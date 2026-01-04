@@ -1,135 +1,1400 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Tấn Phong | VECOM - CLEAD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
-        .bg-navy { background-color: #050a1a; }
-        .text-gold { color: #c5a059; }
-        .border-gold { border-color: #c5a059; }
-        .hero-clip { clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }
-    </style>
-</head>
-<body class="bg-white text-gray-900 overflow-x-hidden">
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var gform;
+            gform || (document.addEventListener("gform_main_scripts_loaded", function() {
+                gform.scriptsLoaded = !0
+            }),
+            document.addEventListener("gform/theme/scripts_loaded", function() {
+                gform.themeScriptsLoaded = !0
+            }),
+            window.addEventListener("DOMContentLoaded", function() {
+                gform.domLoaded = !0
+            }),
+            gform = {
+                domLoaded: !1,
+                scriptsLoaded: !1,
+                themeScriptsLoaded: !1,
+                isFormEditor: () => "function" == typeof InitializeEditor,
+                callIfLoaded: function(o) {
+                    return !(!gform.domLoaded || !gform.scriptsLoaded || !gform.themeScriptsLoaded && !gform.isFormEditor() || (gform.isFormEditor() && console.warn("The use of gform.initializeOnLoaded() is deprecated in the form editor context and will be removed in Gravity Forms 3.1."),
+                    o(),
+                    0))
+                },
+                initializeOnLoaded: function(o) {
+                    gform.callIfLoaded(o) || (document.addEventListener("gform_main_scripts_loaded", () => {
+                        gform.scriptsLoaded = !0,
+                        gform.callIfLoaded(o)
+                    }
+                    ),
+                    document.addEventListener("gform/theme/scripts_loaded", () => {
+                        gform.themeScriptsLoaded = !0,
+                        gform.callIfLoaded(o)
+                    }
+                    ),
+                    window.addEventListener("DOMContentLoaded", () => {
+                        gform.domLoaded = !0,
+                        gform.callIfLoaded(o)
+                    }
+                    ))
+                },
+                hooks: {
+                    action: {},
+                    filter: {}
+                },
+                addAction: function(o, r, e, t) {
+                    gform.addHook("action", o, r, e, t)
+                },
+                addFilter: function(o, r, e, t) {
+                    gform.addHook("filter", o, r, e, t)
+                },
+                doAction: function(o) {
+                    gform.doHook("action", o, arguments)
+                },
+                applyFilters: function(o) {
+                    return gform.doHook("filter", o, arguments)
+                },
+                removeAction: function(o, r) {
+                    gform.removeHook("action", o, r)
+                },
+                removeFilter: function(o, r, e) {
+                    gform.removeHook("filter", o, r, e)
+                },
+                addHook: function(o, r, e, t, n) {
+                    null == gform.hooks[o][r] && (gform.hooks[o][r] = []);
+                    var d = gform.hooks[o][r];
+                    null == n && (n = r + "_" + d.length),
+                    gform.hooks[o][r].push({
+                        tag: n,
+                        callable: e,
+                        priority: t = null == t ? 10 : t
+                    })
+                },
+                doHook: function(r, o, e) {
+                    var t;
+                    if (e = Array.prototype.slice.call(e, 1),
+                    null != gform.hooks[r][o] && ((o = gform.hooks[r][o]).sort(function(o, r) {
+                        return o.priority - r.priority
+                    }),
+                    o.forEach(function(o) {
+                        "function" != typeof (t = o.callable) && (t = window[t]),
+                        "action" == r ? t.apply(null, e) : e[0] = t.apply(null, e)
+                    })),
+                    "filter" == r)
+                        return e[0]
+                },
+                removeHook: function(o, r, t, n) {
+                    var e;
+                    null != gform.hooks[o][r] && (e = (e = gform.hooks[o][r]).filter(function(o, r, e) {
+                        return !!(null != n && n != o.tag || null != t && t != o.priority)
+                    }),
+                    gform.hooks[o][r] = e)
+                }
+            });
+            /* ]]> */
+        </script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta class="foundation-mq">
+        <link rel="pingback" href="https://www.leaderlawaz.com/xmlrpc.php">
+        <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'/>
+        <link media="all" href="https://www.leaderlawaz.com/wp-content/cache/autoptimize/css/autoptimize_9cea91c28563cfc827d2b4778d969b40.css" rel="stylesheet">
+        <title>Tucson Personal Injury Lawyer-Free Case Consultation</title>
+        <meta name="description" content="The Leader Law Firm has helped clients throughout Arizona recover tens of millions of dollars for personal injury and wrongful death claims."/>
+        <link rel="canonical" href="https://www.leaderlawaz.com/"/>
+        <meta property="og:locale" content="en_US"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Tucson Personal Injury Lawyer-Free Case Consultation"/>
+        <meta property="og:description" content="The Leader Law Firm has helped clients throughout Arizona recover tens of millions of dollars for personal injury and wrongful death claims."/>
+        <meta property="og:url" content="https://www.leaderlawaz.com/"/>
+        <meta property="og:site_name" content="Leader Law Firm"/>
+        <meta property="article:publisher" content="https://www.facebook.com/leaderlawfirmaz"/>
+        <meta property="article:modified_time" content="2023-03-24T19:16:10+00:00"/>
+        <meta name="twitter:card" content="summary_large_image"/>
+        <script type="application/ld+json" class="yoast-schema-graph">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://www.leaderlawaz.com/",
+                        "url": "https://www.leaderlawaz.com/",
+                        "name": "Tucson Personal Injury Lawyer-Free Case Consultation",
+                        "isPartOf": {
+                            "@id": "https://www.leaderlawaz.com/#website"
+                        },
+                        "about": {
+                            "@id": "https://www.leaderlawaz.com/#organization"
+                        },
+                        "datePublished": "2018-08-08T07:33:42+00:00",
+                        "dateModified": "2023-03-24T19:16:10+00:00",
+                        "description": "The Leader Law Firm has helped clients throughout Arizona recover tens of millions of dollars for personal injury and wrongful death claims.",
+                        "breadcrumb": {
+                            "@id": "https://www.leaderlawaz.com/#breadcrumb"
+                        },
+                        "inLanguage": "en",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://www.leaderlawaz.com/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://www.leaderlawaz.com/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://www.leaderlawaz.com/#website",
+                        "url": "https://www.leaderlawaz.com/",
+                        "name": "Leader Law Firm",
+                        "description": "",
+                        "publisher": {
+                            "@id": "https://www.leaderlawaz.com/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://www.leaderlawaz.com/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "en"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://www.leaderlawaz.com/#organization",
+                        "name": "Leader Law Firm",
+                        "url": "https://www.leaderlawaz.com/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en",
+                            "@id": "https://www.leaderlawaz.com/#/schema/logo/image/",
+                            "url": "https://www.leaderlawaz.com/wp-content/uploads/2016/01/admin-ajax.png",
+                            "contentUrl": "https://www.leaderlawaz.com/wp-content/uploads/2016/01/admin-ajax.png",
+                            "width": 300,
+                            "height": 146,
+                            "caption": "Leader Law Firm"
+                        },
+                        "image": {
+                            "@id": "https://www.leaderlawaz.com/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.facebook.com/leaderlawfirmaz"
+                        ]
+                    }
+                ]
+            }</script>
+        <link rel='dns-prefetch' href='//use.fontawesome.com'/>
+        <link href='https://www.youtube.com' rel='preconnect'/>
+        <link href='https://sp-ao.shortpixel.ai' rel='preconnect'/>
+        <link rel="alternate" type="application/rss+xml" title="Leader Law Firm &raquo; Feed" href="https://www.leaderlawaz.com/feed/"/>
+        <link rel="alternate" type="application/rss+xml" title="Leader Law Firm &raquo; Comments Feed" href="https://www.leaderlawaz.com/comments/feed/"/>
+        <link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.leaderlawaz.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.leaderlawaz.com%2F"/>
+        <link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.leaderlawaz.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.leaderlawaz.com%2F&#038;format=xml"/>
+        <link rel='stylesheet' id='font-awesome-css' href='//use.fontawesome.com/releases/v5.1.0/css/all.css' type='text/css' media='all'/>
+        <script type="text/javascript" src="https://www.leaderlawaz.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+        <link rel="https://api.w.org/" href="https://www.leaderlawaz.com/wp-json/"/>
+        <link rel="alternate" title="JSON" type="application/json" href="https://www.leaderlawaz.com/wp-json/wp/v2/pages/10"/>
+        <link rel='shortlink' href='https://www.leaderlawaz.com/'/>
+        <link rel="icon" href="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_32,h_32/https://www.leaderlawaz.com/wp-content/uploads/2018/08/cropped-favicon-32x32.png" sizes="32x32"/>
+        <link rel="icon" href="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_192,h_192/https://www.leaderlawaz.com/wp-content/uploads/2018/08/cropped-favicon-192x192.png" sizes="192x192"/>
+        <link rel="apple-touch-icon" href="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_180,h_180/https://www.leaderlawaz.com/wp-content/uploads/2018/08/cropped-favicon-180x180.png"/>
+        <meta name="msapplication-TileImage" content="https://www.leaderlawaz.com/wp-content/uploads/2018/08/cropped-favicon-270x270.png"/>
+        <script>
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0]
+                  , j = d.createElement(s)
+                  , dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            }
+            )(window, document, 'script', 'dataLayer', 'GTM-T9G2MD7');
+        </script>
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }
+                ,
+                i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            }
+            )(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    <nav class="border-b border-gray-100 py-6 px-8 flex justify-between items-center sticky top-0 bg-white z-50">
-        <div class="text-xl font-bold tracking-tighter uppercase">NGUYỄN TẤN <span class="text-gold">PHONG</span></div>
-        <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.2em] font-semibold">
-            <a href="#about" class="hover:text-gold transition">Vị thế</a>
-            <a href="#services" class="hover:text-gold transition">Dịch vụ</a>
-            <a href="#mission" class="hover:text-gold transition">Sứ mệnh</a>
-            <a href="#contact" class="hover:text-gold transition text-navy">Liên hệ</a>
-        </div>
-    </nav>
-
-    <section class="grid md:grid-cols-2 min-h-screen border-b border-gray-100">
-        <div class="bg-navy text-white p-12 md:p-24 flex flex-col justify-center relative overflow-hidden">
-            <div class="relative z-10">
-                <p class="text-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-8 italic">Hiệp hội Thương mại Điện tử Việt Nam</p>
-                <h1 class="text-5xl md:text-7xl leading-[1.1] mb-8 font-serif">
-                    Chiến lược pháp lý <br> <span class="text-gold italic">dẫn dắt</span> kinh tế số.
-                </h1>
-                <p class="text-gray-400 max-w-sm mb-12 text-sm leading-relaxed">
-                    Ủy viên Ban Chấp hành VECOM & Giám đốc Trung tâm Tư vấn Pháp luật (CLEAD).
-                </p>
-                <a href="#services" class="inline-block border border-gold text-gold px-10 py-5 uppercase text-[10px] tracking-[0.2em] font-bold hover:bg-gold hover:text-navy transition">
-                    Khám phá giải pháp
-                </a>
+            ga('create', 'UA-52093994-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+    <body class="home wp-singular page-template-default page page-id-10 wp-theme-leader-law">
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9G2MD7" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <div class="se-pre-con"></div>
+        <a href="javascript:StartNgageChat();" class="button-chat">
+            live chat <i class="fas fa-comment-dots"></i>
+        </a>
+        <div id="nGageLH" style="visibility:hidden; display: block; padding: 0; position: fixed; right: 0px; bottom: 0px; z-index: 5000;"></div>
+        <script type="text/javascript" src="https://messenger.ngageics.com/ilnksrvr.aspx?websiteid=1-154-123-52-99-41-31-121" defer></script>
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas position-left" id="off-canvas" data-off-canvas>
+                <ul id="menu-primary-menu" class="vertical menu" data-drilldown>
+                    <li id="menu-item-220" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-220">
+                        <a href="https://www.leaderlawaz.com/about-leader-law-firm/">About</a>
+                    </li>
+                    <li id="menu-item-219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-219">
+                        <a href="https://www.leaderlawaz.com/practice-area/">Practice Areas</a>
+                        <ul class="vertical menu">
+                            <li id="menu-item-225" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-225">
+                                <a href="https://www.leaderlawaz.com/practice-areas/auto-accidents/">Auto Accidents</a>
+                            </li>
+                            <li id="menu-item-226" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-226">
+                                <a href="https://www.leaderlawaz.com/practice-areas/defective-roadway/">Defective Roadway</a>
+                            </li>
+                            <li id="menu-item-227" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-227">
+                                <a href="https://www.leaderlawaz.com/practice-areas/nursing-home-abuse/">Nursing Home Abuse</a>
+                            </li>
+                            <li id="menu-item-228" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-228">
+                                <a href="https://www.leaderlawaz.com/practice-areas/personal-injury/">Personal Injury</a>
+                            </li>
+                            <li id="menu-item-229" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-229">
+                                <a href="https://www.leaderlawaz.com/practice-areas/traumatic-brain-injury/">Traumatic Brain Injury</a>
+                            </li>
+                            <li id="menu-item-230" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-230">
+                                <a href="https://www.leaderlawaz.com/practice-areas/trucking-accident/">Trucking Accident</a>
+                            </li>
+                            <li id="menu-item-231" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-231">
+                                <a href="https://www.leaderlawaz.com/practice-areas/whistleblower-cases/">Whistleblower Cases</a>
+                            </li>
+                            <li id="menu-item-232" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-232">
+                                <a href="https://www.leaderlawaz.com/practice-areas/wrongful-death/">Wrongful Death</a>
+                            </li>
+                            <li id="menu-item-16626" class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-16626">
+                                <a href="https://www.leaderlawaz.com/practice-areas/bicycle-accident/">Bicycle Accident</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-223" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-223">
+                        <a href="https://www.leaderlawaz.com/case-results/">Case Results</a>
+                    </li>
+                    <li id="menu-item-222" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-222">
+                        <a href="https://www.leaderlawaz.com/videos/">Videos</a>
+                    </li>
+                    <li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224">
+                        <a href="https://www.leaderlawaz.com/blog/">Blog</a>
+                    </li>
+                    <li id="menu-item-221" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-221">
+                        <a href="https://www.leaderlawaz.com/contact-us/">Contact</a>
+                    </li>
+                </ul>
             </div>
-            <div class="absolute -bottom-20 -right-20 w-64 h-64 border border-gold/10 rounded-full"></div>
-        </div>
-        <div class="relative bg-gray-50 flex items-center justify-center">
-            <img src="chan-dung.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000">
-            <div class="absolute bottom-12 left-12">
-                <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-navy/40 mb-2">Trụ sở phía Nam</p>
-                <p class="text-xs font-serif italic text-navy/60 font-bold">VPĐD VECOM, TP. Hồ Chí Minh</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-32 px-8 max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-12 gap-16 items-start">
-            <div class="md:col-span-4">
-                <h2 class="text-4xl font-serif">Vị thế <br> chuyên gia.</h2>
-                <div class="w-12 h-px bg-gold mt-6"></div>
-            </div>
-            <div class="md:col-span-8 space-y-8">
-                <p class="text-xl text-gray-600 leading-relaxed font-serif italic">
-                    "Trong kỷ nguyên số, một chiến lược đúng đắn không chỉ nằm ở công nghệ, mà còn nằm ở nền tảng pháp lý vững chắc và khả năng kết nối giá trị cộng đồng."
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8">
-                    <div>
-                        <h4 class="text-gold uppercase tracking-widest text-[10px] font-bold mb-3">VECOM</h4>
-                        <p class="text-sm text-gray-500 italic">Trưởng Văn phòng đại diện phía Nam, dẫn dắt các hoạt động xúc tiến thương mại và kết nối doanh nghiệp số.</p>
+            <div class="off-canvas-content" data-off-canvas-content>
+                <header class="header" role="banner">
+                    <div class="top-bar" id="top-bar-menu">
+                        <div class="grid-container grid-x">
+                            <div class="large-10 medium-10 small-12 cell">
+                                <div class="logo-item">
+                                    <a href="https://www.leaderlawaz.com">
+                                        <noscript>
+                                            <img src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/themes/leader-law/assets/images/logo.png" alt="Leader Law Firm">
+                                        </noscript>
+                                        <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/themes/leader-law/assets/images/logo.png" alt="Leader Law Firm">
+                                    </a>
+                                </div>
+                                <div class="show-for-medium">
+                                    <ul id="menu-primary-menu-1" class="medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-220">
+                                            <a href="https://www.leaderlawaz.com/about-leader-law-firm/">About</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-219">
+                                            <a href="https://www.leaderlawaz.com/practice-area/">Practice Areas</a>
+                                            <ul class="menu">
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-225">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/auto-accidents/">Auto Accidents</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-226">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/defective-roadway/">Defective Roadway</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-227">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/nursing-home-abuse/">Nursing Home Abuse</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-228">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/personal-injury/">Personal Injury</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-229">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/traumatic-brain-injury/">Traumatic Brain Injury</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-230">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/trucking-accident/">Trucking Accident</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-231">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/whistleblower-cases/">Whistleblower Cases</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-232">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/wrongful-death/">Wrongful Death</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-practice-areas menu-item-16626">
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/bicycle-accident/">Bicycle Accident</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-223">
+                                            <a href="https://www.leaderlawaz.com/case-results/">Case Results</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-222">
+                                            <a href="https://www.leaderlawaz.com/videos/">Videos</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224">
+                                            <a href="https://www.leaderlawaz.com/blog/">Blog</a>
+                                        </li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-221">
+                                            <a href="https://www.leaderlawaz.com/contact-us/">Contact</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="large-2 medium-2 small-12 cell top-bar__contact-information">
+                                <span>Call Us Today</span>
+                                <a href="tel:5205759040">520.575.9040</a>
+                            </div>
+                            <div class="top-bar__show-small large-2 medium-2 small-12 cell">
+                                <a class="phone-number" href="tel:5205759040">
+                                    <i class="fas fa-phone-square"></i>
+                                </a>
+                                <a href="javascript:StartNgageChat();" class="live-chat">
+                                    <i class="fas fa-comment-dots"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="show-for-small-only">
+                            <div class="menu">
+                                <button class="menu-icon" type="button" data-toggle="off-canvas"></button>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h4 class="text-gold uppercase tracking-widest text-[10px] font-bold mb-3">CLEAD</h4>
-                        <p class="text-sm text-gray-500 italic">Giám đốc Trung tâm Tư vấn Pháp luật, bảo vệ quyền lợi và định hướng pháp lý cho doanh nghiệp TMĐT.</p>
+                </header>
+                <div class="lazyload banner banner--home" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/LeaderLaw-Banner-Color-2.png" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                    <div class="banner__content banner__content--home">
+                        <div class="grid-container grid-x">
+                            <div class="large-6 medium-8 small-12 cell">
+                                <header class="banner__header">
+                                    <h1 class="banner__main-title banner__main-title--large">The right lawyer</h1>
+                                    <span class="banner__sub-title">Makes all the difference</span>
+                                </header>
+                                <div class="banner__content-detail">
+                                    <p>John Leader has over three decades of experience as a trial lawyer.</p>
+                                </div>
+                                <a href="https://www.leaderlawaz.com/case-results/" class="button button--fancy " target="">
+                                    case results <i class="fas fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="content">
+                    <div class="inner-content">
+                        <main class="main" role="main">
+                            <div class="primary-block">
+                                <div class="service-block">
+                                    <div class="grid-container">
+                                        <h2 class="block-title block-title--fancy">
+                                            <span class="left"></span>
+                                            Services <span class="right"></span>
+                                        </h2>
+                                        <div class="service-carousel">
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/service-img1.png" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/wrongful-death/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Wrongful Death</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>Losing a loved one is always difficult. Losing someone due to the possible negligence of another can be especially difficult for a family.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/wrongful-death/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/service-img2.png" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/personal-injury/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Personal Injury</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>The term “personal injury” encompasses a broad range of injuries. Some are minor, but some injuries can be catastrophic. Catastrophic injuries typically involve severe damage to the brain or spine that is often permanent and life-changing.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/personal-injury/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/trucking-accident-featured.jpg" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/trucking-accident/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Trucking Accident</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>Trucking accidents typically occur on highways, often at high speed. The results of such crashes can be devastating and sometimes fatal.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/trucking-accident/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/defective-roadway-feature.jpg" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/defective-roadway/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Defective Roadway</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>Defective Roadway cases can involve many things such as lack of a median cable barrier, poor road design or road condition.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/defective-roadway/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/service-img4.png" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/auto-accidents/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Auto Accidents</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>After an accident, you probably have a lot of questions. When can I go back to work? How will I pay my medical bills? How will I afford my vehicle repairs? Do I have to negotiate with the insurance company?</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/auto-accidents/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2016/06/justice-2060093_1280.jpg" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/whistleblower-cases/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Whistleblower Cases</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>Sometimes, people working in big business learn about unfair or deceptive practices. Examples of fraudulent practices include: cooking the books, shareholder fraud, lying on tax returns, and the production of potentially dangerous or mislabeled products.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/whistleblower-cases/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/nursing-home-abuse-featured.jpg" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/nursing-home-abuse/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Nursing Home Abuse</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>The decision to place a loved one in a nursing home can be challenging. However, we trust and assume that the facility caregivers will treat our loved ones with compassion, quality care, and dignity in making that decision.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/nursing-home-abuse/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/bicyle-accident-feature.jpg" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/bicycle-accident/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Bicycle Accident</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>Cycling is a year-round activity in Tucson, with approximately 350 sunny days each year. Tucson has many miles of striped bike paths and 300 miles of spectacular mountain bike trails. Bicyclists can now enjoy “The Loop”; 120 miles of paved paths and bike lanes that run throughout Pima County.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/bicycle-accident/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                            <div class="lazyload service-carousel__item" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/traumatic-brain-injury-featured.jpg" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                                                <a href="https://www.leaderlawaz.com/practice-areas/traumatic-brain-injury/" class="overlay-link">Read More</a>
+                                                <div class="service-carousel__description-holder">
+                                                    <h3>Traumatic Brain Injury</h3>
+                                                    <div class="service-carousel__detail">
+                                                        <p>A traumatic brain injury (TBI) can be a life-altering event. A TBI is caused by a severe jolt or hard blow to the head or a head injury that penetrates and disrupts healthy brain function.</p>
+                                                    </div>
+                                                    <a href="https://www.leaderlawaz.com/practice-areas/traumatic-brain-injury/" class="button button--secondary">Learn More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-block">
+                                    <div class="grid-container grid-x align-center">
+                                        <div class="large-10 medium-11 small-12 cell">
+                                            <div class="testimonial-slider">
+                                                <div class="testimonial-slider__item">
+                                                    <div class="testimonial-slider__highlights">
+                                                        <p>&#8220;They went above and beyond for us &#8230;&#8221;</p>
+                                                    </div>
+                                                    <p>&#8220;We are very grateful for John leader and his staff. They went above and beyond for us in such a difficult time in our lives. Thank you Leader Law Firm for everything. If we could give you 10 stars or more we would.&#8221;</p>
+                                                    <span class="testimonial-slider__testimony">Taryn Debrun</span>
+                                                </div>
+                                                <div class="testimonial-slider__item">
+                                                    <div class="testimonial-slider__highlights">
+                                                        <p>&#8220;Mr. Leader and his team are very dedicated &#8230;&#8221;</p>
+                                                    </div>
+                                                    <p>“I have had the pleasure of being a client of the Leader Law Firm for many years. Mr. Leader and his team are very dedicated, hard working, and trustworthy. I was kept in the loop of my case every step of the way. I appreciated the way I was treated, like a person not a case. I highly recommend the caring team of the Leader Law Firm.”</p>
+                                                    <span class="testimonial-slider__testimony">Tami Martinez</span>
+                                                </div>
+                                                <div class="testimonial-slider__item">
+                                                    <div class="testimonial-slider__highlights">
+                                                        <p>&#8220;We will highly recommend your firm to family and friends &#8230;&#8221;</p>
+                                                    </div>
+                                                    <p>“Thank you John Leader for your professional and timely assistance in resolving my daughter’s injury case from an auto accident. Your staff, both James and Yvonne, were a pleasure to work with and we will highly recommend your firm to family and friends.”</p>
+                                                    <span class="testimonial-slider__testimony">M. Smith</span>
+                                                </div>
+                                                <div class="testimonial-slider__item">
+                                                    <div class="testimonial-slider__highlights">
+                                                        <p>&#8220;John fought for me like I was his own family member &#8230;&#8221;</p>
+                                                    </div>
+                                                    <p>“John Leader and his office manager Yvonne are outstanding in their profession! My case took years (8) to complete and John fought for me like I was his own family member (and won!). John made sure I was prepared to face the opposition and he supported me every step of the way. Yvonne was receptive to my every need and went out of her way to communicate information meticulously between the three of us. I would trust this team with my life, they are that good.”</p>
+                                                    <span class="testimonial-slider__testimony">Kim Crepea</span>
+                                                </div>
+                                                <div class="testimonial-slider__item">
+                                                    <div class="testimonial-slider__highlights">
+                                                        <p>&#8220;He is precise in his work and will do his best &#8230;&#8221;</p>
+                                                    </div>
+                                                    <p>“John leader is an exemplary lawyer he cares about his clients and takes the time to listen. He is precise in his work and will do his best to accomplish the goals that were set out. The staff at Leader Law are very knowledgeable and continually in a good mood. The women there are very easy to speak to and always get back with you whatever your question.”</p>
+                                                    <span class="testimonial-slider__testimony">Giselle Hayes</span>
+                                                </div>
+                                                <div class="testimonial-slider__item">
+                                                    <div class="testimonial-slider__highlights">
+                                                        <p>&#8220;They asked the questions I didn &#8217;t know needed to be asked &#8230;&#8221;</p>
+                                                    </div>
+                                                    <p>&#8220;Leader Law Firm was exactly what I needed after my auto accident. They asked the questions I didn &#8217;t know needed to be asked and walked me through the entire process, fighting for me every step of the way. John and James made sure the healing process came first and that I was getting all of the care I needed. Though the process took over a year, they checked in with me regularly. I am very satisfied with my experience!&#8221;</p>
+                                                    <span class="testimonial-slider__testimony">Melissa Beal</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <section class="icon-block icon-block--primary">
+                                <div class="grid-container">
+                                    <h2 class="block-title block-title--fancy">
+                                        <span class="left"></span>
+                                        Benefits <span class="right"></span>
+                                    </h2>
+                                    <div class="fancy-list grid-x grid-padding-x">
+                                        <div class="fancy-list__item large-4 medium-4 small-12 cell">
+                                            <div class="fancy-list__item-inner">
+                                                <figure class="icon-holder">
+                                                    <span class="icon-holder-fancy"></span>
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/icon-one.png" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/icon-one.png" alt="">
+                                                </figure>
+                                                <div class="fancy-list__item-description">
+                                                    <h3 class="fancy-list__item-title">Over 30 years  of experience</h3>
+                                                    <a href="/about/" class="fancy-list__item-link more-link" target=""></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fancy-list__item large-4 medium-4 small-12 cell">
+                                            <div class="fancy-list__item-inner">
+                                                <figure class="icon-holder">
+                                                    <span class="icon-holder-fancy"></span>
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/icon-second.png" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/icon-second.png" alt="">
+                                                </figure>
+                                                <div class="fancy-list__item-description">
+                                                    <h3 class="fancy-list__item-title">high dollar  judgements & verdicts</h3>
+                                                    <a href="https://www.leaderlawaz.com/case-results/" class="fancy-list__item-link more-link" target="">see case results</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fancy-list__item large-4 medium-4 small-12 cell">
+                                            <div class="fancy-list__item-inner">
+                                                <figure class="icon-holder">
+                                                    <span class="icon-holder-fancy"></span>
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/icon-third.png" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/icon-third.png" alt="">
+                                                </figure>
+                                                <div class="fancy-list__item-description">
+                                                    <h3 class="fancy-list__item-title">works on a contingency fee basis</h3>
+                                                    <a href="/contact-us/" class="fancy-list__item-link more-link" target=""></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="secondary-block">
+                                <noscript>
+                                    <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/themes/leader-law/assets/images/secondary-bg.png" alt="">
+                                </noscript>
+                                <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/themes/leader-law/assets/images/secondary-bg.png" alt="">
+                                <section class="video-block">
+                                    <div class="grid-container">
+                                        <h2 class="block-title block-title--fancy block-title--fancy-white">
+                                            <span class="left"></span>
+                                            Videos <span class="right"></span>
+                                        </h2>
+                                        <div class="video-block__slider">
+                                            <div class="grid-x grid-padding-x">
+                                                <div class="video-large large-9 medium-9 small-12 cell">
+                                                    <div class="video-large__item">
+                                                        <iframe class="slide-media slide-enlarged" width="980" height="520" src="" data-src="//www.youtube.com/embed/B2XHDwnSTA4" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-large__item">
+                                                        <iframe class="slide-media slide-enlarged" width="980" height="520" src="" data-src="//www.youtube.com/embed/V80UM-dauiM" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-large__item">
+                                                        <iframe class="slide-media slide-enlarged" width="980" height="520" src="" data-src="//www.youtube.com/embed/zIIM7daFvr4" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-large__item">
+                                                        <iframe class="slide-media slide-enlarged" width="980" height="520" src="" data-src="//www.youtube.com/embed/0leQN5HLiQQ" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-large__item">
+                                                        <iframe class="slide-media slide-enlarged" width="980" height="520" src="" data-src="//www.youtube.com/embed/OAJzOcBpQe4" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                </div>
+                                                <div class="video-navigation large-3 medium-3 small-12 cell">
+                                                    <div class="video-navigation__item">
+                                                        <iframe class="slide-media" width="980" height="520" src="" data-src="//www.youtube.com/embed/B2XHDwnSTA4" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-navigation__item">
+                                                        <iframe class="slide-media" width="980" height="520" src="" data-src="//www.youtube.com/embed/V80UM-dauiM" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-navigation__item">
+                                                        <iframe class="slide-media" width="980" height="520" src="" data-src="//www.youtube.com/embed/zIIM7daFvr4" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-navigation__item">
+                                                        <iframe class="slide-media" width="980" height="520" src="" data-src="//www.youtube.com/embed/0leQN5HLiQQ" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="video-navigation__item">
+                                                        <iframe class="slide-media" width="980" height="520" src="" data-src="//www.youtube.com/embed/OAJzOcBpQe4" frameborder="0" allowfullscreen></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="additional-information">
+                                    <div class="grid-container grid-x align-center">
+                                        <div class="large-10 medium-11 small-12 cell">
+                                            <header class="additional-information__header">
+                                                <h3 class="additional-information__main-title">Over 30 years of trial experience</h3>
+                                                <span class="additional-information__subtitle">JOHN LEADER – WRONGFUL DEATH AND PERSONAL INJURY LAWYER</span>
+                                            </header>
+                                            <div class="additional-information__description">
+                                                <p>Attorney John Leader focuses on wrongful death and personal injury law. He has proven results, recovering millions of dollars for his clients over the years. He has significant experience in wrongful death, car accidents, truck accidents, personal injury, and defective roadway litigation. John and his team understand the uncertainties and challenges you may be facing after an accident or loss. Our legal professionals &#8217;team helps clients receive justice and compensation for injuries and losses from negligence or other wrongdoing. In most cases, there are no attorney &#8217;s fees unless you recover monetary damages. For a free case consultation with compassionate and experienced legal counsel, call us at (520) 575-9040.</p>
+                                                <a href="https://leaderlaw.zqpfpcj3-liquidwebsites.com/about/" class="button button--primary" target="">learn more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tertiary-block">
+                                <div class="logo-block">
+                                    <div class="grid-container">
+                                        <h2 class="logo-block__title">Accolades & Affiliates</h2>
+                                        <div class="logo-carousel">
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.azaj.org/" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0000_Layer-1.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0000_Layer-1.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.supremecourt.gov/" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0002_Seal_of_the_United_States_Supreme_Court.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0002_Seal_of_the_United_States_Supreme_Court.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://azbar.legalserviceslink.com/lawyers/search/basic" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0004_SBA_Logo.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0004_SBA_Logo.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.azd.uscourts.gov/" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0008_1200px-US_DC_AZ.svg_.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0008_1200px-US_DC_AZ.svg_.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.justice.org/" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0007_American-Association-for-Justice-Auto-Accident-Strategy.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0007_American-Association-for-Justice-Auto-Accident-Strategy.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.ca9.uscourts.gov/" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0003_Seal_of_the_United_States_Court_of_Appeals_for_the_Ninth_Circuit.svg_.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0003_Seal_of_the_United_States_Court_of_Appeals_for_the_Ninth_Circuit.svg_.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.pimacountybar.org/" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0005_PCBA.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0005_PCBA.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.avvo.com/attorneys/85704-az-john-leader-413548.html" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0006_Avvo_logo_navy.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0006_Avvo_logo_navy.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="logo-carousel__item">
+                                                <a href="https://www.westerntriallawyers.com/" target="_blank">
+                                                    <noscript>
+                                                        <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0001_western-trial-lawyers-association.jpg" alt="">
+                                                    </noscript>
+                                                    <img decoding="async" class="lazyload" src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20210%20140%22%3E%3C/svg%3E' data-src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/09/carousel-logo_0001_western-trial-lawyers-association.jpg" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="victories-block">
+                                    <div class="grid-container">
+                                        <h2 class="victories-block__title">
+                                            <span>Victories</span>
+                                        </h2>
+                                        <div class="victories-carousel">
+                                            <div class="victories-carousel__item">
+                                                <h4 class="victories-carousel__title">$4.5  Million</h4>
+                                                <p>Medical negligence settlement</p>
+                                            </div>
+                                            <div class="victories-carousel__item">
+                                                <h4 class="victories-carousel__title">$47  Million</h4>
+                                                <p>Defective roadway jury verdict  (#39, Top Verdicts in the U.S. in 2015,  “Arizona Attorney” magazine)</p>
+                                            </div>
+                                            <div class="victories-carousel__item">
+                                                <h4 class="victories-carousel__title">$7.8  Million</h4>
+                                                <p>Defective roadway jury verdict (3rd largest civil verdict of 2012 in Arizona- “Arizona Attorney” magazine)</p>
+                                            </div>
+                                            <div class="victories-carousel__item">
+                                                <h4 class="victories-carousel__title">$3.1  Million</h4>
+                                                <p>Brain injury settlement</p>
+                                            </div>
+                                            <div class="victories-carousel__item">
+                                                <h4 class="victories-carousel__title">$3.2  Million</h4>
+                                                <p>Trucking accident verdict</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <section class="latest-post">
+                                <div class="grid-container">
+                                    <h2 class="latest-post__title">Wrongful Death and Personal Injury Blog</h2>
+                                    <div class="latest-post__list">
+                                        <div class="latest-post__item">
+                                            <div class="date-holder">
+                                                <span class="day">31</span>
+                                                <span class="month">May</span>
+                                            </div>
+                                            <div class="description">
+                                                <h3>
+                                                    <a href="https://www.leaderlawaz.com/seeking-justice-for-louis-taylor-2/">Seeking Justice for Louis Taylor</a>
+                                                </h3>
+                                                <p>The Leader Law Firm would like to thank journalist Steve Kroft and "60 Minutes" for its powerful 2013 coverage of &hellip;</p>
+                                                <span class="year">Published 2021</span>
+                                            </div>
+                                        </div>
+                                        <div class="latest-post__item">
+                                            <div class="date-holder">
+                                                <span class="day">9</span>
+                                                <span class="month">Sep</span>
+                                            </div>
+                                            <div class="description">
+                                                <h3>
+                                                    <a href="https://www.leaderlawaz.com/most-dangerous-highways/">The Three Most Dangerous Highways in Arizona</a>
+                                                </h3>
+                                                <p>Popular Mechanics magazine analyzes America's highway data to determine the most dangerous highways every year. They publish a list of &hellip;</p>
+                                                <span class="year">Published 2020</span>
+                                            </div>
+                                        </div>
+                                        <div class="latest-post__item">
+                                            <div class="date-holder">
+                                                <span class="day">26</span>
+                                                <span class="month">Jul</span>
+                                            </div>
+                                            <div class="description">
+                                                <h3>
+                                                    <a href="https://www.leaderlawaz.com/what-to-do-if-you-are-injured-on-the-job/">What to Do If You Are Injured on the Job</a>
+                                                </h3>
+                                                <p>Thousands of people are injured on the job every year. A recent story in the Washington Post tells the story &hellip;</p>
+                                                <span class="year">Published 2020</span>
+                                            </div>
+                                        </div>
+                                        <div class="latest-post__item">
+                                            <div class="date-holder">
+                                                <span class="day">1</span>
+                                                <span class="month">Jun</span>
+                                            </div>
+                                            <div class="description">
+                                                <h3>
+                                                    <a href="https://www.leaderlawaz.com/racial-bias-and-excessive-force/">Racial Bias and the Use of Excessive Force</a>
+                                                </h3>
+                                                <p>As America reels from the George Floyd incident, it's time to discuss how to fix the problem of law enforcement &hellip;</p>
+                                                <span class="year">Published 2020</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                </div>
+                <section class="lazyload contact-block" data-bg="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img/https://www.leaderlawaz.com/wp-content/uploads/2018/08/form-bg-1.jpg" style="background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20500%20300%22%3E%3C/svg%3E)">
+                    <div class="grid-container grid-x align-center">
+                        <div class="large-6 medium-10 small-12 cell">
+                            <div class="contact-block__information">
+                                <h3 class="contact-block__title">Schedule a Free Consultation</h3>
+                            </div>
+                            <div class="form-holder">
+                                <script type="text/javascript"></script>
+                                <div class='gf_browser_chrome gform_wrapper gform_legacy_markup_wrapper gform-theme--no-framework' data-form-theme='legacy' data-form-index='0' id='gform_wrapper_1'>
+                                    <div id='gf_1' class='gform_anchor' tabindex='-1'></div>
+                                    <form method='post' enctype='multipart/form-data' target='gform_ajax_frame_1' id='gform_1' action='/#gf_1' data-formid='1' novalidate>
+                                        <div class='gform-body gform_body'>
+                                            <ul id='gform_fields_1' class='gform_fields top_label form_sublabel_below description_below validation_below'>
+                                                <li id="field_1_6" class="gfield gfield--type-honeypot gform_validation_container field_sublabel_below gfield--has-description field_description_below field_validation_below gfield_visibility_visible">
+                                                    <label class='gfield_label gform-field-label' for='input_1_6'>Company</label>
+                                                    <div class='ginput_container'>
+                                                        <input name='input_6' id='input_1_6' type='text' value='' autocomplete='new-password'/>
+                                                    </div>
+                                                    <div class='gfield_description' id='gfield_description_1_6'>This field is for validation purposes and should be left unchanged.</div>
+                                                </li>
+                                                <li id="field_1_1" class="gfield gfield--type-text hide-label gfield_contains_required field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible">
+                                                    <label class='gfield_label gform-field-label' for='input_1_1'>
+                                                        Name*
+                                                        <span class="gfield_required">
+                                                            <span class="gfield_required gfield_required_asterisk">*</span>
+                                                        </span>
+                                                    </label>
+                                                    <div class='ginput_container ginput_container_text'>
+                                                        <input name='input_1' id='input_1_1' type='text' value='' class='medium' tabindex='45' placeholder='Name*' aria-required="true" aria-invalid="false"/>
+                                                    </div>
+                                                </li>
+                                                <li id="field_1_2" class="gfield gfield--type-phone hide-label gf_left_half gfield_contains_required field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible">
+                                                    <label class='gfield_label gform-field-label' for='input_1_2'>
+                                                        Phone Number*
+                                                        <span class="gfield_required">
+                                                            <span class="gfield_required gfield_required_asterisk">*</span>
+                                                        </span>
+                                                    </label>
+                                                    <div class='ginput_container ginput_container_phone'>
+                                                        <input name='input_2' id='input_1_2' type='tel' value='' class='medium' tabindex='46' placeholder='Phone Number*' aria-required="true" aria-invalid="false"/>
+                                                    </div>
+                                                </li>
+                                                <li id="field_1_3" class="gfield gfield--type-email hide-label gf_right_half gfield_contains_required field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible">
+                                                    <label class='gfield_label gform-field-label' for='input_1_3'>
+                                                        Email*
+                                                        <span class="gfield_required">
+                                                            <span class="gfield_required gfield_required_asterisk">*</span>
+                                                        </span>
+                                                    </label>
+                                                    <div class='ginput_container ginput_container_email'>
+                                                        <input name='input_3' id='input_1_3' type='email' value='' class='medium' tabindex='47' placeholder='Email*' aria-required="true" aria-invalid="false"/>
+                                                    </div>
+                                                </li>
+                                                <li id="field_1_4" class="gfield gfield--type-textarea hide-label field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible">
+                                                    <label class='gfield_label gform-field-label' for='input_1_4'>How can we help you?</label>
+                                                    <div class='ginput_container ginput_container_textarea'>
+                                                        <textarea name='input_4' id='input_1_4' class='textarea medium' tabindex='48' placeholder='How can we help you?' aria-invalid="false" rows='10' cols='50'></textarea>
+                                                    </div>
+                                                </li>
+                                                <li id="field_1_5" class="gfield gfield--type-captcha field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible">
+                                                    <label class='gfield_label gform-field-label' for='input_1_5'>CAPTCHA</label>
+                                                    <div id='input_1_5' class='ginput_container ginput_recaptcha' data-sitekey='6LdpNWUbAAAAAGBST2GWNdnFf4QqEPCIqG9wZOWa' data-theme='light' data-tabindex='-1' data-size='invisible' data-badge='bottomright'></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class='gform-footer gform_footer top_label'>
+                                            <input type='submit' id='gform_submit_button_1' class='gform_button button' onclick='gform.submission.handleButtonClick(this);' data-submission-type='submit' value='Submit' tabindex='49'/>
+                                            <input type='hidden' name='gform_ajax' value='form_id=1&amp;title=&amp;description=&amp;tabindex=45&amp;theme=legacy&amp;styles=[]&amp;hash=cecb761a9bf3d0cfb6ea292651e1df66'/>
+                                            <input type='hidden' class='gform_hidden' name='gform_submission_method' data-js='gform_submission_method_1' value='iframe'/>
+                                            <input type='hidden' class='gform_hidden' name='gform_theme' data-js='gform_theme_1' id='gform_theme_1' value='legacy'/>
+                                            <input type='hidden' class='gform_hidden' name='gform_style_settings' data-js='gform_style_settings_1' id='gform_style_settings_1' value='[]'/>
+                                            <input type='hidden' class='gform_hidden' name='is_submit_1' value='1'/>
+                                            <input type='hidden' class='gform_hidden' name='gform_submit' value='1'/>
+                                            <input type='hidden' class='gform_hidden' name='gform_unique_id' value=''/>
+                                            <input type='hidden' class='gform_hidden' name='state_1' value='WyJbXSIsIjRhN2ZhNmZhYjNjZDA5MDVlZjNiYmRiY2EwNzg4ZmIzIl0='/>
+                                            <input type='hidden' autocomplete='off' class='gform_hidden' name='gform_target_page_number_1' id='gform_target_page_number_1' value='0'/>
+                                            <input type='hidden' autocomplete='off' class='gform_hidden' name='gform_source_page_number_1' id='gform_source_page_number_1' value='1'/>
+                                            <input type='hidden' name='gform_field_values' value=''/>
+                                        </div>
+                                        <p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_">
+                                            <label>
+                                                &#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea>
+                                            </label>
+                                            <input type="hidden" id="ak_js_1" name="ak_js" value="161"/>
+                                            <script>
+                                                document.getElementById("ak_js_1").setAttribute("value", (new Date()).getTime());
+                                            </script>
+                                        </p>
+                                    </form>
+                                </div>
+                                <iframe style='display:none;width:0px;height:0px;' src='about:blank' name='gform_ajax_frame_1' id='gform_ajax_frame_1' title='This iframe contains the logic required to handle Ajax powered Gravity Forms.'></iframe>
+                                <script type="text/javascript">
+                                    gform.initializeOnLoaded(function() {
+                                        gformInitSpinner(1, 'https://www.leaderlawaz.com/wp-content/plugins/gravityforms/images/spinner.svg', true);
+                                        jQuery('#gform_ajax_frame_1').on('load', function() {
+                                            var contents = jQuery(this).contents().find('*').html();
+                                            var is_postback = contents.indexOf('GF_AJAX_POSTBACK') >= 0;
+                                            if (!is_postback) {
+                                                return;
+                                            }
+                                            var form_content = jQuery(this).contents().find('#gform_wrapper_1');
+                                            var is_confirmation = jQuery(this).contents().find('#gform_confirmation_wrapper_1').length > 0;
+                                            var is_redirect = contents.indexOf('gformRedirect(){') >= 0;
+                                            var is_form = form_content.length > 0 && !is_redirect && !is_confirmation;
+                                            var mt = parseInt(jQuery('html').css('margin-top'), 10) + parseInt(jQuery('body').css('margin-top'), 10) + 100;
+                                            if (is_form) {
+                                                jQuery('#gform_wrapper_1').html(form_content.html());
+                                                if (form_content.hasClass('gform_validation_error')) {
+                                                    jQuery('#gform_wrapper_1').addClass('gform_validation_error');
+                                                } else {
+                                                    jQuery('#gform_wrapper_1').removeClass('gform_validation_error');
+                                                }
+                                                setTimeout(function() {
+                                                    /* delay the scroll by 50 milliseconds to fix a bug in chrome */
+                                                    jQuery(document).scrollTop(jQuery('#gform_wrapper_1').offset().top - mt);
+                                                }, 50);
+                                                if (window['gformInitDatepicker']) {
+                                                    gformInitDatepicker();
+                                                }
+                                                if (window['gformInitPriceFields']) {
+                                                    gformInitPriceFields();
+                                                }
+                                                var current_page = jQuery('#gform_source_page_number_1').val();
+                                                gformInitSpinner(1, 'https://www.leaderlawaz.com/wp-content/plugins/gravityforms/images/spinner.svg', true);
+                                                jQuery(document).trigger('gform_page_loaded', [1, current_page]);
+                                                window['gf_submitting_1'] = false;
+                                            } else if (!is_redirect) {
+                                                var confirmation_content = jQuery(this).contents().find('.GF_AJAX_POSTBACK').html();
+                                                if (!confirmation_content) {
+                                                    confirmation_content = contents;
+                                                }
+                                                jQuery('#gform_wrapper_1').replaceWith(confirmation_content);
+                                                jQuery(document).scrollTop(jQuery('#gf_1').offset().top - mt);
+                                                jQuery(document).trigger('gform_confirmation_loaded', [1]);
+                                                window['gf_submitting_1'] = false;
+                                                wp.a11y.speak(jQuery('#gform_confirmation_message_1').text());
+                                            } else {
+                                                jQuery('#gform_1').append(contents);
+                                                if (window['gformRedirect']) {
+                                                    gformRedirect();
+                                                }
+                                            }
+                                            jQuery(document).trigger("gform_pre_post_render", [{
+                                                formId: "1",
+                                                currentPage: "current_page",
+                                                abort: function() {
+                                                    this.preventDefault();
+                                                }
+                                            }]);
+                                            if (event && event.defaultPrevented) {
+                                                return;
+                                            }
+                                            const gformWrapperDiv = document.getElementById("gform_wrapper_1");
+                                            if (gformWrapperDiv) {
+                                                const visibilitySpan = document.createElement("span");
+                                                visibilitySpan.id = "gform_visibility_test_1";
+                                                gformWrapperDiv.insertAdjacentElement("afterend", visibilitySpan);
+                                            }
+                                            const visibilityTestDiv = document.getElementById("gform_visibility_test_1");
+                                            let postRenderFired = false;
+                                            function triggerPostRender() {
+                                                if (postRenderFired) {
+                                                    return;
+                                                }
+                                                postRenderFired = true;
+                                                gform.core.triggerPostRenderEvents(1, current_page);
+                                                if (visibilityTestDiv) {
+                                                    visibilityTestDiv.parentNode.removeChild(visibilityTestDiv);
+                                                }
+                                            }
+                                            function debounce(func, wait, immediate) {
+                                                var timeout;
+                                                return function() {
+                                                    var context = this
+                                                      , args = arguments;
+                                                    var later = function() {
+                                                        timeout = null;
+                                                        if (!immediate)
+                                                            func.apply(context, args);
+                                                    };
+                                                    var callNow = immediate && !timeout;
+                                                    clearTimeout(timeout);
+                                                    timeout = setTimeout(later, wait);
+                                                    if (callNow)
+                                                        func.apply(context, args);
+                                                }
+                                                ;
+                                            }
+                                            const debouncedTriggerPostRender = debounce(function() {
+                                                triggerPostRender();
+                                            }, 200);
+                                            if (visibilityTestDiv && visibilityTestDiv.offsetParent === null) {
+                                                const observer = new MutationObserver( (mutations) => {
+                                                    mutations.forEach( (mutation) => {
+                                                        if (mutation.type === 'attributes' && visibilityTestDiv.offsetParent !== null) {
+                                                            debouncedTriggerPostRender();
+                                                            observer.disconnect();
+                                                        }
+                                                    }
+                                                    );
+                                                }
+                                                );
+                                                observer.observe(document.body, {
+                                                    attributes: true,
+                                                    childList: false,
+                                                    subtree: true,
+                                                    attributeFilter: ['style', 'class'],
+                                                });
+                                            } else {
+                                                triggerPostRender();
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <footer class="footer" role="contentinfo">
+                    <div class="footer__primary">
+                        <div class="grid-container grid-x grid-padding-x">
+                            <div class="large-4 medium-4 small-12 cell phone">
+                                <a href="tel:5205759040">
+                                    <i class="fas fa-phone-square"></i>
+                                    <br>520.575.9040 
+                                </a>
+                            </div>
+                            <div class="large-4 medium-4 small-12 cell address">
+                                <address>
+                                    <i class="fas fa-map-marker"></i>
+                                    <br>
+                                    <p>
+                                        405 W. Cool Drive, Suite 107<br/>Tucson, Arizona 85704
+                                    </p>
+                                </address>
+                                <a href="https://www.google.com/maps/dir//405+W+Cool+Dr+STE+107,+Tucson,+AZ+85704/@32.353137,-110.975755,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x86d60cb53c07b489:0xfcc2f44f75afc142!2m2!1d-110.9764097!2d32.3530912?hl=en-US" class="direction-link" target="_blank">Get Directions</a>
+                            </div>
+                            <div class="large-4 medium-4 small-12 cell media-holder">
+                                <ul class="social-media">
+                                    <li class="social-media__facebook">
+                                        <a href="https://www.facebook.com/leaderlawfirmaz/" target="_blank">
+                                            <i class="fab fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-media__linkedin">
+                                        <a href="https://www.linkedin.com/company/leader-law-firm" target="_blank">
+                                            <i class="fab fa-linkedin"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-media__twitter">
+                                        <a href="https://twitter.com/leaderlawfirm" target="_blank">
+                                            <i class="fab fa-twitter-square"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-footer">
+                        <div class="grid-container grid-x grid-padding-x">
+                            <div class="large-5 medium-5 small-12 cell copyright">
+                                <p>Copyright &copy;2026 Leader Law. All Rights Reserved</p>
+                            </div>
+                            <div class="large-3 medium-3 small-12 cell page-link">
+                                <a href="/sitemap">Sitemap</a>
+                                <span class="separator">|</span>
+                                <a href="/privacy-policy">Privacy Policy</a>
+                            </div>
+                            <div class="large-4 medium-4 small-12 cell source-org">
+                                Web Design By <a href='https://www.anchorwave.com/'>Anchor Wave</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-    </section>
-
-    <section id="services" class="bg-gray-50 py-32 px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-gray-200 pb-12">
-                <div>
-                    <p class="text-gold uppercase tracking-[0.2em] text-[10px] font-bold mb-3">Our Expertise</p>
-                    <h2 class="text-4xl md:text-6xl font-serif leading-none">Dịch vụ & Giải pháp.</h2>
-                </div>
-                <p class="text-gray-400 text-xs tracking-widest uppercase font-semibold md:mb-2">Legal & E-commerce Hub</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-12 lg:gap-24">
-                <div class="group">
-                    <span class="text-gold font-serif italic text-4xl block mb-6">01.</span>
-                    <h3 class="text-2xl mb-6 font-serif group-hover:text-gold transition">Pháp lý TMĐT</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">
-                        Tư vấn chuyên sâu về hợp đồng điện tử, bảo vệ dữ liệu cá nhân và giải quyết các tranh chấp phát sinh trong giao dịch trực tuyến.
-                    </p>
-                </div>
-                <div class="group">
-                    <span class="text-gold font-serif italic text-4xl block mb-6">02.</span>
-                    <h3 class="text-2xl mb-6 font-serif group-hover:text-gold transition">Xúc tiến số</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">
-                        Kết nối doanh nghiệp Việt Nam với thị trường quốc tế, hỗ trợ các hoạt động chuyển đổi số và phát triển kinh doanh bền vững.
-                    </p>
-                </div>
-                <div class="group">
-                    <span class="text-gold font-serif italic text-4xl block mb-6">03.</span>
-                    <h3 class="text-2xl mb-6 font-serif group-hover:text-gold transition">Giấy phép & Đào tạo</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">
-                        Thực hiện thủ tục đăng ký website TMĐT, các loại giấy phép chuyên ngành và đào tạo kiến thức pháp luật cho doanh nghiệp.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="bg-navy text-white pt-32 pb-16 px-8 overflow-hidden relative">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-6xl font-serif mb-12">Hợp tác để cùng kiến tạo tương lai số.</h2>
-            <div class="space-y-4 mb-20">
-                <p class="text-gold text-xs tracking-[0.4em] uppercase font-bold">Kết nối trực tiếp</p>
-                <a href="mailto:phong@vecom.vn" class="text-2xl md:text-4xl hover:text-gold transition font-light">phong@vecom.vn</a>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8 py-16 border-t border-white/10 text-[10px] uppercase tracking-widest font-bold">
-                <a href="https://vecom.vn" target="_blank" class="hover:text-gold transition">VECOM.VN</a>
-                <a href="https://clead.vn" target="_blank" class="hover:text-gold transition">CLEAD.VN</a>
-                <a href="#" class="hover:text-gold transition">SOCIAL MEDIA</a>
-            </div>
-            <p class="text-gray-600 text-[10px] uppercase tracking-[0.2em] mt-20">© 2026 Nguyễn Tấn Phong. Thiết kế theo tiêu chuẩn chuyên gia.</p>
-        </div>
-        <div class="absolute -bottom-10 -left-10 text-[20vw] font-serif text-white/[0.02] whitespace-nowrap select-none pointer-events-none italic">
-            Integrity & Vision
-        </div>
-    </footer>
-
-</body>
+        <script type="speculationrules">
+            {
+                "prefetch": [
+                    {
+                        "source": "document",
+                        "where": {
+                            "and": [
+                                {
+                                    "href_matches": "/*"
+                                },
+                                {
+                                    "not": {
+                                        "href_matches": [
+                                            "/wp-*.php",
+                                            "/wp-admin/*",
+                                            "/wp-content/uploads/*",
+                                            "/wp-content/*",
+                                            "/wp-content/plugins/*",
+                                            "/wp-content/themes/leader-law/*",
+                                            "/*\\?(.+)"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "not": {
+                                        "selector_matches": "a[rel~=\"nofollow\"]"
+                                    }
+                                },
+                                {
+                                    "not": {
+                                        "selector_matches": ".no-prefetch, .no-prefetch a"
+                                    }
+                                }
+                            ]
+                        },
+                        "eagerness": "conservative"
+                    }
+                ]
+            }</script>
+        <noscript>
+            <style>
+                .lazyload {
+                    display: none;
+                }
+            </style>
+        </noscript>
+        <script data-noptimize="1">
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script async data-noptimize="1" src='https://www.leaderlawaz.com/wp-content/plugins/autoptimize/classes/external/js/lazysizes.min.js'></script>
+        <script type="text/javascript" defer='defer' src="https://www.leaderlawaz.com/wp-includes/js/dist/dom-ready.min.js" id="wp-dom-ready-js"></script>
+        <script type="text/javascript" defer='defer' src="https://www.leaderlawaz.com/wp-includes/js/dist/hooks.min.js" id="wp-hooks-js"></script>
+        <script type="text/javascript" defer='defer' src="https://www.leaderlawaz.com/wp-includes/js/dist/i18n.min.js" id="wp-i18n-js"></script>
+        <script type="text/javascript" id="wp-i18n-js-after">
+            wp.i18n.setLocaleData({
+                'text direction\u0004ltr': ['ltr']
+            });
+            //# sourceURL=wp-i18n-js-after
+        </script>
+        <script type="text/javascript" defer='defer' src="https://www.leaderlawaz.com/wp-includes/js/dist/a11y.min.js" id="wp-a11y-js"></script>
+        <script type="text/javascript" id="gform_gravityforms-js-extra">
+            var gform_i18n = {
+                "datepicker": {
+                    "days": {
+                        "monday": "Mo",
+                        "tuesday": "Tu",
+                        "wednesday": "We",
+                        "thursday": "Th",
+                        "friday": "Fr",
+                        "saturday": "Sa",
+                        "sunday": "Su"
+                    },
+                    "months": {
+                        "january": "January",
+                        "february": "February",
+                        "march": "March",
+                        "april": "April",
+                        "may": "May",
+                        "june": "June",
+                        "july": "July",
+                        "august": "August",
+                        "september": "September",
+                        "october": "October",
+                        "november": "November",
+                        "december": "December"
+                    },
+                    "firstDay": 1,
+                    "iconText": "Select date"
+                }
+            };
+            var gf_legacy_multi = [];
+            var gform_gravityforms = {
+                "strings": {
+                    "invalid_file_extension": "This type of file is not allowed. Must be one of the following:",
+                    "delete_file": "Delete this file",
+                    "in_progress": "in progress",
+                    "file_exceeds_limit": "File exceeds size limit",
+                    "illegal_extension": "This type of file is not allowed.",
+                    "max_reached": "Maximum number of files reached",
+                    "unknown_error": "There was a problem while saving the file on the server",
+                    "currently_uploading": "Please wait for the uploading to complete",
+                    "cancel": "Cancel",
+                    "cancel_upload": "Cancel this upload",
+                    "cancelled": "Cancelled",
+                    "error": "Error",
+                    "message": "Message"
+                },
+                "vars": {
+                    "images_url": "https://www.leaderlawaz.com/wp-content/plugins/gravityforms/images"
+                }
+            };
+            var gf_global = {
+                "gf_currency_config": {
+                    "name": "U.S. Dollar",
+                    "symbol_left": "$",
+                    "symbol_right": "",
+                    "symbol_padding": "",
+                    "thousand_separator": ",",
+                    "decimal_separator": ".",
+                    "decimals": 2,
+                    "code": "USD"
+                },
+                "base_url": "https://www.leaderlawaz.com/wp-content/plugins/gravityforms",
+                "number_formats": [],
+                "spinnerUrl": "https://www.leaderlawaz.com/wp-content/plugins/gravityforms/images/spinner.svg",
+                "version_hash": "0f09ff20a9f97e806ce99a5ed2302828",
+                "strings": {
+                    "newRowAdded": "New row added.",
+                    "rowRemoved": "Row removed",
+                    "formSaved": "The form has been saved.  The content contains the link to return and complete the form."
+                }
+            };
+            //# sourceURL=gform_gravityforms-js-extra
+        </script>
+        <script type="text/javascript" defer='defer' defer='defer' src="https://www.google.com/recaptcha/api.js?hl=en&amp;ver=6.9#038;render=explicit" id="gform_recaptcha-js"></script>
+        <script type="text/javascript" id="gform_gravityforms_theme-js-extra">
+            var gform_theme_config = {
+                "common": {
+                    "form": {
+                        "honeypot": {
+                            "version_hash": "0f09ff20a9f97e806ce99a5ed2302828"
+                        },
+                        "ajax": {
+                            "ajaxurl": "https://www.leaderlawaz.com/wp-admin/admin-ajax.php",
+                            "ajax_submission_nonce": "93e228db89",
+                            "i18n": {
+                                "step_announcement": "Step %1$s of %2$s, %3$s",
+                                "unknown_error": "There was an unknown error processing your request. Please try again."
+                            }
+                        }
+                    }
+                },
+                "hmr_dev": "",
+                "public_path": "https://www.leaderlawaz.com/wp-content/plugins/gravityforms/assets/js/dist/",
+                "config_nonce": "67df24cf32"
+            };
+            //# sourceURL=gform_gravityforms_theme-js-extra
+        </script>
+        <script type="text/javascript">
+            gform.initializeOnLoaded(function() {
+                jQuery(document).on('gform_post_render', function(event, formId, currentPage) {
+                    if (formId == 1) {
+                        if (typeof Placeholders != 'undefined') {
+                            Placeholders.enable();
+                        }
+                        jQuery('#input_1_2').mask('(999) 999-9999').bind('keypress', function(e) {
+                            if (e.which == 13) {
+                                jQuery(this).blur();
+                            }
+                        });
+                    }
+                });
+                jQuery(document).on('gform_post_conditional_logic', function(event, formId, fields, isInit) {})
+            });
+        </script>
+        <script type="text/javascript">
+            gform.initializeOnLoaded(function() {
+                jQuery(document).trigger("gform_pre_post_render", [{
+                    formId: "1",
+                    currentPage: "1",
+                    abort: function() {
+                        this.preventDefault();
+                    }
+                }]);
+                if (event && event.defaultPrevented) {
+                    return;
+                }
+                const gformWrapperDiv = document.getElementById("gform_wrapper_1");
+                if (gformWrapperDiv) {
+                    const visibilitySpan = document.createElement("span");
+                    visibilitySpan.id = "gform_visibility_test_1";
+                    gformWrapperDiv.insertAdjacentElement("afterend", visibilitySpan);
+                }
+                const visibilityTestDiv = document.getElementById("gform_visibility_test_1");
+                let postRenderFired = false;
+                function triggerPostRender() {
+                    if (postRenderFired) {
+                        return;
+                    }
+                    postRenderFired = true;
+                    gform.core.triggerPostRenderEvents(1, 1);
+                    if (visibilityTestDiv) {
+                        visibilityTestDiv.parentNode.removeChild(visibilityTestDiv);
+                    }
+                }
+                function debounce(func, wait, immediate) {
+                    var timeout;
+                    return function() {
+                        var context = this
+                          , args = arguments;
+                        var later = function() {
+                            timeout = null;
+                            if (!immediate)
+                                func.apply(context, args);
+                        };
+                        var callNow = immediate && !timeout;
+                        clearTimeout(timeout);
+                        timeout = setTimeout(later, wait);
+                        if (callNow)
+                            func.apply(context, args);
+                    }
+                    ;
+                }
+                const debouncedTriggerPostRender = debounce(function() {
+                    triggerPostRender();
+                }, 200);
+                if (visibilityTestDiv && visibilityTestDiv.offsetParent === null) {
+                    const observer = new MutationObserver( (mutations) => {
+                        mutations.forEach( (mutation) => {
+                            if (mutation.type === 'attributes' && visibilityTestDiv.offsetParent !== null) {
+                                debouncedTriggerPostRender();
+                                observer.disconnect();
+                            }
+                        }
+                        );
+                    }
+                    );
+                    observer.observe(document.body, {
+                        attributes: true,
+                        childList: false,
+                        subtree: true,
+                        attributeFilter: ['style', 'class'],
+                    });
+                } else {
+                    triggerPostRender();
+                }
+            });
+        </script>
+        <script defer='defer' src="https://www.leaderlawaz.com/wp-content/cache/autoptimize/js/autoptimize_bb9a491b2c785b954a12084e241f1ecc.js"></script>
+    </body>
 </html>
