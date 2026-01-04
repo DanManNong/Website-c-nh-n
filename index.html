@@ -3,70 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Tấn Phong | VECOM - CLEAD</title>
+    <title>Nguyễn Tấn Phong | VECOM - CLEAD - EA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #050a1a; }
         h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
-        .bg-navy { background-color: #050a1a; }
         .text-gold { color: #c5a059; }
         .border-gold { border-color: #c5a059; }
+        .bg-navy { background-color: #050a1a; }
+        /* Hiệu ứng chuyển động nhẹ nhàng */
+        .fade-in { animation: fadeIn 1.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-navy text-white min-h-screen flex flex-col justify-center items-center p-6 overflow-hidden relative">
+<body class="text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-        <div class="absolute top-[-10%] right-[-10%] w-96 h-96 border border-gold rounded-full"></div>
-        <div class="absolute bottom-[-10%] left-[-10%] w-64 h-64 border border-gold rounded-full"></div>
+    <div class="absolute inset-0 opacity-5 pointer-events-none">
+        <div class="absolute top-[-5%] left-[-5%] w-96 h-96 border border-gold rounded-full"></div>
+        <div class="absolute bottom-[-5%] right-[-5%] w-[500px] h-[500px] border border-gold rounded-full"></div>
     </div>
 
-    <div class="max-w-3xl w-full text-center relative z-10 px-4">
+    <header class="p-8 text-center fade-in">
+        <div class="text-sm font-semibold tracking-[0.3em] text-gold/60 uppercase">Chuyên gia Kinh tế số & Pháp luật</div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center px-6 py-10 relative z-10 fade-in">
         
-        <h1 class="text-5xl md:text-7xl mb-10 font-serif uppercase tracking-tighter leading-none">
-            Nguyễn Tấn <span class="text-gold">Phong</span>
+        <h1 class="text-5xl md:text-8xl font-serif font-bold uppercase tracking-tighter leading-none mb-4 text-center">
+            Nguyễn Tấn <span class="text-gold italic">Phong</span>
         </h1>
         
-        <div class="flex justify-center items-start gap-12 md:gap-16 mb-14">
-            <a href="https://www.vecom.vn" target="_blank" class="group flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full border-[3px] border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300 mb-4">
-                     <i class="fas fa-building-columns text-4xl text-gold"></i> 
+        <div class="h-px bg-gold/20 w-48 mb-12"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-16 w-full max-w-5xl">
+            <a href="https://www.vecom.vn" target="_blank" class="group flex flex-col items-center text-center">
+                <div class="w-20 h-20 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500 mb-4">
+                    <i class="fas fa-network-wired text-2xl text-gold/70 group-hover:text-gold transition"></i>
                 </div>
-                <span class="text-sm font-semibold tracking-widest text-gray-300 group-hover:text-gold transition uppercase">VECOM</span>
+                <h3 class="text-xs font-bold tracking-[0.2em] text-gray-400 group-hover:text-white transition uppercase">VECOM</h3>
+                <p class="text-[10px] text-gray-500 mt-1 italic">Ủy viên Ban Chấp hành</p>
             </a>
 
-            <a href="https://www.clead.vn" target="_blank" class="group flex flex-col items-center">
-                 <div class="w-24 h-24 rounded-full border-[3px] border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/10 transition-all duration-300 mb-4">
-                    <i class="fas fa-scale-balanced text-4xl text-gold"></i>
+            <a href="https://www.clead.vn" target="_blank" class="group flex flex-col items-center text-center">
+                <div class="w-20 h-20 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold/10 transition-all duration-500 mb-4 shadow-[0_0_15px_rgba(197,160,89,0.2)]">
+                    <i class="fas fa-gavel text-2xl text-gold"></i>
                 </div>
-                <span class="text-sm font-semibold tracking-widest text-gray-300 group-hover:text-gold transition uppercase">CLEAD</span>
+                <h3 class="text-xs font-bold tracking-[0.2em] text-gold uppercase transition">CLEAD</h3>
+                <p class="text-[10px] text-gray-400 mt-1 italic">Giám đốc Trung tâm</p>
+            </a>
+
+            <a href="https://eagleacademy.vn" target="_blank" class="group flex flex-col items-center text-center">
+                <div class="w-20 h-20 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500 mb-4">
+                    <i class="fas fa-graduation-cap text-2xl text-gold/70 group-hover:text-gold transition"></i>
+                </div>
+                <h3 class="text-xs font-bold tracking-[0.2em] text-gray-400 group-hover:text-white transition uppercase">Eagle Academy</h3>
+                <p class="text-[10px] text-gray-500 mt-1 italic">Giảng viên cấp cao</p>
             </a>
         </div>
 
-
-        <a href="https://www.clead.vn" target="_blank" class="block bg-white/5 border border-white/10 backdrop-blur-sm p-8 rounded-sm mb-14 mx-auto max-w-xl hover:border-gold/50 hover:bg-white/10 transition-all duration-500 group cursor-pointer">
-            <p class="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-3">Trạng thái</p>
-            <h2 class="text-xl md:text-3xl font-serif italic text-white group-hover:text-gold transition">Website đang trong quá trình hoàn thiện</h2>
-        </a>
-
-        <div class="space-y-8">
-            <p class="text-gray-500 text-[10px] uppercase tracking-[0.4em]">Kết nối trực tiếp</p>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-20">
-                <a href="tel:+84915159499" class="group text-3xl font-serif hover:text-gold transition duration-300 relative">
-                    <span class="text-[10px] block text-gray-500 font-sans uppercase tracking-widest mb-2 absolute -top-6 left-0 md:left-auto w-full">Điện thoại</span>
-                    +84 91 515 9499
-                </a>
-                <a href="mailto:phong@vecom.vn" class="group text-3xl font-serif hover:text-gold transition duration-300 relative">
-                    <span class="text-[10px] block text-gray-500 font-sans uppercase tracking-widest mb-2 absolute -top-6 left-0 md:left-auto w-full">Email</span>
-                    hello@nguyentanphong.com
-                </a>
-            </div>
+        <div class="w-full max-w-2xl text-center">
+            <a href="https://www.clead.vn" target="_blank" class="inline-block w-full border border-white/10 bg-white/5 backdrop-blur-md p-6 md:p-10 rounded-sm hover:border-gold/40 transition-all duration-700 group">
+                <span class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block opacity-60 group-hover:opacity-100">Status Update</span>
+                <h2 class="text-xl md:text-3xl font-serif italic mb-6">Website đang trong quá trình hoàn thiện.</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 pt-6 border-t border-white/5">
+                    <div class="text-left">
+                        <span class="text-[9px] uppercase tracking-widest text-gray-500 block mb-1">Liên hệ</span>
+                        <span class="text-lg md:text-xl font-serif tracking-tight">+84 91 515 9499</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] uppercase tracking-widest text-gray-500 block mb-1">Email</span>
+                        <span class="text-lg md:text-xl font-serif tracking-tight">phong@vecom.vn</span>
+                    </div>
+                </div>
+            </a>
         </div>
-    </div>
+    </main>
 
-    <footer class="absolute bottom-6 text-center w-full">
-        <p class="text-gray-700 text-[9px] uppercase tracking-[0.3em]">© 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</p>
+    <footer class="p-8 text-center fade-in">
+        <p class="text-gray-700 text-[9px] uppercase tracking-[0.4em]">© 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</p>
     </footer>
 
 </body>
