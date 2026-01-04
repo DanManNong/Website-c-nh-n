@@ -1,131 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nguyễn Tấn Phong | Chuyên gia Pháp luật & Thương mại Điện tử</title>
-        <meta name="description" content="Nguyễn Tấn Phong - Ủy viên BCH VECOM, Giám đốc CLEAD. Chuyên gia tư vấn chiến lược pháp lý và TMĐT."/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Tấn Phong | VECOM - CLEAD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
+        .bg-navy { background-color: #050a1a; }
+        .text-gold { color: #c5a059; }
+        .border-gold { border-color: #c5a059; }
+    </style>
+</head>
+<body class="bg-navy text-white min-h-screen flex flex-col justify-center items-center p-6 overflow-hidden relative">
+
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div class="absolute top-[-10%] right-[-10%] w-96 h-96 border border-gold rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-64 h-64 border border-gold rounded-full"></div>
+    </div>
+
+    <div class="max-w-3xl w-full text-center relative z-10">
+        <p class="text-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-6 italic">Hiệp hội Thương mại Điện tử Việt Nam</p>
+        <h1 class="text-5xl md:text-7xl mb-4 font-serif uppercase tracking-tighter">
+            Nguyễn Tấn <span class="text-gold">Phong</span>
+        </h1>
         
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.0/css/all.css'>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-        
-        <style>
-            body { font-family: 'Inter', sans-serif; }
-            h1, h2, h3 { font-family: 'Playfair Display', serif; }
-            .bg-navy { background-color: #050a1a; }
-            .text-gold { color: #c5a059; }
-            .btn-fancy { border: 2px solid #c5a059; color: #c5a059; padding: 12px 30px; text-transform: uppercase; font-weight: bold; transition: 0.3s; }
-            .btn-fancy:hover { background: #c5a059; color: white; }
-        </style>
-    </head>
-    
-    <body class="bg-white text-gray-900">
-        
-        <header class="border-b border-gray-100 sticky top-0 bg-white z-50 py-4 px-8">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="text-xl font-bold uppercase tracking-tighter">
-                    Nguyễn Tấn <span class="text-gold">Phong</span>
-                </div>
-                <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest">
-                    <a href="#about" class="hover:text-gold">Giới thiệu</a>
-                    <a href="#services" class="hover:text-gold">Lĩnh vực</a>
-                    <a href="#results" class="hover:text-gold">Thành tựu</a>
-                    <a href="#contact" class="hover:text-gold">Liên hệ</a>
-                </nav>
-                <div class="text-sm font-bold">
-                    Hotline: <a href="tel:090xxxxxxxx" class="text-gold">090.xxx.xxxx</a>
-                </div>
-            </div>
-        </header>
+        <div class="h-px bg-gold/30 w-32 mx-auto mb-8"></div>
 
-        <section class="grid md:grid-cols-2 min-h-[80vh] bg-navy text-white">
-            <div class="p-12 md:p-24 flex flex-col justify-center">
-                <p class="text-gold uppercase tracking-[0.3em] text-xs font-bold mb-4">Chiến lược - Pháp lý - Kết nối</p>
-                <h1 class="text-5xl md:text-7xl leading-tight mb-8">
-                    Người dẫn dắt <br> <span class="text-gold italic">tận tâm</span> tạo nên sự khác biệt.
-                </h1>
-                <p class="text-gray-400 mb-10 max-w-md">
-                    Với hơn 20 năm kinh nghiệm, tôi đồng hành cùng doanh nghiệp kiến tạo giá trị bền vững trong kỷ nguyên số.
-                </p>
-                <div>
-                    <a href="#results" class="btn-fancy inline-block">Xem thành tựu <i class="fas fa-angle-right ml-2"></i></a>
-                </div>
-            </div>
-            <div class="bg-gray-800">
-                <img src="chan-dung.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover grayscale opacity-80">
-            </div>
-        </section>
+        <div class="space-y-2 mb-12">
+            <p class="text-lg md:text-xl font-light tracking-wide text-gray-300">
+                Ủy viên Ban Chấp hành <span class="text-white font-semibold italic">VECOM</span>
+            </p>
+            <p class="text-lg md:text-xl font-light tracking-wide text-gray-300">
+                Giám đốc Trung tâm Tư vấn Pháp luật <span class="text-white font-semibold italic">CLEAD</span>
+            </p>
+        </div>
 
-        <section id="services" class="py-20 px-8 max-w-7xl mx-auto">
-            <h2 class="text-4xl text-center mb-16 underline decoration-gold underline-offset-8">Dịch vụ chuyên gia</h2>
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="border-t-4 border-gold pt-6">
-                    <h3 class="text-2xl mb-4 text-navy">Pháp lý TMĐT</h3>
-                    <p class="text-gray-600 text-sm">Tư vấn hợp đồng điện tử, bảo vệ dữ liệu cá nhân và tuân thủ quy định pháp luật trực tuyến.</p>
-                </div>
-                <div class="border-t-4 border-gold pt-6">
-                    <h3 class="text-2xl mb-4 text-navy">Xúc tiến số</h3>
-                    <p class="text-gray-600 text-sm">Kết nối doanh nghiệp VECOM với các đối tác quốc tế, thúc đẩy kinh doanh không biên giới.</p>
-                </div>
-                <div class="border-t-4 border-gold pt-6">
-                    <h3 class="text-2xl mb-4 text-navy">Giấy phép & Đào tạo</h3>
-                    <p class="text-gray-600 text-sm">Hỗ trợ thủ tục đăng ký website TMĐT và đào tạo kỹ năng kinh doanh số chuyên nghiệp.</p>
-                </div>
-            </div>
-        </section>
+        <div class="bg-white/5 border border-white/10 backdrop-blur-sm p-8 rounded-sm mb-12 inline-block px-12">
+            <p class="text-gold text-xs uppercase tracking-[0.2em] font-bold mb-2">Trạng thái</p>
+            <h2 class="text-2xl font-serif italic text-white">Website đang trong quá trình hoàn thiện</h2>
+        </div>
 
-        <section id="results" class="bg-gray-50 py-20 px-8">
-            <div class="max-w-7xl mx-auto text-center">
-                <h2 class="text-4xl mb-12">Kết quả nổi bật</h2>
-                <div class="grid md:grid-cols-4 gap-8">
-                    <div class="bg-white p-8 shadow-sm">
-                        <h4 class="text-gold text-3xl font-bold mb-2">20+</h4>
-                        <p class="text-xs uppercase font-semibold">Năm kinh nghiệm</p>
-                    </div>
-                    <div class="bg-white p-8 shadow-sm">
-                        <h4 class="text-gold text-3xl font-bold mb-2">10.000+</h4>
-                        <p class="text-xs uppercase font-semibold">Doanh nghiệp hỗ trợ</p>
-                    </div>
-                    <div class="bg-white p-8 shadow-sm">
-                        <h4 class="text-gold text-3xl font-bold mb-2">CLEAD</h4>
-                        <p class="text-xs uppercase font-semibold">Giám đốc điều hành</p>
-                    </div>
-                    <div class="bg-white p-8 shadow-sm">
-                        <h4 class="text-gold text-3xl font-bold mb-2">VECOM</h4>
-                        <p class="text-xs uppercase font-semibold">Trưởng VPĐD phía Nam</p>
-                    </div>
-                </div>
+        <div class="space-y-6">
+            <p class="text-gray-400 text-xs uppercase tracking-[0.3em]">Kết nối trực tiếp</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                <a href="tel:+84915159499" class="group text-2xl font-serif hover:text-gold transition duration-300">
+                    <span class="text-sm block text-gray-500 font-sans uppercase tracking-widest mb-1 group-hover:text-gold/50">Điện thoại</span>
+                    +84 91 515 9499
+                </a>
+                <a href="mailto:phong@vecom.vn" class="group text-2xl font-serif hover:text-gold transition duration-300">
+                    <span class="text-sm block text-gray-500 font-sans uppercase tracking-widest mb-1 group-hover:text-gold/50">Email</span>
+                    phong@vecom.vn
+                </a>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <footer id="contact" class="bg-navy text-white py-20 px-8 border-t border-gray-800">
-            <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
-                <div>
-                    <h5 class="text-gold uppercase font-bold mb-6">Liên hệ trực tiếp</h5>
-                    <p class="text-2xl mb-4">520.575.9040</p>
-                    <p class="text-gray-500">phong@vecom.vn</p>
-                </div>
-                <div>
-                    <h5 class="text-gold uppercase font-bold mb-6">Địa chỉ văn phòng</h5>
-                    <address class="not-italic text-gray-400">
-                        VPĐD VECOM phía Nam<br/>
-                        TP. Hồ Chí Minh, Việt Nam
-                    </address>
-                </div>
-                <div>
-                    <h5 class="text-gold uppercase font-bold mb-6">Mạng xã hội</h5>
-                    <div class="flex space-x-4 text-2xl">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-20 text-[10px] text-gray-600 uppercase tracking-widest">
-                Copyright ©2026 Nguyễn Tấn Phong. All Rights Reserved.
-            </div>
-        </footer>
+    <footer class="absolute bottom-10 text-center w-full">
+        <p class="text-gray-600 text-[10px] uppercase tracking-[0.2em]">© 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</p>
+    </footer>
 
-    </body>
+</body>
 </html>
