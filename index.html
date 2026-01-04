@@ -12,7 +12,6 @@
         h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
         .text-gold { color: #c5a059; }
         .border-gold { border-color: #c5a059; }
-        .bg-navy { background-color: #050a1a; }
         /* Hiệu ứng chuyển động nhẹ nhàng */
         .fade-in { animation: fadeIn 1.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -38,29 +37,38 @@
         <div class="h-px bg-gold/20 w-48 mb-12"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-16 w-full max-w-5xl">
-            <a href="https://www.vecom.vn" target="_blank" class="group flex flex-col items-center text-center">
-                <div class="w-20 h-20 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500 mb-4">
-                    <i class="fas fa-network-wired text-2xl text-gold/70 group-hover:text-gold transition"></i>
+            <div class="group flex flex-col items-center text-center">
+                <a href="https://www.vecom.vn" target="_blank" class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500 mb-4">
+                        <i class="fas fa-network-wired text-2xl text-gold/70 group-hover:text-gold transition"></i>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-[0.2em] text-gray-400 group-hover:text-white transition uppercase">VECOM</h3>
+                </a>
+                <div class="mt-2 text-[10px] text-gray-500 leading-relaxed uppercase tracking-widest">
+                    <p>UV Ban chấp hành</p>
+                    <p class="text-gold/60 mt-1">Trưởng đại diện phía Nam</p>
                 </div>
-                <h3 class="text-xs font-bold tracking-[0.2em] text-gray-400 group-hover:text-white transition uppercase">VECOM</h3>
-                <p class="text-[10px] text-gray-500 mt-1 italic">Ủy viên Ban Chấp hành</p>
-            </a>
+            </div>
 
-            <a href="https://www.clead.vn" target="_blank" class="group flex flex-col items-center text-center">
-                <div class="w-20 h-20 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold/10 transition-all duration-500 mb-4 shadow-[0_0_15px_rgba(197,160,89,0.2)]">
-                    <i class="fas fa-gavel text-2xl text-gold"></i>
-                </div>
-                <h3 class="text-xs font-bold tracking-[0.2em] text-gold uppercase transition">CLEAD</h3>
-                <p class="text-[10px] text-gray-400 mt-1 italic">Giám đốc Trung tâm</p>
-            </a>
+            <div class="group flex flex-col items-center text-center">
+                <a href="https://www.clead.vn" target="_blank" class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold/10 transition-all duration-500 mb-4 shadow-[0_0_15px_rgba(197,160,89,0.2)]">
+                        <i class="fas fa-gavel text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-[0.2em] text-gold uppercase transition">CLEAD</h3>
+                </a>
+                <p class="mt-2 text-[10px] text-gray-400 leading-relaxed uppercase tracking-widest italic">Giám đốc Trung tâm</p>
+            </div>
 
-            <a href="https://eagleacademy.vn" target="_blank" class="group flex flex-col items-center text-center">
-                <div class="w-20 h-20 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500 mb-4">
-                    <i class="fas fa-graduation-cap text-2xl text-gold/70 group-hover:text-gold transition"></i>
-                </div>
-                <h3 class="text-xs font-bold tracking-[0.2em] text-gray-400 group-hover:text-white transition uppercase">Eagle Academy</h3>
-                <p class="text-[10px] text-gray-500 mt-1 italic">Giảng viên cấp cao</p>
-            </a>
+            <div class="group flex flex-col items-center text-center">
+                <a href="https://eagleacademy.vn" target="_blank" class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500 mb-4">
+                        <i class="fas fa-graduation-cap text-2xl text-gold/70 group-hover:text-gold transition"></i>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-[0.2em] text-gray-400 group-hover:text-white transition uppercase">Eagle Academy</h3>
+                </a>
+                <p class="mt-2 text-[10px] text-gray-500 leading-relaxed uppercase tracking-widest italic">Giảng viên cấp cao</p>
+            </div>
         </div>
 
         <div class="w-full max-w-2xl text-center">
@@ -69,12 +77,12 @@
                 <h2 class="text-xl md:text-3xl font-serif italic mb-6">Website đang trong quá trình hoàn thiện.</h2>
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 pt-6 border-t border-white/5">
                     <div class="text-left">
-                        <span class="text-[9px] uppercase tracking-widest text-gray-500 block mb-1">Liên hệ</span>
-                        <span class="text-lg md:text-xl font-serif tracking-tight">+84 91 515 9499</span>
+                        <span class="text-[9px] uppercase tracking-widest text-gray-500 block mb-1">Điện thoại</span>
+                        <span class="text-lg md:text-xl font-serif tracking-tight text-white/90">+84 91 515 9499</span>
                     </div>
                     <div class="text-left">
                         <span class="text-[9px] uppercase tracking-widest text-gray-500 block mb-1">Email</span>
-                        <span class="text-lg md:text-xl font-serif tracking-tight">phong@vecom.vn</span>
+                        <span class="text-lg md:text-xl font-serif tracking-tight text-white/90 lowercase">hello@nguyentanphong.com</span>
                     </div>
                 </div>
             </a>
