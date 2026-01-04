@@ -6,69 +6,85 @@
     <title>Nguyễn Tấn Phong | VECOM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .bg-navy { background-color: #002147; }
+        .text-gold { color: #D4AF37; }
+        .border-gold { border-color: #D4AF37; }
+    </style>
 </head>
-<body class="bg-slate-50 font-sans antialiased text-slate-900">
+<body class="bg-white font-sans antialiased text-gray-800">
 
-    <header class="bg-[#002147] text-white pt-20 pb-32 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <div class="w-32 h-32 bg-slate-300 rounded-full mx-auto mb-6 border-4 border-[#D4AF37] shadow-xl overflow-hidden">
-                <img src="https://ui-avatars.com/api/?name=Nguyen+Tan+Phong&background=D4AF37&color=fff&size=128" alt="Avatar" class="w-full h-full object-cover">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-navy">NGUYỄN TẤN <span class="text-gold">PHONG</span></div>
+            <div class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-widest">
+                <a href="#about" class="hover:text-gold transition">Giới thiệu</a>
+                <a href="#expertise" class="hover:text-gold transition">Chuyên môn</a>
+                <a href="#results" class="hover:text-gold transition">Thành tựu</a>
+                <a href="#contact" class="hover:text-gold transition text-navy font-bold">Liên hệ: 090.xxx.xxxx</a>
             </div>
-            <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-2 uppercase">Nguyễn Tấn Phong</h1>
-            <p class="text-[#D4AF37] text-lg font-medium mb-4">Ủy viên Ban Chấp hành Hiệp hội Thương mại Điện tử Việt Nam (VECOM)</p>
-            <p class="text-slate-300 italic text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-                "Tiên phong chuyển đổi - Kết nối giá trị bền vững cho kinh tế số Việt Nam."
-            </p>
         </div>
-    </header>
+    </nav>
 
-    <main class="max-w-3xl mx-auto px-6 -mt-16 pb-20">
-        <div class="bg-white rounded-2xl shadow-2xl p-8 border border-slate-100">
-            <h2 class="text-xl font-bold text-[#002147] mb-6 flex items-center">
-                <i class="fas fa-link mr-3 text-[#D4AF37]"></i> Kết nối với tôi
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="#" class="flex items-center p-4 bg-slate-50 border border-slate-200 rounded-xl hover:bg-[#D4AF37] hover:text-white transition-all duration-300 group shadow-sm">
-                    <div class="w-10 h-10 bg-[#002147] text-white rounded-lg flex items-center justify-center mr-4 group-hover:bg-white group-hover:text-[#002147]">
-                        <i class="fas fa-comment"></i>
-                    </div>
-                    <span class="font-semibold">Kết nối Zalo</span>
-                </a>
-
-                <a href="#" class="flex items-center p-4 bg-slate-50 border border-slate-200 rounded-xl hover:bg-[#D4AF37] hover:text-white transition-all duration-300 group shadow-sm">
-                    <div class="w-10 h-10 bg-[#002147] text-white rounded-lg flex items-center justify-center mr-4 group-hover:bg-white group-hover:text-[#002147]">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <span class="font-semibold">Facebook Cá nhân</span>
-                </a>
-
-                <a href="https://vecom.vn" target="_blank" class="flex items-center p-4 bg-slate-50 border border-slate-200 rounded-xl hover:bg-[#D4AF37] hover:text-white transition-all duration-300 group shadow-sm">
-                    <div class="w-10 h-10 bg-[#002147] text-white rounded-lg flex items-center justify-center mr-4 group-hover:bg-white group-hover:text-[#002147]">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <span class="font-semibold">Website VECOM</span>
-                </a>
-
-                <a href="mailto:phong@vecom.vn" class="flex items-center p-4 bg-slate-50 border border-slate-200 rounded-xl hover:bg-[#D4AF37] hover:text-white transition-all duration-300 group shadow-sm">
-                    <div class="w-10 h-10 bg-[#002147] text-white rounded-lg flex items-center justify-center mr-4 group-hover:bg-white group-hover:text-[#002147]">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <span class="font-semibold">Gửi Email</span>
-                </a>
+    <section class="bg-navy text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mt-12 md:mt-0">
+                <img src="https://via.placeholder.com/600x800" alt="Nguyễn Tấn Phong" class="w-full h-auto object-cover grayscale hover:grayscale-0 transition duration-700">
             </div>
-
-            <div class="mt-12 pt-8 border-t border-slate-100">
-                <h3 class="text-xl font-bold text-[#002147] mb-4">Về tôi</h3>
-                <p class="text-slate-600 leading-relaxed italic">
-                    Hơn một thập kỷ gắn bó với sự phát triển của Thương mại điện tử Việt Nam, tôi tin rằng chuyển đổi số không chỉ là công nghệ, mà là hành trình kiến tạo giá trị mới cho cộng đồng doanh nghiệp.
+            <div class="md:w-1/2 py-16 md:pl-16">
+                <h2 class="text-gold uppercase tracking-widest font-bold mb-4">Chuyên gia TMĐT & Chuyển đổi số</h2>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold leading-tight mb-6">
+                    MỘT CHIẾN LƯỢC ĐÚNG <br> <span class="text-gold">TẠO NÊN SỰ KHÁC BIỆT</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                    Với hơn 20 năm kinh nghiệm trong ngành, tôi đồng hành cùng doanh nghiệp Việt Nam xây dựng nền tảng số vững chắc và bền vững.
                 </p>
+                <a href="#contact" class="inline-block bg-white text-navy px-10 py-4 font-bold uppercase tracking-widest hover:bg-gold hover:text-white transition">
+                    Tư vấn miễn phí <i class="fas fa-chevron-right ml-2"></i>
+                </a>
             </div>
         </div>
-    </main>
+    </section>
 
-    <footer class="text-center text-slate-400 text-sm pb-10">
-        &copy; 2026 Nguyễn Tấn Phong. Đã đăng ký bản quyền.
+    <section id="expertise" class="py-20 bg-gray-50 px-6">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h3 class="text-3xl font-bold text-navy uppercase">Lĩnh Vực Chuyên Môn</h3>
+            <div class="w-24 h-1 bg-gold mx-auto mt-4"></div>
+        </div>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+            <div class="bg-white p-10 shadow-lg border-t-4 border-gold text-center">
+                <i class="fas fa-shopping-cart text-4xl text-navy mb-6"></i>
+                <h4 class="text-xl font-bold mb-4">Thương mại điện tử</h4>
+                <p class="text-gray-600">Tư vấn chiến lược bán hàng đa kênh và tối ưu hóa trải nghiệm khách hàng số.</p>
+            </div>
+            <div class="bg-white p-10 shadow-lg border-t-4 border-gold text-center">
+                <i class="fas fa-rocket text-4xl text-navy mb-6"></i>
+                <h4 class="text-xl font-bold mb-4">Chuyển đổi số</h4>
+                <p class="text-gray-600">Áp dụng công nghệ vào quy trình vận hành giúp doanh nghiệp tăng trưởng đột phá.</p>
+            </div>
+            <div class="bg-white p-10 shadow-lg border-t-4 border-gold text-center">
+                <i class="fas fa-gavel text-4xl text-navy mb-6"></i>
+                <h4 class="text-xl font-bold mb-4">Chính sách & Pháp lý</h4>
+                <p class="text-gray-600">Hỗ trợ doanh nghiệp tuân thủ các quy định pháp luật về kinh doanh trực tuyến.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-navy text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0">
+                <h5 class="text-2xl font-bold italic">Nguyễn Tấn Phong</h5>
+                <p class="text-gray-400">Thành viên Ban chấp hành VECOM</p>
+            </div>
+            <div class="flex space-x-6 text-2xl">
+                <a href="#" class="hover:text-gold"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-gold"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:phong@vecom.vn" class="hover:text-gold"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="text-center mt-12 text-gray-500 text-sm">
+            &copy; 2026 Nguyễn Tấn Phong. All Rights Reserved.
+        </div>
     </footer>
 
 </body>
