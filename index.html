@@ -50,7 +50,7 @@
         .zen-link-effect:hover * { color: #ffffff !important; opacity: 1 !important; }
 
         .pillar-box {
-            min-height: 200px;
+            min-height: 180px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -59,6 +59,17 @@
             background-color: rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(0, 0, 0, 0.03);
             width: 100%;
+        }
+
+        .lecture-box {
+            min-height: 120px;
+            background-color: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
         }
 
         .name-title {
@@ -145,36 +156,36 @@
         <h1 class="name-title text-center mb-8 uppercase stagger delay-2">Nguyễn Tấn Phong</h1>
         <div class="w-16 h-[0.5px] bg-black/20 mb-20 stagger delay-2"></div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-28 w-full max-w-7xl text-center items-stretch">
-            <a href="https://vecom.vn" target="_blank" class="pillar-box zen-link-effect stagger delay-3">
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-24 w-full max-w-7xl text-center items-stretch stagger delay-3">
+            <a href="https://vecom.vn" target="_blank" class="pillar-box zen-link-effect">
                 <i class="fas fa-network-wired text-xl opacity-30 mb-6"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">VECOM</h3>
                 <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">
                     Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam
                 </p>
             </a>
-            <a href="https://clead.vn" target="_blank" class="pillar-box zen-link-effect stagger delay-3" style="animation-delay: 0.7s">
+            <a href="https://clead.vn" target="_blank" class="pillar-box zen-link-effect" style="animation-delay: 0.7s">
                 <i class="fas fa-gavel text-xl opacity-30 mb-6"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">CLEAD</h3>
                 <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">
                     Giám đốc<br>Trung tâm tư vấn pháp luật<br>Hiệp hội thương mại điện tử Việt Nam
                 </p>
             </a>
-            <a href="https://www.ari.org.vn/" target="_blank" class="pillar-box zen-link-effect stagger delay-3" style="animation-delay: 0.8s">
+            <a href="https://www.ari.org.vn/" target="_blank" class="pillar-box zen-link-effect" style="animation-delay: 0.8s">
                 <i class="fas fa-scale-balanced text-xl opacity-30 mb-6"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">ARI</h3>
                 <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">
                     Luật gia<br>Phó Viện Trưởng<br>Viện Khoa học pháp lý
                 </p>
             </a>
-            <a href="https://tracent.com.vn/" target="_blank" class="pillar-box zen-link-effect stagger delay-3" style="animation-delay: 0.9s">
+            <a href="https://tracent.com.vn/" target="_blank" class="pillar-box zen-link-effect" style="animation-delay: 0.9s">
                 <i class="fas fa-handshake-simple text-xl opacity-30 mb-6"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">TRACENT</h3>
                 <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">
                     Trọng tài viên<br>Trung tâm trọng tài thương mại<br>Thành phố Hồ Chí Minh
                 </p>
             </a>
-            <a href="https://eagleacademy.vn" target="_blank" class="pillar-box zen-link-effect stagger delay-3 col-span-2 lg:col-span-1" style="animation-delay: 1s">
+            <a href="https://eagleacademy.vn" target="_blank" class="pillar-box zen-link-effect col-span-2 lg:col-span-1" style="animation-delay: 1s">
                 <i class="fas fa-graduation-cap text-xl opacity-30 mb-6"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">EAGLE</h3>
                 <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">
@@ -183,7 +194,39 @@
             </a>
         </div>
 
-        <div class="w-full max-w-3xl text-center mb-32 px-4 stagger delay-4">
+        <div class="w-full max-w-6xl mb-32 px-4 text-center stagger delay-4">
+            <h2 class="text-[10px] font-medium tracking-[0.5em] mb-12 uppercase opacity-40">Thư viện Tri thức chuyên gia</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <button onclick="openGate('Bài giảng A', 'AAA', 'bai-giang-a.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-lock text-[8px] opacity-20 mb-4 self-end"></i>
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng A</h4>
+                </button>
+                <button onclick="openGate('Bài giảng B', 'BBB', 'bai-giang-b.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-lock text-[8px] opacity-20 mb-4 self-end"></i>
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng B</h4>
+                </button>
+                <div class="lecture-box opacity-30 grayscale cursor-not-allowed">
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng C</h4>
+                </div>
+                <div class="lecture-box opacity-30 grayscale cursor-not-allowed">
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng D</h4>
+                </div>
+                <div class="lecture-box opacity-30 grayscale cursor-not-allowed">
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng E</h4>
+                </div>
+                <div class="lecture-box opacity-30 grayscale cursor-not-allowed">
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng F</h4>
+                </div>
+                <div class="lecture-box opacity-30 grayscale cursor-not-allowed">
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng G</h4>
+                </div>
+                <div class="lecture-box opacity-30 grayscale cursor-not-allowed">
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng H</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-3xl text-center mb-32 px-4 stagger delay-4" style="animation-delay: 1.2s">
             <div class="p-16 md:p-24 flex flex-col items-center glass-box shadow-sm relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-4 opacity-5 text-[60px]"><i class="fas fa-quote-right"></i></div>
                 <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-16 uppercase">Kho tài liệu Nghiên cứu</h2>
