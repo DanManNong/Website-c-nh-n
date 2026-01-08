@@ -14,7 +14,7 @@
         .bg-gold { background: #c5a059; }
         .border-gold { border-color: #c5a059; }
         
-        /* Chỉnh sửa lỗi con trỏ */
+        /* Đảm bảo con trỏ hiển thị đúng cho các vùng tương tác */
         a, button, .lecture-card, .folder-btn { cursor: pointer !important; }
 
         .fade-in { animation: fadeIn 1.5s ease-out forwards; }
@@ -98,7 +98,7 @@
                     <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">VECOM</h3>
                 </a>
                 <p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">
-                    Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam
+                    UV Ban chấp hành<br>Trưởng đại diện phía Nam
                 </p>
             </div>
 
@@ -109,7 +109,7 @@
                     </div>
                     <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">CLEAD</h3>
                 </a>
-                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic leading-relaxed">Giám đốc<br>Trung tâm Tư vấn Pháp luật</p>
+                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic leading-relaxed">Giám đốc Trung tâm<br>Tư vấn Pháp luật</p>
             </div>
 
             <div class="group">
@@ -119,7 +119,7 @@
                     </div>
                     <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">Eagle Academy</h3>
                 </a>
-                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic leading-relaxed">Giảng viên cấp cao<br>Bất động sản</p>
+                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic leading-relaxed">Giảng viên cấp cao<br>BĐS & PropTech</p>
             </div>
         </div>
 
@@ -161,30 +161,53 @@
             </button>
         </div>
 
-        <div class="w-full max-w-4xl flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20 border-t border-white/5 pt-12">
-            <a href="tel:+84915159499" class="flex items-center gap-4 group">
-                <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
-                    <i class="fas fa-phone-alt text-gold group-hover:text-black text-sm"></i>
-                </div>
-                <div class="text-left">
-                    <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Hotline</span>
-                    <span class="text-lg font-serif text-white/80">+84 91 515 9499</span>
-                </div>
-            </a>
-            <a href="mailto:hello@nguyentanphong.com" class="flex items-center gap-4 group">
-                <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
-                    <i class="fas fa-envelope text-gold group-hover:text-black text-sm"></i>
-                </div>
-                <div class="text-left">
-                    <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Email</span>
-                    <span class="text-lg font-serif text-white/80 lowercase">hello@nguyentanphong.com</span>
-                </div>
-            </a>
+        <div class="w-full max-w-4xl flex flex-col gap-10 border-t border-white/5 pt-12 items-center">
+            <div class="flex flex-wrap justify-center gap-10 md:gap-20">
+                <a href="tel:+84915159499" class="flex items-center gap-4 group">
+                    <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
+                        <i class="fas fa-phone-alt text-gold group-hover:text-black text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Hotline</span>
+                        <span class="text-lg font-serif text-white/80">+84 91 515 9499</span>
+                    </div>
+                </a>
+                <a href="mailto:hello@nguyentanphong.com" class="flex items-center gap-4 group">
+                    <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
+                        <i class="fas fa-envelope text-gold group-hover:text-black text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Email</span>
+                        <span class="text-lg font-serif text-white/80 lowercase">hello@nguyentanphong.com</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-10 md:gap-20">
+                <a href="https://zalo.me/cangioland" target="_blank" class="flex items-center gap-4 group">
+                    <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
+                        <i class="fas fa-comment-dots text-gold group-hover:text-black text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Zalo</span>
+                        <span class="text-lg font-serif text-white/80">Zalo Kết nối</span>
+                    </div>
+                </a>
+                <a href="https://facebook.com/tanphong1981" target="_blank" class="flex items-center gap-4 group">
+                    <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
+                        <i class="fab fa-facebook-f text-gold group-hover:text-black text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Facebook</span>
+                        <span class="text-lg font-serif text-white/80">Facebook Profile</span>
+                    </div>
+                </a>
+            </div>
         </div>
 
     </main>
 
-    <footer class="p-8 text-center text-gray-700 text-[6px] uppercase tracking-[0.4em]">
+    <footer class="p-8 text-center text-gray-700 text-[9px] uppercase tracking-[0.4em]">
         © 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.
     </footer>
 
@@ -196,7 +219,6 @@
 
         function updateDisplay() {
             const total = BASE_COUNT + storedCount;
-            // Luôn hiển thị đủ 8 chữ số
             document.getElementById('loginCount').innerText = total.toString().padStart(8, '0');
         }
 
