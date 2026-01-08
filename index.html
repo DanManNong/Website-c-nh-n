@@ -24,7 +24,6 @@
             --zen-border-shadow: rgba(107, 112, 92, 0.1);
         }
 
-        /* RESET & BASE */
         * { -webkit-tap-highlight-color: transparent; cursor: default; }
         a, button, i { cursor: pointer !important; }
         html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -36,7 +35,7 @@
             line-height: 1.6;
         }
 
-        /* HIỆU ỨNG VÂN CÁT XÁM & PHẢN HỒI NHẸ (Premium Hover) */
+        /* HIỆU ỨNG VÂN CÁT XÁM */
         .zen-link-effect {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
@@ -51,14 +50,25 @@
         }
         .zen-link-effect:hover * { color: #ffffff !important; opacity: 1 !important; }
 
-        /* PHÂN CẤP THỊ GIÁC (Hierarchy) */
-        .name-title {
-            font-weight: 100; /* Làm mỏng hơn để tăng sự sang trọng */
-            letter-spacing: 0.3em;
-            font-size: clamp(1.5rem, 5vw, 3rem); /* Tự động co giãn theo màn hình */
+        /* KHUNG CHỨC DANH - FIX FULL & SYNC SIZE */
+        .pillar-box {
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            width: 100%;
         }
 
-        /* KHUNG AVATAR ĐÔI (Double Border) */
+        .name-title {
+            font-weight: 100;
+            letter-spacing: 0.3em;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+        }
+
         .avatar-frame {
             position: relative;
             padding: 10px;
@@ -72,10 +82,8 @@
             border-radius: 9999px;
             overflow: hidden;
             border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        /* GLASSMORPHISM CHO KHO TÀI LIỆU */
         .glass-box {
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(10px);
@@ -83,7 +91,6 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        /* HIỆU ỨNG XUẤT HIỆN SO LE (Staggered Animation) */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -95,9 +102,7 @@
         .delay-4 { animation-delay: 0.8s; }
         .delay-5 { animation-delay: 1s; }
 
-        /* COUNTER BOX PHONG CÁCH CƠ KHÍ */
         .counter-box {
-            font-family: 'Inter', sans-serif;
             background: #2d2d2d;
             color: #ebe9e0;
             padding: 8px 20px;
@@ -142,49 +147,69 @@
         <h1 class="name-title text-center mb-8 uppercase stagger delay-2">Nguyễn Tấn Phong</h1>
         <div class="w-16 h-[0.5px] bg-black/20 mb-20 stagger delay-2"></div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-28 w-full max-w-7xl text-center items-start">
-            <a href="https://vecom.vn" target="_blank" class="p-5 flex flex-col items-center bg-black/[0.05] border border-black/[0.05] zen-link-effect stagger delay-3">
-                <i class="fas fa-network-wired text-[10px] opacity-30 mb-6"></i>
-                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">VECOM</h3>
-                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Uỷ viên BCH<br>Trưởng Ban kiểm tra</p>
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-28 w-full max-w-7xl text-center items-stretch">
+            <a href="https://vecom.vn" target="_blank" class="pillar-box zen-link-effect stagger delay-3">
+                <i class="fas fa-network-wired text-xl opacity-30 mb-6"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">VECOM</h3>
+                <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">Uỷ viên BCH<br>Trưởng Ban kiểm tra</p>
             </a>
-            <a href="https://clead.vn" target="_blank" class="p-5 flex flex-col items-center bg-black/[0.05] border border-black/[0.05] zen-link-effect stagger delay-3" style="animation-delay: 0.7s">
-                <i class="fas fa-gavel text-[10px] opacity-30 mb-6"></i>
-                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">CLEAD</h3>
-                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Giám đốc<br>Trung tâm TVPL</p>
+            <a href="https://clead.vn" target="_blank" class="pillar-box zen-link-effect stagger delay-3" style="animation-delay: 0.7s">
+                <i class="fas fa-gavel text-xl opacity-30 mb-6"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">CLEAD</h3>
+                <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">Giám đốc<br>Trung tâm TVPL</p>
             </a>
-            <a href="https://www.ari.org.vn/" target="_blank" class="p-5 flex flex-col items-center bg-black/[0.05] border border-black/[0.05] zen-link-effect stagger delay-3" style="animation-delay: 0.8s">
-                <i class="fas fa-scale-balanced text-[10px] opacity-30 mb-6"></i>
-                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">ARI</h3>
-                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Phó Viện trưởng<br>Viện KHPL Trọng tài</p>
+            <a href="https://www.ari.org.vn/" target="_blank" class="pillar-box zen-link-effect stagger delay-3" style="animation-delay: 0.8s">
+                <i class="fas fa-scale-balanced text-xl opacity-30 mb-6"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">ARI</h3>
+                <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">Phó Viện trưởng<br>Viện KHPL Trọng tài</p>
             </a>
-            <a href="https://tracent.com.vn/" target="_blank" class="p-5 flex flex-col items-center bg-black/[0.05] border border-black/[0.05] zen-link-effect stagger delay-3" style="animation-delay: 0.9s">
-                <i class="fas fa-handshake-simple text-[10px] opacity-30 mb-6"></i>
-                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">TRACENT</h3>
-                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Trọng tài viên<br>TT Trọng tài HCM</p>
+            <a href="https://tracent.com.vn/" target="_blank" class="pillar-box zen-link-effect stagger delay-3" style="animation-delay: 0.9s">
+                <i class="fas fa-handshake-simple text-xl opacity-30 mb-6"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">TRACENT</h3>
+                <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">Trọng tài viên<br>TT Trọng tài HCM</p>
             </a>
-            <a href="https://eagleacademy.vn" target="_blank" class="p-5 flex flex-col items-center bg-black/[0.05] border border-black/[0.05] zen-link-effect stagger delay-3 col-span-2 lg:col-span-1" style="animation-delay: 1s">
-                <i class="fas fa-graduation-cap text-[10px] opacity-30 mb-6"></i>
-                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">Eagle Academy</h3>
-                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Giảng viên cao cấp<br>Bất động sản</p>
+            <a href="https://eagleacademy.vn" target="_blank" class="pillar-box zen-link-effect stagger delay-3 col-span-2 lg:col-span-1" style="animation-delay: 1s">
+                <i class="fas fa-graduation-cap text-xl opacity-30 mb-6"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">Eagle Academy</h3>
+                <p class="text-[8.5px] text-[#888] uppercase tracking-[0.18em] leading-relaxed">Giảng viên cao cấp<br>Bất động sản</p>
             </a>
         </div>
 
         <div class="w-full max-w-3xl text-center mb-32 px-4 stagger delay-4">
             <div class="p-16 md:p-24 flex flex-col items-center glass-box shadow-sm relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-4 opacity-5 text-[60px]"><i class="fas fa-quote-right"></i></div>
-                
                 <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-16 uppercase">Kho tài liệu Nghiên cứu</h2>
                 <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm relative z-10">
                     <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" 
                             class="flex-1 py-5 bg-[#2d2d2d] text-white text-[10px] tracking-[0.2em] uppercase zen-link-effect">Tải về ngay</button>
                     <button onclick="document.getElementById('registerModal').style.display='flex'" 
-                            class="flex-1 py-5 bg-black/[0.05] border border-black/[0.05] text-[10px] tracking-[0.2em] uppercase zen-link-effect">Đăng ký mới</button>
+                            class="flex-1 py-5 bg-black/[0.04] border border-black/[0.03] text-[10px] tracking-[0.2em] uppercase zen-link-effect">Đăng ký mới</button>
                 </div>
                 <div class="mt-20 pt-12 border-t border-black/5 w-full">
                     <span class="text-[8px] tracking-[0.3em] uppercase opacity-30 block mb-6">Lượt truy cập hệ thống</span>
                     <span id="loginCount" class="counter-box">00006875</span>
                 </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-5xl border-t border-black/5 pt-16 mb-20 px-6 stagger delay-5">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
+                <a href="tel:+84915159499" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/[0.02]">
+                    <i class="fas fa-phone-alt text-sm opacity-30"></i>
+                    <span class="text-[9px] uppercase tracking-[0.3em] font-medium">Hotline</span>
+                </a>
+                <a href="mailto:hello@nguyentanphong.com" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/[0.02]">
+                    <i class="fas fa-envelope text-sm opacity-30"></i>
+                    <span class="text-[9px] uppercase tracking-[0.3em] font-medium">Email</span>
+                </a>
+                <a href="https://zalo.me/0915159499" target="_blank" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/[0.02]">
+                    <i class="fas fa-comment-dots text-sm opacity-30"></i>
+                    <span class="text-[9px] uppercase tracking-[0.3em] font-medium">Zalo</span>
+                </a>
+                <a href="https://facebook.com/tanphong1981" target="_blank" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/[0.02]">
+                    <i class="fab fa-facebook-f text-sm opacity-30"></i>
+                    <span class="text-[9px] uppercase tracking-[0.3em] font-medium">Facebook</span>
+                </a>
             </div>
         </div>
     </main>
@@ -225,6 +250,7 @@
             if (document.getElementById('passInput').value === currentCode) {
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
                 localStorage.setItem('loginCount', count);
+                updateDisplay();
                 window.location.href = currentTarget;
             } else { 
                 const err = document.getElementById('errorMsg');
