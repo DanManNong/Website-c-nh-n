@@ -6,263 +6,207 @@
     <title>Nguyễn Tấn Phong | Chuyên gia Kinh tế số & Pháp luật</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #050a1a;
-            --neon-blue: #00f3ff;
-            --neon-purple: #bd00ff;
-            --text-light: #e2e8f0;
+            --zen-bg: #f8f7f2;
+            --zen-text: #2d2d2d;
+            --zen-accent: #6b705c;
+            --zen-card: #ffffff;
         }
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-dark); 
-            color: var(--text-light);
-            /* Hiệu ứng nền mạch điện tử mờ */
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(189, 0, 255, 0.15) 0%, transparent 40%);
-            background-attachment: fixed;
+            background-color: var(--zen-bg); 
+            color: var(--zen-text); 
             overflow-x: hidden;
-        }
-        h1, h2, h3, .tech-font { font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; }
-        
-        /* Hiệu ứng chữ Neon */
-        .neon-text-blue {
-            color: white;
-            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
-        }
-        .neon-text-purple {
-            color: white;
-            text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
-        }
-
-        /* Thẻ Cyberpunk */
-        .cyber-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0, 243, 255, 0.05);
-            border-radius: 4px; /* Góc cạnh hơn */
-            transition: all 0.3s ease;
-        }
-        .cyber-card:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.5), inset 0 0 30px rgba(0, 243, 255, 0.2);
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(0, 243, 255, 0.05);
+            -webkit-font-smoothing: antialiased;
         }
         
-        /* Icon phát sáng */
-        .neon-icon { color: var(--neon-blue); filter: drop-shadow(0 0 8px var(--neon-blue)); }
-        .group:hover .neon-icon { color: white; filter: drop-shadow(0 0 15px var(--neon-blue)); }
+        /* Hiệu ứng thiền: Đổ bóng cực nhẹ & tinh tế */
+        .zen-card {
+            background: var(--zen-card);
+            border-radius: 2px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .zen-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border-color: var(--zen-accent);
+        }
 
-        /* Buttons */
-        .cyber-btn {
-            background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), rgba(189, 0, 255, 0.1));
-            border: 1px solid var(--neon-blue);
-            color: var(--neon-blue);
-            text-transform: uppercase; font-weight: 800; letter-spacing: 0.2em;
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
-            transition: all 0.3s ease;
+        /* Chữ tối giản */
+        .zen-title {
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 300;
         }
-        .cyber-btn:hover {
-            background: var(--neon-blue); color: var(--bg-dark);
-            box-shadow: 0 0 30px var(--neon-blue);
-        }
+
+        a, button { cursor: pointer !important; }
+        .fade-in { animation: fadeIn 2s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .modal-overlay { 
             display: none; position: fixed; inset: 0; 
-            background: rgba(5, 10, 26, 0.95); backdrop-filter: blur(10px);
+            background: rgba(248, 247, 242, 0.98); 
             z-index: 100; align-items: center; justify-content: center; padding: 20px; 
         }
-        .input-cyber {
-            background: rgba(0, 243, 255, 0.05); border: 1px solid rgba(0, 243, 255, 0.3); padding: 14px; 
-            color: var(--neon-blue); width: 100%; font-family: 'Orbitron', sans-serif; margin-bottom: 15px;
-            text-align: center; font-weight: bold; letter-spacing: 0.1em;
+        
+        .input-zen {
+            background: transparent; border: none; border-bottom: 1px solid #d1d1d1;
+            padding: 12px 0; color: var(--zen-text); width: 100%; font-size: 15px; margin-bottom: 20px;
+            transition: border-color 0.3s;
         }
-        .input-cyber:focus { outline: none; box-shadow: 0 0 20px rgba(0, 243, 255, 0.5); border-color: var(--neon-blue); }
-        .input-cyber::placeholder { color: rgba(0, 243, 255, 0.5); }
+        .input-zen:focus { outline: none; border-color: var(--zen-accent); }
 
         .counter-box {
-            font-family: 'Orbitron', monospace; font-weight: 800;
-            background: rgba(0,0,0,0.5); padding: 6px 16px; border: 1px solid var(--neon-blue);
-            color: var(--neon-blue); letter-spacing: 0.2em; box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            font-family: 'Inter', sans-serif; font-weight: 300;
+            background: #ebe9e0; padding: 4px 12px; border-radius: 2px;
+            color: var(--zen-accent); letter-spacing: 0.2em;
         }
-        a, button { cursor: pointer !important; }
-        .fade-in { animation: fadeIn 1s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
     <div id="passwordModal" class="modal-overlay">
-        <div class="cyber-card p-10 w-full max-w-md text-center border-neon-blue">
-            <i class="fas fa-shield-halved text-5xl mb-6 neon-icon"></i>
-            <h3 id="modalTitle" class="text-xl font-bold mb-8 neon-text-purple">Yêu cầu xác thực</h3>
-            <input type="password" id="passInput" placeholder="NHẬP MÃ TRUY CẬP" class="input-cyber">
-            <div class="flex gap-4 mt-6">
-                <button onclick="closeModal('passwordModal')" class="flex-1 py-3 text-sm font-bold text-gray-500 hover:text-white transition tech-font">HỦY BỎ</button>
-                <button onclick="validateAccess()" class="flex-1 py-3 cyber-btn rounded-sm">XÁC NHẬN</button>
+        <div class="max-w-md w-full text-center p-8">
+            <h3 class="zen-title text-sm mb-12">Yêu cầu xác thực</h3>
+            <input type="password" id="passInput" placeholder="Nhập mã..." class="input-zen text-center">
+            <div class="flex gap-8 mt-8 justify-center">
+                <button onclick="closeModal('passwordModal')" class="text-[10px] zen-title opacity-40">Hủy bỏ</button>
+                <button onclick="validateAccess()" class="text-[10px] zen-title font-bold text-accent">Xác nhận</button>
             </div>
-            <p id="errorMsg" class="text-red-500 text-xs mt-4 opacity-0 font-bold tech-font tracking-widest">MÃ KHÔNG CHÍNH XÁC</p>
+            <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 zen-title">Mã không chính xác</p>
         </div>
     </div>
 
     <div id="registerModal" class="modal-overlay">
-        <div class="cyber-card p-10 w-full max-w-md text-center">
-            <i class="fas fa-file-circuit text-5xl mb-6 neon-icon"></i>
-            <h3 class="text-xl font-bold mb-8 neon-text-purple">Đăng ký tài liệu</h3>
+        <div class="max-w-md w-full p-8">
+            <div class="text-center mb-12">
+                <h3 class="zen-title text-sm">Đăng ký nhận tài liệu</h3>
+            </div>
             <form id="regForm" onsubmit="handleRegistration(event)">
-                <input type="text" name="name" placeholder="HỌ VÀ TÊN" required class="input-cyber text-left">
-                <input type="tel" name="phone" placeholder="SỐ ĐIỆN THOẠI" required class="input-cyber text-left">
-                <input type="email" name="email" placeholder="EMAIL NHẬN TÀI LIỆU" required class="input-cyber text-left">
-                <div class="flex gap-4 mt-8">
-                    <button type="button" onclick="closeModal('registerModal')" class="flex-1 py-3 text-sm font-bold text-gray-500 hover:text-white transition tech-font">ĐÓNG</button>
-                    <button type="submit" id="submitBtn" class="flex-1 py-3 cyber-btn rounded-sm">GỬI ĐĂNG KÝ</button>
+                <input type="text" name="name" placeholder="Họ và Tên" required class="input-zen">
+                <input type="tel" name="phone" placeholder="Số điện thoại" required class="input-zen">
+                <input type="email" name="email" placeholder="Địa chỉ Email" required class="input-zen">
+                <div class="flex gap-8 mt-12 justify-center">
+                    <button type="button" onclick="closeModal('registerModal')" class="text-[10px] zen-title opacity-40">Đóng</button>
+                    <button type="submit" id="submitBtn" class="text-[10px] zen-title font-bold">Gửi thông tin</button>
                 </div>
             </form>
-            <p id="regSuccess" class="text-neon-blue text-sm mt-4 hidden font-bold tech-font tracking-widest">ĐÃ ĐĂNG KÝ THÀNH CÔNG</p>
+            <p id="regSuccess" class="text-emerald-600 text-[10px] zen-title mt-8 text-center hidden">Đã đăng ký thành công</p>
         </div>
     </div>
 
-    <header class="p-10 text-center fade-in">
-        <div class="text-[10px] font-bold tracking-[0.4em] text-neon-blue uppercase tech-font glow-sm">Chuyên gia Kinh tế số & Pháp luật</div>
+    <header class="p-12 text-center fade-in">
+        <div class="text-[9px] font-semibold tracking-[0.5em] text-[#a5a5a5] uppercase">Tri thức • Pháp lý • Công nghệ</div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center px-6 py-4 z-10 fade-in">
+    <main class="flex-grow flex flex-col items-center px-6 z-10 fade-in">
         
-        <div class="mb-12 relative group">
-            <div class="w-44 h-44 md:w-60 md:h-60 rounded-full p-1 cyber-card flex items-center justify-center overflow-hidden relative z-10">
-                <div class="w-full h-full rounded-full overflow-hidden bg-gray-900 border-2 border-neon-blue/30 group-hover:border-neon-blue transition-all">
-                    <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all">
-                </div>
+        <div class="mb-12">
+            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full p-1 border border-black/5 shadow-sm overflow-hidden bg-white">
+                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover opacity-95 grayscale-[20%]">
             </div>
-            <div class="absolute inset-0 rounded-full bg-neon-blue blur-[40px] opacity-20 group-hover:opacity-40 transition-all -z-10"></div>
-            <div class="absolute bottom-2 right-2 cyber-btn text-[9px] px-4 py-1 rounded-full z-20">Official</div>
         </div>
 
-        <h1 class="text-4xl md:text-6xl text-center mb-4 neon-text-blue uppercase font-black">Nguyễn Tấn Phong</h1>
-        <div class="h-1 w-32 bg-gradient-to-r from-neon-blue to-neon-purple mb-16 rounded-full blur-[2px]"></div>
+        <h1 class="text-3xl md:text-5xl font-light tracking-[0.2em] text-center mb-6 uppercase">Nguyễn Tấn Phong</h1>
+        <div class="w-12 h-[1px] bg-black/10 mb-16"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4 mb-24 w-full max-w-7xl text-center items-start">
-            <a href="https://vecom.vn" target="_blank" class="cyber-card p-6 flex flex-col items-center group">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 border border-neon-blue/30 group-hover:bg-neon-blue/10 transition-all"><i class="fas fa-network-wired text-2xl neon-icon"></i></div>
-                <h3 class="text-[12px] font-bold uppercase mb-3 tracking-widest text-neon-blue tech-font">VECOM</h3>
-                <p class="text-[9px] text-gray-400 uppercase leading-relaxed font-semibold tracking-wider">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 mb-24 w-full max-w-7xl text-center items-start px-4">
+            <a href="https://vecom.vn" target="_blank" class="flex flex-col items-center group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-network-wired text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <h3 class="text-[10px] font-bold zen-title mb-4">VECOM</h3>
+                <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p>
             </a>
-            <a href="https://clead.vn" target="_blank" class="cyber-card p-6 flex flex-col items-center group">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 border border-neon-blue/30 group-hover:bg-neon-blue/10 transition-all"><i class="fas fa-gavel text-2xl neon-icon"></i></div>
-                <h3 class="text-[12px] font-bold uppercase mb-3 tracking-widest text-neon-blue tech-font">CLEAD</h3>
-                <p class="text-[9px] text-gray-400 uppercase leading-relaxed font-semibold tracking-wider">Giám đốc<br>Trung tâm tư vấn pháp luật</p>
+            <a href="https://clead.vn" target="_blank" class="flex flex-col items-center group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-gavel text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <h3 class="text-[10px] font-bold zen-title mb-4">CLEAD</h3>
+                <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Giám đốc<br>Trung tâm tư vấn pháp luật</p>
             </a>
-            <a href="https://www.ari.org.vn/ban-dieu-hanh-vien-ari/" target="_blank" class="cyber-card p-6 flex flex-col items-center group">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 border border-neon-blue/30 group-hover:bg-neon-blue/10 transition-all"><i class="fas fa-scale-balanced text-2xl neon-icon"></i></div>
-                <h3 class="text-[12px] font-bold uppercase mb-3 tracking-widest text-neon-blue tech-font">ARI</h3>
-                <p class="text-[9px] text-gray-400 uppercase leading-relaxed font-semibold tracking-wider">Phó Viện trưởng<br>Viện Khoa học pháp lý Trọng Tài</p>
+            <a href="https://www.ari.org.vn/ban-dieu-hanh-vien-ari/" target="_blank" class="flex flex-col items-center group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-scale-balanced text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <h3 class="text-[10px] font-bold zen-title mb-4">ARI</h3>
+                <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Phó Viện trưởng<br>Viện Khoa học pháp lý Trọng Tài</p>
             </a>
-            <a href="https://tracent.com.vn/" target="_blank" class="cyber-card p-6 flex flex-col items-center group">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 border border-neon-blue/30 group-hover:bg-neon-blue/10 transition-all"><i class="fas fa-handshake-simple text-2xl neon-icon"></i></div>
-                <h3 class="text-[12px] font-bold uppercase mb-3 tracking-widest text-neon-blue tech-font">TRACENT</h3>
-                <p class="text-[9px] text-gray-400 uppercase leading-relaxed font-semibold tracking-wider">Trọng tài viên<br>Trung tâm Trọng tài Thương mại TP.HCM</p>
+            <a href="https://tracent.com.vn/" target="_blank" class="flex flex-col items-center group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-handshake-simple text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <h3 class="text-[10px] font-bold zen-title mb-4">TRACENT</h3>
+                <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Trọng tài viên<br>Trung tâm Trọng tài Thương mại TP.HCM</p>
             </a>
-            <a href="https://eagleacademy.vn" target="_blank" class="cyber-card p-6 flex flex-col items-center group">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 border border-neon-blue/30 group-hover:bg-neon-blue/10 transition-all"><i class="fas fa-graduation-cap text-2xl neon-icon"></i></div>
-                <h3 class="text-[12px] font-bold uppercase mb-3 tracking-widest text-neon-blue tech-font">Eagle Academy</h3>
-                <p class="text-[9px] text-gray-400 uppercase leading-relaxed font-semibold tracking-wider">Giảng viên cấp cao<br>Bất động sản</p>
+            <a href="https://eagleacademy.vn" target="_blank" class="flex flex-col items-center group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-graduation-cap text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <h3 class="text-[10px] font-bold zen-title mb-4">Eagle Academy</h3>
+                <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Giảng viên cấp cao<br>Bất động sản</p>
             </a>
         </div>
 
-        <div class="w-full max-w-5xl mb-24 px-4 text-center">
-            <h2 class="text-xl font-bold tracking-[0.3em] mb-12 tech-font neon-text-purple uppercase">Thư viện<br>Tri thức chuyên gia</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <button onclick="openGate('A', 'AAA', 'bai-giang-a.html')" class="cyber-card p-6 flex flex-col items-center group">
-                    <i class="fas fa-lock text-[10px] text-neon-blue/50 mb-3 self-end"></i><i class="fas fa-chalkboard-user text-3xl mb-4 neon-icon"></i>
-                    <h4 class="text-[10px] font-bold uppercase tracking-widest tech-font group-hover:text-neon-blue transition">Bài giảng A</h4>
+        <div class="w-full max-w-5xl mb-32 px-4 text-center">
+            <h2 class="text-xs zen-title mb-12 opacity-40">Thư viện<br>Tri thức chuyên gia</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                <button onclick="openGate('A', 'AAA', 'bai-giang-a.html')" class="zen-card p-8 flex flex-col items-center">
+                    <i class="fas fa-lock text-[8px] opacity-10 mb-4 self-end"></i>
+                    <h4 class="text-[9px] zen-title">Bài giảng A</h4>
                 </button>
-                <button onclick="openGate('B', 'BBB', 'bai-giang-b.html')" class="cyber-card p-6 flex flex-col items-center group">
-                    <i class="fas fa-lock text-[10px] text-neon-blue/50 mb-3 self-end"></i><i class="fas fa-file-powerpoint text-3xl mb-4 neon-icon"></i>
-                    <h4 class="text-[10px] font-bold uppercase tracking-widest tech-font group-hover:text-neon-blue transition">Bài giảng B</h4>
+                <button onclick="openGate('B', 'BBB', 'bai-giang-b.html')" class="zen-card p-8 flex flex-col items-center">
+                    <i class="fas fa-lock text-[8px] opacity-10 mb-4 self-end"></i>
+                    <h4 class="text-[9px] zen-title">Bài giảng B</h4>
                 </button>
-                <div class="cyber-card p-6 opacity-40 flex flex-col items-center grayscale border-white/5"><i class="fas fa-hourglass-start text-2xl mb-4 mt-4 text-gray-500"></i><h4 class="text-[10px] font-bold uppercase tracking-widest tech-font text-gray-500">Bài giảng C</h4></div>
-                <div class="cyber-card p-6 opacity-40 flex flex-col items-center grayscale border-white/5"><i class="fas fa-hourglass-start text-2xl mb-4 mt-4 text-gray-500"></i><h4 class="text-[10px] font-bold uppercase tracking-widest tech-font text-gray-500">Bài giảng D</h4></div>
-                <div class="cyber-card p-6 opacity-40 flex flex-col items-center grayscale border-white/5"><i class="fas fa-hourglass-start text-2xl mb-4 mt-4 text-gray-500"></i><h4 class="text-[10px] font-bold uppercase tracking-widest tech-font text-gray-500">Bài giảng E</h4></div>
-                <div class="cyber-card p-6 opacity-40 flex flex-col items-center grayscale border-white/5"><i class="fas fa-hourglass-start text-2xl mb-4 mt-4 text-gray-500"></i><h4 class="text-[10px] font-bold uppercase tracking-widest tech-font text-gray-500">Bài giảng F</h4></div>
-                <div class="cyber-card p-6 opacity-40 flex flex-col items-center grayscale border-white/5"><i class="fas fa-hourglass-start text-2xl mb-4 mt-4 text-gray-500"></i><h4 class="text-[10px] font-bold uppercase tracking-widest tech-font text-gray-500">Bài giảng G</h4></div>
-                <div class="cyber-card p-6 opacity-40 flex flex-col items-center grayscale border-white/5"><i class="fas fa-hourglass-start text-2xl mb-4 mt-4 text-gray-500"></i><h4 class="text-[10px] font-bold uppercase tracking-widest tech-font text-gray-500">Bài giảng H</h4></div>
+                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng C</h4></div>
+                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng D</h4></div>
+                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng E</h4></div>
+                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng F</h4></div>
+                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng G</h4></div>
+                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng H</h4></div>
             </div>
         </div>
 
-        <div class="w-full max-w-3xl text-center mb-24 px-4 relative">
-            <div class="absolute inset-0 bg-neon-blue blur-[100px] opacity-10 -z-10 rounded-full"></div>
-            <div class="cyber-card p-12 md:p-16 flex flex-col items-center border-neon-blue/50 shadow-[0_0_50px_rgba(0,243,255,0.2)]">
-                <i class="fas fa-folder-tree text-5xl mb-8 neon-icon"></i>
-                <h2 class="text-lg md:text-2xl font-black tracking-[0.3em] uppercase mb-12 neon-text-blue tech-font">Kho tài liệu Nghiên cứu</h2>
-                
-                <div class="grid grid-cols-2 gap-6 w-full max-w-lg">
-                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="py-5 cyber-btn rounded-sm flex flex-col items-center group"><i class="fas fa-cloud-arrow-down text-2xl mb-2 group-hover:text-white transition"></i><span class="text-[10px]">Tải ngay</span></button>
-                    <button onclick="openRegisterModal()" class="py-5 cyber-btn rounded-sm flex flex-col items-center group"><i class="fas fa-envelope-open-text text-2xl mb-2 group-hover:text-white transition"></i><span class="text-[10px]">Đăng ký nhận tin</span></button>
+        <div class="w-full max-w-2xl text-center mb-32 px-4">
+            <div class="zen-card p-12 md:p-20 flex flex-col items-center">
+                <h2 class="text-[11px] zen-title mb-12">Kho tài liệu Nghiên cứu</h2>
+                <div class="flex flex-col md:flex-row gap-6 w-full max-w-sm">
+                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-4 border border-black/10 text-[9px] zen-title hover:bg-black hover:text-white transition-all">Tải về ngay</button>
+                    <button onclick="openRegisterModal()" class="flex-1 py-4 border border-black/10 text-[9px] zen-title hover:bg-black hover:text-white transition-all">Đăng ký mới</button>
                 </div>
-
-                <div class="mt-12 pt-10 border-t border-neon-blue/20 w-full flex flex-col items-center">
-                    <div class="flex items-center gap-4 text-[13px] font-semibold tech-font">
-                        <span class="uppercase tracking-widest text-neon-blue/70 text-[10px]">Lượt truy cập hệ thống:</span>
-                        <span id="loginCount" class="counter-box text-xl">00006868</span>
-                    </div>
+                <div class="mt-16 pt-10 border-t border-black/5 w-full">
+                    <span class="zen-title text-[8px] opacity-30 block mb-4">Lượt truy cập hệ thống</span>
+                    <span id="loginCount" class="counter-box text-sm">00006868</span>
                 </div>
             </div>
         </div>
 
-        <div class="w-full max-w-6xl border-t border-neon-blue/20 pt-16 mb-16 px-6">
+        <div class="w-full max-w-6xl border-t border-black/5 pt-16 mb-16 px-6">
             <div class="flex flex-col md:flex-row md:flex-wrap md:justify-center items-start md:items-center gap-10 md:gap-16">
-                <a href="tel:+84915159499" class="flex items-center gap-5 group cyber-card p-4 hover:bg-neon-blue/10 transition-all">
-                    <i class="fas fa-phone-alt text-xl neon-icon group-hover:text-white transition"></i>
-                    <div class="text-left"><span class="text-[9px] font-bold text-neon-blue/70 uppercase block mb-1 tech-font">Hotline</span><span class="text-lg font-bold tracking-tight text-white group-hover:text-neon-blue transition">+84 91 515 9499</span></div>
+                <a href="tel:+84915159499" class="flex items-center gap-5 group">
+                    <i class="fas fa-phone-alt text-xs opacity-30 group-hover:opacity-100"></i>
+                    <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Hotline</span><span class="text-sm font-medium tracking-wide">+84 91 515 9499</span></div>
                 </a>
-                <a href="mailto:hello@nguyentanphong.com" class="flex items-center gap-5 group cyber-card p-4 hover:bg-neon-blue/10 transition-all">
-                    <i class="fas fa-envelope text-xl neon-icon group-hover:text-white transition"></i>
-                    <div class="text-left"><span class="text-[9px] font-bold text-neon-blue/70 uppercase block mb-1 tech-font">Email</span><span class="text-lg font-bold tracking-tight text-white group-hover:text-neon-blue transition">hello@nguyentanphong.com</span></div>
+                <a href="mailto:hello@nguyentanphong.com" class="flex items-center gap-5 group">
+                    <i class="fas fa-envelope text-xs opacity-30 group-hover:opacity-100"></i>
+                    <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Email</span><span class="text-sm font-medium tracking-wide">hello@nguyentanphong.com</span></div>
                 </a>
-                <a href="https://zalo.me/cangioland" target="_blank" class="flex items-center gap-5 group cyber-card p-4 hover:bg-neon-blue/10 transition-all">
-                    <i class="fas fa-comment-dots text-xl neon-icon group-hover:text-white transition"></i>
-                    <div class="text-left"><span class="text-[9px] font-bold text-neon-blue/70 uppercase block mb-1 tech-font">Zalo</span><span class="text-lg font-bold tracking-tight text-white group-hover:text-neon-blue transition">Zalo Kết nối</span></div>
+                <a href="https://zalo.me/cangioland" target="_blank" class="flex items-center gap-5 group">
+                    <i class="fas fa-comment-dots text-xs opacity-30 group-hover:opacity-100"></i>
+                    <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Zalo</span><span class="text-sm font-medium tracking-wide">Zalo Kết nối</span></div>
                 </a>
-                <a href="https://facebook.com/tanphong1981" target="_blank" class="flex items-center gap-5 group cyber-card p-4 hover:bg-neon-blue/10 transition-all">
-                    <i class="fab fa-facebook-f text-xl neon-icon group-hover:text-white transition"></i>
-                    <div class="text-left"><span class="text-[9px] font-bold text-neon-blue/70 uppercase block mb-1 tech-font">Facebook</span><span class="text-lg font-bold tracking-tight text-white group-hover:text-neon-blue transition">Facebook Profile</span></div>
+                <a href="https://facebook.com/tanphong1981" target="_blank" class="flex items-center gap-5 group">
+                    <i class="fab fa-facebook-f text-xs opacity-30 group-hover:opacity-100"></i>
+                    <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Facebook</span><span class="text-sm font-medium tracking-wide">Facebook Profile</span></div>
                 </a>
             </div>
         </div>
     </main>
 
-    <footer class="p-10 text-center text-neon-blue/50 text-[8px] md:text-[10px] font-bold tracking-[0.3em] tech-font">
-        © 2026 DIGITAL ECONOMY EXPERT - NGUYEN TAN PHONG. ALL RIGHTS RESERVED.
-    </footer>
+    <footer class="p-12 text-center text-[#c2c2c2] text-[7px] md:text-[8px] zen-title">© 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</footer>
 
     <script>
         let currentTarget = ""; let currentCode = "";
         const BASE_COUNT = 6868; let storedCount = parseInt(localStorage.getItem('legalLoginCount')) || 0;
-
-        function updateDisplay() {
-            const total = BASE_COUNT + storedCount;
-            document.getElementById('loginCount').innerText = total.toString().padStart(8, '0');
-        }
-
-        function openGate(name, code, url) {
-            document.getElementById('modalTitle').innerText = "XÁC THỰC TRUY CẬP " + name;
-            document.getElementById('passwordModal').style.display = 'flex';
-            currentTarget = url; currentCode = code; document.getElementById('passInput').focus();
-        }
-
+        function updateDisplay() { document.getElementById('loginCount').innerText = (BASE_COUNT + storedCount).toString().padStart(8, '0'); }
+        function openGate(name, code, url) { document.getElementById('modalTitle').innerText = "Xác thực " + name; document.getElementById('passwordModal').style.display = 'flex'; currentTarget = url; currentCode = code; document.getElementById('passInput').focus(); }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        function validateAccess() {
-            if (document.getElementById('passInput').value === currentCode) {
-                if (currentCode === '0915159499') { storedCount++; localStorage.setItem('legalLoginCount', storedCount); updateDisplay(); }
-                window.location.href = currentTarget;
-            } else { document.getElementById('errorMsg').style.opacity = 1; }
-        }
-
+        function validateAccess() { if (document.getElementById('passInput').value === currentCode) { if (currentCode === '0915159499') { storedCount++; localStorage.setItem('legalLoginCount', storedCount); updateDisplay(); } window.location.href = currentTarget; } else { document.getElementById('errorMsg').style.opacity = 1; } }
         function openRegisterModal() { document.getElementById('registerModal').style.display = 'flex'; }
 
         function handleRegistration(event) {
@@ -271,22 +215,15 @@
             const successMsg = document.getElementById('regSuccess');
             const form = document.getElementById('regForm');
             const formData = new FormData(form);
-            submitBtn.innerText = "ĐANG XỬ LÝ...";
+            submitBtn.innerText = "Đang gửi...";
             submitBtn.disabled = true;
 
-            // ▼▼▼ DÁN LINK GOOGLE SCRIPT CỦA CHÚ VÀO DÒNG DƯỚI ĐÂY ▼▼▼
-            const scriptURL = 'DÁN_URL_CỦA_CHÚ_VÀO_ĐÂY';
-            
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyhsSggy5DOptRP5CFt3bhw70tsU0hTZHRVd3aZstAL8-cxNf1FsCMoHruSsmb4WTWE/exec';
             fetch(scriptURL, { method: 'POST', body: formData })
-            .then(() => {
-                successMsg.classList.remove('hidden');
-                form.reset();
-                setTimeout(() => { closeModal('registerModal'); successMsg.classList.add('hidden'); }, 3000);
-            })
-            .catch(error => { console.error('Error!', error.message); alert('Hệ thống đang bận, vui lòng thử lại sau.'); })
-            .finally(() => { submitBtn.innerText = "GỬI ĐĂNG KÝ"; submitBtn.disabled = false; });
+            .then(() => { successMsg.classList.remove('hidden'); form.reset(); setTimeout(() => { closeModal('registerModal'); successMsg.classList.add('hidden'); }, 3000); })
+            .catch(() => { alert('Vui lòng thử lại sau.'); })
+            .finally(() => { submitBtn.innerText = "Gửi thông tin"; submitBtn.disabled = false; });
         }
-
         updateDisplay();
         window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal('passwordModal'); closeModal('registerModal'); } });
     </script>
