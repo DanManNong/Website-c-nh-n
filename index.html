@@ -12,114 +12,202 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --zen-bg: #f8f7f2;
             --zen-text: #2d2d2d;
-            --zen-card: #ffffff;
+            --zen-accent: #6b705c;
+            --zen-card: rgba(255, 255, 255, 0.8);
             --zen-hover-bg: #2d2d2d;
-            --zen-border-shadow: rgba(107, 112, 92, 0.15);
+            --zen-border-shadow: rgba(107, 112, 92, 0.1);
         }
-        * { -webkit-tap-highlight-color: transparent; }
+
+        /* RESET & BASE */
+        * { -webkit-tap-highlight-color: transparent; cursor: default; }
+        a, button, i { cursor: pointer !important; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--zen-bg); 
             color: var(--zen-text); 
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(107, 112, 92, 0.03) 10px, rgba(107, 112, 92, 0.03) 12px);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(107, 112, 92, 0.02) 10px, rgba(107, 112, 92, 0.02) 12px);
+            line-height: 1.6;
         }
-        .zen-link-effect { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; z-index: 1; }
+
+        /* HIỆU ỨNG VÂN CÁT XÁM & PHẢN HỒI NHẸ (Premium Hover) */
+        .zen-link-effect {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+        }
         .zen-link-effect:hover, .zen-link-effect:active {
             background-color: var(--zen-hover-bg) !important;
             color: #ffffff !important;
             background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255, 0.05) 8px, rgba(255,255,255, 0.05) 10px) !important;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
         }
         .zen-link-effect:hover * { color: #ffffff !important; opacity: 1 !important; }
-        .zen-3d { background: var(--zen-card); border-radius: 2px; border: 1px solid var(--zen-border-shadow); box-shadow: 2px 3px 10px rgba(0,0,0,0.02); }
-        .zen-title { letter-spacing: 0.25em; text-transform: uppercase; font-weight: 300; }
-        .fade-in { animation: fadeIn 1.8s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .counter-box { background: #ebe9e0; padding: 6px 16px; border-radius: 2px; color: #6b705c; letter-spacing: 0.2em; display: inline-block; }
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(248, 247, 242, 0.98); backdrop-filter: blur(8px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
-        .input-zen { background: white; border: 1px solid #ddd; padding: 14px; width: 100%; font-size: 14px; margin-bottom: 15px; border-radius: 2px; }
+
+        /* PHÂN CẤP THỊ GIÁC (Hierarchy) */
+        .name-title {
+            font-weight: 100; /* Làm mỏng hơn để tăng sự sang trọng */
+            letter-spacing: 0.3em;
+            font-size: clamp(1.5rem, 5vw, 3rem); /* Tự động co giãn theo màn hình */
+        }
+
+        /* KHUNG AVATAR ĐÔI (Double Border) */
+        .avatar-frame {
+            position: relative;
+            padding: 10px;
+            border: 0.5px solid rgba(0,0,0,0.05);
+            border-radius: 9999px;
+            display: inline-block;
+        }
+        .avatar-inner {
+            width: clamp(160px, 25vw, 240px);
+            height: clamp(160px, 25vw, 240px);
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* GLASSMORPHISM CHO KHO TÀI LIỆU */
+        .glass-box {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* HIỆU ỨNG XUẤT HIỆN SO LE (Staggered Animation) */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .stagger { opacity: 0; animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+
+        /* COUNTER BOX PHONG CÁCH CƠ KHÍ */
+        .counter-box {
+            font-family: 'Inter', sans-serif;
+            background: #2d2d2d;
+            color: #ebe9e0;
+            padding: 8px 20px;
+            border-radius: 4px;
+            letter-spacing: 0.4em;
+            font-weight: 300;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+            font-size: 0.85rem;
+        }
+
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(248, 247, 242, 0.98); backdrop-filter: blur(15px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
+
     <div id="passwordModal" class="modal-overlay">
-        <div class="max-w-md w-full text-center p-8 zen-3d">
-            <h3 id="modalTitle" class="zen-title text-[11px] mb-10">Xác thực truy cập</h3>
-            <input type="password" id="passInput" placeholder="Nhập mã..." class="input-zen text-center">
-            <div class="flex gap-4 justify-center">
-                <button onclick="closeModal('passwordModal')" class="py-3 px-6 text-[9px] zen-title opacity-40">Hủy</button>
-                <button onclick="validateAccess()" class="py-3 px-8 bg-[#2d2d2d] text-white text-[9px] zen-title">Xác nhận</button>
+        <div class="max-w-md w-full text-center p-10 bg-white shadow-2xl rounded-sm">
+            <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10">Xác thực quyền truy cập</h3>
+            <input type="password" id="passInput" placeholder="Mật mã..." class="w-full p-4 border-b border-black/10 focus:outline-none focus:border-black transition-all text-center text-sm mb-10">
+            <div class="flex gap-6 justify-center">
+                <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-40 hover:opacity-100 transition">Hủy bỏ</button>
+                <button onclick="validateAccess()" class="px-10 py-4 bg-[#2d2d2d] text-white text-[9px] uppercase tracking-widest zen-link-effect">Xác nhận</button>
             </div>
-            <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 zen-title">Mã không chính xác</p>
+            <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 uppercase tracking-tighter">Mã truy cập không hợp lệ</p>
         </div>
     </div>
 
-    <header class="p-12 text-center fade-in">
-        <div class="text-[9px] font-semibold tracking-[0.5em] text-[#a5a5a5] uppercase">Tri thức • Pháp lý • Công nghệ</div>
+    <header class="p-12 md:p-20 text-center stagger">
+        <div class="text-[9px] font-medium tracking-[0.6em] text-[#b0b0b0] uppercase">Tri thức • Pháp lý • Công nghệ</div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center px-6 z-10 fade-in">
-        <div class="mb-10">
-            <div class="w-44 h-44 md:w-60 md:h-60 rounded-full p-2 zen-3d bg-white overflow-hidden">
-                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full rounded-full object-cover grayscale-[15%]">
+    <main class="flex-grow flex flex-col items-center px-6 z-10">
+        
+        <div class="mb-12 stagger delay-1">
+            <div class="avatar-frame">
+                <div class="avatar-inner">
+                    <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700">
+                </div>
             </div>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-light tracking-[0.2em] text-center mb-6 uppercase">Nguyễn Tấn Phong</h1>
-        <div class="w-12 h-[1px] bg-black/10 mb-16"></div>
+        <h1 class="name-title text-center mb-8 uppercase stagger delay-2">Nguyễn Tấn Phong</h1>
+        <div class="w-16 h-[0.5px] bg-black/20 mb-20 stagger delay-2"></div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 mb-24 w-full max-w-7xl text-center items-start">
-            <a href="https://vecom.vn" target="_blank" class="zen-3d zen-link-effect p-6 flex flex-col items-center">
-                <i class="fas fa-network-wired text-[10px] opacity-40 mb-4"></i>
-                <h3 class="text-[10px] font-bold zen-title mb-2">VECOM</h3>
-                <p class="text-[7px] text-[#888] uppercase tracking-widest">Uỷ viên BCH<br>Trưởng Ban kiểm tra</p>
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-28 w-full max-w-7xl text-center items-start">
+            <a href="https://vecom.vn" target="_blank" class="p-8 flex flex-col items-center border border-black/[0.03] zen-link-effect stagger delay-3">
+                <i class="fas fa-network-wired text-[10px] opacity-30 mb-6"></i>
+                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">VECOM</h3>
+                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Uỷ viên BCH<br>Trưởng Ban kiểm tra</p>
             </a>
-            <a href="https://clead.vn" target="_blank" class="zen-3d zen-link-effect p-6 flex flex-col items-center">
-                <i class="fas fa-gavel text-[10px] opacity-40 mb-4"></i>
-                <h3 class="text-[10px] font-bold zen-title mb-2">CLEAD</h3>
-                <p class="text-[7px] text-[#888] uppercase tracking-widest">Giám đốc<br>Trung tâm TVPL</p>
+            <a href="https://clead.vn" target="_blank" class="p-8 flex flex-col items-center border border-black/[0.03] zen-link-effect stagger delay-3" style="animation-delay: 0.7s">
+                <i class="fas fa-gavel text-[10px] opacity-30 mb-6"></i>
+                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">CLEAD</h3>
+                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Giám đốc<br>Trung tâm TVPL</p>
             </a>
-            <a href="https://www.ari.org.vn/" target="_blank" class="zen-3d zen-link-effect p-6 flex flex-col items-center">
-                <i class="fas fa-scale-balanced text-[10px] opacity-40 mb-4"></i>
-                <h3 class="text-[10px] font-bold zen-title mb-2">ARI</h3>
-                <p class="text-[7px] text-[#888] uppercase tracking-widest">Phó Viện trưởng</p>
+            <a href="https://www.ari.org.vn/" target="_blank" class="p-8 flex flex-col items-center border border-black/[0.03] zen-link-effect stagger delay-3" style="animation-delay: 0.8s">
+                <i class="fas fa-scale-balanced text-[10px] opacity-30 mb-6"></i>
+                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">ARI</h3>
+                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Phó Viện trưởng<br>Viện KHPL Trọng tài</p>
             </a>
-            <a href="https://tracent.com.vn/" target="_blank" class="zen-3d zen-link-effect p-6 flex flex-col items-center">
-                <i class="fas fa-handshake-simple text-[10px] opacity-40 mb-4"></i>
-                <h3 class="text-[10px] font-bold zen-title mb-2">TRACENT</h3>
-                <p class="text-[7px] text-[#888] uppercase tracking-widest">Trọng tài viên</p>
+            <a href="https://tracent.com.vn/" target="_blank" class="p-8 flex flex-col items-center border border-black/[0.03] zen-link-effect stagger delay-3" style="animation-delay: 0.9s">
+                <i class="fas fa-handshake-simple text-[10px] opacity-30 mb-6"></i>
+                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">TRACENT</h3>
+                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Trọng tài viên<br>TT Trọng tài HCM</p>
             </a>
-            <a href="https://eagleacademy.vn" target="_blank" class="zen-3d zen-link-effect p-6 flex flex-col items-center col-span-2 lg:col-span-1">
-                <i class="fas fa-graduation-cap text-[10px] opacity-40 mb-4"></i>
-                <h3 class="text-[10px] font-bold zen-title mb-2">Eagle Academy</h3>
-                <p class="text-[7px] text-[#888] uppercase tracking-widest">Giảng viên cao cấp</p>
+            <a href="https://eagleacademy.vn" target="_blank" class="p-8 flex flex-col items-center border border-black/[0.03] zen-link-effect stagger delay-3 col-span-2 lg:col-span-1" style="animation-delay: 1s">
+                <i class="fas fa-graduation-cap text-[10px] opacity-30 mb-6"></i>
+                <h3 class="text-[10px] font-bold tracking-[0.2em] mb-3">Eagle Academy</h3>
+                <p class="text-[7.5px] text-[#999] uppercase tracking-[0.15em] leading-relaxed">Giảng viên cao cấp<br>Bất động sản</p>
             </a>
         </div>
 
-        <div class="w-full max-w-2xl text-center mb-32 px-4">
-            <div class="zen-3d p-12 md:p-16 flex flex-col items-center">
-                <h2 class="text-[11px] zen-title mb-12 font-semibold tracking-[0.3em]">Kho tài liệu Nghiên cứu</h2>
-                <div class="flex flex-col sm:flex-row gap-6 w-full max-w-sm">
+        <div class="w-full max-w-3xl text-center mb-32 px-4 stagger delay-4">
+            <div class="p-16 md:p-24 flex flex-col items-center glass-box shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5 text-[60px]"><i class="fas fa-quote-right"></i></div>
+                
+                <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-16 uppercase">Kho tài liệu Nghiên cứu</h2>
+                <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm relative z-10">
                     <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" 
-                            class="flex-1 py-4 bg-[#2d2d2d] text-white text-[10px] zen-title zen-link-effect">Tải về ngay</button>
+                            class="flex-1 py-5 bg-[#2d2d2d] text-white text-[10px] tracking-[0.2em] uppercase zen-link-effect">Tải về ngay</button>
                     <button onclick="document.getElementById('registerModal').style.display='flex'" 
-                            class="flex-1 py-4 zen-3d text-[10px] zen-title zen-link-effect">Đăng ký mới</button>
+                            class="flex-1 py-5 border border-black/10 text-[10px] tracking-[0.2em] uppercase zen-link-effect">Đăng ký mới</button>
                 </div>
-                <div class="mt-16 pt-10 border-t border-black/5 w-full">
-                    <span class="zen-title text-[8px] opacity-40 block mb-4">Lượt truy cập hệ thống</span>
-                    <span id="loginCount" class="counter-box text-sm">00006875</span>
+                <div class="mt-20 pt-12 border-t border-black/5 w-full">
+                    <span class="text-[8px] tracking-[0.3em] uppercase opacity-30 block mb-6">Lượt truy cập hệ thống</span>
+                    <span id="loginCount" class="counter-box">00006875</span>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="p-12 text-center text-[#c2c2c2] text-[8px] zen-title">© 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</footer>
+    <footer class="p-16 text-center text-[#d0d0d0] text-[8px] tracking-[0.4em] uppercase stagger delay-5">
+        © 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.
+    </footer>
+
+    <div id="registerModal" class="modal-overlay">
+        <div class="max-w-md w-full p-10 bg-white rounded-sm">
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light text-center mb-10">Đăng ký thành viên</h3>
+            <form id="regForm" onsubmit="handleRegistration(event)">
+                <input type="text" name="name" placeholder="Họ và Tên" required class="w-full p-4 border-b border-black/10 focus:outline-none focus:border-black transition-all text-sm mb-6">
+                <input type="tel" name="phone" placeholder="Số điện thoại" required class="w-full p-4 border-b border-black/10 focus:outline-none focus:border-black transition-all text-sm mb-6">
+                <input type="email" name="email" placeholder="Địa chỉ Email" required class="w-full p-4 border-b border-black/10 focus:outline-none focus:border-black transition-all text-sm mb-10">
+                <div class="flex gap-6 justify-center">
+                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase tracking-widest opacity-40">Đóng</button>
+                    <button type="submit" id="submitBtn" class="px-10 py-4 bg-[#2d2d2d] text-white text-[9px] uppercase tracking-widest zen-link-effect">Gửi đi</button>
+                </div>
+            </form>
+            <p id="regSuccess" class="text-emerald-600 text-[9px] text-center mt-6 hidden">Đăng ký thành công!</p>
+        </div>
+    </div>
 
     <script>
         let currentTarget = ""; let currentCode = "";
@@ -138,7 +226,11 @@
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
                 localStorage.setItem('loginCount', count);
                 window.location.href = currentTarget;
-            } else { document.getElementById('errorMsg').style.opacity = 1; }
+            } else { 
+                const err = document.getElementById('errorMsg');
+                err.style.opacity = 1;
+                setTimeout(() => err.style.opacity = 0, 2000);
+            }
         }
         updateDisplay();
     </script>
