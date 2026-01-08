@@ -13,19 +13,18 @@
         .text-gold { color: #c5a059; }
         .bg-gold { background: #c5a059; }
         .border-gold { border-color: #c5a059; }
+        
+        /* Chỉnh sửa lỗi con trỏ */
+        a, button, .lecture-card, .folder-btn { cursor: pointer !important; }
+
         .fade-in { animation: fadeIn 1.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Sửa lỗi con trỏ cho các thành phần tương tác */
-        button, a, .lecture-card { cursor: pointer !important; }
-
-        /* Hiệu ứng tên 3D Gold tinh tế */
         .text-3d-gold {
             color: #c5a059;
             text-shadow: 1px 1px 0px #a08040, 2px 2px 0px #a08040, 3px 3px 10px rgba(197, 160, 89, 0.3);
         }
 
-        /* Glassmorphism Card */
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
@@ -34,7 +33,6 @@
         }
         .glass-card:hover { transform: translateY(-5px); border-color: #c5a059; }
 
-        /* Modal Bảo mật */
         #passwordModal {
             display: none;
             position: fixed;
@@ -45,14 +43,13 @@
             justify-content: center;
         }
 
-        /* Hiển thị số đếm kiểu Digital */
         .counter-box {
             font-family: monospace;
-            letter-spacing: 0.2em;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.5);
             padding: 4px 12px;
             border-radius: 4px;
-            border: 1px solid rgba(197, 160, 89, 0.2);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            letter-spacing: 0.15em;
         }
     </style>
 </head>
@@ -61,7 +58,7 @@
     <div id="passwordModal">
         <div class="glass-card p-10 rounded-sm w-full max-w-md text-center border-gold/40">
             <i class="fas fa-shield-halved text-4xl text-gold mb-6"></i>
-            <h3 id="modalTitle" class="text-xl font-serif text-white mb-6 uppercase tracking-widest">Yêu cầu xác thực</h3>
+            <h3 id="modalTitle" class="text-xl font-serif text-white mb-6 uppercase tracking-widest text-gold">Yêu cầu xác thực</h3>
             <input type="password" id="passInput" placeholder="Nhập mã truy cập..." class="w-full bg-white/5 border border-gold/20 p-4 rounded-sm text-white focus:outline-none focus:border-gold mb-6 text-center tracking-widest">
             <div class="flex gap-4">
                 <button onclick="closeModal()" class="flex-1 py-3 text-xs uppercase tracking-widest text-gray-500 hover:text-white transition">Hủy bỏ</button>
@@ -70,8 +67,6 @@
             <p id="errorMsg" class="text-red-500 text-[10px] mt-4 uppercase opacity-0">Mã không chính xác</p>
         </div>
     </div>
-
-    <div class="absolute top-[-5%] left-[-5%] w-96 h-96 border border-gold/5 rounded-full pointer-events-none"></div>
 
     <header class="p-8 text-center fade-in">
         <div class="text-[10px] font-bold tracking-[0.4em] text-gold/60 uppercase">Chuyên gia Kinh tế số & Pháp luật</div>
@@ -88,7 +83,7 @@
             <div class="absolute bottom-0 right-6 bg-gold text-black text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Official</div>
         </div>
 
-        <h1 class="text-4xl md:text-6xl font-serif font-bold tracking-tight leading-none mb-4 text-center text-3d-gold">
+        <h1 class="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-none mb-4 text-center text-3d-gold">
             Nguyễn Tấn Phong
         </h1>
         
@@ -97,7 +92,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16 w-full max-w-5xl text-center">
             <div class="group">
                 <a href="https://vecom.vn" target="_blank">
-                    <div class="w-16 h-16 mx-auto rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold group-hover:border-gold transition-all duration-500 mb-4">
+                    <div class="w-16 h-16 mx-auto rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold transition-all duration-500 mb-4">
                         <i class="fas fa-network-wired text-gold group-hover:text-black"></i>
                     </div>
                     <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">VECOM</h3>
@@ -114,7 +109,7 @@
                     </div>
                     <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">CLEAD</h3>
                 </a>
-                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic">Giám đốc Trung tâm</p>
+                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic leading-relaxed">Giám đốc Trung tâm<br>Tư vấn Pháp luật</p>
             </div>
 
             <div class="group">
@@ -124,30 +119,28 @@
                     </div>
                     <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">Eagle Academy</h3>
                 </a>
-                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic">Giảng viên cấp cao</p>
+                <p class="text-[9px] text-gray-500 uppercase tracking-widest italic leading-relaxed">Giảng viên cấp cao<br>BĐS & PropTech</p>
             </div>
         </div>
 
         <div class="w-full max-w-5xl mb-16 px-4">
             <h2 class="text-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-10 text-center opacity-70">— Thư viện tri thức chuyên gia —</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <button onclick="openGate('A', 'AAA', 'bai-giang-a.html')" class="lecture-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
-                    <i class="fas fa-lock text-[10px] text-gold/30 mb-4 self-end group-hover:text-gold transition"></i>
-                    <i class="fas fa-chalkboard-teacher text-2xl text-gold/60 group-hover:text-gold mb-4 transition"></i>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 text-center">
+                <button onclick="openGate('A', 'AAA', 'bai-giang-a.html')" class="lecture-card p-6 rounded-sm flex flex-col items-center">
+                    <i class="fas fa-lock text-[10px] text-gold/30 mb-4 self-end"></i>
+                    <i class="fas fa-chalkboard-teacher text-2xl text-gold/60 mb-4 transition"></i>
                     <h4 class="text-xs font-bold tracking-widest text-white/90 uppercase">Bài giảng A</h4>
-                    <span class="text-[9px] text-gray-500 mt-2 uppercase">Cần mã AAA</span>
                 </button>
-                <button onclick="openGate('B', 'BBB', 'bai-giang-b.html')" class="lecture-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
-                    <i class="fas fa-lock text-[10px] text-gold/30 mb-4 self-end group-hover:text-gold transition"></i>
-                    <i class="fas fa-file-powerpoint text-2xl text-gold/60 group-hover:text-gold mb-4 transition"></i>
+                <button onclick="openGate('B', 'BBB', 'bai-giang-b.html')" class="lecture-card p-6 rounded-sm flex flex-col items-center">
+                    <i class="fas fa-lock text-[10px] text-gold/30 mb-4 self-end"></i>
+                    <i class="fas fa-file-powerpoint text-2xl text-gold/60 mb-4 transition"></i>
                     <h4 class="text-xs font-bold tracking-widest text-white/90 uppercase">Bài giảng B</h4>
-                    <span class="text-[9px] text-gray-500 mt-2 uppercase">Cần mã BBB</span>
                 </button>
-                <div class="glass-card p-6 md:p-8 rounded-sm opacity-40 grayscale flex flex-col items-center">
+                <div class="glass-card p-6 rounded-sm opacity-40 grayscale flex flex-col items-center">
                     <i class="fas fa-hourglass-start text-2xl text-gray-500 mb-4"></i>
                     <h4 class="text-xs font-bold tracking-widest uppercase">Bài giảng C</h4>
                 </div>
-                <div class="glass-card p-6 md:p-8 rounded-sm opacity-40 grayscale flex flex-col items-center">
+                <div class="glass-card p-6 rounded-sm opacity-40 grayscale flex flex-col items-center">
                     <i class="fas fa-hourglass-start text-2xl text-gray-500 mb-4"></i>
                     <h4 class="text-xs font-bold tracking-widest uppercase">Bài giảng D</h4>
                 </div>
@@ -155,14 +148,14 @@
         </div>
 
         <div class="w-full max-w-2xl text-center mb-16 px-4">
-            <button onclick="openGate('Kho tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="w-full border border-gold bg-gold/5 py-8 md:py-12 rounded-sm group hover:bg-gold transition-all duration-700">
+            <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="folder-btn w-full border border-gold bg-gold/5 py-8 md:py-12 rounded-sm group hover:bg-gold transition-all duration-700">
                 <i class="fas fa-folder-open text-3xl text-gold group-hover:text-black transition mb-4"></i>
                 <h2 class="text-xl md:text-3xl font-serif italic text-white group-hover:text-black transition">Kho tài liệu Pháp luật Chuyên sâu</h2>
                 <div class="mt-6 flex flex-col items-center">
-                    <span class="text-[9px] uppercase tracking-[0.3em] text-gold/60 group-hover:text-black/60 mb-3 tracking-widest">Xác thực bởi Mr.Phong</span>
-                    <div class="flex items-center gap-3 text-[11px] font-bold text-gold group-hover:text-black transition">
-                        <span class="uppercase tracking-widest opacity-70">Lượt truy cập:</span>
-                        <span id="loginCount" class="counter-box font-mono text-lg">00006868</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-gold/60 group-hover:text-black/60 mb-4 tracking-widest">Xác thực bởi Mr.Phong</span>
+                    <div class="flex items-center gap-3 text-[12px] font-bold text-gold group-hover:text-black transition">
+                        <span class="uppercase tracking-widest opacity-60">Lượt truy cập:</span>
+                        <span id="loginCount" class="counter-box text-xl">00006868</span>
                     </div>
                 </div>
             </button>
@@ -198,16 +191,13 @@
     <script>
         let currentTarget = "";
         let currentCode = "";
-
-        // Logic bộ đếm phong thủy 8 chữ số
         const BASE_COUNT = 6868;
         let storedCount = parseInt(localStorage.getItem('legalLoginCount')) || 0;
-        
+
         function updateDisplay() {
             const total = BASE_COUNT + storedCount;
-            // Định dạng đủ 8 chữ số với các số 0 phía trước
-            const formatted = total.toString().padStart(8, '0');
-            document.getElementById('loginCount').innerText = formatted;
+            // Luôn hiển thị đủ 8 chữ số
+            document.getElementById('loginCount').innerText = total.toString().padStart(8, '0');
         }
 
         function openGate(name, code, url) {
@@ -225,8 +215,7 @@
         }
 
         function validateAccess() {
-            const input = document.getElementById('passInput').value;
-            if (input === currentCode) {
+            if (document.getElementById('passInput').value === currentCode) {
                 if (currentCode === '0915159499') {
                     storedCount++;
                     localStorage.setItem('legalLoginCount', storedCount);
@@ -238,7 +227,6 @@
             }
         }
 
-        // Khởi tạo hiển thị ban đầu
         updateDisplay();
         window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     </script>
