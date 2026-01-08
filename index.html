@@ -45,7 +45,6 @@
             <div class="text-center mb-8">
                 <i class="fas fa-file-signature text-4xl text-gold mb-4"></i>
                 <h3 class="text-xl font-serif text-white uppercase tracking-widest text-gold font-bold">Đăng ký nhận tài liệu</h3>
-                <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-2 font-bold italic">Thông tin được gửi trực tiếp đến hệ thống Mr.Phong</p>
             </div>
             <form id="regForm" onsubmit="handleRegistration(event)">
                 <input type="text" id="regName" placeholder="Họ và Tên" required class="input-field font-bold">
@@ -56,7 +55,7 @@
                     <button type="submit" id="submitBtn" class="flex-1 py-3 bg-gold text-black text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm shadow-lg hover:scale-105 transition">Gửi đăng ký</button>
                 </div>
             </form>
-            <p id="regSuccess" class="text-emerald-500 text-[11px] mt-4 uppercase text-center hidden font-bold">Gửi thành công! Chú Phong sẽ liên hệ sớm.</p>
+            <p id="regSuccess" class="text-emerald-500 text-[11px] mt-4 uppercase text-center hidden font-bold">Đã đăng ký thành công</p>
         </div>
     </div>
 
@@ -126,17 +125,15 @@
             </div>
         </div>
 
-        <div class="w-full max-w-5xl mb-16 px-4">
-            <h2 class="text-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-10 text-center opacity-70">Thư viện<br>Tri thức chuyên gia</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 text-center">
+        <div class="w-full max-w-5xl mb-16 px-4 text-center">
+            <h2 class="text-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-10 opacity-70 leading-relaxed">Thư viện<br>Tri thức chuyên gia</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <button onclick="openGate('A', 'AAA', 'bai-giang-a.html')" class="glass-card p-4 md:p-6 rounded-sm flex flex-col items-center">
-                    <i class="fas fa-lock text-[10px] text-gold/30 mb-2 self-end"></i>
-                    <i class="fas fa-chalkboard-teacher text-2xl text-gold/60 mb-2"></i>
+                    <i class="fas fa-lock text-[10px] text-gold/30 mb-2 self-end"></i><i class="fas fa-chalkboard-teacher text-2xl text-gold/60 mb-2"></i>
                     <h4 class="text-[10px] font-bold tracking-widest text-white/90 uppercase">Bài giảng A</h4>
                 </button>
                 <button onclick="openGate('B', 'BBB', 'bai-giang-b.html')" class="glass-card p-4 md:p-6 rounded-sm flex flex-col items-center">
-                    <i class="fas fa-lock text-[10px] text-gold/30 mb-2 self-end"></i>
-                    <i class="fas fa-file-powerpoint text-2xl text-gold/60 mb-2"></i>
+                    <i class="fas fa-lock text-[10px] text-gold/30 mb-2 self-end"></i><i class="fas fa-file-powerpoint text-2xl text-gold/60 mb-2"></i>
                     <h4 class="text-[10px] font-bold tracking-widest text-white/90 uppercase">Bài giảng B</h4>
                 </button>
                 <div class="glass-card p-4 md:p-6 rounded-sm opacity-40 grayscale border-white/5"><i class="fas fa-hourglass-start text-xl text-gray-500 mb-2 mt-4"></i><h4 class="text-[10px] font-bold uppercase text-gray-500 mb-4">Bài giảng C</h4></div>
@@ -155,12 +152,10 @@
                 
                 <div class="grid grid-cols-2 gap-6 w-full max-w-lg px-4">
                     <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="action-btn flex flex-col items-center p-6 border-2 border-gold/30 hover:bg-gold hover:text-black transition-all duration-500 rounded-sm">
-                        <i class="fas fa-cloud-arrow-down text-2xl mb-3"></i>
-                        <span class="text-[9px] font-black uppercase tracking-widest">Tải ngay</span>
+                        <i class="fas fa-cloud-arrow-down text-2xl mb-3"></i><span class="text-[9px] font-black uppercase tracking-widest">Tải ngay</span>
                     </button>
                     <button onclick="openRegisterModal()" class="action-btn flex flex-col items-center p-6 border-2 border-gold/30 hover:bg-gold hover:text-black transition-all duration-500 rounded-sm">
-                        <i class="fas fa-envelope-open-text text-2xl mb-3"></i>
-                        <span class="text-[9px] font-black uppercase tracking-widest">Đăng ký nhận tài liệu mới</span>
+                        <i class="fas fa-envelope-open-text text-2xl mb-3"></i><span class="text-[9px] font-black uppercase tracking-widest">Đăng ký nhận tài liệu mới</span>
                     </button>
                 </div>
 
@@ -177,19 +172,19 @@
             <div class="flex flex-col md:flex-row md:flex-wrap md:justify-center items-start md:items-center gap-8 md:gap-12 lg:gap-16 px-4">
                 <a href="tel:+84915159499" class="flex items-center gap-4 group">
                     <div class="w-10 h-10 border-gold-3d rounded-full flex items-center justify-center group-hover:bg-gold transition-all shrink-0"><i class="fas fa-phone-alt text-gold group-hover:text-black text-xs"></i></div>
-                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Hotline</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition">+84 91 515 9499</span></div>
+                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Hotline</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition font-bold tracking-tighter">+84 91 515 9499</span></div>
                 </a>
                 <a href="mailto:hello@nguyentanphong.com" class="flex items-center gap-4 group">
                     <div class="w-10 h-10 border-gold-3d rounded-full flex items-center justify-center group-hover:bg-gold transition-all shrink-0"><i class="fas fa-envelope text-gold group-hover:text-black text-xs"></i></div>
-                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Email</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition lowercase">hello@nguyentanphong.com</span></div>
+                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Email</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition font-bold lowercase tracking-tighter">hello@nguyentanphong.com</span></div>
                 </a>
                 <a href="https://zalo.me/cangioland" target="_blank" class="flex items-center gap-4 group">
                     <div class="w-10 h-10 border-gold-3d rounded-full flex items-center justify-center group-hover:bg-gold transition-all shrink-0"><i class="fas fa-comment-dots text-gold group-hover:text-black text-xs"></i></div>
-                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Zalo</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition">Zalo Kết nối</span></div>
+                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Zalo</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition font-bold tracking-tighter">Zalo Kết nối</span></div>
                 </a>
                 <a href="https://facebook.com/tanphong1981" target="_blank" class="flex items-center gap-4 group">
                     <div class="w-10 h-10 border-gold-3d rounded-full flex items-center justify-center group-hover:bg-gold transition-all shrink-0"><i class="fab fa-facebook-f text-gold group-hover:text-black text-xs"></i></div>
-                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Facebook</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition">Facebook Profile</span></div>
+                    <div class="text-left font-bold"><span class="text-[8px] uppercase tracking-widest text-gray-500 block">Facebook</span><span class="text-lg font-serif text-white/80 group-hover:text-gold transition font-bold tracking-tighter">Facebook Profile</span></div>
                 </a>
             </div>
         </div>
@@ -198,10 +193,8 @@
     <footer class="p-8 text-center text-gray-700 text-[7px] md:text-[9px] uppercase tracking-[0.4em]">© 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</footer>
 
     <script>
-        let currentTarget = "";
-        let currentCode = "";
-        const BASE_COUNT = 6868;
-        let storedCount = parseInt(localStorage.getItem('legalLoginCount')) || 0;
+        let currentTarget = ""; let currentCode = "";
+        const BASE_COUNT = 6868; let storedCount = parseInt(localStorage.getItem('legalLoginCount')) || 0;
 
         function updateDisplay() {
             const total = BASE_COUNT + storedCount;
@@ -211,8 +204,7 @@
         function openGate(name, code, url) {
             document.getElementById('modalTitle').innerText = "Truy cập " + name;
             document.getElementById('passwordModal').style.display = 'flex';
-            currentTarget = url;
-            currentCode = code;
+            currentTarget = url; currentCode = code;
             document.getElementById('passInput').focus();
         }
 
@@ -221,9 +213,7 @@
         function validateAccess() {
             if (document.getElementById('passInput').value === currentCode) {
                 if (currentCode === '0915159499') {
-                    storedCount++;
-                    localStorage.setItem('legalLoginCount', storedCount);
-                    updateDisplay();
+                    storedCount++; localStorage.setItem('legalLoginCount', storedCount); updateDisplay();
                 }
                 window.location.href = currentTarget;
             } else { document.getElementById('errorMsg').style.opacity = 1; }
@@ -244,7 +234,6 @@
             submitBtn.innerText = "Đang gửi...";
             submitBtn.disabled = true;
 
-            // ĐỊA CHỈ BỘ NÃO CỦA CHÚ PHONG
             const scriptURL = 'https://script.google.com/a/macros/nguyentanphong.com/s/AKfycby0ic-4topTPMKX2IJeeVaJNLi8qoeghV0KxrDoTkASXnt8UlIEFbLDwRmSCnAy9b_N/exec';
             
             fetch(scriptURL, { 
