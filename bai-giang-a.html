@@ -1,1 +1,655 @@
-note
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pháp luật TMĐT - Chuyên gia Nguyễn Tấn Phong | CLEAD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #020617;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --gold: #c5a021;
+            --gold-glow: rgba(197, 160, 33, 0.4);
+            --blue-accent: #3b82f6;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: #010409; 
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--text-main); 
+            overflow: hidden; 
+        }
+
+        .presentation-wrapper {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 2000px;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+            border-radius: 20px;
+            display: none;
+            animation: slideIn 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide-container.active { display: flex; flex-direction: column; padding: 60px; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.95) translateZ(-200px); }
+            to { opacity: 1; transform: scale(1) translateZ(0); }
+        }
+
+        /* 3D Background Decoration */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            top: -400px;
+            right: -400px;
+            pointer-events: none;
+        }
+
+        .logo-brand {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .logo-brand .icon { width: 35px; height: 35px; background: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: black; font-weight: 800; }
+        .logo-brand .name { font-weight: 800; letter-spacing: 2px; color: white; font-size: 18px; }
+
+        .slide-content { position: relative; z-index: 10; display: flex; flex-direction: column; height: 100%; width: 100%; }
+
+        /* Typography */
+        h1 { font-family: 'Playfair Display', serif; font-size: 72px; color: var(--gold); line-height: 1.1; text-transform: uppercase; }
+        .slide-title { font-size: 42px; font-weight: 800; margin-bottom: 40px; display: flex; align-items: center; gap: 20px; text-transform: uppercase; }
+        .slide-title::before { content: ''; width: 60px; height: 6px; background: var(--gold); border-radius: 3px; }
+        
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover { transform: translateY(-10px) rotateX(2deg); border-color: var(--gold); box-shadow: 0 30px 60px var(--gold-glow); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 100%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+
+        .icon-3d {
+            width: 70px; height: 70px;
+            background: linear-gradient(135deg, #1e293b, #020617);
+            border: 1px solid var(--gold);
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: var(--gold);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px var(--gold-glow);
+        }
+
+        .bullet-list { list-style: none; }
+        .bullet-list li { position: relative; padding-left: 40px; margin-bottom: 20px; font-size: 20px; color: var(--text-dim); }
+        .bullet-list li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; color: var(--gold); }
+
+        /* Table Style */
+        table { width: 100%; border-collapse: separate; border-spacing: 0 12px; margin-top: 20px; }
+        th { text-align: left; padding: 15px 25px; color: var(--gold); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+        td { padding: 20px 25px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 18px; }
+        td:first-child { font-weight: 700; color: var(--gold); }
+
+        /* Navigation */
+        .nav-controls { position: fixed; bottom: 40px; right: 60px; display: flex; gap: 20px; z-index: 1000; }
+        .nav-btn { 
+            width: 60px; height: 60px; border-radius: 50%; 
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); 
+            color: white; display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px);
+        }
+        .nav-btn:hover { background: var(--gold); color: black; transform: scale(1.1); }
+        .nav-btn.primary { background: var(--gold); color: black; box-shadow: 0 0 20px var(--gold-glow); }
+
+        .slide-counter { position: fixed; bottom: 50px; left: 60px; font-weight: 800; font-size: 24px; color: var(--gold); }
+
+        /* Image 3D Frame */
+        .img-3d-frame {
+            border-radius: 30px;
+            box-shadow: 30px 30px 80px rgba(0,0,0,0.7);
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            height: 450px;
+        }
+        .img-3d-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+    </style>
+</head>
+<body>
+
+    <div class="logo-brand">
+        <div class="icon">C</div>
+        <div class="name">CLEAD.VN</div>
+    </div>
+
+    <div class="presentation-wrapper" id="presentation">
+        
+        <!-- SLIDE 1: TRANG CHỦ -->
+        <div class="slide-container active" id="slide1">
+            <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                <div style="background: rgba(59, 130, 246, 0.1); padding: 8px 25px; border-radius: 100px; border: 1px solid var(--blue-accent); color: var(--blue-accent); font-weight: 700; font-size: 14px; margin-bottom: 30px;">CHƯƠNG TRÌNH ĐÀO TẠO PHÁP LUẬT CAO CẤP</div>
+                <h1>LUẬT THƯƠNG MẠI<br><span style="color: white; font-style: italic;">ĐIỆN TỬ VIỆT NAM</span></h1>
+                <div style="width: 150px; height: 4px; background: var(--gold); margin: 40px 0;"></div>
+                <p style="font-size: 32px; letter-spacing: 5px; font-weight: 300; opacity: 0.8;">KỶ NGUYÊN SỐ & TUÂN THỦ PHÁP LÝ</p>
+                <div style="margin-top: 50px;">
+                    <p style="font-size: 24px; color: var(--gold); font-weight: 700; margin-bottom: 5px;">Diễn giả: Nguyễn Tấn Phong</p>
+                    <p style="opacity: 0.5;">Chuyên gia Pháp lý Cấp cao - WWW.CLEAD.VN</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: DIỄN GIẢ -->
+        <div class="slide-container" id="slide2">
+            <h2 class="slide-title">Diễn giả trình bày</h2>
+            <div class="slide-content">
+                <div class="grid-2" style="align-items: center;">
+                    <div class="img-3d-frame">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" alt="Speaker">
+                    </div>
+                    <div>
+                        <h3 style="font-size: 42px; margin-bottom: 10px;">Mr. Nguyễn Tấn Phong</h3>
+                        <p style="color: var(--gold); font-weight: 700; margin-bottom: 30px; letter-spacing: 2px;">SENIOR LEGAL EXPERT</p>
+                        <ul class="bullet-list">
+                            <li>Hơn 15 năm kinh nghiệm tư vấn Luật Kinh doanh & Thương mại.</li>
+                            <li>Cố vấn cấp cao cho nhiều sàn TMĐT xuyên biên giới.</li>
+                            <li>Chuyên gia đào tạo tuân thủ Bảo vệ dữ liệu cá nhân (NĐ 13).</li>
+                            <li>Giám đốc điều hành tại CLEAD.VN.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: NỘI DUNG -->
+        <div class="slide-container" id="slide3">
+            <h2 class="slide-title">Cấu trúc nội dung đào tạo</h2>
+            <div class="slide-content">
+                <div class="grid-3" style="grid-template-rows: 1fr 1fr;">
+                    <div class="glass-card">
+                        <div class="icon-3d"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h4>01. Khung Pháp lý</h4>
+                        <p style="font-size: 14px; color: var(--text-dim); margin-top: 10px;">Luật GDĐT 2023 & Hệ thống Nghị định mới nhất.</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="icon-3d"><i class="fa-solid fa-globe"></i></div>
+                        <h4>02. Quản lý Website</h4>
+                        <p style="font-size: 14px; color: var(--text-dim); margin-top: 10px;">Quy trình Thông báo & Đăng ký Bộ Công Thương.</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="icon-3d"><i class="fa-solid fa-file-signature"></i></div>
+                        <h4>03. Hợp đồng số</h4>
+                        <p style="font-size: 14px; color: var(--text-dim); margin-top: 10px;">Giá trị pháp lý của chứng từ & Chữ ký điện tử.</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="icon-3d"><i class="fa-solid fa-user-shield"></i></div>
+                        <h4>04. Dữ liệu cá nhân</h4>
+                        <p style="font-size: 14px; color: var(--text-dim); margin-top: 10px;">Thực thi Nghị định 13/2023 tại doanh nghiệp.</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="icon-3d"><i class="fa-solid fa-gavel"></i></div>
+                        <h4>05. Thanh tra Xử phạt</h4>
+                        <p style="font-size: 14px; color: var(--text-dim); margin-top: 10px;">Chế tài hành chính & Hình thức bổ sung.</p>
+                    </div>
+                    <div class="glass-card" style="background: linear-gradient(135deg, var(--gold), #8a6d0d); border: none;">
+                        <div class="icon-3d" style="background: white; border: none; color: black;"><i class="fa-solid fa-lightbulb"></i></div>
+                        <h4 style="color: white;">06. Thực chiến</h4>
+                        <p style="font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 10px;">Giải quyết các Case Study thực tế từ CLEAD.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: KHUNG PHÁP LÝ -->
+        <div class="slide-container" id="slide4">
+            <h2 class="slide-title">1. Khung Pháp lý TMĐT 2024</h2>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="glass-card" style="border-left: 8px solid var(--gold);">
+                        <h3 style="color: var(--gold); margin-bottom: 20px;">Trụ cột pháp lý</h3>
+                        <ul class="bullet-list" style="font-size: 18px;">
+                            <li><strong>Luật Giao dịch điện tử 2023:</strong> Nền tảng quan trọng nhất (Hiệu lực 01/07/2024).</li>
+                            <li><strong>Nghị định 52/2013:</strong> Xương sống của TMĐT Việt Nam.</li>
+                            <li><strong>Nghị định 85/2021:</strong> Bổ sung quy định xuyên biên giới.</li>
+                        </ul>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div class="glass-card">
+                            <h4 style="color: var(--blue-accent);">Điểm mới 2024</h4>
+                            <p style="font-size: 16px; margin-top: 10px;">Thừa nhận giá trị của "Con dấu điện tử" và các loại "Chữ ký số chuyên dùng" mới.</p>
+                        </div>
+                        <div class="glass-card">
+                            <h4 style="color: var(--blue-accent);">Bảo vệ dữ liệu</h4>
+                            <p style="font-size: 16px; margin-top: 10px;">Áp dụng Nghị định 13/2023/NĐ-CP khắt khe hơn đối với các sàn giao dịch trực tuyến.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: HÀNH VI CẤM -->
+        <div class="slide-container" id="slide5">
+            <h2 class="slide-title">Các hành vi bị nghiêm cấm</h2>
+            <div class="slide-content">
+                <div class="grid-3">
+                    <div class="glass-card" style="border-top: 8px solid #ef4444; text-align: center;">
+                        <i class="fa-solid fa-user-secret" style="font-size: 50px; color: #ef4444; margin-bottom: 20px;"></i>
+                        <h4 style="margin-bottom: 10px;">Giả mạo & Lừa đảo</h4>
+                        <p style="font-size: 14px; opacity: 0.7;">Giả mạo thông tin tổ chức, cá nhân để lừa khách hàng giao kết hợp đồng.</p>
+                    </div>
+                    <div class="glass-card" style="border-top: 8px solid #ef4444; text-align: center;">
+                        <i class="fa-solid fa-box-open" style="font-size: 50px; color: #ef4444; margin-bottom: 20px;"></i>
+                        <h4 style="margin-bottom: 10px;">Hàng lậu & Hàng giả</h4>
+                        <p style="font-size: 14px; opacity: 0.7;">Kinh doanh hàng cấm, hàng giả, xâm phạm quyền sở hữu trí tuệ trên mạng.</p>
+                    </div>
+                    <div class="glass-card" style="border-top: 8px solid #ef4444; text-align: center;">
+                        <i class="fa-solid fa-database" style="font-size: 50px; color: #ef4444; margin-bottom: 20px;"></i>
+                        <h4 style="margin-bottom: 10px;">Xâm phạm Dữ liệu</h4>
+                        <p style="font-size: 14px; opacity: 0.7;">Thu thập dữ liệu cá nhân khách hàng trái phép hoặc làm rò rỉ thông tin.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: PHÂN LOẠI WEB -->
+        <div class="slide-container" id="slide6">
+            <h2 class="slide-title">2. Phân loại Website TMĐT</h2>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="glass-card" style="border-bottom: 10px solid var(--blue-accent);">
+                        <div style="background: var(--blue-accent); color: white; padding: 5px 15px; border-radius: 5px; font-weight: 800; width: fit-content; margin-bottom: 20px;">NHÓM BÁN HÀNG</div>
+                        <h3>Website TMĐT Bán hàng</h3>
+                        <p style="margin-top: 15px; font-size: 18px; opacity: 0.8;">Do doanh nghiệp tự thiết lập để bán hàng/dịch vụ của chính mình.</p>
+                        <div style="margin-top: 30px; border: 2px dashed var(--blue-accent); padding: 15px; border-radius: 15px; text-align: center;">
+                            <h4 style="color: var(--blue-accent);">THỦ TỤC: THÔNG BÁO</h4>
+                        </div>
+                    </div>
+                    <div class="glass-card" style="border-bottom: 10px solid var(--gold);">
+                        <div style="background: var(--gold); color: black; padding: 5px 15px; border-radius: 5px; font-weight: 800; width: fit-content; margin-bottom: 20px;">NHÓM DỊCH VỤ</div>
+                        <h3>Sàn giao dịch & Dịch vụ</h3>
+                        <p style="margin-top: 15px; font-size: 18px; opacity: 0.8;">Website cung cấp nền tảng cho người khác bán hàng (Sàn, Đấu giá, Khuyến mại).</p>
+                        <div style="margin-top: 30px; border: 2px dashed var(--gold); padding: 15px; border-radius: 15px; text-align: center;">
+                            <h4 style="color: var(--gold);">THỦ TỤC: ĐĂNG KÝ</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: QUY TRÌNH BCT -->
+        <div class="slide-container" id="slide7">
+            <h2 class="slide-title">Quy trình làm việc với Bộ Công Thương</h2>
+            <div class="slide-content">
+                <div style="display: flex; justify-content: space-between; position: relative; margin-top: 40px;">
+                    <div style="position: absolute; top: 40px; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.1); z-index: 1;"></div>
+                    <div style="width: 23%; text-align: center; z-index: 2;">
+                        <div style="width: 80px; height: 80px; background: var(--bg-dark); border: 4px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-weight: 800; font-size: 24px;">1</div>
+                        <h4>Tạo tài khoản</h4>
+                        <p style="font-size: 14px; opacity: 0.6; margin-top: 10px;">Tại cổng online.gov.vn</p>
+                    </div>
+                    <div style="width: 23%; text-align: center; z-index: 2;">
+                        <div style="width: 80px; height: 80px; background: var(--bg-dark); border: 4px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-weight: 800; font-size: 24px;">2</div>
+                        <h4>Nộp hồ sơ</h4>
+                        <p style="font-size: 14px; opacity: 0.6; margin-top: 10px;">Tải lên GPKD & các giấy phép</p>
+                    </div>
+                    <div style="width: 23%; text-align: center; z-index: 2;">
+                        <div style="width: 80px; height: 80px; background: var(--bg-dark); border: 4px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-weight: 800; font-size: 24px;">3</div>
+                        <h4>Sửa đổi (nếu có)</h4>
+                        <p style="font-size: 14px; opacity: 0.6; margin-top: 10px;">BCT phản hồi trong 3-7 ngày</p>
+                    </div>
+                    <div style="width: 23%; text-align: center; z-index: 2;">
+                        <div style="width: 80px; height: 80px; background: var(--gold); border: 4px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-weight: 800; font-size: 24px; color: black;">4</div>
+                        <h4>Cấp Logo</h4>
+                        <p style="font-size: 14px; opacity: 0.6; margin-top: 10px;">Gắn nhãn xanh/đỏ lên web</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: THÔNG TIN BẮT BUỘC -->
+        <div class="slide-container" id="slide8">
+            <h2 class="slide-title">Thông tin bắt buộc phải công khai</h2>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <ul class="bullet-list">
+                        <li><strong>Thông tin đơn vị:</strong> Tên công ty, MST, Địa chỉ trụ sở chính, Hotline, Email.</li>
+                        <li><strong>Thông tin hàng hóa:</strong> Giá niêm yết (VAT), mô tả đặc tính kỹ thuật sản phẩm.</li>
+                        <li><strong>Vận chuyển:</strong> Phí ship, thời gian giao dự kiến, giới hạn địa lý giao hàng.</li>
+                    </ul>
+                    <ul class="bullet-list">
+                        <li><strong>Thanh toán:</strong> Phương thức thanh toán & cơ chế bảo mật giao dịch.</li>
+                        <li><strong>Chính sách:</strong> Quy trình đổi trả, bảo hành và giải quyết khiếu nại của khách.</li>
+                        <li><strong>Bảo mật:</strong> Chính sách thu thập dữ liệu cá nhân theo Nghị định 13.</li>
+                    </ul>
+                </div>
+                <div class="glass-card" style="margin-top: 40px; border-left: 10px solid var(--blue-accent);">
+                    <p style="margin: 0;"><strong>CLEAD Lưu ý:</strong> Bộ Công Thương thường xuyên quét Footer website để kiểm tra tính hiện diện của các thông tin này.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: HỢP ĐỒNG SỐ -->
+        <div class="slide-container" id="slide9">
+            <h2 class="slide-title">3. Hợp đồng & Chữ ký số 2024</h2>
+            <div class="slide-content">
+                <div class="grid-2" style="align-items: center;">
+                    <div style="font-size: 160px; font-family: 'Playfair Display'; color: var(--gold); line-height: 1;">2024</div>
+                    <div>
+                        <h3 style="color: white; margin-bottom: 20px;">Tính pháp lý tối thượng</h3>
+                        <p style="font-size: 20px; opacity: 0.8;">Hợp đồng điện tử không bị phủ nhận giá trị pháp lý chỉ vì nó được thể hiện dưới dạng thông điệp dữ liệu.</p>
+                        <div style="margin-top: 30px; display: flex; gap: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; flex: 1; text-align: center;">
+                                <i class="fa-solid fa-signature" style="color: var(--gold); font-size: 24px;"></i>
+                                <p style="font-size: 14px; margin-top: 10px;">Chữ ký số chuyên dùng</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; flex: 1; text-align: center;">
+                                <i class="fa-solid fa-stamp" style="color: var(--gold); font-size: 24px;"></i>
+                                <p style="font-size: 14px; margin-top: 10px;">Con dấu điện tử DN</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: GIAO KẾT -->
+        <div class="slide-container" id="slide10">
+            <h2 class="slide-title">Quy trình Giao kết Hợp đồng</h2>
+            <div class="slide-content">
+                <div class="grid-3" style="text-align: center;">
+                    <div class="glass-card">
+                        <div class="icon-3d" style="margin: 0 auto 20px;"><i class="fa-solid fa-bullhorn"></i></div>
+                        <h4>Đề nghị</h4>
+                        <p style="font-size: 14px; opacity: 0.6;">Hiển thị hàng hóa & Điều khoản trên Website</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="icon-3d" style="margin: 0 auto 20px;"><i class="fa-solid fa-hand-pointer"></i></div>
+                        <h4>Chấp nhận</h4>
+                        <p style="font-size: 14px; opacity: 0.6;">Khách hàng thực hiện thao tác Đặt hàng/Thanh toán</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="icon-3d" style="margin: 0 auto 20px;"><i class="fa-solid fa-check-circle"></i></div>
+                        <h4>Xác nhận</h4>
+                        <p style="font-size: 14px; opacity: 0.6;">Hệ thống phản hồi thông điệp tiếp nhận đơn hàng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: BẢO VỆ NTD -->
+        <div class="slide-container" id="slide11">
+            <h2 class="slide-title">Bảo vệ Người tiêu dùng TMĐT</h2>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="img-3d-frame">
+                        <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=600" alt="Consumer">
+                    </div>
+                    <div>
+                        <ul class="bullet-list">
+                            <li>Quyền được cung cấp thông tin trung thực về sản phẩm.</li>
+                            <li>Quyền từ chối đơn hàng nếu không đúng thỏa thuận.</li>
+                            <li>Quyền được bồi thường khi sàn TMĐT để lộ thông tin thẻ tín dụng/thanh toán.</li>
+                            <li>Cơ chế giải quyết tranh chấp trực tuyến bắt buộc.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: NGHỊ ĐỊNH 13 -->
+        <div class="slide-container" id="slide12">
+            <h2 class="slide-title">4. Dữ liệu Cá nhân (Nghị định 13)</h2>
+            <div class="slide-content">
+                <div class="grid-2" style="align-items: center;">
+                    <div class="glass-card" style="border: 2px solid var(--blue-accent);">
+                        <i class="fa-solid fa-shield-virus" style="font-size: 60px; color: var(--blue-accent); margin-bottom: 20px;"></i>
+                        <h3>Nguyên tắc cốt lõi</h3>
+                        <p style="margin-top: 15px; font-size: 18px;">Mọi hoạt động xử lý dữ liệu (từ thu thập đến xóa) đều phải có <strong>SỰ ĐỒNG Ý</strong> rõ ràng của chủ thể dữ liệu.</p>
+                    </div>
+                    <div>
+                        <ul class="bullet-list">
+                            <li>Xây dựng Hồ sơ đánh giá tác động (DPIA).</li>
+                            <li>Thiết lập bộ phận chuyên trách bảo mật dữ liệu.</li>
+                            <li>Thông báo vi phạm dữ liệu cho Bộ Công an (A05) trong 72h.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: VÒNG ĐỜI DỮ LIỆU -->
+        <div class="slide-container" id="slide13">
+            <h2 class="slide-title">Vòng đời xử lý Dữ liệu Cá nhân</h2>
+            <div class="slide-content">
+                <div class="grid-3">
+                    <div class="glass-card" style="text-align: center;">
+                        <i class="fa-solid fa-cloud-download" style="font-size: 40px; color: var(--gold); margin-bottom: 20px;"></i>
+                        <h4>Thu thập</h4>
+                        <p style="font-size: 14px; opacity: 0.6;">Chỉ thu thập thông tin tối thiểu cần thiết</p>
+                    </div>
+                    <div class="glass-card" style="text-align: center;">
+                        <i class="fa-solid fa-server" style="font-size: 40px; color: var(--gold); margin-bottom: 20px;"></i>
+                        <h4>Lưu trữ</h4>
+                        <p style="font-size: 14px; opacity: 0.6;">Mã hóa và giới hạn quyền truy cập</p>
+                    </div>
+                    <div class="glass-card" style="text-align: center;">
+                        <i class="fa-solid fa-trash-alt" style="font-size: 40px; color: var(--gold); margin-bottom: 20px;"></i>
+                        <h4>Xóa bỏ</h4>
+                        <p style="font-size: 14px; opacity: 0.6;">Xóa khi xong mục đích hoặc khách yêu cầu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: XUYÊN BIÊN GIỚI -->
+        <div class="slide-container" id="slide14">
+            <h2 class="slide-title">TMĐT Xuyên biên giới (NĐ 85)</h2>
+            <div class="slide-content">
+                <div class="glass-card" style="border-right: 10px solid var(--gold);">
+                    <h3 style="margin-bottom: 20px;">Thương nhân nước ngoài tại Việt Nam</h3>
+                    <ul class="bullet-list">
+                        <li>Phải thực hiện đăng ký TMĐT nếu có tên miền .VN hoặc hiển thị Tiếng Việt.</li>
+                        <li>Có số lượng giao dịch từ Việt Nam vượt ngưỡng quy định.</li>
+                        <li>Chỉ định đại diện ủy quyền tại Việt Nam để thực hiện nghĩa vụ pháp lý & thuế.</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 40px; opacity: 0.5; font-style: italic; text-align: center;">Bản đồ kết nối TMĐT Toàn cầu & Việt Nam 2024</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: XỬ PHẠT -->
+        <div class="slide-container" id="slide15">
+            <h2 class="slide-title">5. Chế tài & Xử phạt Hành chính</h2>
+            <div class="slide-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hành vi vi phạm</th>
+                            <th>Mức phạt (VND)</th>
+                            <th>Hình thức bổ sung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Không thông báo website TMĐT bán hàng</td>
+                            <td>10.000.000 - 20.000.000</td>
+                            <td>Đình chỉ 6-12 tháng</td>
+                        </tr>
+                        <tr>
+                            <td>Không đăng ký sàn giao dịch TMĐT</td>
+                            <td>20.000.000 - 30.000.000</td>
+                            <td>Tước quyền dùng tên miền</td>
+                        </tr>
+                        <tr>
+                            <td>Vi phạm bảo mật thông tin cá nhân</td>
+                            <td>40.000.000 - 60.000.000</td>
+                            <td>Công khai tên doanh nghiệp</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: THANH TRA -->
+        <div class="slide-container" id="slide16">
+            <h2 class="slide-title">Hệ thống Thanh tra Chuyên ngành</h2>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="glass-card">
+                        <h4 style="color: var(--gold); margin-bottom: 15px;">Bộ Công Thương</h4>
+                        <p style="font-size: 16px;">Thanh tra về điều kiện kinh doanh, tính xác thực của thông báo/đăng ký web.</p>
+                    </div>
+                    <div class="glass-card">
+                        <h4 style="color: var(--blue-accent); margin-bottom: 15px;">Bộ Công An (A05)</h4>
+                        <p style="font-size: 16px;">Thanh tra về an ninh mạng và tuân thủ bảo vệ dữ liệu khách hàng (Nghị định 13).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: LỘ TRÌNH CEO -->
+        <div class="slide-container" id="slide17">
+            <h2 class="slide-title">Lộ trình tuân thủ cho CEO</h2>
+            <div class="slide-content">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="glass-card" style="display: flex; align-items: center; gap: 30px;">
+                        <div style="font-size: 40px; font-weight: 800; color: var(--gold);">Q1</div>
+                        <div>
+                            <h4>Audit Pháp lý</h4>
+                            <p style="font-size: 14px; opacity: 0.6;">Rà soát toàn bộ website/app hiện có của doanh nghiệp.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card" style="display: flex; align-items: center; gap: 30px;">
+                        <div style="font-size: 40px; font-weight: 800; color: var(--gold);">Q2</div>
+                        <div>
+                            <h4>Hồ sơ Bộ Công Thương</h4>
+                            <p style="font-size: 14px; opacity: 0.6;">Hoàn thiện thông báo/đăng ký cho mọi nền tảng bán hàng.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card" style="display: flex; align-items: center; gap: 30px;">
+                        <div style="font-size: 40px; font-weight: 800; color: var(--gold);">Q3</div>
+                        <div>
+                            <h4>Tuân thủ Nghị định 13</h4>
+                            <p style="font-size: 14px; opacity: 0.6;">Lập hồ sơ đánh giá tác động dữ liệu và quy trình bảo mật.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 18: CHIẾN LƯỢC CLEAD -->
+        <div class="slide-container" id="slide18">
+            <h2 class="slide-title">Chiến lược Thực thi từ CLEAD</h2>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="glass-card">
+                        <h3 style="color: var(--gold); margin-bottom: 15px;">Pháp lý hóa UI/UX</h3>
+                        <p style="font-size: 16px;">Tích hợp các checkbox đồng ý điều khoản vào luồng thanh toán để tạo bằng chứng số không thể chối cãi.</p>
+                    </div>
+                    <div class="glass-card">
+                        <h3 style="color: var(--gold); margin-bottom: 15px;">Lưu trữ Bất biến</h3>
+                        <p style="font-size: 16px;">Xây dựng hệ thống log giao dịch (Log-trail) chuẩn pháp lý để bảo vệ doanh nghiệp khi có kiện tụng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 19: KẾT LUẬN -->
+        <div class="slide-container" id="slide19">
+            <div class="slide-content" style="text-align: center; justify-content: center;">
+                <i class="fa-solid fa-trophy" style="font-size: 120px; color: var(--gold); margin-bottom: 40px; filter: drop-shadow(0 0 30px var(--gold-glow));"></i>
+                <h1 style="font-size: 80px;">KẾT LUẬN</h1>
+                <p style="font-size: 28px; max-width: 900px; margin: 0 auto; opacity: 0.8;">Tuân thủ pháp luật là <strong>lợi thế cạnh tranh</strong> bền vững nhất của doanh nghiệp trong kỷ nguyên số.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 20: Q&A -->
+        <div class="slide-container" id="slide20">
+            <div class="slide-content">
+                <div class="grid-2" style="align-items: center;">
+                    <div>
+                        <h1 style="font-size: 120px; line-height: 1;">Q&A</h1>
+                        <p style="font-size: 32px; color: var(--gold); font-weight: 600;">Giải đáp & Thảo luận</p>
+                        <div style="margin-top: 60px;">
+                            <p style="font-size: 18px; margin-bottom: 10px;"><i class="fa-solid fa-globe" style="color: var(--gold);"></i> www.clead.vn</p>
+                            <p style="font-size: 18px; margin-bottom: 10px;"><i class="fa-solid fa-envelope" style="color: var(--gold);"></i> contact@clead.vn</p>
+                            <p style="font-size: 18px;"><i class="fa-solid fa-phone" style="color: var(--gold);"></i> Hotline: 1900 xxxx</p>
+                        </div>
+                    </div>
+                    <div class="glass-card" style="text-align: center; padding: 60px;">
+                        <h3 style="color: white; margin-bottom: 20px;">Cảm ơn Quý vị đã lắng nghe!</h3>
+                        <div style="width: 100px; height: 4px; background: var(--gold); margin: 30px auto;"></div>
+                        <p style="color: var(--gold); font-weight: 800; font-size: 20px;">Diễn giả: Nguyễn Tấn Phong</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- UI CONTROLS -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="nav-btn primary" onclick="changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current">1</span> / 20
+    </div>
+
+    <script>
+        let currentIdx = 1;
+        const totalSlides = 20;
+
+        function changeSlide(dir) {
+            const nextIdx = currentIdx + dir;
+            if (nextIdx >= 1 && nextIdx <= totalSlides) {
+                document.getElementById(`slide${currentIdx}`).classList.remove('active');
+                document.getElementById(`slide${nextIdx}`).classList.add('active');
+                currentIdx = nextIdx;
+                document.getElementById('current').innerText = currentIdx;
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+    </script>
+</body>
+</html>
