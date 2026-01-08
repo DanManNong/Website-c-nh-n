@@ -1,1 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài giảng B | Chiến lược Lãnh đạo Đột phá 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050a1a; color: white; overflow: hidden; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .text-gold { color: #c5a059; }
+        .bg-gold { background-color: #c5a059; }
+        .border-gold { border-color: #c5a059; }
+        
+        /* Hiệu ứng Glassmorphism cho Slide */
+        .glass-slide {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
 
+        .slide-enter { animation: slideIn 0.5s ease-out forwards; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .bullet-point::before {
+            content: "•";
+            color: #c5a059;
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useCallback } = React;
+
+        const slides = [
+            {
+                id: 1,
+                title: "CHIẾN LƯỢC LÃNH ĐẠO ĐỘT PHÁ TRONG TMĐT 2026",
+                subtitle: "Tư duy mới cho kỷ nguyên AI & Kinh tế số",
+                presenter: "Nguyễn Tấn Phong - VECOM & CLEAD.vn",
+                type: "title",
+                icon: "fa-monitor-waveform"
+            },
+            {
+                id: 2,
+                title: "Bối cảnh TMĐT Việt Nam 2026",
+                content: [
+                    "Thị trường bùng nổ: Dự báo vượt mốc 30 tỷ USD.",
+                    "Sự lên ngôi của AI-Commerce: Cá nhân hóa ở quy mô lớn.",
+                    "Social Commerce 2.0: Trải nghiệm mua sắm gắn liền giải trí.",
+                    "Cạnh tranh xuyên biên giới: Áp lực từ các nền tảng toàn cầu."
+                ],
+                icon: "fa-trending-up"
+            },
+            {
+                id: 3,
+                title: "Tại sao 'Lãnh đạo' là chìa khóa?",
+                content: [
+                    "70% dự án chuyển đổi số thất bại do yếu tố con người.",
+                    "Công nghệ chỉ là công cụ, lãnh đạo là bánh lái.",
+                    "CLEAD Insight: Quản trị sự thay đổi là kỹ năng sống còn.",
+                    "Lãnh đạo phải đi trước công nghệ một bước chân."
+                ],
+                icon: "fa-bullseye"
+            },
+            {
+                id: 4,
+                title: "Chân dung Nhà Lãnh đạo Số",
+                columns: [
+                    { label: "Tư duy Dữ liệu", desc: "Ra quyết định dựa trên con số, không phải cảm tính." },
+                    { label: "Sự Linh hoạt", desc: "Thích ứng cực nhanh với biến động thị trường (Agility)." },
+                    { label: "Sự Thấu cảm", desc: "Gắn kết đội ngũ trong môi trường hybrid." }
+                ],
+                icon: "fa-users-gear"
+            },
+            {
+                id: 5,
+                title: "AI & Automation trong TMĐT",
+                content: [
+                    "Gen-AI: Tự động hóa sáng tạo nội dung và sản phẩm.",
+                    "Predictive Analytics: Dự báo tồn kho và xu hướng.",
+                    "AI Agents: Trợ lý ảo thông minh thế hệ mới.",
+                    "Tối ưu hóa hành trình khách hàng theo thời gian thực."
+                ],
+                icon: "fa-microchip"
+            },
+            {
+                id: 6,
+                title: "Thương mại Hội thoại & KOC 2.0",
+                content: [
+                    "Livestream 3D/VR: Trải nghiệm thử đồ ảo tại nhà.",
+                    "KOC: Sức mạnh từ sự tin cậy cộng đồng.",
+                    "Message-to-Commerce trở thành chủ đạo.",
+                    "Xây dựng 'Bộ tộc' (Tribes) thay vì chạy quảng cáo."
+                ],
+                icon: "fa-comments"
+            },
+            {
+                id: 7,
+                title: "TMĐT Xanh & Bền vững (ESG)",
+                content: [
+                    "Logistics xanh: Giảm thiểu dấu chân carbon.",
+                    "Bao bì bền vững: Quy định mới về rác thải nhựa 2026.",
+                    "Kinh tế tuần hoàn: Mô hình Re-sale trên sàn TMĐT.",
+                    "Giá trị thương hiệu: Ưu tiên doanh nghiệp tử tế."
+                ],
+                icon: "fa-leaf"
+            },
+            {
+                id: 8,
+                title: "CLEAD Framework: Hiệu suất Số",
+                content: [
+                    "OKR: Thiết lập mục tiêu tham vọng.",
+                    "Agile Execution: Thực thi linh hoạt theo tuần.",
+                    "Data Dashboards: Theo dõi chỉ số sức khỏe 24/7.",
+                    "Feedback Loop: Phản hồi liên tục để cải tiến."
+                ],
+                icon: "fa-bolt"
+            },
+            {
+                id: 9,
+                title: "Văn hóa Học tập không ngừng",
+                content: [
+                    "Digital Literacy: Xóa mù công nghệ cho nhân viên.",
+                    "Micro-learning: Học tập qua các module ngắn.",
+                    "Văn hóa 'Thử và Sai': Khuyến khích đổi mới.",
+                    "Vai trò Coach/Mentor của lãnh đạo."
+                ],
+                icon: "fa-graduation-cap"
+            },
+            {
+                id: 10,
+                title: "Quản trị Rủi ro & An ninh mạng",
+                content: [
+                    "Deepfake & Fraud: Cảnh giác lừa đảo công nghệ cao.",
+                    "Bảo mật dữ liệu: Tuân thủ Luật An ninh mạng mới.",
+                    "Incident Response: Luôn có phương án B dự phòng.",
+                    "Digital Trust là tài sản vô hình lớn nhất."
+                ],
+                icon: "fa-shield-halved"
+            },
+            {
+                id: 11,
+                title: "Nhân lực Gen Z & Alpha",
+                content: [
+                    "Thế hệ 'Bản địa số': Tư duy về sự nghiệp.",
+                    "Purpose-driven Leadership: Lãnh đạo bằng mục đích.",
+                    "Empowerment: Cho phép nhân sự tự chủ hoàn toàn.",
+                    "Môi trường số hạnh phúc: Kết nối và cân bằng."
+                ],
+                icon: "fa-user-group"
+            },
+            {
+                id: 12,
+                title: "Từ 'Sản phẩm' sang 'Giải pháp'",
+                content: [
+                    "Khách hàng mua kết quả, không mua sản phẩm.",
+                    "Cá nhân hóa trải nghiệm ở mọi điểm chạm.",
+                    "Customer Success là khởi đầu của đơn hàng mới.",
+                    "Xây dựng hệ sinh thái giá trị xung quanh cốt lõi."
+                ],
+                icon: "fa-lightbulb"
+            },
+            {
+                id: 13,
+                title: "5 Bước Chuyển đổi số SMEs",
+                content: [
+                    "1. Đánh giá hiện trạng & Năng lực số.",
+                    "2. Chuẩn hóa quy trình & Dữ liệu cốt lõi.",
+                    "3. Thử nghiệm Sandbox mô hình kinh doanh mới.",
+                    "4. Đào tạo nâng cấp đội ngũ (CLEAD Program).",
+                    "5. Tối ưu hóa & Mở rộng quy mô bền vững."
+                ],
+                icon: "fa-circle-arrow-right"
+            },
+            {
+                id: 14,
+                title: "Thông điệp từ VECOM & CLEAD",
+                content: [
+                    "VECOM: Cầu nối cộng đồng doanh nghiệp số VN.",
+                    "CLEAD: Người đồng hành cùng nhà lãnh đạo hiện đại.",
+                    "Sứ mệnh: Đưa TMĐT Việt Nam vươn tầm khu vực.",
+                    "Cam kết: Chia sẻ giá trị - Kiến tạo thành công."
+                ],
+                icon: "fa-handshake"
+            },
+            {
+                id: 15,
+                title: "Q&A và Kết luận",
+                subtitle: "Cảm ơn quý vị đã lắng nghe!",
+                content: [
+                    "Hãy chuyển đổi từ chính tư duy của bạn.",
+                    "Hotline hỗ trợ: +84 91 515 9499",
+                    "Website: vecom.vn | clead.vn"
+                ],
+                icon: "fa-qrcode",
+                type: "end"
+            }
+        ];
+
+        const App = () => {
+            const [currentSlide, setCurrentSlide] = useState(0);
+            const [isTransitioning, setIsTransitioning] = useState(false);
+
+            const nextSlide = useCallback(() => {
+                if (currentSlide < slides.length - 1) {
+                    setIsTransitioning(true);
+                    setTimeout(() => {
+                        setCurrentSlide(prev => prev + 1);
+                        setIsTransitioning(false);
+                    }, 300);
+                }
+            }, [currentSlide]);
+
+            const prevSlide = useCallback(() => {
+                if (currentSlide > 0) {
+                    setIsTransitioning(true);
+                    setTimeout(() => {
+                        setCurrentSlide(prev => prev - 1);
+                        setIsTransitioning(false);
+                    }, 300);
+                }
+            }, [currentSlide]);
+
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+                    if (e.key === 'ArrowLeft') prevSlide();
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [nextSlide, prevSlide]);
+
+            const slide = slides[currentSlide];
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Header */}
+                    <header className="bg-[#0a1229] border-b border-gold/10 px-6 py-4 flex justify-between items-center shadow-lg">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 border border-gold rounded-lg flex items-center justify-center text-gold font-bold italic font-serif">
+                                P
+                            </div>
+                            <div>
+                                <h1 className="text-sm font-bold text-gold tracking-widest uppercase">NGUYỄN TẤN PHONG</h1>
+                                <p className="text-[10px] text-gray-400 uppercase tracking-tighter">Lãnh Đạo Số & TMĐT 2026</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-6">
+                            <span className="text-[10px] font-bold text-gold/60 uppercase tracking-widest">
+                                Slide {currentSlide + 1} / {slides.length}
+                            </span>
+                            <div className="flex gap-2">
+                                <button onClick={prevSlide} disabled={currentSlide === 0} className="p-2 rounded-full border border-gold/20 hover:bg-gold/10 disabled:opacity-20 transition-all text-gold">
+                                    <i className="fas fa-chevron-left"></i>
+                                </button>
+                                <button onClick={nextSlide} disabled={currentSlide === slides.length - 1} className="p-2 rounded-full border border-gold/20 hover:bg-gold/10 disabled:opacity-20 transition-all text-gold">
+                                    <i className="fas fa-chevron-right"></i>
+                                </button>
+                                <a href="index.html" className="p-2 rounded-full border border-gold/20 hover:bg-gold/10 text-gold ml-2">
+                                    <i className="fas fa-home"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Content */}
+                    <main className="flex-1 relative flex items-center justify-center p-4 md:p-10">
+                        <div className={`w-full max-w-6xl aspect-video glass-slide rounded-sm p-8 md:p-16 flex flex-col transition-all duration-300 ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+                            
+                            {slide.type === 'title' ? (
+                                <div className="flex-1 flex flex-col items-center justify-center text-center space-y-10">
+                                    <div className="w-24 h-24 border border-gold rounded-full flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(197,160,89,0.2)]">
+                                        <i className={`fas ${slide.icon} text-4xl text-gold`}></i>
+                                    </div>
+                                    <div className="space-y-6">
+                                        <h2 className="text-4xl md:text-6xl font-serif font-bold text-white tracking-tight leading-tight uppercase">
+                                            {slide.title}
+                                        </h2>
+                                        <p className="text-xl md:text-3xl text-gold italic font-serif">
+                                            {slide.subtitle}
+                                        </p>
+                                    </div>
+                                    <div className="pt-10 border-t border-gold/20 w-full max-w-2xl">
+                                        <p className="text-lg font-bold text-gray-300 tracking-widest uppercase">{slide.presenter}</p>
+                                        <p className="text-xs text-gold/50 mt-2 uppercase tracking-[0.5em]">Digital Leadership Program © 2026</p>
+                                    </div>
+                                </div>
+                            ) : slide.type === 'end' ? (
+                                <div className="flex-1 flex flex-col items-center justify-center text-center space-y-8">
+                                    <h2 className="text-5xl md:text-7xl font-serif font-bold text-white uppercase tracking-tighter">{slide.title}</h2>
+                                    <p className="text-2xl text-gold font-serif italic">{slide.subtitle}</p>
+                                    <div className="w-40 h-40 border border-gold/30 p-4 bg-white/5 backdrop-blur-md rounded-lg">
+                                        <i className={`fas ${slide.icon} text-7xl text-gold/80 flex items-center justify-center h-full`}></i>
+                                    </div>
+                                    <div className="space-y-4">
+                                        {slide.content.map((item, i) => (
+                                            <p key={i} className="text-xl text-gray-400 font-light tracking-wide">{item}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="flex-1 flex flex-col h-full">
+                                    <div className="flex items-center gap-6 mb-12 border-l-4 border-gold pl-6">
+                                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight uppercase">
+                                            {slide.title}
+                                        </h2>
+                                    </div>
+
+                                    {slide.columns ? (
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+                                            {slide.columns.map((col, i) => (
+                                                <div key={i} className="p-8 bg-gold/5 border border-gold/10 rounded-sm hover:border-gold/40 transition-all duration-500">
+                                                    <h3 className="text-xl font-bold text-gold uppercase mb-4 tracking-widest">{col.label}</h3>
+                                                    <p className="text-gray-400 leading-relaxed font-light">{col.desc}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <ul className="space-y-8 flex-1 flex flex-col justify-center">
+                                            {slide.content.map((item, i) => (
+                                                <li key={i} className="flex items-start gap-6 text-2xl md:text-3xl text-gray-200 font-light">
+                                                    <span className="mt-3 w-2 h-2 rounded-full bg-gold shrink-0 shadow-[0_0_10px_#c5a059]" />
+                                                    <span className="tracking-wide">{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </main>
+
+                    {/* Progress Bar */}
+                    <div className="h-1 bg-white/5 w-full">
+                        <div 
+                            className="h-full bg-gold transition-all duration-700 ease-out shadow-[0_0_15px_#c5a059]"
+                            style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+                        />
+                    </div>
+
+                    {/* Footer */}
+                    <footer className="bg-[#0a1229] px-8 py-4 flex justify-between items-center text-[9px] text-gray-600 uppercase tracking-[0.4em]">
+                        <div>Sử dụng phím mũi tên ← → hoặc Space để điều hướng</div>
+                        <div>VECOM & CLEAD Program • 2026</div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
