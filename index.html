@@ -6,13 +6,15 @@
     <title>Nguyễn Tấn Phong | Chuyên gia Kinh tế số & Pháp luật</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --zen-bg: #f8f7f2;
             --zen-text: #2d2d2d;
             --zen-accent: #6b705c;
             --zen-card: #ffffff;
+            --zen-border-light: rgba(255,255,255, 0.9);
+            --zen-border-shadow: rgba(107, 112, 92, 0.15);
         }
         body { 
             font-family: 'Inter', sans-serif; 
@@ -20,23 +22,48 @@
             color: var(--zen-text); 
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            /* HỌA TIẾT NỀN THIỀN (Sọc vân cát nhẹ) */
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(107, 112, 92, 0.03) 10px, rgba(107, 112, 92, 0.03) 12px);
         }
         
-        /* Hiệu ứng thiền: Đổ bóng cực nhẹ & tinh tế */
-        .zen-card {
+        /* Lớp cơ bản cho hiệu ứng 3D nhẹ */
+        .zen-3d {
             background: var(--zen-card);
-            border-radius: 2px;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.02);
+            border-radius: 4px;
+            /* Viền sáng phía trên và trái */
+            border-top: 1px solid var(--zen-border-light);
+            border-left: 1px solid var(--zen-border-light);
+            /* Viền tối phía dưới và phải tạo bóng */
+            border-bottom: 1px solid var(--zen-border-shadow);
+            border-right: 1px solid var(--zen-border-shadow);
+            /* Bóng đổ nhẹ để nâng khối lên */
+            box-shadow: 2px 3px 10px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Áp dụng cho các thẻ Card */
+        .zen-card {
+            @apply zen-3d;
         }
         .zen-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-            border-color: var(--zen-accent);
+            /* Tăng hiệu ứng 3D khi di chuột */
+            box-shadow: 4px 6px 20px rgba(0,0,0,0.05);
+            border-bottom-color: rgba(107, 112, 92, 0.3);
         }
 
-        /* Chữ tối giản */
+        /* Áp dụng cho nút bấm */
+        .zen-btn {
+            @apply zen-3d;
+            font-weight: 500;
+        }
+        .zen-btn:hover {
+            background-color: var(--zen-text);
+            color: var(--zen-bg);
+            border-color: var(--zen-text);
+            transform: translateY(-2px);
+        }
+
         .zen-title {
             letter-spacing: 0.3em;
             text-transform: uppercase;
@@ -49,50 +76,54 @@
 
         .modal-overlay { 
             display: none; position: fixed; inset: 0; 
-            background: rgba(248, 247, 242, 0.98); 
+            /* Nền modal cũng có họa tiết mờ */
+            background: rgba(248, 247, 242, 0.95);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(107, 112, 92, 0.02) 10px, rgba(107, 112, 92, 0.02) 12px);
+            backdrop-filter: blur(5px);
             z-index: 100; align-items: center; justify-content: center; padding: 20px; 
         }
         
         .input-zen {
-            background: transparent; border: none; border-bottom: 1px solid #d1d1d1;
-            padding: 12px 0; color: var(--zen-text); width: 100%; font-size: 15px; margin-bottom: 20px;
-            transition: border-color 0.3s;
+            background: rgba(255,255,255,0.5); border: 1px solid var(--zen-border-shadow);
+            padding: 12px; color: var(--zen-text); width: 100%; font-size: 14px; margin-bottom: 20px;
+            transition: all 0.3s; border-radius: 2px;
         }
-        .input-zen:focus { outline: none; border-color: var(--zen-accent); }
+        .input-zen:focus { outline: none; border-color: var(--zen-accent); background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
         .counter-box {
-            font-family: 'Inter', sans-serif; font-weight: 300;
+            font-family: 'Inter', sans-serif; font-weight: 400;
             background: #ebe9e0; padding: 4px 12px; border-radius: 2px;
             color: var(--zen-accent); letter-spacing: 0.2em;
+            border: 1px solid rgba(0,0,0,0.05);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
     <div id="passwordModal" class="modal-overlay">
-        <div class="max-w-md w-full text-center p-8">
-            <h3 class="zen-title text-sm mb-12">Yêu cầu xác thực</h3>
+        <div class="max-w-md w-full text-center p-8 zen-3d">
+            <h3 class="zen-title text-sm mb-10">Yêu cầu xác thực</h3>
             <input type="password" id="passInput" placeholder="Nhập mã..." class="input-zen text-center">
-            <div class="flex gap-8 mt-8 justify-center">
-                <button onclick="closeModal('passwordModal')" class="text-[10px] zen-title opacity-40">Hủy bỏ</button>
-                <button onclick="validateAccess()" class="text-[10px] zen-title font-bold text-accent">Xác nhận</button>
+            <div class="flex gap-4 mt-8 justify-center">
+                <button onclick="closeModal('passwordModal')" class="py-3 px-6 zen-btn text-[10px] zen-title opacity-60">Hủy bỏ</button>
+                <button onclick="validateAccess()" class="py-3 px-6 zen-btn text-[10px] zen-title font-bold text-accent">Xác nhận</button>
             </div>
             <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 zen-title">Mã không chính xác</p>
         </div>
     </div>
 
     <div id="registerModal" class="modal-overlay">
-        <div class="max-w-md w-full p-8">
-            <div class="text-center mb-12">
+        <div class="max-w-md w-full p-8 zen-3d">
+            <div class="text-center mb-10">
                 <h3 class="zen-title text-sm">Đăng ký nhận tài liệu</h3>
             </div>
             <form id="regForm" onsubmit="handleRegistration(event)">
                 <input type="text" name="name" placeholder="Họ và Tên" required class="input-zen">
                 <input type="tel" name="phone" placeholder="Số điện thoại" required class="input-zen">
                 <input type="email" name="email" placeholder="Địa chỉ Email" required class="input-zen">
-                <div class="flex gap-8 mt-12 justify-center">
-                    <button type="button" onclick="closeModal('registerModal')" class="text-[10px] zen-title opacity-40">Đóng</button>
-                    <button type="submit" id="submitBtn" class="text-[10px] zen-title font-bold">Gửi thông tin</button>
+                <div class="flex gap-4 mt-10 justify-center">
+                    <button type="button" onclick="closeModal('registerModal')" class="py-3 px-6 zen-btn text-[10px] zen-title opacity-60">Đóng</button>
+                    <button type="submit" id="submitBtn" class="py-3 px-6 zen-btn text-[10px] zen-title font-bold">Gửi thông tin</button>
                 </div>
             </form>
             <p id="regSuccess" class="text-emerald-600 text-[10px] zen-title mt-8 text-center hidden">Đã đăng ký thành công</p>
@@ -106,37 +137,39 @@
     <main class="flex-grow flex flex-col items-center px-6 z-10 fade-in">
         
         <div class="mb-12">
-            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full p-1 border border-black/5 shadow-sm overflow-hidden bg-white">
-                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover opacity-95 grayscale-[20%]">
+            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full p-2 zen-3d overflow-hidden bg-white">
+                <div class="w-full h-full rounded-full overflow-hidden">
+                    <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover opacity-95 grayscale-[20%]">
+                </div>
             </div>
         </div>
 
         <h1 class="text-3xl md:text-5xl font-light tracking-[0.2em] text-center mb-6 uppercase">Nguyễn Tấn Phong</h1>
-        <div class="w-12 h-[1px] bg-black/10 mb-16"></div>
+        <div class="w-12 h-[1px] bg-current opacity-20 mb-16"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 mb-24 w-full max-w-7xl text-center items-start px-4">
             <a href="https://vecom.vn" target="_blank" class="flex flex-col items-center group">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-network-wired text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 zen-3d group-hover:border-zen-accent transition-all"><i class="fas fa-network-wired text-xs opacity-40 group-hover:opacity-100"></i></div>
                 <h3 class="text-[10px] font-bold zen-title mb-4">VECOM</h3>
                 <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p>
             </a>
             <a href="https://clead.vn" target="_blank" class="flex flex-col items-center group">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-gavel text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 zen-3d group-hover:border-zen-accent transition-all"><i class="fas fa-gavel text-xs opacity-40 group-hover:opacity-100"></i></div>
                 <h3 class="text-[10px] font-bold zen-title mb-4">CLEAD</h3>
                 <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Giám đốc<br>Trung tâm tư vấn pháp luật</p>
             </a>
             <a href="https://www.ari.org.vn/ban-dieu-hanh-vien-ari/" target="_blank" class="flex flex-col items-center group">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-scale-balanced text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 zen-3d group-hover:border-zen-accent transition-all"><i class="fas fa-scale-balanced text-xs opacity-40 group-hover:opacity-100"></i></div>
                 <h3 class="text-[10px] font-bold zen-title mb-4">ARI</h3>
                 <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Phó Viện trưởng<br>Viện Khoa học pháp lý Trọng Tài</p>
             </a>
             <a href="https://tracent.com.vn/" target="_blank" class="flex flex-col items-center group">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-handshake-simple text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 zen-3d group-hover:border-zen-accent transition-all"><i class="fas fa-handshake-simple text-xs opacity-40 group-hover:opacity-100"></i></div>
                 <h3 class="text-[10px] font-bold zen-title mb-4">TRACENT</h3>
                 <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Trọng tài viên<br>Trung tâm Trọng tài Thương mại TP.HCM</p>
             </a>
             <a href="https://eagleacademy.vn" target="_blank" class="flex flex-col items-center group">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-6 border border-black/5 group-hover:border-black/20 transition-all"><i class="fas fa-graduation-cap text-xs opacity-40 group-hover:opacity-100"></i></div>
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 zen-3d group-hover:border-zen-accent transition-all"><i class="fas fa-graduation-cap text-xs opacity-40 group-hover:opacity-100"></i></div>
                 <h3 class="text-[10px] font-bold zen-title mb-4">Eagle Academy</h3>
                 <p class="text-[8px] text-[#888] uppercase leading-relaxed tracking-widest font-medium">Giảng viên cấp cao<br>Bất động sản</p>
             </a>
@@ -146,31 +179,31 @@
             <h2 class="text-xs zen-title mb-12 opacity-40">Thư viện<br>Tri thức chuyên gia</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                 <button onclick="openGate('A', 'AAA', 'bai-giang-a.html')" class="zen-card p-8 flex flex-col items-center">
-                    <i class="fas fa-lock text-[8px] opacity-10 mb-4 self-end"></i>
-                    <h4 class="text-[9px] zen-title">Bài giảng A</h4>
+                    <i class="fas fa-lock text-[8px] opacity-20 mb-4 self-end"></i>
+                    <h4 class="text-[9px] zen-title font-semibold">Bài giảng A</h4>
                 </button>
                 <button onclick="openGate('B', 'BBB', 'bai-giang-b.html')" class="zen-card p-8 flex flex-col items-center">
-                    <i class="fas fa-lock text-[8px] opacity-10 mb-4 self-end"></i>
-                    <h4 class="text-[9px] zen-title">Bài giảng B</h4>
+                    <i class="fas fa-lock text-[8px] opacity-20 mb-4 self-end"></i>
+                    <h4 class="text-[9px] zen-title font-semibold">Bài giảng B</h4>
                 </button>
-                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng C</h4></div>
-                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng D</h4></div>
-                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng E</h4></div>
-                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng F</h4></div>
-                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng G</h4></div>
-                <div class="zen-card p-8 opacity-20 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng H</h4></div>
+                <div class="zen-card p-8 opacity-40 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng C</h4></div>
+                <div class="zen-card p-8 opacity-40 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng D</h4></div>
+                <div class="zen-card p-8 opacity-40 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng E</h4></div>
+                <div class="zen-card p-8 opacity-40 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng F</h4></div>
+                <div class="zen-card p-8 opacity-40 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng G</h4></div>
+                <div class="zen-card p-8 opacity-40 flex flex-col items-center grayscale"><h4 class="text-[9px] zen-title py-4">Bài giảng H</h4></div>
             </div>
         </div>
 
         <div class="w-full max-w-2xl text-center mb-32 px-4">
-            <div class="zen-card p-12 md:p-20 flex flex-col items-center">
-                <h2 class="text-[11px] zen-title mb-12">Kho tài liệu Nghiên cứu</h2>
+            <div class="zen-card p-12 md:p-16 flex flex-col items-center">
+                <h2 class="text-[11px] zen-title mb-12 font-semibold">Kho tài liệu Nghiên cứu</h2>
                 <div class="flex flex-col md:flex-row gap-6 w-full max-w-sm">
-                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-4 border border-black/10 text-[9px] zen-title hover:bg-black hover:text-white transition-all">Tải về ngay</button>
-                    <button onclick="openRegisterModal()" class="flex-1 py-4 border border-black/10 text-[9px] zen-title hover:bg-black hover:text-white transition-all">Đăng ký mới</button>
+                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-4 zen-btn text-[9px] zen-title transition-all">Tải về ngay</button>
+                    <button onclick="openRegisterModal()" class="flex-1 py-4 zen-btn text-[9px] zen-title transition-all">Đăng ký mới</button>
                 </div>
                 <div class="mt-16 pt-10 border-t border-black/5 w-full">
-                    <span class="zen-title text-[8px] opacity-30 block mb-4">Lượt truy cập hệ thống</span>
+                    <span class="zen-title text-[8px] opacity-40 block mb-4">Lượt truy cập hệ thống</span>
                     <span id="loginCount" class="counter-box text-sm">00006868</span>
                 </div>
             </div>
@@ -179,19 +212,19 @@
         <div class="w-full max-w-6xl border-t border-black/5 pt-16 mb-16 px-6">
             <div class="flex flex-col md:flex-row md:flex-wrap md:justify-center items-start md:items-center gap-10 md:gap-16">
                 <a href="tel:+84915159499" class="flex items-center gap-5 group">
-                    <i class="fas fa-phone-alt text-xs opacity-30 group-hover:opacity-100"></i>
+                    <i class="fas fa-phone-alt text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Hotline</span><span class="text-sm font-medium tracking-wide">+84 91 515 9499</span></div>
                 </a>
                 <a href="mailto:hello@nguyentanphong.com" class="flex items-center gap-5 group">
-                    <i class="fas fa-envelope text-xs opacity-30 group-hover:opacity-100"></i>
+                    <i class="fas fa-envelope text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Email</span><span class="text-sm font-medium tracking-wide">hello@nguyentanphong.com</span></div>
                 </a>
                 <a href="https://zalo.me/cangioland" target="_blank" class="flex items-center gap-5 group">
-                    <i class="fas fa-comment-dots text-xs opacity-30 group-hover:opacity-100"></i>
+                    <i class="fas fa-comment-dots text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Zalo</span><span class="text-sm font-medium tracking-wide">Zalo Kết nối</span></div>
                 </a>
                 <a href="https://facebook.com/tanphong1981" target="_blank" class="flex items-center gap-5 group">
-                    <i class="fab fa-facebook-f text-xs opacity-30 group-hover:opacity-100"></i>
+                    <i class="fab fa-facebook-f text-xs opacity-30 group-hover:opacity-100 transition"></i>
                     <div class="text-left"><span class="text-[8px] zen-title opacity-30 block mb-1">Facebook</span><span class="text-sm font-medium tracking-wide">Facebook Profile</span></div>
                 </a>
             </div>
@@ -218,6 +251,7 @@
             submitBtn.innerText = "Đang gửi...";
             submitBtn.disabled = true;
 
+            // URL BỘ NÃO CỦA CHÚ (Giữ nguyên từ phiên bản trước)
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyhsSggy5DOptRP5CFt3bhw70tsU0hTZHRVd3aZstAL8-cxNf1FsCMoHruSsmb4WTWE/exec';
             fetch(scriptURL, { method: 'POST', body: formData })
             .then(() => { successMsg.classList.remove('hidden'); form.reset(); setTimeout(() => { closeModal('registerModal'); successMsg.classList.add('hidden'); }, 3000); })
