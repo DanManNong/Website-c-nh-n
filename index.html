@@ -4,163 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nguyễn Tấn Phong | Chuyên gia Kinh tế số & Pháp luật</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #050a1a; color: white; overflow-x: hidden; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .text-gold { color: #c5a059; }
+        .bg-gold { background: #c5a059; }
         .border-gold { border-color: #c5a059; }
-        
-        /* Hiệu ứng Fade-in khi tải trang */
         .fade-in { animation: fadeIn 1.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hiệu ứng tên 3D Gold quyền lực */
+        /* Hiệu ứng tên 3D Gold */
         .text-3d-gold {
             color: #c5a059;
-            text-shadow: 
-                1px 1px 0px #a08040,
-                2px 2px 0px #a08040,
-                3px 3px 0px #806030,
-                4px 4px 15px rgba(197, 160, 89, 0.4);
+            text-shadow: 1px 1px 0px #a08040, 2px 2px 0px #a08040, 3px 3px 0px #806030, 4px 4px 15px rgba(197, 160, 89, 0.4);
         }
 
-        /* Thẻ bài giảng hiệu ứng kính mờ (Glassmorphism) */
-        .lecture-card {
+        /* Glassmorphism Card */
+        .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(197, 160, 89, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
         }
-        .lecture-card:hover {
-            transform: translateY(-8px);
-            border-color: #c5a059;
-            background: rgba(197, 160, 89, 0.08);
-            box-shadow: 0 15px 30px -10px rgba(197, 160, 89, 0.2);
-        }
+        .glass-card:hover { transform: translateY(-5px); border-color: #c5a059; }
 
-        /* Trang trí vòng tròn nền */
-        .bg-circle {
-            position: absolute; border: 1px solid rgba(197, 160, 89, 0.05); border-radius: 50%; z-index: 0; pointer-events: none;
+        /* Modal Bảo mật */
+        #passwordModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 10, 26, 0.95);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between relative">
 
-    <div class="bg-circle w-[500px] h-[500px] -top-20 -left-20"></div>
-    <div class="bg-circle w-[600px] h-[600px] -bottom-32 -right-32"></div>
+    <div id="passwordModal">
+        <div class="glass-card p-10 rounded-sm w-full max-w-md text-center border-gold/40">
+            <i class="fas fa-shield-halved text-4xl text-gold mb-6"></i>
+            <h3 id="modalTitle" class="text-xl font-serif text-white mb-6 uppercase tracking-widest">Yêu cầu xác thực</h3>
+            <input type="password" id="passInput" placeholder="Nhập mã truy cập..." class="w-full bg-white/5 border border-gold/20 p-4 rounded-sm text-white focus:outline-none focus:border-gold mb-6 text-center tracking-widest">
+            <div class="flex gap-4">
+                <button onclick="closeModal()" class="flex-1 py-3 text-xs uppercase tracking-widest text-gray-500 hover:text-white transition">Hủy bỏ</button>
+                <button onclick="validateAccess()" class="flex-1 py-3 bg-gold text-black text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm hover:brightness-110 transition">Xác nhận</button>
+            </div>
+            <p id="errorMsg" class="text-red-500 text-[10px] mt-4 uppercase opacity-0">Mã không chính xác</p>
+        </div>
+    </div>
 
-    <header class="p-8 text-center fade-in z-10">
-        <div class="text-[10px] font-bold tracking-[0.5em] text-gold/50 uppercase">Digital Identity • Expertise • Vision</div>
+    <div class="absolute top-[-5%] left-[-5%] w-96 h-96 border border-gold/5 rounded-full pointer-events-none"></div>
+
+    <header class="p-8 text-center fade-in">
+        <div class="text-[10px] font-bold tracking-[0.4em] text-gold/60 uppercase">Chuyên gia Kinh tế số & Pháp luật</div>
     </header>
 
     <main class="flex-grow flex flex-col items-center justify-center px-6 py-10 z-10 fade-in">
         
-        <div class="mb-10 relative group">
-            <div class="w-36 h-36 md:w-48 md:h-48 rounded-full border-2 border-gold p-1.5 shadow-[0_0_40px_rgba(197,160,89,0.15)] transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(197,160,89,0.3)]">
-                <div class="w-full h-full rounded-full overflow-hidden bg-gray-900 border border-gold/20">
+        <div class="mb-10 relative">
+            <div class="w-36 h-36 md:w-44 md:h-44 rounded-full border-2 border-gold p-1.5 shadow-[0_0_40px_rgba(197,160,89,0.2)]">
+                <div class="w-full h-full rounded-full overflow-hidden bg-gray-900 border border-gold/10">
                     <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover">
                 </div>
             </div>
-            <div class="absolute -bottom-2 right-4 bg-gold text-black text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Verified</div>
+            <div class="absolute bottom-0 right-4 bg-gold text-black text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Official</div>
         </div>
 
-        <h1 class="text-5xl md:text-8xl font-serif font-bold uppercase tracking-tight leading-none mb-6 text-center text-3d-gold">
+        <h1 class="text-5xl md:text-8xl font-serif font-bold uppercase tracking-tighter leading-none mb-4 text-center text-3d-gold">
             Nguyễn Tấn Phong
         </h1>
         
-        <p class="text-[11px] md:text-xs font-bold tracking-[0.4em] text-gray-400 uppercase mb-16">Chuyên gia Kinh tế số & Pháp luật</p>
+        <div class="h-px bg-gold/20 w-48 mb-12"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 mb-20 w-full max-w-5xl">
-            <div class="flex flex-col items-center text-center">
-                <a href="https://vecom.vn" target="_blank" class="group flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold group-hover:border-gold transition-all duration-500 mb-5">
-                        <i class="fas fa-network-wired text-gold group-hover:text-black transition"></i>
-                    </div>
-                    <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">VECOM</h3>
-                </a>
-                <p class="text-[10px] text-gray-500 leading-relaxed uppercase tracking-widest">
-                    UV Ban chấp hành<br>Trưởng đại diện phía Nam
-                </p>
-            </div>
-
-            <div class="flex flex-col items-center text-center">
-                <a href="https://clead.vn" target="_blank" class="group flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold/10 transition-all duration-500 mb-5 shadow-[0_0_20px_rgba(197,160,89,0.2)]">
-                        <i class="fas fa-gavel text-gold text-xl"></i>
-                    </div>
-                    <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">CLEAD</h3>
-                </a>
-                <p class="text-[10px] text-gray-500 leading-relaxed uppercase tracking-widest italic">Giám đốc Trung tâm</p>
-            </div>
-
-            <div class="flex flex-col items-center text-center">
-                <a href="https://eagleacademy.vn" target="_blank" class="group flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold group-hover:border-gold transition-all duration-500 mb-5">
-                        <i class="fas fa-graduation-cap text-gold group-hover:text-black transition"></i>
-                    </div>
-                    <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase mb-2">Eagle Academy</h3>
-                </a>
-                <p class="text-[10px] text-gray-500 leading-relaxed uppercase tracking-widest italic">Giảng viên cấp cao</p>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16 w-full max-w-4xl text-center">
+            <a href="https://vecom.vn" target="_blank" class="group">
+                <div class="w-16 h-16 mx-auto rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold group-hover:border-gold transition-all duration-500 mb-4">
+                    <i class="fas fa-network-wired text-gold group-hover:text-black"></i>
+                </div>
+                <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase">VECOM</h3>
+            </a>
+            <a href="https://clead.vn" target="_blank" class="group">
+                <div class="w-16 h-16 mx-auto rounded-full border border-gold flex items-center justify-center group-hover:bg-gold/10 transition shadow-[0_0_15px_rgba(197,160,89,0.2)] mb-4">
+                    <i class="fas fa-gavel text-gold"></i>
+                </div>
+                <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase">CLEAD</h3>
+            </a>
+            <a href="https://eagleacademy.vn" target="_blank" class="group">
+                <div class="w-16 h-16 mx-auto rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold transition-all duration-500 mb-4">
+                    <i class="fas fa-graduation-cap text-gold group-hover:text-black"></i>
+                </div>
+                <h3 class="text-[11px] font-bold tracking-widest text-gold uppercase text-gray-400">Eagle Academy</h3>
+            </a>
         </div>
 
-        <div class="w-full max-w-5xl text-center mb-16">
-            <h2 class="text-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-10 opacity-70 italic">— Thư viện bài giảng chuyên gia —</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4">
-                <a href="bai-giang-a.html" class="lecture-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
+        <div class="w-full max-w-5xl mb-16 px-4">
+            <h2 class="text-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-10 text-center opacity-70">— Thư viện tri thức chuyên gia —</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <button onclick="openGate('A', 'AAA', 'bai-giang-a.html')" class="glass-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
+                    <i class="fas fa-lock text-[10px] text-gold/30 mb-4 self-end group-hover:text-gold transition"></i>
                     <i class="fas fa-chalkboard-teacher text-2xl text-gold/60 group-hover:text-gold mb-4 transition"></i>
-                    <h4 class="text-xs font-bold tracking-widest text-white/90 mb-2 uppercase">Bài giảng A</h4>
-                    <span class="text-[9px] text-gray-500 uppercase tracking-tighter">Pháp lý TMĐT</span>
-                </a>
-                <a href="bai-giang-b.html" class="lecture-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
+                    <h4 class="text-xs font-bold tracking-widest text-white/90 uppercase">Bài giảng A</h4>
+                    <span class="text-[9px] text-gray-500 mt-2 uppercase">Cần mã AAA</span>
+                </button>
+                <button onclick="openGate('B', 'BBB', 'bai-giang-b.html')" class="glass-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
+                    <i class="fas fa-lock text-[10px] text-gold/30 mb-4 self-end group-hover:text-gold transition"></i>
                     <i class="fas fa-file-powerpoint text-2xl text-gold/60 group-hover:text-gold mb-4 transition"></i>
-                    <h4 class="text-xs font-bold tracking-widest text-white/90 mb-2 uppercase">Bài giảng B</h4>
-                    <span class="text-[9px] text-gray-500 uppercase tracking-tighter">Kinh tế số</span>
-                </a>
-                <a href="bai-giang-c.html" class="lecture-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
-                    <i class="fas fa-laptop-code text-2xl text-gold/60 group-hover:text-gold mb-4 transition"></i>
-                    <h4 class="text-xs font-bold tracking-widest text-white/90 mb-2 uppercase">Bài giảng C</h4>
-                    <span class="text-[9px] text-gray-500 uppercase tracking-tighter">PropTech & AI</span>
-                </a>
-                <a href="bai-giang-d.html" class="lecture-card p-6 md:p-8 rounded-sm group flex flex-col items-center">
-                    <i class="fas fa-brain text-2xl text-gold/60 group-hover:text-gold mb-4 transition"></i>
-                    <h4 class="text-xs font-bold tracking-widest text-white/90 mb-2 uppercase">Bài giảng D</h4>
-                    <span class="text-[9px] text-gray-500 uppercase tracking-tighter">Lãnh đạo số</span>
-                </a>
+                    <h4 class="text-xs font-bold tracking-widest text-white/90 uppercase">Bài giảng B</h4>
+                    <span class="text-[9px] text-gray-500 mt-2 uppercase">Cần mã BBB</span>
+                </button>
+                <div class="glass-card p-6 md:p-8 rounded-sm opacity-40 grayscale flex flex-col items-center">
+                    <i class="fas fa-hourglass-start text-2xl text-gray-500 mb-4"></i>
+                    <h4 class="text-xs font-bold tracking-widest uppercase">Bài giảng C</h4>
+                </div>
+                <div class="glass-card p-6 md:p-8 rounded-sm opacity-40 grayscale flex flex-col items-center">
+                    <i class="fas fa-hourglass-start text-2xl text-gray-500 mb-4"></i>
+                    <h4 class="text-xs font-bold tracking-widest uppercase">Bài giảng D</h4>
+                </div>
             </div>
         </div>
 
-        <div class="w-full max-w-2xl border-t border-white/10 pt-12 flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20">
-            <a href="tel:+84915159499" class="flex items-center gap-4 group">
-                <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all duration-500">
+        <div class="w-full max-w-2xl text-center mb-16">
+            <button onclick="openGate('Kho tài liệu', '0915159499', 'https://drive.google.com/drive/u/0/my-drive')" class="w-full border border-gold bg-gold/5 py-8 md:py-12 rounded-sm group hover:bg-gold transition-all duration-700">
+                <i class="fas fa-folder-open text-3xl text-gold group-hover:text-black transition mb-4"></i>
+                <h2 class="text-xl md:text-3xl font-serif italic text-white group-hover:text-black transition">Kho tài liệu Pháp luật Chuyên sâu</h2>
+                <div class="mt-4 flex flex-col items-center">
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-gold/60 group-hover:text-black/60 mb-2">Yêu cầu xác thực Mr.Phong</span>
+                    <div class="flex items-center gap-2 text-[10px] font-bold text-gray-500 group-hover:text-black/80">
+                        <i class="fas fa-users-viewfinder"></i> Lượt truy cập thành công: <span id="loginCount">0</span>
+                    </div>
+                </div>
+            </button>
+        </div>
+
+        <div class="w-full max-w-4xl flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20 border-t border-white/5 pt-12">
+            <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
                     <i class="fas fa-phone-alt text-gold group-hover:text-black text-sm"></i>
                 </div>
                 <div class="text-left">
                     <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Hotline</span>
-                    <span class="text-lg font-serif text-white/80 group-hover:text-gold transition">+84 91 515 9499</span>
+                    <span class="text-lg font-serif text-white/80">+84 91 515 9499</span>
                 </div>
-            </a>
-            <a href="mailto:hello@nguyentanphong.com" class="flex items-center gap-4 group">
-                <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all duration-500">
+            </div>
+            <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center group-hover:bg-gold transition-all">
                     <i class="fas fa-envelope text-gold group-hover:text-black text-sm"></i>
                 </div>
                 <div class="text-left">
                     <span class="text-[8px] uppercase tracking-widest text-gray-500 block">Email</span>
-                    <span class="text-lg font-serif text-white/80 group-hover:text-gold transition lowercase">hello@nguyentanphong.com</span>
+                    <span class="text-lg font-serif text-white/80 lowercase">hello@nguyentanphong.com</span>
                 </div>
-            </a>
+            </div>
         </div>
 
     </main>
 
-    <footer class="p-10 text-center fade-in border-t border-white/5 opacity-40">
-        <p class="text-[9px] uppercase tracking-[0.5em]">© 2026 NGUYÊN TẤN PHONG. ALL RIGHTS RESERVED.</p>
+    <footer class="p-8 text-center text-gray-700 text-[9px] uppercase tracking-[0.4em]">
+        © 2026 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.
     </footer>
 
+    <script>
+        // Logic Bảo mật và Điều hướng
+        let currentTarget = "";
+        let currentCode = "";
+
+        // Khởi tạo bộ đếm
+        let count = localStorage.getItem('legalLoginCount') || 0;
+        document.getElementById('loginCount').innerText = count;
+
+        function openGate(name, code, url) {
+            document.getElementById('modalTitle').innerText = "Truy cập " + name;
+            document.getElementById('passwordModal').style.display = 'flex';
+            currentTarget = url;
+            currentCode = code;
+            document.getElementById('passInput').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('passInput').value = "";
+            document.getElementById('errorMsg').style.opacity = 0;
+        }
+
+        function validateAccess() {
+            const input = document.getElementById('passInput').value;
+            if (input === currentCode) {
+                // Nếu là kho tài liệu, tăng bộ đếm
+                if (currentCode === '0915159499') {
+                    count++;
+                    localStorage.setItem('legalLoginCount', count);
+                    document.getElementById('loginCount').innerText = count;
+                }
+                window.location.href = currentTarget;
+            } else {
+                document.getElementById('errorMsg').style.opacity = 1;
+            }
+        }
+
+        // Đóng modal khi nhấn phím Esc
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    </script>
 </body>
 </html>
