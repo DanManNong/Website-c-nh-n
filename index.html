@@ -15,7 +15,7 @@
       gtag('config', 'G-4WM8D9SK71');
     </script>
 
-    <meta name="description" content="Nguyễn Tấn Phong - Chuyên gia Kinh tế số, Trọng tài viên, tư vấn Pháp luật và Bất động sản. Thành viên BCH VECOM.">
+    <meta name="description" content="Nguyễn Tấn Phong - Chuyên gia Kinh tế số, Trọng tài viên, tư vấn Pháp luật và Bất động sản.">
     <meta property="og:title" content="Nguyễn Tấn Phong | TRI THỨC • PHÁP LUẬT • CÔNG NGHỆ">
     <meta property="og:image" content="avatar-nguyentanphong.jpg">
 
@@ -27,8 +27,6 @@
       "url": "https://nguyentanphong.com",
       "image": "https://nguyentanphong.com/avatar-nguyentanphong.jpg",
       "jobTitle": "Chuyên gia Kinh tế số & Pháp luật",
-      "description": "Chuyên gia tư vấn chiến lược Thương mại điện tử, Trọng tài viên thương mại quốc tế. Phối hợp cùng A05/PA05 và điều phối chiến dịch 'Không Một Mình'.",
-      "nationality": { "@type": "Country", "name": "Việt Nam" },
       "sameAs": [
         "https://facebook.com/tanphong1981",
         "https://zalo.me/0915159499",
@@ -53,12 +51,7 @@
       ],
       "affiliation": [
         { "@type": "Organization", "name": "VECOM" },
-        { "@type": "Organization", "name": "Bộ Công thương" },
         { "@type": "Organization", "name": "PA05 & A05 Collaboration" }
-      ],
-      "alumniOf": [
-        { "@type": "CollegeOrUniversity", "name": "Đại học Luật TP.HCM" },
-        { "@type": "CollegeOrUniversity", "name": "Đại học Hoa Sen - MBA" }
       ]
     }
     </script>
@@ -76,23 +69,26 @@
         .pillar-box { min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: rgba(0,0,0,0.3); border: 1px solid var(--zen-border); }
         .logo-bar { opacity: 0.4; filter: grayscale(1); transition: 0.5s; }
         .logo-bar:hover { opacity: 0.8; filter: grayscale(0); }
-        .insight-card { background: rgba(0,0,0,0.2); border: 0.5px solid var(--zen-border); padding: 2rem; }
+        .insight-card { background: rgba(0,0,0,0.2); border: 0.5px solid var(--zen-border); padding: 2rem; transition: 0.4s; }
+        .insight-card:hover { border-color: var(--zen-text-gold); }
+        .lecture-box { min-height: 120px; background-color: rgba(0, 0, 0, 0.25); border: 1px solid var(--zen-border); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; }
+        .counter-box { background: #000000; color: var(--zen-text-gold); padding: 8px 20px; border-radius: 4px; letter-spacing: 0.4em; border: 1px solid var(--zen-border); }
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(27,43,33,0.98); backdrop-filter: blur(20px); z-index: 100; align-items: center; justify-content: center; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .stagger { opacity: 0; animation: fadeUp 1.2s forwards; }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
 
     <div id="passwordModal" class="modal-overlay">
         <div class="max-w-md w-full text-center p-10 bg-black/60 border border-white/10 shadow-2xl">
-            <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-white">Xác thực Đối tác</h3>
+            <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-white">Xác thực Quyền truy cập Đối tác</h3>
             <input type="password" id="passInput" placeholder="Mã định danh..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none">
             <div class="flex gap-6 justify-center">
                 <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-40 text-white">Hủy</button>
                 <button onclick="validateAccess()" class="px-10 py-4 bg-black/40 text-white text-[9px] uppercase tracking-widest border border-white/5">Xác nhận</button>
             </div>
-            <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 uppercase tracking-tighter">Mã không hợp lệ</p>
+            <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 uppercase">Mã không hợp lệ</p>
         </div>
     </div>
 
@@ -100,7 +96,8 @@
         <div class="text-[9px] font-medium tracking-[0.6em] text-stone-500 uppercase">TRI THỨC - PHÁP LUẬT - CÔNG NGHỆ</div>
     </header>
 
-    <main class="flex flex-col items-center px-6">
+    <main class="flex-grow flex flex-col items-center px-6 z-10">
+        
         <div class="mb-12 stagger" style="animation-delay: 0.2s">
             <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border border-gold/20 mx-auto shadow-2xl">
                 <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover">
@@ -144,6 +141,7 @@
                 <i class="fas fa-shield-halved text-2xl" title="PA05/A05"></i>
                 <i class="fas fa-graduation-cap text-2xl" title="ĐH Luật"></i>
                 <i class="fas fa-newspaper text-2xl" title="Press"></i>
+                <i class="fas fa-handshake text-2xl" title="Campaign"></i>
             </div>
         </div>
 
@@ -151,25 +149,25 @@
             <h2 class="text-[11px] font-semibold tracking-[0.4em] uppercase text-gold mb-12 border-b border-white/5 pb-4">Góc nhìn & Trí thức Chuyên gia</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="insight-card zen-link-effect">
-                    <span class="text-[8px] text-stone-500 uppercase tracking-widest mb-4 block">Thương mại điện tử</span>
-                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Sàn TMĐT không còn "vô can" trước hàng giả</h4>
+                    <span class="text-[8px] text-stone-500 uppercase tracking-widest mb-4 block">TMĐT / 2026</span>
+                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6">Trách nhiệm pháp lý của sàn TMĐT và KOL</h4>
                     <button class="text-[8px] text-gold uppercase tracking-[0.2em]">Khám phá →</button>
                 </div>
                 <div class="insight-card zen-link-effect">
                     <span class="text-[8px] text-stone-500 uppercase tracking-widest mb-4 block">Bất động sản</span>
-                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Nhận diện 11 rủi ro đầu tư địa ốc 2026</h4>
+                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6">Nhận diện rủi ro pháp lý địa ốc 2026</h4>
                     <button class="text-[8px] text-gold uppercase tracking-[0.2em]">Khám phá →</button>
                 </div>
                 <div class="insight-card zen-link-effect">
                     <span class="text-[8px] text-stone-500 uppercase tracking-widest mb-4 block">An ninh mạng</span>
-                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Bảo vệ dữ liệu cá nhân trên môi trường số</h4>
+                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6">Bảo vệ dữ liệu cá nhân trong kỷ nguyên số</h4>
                     <button class="text-[8px] text-gold uppercase tracking-[0.2em]">Khám phá →</button>
                 </div>
             </div>
         </div>
 
         <div class="w-full max-w-6xl mb-32 px-4 text-center stagger" style="animation-delay: 1.2s">
-            <h2 class="text-[10px] font-medium tracking-[0.5em] mb-12 uppercase opacity-30">Cổng Tri thức Đối tác</h2>
+            <h2 class="text-[10px] font-medium tracking-[0.5em] mb-12 uppercase opacity-30">Thư viện Tri thức (8 Chuyên đề)</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <button onclick="openGate('Bài giảng A', '0915159499', 'bai-giang-a.html')" class="lecture-box zen-link-effect">
                     <i class="fas fa-fingerprint text-[10px] opacity-30 mb-4 self-end"></i>
@@ -179,8 +177,18 @@
                     <i class="fas fa-fingerprint text-[10px] opacity-30 mb-4 self-end"></i>
                     <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng B</h4>
                 </button>
-                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Sắp ra mắt</h4></div>
-                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Sắp ra mắt</h4></div>
+                <button onclick="openGate('Bài giảng C', '0915159499', 'bai-giang-c.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-fingerprint text-[10px] opacity-30 mb-4 self-end"></i>
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng C</h4>
+                </button>
+                <button onclick="openGate('Bài giảng D', '0915159499', 'bai-giang-d.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-fingerprint text-[10px] opacity-30 mb-4 self-end"></i>
+                    <h4 class="text-[9px] font-bold tracking-widest uppercase">Bài giảng D</h4>
+                </button>
+                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng E</h4></div>
+                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng F</h4></div>
+                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng G</h4></div>
+                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng H</h4></div>
             </div>
         </div>
 
@@ -190,11 +198,11 @@
                 <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Tài liệu Chuyên gia</h2>
                 <p class="text-[9px] text-gold/60 uppercase tracking-widest mb-16 italic">Checklist Pháp lý & Kinh tế số 2026</p>
                 <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm relative z-10">
-                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com')" class="flex-1 py-5 bg-black text-white text-[10px] tracking-[0.2em] uppercase zen-link-effect border border-stone-800">Tải về ngay</button>
+                    <button onclick="openGate('Cẩm nang', '0915159499', 'https://drive.google.com')" class="flex-1 py-5 bg-black text-white text-[10px] tracking-[0.2em] uppercase zen-link-effect border border-stone-800">Tải về ngay</button>
                     <button onclick="document.getElementById('registerModal').style.display='flex'" class="flex-1 py-5 bg-black/20 border border-stone-800 text-[10px] tracking-[0.2em] uppercase zen-link-effect">Đăng ký mới</button>
                 </div>
                 <div class="mt-20 pt-12 border-t border-stone-800 w-full">
-                    <span class="text-[8px] tracking-[0.3em] uppercase opacity-30 block mb-6">Lượt kết nối đối tác</span>
+                    <span class="text-[8px] tracking-[0.3em] uppercase opacity-30 block mb-6">Đối tác kết nối</span>
                     <span id="loginCount" class="counter-box">00006875</span>
                 </div>
             </div>
