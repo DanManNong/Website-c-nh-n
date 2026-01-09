@@ -42,7 +42,6 @@
         "https://eagleacademy.vn/ccmg/",
         "https://www.hoasen.edu.vn/saudaihoc/truong-dai-hoc-hoa-sen-hsu-va-hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-huong-den-hop-tac-chat-che/",
         "https://tracent.com.vn/",
-        "https://www.vecomnet.vn/hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-ky-ket-hop-tac-toan-dien-cung-truong-dai-hoc-ngan-hang-tp-hcm",
         "https://www.ulaw.edu.vn"
       ],
       "affiliation": [
@@ -59,9 +58,9 @@
     
     <style>
         :root {
-            --zen-bg: #141414;        /* Nền Xám than chì sâu */
-            --zen-text: #E5E5E5;      /* Chữ sáng tương phản cao */
-            --zen-copper: #D27D56;    /* Đồng đỏ (Copper) */
+            --zen-bg: #141414;        
+            --zen-text: #E5E5E5;      
+            --zen-copper: #D27D56;    
             --zen-border: rgba(210, 125, 86, 0.2); 
         }
 
@@ -69,21 +68,32 @@
             font-family: 'Inter', sans-serif; 
             background-color: var(--zen-bg); 
             color: var(--zen-text); 
-            /* Hình nền vân giấy mỹ thuật cổ điển */
             background-image: radial-gradient(rgba(210, 125, 86, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
             line-height: 1.6;
             overflow-x: hidden;
+            text-rendering: optimizeLegibility;
         }
 
-        /* FIX: Canh giữa Header tuyệt đối bằng Flexbox & Text-indent */
+        /* CHỈNH SỬA DUY NHẤT: CHỪA LỀ 20% (10% MỖI BÊN) TRÊN PHONE */
+        main {
+            padding-left: 10%;
+            padding-right: 10%;
+            width: 100%;
+            margin: 0 auto;
+        }
+        @media (min-width: 1024px) {
+            main { padding-left: 0; padding-right: 0; }
+        }
+
+        /* FIX: Canh giữa Header tuyệt đối */
         .header-fixed {
             display: flex;
             justify-content: center;
             white-space: nowrap;
-            font-size: clamp(8px, 2.5vw, 10px);
+            font-size: clamp(8px, 2.3vw, 10px);
             letter-spacing: 0.6em;
-            text-indent: 0.6em; /* Bù lại khoảng cách chữ cuối cùng để canh giữa chuẩn */
+            text-indent: 0.6em; 
             width: 100%;
             font-weight: 500;
             color: #888;
@@ -94,13 +104,11 @@
             white-space: nowrap;
             font-weight: 300;
             letter-spacing: 0.3em;
-            font-size: clamp(1.2rem, 6.5vw, 2.8rem);
+            font-size: clamp(1.1rem, 6vw, 2.8rem);
             color: var(--zen-copper);
         }
 
-        .zen-link-effect {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .zen-link-effect { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .zen-link-effect:hover {
             background-color: rgba(210, 125, 86, 0.1) !important;
             color: var(--zen-copper) !important;
@@ -114,7 +122,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 1.5rem;
+            padding: 1rem;
             background-color: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--zen-border);
         }
@@ -171,7 +179,7 @@
         <div class="header-fixed uppercase">TRI THỨC - PHÁP LUẬT - CÔNG NGHỆ</div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center px-6 z-10">
+    <main class="flex-grow flex flex-col items-center z-10">
         
         <div class="mb-12 stagger" style="animation-delay: 0.2s">
             <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-2 border-[#D27D56]/20 mx-auto shadow-2xl">
@@ -220,7 +228,7 @@
             </div>
         </div>
 
-        <div class="w-full max-w-6xl mb-32 px-4 stagger" style="animation-delay: 1s">
+        <div class="w-full max-w-6xl mb-32 stagger" style="animation-delay: 1s">
             <h2 class="text-[10px] font-semibold tracking-[0.5em] uppercase text-[#D27D56] mb-12 border-b border-white/5 pb-4">Góc nhìn & Trí thức Chuyên gia</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="insight-card zen-link-effect">
@@ -241,7 +249,7 @@
             </div>
         </div>
 
-        <div class="w-full max-w-6xl mb-32 px-4 text-center stagger" style="animation-delay: 1.2s">
+        <div class="w-full max-w-6xl mb-32 text-center stagger" style="animation-delay: 1.2s">
             <h2 class="text-[10px] font-medium tracking-[0.4em] mb-12 uppercase opacity-20">Thư viện Tri thức (8 Chuyên đề)</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <button onclick="openGate('Bài giảng A', '0915159499', 'bai-giang-a.html')" class="lecture-box zen-link-effect">
@@ -267,8 +275,8 @@
             </div>
         </div>
 
-        <div class="w-full max-w-3xl text-center mb-32 px-4 stagger" style="animation-delay: 1.4s">
-            <div class="p-16 md:p-24 flex flex-col items-center glass-box shadow-2xl relative overflow-hidden bg-black/40 border border-[#D27D56]/10">
+        <div class="w-full max-w-3xl text-center mb-32 stagger" style="animation-delay: 1.4s">
+            <div class="p-12 md:p-24 flex flex-col items-center glass-box shadow-2xl relative overflow-hidden bg-black/40 border border-[#D27D56]/10">
                 <div class="absolute top-0 right-0 p-4 opacity-5 text-[60px] text-stone-300"><i class="fas fa-quote-right"></i></div>
                 <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Tài liệu Chuyên gia</h2>
                 <p class="text-[9px] text-[#D27D56]/60 uppercase tracking-widest mb-16 italic font-light">Cẩm nang Pháp lý & Kinh tế số 2026</p>
@@ -283,7 +291,7 @@
             </div>
         </div>
 
-        <div class="w-full max-w-5xl border-t border-stone-900 pt-16 mb-20 px-6 stagger" style="animation-delay: 1.6s">
+        <div class="w-full max-w-5xl border-t border-stone-900 pt-16 mb-20 stagger" style="animation-delay: 1.6s">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
                 <a id="link-phone" href="tel:+84915159499" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/20 border border-stone-900"><i class="fas fa-phone-alt opacity-40 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Hotline</span></a>
                 <a id="link-email" href="mailto:hello@nguyentanphong.com" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/20 border border-stone-900"><i class="fas fa-envelope opacity-40 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Email</span></a>
@@ -311,25 +319,20 @@
 
     <script>
         let currentTarget = ""; let currentCode = "";
-        
         function updateDisplay() { 
             let count = localStorage.getItem('loginCount') || 6875;
             document.getElementById('loginCount').innerText = count.toString().padStart(8, '0');
         }
-
         function openGate(name, code, url) { 
             document.getElementById('modalTitle').innerText = "Xác thực định danh: " + name;
             document.getElementById('passwordModal').style.display = 'flex'; 
             currentTarget = url; currentCode = code; 
         }
-
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
         function validateAccess() {
             if (document.getElementById('passInput').value === currentCode) {
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
-                localStorage.setItem('loginCount', count); 
-                updateDisplay();
+                localStorage.setItem('loginCount', count); updateDisplay();
                 gtag('event', 'unlock_content', { 'content_name': currentTarget });
                 window.location.href = currentTarget;
             } else { 
@@ -337,19 +340,16 @@
                 setTimeout(() => err.style.opacity = 0, 2000);
             }
         }
-
         function handleRegSubmit(e) {
             e.preventDefault();
             gtag('event', 'sign_up', { 'method': 'Website Form' });
             alert('Đã nhận yêu cầu kết nối đối tác.');
             closeModal('registerModal');
         }
-
         document.getElementById('link-zalo').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Zalo' }));
         document.getElementById('link-phone').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Hotline' }));
         document.getElementById('link-email').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Email' }));
         document.getElementById('link-fb').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Facebook' }));
-
         updateDisplay();
     </script>
 </body>
