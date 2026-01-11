@@ -123,6 +123,30 @@
             color: var(--zen-copper);
         }
 
+        .zen-btn {
+            padding: 12px 32px;
+            background-color: transparent;
+            border: 1px solid rgba(224, 170, 121, 0.4);
+            color: var(--zen-copper);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-weight: 500;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+        .zen-btn:hover {
+            background-color: rgba(224, 170, 121, 0.1);
+            transform: translateY(-3px);
+        }
+        .zen-btn i {
+            margin-right: 12px;
+            opacity: 0.6;
+        }
+
         .zen-link-effect {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -242,26 +266,26 @@
                 <i class="fas fa-times text-xs"></i>
             </button>
             
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">DANH THIẾP ĐIỆN TỬ</h3>
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">DANH THIẾP ĐIỆN TỬ - NGUYỄN TẤN PHONG</h3>
             
             <div class="card-grid mx-auto">
                 <div class="col-span-2 row-span-2 bg-black/40 border border-[#E0AA79]/20 p-2 flex items-center justify-center overflow-hidden">
                     <img src="qr-tanphong.png" alt="QR Code" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
 
-                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Zalo' })" class="card-item zen-link-effect">
+                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Zalo_Card' })" class="card-item zen-link-effect">
                     <i class="fas fa-comment-dots text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">Zalo</span>
                 </a>
-                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Facebook' })" class="card-item zen-link-effect">
+                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Facebook_Card' })" class="card-item zen-link-effect">
                     <i class="fab fa-facebook-f text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">Facebook</span>
                 </a>
-                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', { 'type': 'Hotline' })" class="card-item zen-link-effect">
+                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', { 'type': 'Hotline_Card' })" class="card-item zen-link-effect">
                     <i class="fas fa-phone-alt text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">Phone</span>
                 </a>
-                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', { 'type': 'Email' })" class="card-item zen-link-effect">
+                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', { 'type': 'Email_Card' })" class="card-item zen-link-effect">
                     <i class="fas fa-envelope text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">Email</span>
                 </a>
@@ -276,7 +300,7 @@
             </div>
 
             <div class="mt-10 text-[8px] text-[#E0AA79]/60 uppercase tracking-widest">
-                Dân Mần Nông • 091 515 9499
+                nguyentanphong.com • 0915.159.499
             </div>
         </div>
     </div>
@@ -296,10 +320,16 @@
         <h1 class="name-fixed text-center mb-8 uppercase stagger" style="animation-delay: 0.4s">Nguyễn Tấn Phong</h1>
         <div class="w-16 h-[0.5px] bg-[#E0AA79]/50 mb-8 stagger" style="animation-delay: 0.4s"></div>
 
-        <div class="mb-16 stagger" style="animation-delay: 0.5s">
-            <button onclick="openQRModal()" class="px-8 py-3 bg-transparent border border-[#E0AA79]/40 text-[#E0AA79] text-[9px] uppercase tracking-[0.3em] font-medium zen-link-effect hover:bg-[#E0AA79]/10 transition-all">
-                <i class="fas fa-qrcode mr-3 opacity-60"></i>Danh thiếp điện tử
+        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 justify-center items-center w-full px-4" style="animation-delay: 0.5s">
+            <button onclick="openQRModal()" class="zen-btn w-full md:w-auto">
+                <i class="fas fa-qrcode"></i>Danh thiếp điện tử
             </button>
+            <button onclick="document.getElementById('registerModal').style.display='flex'; gtag('event', 'click_consultation')" class="zen-btn w-full md:w-auto">
+                <i class="fas fa-edit"></i>Đăng ký tư vấn
+            </button>
+            <a href="#" target="_blank" onclick="gtag('event', 'click_profile')" class="zen-btn w-full md:w-auto text-center">
+                <i class="fas fa-file-pdf"></i>Hồ sơ năng lực
+            </a>
         </div>
 
         <div class="pillar-grid stagger" style="animation-delay: 0.6s">
@@ -413,13 +443,14 @@
         </div>
     </main>
 
-    <footer class="p-16 flex justify-center stagger">
-        <div class="footer-fixed uppercase">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
+    <footer class="p-16 flex flex-col items-center stagger">
+        <div class="footer-fixed uppercase mb-6">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
+        <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="w-48 opacity-80">
     </footer>
 
     <div id="registerModal" class="modal-overlay">
         <div class="max-w-md w-full p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl">
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light text-center mb-10 text-stone-400">Đăng ký Đối tác Kết nối</h3>
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light text-center mb-10 text-stone-400">Đăng ký Thông tin / Tư vấn</h3>
             <form onsubmit="handleRegSubmit(event)">
                 <input id="regName" type="text" placeholder="Họ và Tên" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-6 focus:outline-none focus:border-[#E0AA79]">
                 <input id="regPhone" type="tel" placeholder="Số điện thoại" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-10 focus:outline-none focus:border-[#E0AA79]">
@@ -473,7 +504,7 @@
         function handleRegSubmit(e) {
             e.preventDefault();
             gtag('event', 'sign_up', { 'method': 'Website Form' });
-            alert('Đã nhận yêu cầu kết nối đối tác.');
+            alert('Đã nhận yêu cầu. Chúng tôi sẽ liên hệ lại sớm nhất.');
             closeModal('registerModal');
         }
 
