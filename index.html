@@ -12,12 +12,16 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
+      gtag('config', 'G-4WM8D9SK71', { 
+          'anonymize_ip': true,
+          'cookie_flags': 'SameSite=None;Secure'
+      });
     </script>
 
     <meta name="description" content="Nguyễn Tấn Phong - Chuyên gia Kinh tế số, Trọng tài viên, tư vấn Pháp luật và Bất động sản.">
+    <meta name="author" content="Nguyễn Tấn Phong">
     <meta property="og:title" content="Nguyễn Tấn Phong | TRI THỨC • PHÁP LUẬT • CÔNG NGHỆ">
-    <meta property="og:description" content="Chuyên gia Kinh tế số & Pháp luật.">
+    <meta property="og:description" content="Chuyên gia tư vấn chiến lược Thương mại điện tử và Pháp luật kinh doanh.">
     <meta property="og:image" content="https://nguyentanphong.com/avatar-nguyentanphong.jpg">
     <meta property="og:url" content="https://nguyentanphong.com">
     <meta property="og:type" content="website">
@@ -85,7 +89,7 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* LỀ 20% CHO DI ĐỘNG (10% MỖI BÊN) */
+        /* VÙNG AN TOÀN LỀ 20% CHO DI ĐỘNG */
         main {
             padding-left: 10%;
             padding-right: 10%;
@@ -96,7 +100,7 @@
             main { padding-left: 0; padding-right: 0; }
         }
 
-        /* HEADER CANH GIỮA TUYỆT ĐỐI */
+        /* HEADER & TYPOGRAPHY FIXES */
         .header-fixed {
             display: flex;
             justify-content: center;
@@ -109,7 +113,6 @@
             color: #AAA;
         }
 
-        /* FOOTER CANH GIỮA TUYỆT ĐỐI */
         .footer-fixed {
             display: flex;
             justify-content: center;
@@ -121,7 +124,6 @@
             color: #888;
         }
 
-        /* TÊN CHUYÊN GIA */
         .name-fixed {
             white-space: nowrap;
             font-weight: 300;
@@ -130,7 +132,7 @@
             color: var(--zen-copper);
         }
 
-        /* NÚT HÀNH ĐỘNG ĐỒNG BỘ */
+        /* BUTTONS STYLING */
         .zen-btn {
             padding: 12px 32px;
             background-color: transparent;
@@ -153,7 +155,6 @@
         }
         .zen-btn i { margin-right: 12px; opacity: 0.6; }
 
-        /* HIỆU ỨNG LIÊN KẾT */
         .zen-link-effect {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -164,7 +165,7 @@
             transform: translateY(-5px);
         }
 
-        /* LƯỚI 5 TRỤ CỘT */
+        /* PILLAR GRID & BOXES */
         .pillar-grid {
             display: grid;
             grid-template-cols: repeat(2, 1fr);
@@ -189,7 +190,15 @@
             text-align: center;
         }
 
-        /* Ô BÀI GIẢNG & Ô LIÊN HỆ ĐỒNG BỘ */
+        /* LOGO BAR */
+        .logo-bar {
+            opacity: 0.5;
+            grayscale: 100%;
+            transition: 0.7s;
+        }
+        .logo-bar:hover { opacity: 1; grayscale: 0; }
+
+        /* ĐỒNG BỘ Ô BÀI GIẢNG & Ô LIÊN HỆ ĐỒNG DẠNG */
         .lecture-box, .contact-box-sync {
             min-height: 120px;
             background-color: rgba(0, 0, 0, 0.4);
@@ -210,18 +219,29 @@
             transform: translateY(-5px);
         }
 
-        /* LƯỚI LIÊN HỆ 6 Ô: 2 DÒNG x 3 CỘT (MOBILE) | 1 DÒNG x 6 CỘT (PC) */
-        .contact-grid {
+        /* LƯỚI LIÊN HỆ: 2 DÒNG x 3 CỘT (PHONE) | 1 DÒNG x 6 CỘT (PC) */
+        .contact-grid-layout {
             display: grid;
             grid-template-cols: repeat(3, 1fr);
             gap: 12px;
             width: 100%;
         }
         @media (min-width: 1024px) {
-            .contact-grid { grid-template-cols: repeat(6, 1fr); gap: 15px; }
+            .contact-grid-layout { grid-template-cols: repeat(6, 1fr); gap: 15px; }
         }
 
-        /* CARD MODAL GRID 10 Ô (5x2) */
+        /* COUNTER BOX */
+        .counter-box {
+            background: #000;
+            color: var(--zen-copper);
+            padding: 8px 24px;
+            border-radius: 2px;
+            letter-spacing: 0.4em;
+            border: 1px solid var(--zen-copper);
+            font-size: 0.9rem;
+        }
+
+        /* MODAL QR CARD 10 Ô (5x2) */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -242,28 +262,17 @@
         }
         .card-item:hover { border-color: var(--zen-copper); background: rgba(224, 170, 121, 0.1); }
 
-        /* FOOTER & CHỮ KÝ */
+        /* CHỮ KÝ TRẮNG TRƯỚC BẢN QUYỀN */
         .signature-img {
             width: 12rem;
-            filter: brightness(0) invert(1); /* CHUYỂN CHỮ KÝ SANG TRẮNG */
+            filter: brightness(0) invert(1); 
             opacity: 0.85;
             transition: 0.5s;
             margin-bottom: 1.5rem;
         }
         .signature-img:hover { opacity: 1; transform: scale(1.05); }
 
-        /* BỘ ĐẾM LƯỢT TRUY CẬP */
-        .counter-box {
-            background: #000;
-            color: var(--zen-copper);
-            padding: 8px 24px;
-            border-radius: 2px;
-            letter-spacing: 0.4em;
-            border: 1px solid var(--zen-copper);
-            font-size: 0.9rem;
-        }
-
-        /* HIỆU ỨNG MODAL OVERLAY */
+        /* OVERLAY HIỆU ỨNG */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(20, 20, 20, 0.98); backdrop-filter: blur(20px); z-index: 100; align-items: center; justify-content: center; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -273,12 +282,12 @@
 <body class="min-h-screen flex flex-col">
 
     <div id="passwordModal" class="modal-overlay">
-        <div class="max-w-md w-full text-center p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl">
+        <div class="max-w-md w-full text-center p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl rounded-sm">
             <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Xác thực Định danh Đối tác</h3>
-            <input type="password" id="passInput" placeholder="Mã số định danh..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none focus:border-[#E0AA79]">
+            <input type="password" id="passInput" placeholder="Mã định danh truy cập..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none focus:border-[#E0AA79]">
             <div class="flex gap-6 justify-center">
                 <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white transition">Hủy bỏ</button>
-                <button onclick="validateAccess()" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 transition">Xác nhận</button>
+                <button onclick="validateAccess()" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 hover:bg-[#E0AA79]/40 transition">Xác nhận</button>
             </div>
             <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 uppercase">Mã truy cập không hợp lệ</p>
         </div>
@@ -287,11 +296,11 @@
     <div id="qrCardModal" class="modal-overlay" onclick="closeQRModal(event)">
         <div class="max-w-[600px] w-[90%] p-6 md:p-10 bg-[#1a1a1a] border border-[#E0AA79]/20 shadow-2xl relative" onclick="event.stopPropagation()">
             <button onclick="document.getElementById('qrCardModal').style.display='none'" class="absolute top-4 right-4 text-stone-500 hover:text-white transition"><i class="fas fa-times text-xs"></i></button>
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-center text-stone-400 tracking-[0.4em]">DANH THIẾP ĐIỆN TỬ</h3>
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-center text-stone-400 tracking-[0.4em]">DANH THIẾP ĐIỆN TỬ - NGUYỄN TẤN PHONG</h3>
             
             <div class="card-grid mx-auto">
                 <div class="col-span-2 row-span-2 bg-black/40 border border-[#E0AA79]/20 p-2 flex items-center justify-center overflow-hidden">
-                    <img src="qr-tanphong.png" alt="QR Code Nguyễn Tấn Phong" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="qr-tanphong.png" alt="QR Code" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
                 <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Zalo_Card'})" class="card-item zen-link-effect">
                     <i class="fas fa-comment-dots text-lg text-[#E0AA79]"></i>
@@ -299,11 +308,11 @@
                 </a>
                 <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Facebook_Card'})" class="card-item zen-link-effect">
                     <i class="fab fa-facebook-f text-lg text-[#E0AA79]"></i>
-                    <span class="text-[6px] uppercase mt-2">FB</span>
+                    <span class="text-[6px] uppercase mt-2">Facebook</span>
                 </a>
-                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Hotline_Card'})" class="card-item zen-link-effect">
+                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Phone_Card'})" class="card-item zen-link-effect">
                     <i class="fas fa-phone-alt text-lg text-[#E0AA79]"></i>
-                    <span class="text-[6px] uppercase mt-2">Call</span>
+                    <span class="text-[6px] uppercase mt-2">Hotline</span>
                 </a>
                 <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', {'type': 'Email_Card'})" class="card-item zen-link-effect">
                     <i class="fas fa-envelope text-lg text-[#E0AA79]"></i>
@@ -311,14 +320,28 @@
                 </a>
                 <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect opacity-30">
                     <i class="fab fa-youtube text-lg"></i>
-                    <span class="text-[6px] uppercase mt-2">YT</span>
+                    <span class="text-[6px] uppercase mt-2">Youtube</span>
                 </a>
                 <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect opacity-30">
                     <i class="fab fa-linkedin-in text-lg"></i>
-                    <span class="text-[6px] uppercase mt-2">IN</span>
+                    <span class="text-[6px] uppercase mt-2">LinkedIn</span>
                 </a>
             </div>
             <div class="mt-8 text-[8px] text-stone-600 uppercase tracking-widest text-center">nguyentanphong.com • 0915.159.499</div>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal-overlay">
+        <div class="max-w-md w-full p-12 bg-[#1a1a1a] border border-white/10 text-center shadow-2xl">
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Đăng ký Tư vấn / Kết nối Đối tác</h3>
+            <form onsubmit="handleRegSubmit(event)">
+                <input id="regName" type="text" placeholder="Họ và Tên" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-6 focus:outline-none focus:border-[#E0AA79]">
+                <input id="regPhone" type="tel" placeholder="Số điện thoại" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-10 focus:outline-none focus:border-[#E0AA79]">
+                <div class="flex gap-6 justify-center">
+                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase tracking-widest opacity-50 text-white transition hover:opacity-100">Đóng</button>
+                    <button type="submit" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 transition hover:bg-[#E0AA79]/40">Gửi thông tin</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -330,53 +353,73 @@
         
         <div class="mb-12 stagger" style="animation-delay: 0.2s">
             <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-2 border-[#E0AA79]/30 mx-auto shadow-2xl">
-                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover">
+                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong Chuyên gia" class="w-full h-full object-cover">
             </div>
         </div>
 
         <h1 class="name-fixed text-center mb-8 uppercase stagger" style="animation-delay: 0.4s">Nguyễn Tấn Phong</h1>
         <div class="w-16 h-[0.5px] bg-[#E0AA79]/50 mb-8 stagger" style="animation-delay: 0.4s"></div>
 
-        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 justify-center items-center w-full" style="animation-delay: 0.5s">
+        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 justify-center items-center w-full px-4" style="animation-delay: 0.5s">
             <button onclick="openQRModal()" class="zen-btn w-full md:w-auto"><i class="fas fa-qrcode"></i>Danh thiếp điện tử</button>
             <button onclick="document.getElementById('registerModal').style.display='flex'" class="zen-btn w-full md:w-auto"><i class="fas fa-edit"></i>Đăng ký tư vấn</button>
-            <a href="#" target="_blank" class="zen-btn w-full md:w-auto"><i class="fas fa-file-pdf"></i>Hồ sơ năng lực</a>
+            <a href="#" target="_blank" class="zen-btn w-full md:w-auto text-center"><i class="fas fa-file-pdf"></i>Hồ sơ năng lực</a>
         </div>
 
         <div class="pillar-grid stagger" style="animation-delay: 0.6s">
-            <div class="pillar-box"><i class="fas fa-network-wired text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">VECOM</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p></div>
-            <div class="pillar-box"><i class="fas fa-gavel text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">CLEAD</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giám đốc<br>Trung tâm tư vấn pháp luật<br>Hiệp hội TMĐT Việt Nam</p></div>
-            <div class="pillar-box"><i class="fas fa-scale-balanced text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">ARI</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Luật gia<br>Phó Viện Trưởng<br>Viện Khoa học pháp lý trọng tài</p></div>
-            <div class="pillar-box"><i class="fas fa-handshake-simple text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">TRACENT</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Trọng tài viên<br>Trung tâm trọng tài thương mại<br>Thành phố Hồ Chí Minh</p></div>
-            <div class="pillar-box"><i class="fas fa-graduation-cap text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">EAGLE</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giảng viên Cao cấp<br>Bất động sản<br>Quản trị Doanh nghiệp</p></div>
+            <div class="pillar-box">
+                <i class="fas fa-network-wired text-xl mb-6 text-[#E0AA79]"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">VECOM</h3>
+                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-gavel text-xl mb-6 text-[#E0AA79]"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">CLEAD</h3>
+                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giám đốc<br>Trung tâm tư vấn pháp luật<br>Hiệp hội TMĐT Việt Nam</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-scale-balanced text-xl mb-6 text-[#E0AA79]"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">ARI</h3>
+                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Luật gia<br>Phó Viện Trưởng<br>Viện Khoa học pháp lý trọng tài</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-handshake-simple text-xl mb-6 text-[#E0AA79]"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">TRACENT</h3>
+                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Trọng tài viên<br>Trung tâm trọng tài thương mại<br>Thành phố Hồ Chí Minh</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-graduation-cap text-xl mb-6 text-[#E0AA79]"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">EAGLE</h3>
+                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giảng viên Cao cấp<br>Bất động sản<br>Quản trị Doanh nghiệp</p>
+            </div>
         </div>
 
         <div class="w-full max-w-5xl mb-28 stagger" style="animation-delay: 0.8s">
             <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 logo-bar">
                 <i class="fas fa-building-columns text-2xl" title="Bộ Công Thương"></i>
-                <i class="fas fa-shield-halved text-2xl" title="PA05/A05"></i>
+                <i class="fas fa-shield-halved text-2xl" title="PA05 & A05"></i>
                 <i class="fas fa-graduation-cap text-2xl" title="ĐH Luật"></i>
-                <i class="fas fa-newspaper text-2xl" title="Báo chí"></i>
-                <i class="fas fa-handshake text-2xl" title="Chiến dịch"></i>
+                <i class="fas fa-newspaper text-2xl" title="Hệ thống Báo chí"></i>
+                <i class="fas fa-handshake text-2xl" title="Chiến dịch Quốc gia"></i>
             </div>
         </div>
 
         <div class="w-full max-w-6xl mb-32 text-center stagger" style="animation-delay: 1s">
             <h2 class="text-[10px] font-medium tracking-[0.4em] mb-12 uppercase opacity-40">Thư viện Tri thức Chuyên gia</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <button onclick="openGate('Bài giảng A', '0915159499', 'a.html')" class="lecture-box zen-link-effect">
+                <button onclick="openGate('Bài giảng A', '1a', 'baigiang-a.html')" class="lecture-box zen-link-effect">
                     <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
                     <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng A</h4>
                 </button>
-                <button onclick="openGate('Bài giảng B', '0915159499', 'b.html')" class="lecture-box zen-link-effect">
+                <button onclick="openGate('Bài giảng B', '1b', 'baigiang-b.html')" class="lecture-box zen-link-effect">
                     <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
                     <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng B</h4>
                 </button>
-                <button onclick="openGate('Bài giảng C', '0915159499', 'c.html')" class="lecture-box zen-link-effect">
+                <button onclick="openGate('Bài giảng C', '0915159499', 'baigiang-c.html')" class="lecture-box zen-link-effect">
                     <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
                     <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng C</h4>
                 </button>
-                <button onclick="openGate('Bài giảng D', '0915159499', 'd.html')" class="lecture-box zen-link-effect">
+                <button onclick="openGate('Bài giảng D', '0915159499', 'baigiang-d.html')" class="lecture-box zen-link-effect">
                     <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
                     <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng D</h4>
                 </button>
@@ -390,9 +433,9 @@
         <div class="w-full max-w-3xl text-center mb-32 stagger" style="animation-delay: 1.2s">
             <div class="p-12 md:p-24 bg-black/50 border border-[#E0AA79]/20 shadow-2xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-4 opacity-5 text-[60px] text-stone-300"><i class="fas fa-quote-right"></i></div>
-                <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Kho Tài liệu Chuyên môn</h2>
+                <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Kho Tài liệu Chuyên môn 2026</h2>
                 <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm mx-auto relative z-10">
-                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] tracking-[0.2em] font-bold transition hover:bg-[#FFFFFF]">Tải về ngay</button>
+                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] tracking-[0.2em] font-bold transition hover:bg-white">Tải về ngay</button>
                     <button onclick="document.getElementById('registerModal').style.display='flex'" class="flex-1 py-5 bg-black/30 border border-[#E0AA79]/50 text-[10px] tracking-[0.2em] transition hover:bg-[#E0AA79]/10">Đăng ký mới</button>
                 </div>
                 <div class="mt-20 pt-12 border-t border-[#E0AA79]/10 text-center">
@@ -403,10 +446,10 @@
         </div>
 
         <div class="w-full max-w-5xl border-t border-[#E0AA79]/20 pt-16 mb-20 stagger" style="animation-delay: 1.4s">
-            <div class="contact-grid">
-                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Hotline'})" class="contact-box-sync">
+            <div class="contact-grid-layout">
+                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Phone'})" class="contact-box-sync">
                     <i class="fas fa-phone-alt text-lg text-[#E0AA79] mb-4"></i>
-                    <span class="text-[9px] font-bold uppercase tracking-widest">Hotline</span>
+                    <span class="text-[9px] font-bold uppercase tracking-widest">Phone</span>
                 </a>
                 <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', {'type': 'Email'})" class="contact-box-sync">
                     <i class="fas fa-envelope text-lg text-[#E0AA79] mb-4"></i>
@@ -437,75 +480,80 @@
         <div class="footer-fixed uppercase">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
     </footer>
 
-    <div id="registerModal" class="modal-overlay">
-        <div class="max-w-md w-full p-12 bg-[#1a1a1a] border border-white/10 text-center shadow-2xl">
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Đăng ký Tư vấn / Kết nối Đối tác</h3>
-            <form onsubmit="handleRegSubmit(event)">
-                <input id="regName" type="text" placeholder="Họ và Tên" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-6 focus:outline-none focus:border-[#E0AA79]">
-                <input id="regPhone" type="tel" placeholder="Số điện thoại" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-10 focus:outline-none focus:border-[#E0AA79]">
-                <div class="flex gap-6 justify-center">
-                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase tracking-widest opacity-50 text-white transition hover:opacity-100">Đóng</button>
-                    <button type="submit" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 transition hover:bg-[#E0AA79]/40">Gửi thông tin</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        let currentTarget = ""; let currentCode = "";
+        let currentTarget = ""; 
+        let currentCode = "";
         
-        // Cập nhật bộ đếm lượt truy cập từ Local Storage
+        // 1. Cập nhật bộ đếm lượt truy cập
         function updateDisplay() { 
             let count = localStorage.getItem('loginCount') || 6875;
             document.getElementById('loginCount').innerText = count.toString().padStart(8, '0');
         }
 
-        // Mở Modal Danh thiếp điện tử
+        // 2. Điều khiển Modal Danh thiếp điện tử
         function openQRModal() {
             document.getElementById('qrCardModal').style.display = 'flex';
             gtag('event', 'view_qr_card', { 'event_category': 'Engagement' });
         }
-
-        // Đóng Modal Danh thiếp điện tử
         function closeQRModal(e) {
             if(e.target.id === 'qrCardModal') {
                 document.getElementById('qrCardModal').style.display = 'none';
             }
         }
 
-        // Mở Modal xác thực bài giảng/tài liệu
+        // 3. Mở cổng xác thực bài giảng/tài liệu
         function openGate(name, code, url) { 
             document.getElementById('modalTitle').innerText = "Xác thực Quyền truy cập: " + name;
             document.getElementById('passwordModal').style.display = 'flex'; 
-            currentTarget = url; currentCode = code; 
+            currentTarget = url; 
+            currentCode = code; 
+            document.getElementById('passInput').value = ""; // Clear input
+            document.getElementById('passInput').focus();
         }
 
-        // Đóng các loại Modal chung
+        // 4. Đóng modal chung
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        // Kiểm tra mã định danh
+        // 5. Kiểm tra mật mã định danh (Hỗ trợ 1a, 1b và mã cũ)
         function validateAccess() {
-            if (document.getElementById('passInput').value === currentCode) {
+            const inputVal = document.getElementById('passInput').value.trim();
+            if (inputVal === currentCode) {
+                // Tăng bộ đếm khi mở thành công
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
                 localStorage.setItem('loginCount', count); 
                 updateDisplay();
-                gtag('event', 'unlock_content', { 'content_name': currentTarget });
+                
+                gtag('event', 'unlock_content', { 
+                    'content_name': currentTarget,
+                    'status': 'success'
+                });
+                
+                // Chuyển hướng
                 window.location.href = currentTarget;
             } else { 
-                const err = document.getElementById('errorMsg'); err.style.opacity = 1;
-                setTimeout(() => err.style.opacity = 0, 2000);
+                const err = document.getElementById('errorMsg'); 
+                err.style.opacity = 1;
+                setTimeout(() => err.style.opacity = 0, 2500);
             }
         }
 
-        // Xử lý Form đăng ký
+        // 6. Xử lý gửi Form đăng ký
         function handleRegSubmit(e) {
             e.preventDefault();
             gtag('event', 'generate_lead', { 'method': 'Website Form' });
-            alert('Đã nhận yêu cầu. Chú Phong sẽ liên hệ lại với đối tác sớm nhất.');
+            alert('Đã tiếp nhận yêu cầu. Chú Phong sẽ liên hệ lại với đối tác sớm nhất.');
             closeModal('registerModal');
         }
 
-        // Khởi tạo bộ đếm khi trang tải xong
+        // 7. Tracking các nút liên hệ bên ngoài (Dùng ID hoặc class)
+        document.querySelectorAll('.contact-box-sync').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const type = this.querySelector('span').innerText;
+                gtag('event', 'click_contact', { 'platform': type });
+            });
+        });
+
+        // Khởi tạo hiển thị ban đầu
         updateDisplay();
     </script>
 </body>
