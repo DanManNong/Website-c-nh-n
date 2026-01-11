@@ -27,7 +27,7 @@
       "url": "https://nguyentanphong.com",
       "image": "https://nguyentanphong.com/avatar-nguyentanphong.jpg",
       "jobTitle": "Chuyên gia Kinh tế số & Pháp luật",
-      "description": "Chuyên gia tư vấn chiến lược Thương mại điện tử, Trọng tài viên thương mại quốc tế. Chuyên gia phối hợp cùng A05/PA05 trong đào tạo an ninh mạng và điều phối chiến dịch 'Không Một Mình'.",
+      "description": "Chuyên gia tư vấn chiến lược Thương mại điện tử, Trọng tài viên thương mại quốc tế. Chuyên gia phối hợp cùng A05/PA05.",
       "sameAs": [
         "https://facebook.com/tanphong1981",
         "https://zalo.me/0915159499",
@@ -48,8 +48,7 @@
         "https://eagleacademy.vn/ccmg/",
         "https://www.hoasen.edu.vn/saudaihoc/truong-dai-hoc-hoa-sen-hsu-va-hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-huong-den-hop-tac-chat-che/",
         "https://tracent.com.vn/",
-        "https://www.ulaw.edu.vn",
-        "https://www.vecomnet.vn/hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-ky-ket-hop-tac-toan-dien-cung-truong-dai-hoc-ngan-hang-tp-hcm"
+        "https://www.ulaw.edu.vn"
       ],
       "affiliation": [
         { "@type": "Organization", "name": "Hiệp hội Thương mại điện tử Việt Nam (VECOM)" },
@@ -82,6 +81,7 @@
             text-rendering: optimizeLegibility;
         }
 
+        /* LỀ 20% CHO DI ĐỘNG */
         main {
             padding-left: 10%;
             padding-right: 10%;
@@ -191,6 +191,31 @@
             font-size: 0.9rem;
         }
 
+        /* CSS CHO MODAL DANH THIẾP ĐIỆN TỬ */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card-item {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--zen-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1 / 1;
+            transition: 0.3s;
+        }
+        .card-item:hover {
+            border-color: var(--zen-copper);
+            background: rgba(224, 170, 121, 0.1);
+        }
+
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(20, 20, 20, 0.98); backdrop-filter: blur(20px); z-index: 100; align-items: center; justify-content: center; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -212,17 +237,46 @@
     </div>
 
     <div id="qrCardModal" class="modal-overlay" onclick="closeQRModal(event)">
-        <div class="max-w-[320px] w-full p-8 bg-[#1a1a1a] border border-[#E0AA79]/20 shadow-2xl text-center relative" onclick="event.stopPropagation()">
+        <div class="max-w-[600px] w-[90%] p-6 md:p-10 bg-[#1a1a1a] border border-[#E0AA79]/20 shadow-2xl text-center relative" onclick="event.stopPropagation()">
             <button onclick="document.getElementById('qrCardModal').style.display='none'" class="absolute top-4 right-4 text-stone-500 hover:text-white transition">
                 <i class="fas fa-times text-xs"></i>
             </button>
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-8 text-stone-400">Kết nối cùng Chuyên gia</h3>
-            <div class="w-full aspect-square bg-black/40 border border-[#E0AA79]/10 p-4 mb-8">
-                <img src="LINK_ANH_QR_CUA_CHU.png" alt="QR Code Nguyễn Tấn Phong" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
+            
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">DANH THIẾP ĐIỆN TỬ - NGUYỄN TẤN PHONG</h3>
+            
+            <div class="card-grid mx-auto">
+                <div class="col-span-2 row-span-2 bg-black/40 border border-[#E0AA79]/20 p-2 flex items-center justify-center overflow-hidden">
+                    <img src="qr-tanphong.png" alt="QR Code" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+
+                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Zalo' })" class="card-item zen-link-effect">
+                    <i class="fas fa-comment-dots text-lg text-[#E0AA79]"></i>
+                    <span class="text-[7px] uppercase mt-2">Zalo</span>
+                </a>
+                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Facebook' })" class="card-item zen-link-effect">
+                    <i class="fab fa-facebook-f text-lg text-[#E0AA79]"></i>
+                    <span class="text-[7px] uppercase mt-2">Facebook</span>
+                </a>
+                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', { 'type': 'Hotline' })" class="card-item zen-link-effect">
+                    <i class="fas fa-phone-alt text-lg text-[#E0AA79]"></i>
+                    <span class="text-[7px] uppercase mt-2">Phone</span>
+                </a>
+                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', { 'type': 'Email' })" class="card-item zen-link-effect">
+                    <i class="fas fa-envelope text-lg text-[#E0AA79]"></i>
+                    <span class="text-[7px] uppercase mt-2">Email</span>
+                </a>
+                <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect">
+                    <i class="fab fa-youtube text-lg text-[#E0AA79]"></i>
+                    <span class="text-[7px] uppercase mt-2">Youtube</span>
+                </a>
+                <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect">
+                    <i class="fab fa-linkedin-in text-lg text-[#E0AA79]"></i>
+                    <span class="text-[7px] uppercase mt-2">LinkedIn</span>
+                </a>
             </div>
-            <div class="text-[9px] text-[#E0AA79]/80 uppercase tracking-widest leading-relaxed">
-                Nguyễn Tấn Phong<br>
-                <span class="opacity-50">nguyentanphong.com</span>
+
+            <div class="mt-10 text-[8px] text-[#E0AA79]/60 uppercase tracking-widest">
+                nguyentanphong.com • 0915.159.499
             </div>
         </div>
     </div>
@@ -249,27 +303,27 @@
         </div>
 
         <div class="pillar-grid stagger" style="animation-delay: 0.6s">
-            <a href="https://vecom.vn" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'VECOM' })" class="pillar-box zen-link-effect">
+            <a href="https://vecom.vn" target="_blank" class="pillar-box zen-link-effect">
                 <i class="fas fa-network-wired text-xl mb-6" style="color:var(--zen-copper)"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">VECOM</h3>
                 <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p>
             </a>
-            <a href="https://clead.vn" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'CLEAD' })" class="pillar-box zen-link-effect">
+            <a href="https://clead.vn" target="_blank" class="pillar-box zen-link-effect">
                 <i class="fas fa-gavel text-xl mb-6" style="color:var(--zen-copper)"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">CLEAD</h3>
                 <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Giám đốc<br>Trung tâm tư vấn pháp luật<br>Hiệp hội Thương mại điện tử Việt Nam</p>
             </a>
-            <a href="https://www.ari.org.vn/" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'ARI' })" class="pillar-box zen-link-effect">
+            <a href="https://www.ari.org.vn/" target="_blank" class="pillar-box zen-link-effect">
                 <i class="fas fa-scale-balanced text-xl mb-6" style="color:var(--zen-copper)"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">ARI</h3>
                 <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Luật gia<br>Phó Viện Trưởng<br>Viện Khoa học pháp lý trọng tài</p>
             </a>
-            <a href="https://tracent.com.vn/" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'TRACENT' })" class="pillar-box zen-link-effect">
+            <a href="https://tracent.com.vn/" target="_blank" class="pillar-box zen-link-effect">
                 <i class="fas fa-handshake-simple text-xl mb-6" style="color:var(--zen-copper)"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">TRACENT</h3>
                 <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Trọng tài viên<br>Trung tâm trọng tài thương mại<br>Thành phố Hồ Chí Minh</p>
             </a>
-            <a href="https://eagleacademy.vn" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'EAGLE' })" class="pillar-box zen-link-effect">
+            <a href="https://eagleacademy.vn" target="_blank" class="pillar-box zen-link-effect">
                 <i class="fas fa-graduation-cap text-xl mb-6" style="color:var(--zen-copper)"></i>
                 <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">EAGLE</h3>
                 <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Giảng viên Cao cấp<br>Bất động sản<br>Quản trị Doanh nghiệp</p>
@@ -282,24 +336,24 @@
                 <i class="fas fa-shield-halved text-2xl" title="PA05/A05"></i>
                 <i class="fas fa-graduation-cap text-2xl" title="ĐH Luật"></i>
                 <i class="fas fa-newspaper text-2xl" title="Báo chí"></i>
-                <i class="fas fa-handshake text-2xl" title="Chién dịch"></i>
+                <i class="fas fa-handshake text-2xl" title="Chiến dịch"></i>
             </div>
         </div>
 
         <div class="w-full max-w-6xl mb-32 stagger" style="animation-delay: 1s">
             <h2 class="text-[10px] font-semibold tracking-[0.5em] uppercase text-[#E0AA79] mb-12 border-b border-[#E0AA79]/20 pb-4">Góc nhìn & Trí thức Chuyên gia</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="insight-card zen-link-effect" onclick="gtag('event', 'view_insight', { 'title': 'TMĐT' })">
+                <div class="insight-card zen-link-effect">
                     <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">Kinh tế số / 2026</span>
                     <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Trách nhiệm pháp lý của sàn TMĐT và KOL</h4>
                     <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
                 </div>
-                <div class="insight-card zen-link-effect" onclick="gtag('event', 'view_insight', { 'title': 'BĐS' })">
+                <div class="insight-card zen-link-effect">
                     <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">Bất động sản</span>
                     <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Nhận diện rủi ro pháp lý địa ốc 2026</h4>
                     <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
                 </div>
-                <div class="insight-card zen-link-effect" onclick="gtag('event', 'view_insight', { 'title': 'Cyber' })">
+                <div class="insight-card zen-link-effect">
                     <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">An ninh mạng</span>
                     <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Bảo vệ dữ liệu cá nhân trên không gian số</h4>
                     <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
@@ -351,10 +405,10 @@
 
         <div class="w-full max-w-5xl border-t border-[#E0AA79]/20 pt-16 mb-20 stagger" style="animation-delay: 1.6s">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
-                <a id="link-phone" href="tel:+84915159499" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-phone-alt opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Hotline</span></a>
-                <a id="link-email" href="mailto:hello@nguyentanphong.com" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-envelope opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Email</span></a>
-                <a id="link-zalo" href="https://zalo.me/0915159499" target="_blank" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-comment-dots opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Zalo</span></a>
-                <a id="link-fb" href="https://facebook.com/tanphong1981" target="_blank" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fab fa-facebook-f opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Facebook</span></a>
+                <a href="tel:+84915159499" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-phone-alt opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Hotline</span></a>
+                <a href="mailto:hello@nguyentanphong.com" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-envelope opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Email</span></a>
+                <a href="https://zalo.me/0915159499" target="_blank" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-comment-dots opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Zalo</span></a>
+                <a href="https://facebook.com/tanphong1981" target="_blank" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fab fa-facebook-f opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Facebook</span></a>
             </div>
         </div>
     </main>
@@ -385,11 +439,11 @@
             document.getElementById('loginCount').innerText = count.toString().padStart(8, '0');
         }
 
-        // ĐIỀU KHIỂN POPUP DANH THIẾP ĐIỆN TỬ
         function openQRModal() {
             document.getElementById('qrCardModal').style.display = 'flex';
             gtag('event', 'view_qr_card', { 'event_category': 'Engagement' });
         }
+
         function closeQRModal(e) {
             if(e.target.id === 'qrCardModal') {
                 document.getElementById('qrCardModal').style.display = 'none';
@@ -407,8 +461,7 @@
         function validateAccess() {
             if (document.getElementById('passInput').value === currentCode) {
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
-                localStorage.setItem('loginCount', count); 
-                updateDisplay();
+                localStorage.setItem('loginCount', count); updateDisplay();
                 gtag('event', 'unlock_content', { 'content_name': currentTarget });
                 window.location.href = currentTarget;
             } else { 
@@ -423,11 +476,6 @@
             alert('Đã nhận yêu cầu kết nối đối tác.');
             closeModal('registerModal');
         }
-
-        document.getElementById('link-zalo').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Zalo' }));
-        document.getElementById('link-phone').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Hotline' }));
-        document.getElementById('link-email').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Email' }));
-        document.getElementById('link-fb').addEventListener('click', () => gtag('event', 'click_contact', { 'type': 'Facebook' }));
 
         updateDisplay();
     </script>
