@@ -48,10 +48,11 @@
         "https://eagleacademy.vn/ccmg/",
         "https://www.hoasen.edu.vn/saudaihoc/truong-dai-hoc-hoa-sen-hsu-va-hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-huong-den-hop-tac-chat-che/",
         "https://tracent.com.vn/",
-        "https://www.ulaw.edu.vn"
+        "https://www.ulaw.edu.vn",
+        "https://www.vecomnet.vn/hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-ky-ket-hop-tac-toan-dien-cung-truong-dai-hoc-ngan-hang-tp-hcm"
       ],
       "affiliation": [
-        { "@type": "Organization", "name": "VECOM" },
+        { "@type": "Organization", "name": "Hiệp hội Thương mại điện tử Việt Nam (VECOM)" },
         { "@type": "Organization", "name": "Sở Công thương TP.HCM" },
         { "@type": "Organization", "name": "PA05 & A05 Collaboration" }
       ]
@@ -81,6 +82,7 @@
             text-rendering: optimizeLegibility;
         }
 
+        /* LỀ 20% CHO DI ĐỘNG */
         main {
             padding-left: 10%;
             padding-right: 10%;
@@ -91,6 +93,7 @@
             main { padding-left: 0; padding-right: 0; }
         }
 
+        /* TYPOGRAPHY FIXES */
         .header-fixed {
             display: flex;
             justify-content: center;
@@ -118,10 +121,11 @@
             white-space: nowrap;
             font-weight: 300;
             letter-spacing: 0.3em;
-            font-size: clamp(1.1rem, 6vw, 2.8rem);
+            font-size: clamp(1.2rem, 6vw, 2.8rem);
             color: var(--zen-copper);
         }
 
+        /* BUTTONS STYLING */
         .zen-btn {
             padding: 12px 32px;
             background-color: transparent;
@@ -140,6 +144,7 @@
         .zen-btn:hover {
             background-color: rgba(224, 170, 121, 0.1);
             transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         .zen-btn i { margin-right: 12px; opacity: 0.6; }
 
@@ -153,6 +158,7 @@
             transform: translateY(-5px);
         }
 
+        /* PILLAR GRID & BOXES */
         .pillar-grid {
             display: grid;
             grid-template-cols: repeat(2, 1fr);
@@ -174,13 +180,65 @@
             padding: 1rem;
             background-color: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--zen-border);
+            text-align: center;
         }
 
         /* LOGO BAR */
-        .logo-bar { opacity: 0.5; grayscale: 100%; transition: 0.7s; }
+        .logo-bar {
+            opacity: 0.5;
+            grayscale: 100%;
+            transition: 0.7s;
+        }
         .logo-bar:hover { opacity: 1; grayscale: 0; }
 
-        /* KHO TÀI LIỆU */
+        /* CONTACT HUB GRID (6 NÚT NỔI KHỐI) */
+        .contact-grid {
+            display: grid;
+            grid-template-cols: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+        @media (min-width: 1024px) {
+            .contact-grid { grid-template-cols: repeat(6, 1fr); gap: 15px; }
+        }
+        
+        .contact-btn { 
+            aspect-ratio: 1/1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            background: linear-gradient(145deg, rgba(45,45,45,0.9), rgba(25,25,25,0.9)); 
+            border: 1px solid rgba(224, 170, 121, 0.15);
+            box-shadow: 5px 5px 12px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(255,255,255,0.03);
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .contact-btn:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            border-color: var(--zen-copper); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(224,170,121,0.15);
+            color: var(--zen-copper);
+        }
+
+        /* INSIGHT & LECTURES */
+        .insight-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 0.5px solid var(--zen-border);
+            padding: 2.5rem;
+            transition: 0.4s;
+        }
+        .insight-card:hover { border-color: var(--zen-copper); background: rgba(0, 0, 0, 0.7); }
+
+        .lecture-box {
+            min-height: 120px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--zen-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
         .counter-box {
             background: #000;
             color: var(--zen-copper);
@@ -191,18 +249,7 @@
             font-size: 0.9rem;
         }
 
-        /* GRID LIÊN HỆ 6 Ô */
-        .contact-grid {
-            display: grid;
-            grid-template-cols: repeat(3, 1fr);
-            gap: 1.5rem;
-            width: 100%;
-        }
-        @media (min-width: 768px) {
-            .contact-grid { grid-template-cols: repeat(6, 1fr); }
-        }
-
-        /* MODAL DANH THIẾP */
+        /* MODAL QR CARD 10 Ô (DASHBOARD) */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -221,18 +268,20 @@
             aspect-ratio: 1 / 1;
             transition: 0.3s;
         }
-        .card-item:hover { border-color: var(--zen-copper); background: rgba(224, 170, 121, 0.1); }
-        
-        /* CHỮ KÝ MÀU TRẮNG */
-        .signature-img {
-            width: 12rem;
-            opacity: 0.8;
-            /* Filter biến ảnh về màu trắng tinh khiết */
-            filter: brightness(0) invert(1);
-            transition: opacity 0.5s;
-            margin-top: 1rem;
+        .card-item:hover {
+            border-color: var(--zen-copper);
+            background: rgba(224, 170, 121, 0.1);
         }
-        .signature-img:hover { opacity: 1; }
+
+        /* CHỮ KÝ TRẮNG */
+        .signature-img {
+            width: 11rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.85;
+            transition: 0.5s;
+            margin-bottom: 1.5rem;
+        }
+        .signature-img:hover { opacity: 1; transform: scale(1.02); }
 
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(20, 20, 20, 0.98); backdrop-filter: blur(20px); z-index: 100; align-items: center; justify-content: center; }
 
@@ -243,13 +292,14 @@
 <body class="min-h-screen flex flex-col">
 
     <div id="passwordModal" class="modal-overlay">
-        <div class="max-w-md w-full text-center p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl">
-            <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Xác thực Quyền truy cập Đối tác</h3>
-            <input type="password" id="passInput" placeholder="Mã định danh..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none focus:border-[#E0AA79]">
+        <div class="max-w-md w-full text-center p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl rounded-sm">
+            <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Xác thực Định danh Đối tác</h3>
+            <input type="password" id="passInput" placeholder="Mã số định danh..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none focus:border-[#E0AA79]">
             <div class="flex gap-6 justify-center">
-                <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white transition">Hủy</button>
+                <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white transition">Hủy bỏ</button>
                 <button onclick="validateAccess()" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 hover:bg-[#E0AA79]/40 transition">Xác nhận</button>
             </div>
+            <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 uppercase">Mã truy cập không hợp lệ</p>
         </div>
     </div>
 
@@ -261,33 +311,34 @@
             <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">DANH THIẾP ĐIỆN TỬ - NGUYỄN TẤN PHONG</h3>
             <div class="card-grid mx-auto">
                 <div class="col-span-2 row-span-2 bg-black/40 border border-[#E0AA79]/20 p-2 flex items-center justify-center overflow-hidden">
-                    <img src="qr-tanphong.png" alt="QR Code" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="qr-tanphong.png" alt="QR" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
                 <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Zalo_Card' })" class="card-item zen-link-effect">
                     <i class="fas fa-comment-dots text-lg text-[#E0AA79]"></i>
-                    <span class="text-[7px] uppercase mt-2">Zalo</span>
+                    <span class="text-[6px] uppercase mt-2">Zalo</span>
                 </a>
                 <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Facebook_Card' })" class="card-item zen-link-effect">
                     <i class="fab fa-facebook-f text-lg text-[#E0AA79]"></i>
-                    <span class="text-[7px] uppercase mt-2">Facebook</span>
+                    <span class="text-[6px] uppercase mt-2">FB</span>
                 </a>
                 <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', { 'type': 'Hotline_Card' })" class="card-item zen-link-effect">
                     <i class="fas fa-phone-alt text-lg text-[#E0AA79]"></i>
-                    <span class="text-[7px] uppercase mt-2">Phone</span>
+                    <span class="text-[6px] uppercase mt-2">Call</span>
                 </a>
                 <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', { 'type': 'Email_Card' })" class="card-item zen-link-effect">
                     <i class="fas fa-envelope text-lg text-[#E0AA79]"></i>
-                    <span class="text-[7px] uppercase mt-2">Email</span>
+                    <span class="text-[6px] uppercase mt-2">Mail</span>
                 </a>
-                <a href="#" onclick="alert('Youtube: Đang cập nhật'); return false;" class="card-item zen-link-effect">
-                    <i class="fab fa-youtube text-lg text-[#E0AA79]"></i>
-                    <span class="text-[7px] uppercase mt-2">Youtube</span>
+                <a href="#" class="card-item opacity-30 cursor-not-allowed">
+                    <i class="fab fa-youtube text-lg"></i>
+                    <span class="text-[6px] uppercase mt-2">Youtube</span>
                 </a>
-                <a href="#" onclick="alert('LinkedIn: Đang cập nhật'); return false;" class="card-item zen-link-effect">
-                    <i class="fab fa-linkedin-in text-lg text-[#E0AA79]"></i>
-                    <span class="text-[7px] uppercase mt-2">LinkedIn</span>
+                <a href="#" class="card-item opacity-30 cursor-not-allowed">
+                    <i class="fab fa-linkedin-in text-lg"></i>
+                    <span class="text-[6px] uppercase mt-2">LinkedIn</span>
                 </a>
             </div>
+            <div class="mt-8 text-[8px] text-stone-600 uppercase tracking-widest">nguyentanphong.com • 0915.159.499</div>
         </div>
     </div>
 
@@ -296,51 +347,32 @@
     </header>
 
     <main class="flex-grow flex flex-col items-center z-10">
+        
         <div class="mb-12 stagger" style="animation-delay: 0.2s">
             <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-2 border-[#E0AA79]/30 mx-auto shadow-2xl">
-                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover">
+                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-1000">
             </div>
         </div>
 
         <h1 class="name-fixed text-center mb-8 uppercase stagger" style="animation-delay: 0.4s">Nguyễn Tấn Phong</h1>
         <div class="w-16 h-[0.5px] bg-[#E0AA79]/50 mb-8 stagger" style="animation-delay: 0.4s"></div>
 
-        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 justify-center items-center w-full px-4" style="animation-delay: 0.5s">
+        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 justify-center items-center w-full" style="animation-delay: 0.5s">
             <button onclick="openQRModal()" class="zen-btn w-full md:w-auto"><i class="fas fa-qrcode"></i>Danh thiếp điện tử</button>
-            <button onclick="document.getElementById('registerModal').style.display='flex'; gtag('event', 'click_consultation')" class="zen-btn w-full md:w-auto"><i class="fas fa-edit"></i>Đăng ký tư vấn</button>
-            <a href="#" target="_blank" onclick="gtag('event', 'click_profile')" class="zen-btn w-full md:w-auto text-center"><i class="fas fa-file-pdf"></i>Hồ sơ năng lực</a>
+            <button onclick="document.getElementById('registerModal').style.display='flex'" class="zen-btn w-full md:w-auto"><i class="fas fa-edit"></i>Đăng ký tư vấn</button>
+            <a href="#" target="_blank" class="zen-btn w-full md:w-auto"><i class="fas fa-file-pdf"></i>Hồ sơ năng lực</a>
         </div>
 
         <div class="pillar-grid stagger" style="animation-delay: 0.6s">
-            <a href="https://vecom.vn" target="_blank" class="pillar-box zen-link-effect">
-                <i class="fas fa-network-wired text-xl mb-6" style="color:var(--zen-copper)"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">VECOM</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p>
-            </a>
-            <a href="https://clead.vn" target="_blank" class="pillar-box zen-link-effect">
-                <i class="fas fa-gavel text-xl mb-6" style="color:var(--zen-copper)"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">CLEAD</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Giám đốc<br>Trung tâm tư vấn pháp luật<br>Hiệp hội Thương mại điện tử Việt Nam</p>
-            </a>
-            <a href="https://www.ari.org.vn/" target="_blank" class="pillar-box zen-link-effect">
-                <i class="fas fa-scale-balanced text-xl mb-6" style="color:var(--zen-copper)"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">ARI</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Luật gia<br>Phó Viện Trưởng<br>Viện Khoa học pháp lý trọng tài</p>
-            </a>
-            <a href="https://tracent.com.vn/" target="_blank" class="pillar-box zen-link-effect">
-                <i class="fas fa-handshake-simple text-xl mb-6" style="color:var(--zen-copper)"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">TRACENT</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Trọng tài viên<br>Trung tâm trọng tài thương mại<br>Thành phố Hồ Chí Minh</p>
-            </a>
-            <a href="https://eagleacademy.vn" target="_blank" class="pillar-box zen-link-effect">
-                <i class="fas fa-graduation-cap text-xl mb-6" style="color:var(--zen-copper)"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">EAGLE</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase tracking-[0.18em] leading-relaxed text-center">Giảng viên Cao cấp<br>Bất động sản<br>Quản trị Doanh nghiệp</p>
-            </a>
+            <div class="pillar-box"><i class="fas fa-network-wired text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">VECOM</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p></div>
+            <div class="pillar-box"><i class="fas fa-gavel text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">CLEAD</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giám đốc<br>Trung tâm tư vấn pháp luật<br>Hiệp hội TMĐT Việt Nam</p></div>
+            <div class="pillar-box"><i class="fas fa-scale-balanced text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">ARI</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Luật gia<br>Phó Viện Trưởng<br>Viện Khoa học pháp lý trọng tài</p></div>
+            <div class="pillar-box"><i class="fas fa-handshake-simple text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">TRACENT</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Trọng tài viên<br>Trung tâm trọng tài thương mại<br>Thành phố Hồ Chí Minh</p></div>
+            <div class="pillar-box"><i class="fas fa-graduation-cap text-xl mb-6 text-[#E0AA79]"></i><h3 class="text-[11px] font-bold tracking-[0.25em] mb-4 uppercase">EAGLE</h3><p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giảng viên Cao cấp<br>Bất động sản<br>Quản trị Doanh nghiệp</p></div>
         </div>
 
-        <div class="w-full max-w-5xl mb-28 stagger" style="animation-delay: 0.8s text-center">
-            <div class="flex flex-wrap justify-center items-center gap-10 opacity-30 grayscale hover:opacity-80 transition duration-700">
+        <div class="w-full max-w-5xl mb-28 stagger" style="animation-delay: 0.8s">
+            <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 logo-bar">
                 <i class="fas fa-building-columns text-2xl" title="Bộ Công Thương"></i>
                 <i class="fas fa-shield-halved text-2xl" title="PA05/A05"></i>
                 <i class="fas fa-graduation-cap text-2xl" title="ĐH Luật"></i>
@@ -349,59 +381,81 @@
             </div>
         </div>
 
+        <div class="w-full max-w-6xl mb-32 stagger" style="animation-delay: 1s">
+            <h2 class="text-[10px] font-semibold tracking-[0.5em] uppercase text-[#E0AA79] mb-12 border-b border-[#E0AA79]/20 pb-4">Góc nhìn & Trí thức Chuyên gia</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="insight-card zen-link-effect">
+                    <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">Kinh tế số / 2026</span>
+                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Trách nhiệm pháp lý của sàn TMĐT và KOL</h4>
+                    <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
+                </div>
+                <div class="insight-card zen-link-effect">
+                    <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">Bất động sản</span>
+                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Nhận diện rủi ro pháp lý địa ốc 2026</h4>
+                    <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
+                </div>
+                <div class="insight-card zen-link-effect">
+                    <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">An ninh mạng</span>
+                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Bảo vệ dữ liệu cá nhân trên không gian số</h4>
+                    <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
+                </div>
+            </div>
+        </div>
+
         <div class="w-full max-w-6xl mb-32 text-center stagger" style="animation-delay: 1.2s">
             <h2 class="text-[10px] font-medium tracking-[0.4em] mb-12 uppercase opacity-40">Thư viện Tri thức (8 Chuyên đề)</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <button onclick="openGate('Bài giảng A', '0915159499', 'bai-giang-a.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng A</h4></button>
-                <button onclick="openGate('Bài giảng B', '0915159499', 'bai-giang-b.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng B</h4></button>
-                <button onclick="openGate('Bài giảng C', '0915159499', 'bai-giang-c.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng C</h4></button>
-                <button onclick="openGate('Bài giảng D', '0915159499', 'bai-giang-d.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng D</h4></button>
-                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase">Bài giảng E</h4></div>
-                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase">Bài giảng F</h4></div>
-                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase">Bài giảng G</h4></div>
-                <div class="lecture-box opacity-20 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase">Bài giảng H</h4></div>
+                <button onclick="openGate('Bài giảng A', '0915159499', 'a.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng A</h4></button>
+                <button onclick="openGate('Bài giảng B', '0915159499', 'b.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng B</h4></button>
+                <button onclick="openGate('Bài giảng C', '0915159499', 'c.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng C</h4></button>
+                <button onclick="openGate('Bài giảng D', '0915159499', 'd.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng D</h4></button>
+                <div class="lecture-box opacity-10 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng E</h4></div>
+                <div class="lecture-box opacity-10 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng F</h4></div>
+                <div class="lecture-box opacity-10 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng G</h4></div>
+                <div class="lecture-box opacity-10 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng H</h4></div>
             </div>
         </div>
 
         <div class="w-full max-w-3xl text-center mb-32 stagger" style="animation-delay: 1.4s">
             <div class="p-12 md:p-24 bg-black/50 border border-[#E0AA79]/20 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5 text-[60px] text-stone-300"><i class="fas fa-quote-right"></i></div>
                 <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Tài liệu Chuyên gia</h2>
                 <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm relative z-10 mx-auto">
                     <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] tracking-[0.2em] font-bold">Tải về ngay</button>
                     <button onclick="document.getElementById('registerModal').style.display='flex'" class="flex-1 py-5 bg-black/30 border border-[#E0AA79]/50 text-[10px] tracking-[0.2em]">Đăng ký mới</button>
                 </div>
-                <div class="mt-20 pt-12 border-t border-[#E0AA79]/20 text-center">
-                    <span class="text-[8px] tracking-[0.3em] uppercase opacity-50 block mb-6 font-medium">Đối tác kết nối (Real-time)</span>
+                <div class="mt-20 pt-12 border-t border-[#E0AA79]/10 w-full text-center">
+                    <span class="text-[8px] tracking-[0.3em] uppercase opacity-50 block mb-6 font-medium">Đối tác kết nối</span>
                     <span id="loginCount" class="counter-box">00006875</span>
                 </div>
             </div>
         </div>
 
         <div class="w-full max-w-5xl border-t border-[#E0AA79]/20 pt-16 mb-20 stagger" style="animation-delay: 1.6s">
-            <div class="contact-grid justify-items-center">
-                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Phone'})" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-phone-alt opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Phone</span></a>
-                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', {'type': 'Email'})" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-envelope opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Email</span></a>
-                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Zalo'})" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fas fa-comment-dots opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Zalo</span></a>
-                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Facebook'})" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fab fa-facebook-f opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Facebook</span></a>
-                <a href="#" onclick="alert('Youtube: Chú sẽ cập nhật link sau'); return false;" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fab fa-youtube opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">Youtube</span></a>
-                <a href="#" onclick="alert('LinkedIn: Chú sẽ cập nhật link sau'); return false;" class="p-6 w-full flex flex-col items-center gap-4 zen-link-effect bg-black/30 border border-[#E0AA79]/20"><i class="fab fa-linkedin-in opacity-60 text-sm"></i><span class="text-[9px] uppercase tracking-[0.3em]">LinkedIn</span></a>
+            <div class="contact-grid">
+                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Phone'})" class="contact-btn"><i class="fas fa-phone-alt text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Phone</span></a>
+                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', {'type': 'Email'})" class="contact-btn"><i class="fas fa-envelope text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Email</span></a>
+                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Zalo'})" class="contact-btn"><i class="fas fa-comment-dots text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Zalo</span></a>
+                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Facebook'})" class="contact-btn"><i class="fab fa-facebook-f text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Facebook</span></a>
+                <a href="#" class="contact-btn opacity-40"><i class="fab fa-youtube text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Youtube</span></a>
+                <a href="#" class="contact-btn opacity-40"><i class="fab fa-linkedin-in text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">LinkedIn</span></a>
             </div>
         </div>
     </main>
 
-    <footer class="p-16 flex flex-col items-center stagger">
-        <div class="footer-fixed uppercase mb-4">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
+    <footer class="p-16 flex flex-col items-center stagger" style="animation-delay: 1.8s">
         <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="signature-img">
+        <div class="footer-fixed uppercase">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
     </footer>
 
     <div id="registerModal" class="modal-overlay">
-        <div class="max-w-md w-full p-12 bg-[#1a1a1a] border border-white/10 text-center">
+        <div class="max-w-md w-full p-12 bg-[#1a1a1a] border border-white/10 text-center shadow-2xl">
             <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Đăng ký Tư vấn / Kết nối</h3>
             <form onsubmit="handleRegSubmit(event)">
                 <input id="regName" type="text" placeholder="Họ và Tên" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-6 focus:outline-none focus:border-[#E0AA79]">
                 <input id="regPhone" type="tel" placeholder="Số điện thoại" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-10 focus:outline-none focus:border-[#E0AA79]">
                 <div class="flex gap-6 justify-center">
-                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white">Đóng</button>
+                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white transition">Đóng</button>
                     <button type="submit" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30">Gửi đi</button>
                 </div>
             </form>
@@ -410,19 +464,39 @@
 
     <script>
         let currentTarget = ""; let currentCode = "";
-        function updateDisplay() { let count = localStorage.getItem('loginCount') || 6875; document.getElementById('loginCount').innerText = count.toString().padStart(8, '0'); }
+        
+        function updateDisplay() { 
+            let count = localStorage.getItem('loginCount') || 6875;
+            document.getElementById('loginCount').innerText = count.toString().padStart(8, '0');
+        }
+
         function openQRModal() { document.getElementById('qrCardModal').style.display = 'flex'; gtag('event', 'view_qr_card'); }
         function closeQRModal(e) { if(e.target.id === 'qrCardModal') { document.getElementById('qrCardModal').style.display = 'none'; } }
-        function openGate(name, code, url) { document.getElementById('modalTitle').innerText = "Xác thực định danh: " + name; document.getElementById('passwordModal').style.display = 'flex'; currentTarget = url; currentCode = code; }
+
+        function openGate(name, code, url) { 
+            document.getElementById('modalTitle').innerText = "Xác thực định danh: " + name;
+            document.getElementById('passwordModal').style.display = 'flex'; 
+            currentTarget = url; currentCode = code; 
+        }
+
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
         function validateAccess() {
             if (document.getElementById('passInput').value === currentCode) {
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
                 localStorage.setItem('loginCount', count); updateDisplay();
-                gtag('event', 'unlock_content', { 'content_name': currentTarget }); window.location.href = currentTarget;
-            } else { const err = document.getElementById('errorMsg'); err.style.opacity = 1; setTimeout(() => err.style.opacity = 0, 2000); }
+                gtag('event', 'unlock_content', { 'content_name': currentTarget });
+                window.location.href = currentTarget;
+            } else { 
+                const err = document.getElementById('errorMsg'); err.style.opacity = 1;
+                setTimeout(() => err.style.opacity = 0, 2000);
+            }
         }
-        function handleRegSubmit(e) { e.preventDefault(); gtag('event', 'sign_up'); alert('Đã nhận yêu cầu. Chúng tôi sẽ liên hệ lại sớm nhất.'); closeModal('registerModal'); }
+
+        function handleRegSubmit(e) {
+            e.preventDefault(); gtag('event', 'sign_up'); alert('Đã nhận yêu cầu. Chúng tôi sẽ liên hệ lại sớm nhất.'); closeModal('registerModal');
+        }
+
         updateDisplay();
     </script>
 </body>
