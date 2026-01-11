@@ -17,7 +17,10 @@
 
     <meta name="description" content="Nguyễn Tấn Phong - Chuyên gia Kinh tế số, Trọng tài viên, tư vấn Pháp luật và Bất động sản.">
     <meta property="og:title" content="Nguyễn Tấn Phong | TRI THỨC • PHÁP LUẬT • CÔNG NGHỆ">
-    <meta property="og:image" content="avatar-nguyentanphong.jpg">
+    <meta property="og:description" content="Chuyên gia Kinh tế số & Pháp luật.">
+    <meta property="og:image" content="https://nguyentanphong.com/avatar-nguyentanphong.jpg">
+    <meta property="og:url" content="https://nguyentanphong.com">
+    <meta property="og:type" content="website">
 
     <script type="application/ld+json">
     {
@@ -27,7 +30,7 @@
       "url": "https://nguyentanphong.com",
       "image": "https://nguyentanphong.com/avatar-nguyentanphong.jpg",
       "jobTitle": "Chuyên gia Kinh tế số & Pháp luật",
-      "description": "Chuyên gia tư vấn chiến lược Thương mại điện tử, Trọng tài viên thương mại quốc tế. Chuyên gia phối hợp cùng A05/PA05.",
+      "description": "Chuyên gia tư vấn chiến lược Thương mại điện tử, Trọng tài viên thương mại quốc tế. Chuyên gia phối hợp cùng A05/PA05 trong đào tạo an ninh mạng và điều phối chiến dịch 'Không Một Mình'.",
       "sameAs": [
         "https://facebook.com/tanphong1981",
         "https://zalo.me/0915159499",
@@ -82,7 +85,7 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* LỀ 20% CHO DI ĐỘNG */
+        /* LỀ 20% CHO DI ĐỘNG (10% MỖI BÊN) */
         main {
             padding-left: 10%;
             padding-right: 10%;
@@ -93,7 +96,7 @@
             main { padding-left: 0; padding-right: 0; }
         }
 
-        /* TYPOGRAPHY FIXES */
+        /* HEADER CANH GIỮA TUYỆT ĐỐI */
         .header-fixed {
             display: flex;
             justify-content: center;
@@ -106,6 +109,7 @@
             color: #AAA;
         }
 
+        /* FOOTER CANH GIỮA TUYỆT ĐỐI */
         .footer-fixed {
             display: flex;
             justify-content: center;
@@ -117,6 +121,7 @@
             color: #888;
         }
 
+        /* TÊN CHUYÊN GIA */
         .name-fixed {
             white-space: nowrap;
             font-weight: 300;
@@ -125,7 +130,7 @@
             color: var(--zen-copper);
         }
 
-        /* BUTTONS STYLING */
+        /* NÚT HÀNH ĐỘNG ĐỒNG BỘ */
         .zen-btn {
             padding: 12px 32px;
             background-color: transparent;
@@ -148,6 +153,7 @@
         }
         .zen-btn i { margin-right: 12px; opacity: 0.6; }
 
+        /* HIỆU ỨNG LIÊN KẾT */
         .zen-link-effect {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -158,7 +164,7 @@
             transform: translateY(-5px);
         }
 
-        /* PILLAR GRID & BOXES */
+        /* LƯỚI 5 TRỤ CỘT */
         .pillar-grid {
             display: grid;
             grid-template-cols: repeat(2, 1fr);
@@ -183,15 +189,28 @@
             text-align: center;
         }
 
-        /* LOGO BAR */
-        .logo-bar {
-            opacity: 0.5;
-            grayscale: 100%;
-            transition: 0.7s;
+        /* Ô BÀI GIẢNG & Ô LIÊN HỆ ĐỒNG BỘ */
+        .lecture-box, .contact-box-sync {
+            min-height: 120px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--zen-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            width: 100%;
         }
-        .logo-bar:hover { opacity: 1; grayscale: 0; }
+        .lecture-box:hover, .contact-box-sync:hover {
+            border-color: var(--zen-copper);
+            background-color: rgba(224, 170, 121, 0.08);
+            transform: translateY(-5px);
+        }
 
-        /* CONTACT HUB GRID (6 NÚT NỔI KHỐI) */
+        /* LƯỚI LIÊN HỆ 6 Ô: 2 DÒNG x 3 CỘT (MOBILE) | 1 DÒNG x 6 CỘT (PC) */
         .contact-grid {
             display: grid;
             grid-template-cols: repeat(3, 1fr);
@@ -201,55 +220,8 @@
         @media (min-width: 1024px) {
             .contact-grid { grid-template-cols: repeat(6, 1fr); gap: 15px; }
         }
-        
-        .contact-btn { 
-            aspect-ratio: 1/1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            background: linear-gradient(145deg, rgba(45,45,45,0.9), rgba(25,25,25,0.9)); 
-            border: 1px solid rgba(224, 170, 121, 0.15);
-            box-shadow: 5px 5px 12px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(255,255,255,0.03);
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .contact-btn:hover { 
-            transform: translateY(-5px) scale(1.02); 
-            border-color: var(--zen-copper); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(224,170,121,0.15);
-            color: var(--zen-copper);
-        }
 
-        /* INSIGHT & LECTURES */
-        .insight-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 0.5px solid var(--zen-border);
-            padding: 2.5rem;
-            transition: 0.4s;
-        }
-        .insight-card:hover { border-color: var(--zen-copper); background: rgba(0, 0, 0, 0.7); }
-
-        .lecture-box {
-            min-height: 120px;
-            background-color: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--zen-border);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .counter-box {
-            background: #000;
-            color: var(--zen-copper);
-            padding: 8px 24px;
-            border-radius: 2px;
-            letter-spacing: 0.4em;
-            border: 1px solid var(--zen-copper);
-            font-size: 0.9rem;
-        }
-
-        /* MODAL QR CARD 10 Ô (DASHBOARD) */
+        /* CARD MODAL GRID 10 Ô (5x2) */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -268,21 +240,30 @@
             aspect-ratio: 1 / 1;
             transition: 0.3s;
         }
-        .card-item:hover {
-            border-color: var(--zen-copper);
-            background: rgba(224, 170, 121, 0.1);
-        }
+        .card-item:hover { border-color: var(--zen-copper); background: rgba(224, 170, 121, 0.1); }
 
-        /* CHỮ KÝ TRẮNG */
+        /* FOOTER & CHỮ KÝ */
         .signature-img {
-            width: 11rem;
-            filter: brightness(0) invert(1);
+            width: 12rem;
+            filter: brightness(0) invert(1); /* CHUYỂN CHỮ KÝ SANG TRẮNG */
             opacity: 0.85;
             transition: 0.5s;
             margin-bottom: 1.5rem;
         }
-        .signature-img:hover { opacity: 1; transform: scale(1.02); }
+        .signature-img:hover { opacity: 1; transform: scale(1.05); }
 
+        /* BỘ ĐẾM LƯỢT TRUY CẬP */
+        .counter-box {
+            background: #000;
+            color: var(--zen-copper);
+            padding: 8px 24px;
+            border-radius: 2px;
+            letter-spacing: 0.4em;
+            border: 1px solid var(--zen-copper);
+            font-size: 0.9rem;
+        }
+
+        /* HIỆU ỨNG MODAL OVERLAY */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(20, 20, 20, 0.98); backdrop-filter: blur(20px); z-index: 100; align-items: center; justify-content: center; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -292,65 +273,64 @@
 <body class="min-h-screen flex flex-col">
 
     <div id="passwordModal" class="modal-overlay">
-        <div class="max-w-md w-full text-center p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl rounded-sm">
+        <div class="max-w-md w-full text-center p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl">
             <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Xác thực Định danh Đối tác</h3>
             <input type="password" id="passInput" placeholder="Mã số định danh..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none focus:border-[#E0AA79]">
             <div class="flex gap-6 justify-center">
                 <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white transition">Hủy bỏ</button>
-                <button onclick="validateAccess()" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 hover:bg-[#E0AA79]/40 transition">Xác nhận</button>
+                <button onclick="validateAccess()" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 transition">Xác nhận</button>
             </div>
             <p id="errorMsg" class="text-red-400 text-[9px] mt-6 opacity-0 uppercase">Mã truy cập không hợp lệ</p>
         </div>
     </div>
 
     <div id="qrCardModal" class="modal-overlay" onclick="closeQRModal(event)">
-        <div class="max-w-[600px] w-[90%] p-6 md:p-10 bg-[#1a1a1a] border border-[#E0AA79]/20 shadow-2xl text-center relative" onclick="event.stopPropagation()">
-            <button onclick="document.getElementById('qrCardModal').style.display='none'" class="absolute top-4 right-4 text-stone-500 hover:text-white transition">
-                <i class="fas fa-times text-xs"></i>
-            </button>
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">DANH THIẾP ĐIỆN TỬ - NGUYỄN TẤN PHONG</h3>
+        <div class="max-w-[600px] w-[90%] p-6 md:p-10 bg-[#1a1a1a] border border-[#E0AA79]/20 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="document.getElementById('qrCardModal').style.display='none'" class="absolute top-4 right-4 text-stone-500 hover:text-white transition"><i class="fas fa-times text-xs"></i></button>
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-center text-stone-400 tracking-[0.4em]">DANH THIẾP ĐIỆN TỬ</h3>
+            
             <div class="card-grid mx-auto">
                 <div class="col-span-2 row-span-2 bg-black/40 border border-[#E0AA79]/20 p-2 flex items-center justify-center overflow-hidden">
-                    <img src="qr-tanphong.png" alt="QR" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="qr-tanphong.png" alt="QR Code Nguyễn Tấn Phong" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
-                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Zalo_Card' })" class="card-item zen-link-effect">
+                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Zalo_Card'})" class="card-item zen-link-effect">
                     <i class="fas fa-comment-dots text-lg text-[#E0AA79]"></i>
                     <span class="text-[6px] uppercase mt-2">Zalo</span>
                 </a>
-                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Facebook_Card' })" class="card-item zen-link-effect">
+                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Facebook_Card'})" class="card-item zen-link-effect">
                     <i class="fab fa-facebook-f text-lg text-[#E0AA79]"></i>
                     <span class="text-[6px] uppercase mt-2">FB</span>
                 </a>
-                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', { 'type': 'Hotline_Card' })" class="card-item zen-link-effect">
+                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Hotline_Card'})" class="card-item zen-link-effect">
                     <i class="fas fa-phone-alt text-lg text-[#E0AA79]"></i>
                     <span class="text-[6px] uppercase mt-2">Call</span>
                 </a>
-                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', { 'type': 'Email_Card' })" class="card-item zen-link-effect">
+                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', {'type': 'Email_Card'})" class="card-item zen-link-effect">
                     <i class="fas fa-envelope text-lg text-[#E0AA79]"></i>
-                    <span class="text-[6px] uppercase mt-2">Mail</span>
+                    <span class="text-[6px] uppercase mt-2">Email</span>
                 </a>
-                <a href="#" class="card-item opacity-30 cursor-not-allowed">
+                <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect opacity-30">
                     <i class="fab fa-youtube text-lg"></i>
-                    <span class="text-[6px] uppercase mt-2">Youtube</span>
+                    <span class="text-[6px] uppercase mt-2">YT</span>
                 </a>
-                <a href="#" class="card-item opacity-30 cursor-not-allowed">
+                <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect opacity-30">
                     <i class="fab fa-linkedin-in text-lg"></i>
-                    <span class="text-[6px] uppercase mt-2">LinkedIn</span>
+                    <span class="text-[6px] uppercase mt-2">IN</span>
                 </a>
             </div>
-            <div class="mt-8 text-[8px] text-stone-600 uppercase tracking-widest">nguyentanphong.com • 0915.159.499</div>
+            <div class="mt-8 text-[8px] text-stone-600 uppercase tracking-widest text-center">nguyentanphong.com • 0915.159.499</div>
         </div>
     </div>
 
     <header class="p-12 md:p-20 flex justify-center stagger">
-        <div class="header-fixed uppercase">TRI THỨC - PHÁP LUẬT - CÔNG NGHỆ</div>
+        <div class="header-fixed uppercase font-medium">TRI THỨC - PHÁP LUẬT - CÔNG NGHỆ</div>
     </header>
 
     <main class="flex-grow flex flex-col items-center z-10">
         
         <div class="mb-12 stagger" style="animation-delay: 0.2s">
             <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-2 border-[#E0AA79]/30 mx-auto shadow-2xl">
-                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-1000">
+                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover">
             </div>
         </div>
 
@@ -381,34 +361,25 @@
             </div>
         </div>
 
-        <div class="w-full max-w-6xl mb-32 stagger" style="animation-delay: 1s">
-            <h2 class="text-[10px] font-semibold tracking-[0.5em] uppercase text-[#E0AA79] mb-12 border-b border-[#E0AA79]/20 pb-4">Góc nhìn & Trí thức Chuyên gia</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="insight-card zen-link-effect">
-                    <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">Kinh tế số / 2026</span>
-                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Trách nhiệm pháp lý của sàn TMĐT và KOL</h4>
-                    <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
-                </div>
-                <div class="insight-card zen-link-effect">
-                    <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">Bất động sản</span>
-                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Nhận diện rủi ro pháp lý địa ốc 2026</h4>
-                    <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
-                </div>
-                <div class="insight-card zen-link-effect">
-                    <span class="text-[8px] text-stone-400 uppercase tracking-widest mb-4 block">An ninh mạng</span>
-                    <h4 class="text-[10px] font-bold uppercase tracking-wider mb-6 leading-relaxed">Bảo vệ dữ liệu cá nhân trên không gian số</h4>
-                    <button class="text-[8px] text-[#E0AA79] uppercase tracking-[0.2em] font-semibold">Khám phá →</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-full max-w-6xl mb-32 text-center stagger" style="animation-delay: 1.2s">
-            <h2 class="text-[10px] font-medium tracking-[0.4em] mb-12 uppercase opacity-40">Thư viện Tri thức (8 Chuyên đề)</h2>
+        <div class="w-full max-w-6xl mb-32 text-center stagger" style="animation-delay: 1s">
+            <h2 class="text-[10px] font-medium tracking-[0.4em] mb-12 uppercase opacity-40">Thư viện Tri thức Chuyên gia</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <button onclick="openGate('Bài giảng A', '0915159499', 'a.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng A</h4></button>
-                <button onclick="openGate('Bài giảng B', '0915159499', 'b.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng B</h4></button>
-                <button onclick="openGate('Bài giảng C', '0915159499', 'c.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng C</h4></button>
-                <button onclick="openGate('Bài giảng D', '0915159499', 'd.html')" class="lecture-box zen-link-effect"><i class="fas fa-fingerprint text-[10px] opacity-40 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng D</h4></button>
+                <button onclick="openGate('Bài giảng A', '0915159499', 'a.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
+                    <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng A</h4>
+                </button>
+                <button onclick="openGate('Bài giảng B', '0915159499', 'b.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
+                    <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng B</h4>
+                </button>
+                <button onclick="openGate('Bài giảng C', '0915159499', 'c.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
+                    <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng C</h4>
+                </button>
+                <button onclick="openGate('Bài giảng D', '0915159499', 'd.html')" class="lecture-box zen-link-effect">
+                    <i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i>
+                    <h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng D</h4>
+                </button>
                 <div class="lecture-box opacity-10 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng E</h4></div>
                 <div class="lecture-box opacity-10 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng F</h4></div>
                 <div class="lecture-box opacity-10 grayscale cursor-not-allowed"><h4 class="text-[9px] font-bold uppercase tracking-widest">Bài giảng G</h4></div>
@@ -416,47 +387,65 @@
             </div>
         </div>
 
-        <div class="w-full max-w-3xl text-center mb-32 stagger" style="animation-delay: 1.4s">
+        <div class="w-full max-w-3xl text-center mb-32 stagger" style="animation-delay: 1.2s">
             <div class="p-12 md:p-24 bg-black/50 border border-[#E0AA79]/20 shadow-2xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-4 opacity-5 text-[60px] text-stone-300"><i class="fas fa-quote-right"></i></div>
-                <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Tài liệu Chuyên gia</h2>
-                <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm relative z-10 mx-auto">
-                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] tracking-[0.2em] font-bold">Tải về ngay</button>
-                    <button onclick="document.getElementById('registerModal').style.display='flex'" class="flex-1 py-5 bg-black/30 border border-[#E0AA79]/50 text-[10px] tracking-[0.2em]">Đăng ký mới</button>
+                <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Kho Tài liệu Chuyên môn</h2>
+                <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm mx-auto relative z-10">
+                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] tracking-[0.2em] font-bold transition hover:bg-[#FFFFFF]">Tải về ngay</button>
+                    <button onclick="document.getElementById('registerModal').style.display='flex'" class="flex-1 py-5 bg-black/30 border border-[#E0AA79]/50 text-[10px] tracking-[0.2em] transition hover:bg-[#E0AA79]/10">Đăng ký mới</button>
                 </div>
-                <div class="mt-20 pt-12 border-t border-[#E0AA79]/10 w-full text-center">
-                    <span class="text-[8px] tracking-[0.3em] uppercase opacity-50 block mb-6 font-medium">Đối tác kết nối</span>
+                <div class="mt-20 pt-12 border-t border-[#E0AA79]/10 text-center">
+                    <span class="text-[8px] tracking-[0.3em] uppercase opacity-50 block mb-6 font-medium">Đối tác kết nối (Real-time)</span>
                     <span id="loginCount" class="counter-box">00006875</span>
                 </div>
             </div>
         </div>
 
-        <div class="w-full max-w-5xl border-t border-[#E0AA79]/20 pt-16 mb-20 stagger" style="animation-delay: 1.6s">
+        <div class="w-full max-w-5xl border-t border-[#E0AA79]/20 pt-16 mb-20 stagger" style="animation-delay: 1.4s">
             <div class="contact-grid">
-                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Phone'})" class="contact-btn"><i class="fas fa-phone-alt text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Phone</span></a>
-                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', {'type': 'Email'})" class="contact-btn"><i class="fas fa-envelope text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Email</span></a>
-                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Zalo'})" class="contact-btn"><i class="fas fa-comment-dots text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Zalo</span></a>
-                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Facebook'})" class="contact-btn"><i class="fab fa-facebook-f text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Facebook</span></a>
-                <a href="#" class="contact-btn opacity-40"><i class="fab fa-youtube text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">Youtube</span></a>
-                <a href="#" class="contact-btn opacity-40"><i class="fab fa-linkedin-in text-lg text-[#E0AA79] mb-3"></i><span class="text-[8px] uppercase tracking-widest">LinkedIn</span></a>
+                <a href="tel:+84915159499" onclick="gtag('event', 'click_contact', {'type': 'Hotline'})" class="contact-box-sync">
+                    <i class="fas fa-phone-alt text-lg text-[#E0AA79] mb-4"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-widest">Hotline</span>
+                </a>
+                <a href="mailto:hello@nguyentanphong.com" onclick="gtag('event', 'click_contact', {'type': 'Email'})" class="contact-box-sync">
+                    <i class="fas fa-envelope text-lg text-[#E0AA79] mb-4"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-widest">Email</span>
+                </a>
+                <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Zalo'})" class="contact-box-sync">
+                    <i class="fas fa-comment-dots text-lg text-[#E0AA79] mb-4"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-widest">Zalo</span>
+                </a>
+                <a href="https://facebook.com/tanphong1981" target="_blank" onclick="gtag('event', 'click_contact', {'type': 'Facebook'})" class="contact-box-sync">
+                    <i class="fab fa-facebook-f text-lg text-[#E0AA79] mb-4"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-widest">Facebook</span>
+                </a>
+                <a href="#" class="contact-box-sync opacity-20 cursor-not-allowed">
+                    <i class="fab fa-youtube text-lg text-[#E0AA79] mb-4"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-widest">Youtube</span>
+                </a>
+                <a href="#" class="contact-box-sync opacity-20 cursor-not-allowed">
+                    <i class="fab fa-linkedin-in text-lg text-[#E0AA79] mb-4"></i>
+                    <span class="text-[9px] font-bold uppercase tracking-widest">LinkedIn</span>
+                </a>
             </div>
         </div>
     </main>
 
-    <footer class="p-16 flex flex-col items-center stagger" style="animation-delay: 1.8s">
+    <footer class="p-16 flex flex-col items-center stagger" style="animation-delay: 1.6s">
         <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="signature-img">
         <div class="footer-fixed uppercase">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
     </footer>
 
     <div id="registerModal" class="modal-overlay">
         <div class="max-w-md w-full p-12 bg-[#1a1a1a] border border-white/10 text-center shadow-2xl">
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Đăng ký Tư vấn / Kết nối</h3>
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Đăng ký Tư vấn / Kết nối Đối tác</h3>
             <form onsubmit="handleRegSubmit(event)">
                 <input id="regName" type="text" placeholder="Họ và Tên" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-6 focus:outline-none focus:border-[#E0AA79]">
                 <input id="regPhone" type="tel" placeholder="Số điện thoại" required class="w-full p-4 bg-white/5 border border-white/10 text-white text-sm mb-10 focus:outline-none focus:border-[#E0AA79]">
                 <div class="flex gap-6 justify-center">
-                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white transition">Đóng</button>
-                    <button type="submit" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30">Gửi đi</button>
+                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase tracking-widest opacity-50 text-white transition hover:opacity-100">Đóng</button>
+                    <button type="submit" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30 transition hover:bg-[#E0AA79]/40">Gửi thông tin</button>
                 </div>
             </form>
         </div>
@@ -465,26 +454,41 @@
     <script>
         let currentTarget = ""; let currentCode = "";
         
+        // Cập nhật bộ đếm lượt truy cập từ Local Storage
         function updateDisplay() { 
             let count = localStorage.getItem('loginCount') || 6875;
             document.getElementById('loginCount').innerText = count.toString().padStart(8, '0');
         }
 
-        function openQRModal() { document.getElementById('qrCardModal').style.display = 'flex'; gtag('event', 'view_qr_card'); }
-        function closeQRModal(e) { if(e.target.id === 'qrCardModal') { document.getElementById('qrCardModal').style.display = 'none'; } }
+        // Mở Modal Danh thiếp điện tử
+        function openQRModal() {
+            document.getElementById('qrCardModal').style.display = 'flex';
+            gtag('event', 'view_qr_card', { 'event_category': 'Engagement' });
+        }
 
+        // Đóng Modal Danh thiếp điện tử
+        function closeQRModal(e) {
+            if(e.target.id === 'qrCardModal') {
+                document.getElementById('qrCardModal').style.display = 'none';
+            }
+        }
+
+        // Mở Modal xác thực bài giảng/tài liệu
         function openGate(name, code, url) { 
-            document.getElementById('modalTitle').innerText = "Xác thực định danh: " + name;
+            document.getElementById('modalTitle').innerText = "Xác thực Quyền truy cập: " + name;
             document.getElementById('passwordModal').style.display = 'flex'; 
             currentTarget = url; currentCode = code; 
         }
 
+        // Đóng các loại Modal chung
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
+        // Kiểm tra mã định danh
         function validateAccess() {
             if (document.getElementById('passInput').value === currentCode) {
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
-                localStorage.setItem('loginCount', count); updateDisplay();
+                localStorage.setItem('loginCount', count); 
+                updateDisplay();
                 gtag('event', 'unlock_content', { 'content_name': currentTarget });
                 window.location.href = currentTarget;
             } else { 
@@ -493,10 +497,15 @@
             }
         }
 
+        // Xử lý Form đăng ký
         function handleRegSubmit(e) {
-            e.preventDefault(); gtag('event', 'sign_up'); alert('Đã nhận yêu cầu. Chúng tôi sẽ liên hệ lại sớm nhất.'); closeModal('registerModal');
+            e.preventDefault();
+            gtag('event', 'generate_lead', { 'method': 'Website Form' });
+            alert('Đã nhận yêu cầu. Chú Phong sẽ liên hệ lại với đối tác sớm nhất.');
+            closeModal('registerModal');
         }
 
+        // Khởi tạo bộ đếm khi trang tải xong
         updateDisplay();
     </script>
 </body>
