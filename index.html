@@ -27,7 +27,7 @@
       "url": "https://nguyentanphong.com",
       "image": "https://nguyentanphong.com/avatar-nguyentanphong.jpg",
       "jobTitle": "Chuyên gia Kinh tế số & Pháp luật",
-      "description": "Chuyên gia tư vấn chiến lược Thương mại điện tử, Trọng tài viên thương mại quốc tế. Chuyên gia phối hợp cùng A05/PA05.",
+      "description": "Chuyên gia tư vấn chiến lược Thương mại điện tử, Trọng tài viên thương mại quốc tế. Chuyên gia phối hợp cùng A05/PA05 trong đào tạo an ninh mạng và điều phối chiến dịch 'Không Một Mình'.",
       "sameAs": [
         "https://facebook.com/tanphong1981",
         "https://zalo.me/0915159499",
@@ -48,7 +48,8 @@
         "https://eagleacademy.vn/ccmg/",
         "https://www.hoasen.edu.vn/saudaihoc/truong-dai-hoc-hoa-sen-hsu-va-hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-huong-den-hop-tac-chat-che/",
         "https://tracent.com.vn/",
-        "https://www.ulaw.edu.vn"
+        "https://www.ulaw.edu.vn",
+        "https://www.vecomnet.vn/hiep-hoi-thuong-mai-dien-tu-viet-nam-vecom-ky-ket-hop-tac-toan-dien-cung-truong-dai-hoc-ngan-hang-tp-hcm"
       ],
       "affiliation": [
         { "@type": "Organization", "name": "Hiệp hội Thương mại điện tử Việt Nam (VECOM)" },
@@ -123,14 +124,15 @@
             color: var(--zen-copper);
         }
 
+        /* NÚT CHỨC NĂNG ĐỒNG BỘ */
         .zen-btn {
-            padding: 12px 32px;
+            padding: 12px 24px;
             background-color: transparent;
             border: 1px solid rgba(224, 170, 121, 0.4);
             color: var(--zen-copper);
             font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.2em;
             font-weight: 500;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-flex;
@@ -141,9 +143,10 @@
         .zen-btn:hover {
             background-color: rgba(224, 170, 121, 0.1);
             transform: translateY(-3px);
+            border-color: var(--zen-copper);
         }
         .zen-btn i {
-            margin-right: 12px;
+            margin-right: 10px;
             opacity: 0.6;
         }
 
@@ -180,42 +183,7 @@
             border: 1px solid var(--zen-border);
         }
 
-        .logo-bar {
-            opacity: 0.5;
-            grayscale: 100%;
-            transition: 0.7s;
-        }
-        .logo-bar:hover { opacity: 1; grayscale: 0; }
-
-        .insight-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 0.5px solid var(--zen-border);
-            padding: 2.5rem;
-            transition: 0.4s;
-        }
-        .insight-card:hover { border-color: var(--zen-copper); background: rgba(0, 0, 0, 0.7); }
-
-        .lecture-box {
-            min-height: 120px;
-            background-color: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--zen-border);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .counter-box {
-            background: #000;
-            color: var(--zen-copper);
-            padding: 8px 24px;
-            border-radius: 2px;
-            letter-spacing: 0.4em;
-            border: 1px solid var(--zen-copper);
-            font-size: 0.9rem;
-        }
-
-        /* CSS CHO MODAL DANH THIẾP ĐIỆN TỬ */
+        /* LOGO GRID DANH THIẾP */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -224,7 +192,6 @@
             width: 100%;
             max-width: 500px;
         }
-
         .card-item {
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--zen-border);
@@ -238,6 +205,26 @@
         .card-item:hover {
             border-color: var(--zen-copper);
             background: rgba(224, 170, 121, 0.1);
+        }
+
+        /* CHỮ KÝ ĐỒNG MÀU */
+        .signature-img {
+            width: 12rem;
+            opacity: 0.8;
+            filter: brightness(0) saturate(100%) invert(79%) sepia(61%) saturate(448%) hue-rotate(333deg) brightness(91%) contrast(86%);
+            transition: opacity 0.5s;
+            margin-top: 1.5rem;
+        }
+        .signature-img:hover { opacity: 1; }
+
+        .counter-box {
+            background: #000;
+            color: var(--zen-copper);
+            padding: 8px 24px;
+            border-radius: 2px;
+            letter-spacing: 0.4em;
+            border: 1px solid var(--zen-copper);
+            font-size: 0.9rem;
         }
 
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(20, 20, 20, 0.98); backdrop-filter: blur(20px); z-index: 100; align-items: center; justify-content: center; }
@@ -265,14 +252,11 @@
             <button onclick="document.getElementById('qrCardModal').style.display='none'" class="absolute top-4 right-4 text-stone-500 hover:text-white transition">
                 <i class="fas fa-times text-xs"></i>
             </button>
-            
             <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">DANH THIẾP ĐIỆN TỬ - NGUYỄN TẤN PHONG</h3>
-            
             <div class="card-grid mx-auto">
                 <div class="col-span-2 row-span-2 bg-black/40 border border-[#E0AA79]/20 p-2 flex items-center justify-center overflow-hidden">
                     <img src="qr-tanphong.png" alt="QR Code" class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
-
                 <a href="https://zalo.me/0915159499" target="_blank" onclick="gtag('event', 'click_contact', { 'type': 'Zalo_Card' })" class="card-item zen-link-effect">
                     <i class="fas fa-comment-dots text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">Zalo</span>
@@ -289,19 +273,16 @@
                     <i class="fas fa-envelope text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">Email</span>
                 </a>
-                <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect">
+                <a href="#" onclick="alert('Youtube: Thông tin đang cập nhật'); return false;" class="card-item zen-link-effect">
                     <i class="fab fa-youtube text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">Youtube</span>
                 </a>
-                <a href="#" onclick="alert('Chức năng đang cập nhật'); return false;" class="card-item zen-link-effect">
+                <a href="#" onclick="alert('LinkedIn: Thông tin đang cập nhật'); return false;" class="card-item zen-link-effect">
                     <i class="fab fa-linkedin-in text-lg text-[#E0AA79]"></i>
                     <span class="text-[7px] uppercase mt-2">LinkedIn</span>
                 </a>
             </div>
-
-            <div class="mt-10 text-[8px] text-[#E0AA79]/60 uppercase tracking-widest">
-                nguyentanphong.com • 0915.159.499
-            </div>
+            <div class="mt-10 text-[8px] text-[#E0AA79]/60 uppercase tracking-widest">nguyentanphong.com • 0915.159.499</div>
         </div>
     </div>
 
@@ -320,15 +301,21 @@
         <h1 class="name-fixed text-center mb-8 uppercase stagger" style="animation-delay: 0.4s">Nguyễn Tấn Phong</h1>
         <div class="w-16 h-[0.5px] bg-[#E0AA79]/50 mb-8 stagger" style="animation-delay: 0.4s"></div>
 
-        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 justify-center items-center w-full px-4" style="animation-delay: 0.5s">
-            <button onclick="openQRModal()" class="zen-btn w-full md:w-auto">
+        <div class="mb-16 stagger flex flex-wrap gap-4 justify-center items-center w-full px-4" style="animation-delay: 0.5s">
+            <button onclick="openQRModal()" class="zen-btn">
                 <i class="fas fa-qrcode"></i>Danh thiếp điện tử
             </button>
-            <button onclick="document.getElementById('registerModal').style.display='flex'; gtag('event', 'click_consultation')" class="zen-btn w-full md:w-auto">
+            <button onclick="document.getElementById('registerModal').style.display='flex'; gtag('event', 'click_consultation')" class="zen-btn">
                 <i class="fas fa-edit"></i>Đăng ký tư vấn
             </button>
-            <a href="#" target="_blank" onclick="gtag('event', 'click_profile')" class="zen-btn w-full md:w-auto text-center">
+            <a href="#" target="_blank" onclick="gtag('event', 'click_profile')" class="zen-btn">
                 <i class="fas fa-file-pdf"></i>Hồ sơ năng lực
+            </a>
+            <a href="#" target="_blank" onclick="gtag('event', 'click_linkedin')" class="zen-btn">
+                <i class="fab fa-linkedin-in"></i>LinkedIn
+            </a>
+            <a href="#" target="_blank" onclick="gtag('event', 'click_youtube')" class="zen-btn">
+                <i class="fab fa-youtube"></i>YouTube
             </a>
         </div>
 
@@ -423,7 +410,7 @@
                 <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Tài liệu Chuyên gia</h2>
                 <p class="text-[9px] text-[#E0AA79]/80 uppercase tracking-widest mb-16 italic font-light">Cẩm nang Pháp lý & Kinh tế số 2026</p>
                 <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm relative z-10">
-                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] tracking-[0.2em] uppercase zen-link-effect font-bold box-shadow-xl">Tải về ngay</button>
+                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com/drive/folders/1zhCr77LZOaaWJMby6P4C5TmqluKl2reR?usp=sharing')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] tracking-[0.2em] uppercase zen-link-effect font-bold shadow-xl">Tải về ngay</button>
                     <button onclick="document.getElementById('registerModal').style.display='flex'" class="flex-1 py-5 bg-black/30 border border-[#E0AA79]/50 text-[10px] tracking-[0.2em] uppercase zen-link-effect">Đăng ký mới</button>
                 </div>
                 <div class="mt-20 pt-12 border-t border-[#E0AA79]/20 w-full text-center">
@@ -444,8 +431,8 @@
     </main>
 
     <footer class="p-16 flex flex-col items-center stagger">
-        <div class="footer-fixed uppercase mb-6">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
-        <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="w-48 opacity-80">
+        <div class="footer-fixed uppercase mb-4">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
+        <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="signature-img">
     </footer>
 
     <div id="registerModal" class="modal-overlay">
@@ -464,50 +451,19 @@
 
     <script>
         let currentTarget = ""; let currentCode = "";
-        
-        function updateDisplay() { 
-            let count = localStorage.getItem('loginCount') || 6875;
-            document.getElementById('loginCount').innerText = count.toString().padStart(8, '0');
-        }
-
-        function openQRModal() {
-            document.getElementById('qrCardModal').style.display = 'flex';
-            gtag('event', 'view_qr_card', { 'event_category': 'Engagement' });
-        }
-
-        function closeQRModal(e) {
-            if(e.target.id === 'qrCardModal') {
-                document.getElementById('qrCardModal').style.display = 'none';
-            }
-        }
-
-        function openGate(name, code, url) { 
-            document.getElementById('modalTitle').innerText = "Xác thực định danh: " + name;
-            document.getElementById('passwordModal').style.display = 'flex'; 
-            currentTarget = url; currentCode = code; 
-        }
-
+        function updateDisplay() { let count = localStorage.getItem('loginCount') || 6875; document.getElementById('loginCount').innerText = count.toString().padStart(8, '0'); }
+        function openQRModal() { document.getElementById('qrCardModal').style.display = 'flex'; gtag('event', 'view_qr_card'); }
+        function closeQRModal(e) { if(e.target.id === 'qrCardModal') { document.getElementById('qrCardModal').style.display = 'none'; } }
+        function openGate(name, code, url) { document.getElementById('modalTitle').innerText = "Xác thực định danh: " + name; document.getElementById('passwordModal').style.display = 'flex'; currentTarget = url; currentCode = code; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
         function validateAccess() {
             if (document.getElementById('passInput').value === currentCode) {
                 let count = parseInt(localStorage.getItem('loginCount') || 6875) + 1;
                 localStorage.setItem('loginCount', count); updateDisplay();
-                gtag('event', 'unlock_content', { 'content_name': currentTarget });
-                window.location.href = currentTarget;
-            } else { 
-                const err = document.getElementById('errorMsg'); err.style.opacity = 1;
-                setTimeout(() => err.style.opacity = 0, 2000);
-            }
+                gtag('event', 'unlock_content', { 'content_name': currentTarget }); window.location.href = currentTarget;
+            } else { const err = document.getElementById('errorMsg'); err.style.opacity = 1; setTimeout(() => err.style.opacity = 0, 2000); }
         }
-
-        function handleRegSubmit(e) {
-            e.preventDefault();
-            gtag('event', 'sign_up', { 'method': 'Website Form' });
-            alert('Đã nhận yêu cầu. Chúng tôi sẽ liên hệ lại sớm nhất.');
-            closeModal('registerModal');
-        }
-
+        function handleRegSubmit(e) { e.preventDefault(); gtag('event', 'sign_up'); alert('Đã nhận yêu cầu kết nối đối tác.'); closeModal('registerModal'); }
         updateDisplay();
     </script>
 </body>
