@@ -1,281 +1,716 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nguyễn Tấn Phong | TRI THỨC - PHÁP LUẬT - CÔNG NGHỆ</title>
-    
-    <meta name="google-site-verification" content="sJw3mavjnDOT8pJS4dhfcNW53G4NM4bc0sBu-ertx4g" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4WM8D9SK71"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSGA — Hoa Sen Graduate Alumni · Câu lạc bộ Hội viên</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --zen-bg: #2C2C2C;
+    --zen-text: #FFFFFF;
+    --zen-copper: #E0AA79;
+    --zen-border: rgba(224, 170, 121, 0.25);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--zen-bg);
+    color: var(--zen-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    margin: 0;
+  }
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Nguyễn Tấn Phong",
-      "url": "https://nguyentanphong.com",
-      "image": "https://nguyentanphong.com/avatar-nguyentanphong.jpg",
-      "jobTitle": "Chuyên gia Kinh tế số & Pháp luật",
-      "sameAs": [
-        "https://facebook.com/tanphong1981", "https://zalo.me/0915159499",
-        "https://www.linkedin.com/in/nguyentanphong", "http://www.youtube.com/@danmannong",
-        "https://nld.com.vn/dung-bam-nut-dong-y-chia-se-du-lieu-ca-nhan-cho-mang-xa-hoi-neu-chua-doc-dieu-nay-196251231174759209.htm",
-        "https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm",
-        "https://nld.com.vn/chan-chinh-livestream-ban-hang-196250307215235956.htm",
-        "https://nld.com.vn/nguoi-ban-hang-gia-lam-quang-cao-gioi-hun-nguoi-ban-hang-that-196250702120716556.htm",
-        "https://thitruong.nld.com.vn/dia-oc/uu-nhuoc-diem-khi-dau-tu-dat-nen-nam-2017-tai-tp-hcm-20170205233759712.htm",
-        "https://tuoitre.vn/kiem-tra-xu-ly-hang-gia-rat-gian-nan-moi-den-cho-da-bi-theo-doi-20250702170347843.htm",
-        "https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html",
-        "https://vnexpress.net/dau-tu-homestay-ven-sai-gon-de-tich-luy-dat-3970522.html",
-        "https://vnexpress.net/5-uu-nhuoc-diem-cua-dau-tu-dat-nen-sai-gon-nam-2017-3536376.html",
-        "https://thanhnien.vn/phat-trien-thuong-mai-dien-tu-ben-vung-18524052110254321.htm",
-        "https://tienphong.vn/bao-ve-nguoi-tieu-dung-tren-san-thuong-mai-dien-tu-post1651234.tpo",
-        "https://plo.vn/quan-ly-thue-va-phap-ly-voi-nguoi-ban-hang-livestream-post789123.html",
-        "https://congthuong.vn/dua-san-pham-ocop-len-gian-hang-viet-truc-tuyen-324567.html",
-        "https://vecom.vn/ban-chap-hanh", "https://eagleacademy.vn/ccmg/", "https://tracent.com.vn/", "https://www.ulaw.edu.vn"
-      ],
-      "affiliation": [{ "@type": "Organization", "name": "VECOM" }, { "@type": "Organization", "name": "PA05 & A05" }]
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .lang-section {
+    width: 100%;
+    border-bottom: 1px solid var(--zen-border);
+    padding: 15px 10%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+  .lang-btn {
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .lang-btn.active, .lang-btn:hover { color: var(--zen-copper); }
+
+  .slogan-copper {
+    color: var(--zen-copper);
+    text-align: center;
+    font-size: clamp(8px, 2.3vw, 11px);
+    letter-spacing: 0.6em;
+    text-indent: 0.6em;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .footer-copper {
+    color: var(--zen-copper);
+    text-align: center;
+    font-size: clamp(6px, 1.8vw, 8px);
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .name-modern {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 14vw, 8.5rem);
+    color: var(--zen-copper);
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    font-weight: 200;
+    text-transform: uppercase;
+    text-align: center;
+    background: linear-gradient(110deg, #E0AA79 0%, #f5d5a0 25%, #ffffff 50%, #f5d5a0 75%, #E0AA79 100%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 8s ease infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .subtitle-zen {
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    font-size: clamp(9px, 1.8vw, 11px);
+    letter-spacing: 0.4em;
+    text-indent: 0.4em;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  /* ===== HSU LOGO TO HƠN ===== */
+  .hsu-logo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid var(--zen-border);
+    background: radial-gradient(circle at center, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: var(--zen-copper);
+    font-weight: 200;
+    font-size: 40px;
+    letter-spacing: 0.25em;
+    text-indent: 0.25em;
+    box-shadow:
+      0 0 80px rgba(224, 170, 121, 0.25),
+      inset 0 0 60px rgba(0,0,0,0.5);
+    position: relative;
+    animation: logoGlow 5s ease-in-out infinite;
+  }
+  .hsu-logo::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px solid rgba(224, 170, 121, 0.2);
+  }
+  .hsu-logo::after {
+    content: "";
+    position: absolute;
+    inset: -24px;
+    border-radius: 50%;
+    border: 1px solid rgba(224, 170, 121, 0.1);
+  }
+  @keyframes logoGlow {
+    0%, 100% { box-shadow: 0 0 80px rgba(224,170,121,0.25), inset 0 0 60px rgba(0,0,0,0.5); }
+    50% { box-shadow: 0 0 120px rgba(224,170,121,0.45), inset 0 0 60px rgba(0,0,0,0.5); }
+  }
+
+  /* ===== STAR FIELD ===== */
+  .constellation {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 620px;
+    margin: 60px auto;
+  }
+
+  /* Sao to hơn + nhấp nháy */
+  .star {
+    position: absolute;
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(224,170,121,0.25), rgba(0,0,0,0.6) 70%);
+    border: 1px solid var(--zen-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--zen-copper);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    animation: floatStar 14s ease-in-out infinite, twinkle 3s ease-in-out infinite;
+  }
+  /* Vòng quầng pulse */
+  .star::before {
+    content: "";
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    border: 1px solid rgba(224, 170, 121, 0.18);
+    animation: pulseRing 4s ease-in-out infinite;
+  }
+  /* Vòng quầng thứ hai */
+  .star::after {
+    content: "";
+    position: absolute;
+    inset: -28px;
+    border-radius: 50%;
+    border: 1px solid rgba(224, 170, 121, 0.08);
+    animation: pulseRing 4s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+  .star:hover {
+    transform: scale(1.25);
+    border-color: var(--zen-copper);
+    background: radial-gradient(circle at 35% 35%, rgba(224,170,121,0.5), rgba(0,0,0,0.6) 70%);
+    box-shadow: 0 0 60px rgba(224, 170, 121, 0.7);
+    z-index: 20;
+    animation-play-state: paused;
+  }
+  .star .star-tooltip {
+    position: absolute;
+    bottom: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.95);
+    border: 1px solid var(--zen-border);
+    color: var(--zen-copper);
+    padding: 10px 16px;
+    font-size: 8.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 30;
+  }
+  .star .star-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--zen-border);
+  }
+  .star:hover .star-tooltip { opacity: 1; }
+
+  .star .star-init {
+    font-weight: 600;
+    line-height: 1;
+  }
+  .star .star-role {
+    font-size: 6.5px;
+    color: rgba(224, 170, 121, 0.6);
+    margin-top: 4px;
+    letter-spacing: 0.15em;
+  }
+
+  @keyframes floatStar {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(10px, -14px); }
+    50% { transform: translate(-6px, -22px); }
+    75% { transform: translate(-12px, -8px); }
+  }
+  @keyframes twinkle {
+    0%, 100% {
+      filter: brightness(1);
+      box-shadow: 0 0 12px rgba(224, 170, 121, 0.3);
     }
-    </script>
+    50% {
+      filter: brightness(1.4);
+      box-shadow: 0 0 30px rgba(224, 170, 121, 0.6);
+    }
+  }
+  @keyframes pulseRing {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.15); }
+  }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root { --zen-bg: #2C2C2C; --zen-text: #FFFFFF; --zen-copper: #E0AA79; --zen-border: rgba(224, 170, 121, 0.25); }
-        body { font-family: 'Inter', sans-serif; background: var(--zen-bg); color: var(--zen-text); line-height: 1.6; overflow-x: hidden; position: relative; }
-        
-        /* NỀN ZEN SÓNG NƯỚC (15% ĐẬM NÉT) */
-        body::before { content: ""; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E"); pointer-events: none; z-index: -1; }
+  .zen-box {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--zen-border);
+    transition: 0.4s;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .zen-box:hover {
+    border-color: var(--zen-copper);
+    background: rgba(224, 170, 121, 0.08);
+    transform: translateY(-5px);
+  }
 
-        /* HEADER & NGÔN NGỮ */
-        .lang-section { width: 100%; border-bottom: 1px solid var(--zen-border); padding: 15px 10%; display: flex; justify-content: flex-end; gap: 15px; }
-        .lang-btn { font-size: 9px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
-        .lang-btn.active, .lang-btn:hover { color: var(--zen-copper); }
+  /* MEMBER CARD */
+  .member-card {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--zen-border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .member-card.chairman {
+    border-color: rgba(224, 170, 121, 0.5);
+    background: linear-gradient(180deg, rgba(224,170,121,0.08), rgba(0,0,0,0.4));
+  }
+  .member-card.chairman::before {
+    content: "CHỦ NHIỆM";
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--zen-copper);
+    color: #2C2C2C;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 4px 14px;
+    letter-spacing: 0.2em;
+  }
+  .member-card:hover {
+    border-color: var(--zen-copper);
+    background: rgba(224, 170, 121, 0.06);
+    transform: translateY(-5px);
+  }
+  .member-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1px solid var(--zen-border);
+    background: rgba(224, 170, 121, 0.08);
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--zen-copper);
+    font-size: 22px;
+    font-weight: 200;
+    letter-spacing: 0.1em;
+  }
+  .member-name {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+    color: #fff;
+    min-height: 36px;
+  }
+  .member-role {
+    font-size: 8px;
+    color: var(--zen-copper);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 10px;
+    min-height: 28px;
+  }
+  .member-org {
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    flex-grow: 1;
+  }
+  .member-cohort {
+    font-size: 7.5px;
+    color: var(--zen-copper);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding-top: 12px;
+    border-top: 1px solid rgba(224, 170, 121, 0.15);
+    opacity: 0.7;
+  }
 
-        /* TYPOGRAPHY ĐỒNG BỘ */
-        .slogan-copper { color: var(--zen-copper); text-align: center; font-size: clamp(8px, 2.3vw, 10px); letter-spacing: 0.6em; text-indent: 0.6em; font-weight: 500; text-transform: uppercase; }
-        .footer-copper { color: var(--zen-copper); text-align: center; font-size: clamp(6px, 1.8vw, 8px); letter-spacing: 0.5em; text-indent: 0.5em; font-weight: 400; text-transform: uppercase; }
+  .zen-btn {
+    padding: 14px 36px;
+    border: 1px solid rgba(224, 170, 121, 0.4);
+    color: var(--zen-copper);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    transition: 0.5s;
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .zen-btn:hover {
+    background: rgba(224, 170, 121, 0.1);
+    transform: translateY(-3px);
+  }
 
-        /* TÊN CHUYÊN GIA - SANS SERIF TRANG TRỌNG */
-        .name-modern {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(1.4rem, 7vw, 3rem);
-            color: var(--zen-copper);
-            letter-spacing: 0.3em;
-            text-indent: 0.3em;
-            font-weight: 300;
-            text-transform: uppercase;
-            text-align: center;
-        }
+  .stagger { opacity: 0; animation: fadeUp 1.2s forwards; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-        /* BOX STYLES */
-        .zen-box { min-height: 120px; background: rgba(0,0,0,0.4); border: 1px solid var(--zen-border); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; text-align: center; width: 100%; }
-        .zen-box:hover { border-color: var(--zen-copper); background: rgba(224, 170, 121, 0.08); transform: translateY(-5px); }
-        
-        /* PILLAR GRID MOBILE OPTIMIZATION */
-        .pillar-grid { display: grid; grid-template-cols: 1fr; gap: 1rem; margin-bottom: 6rem; width: 100%; max-width: 7xl; }
-        @media (min-width: 640px) { .pillar-grid { grid-template-cols: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .pillar-grid { grid-template-cols: repeat(5, 1fr); gap: 2rem; } }
-        .pillar-box { min-height: 200px; background: rgba(0,0,0,0.5); padding: 1.5rem; }
+  .section-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+    text-transform: uppercase;
+    color: var(--zen-copper);
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--zen-border);
+  }
+  .section-sub {
+    font-size: 8px;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
 
-        .zen-btn { padding: 12px 32px; border: 1px solid rgba(224, 170, 121, 0.4); color: var(--zen-copper); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; transition: 0.5s; display: inline-flex; align-items: center; white-space: nowrap; }
-        .zen-btn:hover { background: rgba(224, 170, 121, 0.1); transform: translateY(-3px); }
-
-        .contact-grid-layout { display: grid; grid-template-cols: repeat(3, 1fr); gap: 12px; width: 100%; }
-        @media (min-width: 1024px) { .contact-grid-layout { grid-template-cols: repeat(6, 1fr); gap: 15px; } }
-
-        .signature-img { width: 11rem; filter: brightness(0) invert(1); opacity: 0.85; margin-bottom: 1.5rem; }
-        .scroll-to-top { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: rgba(0,0,0,0.6); border: 1px solid var(--zen-border); color: var(--zen-copper); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: 0.4s; z-index: 999; }
-        .scroll-to-top.show { opacity: 1; visibility: visible; }
-        
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(20,20,20,0.98); backdrop-filter: blur(20px); z-index: 1000; align-items: center; justify-content: center; }
-        .stagger { opacity: 0; animation: fadeUp 1.2s forwards; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+  @media (max-width: 768px) {
+    .constellation { height: 900px; }
+    .name-modern { letter-spacing: 0.2em; }
+    .star { width: 64px; height: 64px; font-size: 9px; }
+    .hsu-logo { width: 160px; height: 160px; font-size: 32px; }
+  }
+</style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <nav class="lang-section stagger">
-        <div class="lang-btn active" onclick="changeLang('vi')">VN</div>
-        <div class="lang-btn" onclick="changeLang('en')">EN</div>
-        <div class="lang-btn" onclick="changeLang('zh')">CN</div>
-        <div class="lang-btn" onclick="changeLang('ko')">KR</div>
-        <div class="lang-btn" onclick="changeLang('ja')">JP</div>
-    </nav>
+  <!-- LANG NAV -->
+  <nav class="lang-section stagger">
+    <div class="lang-btn active">VN</div>
+    <div class="lang-btn">EN</div>
+    <div class="lang-btn">CN</div>
+    <div class="lang-btn">KR</div>
+    <div class="lang-btn">JP</div>
+  </nav>
 
-    <div id="passwordModal" class="modal-overlay">
-        <div class="max-w-md w-full text-center p-12 bg-[#1a1a1a] border border-white/10 shadow-2xl">
-            <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Xác thực Định danh Đối tác</h3>
-            <input type="password" id="passInput" placeholder="Mã định danh..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none">
-            <div class="flex gap-6 justify-center">
-                <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-50 text-white">Hủy</button>
-                <button onclick="validateAccess()" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] uppercase tracking-widest border border-[#E0AA79]/30">Xác nhận</button>
-            </div>
-        </div>
+  <!-- SLOGAN -->
+  <header class="p-12 md:p-16 stagger">
+    <div class="slogan-copper">HOA SEN UNIVERSITY · GLOBAL ALUMNI · SINCE 1991</div>
+  </header>
+
+  <main class="flex-grow flex flex-col items-center z-10 px-4">
+
+    <!-- HSU LOGO TO -->
+    <div class="mb-12 stagger" style="animation-delay: 0.2s">
+      <div class="hsu-logo">HSU</div>
     </div>
 
-    <div id="qrCardModal" class="modal-overlay" onclick="closeQRModal(event)">
-        <div class="max-w-[600px] w-[90%] p-6 md:p-10 bg-[#1a1a1a] border border-[#E0AA79]/20 shadow-2xl relative" onclick="event.stopPropagation()">
-            <button onclick="closeModal('qrCardModal')" class="absolute top-4 right-4 text-stone-500 hover:text-white transition"><i class="fas fa-times text-xs"></i></button>
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-center text-stone-400">DANH THIẾP ĐIỆN TỬ</h3>
-            <div class="grid grid-cols-5 grid-rows-2 gap-2 md:gap-4 mx-auto max-w-[500px]">
-                <div class="col-span-2 row-span-2 bg-black/40 border border-[#E0AA79]/20 p-2 flex items-center justify-center overflow-hidden"><img src="qr-tanphong.png" alt="QR" class="w-full h-full object-contain grayscale"></div>
-                <a href="https://zalo.me/0915159499" target="_blank" class="zen-box aspect-square"><i class="fas fa-comment-dots text-[#E0AA79]"></i><span class="text-[6px] mt-1 uppercase">Zalo</span></a>
-                <a href="https://facebook.com/tanphong1981" target="_blank" class="zen-box aspect-square"><i class="fab fa-facebook-f text-[#E0AA79]"></i><span class="text-[6px] mt-1 uppercase">FB</span></a>
-                <a href="tel:+84915159499" class="zen-box aspect-square"><i class="fas fa-phone-alt text-[#E0AA79]"></i><span class="text-[6px] mt-1 uppercase">Call</span></a>
-                <a href="mailto:hello@nguyentanphong.com" class="zen-box aspect-square"><i class="fas fa-envelope text-[#E0AA79]"></i><span class="text-[6px] mt-1 uppercase">Mail</span></a>
-                <a href="http://www.youtube.com/@danmannong" target="_blank" class="zen-box aspect-square"><i class="fab fa-youtube text-[#E0AA79]"></i><span class="text-[6px] mt-1 uppercase">YT</span></a>
-                <a href="https://www.linkedin.com/in/nguyentanphong" target="_blank" class="zen-box aspect-square"><i class="fab fa-linkedin-in text-[#E0AA79]"></i><span class="text-[6px] mt-1 uppercase">IN</span></a>
-            </div>
-        </div>
+    <!-- HSGA TITLE -->
+    <h1 class="name-modern mb-6 stagger" style="animation-delay: 0.4s">HSGA</h1>
+    <div class="w-16 h-[0.5px] bg-[#E0AA79]/50 mb-8 stagger" style="animation-delay: 0.4s"></div>
+    <p class="subtitle-zen mb-4 stagger" style="animation-delay: 0.5s">Hoa Sen Graduate Alumni</p>
+    <p class="subtitle-zen mb-3 stagger" style="animation-delay: 0.5s">Câu lạc bộ Hội viên</p>
+    <p class="subtitle-zen mb-16 stagger" style="animation-delay: 0.5s; opacity:0.5">Nơi những vì sao Hoa Sen hội tụ</p>
+
+    <!-- CTA -->
+    <div class="mb-10 stagger flex flex-col md:flex-row gap-4 justify-center items-center" style="animation-delay: 0.6s">
+      <button class="zen-btn"><i class="fas fa-user-plus mr-3"></i>Đăng ký hội viên</button>
+      <button class="zen-btn"><i class="fas fa-info-circle mr-3"></i>Về HSGA</button>
+      <button class="zen-btn"><i class="fas fa-calendar-alt mr-3"></i>Sự kiện</button>
     </div>
 
-    <header class="p-12 md:p-20 stagger">
-        <div class="slogan-copper">TRI THỨC - PHÁP LUẬT - CÔNG NGHỆ</div>
-    </header>
+    <p class="text-[8px] text-stone-500 uppercase tracking-[0.3em] mb-6 stagger" style="animation-delay: 0.7s">
+      ◆ Click vào một ngôi sao để khám phá hội viên ◆
+    </p>
 
-    <main class="flex-grow flex flex-col items-center z-10">
-        
-        <div class="mb-12 stagger" style="animation-delay: 0.2s">
-            <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-2 border-[#E0AA79]/30 mx-auto shadow-2xl">
-                <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" class="w-full h-full object-cover">
-            </div>
+    <!-- CONSTELLATION -->
+    <div class="constellation stagger" style="animation-delay: 0.8s" id="constellation"></div>
+
+    <!-- BAN CHỦ NHIỆM SECTION -->
+    <section class="w-full max-w-7xl mb-32 stagger px-4" style="animation-delay: 1s">
+      <h2 class="section-title">Ban Chủ nhiệm HSGA</h2>
+      <p class="section-sub">Nhiệm kỳ 2026 — 2027 · 13 thành viên</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="membersGrid"></div>
+    </section>
+
+    <!-- HOẠT ĐỘNG -->
+    <section class="w-full max-w-6xl mb-32 stagger px-4" style="animation-delay: 1.2s">
+      <h2 class="section-title">Hoạt động & Tin tức</h2>
+      <p class="section-sub">Tin tức · Sự kiện · Networking</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="zen-box p-8 text-left">
+          <i class="fas fa-calendar-alt text-xl mb-6 text-[#E0AA79]"></i>
+          <span class="text-[8px] text-stone-400 uppercase mb-3 block tracking-widest">Sự kiện / 2026</span>
+          <h4 class="text-[10px] font-bold uppercase mb-4 leading-relaxed tracking-widest">Đại hội Hội viên HSGA thường niên</h4>
+          <span class="text-[8px] text-[#E0AA79] uppercase font-semibold tracking-widest">Khám phá →</span>
         </div>
-
-        <h1 class="name-modern mb-8 stagger" style="animation-delay: 0.4s">Nguyễn Tấn Phong</h1>
-        <div class="w-16 h-[0.5px] bg-[#E0AA79]/50 mb-8 stagger" style="animation-delay: 0.4s"></div>
-
-        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 justify-center items-center w-full px-4" style="animation-delay: 0.5s">
-            <button onclick="openQRModal()" class="zen-btn w-full md:w-auto"><i class="fas fa-qrcode mr-3"></i>Danh thiếp điện tử</button>
-            <button onclick="document.getElementById('registerModal').style.display='flex'" class="zen-btn w-full md:w-auto"><i class="fas fa-edit mr-3"></i>Đăng ký tư vấn</button>
-            <a href="#" target="_blank" class="zen-btn w-full md:w-auto text-center"><i class="fas fa-file-pdf mr-3"></i>Hồ sơ năng lực</a>
+        <div class="zen-box p-8 text-left">
+          <i class="fas fa-handshake text-xl mb-6 text-[#E0AA79]"></i>
+          <span class="text-[8px] text-stone-400 uppercase mb-3 block tracking-widest">Networking</span>
+          <h4 class="text-[10px] font-bold uppercase mb-4 leading-relaxed tracking-widest">HSGA Talks · Mỗi tháng</h4>
+          <span class="text-[8px] text-[#E0AA79] uppercase font-semibold tracking-widest">Khám phá →</span>
         </div>
-
-        <div class="pillar-grid stagger w-full px-4" style="animation-delay: 0.6s">
-            <a href="https://vecom.vn" target="_blank" class="zen-box pillar-box">
-                <i class="fas fa-network-wired text-xl mb-6 text-[#E0AA79]"></i>
-                <h3 class="text-[11px] font-bold tracking-widest mb-4 uppercase">VECOM</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Uỷ viên Ban chấp hành<br>Trưởng Ban kiểm tra<br>Trưởng đại diện phía Nam</p>
-            </a>
-            <a href="https://clead.vn" target="_blank" class="zen-box pillar-box">
-                <i class="fas fa-gavel text-xl mb-6 text-[#E0AA79]"></i>
-                <h3 class="text-[11px] font-bold tracking-widest mb-4 uppercase">CLEAD</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giám đốc<br>Trung tâm tư vấn pháp luật<br>Hiệp hội Thương mại điện tử Việt Nam</p>
-            </a>
-            <a href="https://www.ari.org.vn" target="_blank" class="zen-box pillar-box">
-                <i class="fas fa-scale-balanced text-xl mb-6 text-[#E0AA79]"></i>
-                <h3 class="text-[11px] font-bold tracking-widest mb-4 uppercase">ARI</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Luật gia<br>Phó Viện Trưởng<br>Viện Khoa học pháp lý trọng tài</p>
-            </a>
-            <a href="https://tracent.com.vn" target="_blank" class="zen-box pillar-box">
-                <i class="fas fa-handshake-simple text-xl mb-6 text-[#E0AA79]"></i>
-                <h3 class="text-[11px] font-bold tracking-widest mb-4 uppercase">TRACENT</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Trọng tài viên<br>Trung tâm trọng tài thương mại<br>Thành phố Hồ Chí Minh</p>
-            </a>
-            <a href="https://eagleacademy.vn" target="_blank" class="zen-box pillar-box">
-                <i class="fas fa-graduation-cap text-xl mb-6 text-[#E0AA79]"></i>
-                <h3 class="text-[11px] font-bold tracking-widest mb-4 uppercase">EAGLE</h3>
-                <p class="text-[8.5px] text-stone-400 uppercase leading-relaxed">Giảng viên Cao cấp<br>Bất động sản<br>Quản trị Doanh nghiệp</p>
-            </a>
+        <div class="zen-box p-8 text-left">
+          <i class="fas fa-graduation-cap text-xl mb-6 text-[#E0AA79]"></i>
+          <span class="text-[8px] text-stone-400 uppercase mb-3 block tracking-widest">Mentorship</span>
+          <h4 class="text-[10px] font-bold uppercase mb-4 leading-relaxed tracking-widest">Cố vấn Sinh viên Hoa Sen</h4>
+          <span class="text-[8px] text-[#E0AA79] uppercase font-semibold tracking-widest">Khám phá →</span>
         </div>
+      </div>
+    </section>
 
-        <div class="w-full max-w-6xl mb-32 stagger px-4" style="animation-delay: 0.8s">
-            <h2 class="text-[10px] font-semibold tracking-[0.5em] uppercase text-[#E0AA79] mb-12 border-b border-[#E0AA79]/20 pb-4 text-center">Góc nhìn & Trí thức Chuyên gia</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm" target="_blank" class="zen-box p-8">
-                    <span class="text-[8px] text-stone-400 uppercase mb-4 block">Kinh tế số / 2026</span>
-                    <h4 class="text-[10px] font-bold uppercase mb-6 leading-relaxed">Trách nhiệm pháp lý của sàn TMĐT và KOL</h4>
-                    <span class="text-[8px] text-[#E0AA79] uppercase font-semibold">Khám phá →</span>
-                </a>
-                <a href="https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html" target="_blank" class="zen-box p-8">
-                    <span class="text-[8px] text-stone-400 uppercase mb-4 block">Bất động sản</span>
-                    <h4 class="text-[10px] font-bold uppercase mb-6 leading-relaxed">Nhận diện rủi ro pháp lý địaốc 2026</h4>
-                    <span class="text-[8px] text-[#E0AA79] uppercase font-semibold">Khám phá →</span>
-                </a>
-                <a href="https://nld.com.vn/dung-bam-nut-dong-y-chia-se-du-lieu-ca-nhan-cho-mang-xa-hoi-neu-chua-doc-dieu-nay-196251231174759209.htm" target="_blank" class="zen-box p-8">
-                    <span class="text-[8px] text-stone-400 uppercase mb-4 block">An ninh mạng</span>
-                    <h4 class="text-[10px] font-bold uppercase mb-6 leading-relaxed">Bảo vệ dữ liệu cá nhân trên không gian số</h4>
-                    <span class="text-[8px] text-[#E0AA79] uppercase font-semibold">Khám phá →</span>
-                </a>
-            </div>
-        </div>
+    <!-- CONTACT -->
+    <section class="w-full max-w-5xl border-t border-[#E0AA79]/20 pt-16 mb-20 stagger px-4" style="animation-delay: 1.4s">
+      <h2 class="section-title">Kết nối với HSGA</h2>
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+        <a href="tel:+84915159499" class="zen-box flex flex-col items-center justify-center min-h-[100px]">
+          <i class="fas fa-phone-alt text-[#E0AA79] mb-3"></i>
+          <span class="text-[9px] font-bold uppercase tracking-widest">Hotline</span>
+        </a>
+        <a href="mailto:hello@hsga.vn" class="zen-box flex flex-col items-center justify-center min-h-[100px]">
+          <i class="fas fa-envelope text-[#E0AA79] mb-3"></i>
+          <span class="text-[9px] font-bold uppercase tracking-widest">Email</span>
+        </a>
+        <a href="#" class="zen-box flex flex-col items-center justify-center min-h-[100px]">
+          <i class="fas fa-comment-dots text-[#E0AA79] mb-3"></i>
+          <span class="text-[9px] font-bold uppercase tracking-widest">Zalo</span>
+        </a>
+        <a href="#" class="zen-box flex flex-col items-center justify-center min-h-[100px]">
+          <i class="fab fa-facebook-f text-[#E0AA79] mb-3"></i>
+          <span class="text-[9px] font-bold uppercase tracking-widest">Facebook</span>
+        </a>
+        <a href="#" class="zen-box flex flex-col items-center justify-center min-h-[100px]">
+          <i class="fab fa-youtube text-[#E0AA79] mb-3"></i>
+          <span class="text-[9px] font-bold uppercase tracking-widest">YouTube</span>
+        </a>
+        <a href="#" class="zen-box flex flex-col items-center justify-center min-h-[100px]">
+          <i class="fab fa-linkedin-in text-[#E0AA79] mb-3"></i>
+          <span class="text-[9px] font-bold uppercase tracking-widest">LinkedIn</span>
+        </a>
+      </div>
+    </section>
 
-        <div class="w-full max-w-6xl mb-32 text-center stagger px-4" style="animation-delay: 1s">
-            <h2 class="text-[10px] font-medium tracking-[0.4em] mb-12 uppercase opacity-40">Thư viện Tri thức Chuyên gia</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <button onclick="openGate('Bài giảng A', '1a', 'bai-giang-a.html')" class="zen-box"><i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng A</h4></button>
-                <button onclick="openGate('Bài giảng B', '1b', 'bai-giang-b.html')" class="zen-box"><i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng B</h4></button>
-                <button onclick="openGate('Bài giảng C', '0915159499', 'bai-giang-c.html')" class="zen-box"><i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng C</h4></button>
-                <button onclick="openGate('Bài giảng D', '0915159499', 'bai-giang-d.html')" class="zen-box"><i class="fas fa-fingerprint text-[10px] opacity-20 mb-4 self-end pr-4"></i><h4 class="text-[9px] font-bold uppercase">Bài giảng D</h4></button>
-                <div class="zen-box opacity-10 grayscale"><h4 class="text-[9px] font-bold uppercase">Bài giảng E</h4></div>
-                <div class="zen-box opacity-10 grayscale"><h4 class="text-[9px] font-bold uppercase">Bài giảng F</h4></div>
-                <div class="zen-box opacity-10 grayscale"><h4 class="text-[9px] font-bold uppercase">Bài giảng G</h4></div>
-                <div class="zen-box opacity-10 grayscale"><h4 class="text-[9px] font-bold uppercase">Bài giảng H</h4></div>
-            </div>
-        </div>
+  </main>
 
-        <div class="w-full max-w-3xl text-center mb-32 stagger px-4" style="animation-delay: 1.2s">
-            <div class="p-12 md:p-24 bg-black/50 border border-[#E0AA79]/20 shadow-2xl relative overflow-hidden">
-                <h2 class="text-[11px] font-semibold tracking-[0.4em] mb-12 uppercase">Kho Tài liệu Chuyên môn</h2>
-                <div class="flex flex-col sm:flex-row gap-8 w-full max-w-sm mx-auto relative z-10">
-                    <button onclick="openGate('Tài liệu', '0915159499', 'https://drive.google.com')" class="flex-1 py-5 bg-[#E0AA79] text-black text-[10px] font-bold">Tải về ngay</button>
-                    <button onclick="document.getElementById('registerModal').style.display='flex'" class="flex-1 py-5 bg-black/30 border border-[#E0AA79]/50 text-[10px]">Đăng ký mới</button>
-                </div>
-                <div class="mt-20 pt-12 border-t border-[#E0AA79]/10">
-                    <span id="loginCount" class="text-[1.2rem] text-[#E0AA79] tracking-[0.4em]">00006875</span>
-                </div>
-            </div>
-        </div>
+  <footer class="p-16 flex flex-col items-center stagger" style="animation-delay: 1.6s">
+    <div class="w-12 h-[0.5px] bg-[#E0AA79]/30 mb-8"></div>
+    <div class="footer-copper mb-3">HSGA · HOA SEN GRADUATE ALUMNI</div>
+    <div class="footer-copper" style="opacity:0.5">© 2026 ALL RIGHTS RESERVED · HSGA.VN</div>
+  </footer>
 
-        <div class="w-full max-w-5xl border-t border-[#E0AA79]/20 pt-16 mb-20 stagger px-4" style="animation-delay: 1.4s">
-            <div class="contact-grid-layout">
-                <a href="tel:+84915159499" class="zen-box"><i class="fas fa-phone-alt text-[#E0AA79] mb-4"></i><span class="text-[9px] font-bold uppercase">Hotline</span></a>
-                <a href="mailto:hello@nguyentanphong.com" class="zen-box"><i class="fas fa-envelope text-[#E0AA79] mb-4"></i><span class="text-[9px] font-bold uppercase">Email</span></a>
-                <a href="https://zalo.me/0915159499" target="_blank" class="zen-box"><i class="fas fa-comment-dots text-[#E0AA79] mb-4"></i><span class="text-[9px] font-bold uppercase">Zalo</span></a>
-                <a href="https://facebook.com/tanphong1981" target="_blank" class="zen-box"><i class="fab fa-facebook-f text-[#E0AA79] mb-4"></i><span class="text-[9px] font-bold uppercase">Facebook</span></a>
-                <a href="http://www.youtube.com/@danmannong" target="_blank" class="zen-box"><i class="fab fa-youtube text-[#E0AA79] mb-4"></i><span class="text-[9px] font-bold uppercase">YouTube</span></a>
-                <a href="https://www.linkedin.com/in/nguyentanphong" target="_blank" class="zen-box"><i class="fab fa-linkedin-in text-[#E0AA79] mb-4"></i><span class="text-[9px] font-bold uppercase">LinkedIn</span></a>
-            </div>
-        </div>
-    </main>
+  <script>
+    // ====== DANH SÁCH BAN CHỦ NHIỆM HSGA 2026-2027 ======
+    const members = [
+      {
+        initials: "NTP",
+        name: "Nguyễn Tấn Phong",
+        phone: "0915159499",
+        role: "Chủ nhiệm",
+        position: "Trưởng VP Đại diện phía Nam",
+        org: "Trung tâm Tư vấn Pháp luật — Hiệp hội Thương mại Điện tử Việt Nam",
+        cohort: "MBA Khóa 17",
+        isChair: true
+      },
+      {
+        initials: "TNHP",
+        name: "Trần Nguyễn Hồng Phương",
+        phone: "0900000002",
+        role: "Thành viên",
+        position: "Giám đốc dự án",
+        org: "Công ty Cổ phần Đầu tư T&A",
+        cohort: "MBA Khóa 16"
+      },
+      {
+        initials: "NQT",
+        name: "Nguyễn Quang Tuấn",
+        phone: "0900000003",
+        role: "Thành viên",
+        position: "Phó GĐ Trung tâm Điều độ cảng",
+        org: "Tổng Công ty Tân Cảng Sài Gòn",
+        cohort: "MBA Khóa 18"
+      },
+      {
+        initials: "TPST",
+        name: "Trần Phạm Sơn Tùng",
+        phone: "0900000004",
+        role: "Thành viên",
+        position: "Giám đốc kinh doanh",
+        org: "CTCP Truyền Thông Xu Hướng Số",
+        cohort: "MBA Khóa 18"
+      },
+      {
+        initials: "NQTh",
+        name: "Nguyễn Quang Thiện",
+        phone: "0900000005",
+        role: "Thành viên",
+        position: "CEO",
+        org: "T&C Logistics Co., Ltd",
+        cohort: "MBA Khóa 18"
+      },
+      {
+        initials: "LHMH",
+        name: "Lê Hoàng Mỹ Hạnh",
+        phone: "0900000006",
+        role: "Thành viên",
+        position: "CEO",
+        org: "Công ty Green Communications",
+        cohort: "MBA Khóa 18"
+      },
+      {
+        initials: "NTHT",
+        name: "Nguyễn Thị Hồng Thanh",
+        phone: "0900000007",
+        role: "Thành viên",
+        position: "CEO",
+        org: "Công ty TNHH DV Truyền thông & Sự kiện Sao Vàng",
+        cohort: "Cựu MBA Khóa 11"
+      },
+      {
+        initials: "VMP",
+        name: "Võ Minh Phụng",
+        phone: "0900000008",
+        role: "Thành viên",
+        position: "Marketing Manager",
+        org: "Freelance",
+        cohort: "MBA Khóa 20"
+      },
+      {
+        initials: "NTM",
+        name: "Nguyễn Thị Mạnh",
+        phone: "0900000009",
+        role: "Thành viên",
+        position: "Đại diện văn phòng",
+        org: "VINASA — Hiệp hội Phần mềm & Dịch vụ CNTT Việt Nam",
+        cohort: "MBA Khóa 18"
+      },
+      {
+        initials: "TTM",
+        name: "Trương Trúc Mai",
+        phone: "0900000010",
+        role: "Thành viên",
+        position: "Business Project Development Manager",
+        org: "CTCP Văn hóa Sách Sài Gòn / Zenbooks — Tập đoàn Thiên Long",
+        cohort: "MBA Khóa 17"
+      },
+      {
+        initials: "NTTN",
+        name: "Nguyễn Thị Tuyết Nhung",
+        phone: "0900000011",
+        role: "Thành viên",
+        position: "Marketing Lead",
+        org: "Nexus Sport Event",
+        cohort: "MBA Khóa 19"
+      },
+      {
+        initials: "ĐQH",
+        name: "Đậu Quốc Hưng",
+        phone: "0900000012",
+        role: "Thành viên",
+        position: "Phó Ban NC&PT, Phòng Marketing",
+        org: "Tổng Công ty Tân Cảng Sài Gòn",
+        cohort: "Cựu MBA Khóa 5"
+      },
+      {
+        initials: "TTTD",
+        name: "Trần Thị Thùy Dung",
+        phone: "0900000013",
+        role: "Thành viên",
+        position: "Chuyên viên Chăm sóc — Trải nghiệm học viên",
+        org: "Viện Sau đại học & Lãnh đạo — ĐH Hoa Sen",
+        cohort: "MBA Khóa 20"
+      }
+    ];
 
-    <footer class="p-16 flex flex-col items-center stagger" style="animation-delay: 1.6s">
-        <img src="NguyenTanPhong.png" alt="Chữ ký" class="signature-img">
-        <div class="footer-copper">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
-    </footer>
+    // ====== STAR FIELD - 13 NGÔI SAO ======
+    const constellation = document.getElementById('constellation');
+    // 13 vị trí phân tán đều trên bầu trời
+    const positions = [
+      { top: '8%',  left: '45%' },  // NTP - Chủ nhiệm ở giữa trên
+      { top: '15%', left: '15%' },
+      { top: '18%', left: '78%' },
+      { top: '32%', left: '32%' },
+      { top: '35%', left: '62%' },
+      { top: '38%', left: '5%'  },
+      { top: '40%', left: '88%' },
+      { top: '55%', left: '20%' },
+      { top: '58%', left: '50%' },
+      { top: '60%', left: '75%' },
+      { top: '78%', left: '12%' },
+      { top: '80%', left: '42%' },
+      { top: '82%', left: '70%' }
+    ];
 
-    <div id="backToTop" class="scroll-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
-    
-    <div id="registerModal" class="modal-overlay">
-        <div class="max-w-md w-full p-12 bg-[#1a1a1a] border border-white/10 text-center shadow-2xl">
-            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-stone-400">Đăng ký Tư vấn</h3>
-            <form onsubmit="event.preventDefault(); alert('Đã tiếp nhận.');">
-                <input type="text" placeholder="Họ tên" required class="w-full p-4 bg-white/5 border border-white/10 text-white mb-6">
-                <input type="tel" placeholder="Số điện thoại" required class="w-full p-4 bg-white/5 border border-white/10 text-white mb-10">
-                <div class="flex gap-6 justify-center">
-                    <button type="button" onclick="closeModal('registerModal')" class="text-[9px] uppercase opacity-50">Đóng</button>
-                    <button type="submit" class="px-10 py-4 bg-[#E0AA79]/20 text-white text-[9px] border border-[#E0AA79]/30">Gửi</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    members.forEach((m, i) => {
+      const star = document.createElement('a');
+      star.className = 'star';
+      star.href = `https://hsga.vn/${m.phone}`;
+      star.target = '_blank';
+      star.style.top = positions[i].top;
+      star.style.left = positions[i].left;
+      // Mỗi ngôi sao có animation-delay riêng để nhấp nháy lệch pha
+      star.style.animationDelay = `${i * 0.6}s, ${i * 0.4}s`;
+      // NTP chủ nhiệm to hơn chút
+      if (m.isChair) {
+        star.style.width = '92px';
+        star.style.height = '92px';
+        star.style.borderColor = 'rgba(224, 170, 121, 0.6)';
+      }
+      star.innerHTML = `
+        <span class="star-init">${m.initials}</span>
+        <span class="star-role">${m.role === 'Chủ nhiệm' ? '★ CHỦ NHIỆM' : ''}</span>
+        <span class="star-tooltip">${m.name} · ${m.cohort}</span>
+      `;
+      constellation.appendChild(star);
+    });
 
-    <script>
-        function closeModal(id) { document.getElementById(id).style.display='none'; }
-        function openQRModal() { document.getElementById('qrCardModal').style.display='flex'; }
-        function closeQRModal(e) { if(e.target.id === 'qrCardModal') { closeModal('qrCardModal'); } }
-        function openGate(name, code, url) { document.getElementById('modalTitle').innerText = "Xác thực: " + name; document.getElementById('passwordModal').style.display='flex'; }
-        function validateAccess() { if(document.getElementById('passInput').value){ window.location.reload(); } }
-        function changeLang(lang) { document.querySelectorAll('.lang-btn').forEach(btn => { btn.classList.remove('active'); if(btn.innerText.toLowerCase() === lang) btn.classList.add('active'); }); }
-        window.onscroll = function() { const btn = document.getElementById('backToTop'); if (document.documentElement.scrollTop > 400) btn.classList.add('show'); else btn.classList.remove('show'); };
-    </script>
+    // ====== MEMBER GRID ======
+    const grid = document.getElementById('membersGrid');
+    members.forEach(m => {
+      const card = document.createElement('a');
+      card.className = 'member-card' + (m.isChair ? ' chairman' : '');
+      card.href = `https://hsga.vn/${m.phone}`;
+      card.target = '_blank';
+      card.innerHTML = `
+        <div class="member-avatar" style="${m.isChair ? 'margin-top: 12px;' : ''}">${m.initials}</div>
+        <div class="member-name">${m.name}</div>
+        <div class="member-role">${m.position}</div>
+        <div class="member-org">${m.org}</div>
+        <div class="member-cohort">${m.cohort} · ${m.role}</div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
 </body>
 </html>
