@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Trang Bài Viết · nguyentanphong.com v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a1a1a;
+    --navy-mid: #222222;
+    --gold: #E0AA79;
+    --gold-light: #f0c896;
+    --cream: #2C2C2C;
+    --text: #FFFFFF;
+    --text-soft: rgba(255,255,255,0.5);
+    --border: rgba(224, 170, 121, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
+  a { color: inherit; text-decoration: none; }
+  .block-label {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 10;
+  }
+  section { position: relative; }
+
+  /* NAV */
+  .nav {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .nav-logo em { color: var(--gold); font-size: 0.7em; display: block; letter-spacing: 0.15em; font-family: 'Inter', sans-serif; font-weight: 400; }
+  .nav-menu { display: flex; gap: 24px; font-size: 13px; font-weight: 500; }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* READING PROGRESS BAR */
+  .progress-bar {
+    position: sticky;
+    top: 57px;
+    height: 3px;
+    background: rgba(224,170,121,0.15);
+    z-index: 99;
+  }
+  .progress-fill {
+    width: 28%;
+    height: 100%;
+    background: var(--gold);
+  }
+
+  /* ARTICLE CONTAINER */
+  .article-wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+  }
+
+  /* BLOCK 1: BREADCRUMB */
+  .breadcrumb {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--text-soft);
+    margin-bottom: 28px;
+    letter-spacing: 0.05em;
+  }
+  .breadcrumb a { color: var(--text-soft); }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb .sep { margin: 0 8px; color: var(--gold); }
+  .breadcrumb .current { color: var(--gold); font-weight: 600; }
+
+  /* BLOCK 2: TITLE + METADATA */
+  .article-header { margin-bottom: 32px; }
+  .article-category {
+    display: inline-block;
+    background: rgba(224, 170, 121, 0.2);
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 5px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .article-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .meta-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .meta-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+    border: 2px solid var(--gold);
+  }
+  .meta-author-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: #fff;
+  }
+  .meta-author-title {
+    font-size: 11px;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+  .meta-info {
+    display: flex;
+    gap: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--text-soft);
+    margin-left: auto;
+  }
+  .meta-share {
+    display: flex;
+    gap: 8px;
+  }
+  .share-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--text-soft);
+  }
+
+  /* BLOCK 3: ABSTRACT */
+  .abstract {
+    background: rgba(0,0,0,0.4);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+  }
+  .abstract-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .abstract-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* BLOCK 4: TABLE OF CONTENTS */
+  .toc {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+  }
+  .toc-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .toc-list {
+    list-style: none;
+    counter-reset: toc;
+  }
+  .toc-list li {
+    counter-increment: toc;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 13.5px;
+    color: #fff;
+  }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list li::before {
+    content: counter(toc, decimal-leading-zero) " ·";
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-right: 10px;
+    font-weight: 600;
+  }
+
+  /* BLOCK 5: ARTICLE CONTENT */
+  .content h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 48px 0 18px;
+    padding-top: 16px;
+    border-top: 2px solid var(--gold);
+    display: inline-block;
+    padding-right: 20px;
+  }
+  .content p {
+    margin-bottom: 18px;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .content p strong { color: var(--gold); }
+
+  /* LAW CALLOUT */
+  .law-callout {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 28px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .law-callout-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .law-callout-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .law-callout-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* BLOCK 6: INLINE CTA (Lead Magnet mid-article) */
+  .inline-cta {
+    background: rgba(0,0,0,0.4);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+  .inline-cta-icon {
+    width: 70px;
+    height: 90px;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: 4px;
+    position: relative;
+    border: 1px solid var(--gold);
+  }
+  .inline-cta-icon::before {
+    content: 'PDF';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .inline-cta-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .inline-cta-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .inline-cta-desc {
+    font-size: 12px;
+    color: var(--text-soft);
+  }
+  .inline-cta-btn {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* BLOCK 7: AUTHOR BOX + NEWSLETTER BOX */
+  .after-article { margin: 60px 0 40px; }
+  .author-box {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .author-avatar-lg {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+    border: 3px solid var(--gold);
+  }
+  .author-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .author-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .author-title {
+    font-size: 12px;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .author-bio {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .author-links {
+    display: flex;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+  }
+  .author-links a {
+    color: var(--gold);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  /* NEWSLETTER BOX */
+  .newsletter-box {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    text-align: center;
+    border: 2px solid var(--gold);
+  }
+  .newsletter-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .newsletter-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .newsletter-title em { color: var(--gold-light); }
+  .newsletter-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 8px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .newsletter-input {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.4); }
+  .newsletter-btn {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  /* BLOCK 8: RELATED ARTICLES */
+  .related {
+    background: transparent;
+    padding: 60px 0;
+    border-top: 1px solid var(--border);
+  }
+  .related-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .related-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .related-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .related-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .related-card {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  .related-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .related-art-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .related-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--text-soft);
+  }
+
+  /* BLOCK 9: COMMENTS */
+  .comments-section {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 28px 40px;
+  }
+  .comments-box {
+    background: rgba(0,0,0,0.3);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 36px;
+    text-align: center;
+  }
+  .comments-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .comments-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 18px;
+  }
+  .comments-btn {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.6);
+    padding: 40px 32px 24px;
+    text-align: center;
+    border-top: 2px solid var(--gold);
+  }
+  .footer-brand {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+  .footer-copy {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stagger { opacity: 0; animation: fadeUp 1.2s forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 800px) {
+    .nav-menu { display: none; }
+    .article-title { font-size: 1.7rem; }
+    .content h2 { font-size: 1.35rem; }
+    .meta-info { margin-left: 0; width: 100%; }
+    .inline-cta { grid-template-columns: 1fr; text-align: center; }
+    .inline-cta-icon { margin: 0 auto; }
+    .author-box { grid-template-columns: 1fr; text-align: center; }
+    .author-avatar-lg { margin: 0 auto; }
+    .author-links { justify-content: center; }
+    .newsletter-form { flex-direction: column; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="wireframe_nguyentanphong_v3.html" class="nav-logo">Nguyễn Tấn Phong<em>Tri thức · Pháp luật · Công nghệ</em></a>
+  <div class="nav-menu">
+    <a href="wireframe_article_detail.html" class="active">Góc Nhìn</a>
+    <a href="#">Thư Viện</a>
+    <a href="wireframe_tai_lieu.html">Tài Liệu</a>
+    <a href="wireframe_ve_toi.html">Về Tôi</a>
+    <a href="thuong_hieu_so_phong.html">Thương Hiệu Số</a>
+    <a href="#">Liên Hệ</a>
+  </div>
+  <a href="wireframe_nguyentanphong_v3.html" class="nav-cta">Trang Chủ ↗</a>
+</nav>
+
+<!-- READING PROGRESS -->
+<div class="progress-bar"><div class="progress-fill"></div></div>
+
+<!-- ARTICLE -->
+<article class="article-wrapper">
+
+  <!-- BLOCK 1: BREADCRUMB -->
+  <section>
+    <div class="block-label">Khối 01 · Breadcrumb</div>
+    <div class="breadcrumb">
+      <a href="wireframe_nguyentanphong_v3.html">Trang chủ</a>
+      <span class="sep">›</span>
+      <a href="wireframe_article_detail.html">Góc Nhìn</a>
+      <span class="sep">›</span>
+      <a href="#">Luật TMĐT</a>
+      <span class="sep">›</span>
+      <span class="current">Luật 122/2025 — Bước ngoặt hay thách thức?</span>
+    </div>
+  </section>
+
+  <!-- BLOCK 2: TITLE + METADATA -->
+  <section>
+    <div class="block-label">Khối 02 · Title & Meta</div>
+    <header class="article-header">
+      <span class="article-category">Luật Thương mại điện tử</span>
+      <h1 class="article-title">Luật Thương mại điện tử 2025: Bước ngoặt hay thách thức?</h1>
+      <div class="article-meta">
+        <div class="meta-author">
+          <div class="meta-avatar"></div>
+          <div>
+            <div class="meta-author-name">Nguyễn Tấn Phong</div>
+            <div class="meta-author-title">Chuyên gia Kinh tế số &amp; Pháp luật</div>
+          </div>
+        </div>
+        <div class="meta-info">
+          <span>16 · 04 · 2026</span>
+          <span>·</span>
+          <span>8 PHÚT ĐỌC</span>
+        </div>
+        <div class="meta-share">
+          <a href="#" class="share-btn">in</a>
+          <a href="#" class="share-btn">f</a>
+          <a href="#" class="share-btn">⎘</a>
+        </div>
+      </div>
+    </header>
+  </section>
+
+  <!-- BLOCK 3: ABSTRACT -->
+  <section>
+    <div class="block-label">Khối 03 · Abstract</div>
+    <div class="abstract">
+      <div class="abstract-label">Tóm Tắt Bài Viết</div>
+      <div class="abstract-text">Còn 75 ngày nữa Luật 122/2025/QH15 có hiệu lực. Bài viết phân tích 5 điểm mới quan trọng nhất, lập luận vì sao đây là "bước ngoặt có điều kiện", và đưa ra 3 việc doanh nghiệp cần làm ngay từ hôm nay đến ngày 1/7/2026.</div>
+    </div>
+  </section>
+
+  <!-- BLOCK 4: TOC -->
+  <section>
+    <div class="block-label">Khối 04 · Mục Lục</div>
+    <div class="toc">
+      <div class="toc-title">Trong Bài Viết Này</div>
+      <ul class="toc-list">
+        <li>75 ngày nữa, mọi thứ sẽ thay đổi</li>
+        <li>Vì sao Luật 122/2025 quan trọng đến thế</li>
+        <li>5 điểm mới quan trọng nhất</li>
+        <li>Quan điểm cá nhân — Bước ngoặt có điều kiện</li>
+        <li>3 việc doanh nghiệp cần làm ngay</li>
+        <li>Kết & mời thảo luận</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BLOCK 5: CONTENT -->
+  <section>
+    <div class="block-label">Khối 05 · Nội Dung</div>
+    <div class="content">
+      <h2>75 ngày nữa, mọi thứ sẽ thay đổi</h2>
+      <p>Còn đúng <strong>75 ngày nữa</strong>, vào ngày <strong>1/7/2026</strong>, Luật Thương mại điện tử 2025 sẽ chính thức có hiệu lực. Đây sẽ là lần đầu tiên sau 20 năm Việt Nam có một đạo luật riêng, có cấp bậc luật, điều chỉnh một lĩnh vực đang chiếm hơn 10% tổng mức bán lẻ của nền kinh tế...</p>
+
+      <div class="law-callout">
+        <div class="law-callout-label">Văn bản pháp luật</div>
+        <div class="law-callout-title">Luật số 122/2025/QH15</div>
+        <div class="law-callout-text">"Luật Thương mại điện tử — Quốc hội thông qua ngày XX/XX/2025, có hiệu lực thi hành từ ngày 01/7/2026. Luật này quy định về hoạt động thương mại điện tử, trách nhiệm của nền tảng, và bảo vệ người tiêu dùng trong môi trường số..."</div>
+      </div>
+
+      <h2>5 điểm mới quan trọng nhất</h2>
+      <p><strong>Thứ nhất</strong>, lần đầu tiên khái niệm "nền tảng thương mại điện tử" được định nghĩa ở cấp luật, tách bạch rõ ràng với "người bán hàng trên nền tảng". Sự tách bạch này có ý nghĩa then chốt trong việc phân định trách nhiệm pháp lý...</p>
+      <p><strong>Thứ hai</strong>, luật quy định rõ trách nhiệm liên đới của nền tảng trong một số trường hợp cụ thể — đặc biệt liên quan đến hàng giả, hàng nhái và bảo vệ người tiêu dùng.</p>
+    </div>
+  </section>
+
+  <!-- BLOCK 6: INLINE CTA -->
+  <section>
+    <div class="block-label">Khối 06 · Inline CTA ★</div>
+    <div class="inline-cta">
+      <div class="inline-cta-icon"></div>
+      <div>
+        <div class="inline-cta-label">Tài Liệu Đi Kèm · Miễn Phí</div>
+        <div class="inline-cta-title">Tải PDF toàn văn bài phân tích</div>
+        <div class="inline-cta-desc">Bản PDF đầy đủ 8 trang + bảng đối chiếu 5 điểm mới để in ra đọc offline</div>
+      </div>
+      <a href="#" class="inline-cta-btn">Tải Ngay →</a>
+    </div>
+  </section>
+
+  <!-- CONTINUE CONTENT -->
+  <section>
+    <div class="content">
+      <h2>Quan điểm cá nhân — Bước ngoặt có điều kiện</h2>
+      <p>Tôi gọi Luật 122/2025 là <strong>"bước ngoặt có điều kiện"</strong>. Vì sao có điều kiện? Vì một đạo luật tốt trên giấy chỉ trở thành đạo luật tốt trong thực tiễn khi ba yếu tố cùng xảy ra...</p>
+
+      <h2>3 việc doanh nghiệp cần làm ngay</h2>
+      <p>Nếu doanh nghiệp của bạn đang hoạt động trong lĩnh vực TMĐT, từ nay đến 1/7 bạn cần rà soát lại mô hình kinh doanh, cập nhật điều khoản dịch vụ, và chuẩn bị quy trình xử lý khiếu nại...</p>
+    </div>
+  </section>
+
+  <!-- BLOCK 7: AUTHOR BOX + NEWSLETTER -->
+  <section class="after-article">
+    <div class="block-label">Khối 07 · Author & Newsletter</div>
+
+    <div class="author-box">
+      <div class="author-avatar-lg"></div>
+      <div>
+        <div class="author-label">Về Tác Giả</div>
+        <div class="author-name">Nguyễn Tấn Phong</div>
+        <div class="author-title">Chuyên gia Kinh tế số &amp; Pháp luật · Trọng tài viên thương mại quốc tế</div>
+        <div class="author-bio">Tư vấn chiến lược TMĐT, Trọng tài viên thương mại quốc tế. Chuyên gia phối hợp cùng A05/PA05 trong đào tạo an ninh mạng. Ủy viên BCH VECOM · Trọng tài viên TRACENT · Giám đốc CLEAD · Phó Viện Trưởng ARI · Giảng viên cao cấp EAGLE.</div>
+        <div class="author-links">
+          <a href="https://facebook.com/tanphong1981" target="_blank">FACEBOOK</a>
+          <a href="https://zalo.me/0915159499" target="_blank">ZALO</a>
+          <a href="mailto:hello@nguyentanphong.com">EMAIL</a>
+          <a href="tel:+84915159499">HOTLINE</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="newsletter-box">
+      <div class="newsletter-label">Thư Pháp Luật Số</div>
+      <div class="newsletter-title">Đừng bỏ lỡ <em>bài tiếp theo</em></div>
+      <div class="newsletter-desc">Mỗi thứ Sáu, một bài phân tích pháp luật TMĐT Việt Nam gửi thẳng hộp thư. Độc quyền · Chuyên sâu · Áp dụng được ngay.</div>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Email của bạn">
+        <button class="newsletter-btn" type="button">Đăng Ký →</button>
+      </div>
+    </div>
+  </section>
+
+</article>
+
+<!-- BLOCK 8: RELATED ARTICLES -->
+<section class="related">
+  <div class="block-label">Khối 08 · Bài Liên Quan</div>
+  <div class="related-inner">
+    <div class="related-header">
+      <div class="related-eyebrow">Cùng Chuyên Mục</div>
+      <h2 class="related-title">Bài viết liên quan</h2>
+    </div>
+    <div class="related-grid">
+      <article class="related-card">
+        <div class="related-tag">Điều 10</div>
+        <h3 class="related-art-title">Giải mã Điều 10 Luật 122/2025: Nội dung, phạm vi và ý nghĩa</h3>
+        <div class="related-meta">23/04/2026 · 12 PHÚT</div>
+      </article>
+      <article class="related-card">
+        <div class="related-tag">Pháp luật so sánh</div>
+        <h3 class="related-art-title">Điều 10 qua lăng kính Singapore, EU và Trung Quốc</h3>
+        <div class="related-meta">30/04/2026 · 15 PHÚT</div>
+      </article>
+      <article class="related-card">
+        <div class="related-tag">Khoảng trống pháp lý</div>
+        <h3 class="related-art-title">Khoảng trống thứ nhất trong Điều 10: Phân tích và kiến nghị</h3>
+        <div class="related-meta">07/05/2026 · 10 PHÚT</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 9: COMMENTS -->
+<section class="comments-section">
+  <div class="block-label">Khối 09 · Thảo Luận</div>
+  <div class="comments-box">
+    <div class="comments-title">Tham gia thảo luận</div>
+    <div class="comments-desc">Trong 5 điểm mới kể trên, điểm nào khiến doanh nghiệp của bạn lo lắng nhất? Chia sẻ quan điểm của bạn trên LinkedIn.</div>
+    <a href="#" class="comments-btn">Thảo Luận Trên LinkedIn →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Nguyễn Tấn Phong</div>
+  <div style="font-size:12px;margin-top:6px;">Chuyên gia Kinh tế số &amp; Pháp luật · Tư vấn chiến lược TMĐT · Trọng tài viên thương mại quốc tế</div>
+  <div class="footer-links" style="display:flex;gap:24px;justify-content:center;margin:24px 0;font-size:12px;">
+    <a href="wireframe_nguyentanphong_v3.html">Trang Chủ</a>
+    <a href="wireframe_article_detail.html">Góc Nhìn</a>
+    <a href="#">Thư Viện</a>
+    <a href="wireframe_tai_lieu.html">Tài Liệu</a>
+    <a href="wireframe_ve_toi.html">Về Tôi</a>
+    <a href="thuong_hieu_so_phong.html">Thương Hiệu Số</a>
+    <a href="#">Liên Hệ</a>
+  </div>
+  <div style="font-size:11px;">hello@nguyentanphong.com · (+84) 915 159 499</div>
+  <div class="footer-copy">© 1981 NGUYEN TAN PHONG · ALL RIGHTS RESERVED</div>
+</footer>
+
+</body>
+</html>

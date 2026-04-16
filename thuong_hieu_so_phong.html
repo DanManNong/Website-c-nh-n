@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thương Hiệu Số Nguyễn Tấn Phong — Bộ Tài Liệu Nền Tảng</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a1a1a;
+    --navy-mid: #222222;
+    --navy-light: #333333;
+    --gold: #E0AA79;
+    --gold-light: #f0c896;
+    --cream: #2C2C2C;
+    --text: #FFFFFF;
+    --text-soft: rgba(255,255,255,0.5);
+    --border: rgba(224, 170, 121, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: #fff;
+    padding: 64px 32px 48px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  .hero-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: italic; }
+  .hero-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    margin-top: 14px;
+  }
+  .container { max-width: 860px; margin: 0 auto; padding: 48px 28px 80px; }
+  .section { margin-bottom: 64px; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .section-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .section-lead {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 24px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Bio cards */
+  .bio-card {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .bio-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .bio-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .bio-content { font-size: 13.5px; line-height: 1.7; color: var(--text); }
+  .bio-content strong { color: var(--gold); font-weight: 600; }
+  .bio-content em { color: var(--gold); font-style: normal; font-weight: 500; }
+
+  /* Manifesto */
+  .manifesto {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 40px 36px;
+    margin-top: 8px;
+  }
+  .manifesto-north-star {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.35;
+    padding: 20px 0;
+    margin-bottom: 24px;
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+  }
+  .manifesto p { margin-bottom: 14px; font-size: 14px; line-height: 1.75; }
+  .manifesto p strong { color: var(--gold); }
+  .manifesto-tagline {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--gold);
+    margin: 24px 0 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Experts grid */
+  .experts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .expert-card {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  .expert-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--gold);
+  }
+  .expert-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 4px 0 6px;
+  }
+  .expert-role {
+    font-size: 11px;
+    color: var(--text-soft);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .expert-lesson {
+    font-size: 12.5px;
+    line-height: 1.6;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+  }
+  .expert-lesson strong { color: var(--gold); }
+
+  /* Calendar */
+  .phase {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .phase-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .phase-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .phase-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .phase-body { padding: 20px 24px; }
+  .week {
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .week:last-child { border-bottom: none; }
+  .week-head {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .week-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .week-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--text-soft);
+  }
+  .week-theme {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .week-pillar {
+    font-size: 12px;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+  .week-pillar strong { color: var(--gold); font-style: normal; }
+
+  /* Formula box */
+  .formula-box {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  .formula-box strong { color: var(--gold); }
+
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    border-top: 2px solid var(--gold);
+  }
+  .footer-brand {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+
+  /* NAV */
+  .nav {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .nav-logo em { color: var(--gold); font-size: 0.7em; display: block; letter-spacing: 0.15em; font-family: 'Inter', sans-serif; font-weight: 400; }
+  .nav-menu { display: flex; gap: 24px; font-size: 13px; font-weight: 500; }
+  .nav-menu a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+  .nav-menu a:hover, .nav-menu a.active { color: var(--gold); font-weight: 600; }
+  .nav-cta {
+    background: var(--gold);
+    color: #1a1a1a;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .nav-menu { display: none; }
+    .hero h1 { font-size: 1.9rem; }
+    .hero { padding: 48px 20px 36px; }
+    .container { padding: 36px 18px 60px; }
+    .manifesto { padding: 28px 22px; }
+    .manifesto-north-star { font-size: 1.15rem; padding: 16px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="wireframe_nguyentanphong_v3.html" class="nav-logo" style="text-decoration:none;color:var(--gold);">Nguyễn Tấn Phong<em>Tri thức · Pháp luật · Công nghệ</em></a>
+  <div class="nav-menu">
+    <a href="wireframe_article_detail.html">Góc Nhìn</a>
+    <a href="#">Thư Viện</a>
+    <a href="wireframe_tai_lieu.html">Tài Liệu</a>
+    <a href="wireframe_ve_toi.html">Về Tôi</a>
+    <a href="thuong_hieu_so_phong.html" class="active">Thương Hiệu Số</a>
+    <a href="#">Liên Hệ</a>
+  </div>
+  <a href="wireframe_nguyentanphong_v3.html" class="nav-cta">Trang Chủ ↗</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Bộ Tài Liệu Nền Tảng · Thương Hiệu Số · 2026</div>
+  <h1>Nguyễn Tấn Phong<br><em>— Chiến Lược Thương Hiệu Số</em></h1>
+  <div class="hero-tagline">Tri Thức · Pháp Luật · Công Nghệ</div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: POSITIONING -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Định Vị Thương Hiệu</h2>
+    </div>
+    <div class="manifesto" style="text-align:center;">
+      <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;">Định vị chính thức</div>
+      <div style="font-family:'Inter',sans-serif;font-size:1.8rem;color:var(--gold);font-weight:700;line-height:1.3;margin-bottom:8px;">Chuyên gia Kinh tế số &amp; Pháp luật</div>
+      <div style="font-size:14px;color:var(--text-soft);font-style:italic;">Tư vấn chiến lược TMĐT · Trọng tài viên thương mại quốc tế · Nguyễn Tấn Phong</div>
+      <div style="margin-top:18px;padding-top:18px;border-top:1px dashed var(--gold);font-size:12px;color:var(--text-soft);">Khi hoàn tất NCS: <strong style="color:var(--gold);">TS. Nguyễn Tấn Phong</strong> — Chuyên gia Kinh tế số &amp; Pháp luật · Trọng tài viên thương mại quốc tế</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: BIO -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Bộ Bio Chuẩn</h2>
+    </div>
+    <div class="section-lead">3 phiên bản độ dài cho các nền tảng khác nhau — dùng nhất quán trên mọi kênh.</div>
+
+    <div class="bio-card">
+      <div class="bio-label">Bio 01 · Siêu ngắn · 1 dòng</div>
+      <h3>Dùng cho: LinkedIn headline, chữ ký email, Twitter, name card</h3>
+      <div class="bio-content"><em>Chuyên gia Kinh tế số &amp; Pháp luật | Ủy viên BCH VECOM | Trọng tài viên TRACENT | nguyentanphong.com</em></div>
+    </div>
+
+    <div class="bio-card">
+      <div class="bio-label">Bio 02 · Trung · 150 chữ</div>
+      <h3>Dùng cho: LinkedIn About, Facebook About, hồ sơ diễn giả</h3>
+      <div class="bio-content">
+        <p><strong>Nguyễn Tấn Phong</strong> là <strong>Chuyên gia Kinh tế số &amp; Pháp luật</strong> với <strong>hơn 10 năm</strong> kinh nghiệm tư vấn chiến lược Thương mại điện tử và Trọng tài viên thương mại quốc tế.</p>
+        <p style="margin-top:10px;">Ông hiện là <strong>Ủy viên Ban Chấp hành · Trưởng Ban kiểm tra · Trưởng đại diện phía Nam</strong> tại <strong>VECOM</strong>, <strong>Trọng tài viên</strong> tại <strong>TRACENT TP.HCM</strong>, <strong>Giám đốc CLEAD</strong>, <strong>Phó Viện Trưởng ARI</strong>, và <strong>Giảng viên cao cấp EAGLE</strong>.</p>
+        <p style="margin-top:10px;">Chuyên gia phối hợp cùng <strong>A05/PA05</strong> trong đào tạo an ninh mạng và điều phối chiến dịch <strong>"Không Một Mình"</strong>. Lĩnh vực chuyên môn: <strong>Kinh tế số &amp; TMĐT</strong>, <strong>Bất động sản</strong>, <strong>An ninh mạng</strong>.</p>
+        <p style="margin-top:10px;">🌐 nguyentanphong.com ✉️ hello@nguyentanphong.com 📞 +84 915 159 499</p>
+      </div>
+    </div>
+
+    <div class="bio-card">
+      <div class="bio-label">Bio 03 · Dài · 300 chữ</div>
+      <h3>Dùng cho: Website About page, hồ sơ VECOM, lý lịch khoa học</h3>
+      <div class="bio-content">
+        <p><strong>Nguyễn Tấn Phong</strong> là <strong>Chuyên gia Kinh tế số &amp; Pháp luật</strong> hàng đầu tại Việt Nam, với <strong>hơn 10 năm</strong> hoạt động liên tục trong tư vấn chiến lược Thương mại điện tử và trọng tài thương mại quốc tế.</p>
+        <p style="margin-top:10px;"><em>Về vai trò hiệp hội và chính sách</em>, ông là <strong>Ủy viên Ban Chấp hành · Trưởng Ban kiểm tra · Trưởng đại diện phía Nam</strong> tại <strong>Hiệp hội Thương mại điện tử Việt Nam (VECOM)</strong>, thường xuyên đóng góp ý kiến xây dựng pháp luật cho các dự thảo văn bản quan trọng.</p>
+        <p style="margin-top:10px;"><em>Về chuyên môn hành nghề</em>, ông là <strong>Trọng tài viên thương mại quốc tế</strong> tại <strong>Trung tâm Trọng tài Thương mại TRACENT TP.HCM</strong>.</p>
+        <p style="margin-top:10px;"><em>Về nghiên cứu và đào tạo</em>, ông giữ cương vị <strong>Giám đốc Trung tâm CLEAD</strong> (Trung tâm Tư vấn pháp luật VECOM), <strong>Luật gia · Phó Viện Trưởng Viện ARI</strong> (Viện Khoa học Pháp lý Trọng tài), và <strong>Giảng viên cao cấp tại Học viện EAGLE</strong> (Bất động sản · Quản trị Doanh nghiệp).</p>
+        <p style="margin-top:10px;"><em>Về an ninh mạng</em>, ông là <strong>Chuyên gia phối hợp cùng A05/PA05</strong> trong đào tạo an ninh mạng và điều phối chiến dịch <strong>"Không Một Mình"</strong>.</p>
+        <p style="margin-top:10px;">Triết lý làm việc: <strong>Tri thức · Pháp luật · Công nghệ</strong>.</p>
+        <p style="margin-top:10px;">🌐 nguyentanphong.com ✉️ hello@nguyentanphong.com 📞 +84 915 159 499</p>
+        <p style="margin-top:6px;">Zalo: <a href="https://zalo.me/0915159499" style="color:var(--gold);">zalo.me/0915159499</a> · Facebook: <a href="https://facebook.com/tanphong1981" style="color:var(--gold);">tanphong1981</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: MANIFESTO -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Brand Manifesto</h2>
+    </div>
+    <div class="section-lead">Tuyên ngôn thương hiệu — đăng cố định tại nguyentanphong.com/manifesto.</div>
+
+    <div class="manifesto">
+      <div class="manifesto-north-star">Tôi tin vào một nền thương mại điện tử Việt Nam minh bạch, công bằng và được dẫn dắt bởi pháp luật vững mạnh.</div>
+
+      <p>Tôi là <strong>Nguyễn Tấn Phong</strong> — Luật gia, Trọng tài viên, và là người đã dành <strong>hơn mười năm</strong> đồng hành cùng sự trưởng thành của thương mại điện tử Việt Nam.</p>
+
+      <p><strong>Tôi tin rằng</strong> thương mại điện tử không chỉ là một lĩnh vực kinh doanh — đó là <strong>hạ tầng nền tảng của nền kinh tế số Việt Nam thế kỷ XXI</strong>. Mỗi điều khoản luật được ban hành hôm nay sẽ định hình cách hàng triệu doanh nghiệp và hàng chục triệu người tiêu dùng tương tác trong mười năm tới.</p>
+
+      <p><strong>Tôi tin rằng</strong> pháp luật thương mại điện tử tốt không phải là pháp luật nhiều — mà là pháp luật <strong>rõ ràng, khả thi, và cân bằng</strong> giữa ba lợi ích: doanh nghiệp đổi mới, người tiêu dùng được bảo vệ, và nhà nước quản lý hiệu quả.</p>
+
+      <p><strong>Tôi không tin vào ba điều:</strong></p>
+
+      <p><em>Thứ nhất</em>, tôi không tin vào <strong>luật sư biết tuốt</strong> — những người đưa ra phán quyết chắc nịch về mọi vấn đề pháp lý chỉ sau một vài dòng trên mạng xã hội. Pháp luật TMĐT Việt Nam đang ở giai đoạn định hình — người trung thực nhất là người dám nói "điểm này chưa rõ ràng, cần tiếp tục nghiên cứu".</p>
+
+      <p><em>Thứ hai</em>, tôi không tin vào <strong>học thuật tháp ngà</strong> — những nghiên cứu chỉ đối thoại với giới học thuật mà không chạm đến thực tiễn. Một bài báo khoa học có giá trị khi nó vừa được bình duyệt chặt chẽ, vừa giúp một doanh nghiệp vừa và nhỏ ở Vĩnh Long hay Trà Vinh hiểu được quyền và nghĩa vụ của mình.</p>
+
+      <p><em>Thứ ba</em>, tôi không tin vào <strong>sự khoan nhượng với gian lận thương mại điện tử</strong>. Hàng giả, hàng nhái, lừa đảo trực tuyến đang bào mòn niềm tin của người tiêu dùng Việt — nơi nào niềm tin bị bào mòn, nơi đó thị trường số không thể phát triển bền vững.</p>
+
+      <p><strong>Tôi phục vụ ba nhóm:</strong> Doanh nghiệp TMĐT (đặc biệt SME), nhà hoạch định chính sách, và giới học thuật — sinh viên.</p>
+
+      <p><strong>Tôi cam kết với bạn:</strong> Mọi bài viết, mọi buổi giảng, mọi ý kiến tư vấn — đều sẽ là sự kết nối trung thực giữa tri thức học thuật, pháp luật Việt Nam, và công nghệ số đương đại.</p>
+
+      <div class="manifesto-tagline">Tri thức · Pháp luật · Công nghệ</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: EXPERTS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Bài Học Từ 5 Chuyên Gia Hàng Đầu</h2>
+    </div>
+    <div class="section-lead">Nền tảng lý thuyết — 5 khung tư duy quan trọng nhất để áp dụng.</div>
+
+    <div class="experts-grid">
+      <div class="expert-card">
+        <div class="expert-num">01</div>
+        <div class="expert-name">Dorie Clark</div>
+        <div class="expert-role">Duke · Columbia · Top 50 Thinkers50</div>
+        <div class="expert-lesson"><strong>Công thức CSN:</strong> Content Creation × Social Proof × Network. Ba trụ nhân với nhau, không cộng. Chú đang mạnh S+N, cần đầu tư C.</div>
+      </div>
+
+      <div class="expert-card">
+        <div class="expert-num">02</div>
+        <div class="expert-name">Dorie Clark</div>
+        <div class="expert-role">"The Long Game"</div>
+        <div class="expert-lesson"><strong>Đường cong chữ J 24 tháng:</strong> 18 tháng đầu "hét vào hư không", từ tháng 19 trở đi compounding bùng nổ. Đo chỉ số đầu vào, không đo đầu ra.</div>
+      </div>
+
+      <div class="expert-card">
+        <div class="expert-num">03</div>
+        <div class="expert-name">Rand Fishkin</div>
+        <div class="expert-role">Moz · SparkToro</div>
+        <div class="expert-lesson"><strong>Transparent Authority:</strong> Dám nói điểm mình chưa biết. "Điều luật này chưa rõ, có 2 cách diễn giải..." — khác biệt với luật sư biết tuốt.</div>
+      </div>
+
+      <div class="expert-card">
+        <div class="expert-num">04</div>
+        <div class="expert-name">Brian Clark</div>
+        <div class="expert-role">Copyblogger</div>
+        <div class="expert-lesson"><strong>Value-First 80/20:</strong> Cho đi 80% kiến thức miễn phí, giữ 20% ứng dụng trả phí. Bài miễn phí = quảng cáo tốt nhất cho dịch vụ tư vấn.</div>
+      </div>
+
+      <div class="expert-card">
+        <div class="expert-num">05</div>
+        <div class="expert-name">Brené Brown</div>
+        <div class="expert-role">Univ. of Houston</div>
+        <div class="expert-lesson"><strong>Strong Back, Soft Front:</strong> Lưng cứng (chuyên môn) + Ngực mềm (câu chuyện cá nhân). 10% nội dung nên là câu chuyện "vì sao tôi làm việc này".</div>
+      </div>
+    </div>
+
+    <div class="formula-box">
+      Thương hiệu chuyên gia = <strong>Định vị tập trung</strong> × <strong>Nội dung nhất quán</strong> × <strong>Thời gian đủ dài</strong>
+    </div>
+  </div>
+
+  <!-- SECTION 5: CONTENT CALENDAR -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Lịch Nội Dung 90 Ngày</h2>
+    </div>
+    <div class="section-lead">Công thức Pillar → Cluster. Bài VECOM 2026 = mỏ nội dung cho 12 tuần. Nhịp độ: 4 bài/tuần, 2.5h/tuần.</div>
+
+    <!-- PHASE 1 -->
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-num">I</span>
+        <span class="phase-title">Đặt Nền · Tuần 1–4 · Giới thiệu vấn đề</span>
+      </div>
+      <div class="phase-body">
+        <div class="week">
+          <div class="week-head"><span class="week-num">T01</span><span class="week-date">15–21/4</span></div>
+          <div class="week-theme">Luật 122/2025 sắp có hiệu lực — Việt Nam đã sẵn sàng chưa?</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Luật TMĐT 2025 — Bước ngoặt hay thách thức?</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T02</span><span class="week-date">22–28/4</span></div>
+          <div class="week-theme">Điều 10 là gì và tại sao quan trọng?</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Giải mã Điều 10 — Nội dung, phạm vi, ý nghĩa</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T03</span><span class="week-date">29/4–5/5</span></div>
+          <div class="week-theme">So sánh với pháp luật các nước</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Điều 10 qua lăng kính Singapore, EU, Trung Quốc</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T04</span><span class="week-date">6–12/5</span></div>
+          <div class="week-theme">Khoảng trống pháp lý đầu tiên</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Khoảng trống thứ nhất — Phân tích & kiến nghị</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-num">II</span>
+        <span class="phase-title">Đào Sâu · Tuần 5–8 · Phân tích chuyên sâu</span>
+      </div>
+      <div class="phase-body">
+        <div class="week">
+          <div class="week-head"><span class="week-num">T05</span><span class="week-date">13–19/5</span></div>
+          <div class="week-theme">Khoảng trống pháp lý thứ 2</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Vấn đề định nghĩa và phạm vi áp dụng</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T06</span><span class="week-date">20–26/5</span></div>
+          <div class="week-theme">Góc nhìn doanh nghiệp SME</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Điều 10 qua lăng kính SME — Thách thức & cơ hội</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T07</span><span class="week-date">27/5–2/6</span></div>
+          <div class="week-theme">★ Góc nhìn Trọng tài viên TRACENT</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Điều 10 và ODR — Góc nhìn từ thực tiễn trọng tài</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T08</span><span class="week-date">3–9/6</span></div>
+          <div class="week-theme">Bài học từ pháp luật so sánh nâng cao</div>
+          <div class="week-pillar"><strong>Pillar:</strong> 5 kiến nghị hoàn thiện Điều 10</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-num">III</span>
+        <span class="phase-title">Khuếch Đại · Tuần 9–12 · Công bố & tổng kết</span>
+      </div>
+      <div class="phase-body">
+        <div class="week">
+          <div class="week-head"><span class="week-num">T09</span><span class="week-date">10–16/6</span></div>
+          <div class="week-theme">Điều 10 trong bức tranh chuyển đổi số</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Góc nhìn tổng thể hệ sinh thái pháp luật số</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T10</span><span class="week-date">17–23/6</span></div>
+          <div class="week-theme">Dự báo tác động</div>
+          <div class="week-pillar"><strong>Pillar:</strong> 6 tháng sau 1/7 — Dự báo tác động</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T11</span><span class="week-date">24–30/6</span></div>
+          <div class="week-theme">★★ Công bố bài VECOM 2026</div>
+          <div class="week-pillar"><strong>Pillar:</strong> Bản tóm tắt chính thức nghiên cứu VECOM 2026</div>
+        </div>
+        <div class="week">
+          <div class="week-head"><span class="week-num">T12</span><span class="week-date">1–7/7</span></div>
+          <div class="week-theme">Ngày Luật có hiệu lực — Tổng kết</div>
+          <div class="week-pillar"><strong>Pillar:</strong> 12 tuần đồng hành với Điều 10 — Bài học rút ra</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula-box" style="margin-top:28px;">
+      Nhịp tuần: <strong>T2</strong> Post ngắn · <strong>T4</strong> Bài trụ cột · <strong>T6</strong> Case thực tế · <strong>CN</strong> Câu hỏi mở
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-brand">Nguyễn Tấn Phong</div>
+  <div style="font-size:12px;margin-top:6px;">Chuyên gia Kinh tế số &amp; Pháp luật · Tư vấn chiến lược TMĐT · Trọng tài viên thương mại quốc tế</div>
+  <div style="display:flex;gap:24px;justify-content:center;margin:24px 0;font-size:12px;">
+    <a href="wireframe_nguyentanphong_v3.html" style="color:inherit;text-decoration:none;">Trang Chủ</a>
+    <a href="wireframe_article_detail.html" style="color:inherit;text-decoration:none;">Góc Nhìn</a>
+    <a href="#" style="color:inherit;text-decoration:none;">Thư Viện</a>
+    <a href="wireframe_tai_lieu.html" style="color:inherit;text-decoration:none;">Tài Liệu</a>
+    <a href="wireframe_ve_toi.html" style="color:inherit;text-decoration:none;">Về Tôi</a>
+    <a href="thuong_hieu_so_phong.html" style="color:inherit;text-decoration:none;">Thương Hiệu Số</a>
+    <a href="#" style="color:inherit;text-decoration:none;">Liên Hệ</a>
+  </div>
+  <div style="font-size:11px;">hello@nguyentanphong.com · (+84) 915 159 499</div>
+  <div style="margin-top:10px;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:0.2em;opacity:0.6;">© 1981 NGUYEN TAN PHONG · ALL RIGHTS RESERVED</div>
+</div>
+
+</body>
+</html>

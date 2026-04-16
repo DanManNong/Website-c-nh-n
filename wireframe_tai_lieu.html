@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Kho Tài Liệu · nguyentanphong.com v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a1a1a;
+    --navy-mid: #222222;
+    --gold: #E0AA79;
+    --gold-light: #f0c896;
+    --cream: #2C2C2C;
+    --text: #FFFFFF;
+    --text-soft: rgba(255,255,255,0.5);
+    --border: rgba(224, 170, 121, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
+  a { color: inherit; text-decoration: none; }
+  .block-label {
+    position: absolute;
+    top: 14px;
+    right: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 10;
+  }
+  section { position: relative; }
+
+  /* NAV */
+  .nav {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .nav-logo em { color: var(--gold); font-size: 0.7em; display: block; letter-spacing: 0.15em; font-family: 'Inter', sans-serif; font-weight: 400; }
+  .nav-menu { display: flex; gap: 24px; font-size: 13px; font-weight: 500; }
+  .nav-menu .active { color: var(--gold); font-weight: 600; }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: #fff;
+    padding: 72px 32px 56px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: italic; }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    max-width: 600px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(201,168,76,0.25);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hs-item { text-align: center; }
+  .hs-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .hs-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* FILTER BAR */
+  .filter-bar {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    position: sticky;
+    top: 57px;
+    z-index: 50;
+  }
+  .filter-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+  .filter-pill {
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-pill.active {
+    background: var(--navy);
+    color: var(--gold);
+    border-color: var(--navy);
+  }
+  .filter-search {
+    margin-left: auto;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 7px 16px;
+    font-size: 12px;
+    color: var(--text-soft);
+    min-width: 200px;
+  }
+
+  /* CONTAINER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+  .tier-section { padding: 56px 0 20px; }
+
+  /* TIER HEADER */
+  .tier-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .tier-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 0.9;
+  }
+  .tier-info {
+    flex: 1;
+    padding-top: 8px;
+  }
+  .tier-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .tier-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .tier-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    max-width: 720px;
+  }
+  .tier-friction {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--gold);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 12px;
+  }
+  .tier-friction span { color: var(--text-soft); }
+
+  /* DOC GRID */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+  .doc-card {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .doc-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+  }
+  .doc-cover {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  .doc-cover-inner {
+    width: 65%;
+    aspect-ratio: 3/4;
+    background: #2C2C2C;
+    border-radius: 2px;
+    padding: 16px 14px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .doc-cover-inner::before {
+    content: 'PDF';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Inter', sans-serif;
+    font-size: 7px;
+    padding: 2px 5px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .dc-mini-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 6px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .dc-mini-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .dc-mini-line {
+    height: 1.5px;
+    background: var(--border);
+    margin: 3px 0;
+    border-radius: 1px;
+  }
+  .dc-mini-line.short { width: 55%; }
+  .dc-mini-sig {
+    margin-top: auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 6.5px;
+    color: var(--gold);
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 4px;
+  }
+
+  .doc-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 3px 9px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .doc-body {
+    padding: 20px 22px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .doc-category {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .doc-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .doc-desc {
+    font-size: 12.5px;
+    color: var(--text-soft);
+    line-height: 1.55;
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .doc-meta {
+    display: flex;
+    gap: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--text-soft);
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    margin-bottom: 14px;
+  }
+  .doc-meta span { display: flex; gap: 4px; }
+  .doc-cta {
+    background: rgba(224, 170, 121, 0.2);
+    color: var(--gold);
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .doc-cta:hover { background: var(--gold); color: #1a1a1a; }
+  .doc-cta.tier2 { background: rgba(0,0,0,0.3); color: var(--gold); border: 1.5px solid var(--gold); }
+  .doc-cta.tier3 {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+  }
+
+  /* TIER COLOR ACCENT */
+  .tier-1 .tier-num { color: #a4c97a; }
+  .tier-1 .tier-header { border-bottom-color: #a4c97a; }
+  .tier-2 .tier-num { color: var(--gold); }
+  .tier-3 .tier-num { color: #e8a08c; }
+  .tier-3 .tier-header { border-bottom-color: #e8a08c; }
+
+  /* BOTTOM CTA — Newsletter nudge */
+  .bottom-cta {
+    background: var(--navy);
+    color: #fff;
+    padding: 72px 32px;
+    text-align: center;
+    border-top: 3px solid var(--gold);
+    margin-top: 40px;
+  }
+  .bc-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .bc-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .bc-title em { color: var(--gold-light); font-style: italic; }
+  .bc-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.72);
+    max-width: 560px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+  .bc-form {
+    display: flex;
+    gap: 8px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .bc-input {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: #fff;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .bc-input::placeholder { color: rgba(255,255,255,0.4); }
+  .bc-btn {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.55);
+    padding: 40px 32px 24px;
+    text-align: center;
+  }
+  .footer-brand {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+  .footer-copy {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stagger { opacity: 0; animation: fadeUp 1.2s forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 900px) {
+    .nav-menu { display: none; }
+    .hero h1 { font-size: 1.9rem; }
+    .hero-stats { gap: 28px; }
+    .doc-grid { grid-template-columns: 1fr; }
+    .tier-header { flex-direction: column; gap: 10px; }
+    .tier-num { font-size: 2.8rem; }
+    .tier-friction { text-align: left; }
+    .filter-inner { gap: 8px; }
+    .filter-search { margin-left: 0; width: 100%; }
+    .bc-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="wireframe_nguyentanphong_v3.html" class="nav-logo">Nguyễn Tấn Phong<em>Tri thức · Pháp luật · Công nghệ</em></a>
+  <div class="nav-menu">
+    <a href="wireframe_article_detail.html">Góc Nhìn</a>
+    <a href="#">Thư Viện</a>
+    <a href="wireframe_tai_lieu.html" class="active">Tài Liệu</a>
+    <a href="wireframe_ve_toi.html">Về Tôi</a>
+    <a href="thuong_hieu_so_phong.html">Thương Hiệu Số</a>
+    <a href="#">Liên Hệ</a>
+  </div>
+  <a href="wireframe_nguyentanphong_v3.html" class="nav-cta">Trang Chủ ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="block-label">Khối 01 · Hero</div>
+  <div class="hero-eyebrow">Kho Tài Liệu Chuyên Môn</div>
+  <h1>Tri thức Pháp lý &amp; Kinh tế số — <em>miễn phí, chuyên sâu</em></h1>
+  <p class="hero-sub">Toàn bộ tài liệu được biên soạn từ kinh nghiệm hơn 10 năm làm việc với VECOM, TRACENT, CLEAD, ARI và hơn 6.875 đối tác kết nối. Tải miễn phí bằng email.</p>
+  <div class="hero-stats">
+    <div class="hs-item"><div class="hs-num">18</div><div class="hs-label">Tài Liệu</div></div>
+    <div class="hs-item"><div class="hs-num">03</div><div class="hs-label">Cấp Độ</div></div>
+    <div class="hs-item"><div class="hs-num">500+</div><div class="hs-label">Lượt Tải</div></div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<section class="filter-bar">
+  <div class="block-label">Khối 02 · Bộ Lọc</div>
+  <div class="filter-inner">
+    <span class="filter-label">Lọc theo</span>
+    <button class="filter-pill active">Tất cả</button>
+    <button class="filter-pill">Kinh tế số &amp; TMĐT</button>
+    <button class="filter-pill">Bất động sản</button>
+    <button class="filter-pill">An ninh mạng</button>
+    <button class="filter-pill">Trọng tài thương mại</button>
+    <button class="filter-pill">Pháp luật &amp; Quản trị</button>
+    <div class="filter-search">🔍  Tìm tài liệu...</div>
+  </div>
+</section>
+
+<!-- TIER 1 — TOOL-LITE -->
+<section class="tier-section tier-1">
+  <div class="block-label">Khối 03 · Cấp 1 — Tool-Lite</div>
+  <div class="container">
+    <div class="tier-header">
+      <div class="tier-num">01</div>
+      <div class="tier-info">
+        <div class="tier-eyebrow">Cấp Độ 1 · Tool-Lite</div>
+        <div class="tier-title">Tài liệu ngắn — Đọc trong 10 phút</div>
+        <div class="tier-desc">Checklist, infographic, và bộ câu hỏi tự đánh giá. Phù hợp cho người mới tìm hiểu. Tải miễn phí chỉ với <strong>email</strong>.</div>
+      </div>
+      <div class="tier-friction"><span>Rào cản:</span> EMAIL</div>
+    </div>
+
+    <div class="doc-grid">
+      <article class="doc-card">
+        <div class="doc-cover">
+          <span class="doc-tag">Checklist</span>
+          <div class="doc-cover-inner">
+            <div class="dc-mini-label">Checklist</div>
+            <div class="dc-mini-title">10 Điểm Tuân Thủ Luật TMĐT 2025</div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line short"></div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line short"></div>
+            <div class="dc-mini-sig">— NTP</div>
+          </div>
+        </div>
+        <div class="doc-body">
+          <div class="doc-category">Luật TMĐT</div>
+          <h3 class="doc-title">Checklist 10 điểm tuân thủ Luật TMĐT 2025</h3>
+          <p class="doc-desc">Bảng kiểm nhanh dành cho doanh nghiệp SME — đánh giá mức độ sẵn sàng trước ngày 1/7/2026.</p>
+          <div class="doc-meta"><span>📄 2 trang</span><span>·</span><span>PDF</span></div>
+          <a href="#" class="doc-cta">Tải Miễn Phí →</a>
+        </div>
+      </article>
+
+      <article class="doc-card">
+        <div class="doc-cover">
+          <span class="doc-tag">Infographic</span>
+          <div class="doc-cover-inner">
+            <div class="dc-mini-label">Infographic</div>
+            <div class="dc-mini-title">Điều 10 Luật 122/2025 Trong 1 Trang</div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line short"></div>
+            <div class="dc-mini-sig">— NTP</div>
+          </div>
+        </div>
+        <div class="doc-body">
+          <div class="doc-category">Luật TMĐT</div>
+          <h3 class="doc-title">Điều 10 Luật 122/2025 trong 1 trang</h3>
+          <p class="doc-desc">Infographic trực quan tóm gọn nội dung, phạm vi và đối tượng áp dụng của Điều 10.</p>
+          <div class="doc-meta"><span>🖼️ 1 trang</span><span>·</span><span>PNG/PDF</span></div>
+          <a href="#" class="doc-cta">Tải Miễn Phí →</a>
+        </div>
+      </article>
+
+      <article class="doc-card">
+        <div class="doc-cover">
+          <span class="doc-tag">Tự đánh giá</span>
+          <div class="doc-cover-inner">
+            <div class="dc-mini-label">Self-Assessment</div>
+            <div class="dc-mini-title">Bộ Câu Hỏi Đánh Giá Rủi Ro Pháp Lý</div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line short"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-sig">— NTP</div>
+          </div>
+        </div>
+        <div class="doc-body">
+          <div class="doc-category">Quản trị nền tảng</div>
+          <h3 class="doc-title">Bộ câu hỏi tự đánh giá rủi ro pháp lý SME TMĐT</h3>
+          <p class="doc-desc">20 câu hỏi giúp doanh nghiệp tự đánh giá mức độ rủi ro pháp lý trong hoạt động TMĐT hiện tại.</p>
+          <div class="doc-meta"><span>📄 3 trang</span><span>·</span><span>PDF</span></div>
+          <a href="#" class="doc-cta">Tải Miễn Phí →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 2 — MID-TICKET -->
+<section class="tier-section tier-2" style="background:rgba(0,0,0,0.15);">
+  <div class="block-label">Khối 04 · Cấp 2 — Mid-Ticket ★</div>
+  <div class="container">
+    <div class="tier-header">
+      <div class="tier-num">02</div>
+      <div class="tier-info">
+        <div class="tier-eyebrow">Cấp Độ 2 · Mid-Ticket</div>
+        <div class="tier-title">Báo cáo chuyên sâu — Nghiên cứu chuyên môn</div>
+        <div class="tier-desc">Whitepaper, cẩm nang và báo cáo phân tích toàn diện. Phù hợp cho luật sư, nhà quản trị và nghiên cứu sinh. Yêu cầu <strong>email + vai trò + tên công ty</strong> để chúng tôi gửi nội dung phù hợp.</div>
+      </div>
+      <div class="tier-friction"><span>Rào cản:</span> EMAIL + VAI TRÒ</div>
+    </div>
+
+    <div class="doc-grid">
+      <article class="doc-card">
+        <div class="doc-cover">
+          <span class="doc-tag">Cẩm nang</span>
+          <div class="doc-cover-inner">
+            <div class="dc-mini-label">Cẩm Nang</div>
+            <div class="dc-mini-title">Luật TMĐT 2025 — Toàn Văn Phân Tích</div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line short"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line short"></div>
+            <div class="dc-mini-sig">— Nguyễn Tấn Phong</div>
+          </div>
+        </div>
+        <div class="doc-body">
+          <div class="doc-category">Luật TMĐT</div>
+          <h3 class="doc-title">Cẩm nang Luật TMĐT 2025 — Toàn văn phân tích</h3>
+          <p class="doc-desc">Phân tích toàn diện 5 điểm mới quan trọng nhất + checklist tuân thủ + bảng đối chiếu với Nghị định 52/2013.</p>
+          <div class="doc-meta"><span>📄 20 trang</span><span>·</span><span>PDF</span></div>
+          <a href="#" class="doc-cta tier2">Nhận Qua Email →</a>
+        </div>
+      </article>
+
+      <article class="doc-card">
+        <div class="doc-cover">
+          <span class="doc-tag">Whitepaper</span>
+          <div class="doc-cover-inner">
+            <div class="dc-mini-label">Whitepaper</div>
+            <div class="dc-mini-title">Điều 10 & Tác Động Đến SME</div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line short"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-sig">— Nguyễn Tấn Phong</div>
+          </div>
+        </div>
+        <div class="doc-body">
+          <div class="doc-category">Nghiên cứu học thuật</div>
+          <h3 class="doc-title">Điều 10 và tác động đến doanh nghiệp SME</h3>
+          <p class="doc-desc">Phân tích chuyên sâu tác động của Điều 10 Luật 122/2025 đến SME tại các vùng khó khăn — Mekong Delta, Tây Nguyên, Tây Bắc.</p>
+          <div class="doc-meta"><span>📄 28 trang</span><span>·</span><span>PDF</span></div>
+          <a href="#" class="doc-cta tier2">Nhận Qua Email →</a>
+        </div>
+      </article>
+
+      <article class="doc-card">
+        <div class="doc-cover">
+          <span class="doc-tag">Báo cáo</span>
+          <div class="doc-cover-inner">
+            <div class="dc-mini-label">Báo Cáo</div>
+            <div class="dc-mini-title">Khung Pháp Lý TMĐT VN 2025–2030</div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line short"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line short"></div>
+            <div class="dc-mini-sig">— Nguyễn Tấn Phong</div>
+          </div>
+        </div>
+        <div class="doc-body">
+          <div class="doc-category">Luật TMĐT</div>
+          <h3 class="doc-title">Khung pháp lý TMĐT Việt Nam 2025–2030</h3>
+          <p class="doc-desc">Báo cáo tổng hợp bức tranh pháp luật TMĐT trong 5 năm tới, so sánh với Singapore, EU, Trung Quốc, và 7 kiến nghị chính sách.</p>
+          <div class="doc-meta"><span>📄 42 trang</span><span>·</span><span>PDF</span></div>
+          <a href="#" class="doc-cta tier2">Nhận Qua Email →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 3 — HIGH-TICKET -->
+<section class="tier-section tier-3">
+  <div class="block-label">Khối 05 · Cấp 3 — High-Ticket</div>
+  <div class="container">
+    <div class="tier-header">
+      <div class="tier-num">03</div>
+      <div class="tier-info">
+        <div class="tier-eyebrow">Cấp Độ 3 · High-Ticket</div>
+        <div class="tier-title">Tư vấn cá nhân — Đánh giá trực tiếp</div>
+        <div class="tier-desc">Không phải file — đây là <strong>cuộc gọi 15 phút miễn phí</strong> để đánh giá nhanh rủi ro pháp lý TMĐT của doanh nghiệp bạn. Dành cho doanh nghiệp đang thực sự cần tư vấn. Yêu cầu <strong>đặt lịch + thông tin doanh nghiệp</strong>.</div>
+      </div>
+      <div class="tier-friction"><span>Rào cản:</span> ĐẶT LỊCH</div>
+    </div>
+
+    <div class="doc-grid">
+      <article class="doc-card" style="grid-column:span 2;">
+        <div class="doc-body" style="padding:32px 36px;">
+          <div class="doc-category">Tư vấn cá nhân</div>
+          <h3 class="doc-title" style="font-size:1.5rem;">Đánh giá miễn phí 15 phút — Rủi ro pháp lý TMĐT</h3>
+          <p class="doc-desc" style="font-size:14px;">Một cuộc gọi 15 phút với tôi (hoặc đội CLEAD) để đánh giá nhanh: (1) Mô hình kinh doanh của bạn có rơi vào định nghĩa mới của Luật 122/2025 không, (2) 3 rủi ro pháp lý cao nhất hiện tại, (3) Các bước chuẩn bị cụ thể trước ngày 1/7/2026. Không bán hàng, không ràng buộc.</p>
+          <div class="doc-meta"><span>⏱️ 15 phút</span><span>·</span><span>Google Meet / Zoom</span><span>·</span><span>Miễn phí</span></div>
+          <a href="#" class="doc-cta tier3">Đặt Lịch Ngay →</a>
+        </div>
+      </article>
+
+      <article class="doc-card">
+        <div class="doc-cover">
+          <span class="doc-tag">Workshop</span>
+          <div class="doc-cover-inner">
+            <div class="dc-mini-label">Workshop</div>
+            <div class="dc-mini-title">Đào Tạo Nội Bộ Doanh Nghiệp</div>
+            <div class="dc-mini-line"></div><div class="dc-mini-line"></div>
+            <div class="dc-mini-line short"></div>
+            <div class="dc-mini-sig">— CLEAD · EAGLE</div>
+          </div>
+        </div>
+        <div class="doc-body">
+          <div class="doc-category">Dịch vụ chuyên sâu</div>
+          <h3 class="doc-title">Workshop đào tạo Luật TMĐT nội bộ DN</h3>
+          <p class="doc-desc">Buổi đào tạo 2–4 giờ dành riêng cho đội pháp chế và vận hành TMĐT của doanh nghiệp bạn.</p>
+          <div class="doc-meta"><span>⏱️ 2–4h</span><span>·</span><span>Có phí</span></div>
+          <a href="#" class="doc-cta tier3">Liên Hệ →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="block-label" style="background:#fff;">Khối 06 · Newsletter CTA</div>
+  <div class="bc-eyebrow">Thư Pháp Luật Số</div>
+  <h2 class="bc-title">Không muốn bỏ lỡ <em>tài liệu mới</em>?</h2>
+  <p class="bc-desc">Mỗi khi có tài liệu mới được thêm vào thư viện, tôi sẽ gửi email thông báo kèm phân tích ngắn — chỉ 1 email mỗi tuần, không spam.</p>
+  <div class="bc-form">
+    <input class="bc-input" type="email" placeholder="Email của bạn">
+    <button class="bc-btn" type="button">Đăng Ký →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Nguyễn Tấn Phong</div>
+  <div style="font-size:12px;margin-top:6px;">Chuyên gia Kinh tế số &amp; Pháp luật · Tư vấn chiến lược TMĐT · Trọng tài viên thương mại quốc tế</div>
+  <div class="footer-links" style="display:flex;gap:24px;justify-content:center;margin:24px 0;font-size:12px;">
+    <a href="wireframe_nguyentanphong_v3.html">Trang Chủ</a>
+    <a href="wireframe_article_detail.html">Góc Nhìn</a>
+    <a href="#">Thư Viện</a>
+    <a href="wireframe_tai_lieu.html">Tài Liệu</a>
+    <a href="wireframe_ve_toi.html">Về Tôi</a>
+    <a href="thuong_hieu_so_phong.html">Thương Hiệu Số</a>
+    <a href="#">Liên Hệ</a>
+  </div>
+  <div style="font-size:11px;">hello@nguyentanphong.com · (+84) 915 159 499</div>
+  <div class="footer-copy">© 1981 NGUYEN TAN PHONG · ALL RIGHTS RESERVED</div>
+</footer>
+
+</body>
+</html>
