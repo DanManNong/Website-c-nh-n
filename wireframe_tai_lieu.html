@@ -519,9 +519,52 @@
     .filter-search { margin-left: 0; width: 100%; }
     .bc-form { flex-direction: column; }
   }
+
+  /* ========== STAGING BANNER ========== */
+  #stagingBanner {
+    display: none;
+    position: relative;
+    z-index: 2000;
+    width: 100%;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #ED1C24, #FF6B3D, #ED1C24);
+    background-size: 200% 100%;
+    animation: stagingShimmer 4s ease infinite;
+    color: #fff;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 20px rgba(237, 28, 36, 0.45);
+  }
+  #stagingBanner.show { display: block; }
+  #stagingBanner span { opacity: 0.92; }
+  @keyframes stagingShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+  @media (max-width: 480px) {
+    #stagingBanner { font-size: 9.5px; letter-spacing: 0.15em; padding: 7px 10px; }
+  }
 </style>
 </head>
 <body>
+<!-- STAGING BANNER -->
+<div id="stagingBanner">
+  <i class="fas fa-wrench" style="margin-right:10px"></i>
+  <span>ĐANG SỬA CHỮA · WEB TẠM · CHƯA PHẢI BẢN CHÍNH THỨC</span>
+</div>
+<script>
+  (function () {
+    var h = location.hostname;
+    if (h !== 'nguyentanphong.com' && h !== 'www.nguyentanphong.com') {
+      var el = document.getElementById('stagingBanner');
+      if (el) el.classList.add('show');
+    }
+  })();
+</script>
 
 <!-- NAV -->
 <nav class="nav">

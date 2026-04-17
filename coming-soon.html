@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nguyễn Tấn Phong | TRI THỨC - PHÁP LUẬT - CÔNG NGHỆ</title>
+
+<meta name="google-site-verification" content="sJw3mavjnDOT8pJS4dhfcNW53G4NM4bc0sBu-ertx4g" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4WM8D9SK71"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nguyễn Tấn Phong",
+  "url": "https://nguyentanphong.com",
+  "image": "https://nguyentanphong.com/avatar-nguyentanphong.jpg",
+  "jobTitle": "Chuyên gia Kinh tế số & Pháp luật",
+  "sameAs": [
+    "https://facebook.com/tanphong1981",
+    "https://zalo.me/0915159499",
+    "https://www.linkedin.com/in/nguyentanphong",
+    "http://www.youtube.com/@danmannong"
+  ]
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --navy: #1a1a1a;
+    --gold: #E0AA79;
+    --gold-light: #f0c896;
+    --cream: #2C2C2C;
+    --text: #FFFFFF;
+    --text-soft: rgba(255,255,255,0.5);
+    --border: rgba(224, 170, 121, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 32px 24px;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .card {
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* AVATAR */
+  .avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid rgba(224,170,121,0.3);
+    margin: 0 auto 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* NAME */
+  .name {
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .title-line {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin: 20px 0 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* PHONE */
+  .phone-block {
+    margin-bottom: 32px;
+  }
+  .phone-number {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .phone-label {
+    font-size: 9px;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  /* QR + CONTACT GRID */
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  .qr-image-cell {
+    grid-column: span 2;
+    grid-row: span 2;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .qr-image-cell img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(1); }
+  .qr-link {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 6px;
+    transition: all 0.2s;
+    aspect-ratio: 1;
+  }
+  .qr-link:hover { border-color: var(--gold); background: rgba(224,170,121,0.08); transform: translateY(-2px); }
+  .qr-link i { color: var(--gold); font-size: 0.9rem; }
+  .qr-link span { font-size: 6px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-soft); }
+
+  /* NOTICE */
+  .notice {
+    background: rgba(0,0,0,0.4);
+    border: 1px dashed var(--gold);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .notice-icon {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  .notice-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .notice-text {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer-copy {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    color: var(--text-soft);
+    opacity: 0.4;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .stagger { opacity: 0; animation: fadeUp 1.2s forwards; }
+  .s2 { animation-delay: 0.2s; }
+  .s3 { animation-delay: 0.4s; }
+  .s4 { animation-delay: 0.6s; }
+  .s5 { animation-delay: 0.8s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ========== STAGING BANNER ========== */
+  #stagingBanner {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 2000;
+    width: 100%;
+    background: linear-gradient(90deg, #ED1C24, #FF6B3D, #ED1C24);
+    background-size: 200% 100%;
+    animation: stagingShimmer 4s ease infinite;
+    color: #fff;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 20px rgba(237, 28, 36, 0.45);
+  }
+  #stagingBanner.show { display: block; }
+  #stagingBanner span { opacity: 0.92; }
+  @keyframes stagingShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+  @media (max-width: 480px) {
+    #stagingBanner { font-size: 9.5px; letter-spacing: 0.15em; padding: 7px 10px; }
+  }
+</style>
+</head>
+<body>
+<!-- STAGING BANNER -->
+<div id="stagingBanner">
+  <i class="fas fa-wrench" style="margin-right:10px"></i>
+  <span>ĐANG SỬA CHỮA · WEB TẠM · CHƯA PHẢI BẢN CHÍNH THỨC</span>
+</div>
+<script>
+  (function () {
+    var h = location.hostname;
+    if (h !== 'nguyentanphong.com' && h !== 'www.nguyentanphong.com') {
+      var el = document.getElementById('stagingBanner');
+      if (el) el.classList.add('show');
+    }
+  })();
+</script>
+
+<div class="card">
+
+  <!-- AVATAR -->
+  <div class="stagger">
+    <div class="avatar">
+      <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong">
+    </div>
+  </div>
+
+  <!-- NAME & TITLE -->
+  <div class="stagger s2">
+    <h1 class="name">Nguyễn Tấn Phong</h1>
+    <div class="title-line">Chuyên gia Kinh tế số &amp; Pháp luật</div>
+    <div class="title-line">Luật gia - Trọng tài viên</div>
+    <div class="title-line">Tư vấn chiến lược Thương mại điện tử và Kinh tế số</div>
+    <div class="tagline">Tri Thức &middot; Pháp Luật &middot; Công Nghệ</div>
+  </div>
+
+  <!-- PHONE -->
+  <div class="phone-block stagger s3">
+    <a href="tel:+84915159499">
+      <div class="phone-number">0915 159 499</div>
+      <div class="phone-label">Hotline</div>
+    </a>
+  </div>
+
+  <!-- QR + DANH THIẾP -->
+  <div class="qr-grid stagger s3">
+    <div class="qr-image-cell">
+      <img src="qr-tanphong.png" alt="QR Code Nguyễn Tấn Phong">
+    </div>
+    <a href="https://zalo.me/0915159499" target="_blank" class="qr-link"><i class="fas fa-comment-dots"></i><span>Zalo</span></a>
+    <a href="https://facebook.com/tanphong1981" target="_blank" class="qr-link"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+    <a href="tel:+84915159499" class="qr-link"><i class="fas fa-phone-alt"></i><span>Gọi</span></a>
+    <a href="mailto:hello@nguyentanphong.com" class="qr-link"><i class="fas fa-envelope"></i><span>Email</span></a>
+    <a href="http://www.youtube.com/@danmannong" target="_blank" class="qr-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+    <a href="https://www.linkedin.com/in/nguyentanphong" target="_blank" class="qr-link"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
+  </div>
+
+  <!-- NOTICE -->
+  <div class="notice stagger s4">
+    <div class="notice-icon"><i class="fas fa-hard-hat"></i></div>
+    <div class="notice-title">Trang web đang xây dựng</div>
+    <div class="notice-text">Phiên bản mới đang được phát triển.<br>Vui lòng liên hệ qua Zalo hoặc Hotline để được hỗ trợ.</div>
+  </div>
+
+  <!-- SIGNATURE + FOOTER -->
+  <div class="stagger s5">
+    <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" style="width:160px;filter:brightness(0) invert(1);opacity:0.85;margin:0 auto 12px;display:block;">
+    <div class="footer-copy">&copy; 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

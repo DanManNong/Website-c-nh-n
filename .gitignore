@@ -1,0 +1,36 @@
+.DS_Store
+*.swp
+._*
+__pycache__/
+*.pyc
+.venv/
+.vscode/
+.idea/
+*.log
+*.tmp
+.env
+.env.local
+
+# Claude memory/session
+.claude/
+
+# File dữ liệu nguồn chứa thông tin cá nhân
+*.xlsx
+*.xls
+*.csv
+
+# Ghi chú nội bộ
+nhac-viec-*.md
+
+# Tài liệu brand guideline nội bộ
+*-Guideline-*.pdf
+
+# Ảnh chân dung gốc
+Anh-*.jpg
+Anh-*.jpeg
+
+# Script build nội bộ
+_*.py
+
+# Wireframe legacy
+wireframe_nguyentanphong_v2.html

@@ -1,0 +1,30 @@
+.DS_Store
+.claude/
+.vscode/
+.idea/
+
+# Markdown nội bộ (trừ README công khai nếu có)
+ZONE-MAP.md
+QUY-UOC-LAM-VIEC.md
+nhac-viec-*.md
+
+# File nguồn Excel / CSV / PDF guideline
+*.xlsx
+*.xls
+*.csv
+*-Guideline-*.pdf
+
+# Script build nội bộ
+_*.py
+__pycache__/
+*.pyc
+.venv/
+
+# Temporary / log
+*.log
+*.tmp
+.env
+.env.local
+
+# Wireframe v2 (legacy, không deploy)
+wireframe_nguyentanphong_v2.html

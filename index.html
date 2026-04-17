@@ -746,11 +746,54 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     .hero-actions .btn-primary,
     .hero-actions .btn-ghost { width: 100%; max-width: 280px; justify-content: center; }
   }
+
+  /* ========== STAGING BANNER ========== */
+  #stagingBanner {
+    display: none;
+    position: relative;
+    z-index: 2000;
+    width: 100%;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #ED1C24, #FF6B3D, #ED1C24);
+    background-size: 200% 100%;
+    animation: stagingShimmer 4s ease infinite;
+    color: #fff;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 20px rgba(237, 28, 36, 0.45);
+  }
+  #stagingBanner.show { display: block; }
+  #stagingBanner span { opacity: 0.92; }
+  @keyframes stagingShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+  @media (max-width: 480px) {
+    #stagingBanner { font-size: 9.5px; letter-spacing: 0.15em; padding: 7px 10px; }
+  }
 </style>
 </head>
 <body>
+<!-- STAGING BANNER -->
+<div id="stagingBanner">
+  <i class="fas fa-wrench" style="margin-right:10px"></i>
+  <span>ĐANG SỬA CHỮA · WEB TẠM · CHƯA PHẢI BẢN CHÍNH THỨC</span>
+</div>
+<script>
+  (function () {
+    var h = location.hostname;
+    if (h !== 'nguyentanphong.com' && h !== 'www.nguyentanphong.com') {
+      var el = document.getElementById('stagingBanner');
+      if (el) el.classList.add('show');
+    }
+  })();
+</script>
 
-<!-- LANGUAGE BAR -->
+<!-- Z01 · LANGUAGE BAR -->
 <div class="lang-bar stagger">
   <button class="lang-btn active" onclick="changeLang(this)">VN</button>
   <button class="lang-btn" onclick="changeLang(this)">EN</button>
@@ -759,7 +802,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   <button class="lang-btn" onclick="changeLang(this)">JP</button>
 </div>
 
-<!-- NAV -->
+<!-- Z02 · NAV -->
 <nav class="nav">
   <a href="wireframe_nguyentanphong_v3.html" class="nav-logo">Nguyễn Tấn Phong<em>Tri thức · Pháp luật · Công nghệ</em></a>
   <div class="nav-menu">
@@ -773,7 +816,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   <button onclick="openQRModal()" class="nav-cta"><i class="fas fa-qrcode" style="margin-right:6px;"></i> Danh Thiếp</button>
 </nav>
 
-<!-- HERO -->
+<!-- Z03 · HERO -->
 <section class="hero stagger">
   <div class="hero-label">Chuyên gia Kinh tế số &amp; Pháp luật · 2026</div>
   <div class="hero-avatar">
@@ -790,7 +833,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- STATS -->
+<!-- Z04 · STATS -->
 <section class="stats stagger">
   <div class="stats-grid">
     <div class="stat-item">
@@ -816,6 +859,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
 <section class="block stagger">
   <div class="container">
     <div class="block-header">
+      <!-- Z05 · VAI TRÒ CHUYÊN MÔN -->
       <div class="block-eyebrow">Vai Trò Chuyên Môn</div>
       <h2 class="block-title">5 tổ chức đang đồng hành</h2>
     </div>
@@ -849,7 +893,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- INSIGHT ARTICLES -->
+<!-- Z06 · INSIGHT ARTICLES -->
 <section class="block stagger" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="block-header">
@@ -889,7 +933,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- PRESS / MEDIA -->
+<!-- Z07 · PRESS / MEDIA -->
 <section class="block stagger" style="background:rgba(0,0,0,0.2);">
   <div class="container">
     <div class="block-header">
@@ -908,7 +952,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- LIBRARY -->
+<!-- Z08 · LIBRARY -->
 <section class="block stagger">
   <div class="container">
     <div class="block-header">
@@ -940,7 +984,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- DOCUMENT SECTION -->
+<!-- Z09 · DOCUMENT SECTION -->
 <section class="block stagger" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="doc-section">
@@ -957,7 +1001,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- MANIFESTO PREVIEW -->
+<!-- Z10 · MANIFESTO PREVIEW -->
 <section class="block stagger">
   <div class="container">
     <div class="manifesto-box">
@@ -969,7 +1013,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- CATEGORIES -->
+<!-- Z11 · CATEGORIES -->
 <section class="block stagger" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="block-header">
@@ -986,7 +1030,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- LEAD MAGNET -->
+<!-- Z12 · LEAD MAGNET -->
 <section class="block lead-magnet stagger">
   <div class="lm-wrapper">
     <div class="lm-mockup">
@@ -1012,7 +1056,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- CONTACT GRID -->
+<!-- Z13 · CONTACT GRID -->
 <section class="block stagger" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="block-header">
@@ -1030,7 +1074,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- Z14 · FOOTER -->
 <footer class="footer stagger">
   <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="footer-signature" onerror="this.style.display='none';">
   <div class="footer-brand">Nguyễn Tấn Phong</div>
@@ -1048,12 +1092,12 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   <div class="footer-copy">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
 </footer>
 
-<!-- SCROLL TO TOP -->
+<!-- Z15 · SCROLL TO TOP -->
 <div id="backToTop" class="scroll-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
   <i class="fas fa-chevron-up"></i>
 </div>
 
-<!-- QR CARD MODAL -->
+<!-- M-QR · QR CARD MODAL -->
 <div id="qrCardModal" class="modal-overlay" onclick="if(event.target===this)closeModal('qrCardModal')">
   <div class="modal-box" style="max-width:600px;" onclick="event.stopPropagation()">
     <button onclick="closeModal('qrCardModal')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-soft);cursor:pointer;"><i class="fas fa-times"></i></button>
@@ -1072,7 +1116,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </div>
 
-<!-- PASSWORD MODAL -->
+<!-- M-PASS · PASSWORD MODAL -->
 <div id="passwordModal" class="modal-overlay" onclick="if(event.target===this)closeModal('passwordModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-title" id="gateTitle">Xác thực Định danh Đối tác</div>
@@ -1084,7 +1128,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   </div>
 </div>
 
-<!-- REGISTER MODAL -->
+<!-- M-REG · REGISTER MODAL -->
 <div id="registerModal" class="modal-overlay" onclick="if(event.target===this)closeModal('registerModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-title">Đăng ký Tư vấn</div>
