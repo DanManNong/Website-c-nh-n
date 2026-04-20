@@ -2,8 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/full", "destination": "/wireframe_nguyentanphong_v3.html" },
-    { "source": "/full.html", "destination": "/wireframe_nguyentanphong_v3.html" }
+    { "source": "/full", "destination": "/wireframe_nguyentanphong_v3" },
+    { "source": "/full.html", "destination": "/wireframe_nguyentanphong_v3" }
   ],
   "redirects": [
     { "source": "/home", "destination": "/", "permanent": true },
