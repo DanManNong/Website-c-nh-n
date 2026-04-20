@@ -161,34 +161,45 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     aspect-ratio: 1;
   }
   .qr-link:hover { border-color: var(--gold); background: rgba(224,170,121,0.08); transform: translateY(-2px); }
-  .qr-link i { color: var(--gold); font-size: 0.9rem; }
-  .qr-link span { font-size: 6px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-soft); }
+  .qr-link i { color: var(--gold); font-size: 1.6rem; line-height: 1; }
+  .qr-link span { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); margin-top: 4px; }
+  @media (max-width: 480px) {
+    .qr-link i { font-size: 1.3rem; }
+    .qr-link span { font-size: 8px; }
+  }
 
-  /* NOTICE */
-  .notice {
-    background: rgba(0,0,0,0.4);
-    border: 1px dashed var(--gold);
-    border-radius: 10px;
-    padding: 20px 24px;
+  /* SAVE CONTACT BUTTON */
+  .save-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 18px 24px;
     margin-bottom: 28px;
-  }
-  .notice-icon {
-    color: var(--gold);
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-  }
-  .notice-title {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(224,170,121,0.35);
+    transition: all 0.25s ease;
   }
-  .notice-text {
-    font-size: 12px;
-    color: var(--text-soft);
-    line-height: 1.6;
+  .save-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(224,170,121,0.5);
+  }
+  .save-contact:active { transform: translateY(0); }
+  .save-contact i { font-size: 18px; }
+  @media (max-width: 480px) {
+    .save-contact { font-size: 13px; padding: 15px 18px; gap: 10px; }
+    .save-contact i { font-size: 16px; }
   }
 
   /* FOOTER */
@@ -287,28 +298,11 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
 </style>
 </head>
 <body>
-<!-- STAGING BANNER -->
-<div id="stagingBanner">
-  <i class="fas fa-wrench" style="margin-right:10px"></i>
-  <span>ĐANG SỬA CHỮA · WEB TẠM · CHƯA PHẢI BẢN CHÍNH THỨC</span>
-</div>
-
-<!-- TAB BAR -->
+<!-- TAB BAR (bản Đơn giản đã hoạt động → không banner) -->
 <nav class="tab-bar" aria-label="Chọn phiên bản hiển thị">
   <a href="/" class="tab-btn active"><i class="fas fa-id-card"></i> Đơn giản</a>
   <a href="/full" class="tab-btn"><i class="fas fa-th-large"></i> Đầy đủ</a>
 </nav>
-<script>
-  (function () {
-    // BANNER_ALWAYS = true → hiện trên MỌI hostname (kể cả production)
-    // Đổi thành false để auto-ẩn trên nguyentanphong.com (khi site hoàn thiện)
-    var BANNER_ALWAYS = true;
-    var h = location.hostname;
-    var isProduction = (h === 'nguyentanphong.com' || h === 'www.nguyentanphong.com');
-    var el = document.getElementById('stagingBanner');
-    if (el && (BANNER_ALWAYS || !isProduction)) el.classList.add('show');
-  })();
-</script>
 
 <div class="card">
 
@@ -349,12 +343,42 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     <a href="https://www.linkedin.com/in/nguyentanphong" target="_blank" class="qr-link"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
   </div>
 
-  <!-- NOTICE -->
-  <div class="notice stagger s4">
-    <div class="notice-icon"><i class="fas fa-hard-hat"></i></div>
-    <div class="notice-title">Trang web đang xây dựng</div>
-    <div class="notice-text">Phiên bản mới đang được phát triển.<br>Vui lòng liên hệ qua Zalo hoặc Hotline để được hỗ trợ.</div>
-  </div>
+  <!-- SAVE CONTACT BUTTON -->
+  <button onclick="saveContact()" class="save-contact stagger s4" aria-label="Lưu danh bạ vào điện thoại">
+    <i class="fas fa-address-book"></i>
+    <span>Lưu Danh Bạ</span>
+  </button>
+  <script>
+    function saveContact() {
+      var vcard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:Nguyễn;Tấn Phong;;;",
+        "FN:Nguyễn Tấn Phong",
+        "TITLE:Chuyên gia Kinh tế số & Pháp luật",
+        "ORG:VECOM · CLEAD · TRACENT",
+        "TEL;TYPE=CELL,VOICE:+84915159499",
+        "EMAIL;TYPE=WORK:hello@nguyentanphong.com",
+        "URL:https://nguyentanphong.com",
+        "X-SOCIALPROFILE;TYPE=facebook:https://facebook.com/tanphong1981",
+        "X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/nguyentanphong",
+        "X-SOCIALPROFILE;TYPE=youtube:http://www.youtube.com/@danmannong",
+        "NOTE:Tri Thức · Pháp Luật · Công Nghệ",
+        "END:VCARD"
+      ].join("\r\n");
+      var blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "Nguyen-Tan-Phong.vcf";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+    }
+  </script>
 
   <!-- SIGNATURE + FOOTER -->
   <div class="stagger s5">
