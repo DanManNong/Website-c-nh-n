@@ -1,15 +1,9 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/full", "destination": "/wireframe_nguyentanphong_v3" },
-    { "source": "/full.html", "destination": "/wireframe_nguyentanphong_v3" }
-  ],
   "redirects": [
     { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/index", "destination": "/", "permanent": true },
-    { "source": "/v3", "destination": "/full", "permanent": false },
-    { "source": "/day-du", "destination": "/full", "permanent": false }
+    { "source": "/index", "destination": "/", "permanent": true }
   ],
   "headers": [
     {

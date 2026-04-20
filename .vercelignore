@@ -28,3 +28,11 @@ __pycache__/
 
 # Wireframe v2 (legacy, không deploy)
 wireframe_nguyentanphong_v2.html
+
+# Bản Đầy đủ tạm ẩn — chú đang sửa
+# (xóa dòng dưới khi muốn mở lại, đồng thời restore rewrite /full trong vercel.json)
+wireframe_nguyentanphong_v3.html
+wireframe_ve_toi.html
+wireframe_tai_lieu.html
+wireframe_article_detail.html
+thuong_hieu_so_phong.html
