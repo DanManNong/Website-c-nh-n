@@ -775,6 +775,54 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   @media (max-width: 480px) {
     #stagingBanner { font-size: 9.5px; letter-spacing: 0.15em; padding: 7px 10px; }
   }
+
+  /* ========== TAB BAR (Đơn giản / Đầy đủ) ========== */
+  .tab-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1500;
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(26, 26, 26, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    transition: all 0.25s ease;
+    letter-spacing: 0.02em;
+  }
+  .tab-btn:hover {
+    color: var(--gold-light);
+    border-color: var(--gold);
+    background: rgba(224,170,121,0.05);
+  }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    border-color: var(--gold);
+    box-shadow: 0 4px 14px rgba(224,170,121,0.3);
+  }
+  .tab-btn i { font-size: 12px; }
+  @media (max-width: 480px) {
+    .tab-bar { padding: 8px 10px; gap: 6px; }
+    .tab-btn { font-size: 12px; padding: 9px 10px; gap: 6px; }
+  }
 </style>
 </head>
 <body>
@@ -783,13 +831,21 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   <i class="fas fa-wrench" style="margin-right:10px"></i>
   <span>ĐANG SỬA CHỮA · WEB TẠM · CHƯA PHẢI BẢN CHÍNH THỨC</span>
 </div>
+
+<!-- TAB BAR -->
+<nav class="tab-bar" aria-label="Chọn phiên bản hiển thị">
+  <a href="/" class="tab-btn"><i class="fas fa-id-card"></i> Đơn giản</a>
+  <a href="/full" class="tab-btn active"><i class="fas fa-th-large"></i> Đầy đủ</a>
+</nav>
 <script>
   (function () {
+    // BANNER_ALWAYS = true → hiện trên MỌI hostname (kể cả production)
+    // Đổi thành false để auto-ẩn trên nguyentanphong.com (khi site hoàn thiện)
+    var BANNER_ALWAYS = true;
     var h = location.hostname;
-    if (h !== 'nguyentanphong.com' && h !== 'www.nguyentanphong.com') {
-      var el = document.getElementById('stagingBanner');
-      if (el) el.classList.add('show');
-    }
+    var isProduction = (h === 'nguyentanphong.com' || h === 'www.nguyentanphong.com');
+    var el = document.getElementById('stagingBanner');
+    if (el && (BANNER_ALWAYS || !isProduction)) el.classList.add('show');
   })();
 </script>
 

@@ -369,11 +369,11 @@
 </div>
 <script>
   (function () {
+    var BANNER_ALWAYS = true;
     var h = location.hostname;
-    if (h !== 'nguyentanphong.com' && h !== 'www.nguyentanphong.com') {
-      var el = document.getElementById('stagingBanner');
-      if (el) el.classList.add('show');
-    }
+    var isProduction = (h === 'nguyentanphong.com' || h === 'www.nguyentanphong.com');
+    var el = document.getElementById('stagingBanner');
+    if (el && (BANNER_ALWAYS || !isProduction)) el.classList.add('show');
   })();
 </script>
 
