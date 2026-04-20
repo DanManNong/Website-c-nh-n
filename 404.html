@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Đang cập nhật thêm | Nguyễn Tấn Phong</title>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4WM8D9SK71"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true, 'page_title': '404 - Đang cập nhật thêm' });
+  function trackEvent(name, params) {
+    if (typeof gtag === 'function') { gtag('event', name, params || {}); }
+  }
+  // Track 404 page view với path để biết user cố vào URL gì
+  window.addEventListener('DOMContentLoaded', function () {
+    trackEvent('404_view', { path: location.pathname });
+  });
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -212,9 +229,9 @@
   <h1 class="title">Đang cập nhật thêm …</h1>
   <p class="desc">Phần này đang được hoàn thiện.<br>Vui lòng quay lại trang chủ hoặc liên hệ trực tiếp.</p>
   <div class="actions">
-    <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Trang Chủ</a>
-    <a href="tel:+84915159499" class="btn btn-ghost"><i class="fas fa-phone-alt"></i> Gọi Ngay</a>
-    <a href="https://zalo.me/0915159499" target="_blank" class="btn btn-ghost"><i class="fas fa-comment-dots"></i> Zalo</a>
+    <a href="/" class="btn btn-primary" onclick="trackEvent('404_home')"><i class="fas fa-home"></i> Trang Chủ</a>
+    <a href="tel:+84915159499" class="btn btn-ghost" onclick="trackEvent('404_call')"><i class="fas fa-phone-alt"></i> Gọi Ngay</a>
+    <a href="https://zalo.me/0915159499" target="_blank" class="btn btn-ghost" onclick="trackEvent('404_zalo')"><i class="fas fa-comment-dots"></i> Zalo</a>
   </div>
 </div>
 

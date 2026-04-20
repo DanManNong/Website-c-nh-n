@@ -342,7 +342,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
 <!-- TAB BAR (bản Đơn giản đã hoạt động → không banner) -->
 <nav class="tab-bar" aria-label="Chọn phiên bản hiển thị">
   <a href="/" class="tab-btn active"><i class="fas fa-id-card"></i> Đơn giản</a>
-  <a href="/full" class="tab-btn"><i class="fas fa-th-large"></i> Đầy đủ</a>
+  <a href="/full" class="tab-btn" onclick="trackEvent('open_full_version')"><i class="fas fa-th-large"></i> Đầy đủ</a>
 </nav>
 
 <div class="card">
@@ -370,12 +370,12 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     <div class="qr-image-cell">
       <img src="qr-tanphong.png" alt="QR Code Nguyễn Tấn Phong">
     </div>
-    <a href="https://zalo.me/0915159499" target="_blank" class="qr-link"><i class="fas fa-comment-dots"></i><span>Zalo</span></a>
-    <a href="https://facebook.com/tanphong1981" target="_blank" class="qr-link"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
-    <a href="tel:+84915159499" class="qr-link"><i class="fas fa-phone-alt"></i><span>Gọi</span></a>
-    <a href="mailto:hello@nguyentanphong.com" class="qr-link"><i class="fas fa-envelope"></i><span>Email</span></a>
-    <a href="http://www.youtube.com/@danmannong" target="_blank" class="qr-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
-    <a href="https://www.linkedin.com/in/nguyentanphong" target="_blank" class="qr-link"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
+    <a href="https://zalo.me/0915159499" target="_blank" class="qr-link" onclick="trackEvent('contact_zalo')"><i class="fas fa-comment-dots"></i><span>Zalo</span></a>
+    <a href="https://facebook.com/tanphong1981" target="_blank" class="qr-link" onclick="trackEvent('contact_facebook')"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+    <a href="tel:+84915159499" class="qr-link" onclick="trackEvent('contact_call')"><i class="fas fa-phone-alt"></i><span>Gọi</span></a>
+    <a href="mailto:hello@nguyentanphong.com" class="qr-link" onclick="trackEvent('contact_email')"><i class="fas fa-envelope"></i><span>Email</span></a>
+    <a href="http://www.youtube.com/@danmannong" target="_blank" class="qr-link" onclick="trackEvent('contact_youtube')"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+    <a href="https://www.linkedin.com/in/nguyentanphong" target="_blank" class="qr-link" onclick="trackEvent('contact_linkedin')"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
   </div>
 
   <!-- SAVE CONTACT BUTTON -->
@@ -386,7 +386,14 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
 
   <!-- Phone block đã xóa — số gọi vẫn còn trong QR grid (nút "Gọi") -->
   <script>
+    // ============ GA4 EVENT TRACKING ============
+    function trackEvent(name, params) {
+      if (typeof gtag === 'function') {
+        gtag('event', name, params || {});
+      }
+    }
     function saveContact() {
+      trackEvent('save_contact', { location: 'home_button' });
       var vcard = [
         "BEGIN:VCARD",
         "VERSION:3.0",
