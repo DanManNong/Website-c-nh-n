@@ -54,7 +54,8 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    padding: 0 24px 24px;
+    /* Top & bottom padding cân đối — khoảng cách top đến tab bar = bottom đến © */
+    padding: 20px 24px 20px;
   }
   body::before {
     content: "";
@@ -110,7 +111,8 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     margin-bottom: 5px;
     line-height: 1.45;
   }
-  .title-line:last-child { margin-bottom: 36px; }
+  /* Gap title cuối → QR: thêm chiều cao nút Lưu Danh Bạ (~52px) ≈ 36 + 52 = 88 */
+  .title-line:last-child { margin-bottom: 88px; }
 
   /* PHONE (đã dời xuống dưới nút Lưu Danh Bạ) */
   .phone-block {
@@ -211,14 +213,26 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     .save-contact i { font-size: 16px; }
   }
 
-  /* FOOTER */
+  /* FOOTER — đồng bộ với bản 404 */
+  .footer-sig-wrap { text-align: center; margin-top: 24px; }
+  .footer-sig {
+    width: 140px;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    display: block;
+    margin: 0 auto 10px;
+  }
   .footer-copy {
     font-size: 8px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     color: var(--text-soft);
-    opacity: 0.4;
+    opacity: 0.5;
     text-transform: uppercase;
-    margin-top: 8px;
+  }
+  @media (max-width: 480px) {
+    .footer-sig-wrap { margin-top: 18px; }
+    .footer-sig { width: 120px; margin-bottom: 8px; }
+    .footer-copy { font-size: 7px; }
   }
 
   .stagger { opacity: 0; animation: fadeUp 1.2s forwards; }
@@ -230,13 +244,14 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
 
   /* ===== MOBILE — fit 1 màn hình, không scroll ===== */
   @media (max-width: 480px) {
-    body { padding: 0 16px 12px; }
+    body { padding: 14px 16px 14px; }
     .card { max-width: 360px; }
     .tagline-top { font-size: 9px; letter-spacing: 0.3em; margin: 12px 0 10px; }
     .avatar { width: 108px; height: 108px; margin: 8px auto 12px; border-width: 1.5px; box-shadow: 0 12px 24px rgba(0,0,0,0.35); }
     .name { font-size: 1.1rem; letter-spacing: 0.14em; margin-bottom: 6px; }
     .title-line { font-size: 10.5px; margin-bottom: 3px; line-height: 1.4; }
-    .title-line:last-child { margin-bottom: 22px; }
+    /* Mobile: gap + nút Lưu Danh Bạ mobile ~42px → 22 + 42 = 64 */
+    .title-line:last-child { margin-bottom: 64px; }
     .qr-grid { gap: 6px; margin-bottom: 14px; }
     .qr-link { padding: 6px 4px; }
     .qr-link span { font-size: 7.5px; margin-top: 2px; }
@@ -281,7 +296,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   .tab-bar {
     max-width: 420px;
     width: 100%;
-    margin: 14px auto 0;
+    margin: 0 auto;
     display: flex;
     gap: 6px;
     padding: 4px;
@@ -317,7 +332,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
   }
   .tab-btn i { font-size: 10px; }
   @media (max-width: 480px) {
-    .tab-bar { margin-top: 10px; padding: 3px; gap: 4px; }
+    .tab-bar { margin: 0 auto; padding: 3px; gap: 4px; }
     .tab-btn { font-size: 10px; padding: 5px 8px; }
     .tab-btn i { font-size: 9px; }
   }
@@ -369,15 +384,7 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     <span>Lưu Danh Bạ</span>
   </button>
 
-  <!-- HOTLINE (dưới nút Lưu Danh Bạ) -->
-  <div class="phone-block stagger s4">
-    <a href="tel:+84915159499">
-      <div class="phone-number">0915 159 499</div>
-    </a>
-  </div>
-
-  <!-- SPACER tạo cảm giác rộng trên chữ ký -->
-  <div class="footer-spacer"></div>
+  <!-- Phone block đã xóa — số gọi vẫn còn trong QR grid (nút "Gọi") -->
   <script>
     function saveContact() {
       var vcard = [
@@ -410,9 +417,9 @@ gtag('config', 'G-4WM8D9SK71', { 'anonymize_ip': true });
     }
   </script>
 
-  <!-- SIGNATURE + FOOTER -->
-  <div class="stagger s5">
-    <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" style="width:160px;filter:brightness(0) invert(1);opacity:0.85;margin:0 auto 12px;display:block;">
+  <!-- SIGNATURE + FOOTER (đồng bộ với bản 404) -->
+  <div class="footer-sig-wrap stagger s5">
+    <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="footer-sig" onerror="this.style.display='none';">
     <div class="footer-copy">&copy; 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
   </div>
 
