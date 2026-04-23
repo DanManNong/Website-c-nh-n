@@ -114,6 +114,19 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   /* Gap title cuối → QR: thêm chiều cao nút Lưu Danh Bạ (~52px) ≈ 36 + 52 = 88 */
   .title-line:last-child { margin-bottom: 88px; }
 
+  /* Divider giữa 2 cụm tiêu đề */
+  .title-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.55;
+    margin: 12px auto;
+    border: 0;
+  }
+  @media (max-width: 480px) {
+    .title-divider { width: 32px; margin: 9px auto; }
+  }
+
   /* PHONE (đã dời xuống dưới nút Lưu Danh Bạ) */
   .phone-block {
     margin-bottom: 16px;
@@ -367,6 +380,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     <h1 class="name">Nguyễn Tấn <strong>Phong</strong></h1>
     <div class="title-line">Chuyên gia Kinh tế số &amp; Pháp luật</div>
     <div class="title-line">Luật gia - Trọng tài viên</div>
+    <hr class="title-divider">
     <div class="title-line">Tư vấn chiến lược</div>
     <div class="title-line">Thương mại điện tử và Tự động hoá kinh doanh</div>
   </div>
