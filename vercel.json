@@ -3,7 +3,12 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/index", "destination": "/", "permanent": true }
+    { "source": "/index", "destination": "/", "permanent": true },
+    { "source": "/english", "destination": "/en", "permanent": false },
+    { "source": "/japanese", "destination": "/ja", "permanent": false },
+    { "source": "/chinese", "destination": "/zh", "permanent": false },
+    { "source": "/jp", "destination": "/ja", "permanent": false },
+    { "source": "/cn", "destination": "/zh", "permanent": false }
   ],
   "headers": [
     {

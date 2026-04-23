@@ -32,6 +32,13 @@
 <meta name="twitter:description" content="Tư vấn chiến lược TMĐT và Tự động hoá kinh doanh.">
 <meta name="twitter:image" content="https://www.nguyentanphong.com/og-image.jpg">
 
+<!-- hreflang alternates for i18n -->
+<link rel="alternate" hreflang="vi" href="https://www.nguyentanphong.com/">
+<link rel="alternate" hreflang="en" href="https://www.nguyentanphong.com/en">
+<link rel="alternate" hreflang="ja" href="https://www.nguyentanphong.com/ja">
+<link rel="alternate" hreflang="zh" href="https://www.nguyentanphong.com/zh">
+<link rel="alternate" hreflang="x-default" href="https://www.nguyentanphong.com/">
+
 <meta name="google-site-verification" content="sJw3mavjnDOT8pJS4dhfcNW53G4NM4bc0sBu-ertx4g" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V45VVRDW8T"></script>
 <script>
@@ -150,6 +157,41 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   }
   /* Gap title cuối → QR: thêm chiều cao nút Lưu Danh Bạ (~52px) ≈ 36 + 52 = 88 */
   .title-line:last-child { margin-bottom: 88px; }
+
+  /* LANGUAGE SWITCHER — top right */
+  .lang-switcher {
+    position: fixed;
+    top: 14px;
+    right: 16px;
+    display: flex;
+    gap: 4px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+  .lang-switcher a {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    border-radius: 5px;
+    transition: all 0.2s;
+  }
+  .lang-switcher a:hover { color: var(--gold-light); }
+  .lang-switcher a.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+  }
+  @media (max-width: 480px) {
+    .lang-switcher { top: 10px; right: 10px; padding: 2px; gap: 2px; }
+    .lang-switcher a { padding: 3px 6px; font-size: 9px; }
+  }
 
   /* Divider giữa 2 cụm tiêu đề */
   .title-divider {
@@ -397,7 +439,15 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </nav>
 -->
 
-<!-- Spacer top thay cho tab bar (giữ layout cân đối) -->
+<!-- Language switcher -->
+<nav class="lang-switcher" aria-label="Chọn ngôn ngữ">
+  <a href="/" class="active">VN</a>
+  <a href="/en" onclick="trackEvent('lang_switch', {to: 'en'})">EN</a>
+  <a href="/ja" onclick="trackEvent('lang_switch', {to: 'ja'})">JA</a>
+  <a href="/zh" onclick="trackEvent('lang_switch', {to: 'zh'})">ZH</a>
+</nav>
+
+<!-- Spacer top (giữ layout cân đối) -->
 <div style="height: 12px;"></div>
 
 <div class="card">
