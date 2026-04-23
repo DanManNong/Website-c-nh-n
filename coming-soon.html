@@ -68,7 +68,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   a { color: inherit; text-decoration: none; }
 
   .card {
-    max-width: 420px;
+    max-width: 504px;
     width: 100%;
     text-align: center;
   }
@@ -82,10 +82,10 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     margin: 20px 0 20px;
   }
 
-  /* AVATAR — khoảng cách trên/dưới cân bằng */
+  /* AVATAR — to lên 20% */
   .avatar {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     border: 2px solid rgba(224,170,121,0.3);
     margin: 20px auto 20px;
@@ -150,13 +150,13 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     height: 24px;
   }
 
-  /* QR + CONTACT GRID */
+  /* QR + CONTACT GRID — to 20% (gap + margin) */
   .qr-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 8px;
-    margin-bottom: 36px;
+    gap: 10px;
+    margin-bottom: 44px;
   }
   .qr-image-cell {
     grid-column: span 2;
@@ -185,11 +185,11 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     aspect-ratio: 1;
   }
   .qr-link:hover { border-color: var(--gold); background: rgba(224,170,121,0.08); transform: translateY(-2px); }
-  .qr-link i { color: var(--gold); font-size: 1.6rem; line-height: 1; }
-  .qr-link span { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); margin-top: 4px; }
+  .qr-link i { color: var(--gold); font-size: 1.9rem; line-height: 1; }
+  .qr-link span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); margin-top: 5px; }
   @media (max-width: 480px) {
-    .qr-link i { font-size: 1.3rem; }
-    .qr-link span { font-size: 8px; }
+    .qr-link i { font-size: 1.55rem; }
+    .qr-link span { font-size: 9.5px; }
   }
 
   /* SAVE CONTACT BUTTON */
@@ -258,16 +258,16 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   /* ===== MOBILE — fit 1 màn hình, không scroll ===== */
   @media (max-width: 480px) {
     body { padding: 14px 16px 14px; }
-    .card { max-width: 360px; }
+    .card { max-width: 432px; }
     .tagline-top { font-size: 9px; letter-spacing: 0.3em; margin: 20px 0 10px; }
-    .avatar { width: 108px; height: 108px; margin: 8px auto 12px; border-width: 1.5px; box-shadow: 0 12px 24px rgba(0,0,0,0.35); }
+    .avatar { width: 130px; height: 130px; margin: 8px auto 12px; border-width: 1.5px; box-shadow: 0 12px 24px rgba(0,0,0,0.35); }
     .name { font-size: 1.1rem; letter-spacing: 0.14em; margin-bottom: 6px; }
     .title-line { font-size: 10.5px; margin-bottom: 3px; line-height: 1.4; }
     /* Mobile: gap + nút Lưu Danh Bạ mobile ~42px → 22 + 42 = 64 */
     .title-line:last-child { margin-bottom: 64px; }
-    .qr-grid { gap: 6px; margin-bottom: 14px; }
-    .qr-link { padding: 6px 4px; }
-    .qr-link span { font-size: 7.5px; margin-top: 2px; }
+    .qr-grid { gap: 7px; margin-bottom: 17px; }
+    .qr-link { padding: 7px 5px; }
+    .qr-link span { font-size: 9px; margin-top: 3px; }
     .save-contact { margin-bottom: 14px; padding: 11px 16px; }
     .phone-block { margin-bottom: 10px; }
     .phone-number { font-size: 1.15rem; }
