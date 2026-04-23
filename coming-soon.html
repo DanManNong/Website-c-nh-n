@@ -32,6 +32,12 @@
 <meta name="twitter:description" content="Tư vấn chiến lược TMĐT và Tự động hoá kinh doanh.">
 <meta name="twitter:image" content="https://www.nguyentanphong.com/og-image.jpg">
 
+<!-- Canonical + preload critical assets -->
+<link rel="canonical" href="https://www.nguyentanphong.com/">
+<link rel="preload" as="image" href="/avatar-nguyentanphong.jpg" fetchpriority="high">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1a1a1a">
+
 <!-- hreflang alternates for i18n -->
 <link rel="alternate" hreflang="vi" href="https://www.nguyentanphong.com/">
 <link rel="alternate" hreflang="en" href="https://www.nguyentanphong.com/en">
@@ -60,6 +66,14 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   "description": "Luật gia · Trọng tài viên · Tư vấn chiến lược Thương mại điện tử và Tự động hoá kinh doanh.",
   "telephone": "+84-915-159-499",
   "email": "hello@nguyentanphong.com",
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+84-915-159-499",
+    "email": "hello@nguyentanphong.com",
+    "contactType": "customer service",
+    "areaServed": ["VN", "INTERNATIONAL"],
+    "availableLanguage": ["Vietnamese", "English", "Japanese", "Chinese"]
+  }],
   "worksFor": [
     { "@type": "Organization", "name": "VECOM", "url": "https://vecom.vn" },
     { "@type": "Organization", "name": "TRACENT", "url": "https://tracent.com.vn" },
@@ -74,6 +88,11 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   ]
 }
 </script>
+
+<!-- Preconnect để tăng tốc load CDN -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -110,6 +129,13 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     z-index: -1;
   }
   a { color: inherit; text-decoration: none; }
+
+  /* Accessibility — focus states rõ ràng cho keyboard navigation */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 
   .card {
     max-width: 504px;
@@ -467,7 +493,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     <h1 class="name">Nguyễn Tấn <strong>Phong</strong></h1>
     <div class="title-line">Chuyên gia Kinh tế số &amp; Pháp luật</div>
     <div class="title-line">Luật gia - Trọng tài viên</div>
-    <hr class="title-divider">
+    <hr class="title-divider" aria-hidden="true">
     <div class="title-line">Tư vấn chiến lược</div>
     <div class="title-line">Thương mại điện tử và Tự động hoá kinh doanh</div>
   </div>

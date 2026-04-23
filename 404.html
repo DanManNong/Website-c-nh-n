@@ -232,14 +232,55 @@
 
 <div class="content stagger">
   <div class="icon"><i class="fas fa-compass"></i></div>
-  <h1 class="title">Đang cập nhật thêm …</h1>
-  <p class="desc">Phần này đang được hoàn thiện.<br>Vui lòng quay lại trang chủ hoặc liên hệ trực tiếp.</p>
+  <h1 class="title" id="t-title">Đang cập nhật thêm …</h1>
+  <p class="desc" id="t-desc">Phần này đang được hoàn thiện.<br>Vui lòng quay lại trang chủ hoặc liên hệ trực tiếp.</p>
   <div class="actions">
-    <a href="/" class="btn btn-primary" onclick="trackEvent('404_home')"><i class="fas fa-home"></i> Trang Chủ</a>
-    <a href="tel:+84915159499" class="btn btn-ghost" onclick="trackEvent('404_call')"><i class="fas fa-phone-alt"></i> Gọi Ngay</a>
-    <a href="https://zalo.me/0915159499" target="_blank" class="btn btn-ghost" onclick="trackEvent('404_zalo')"><i class="fas fa-comment-dots"></i> Zalo</a>
+    <a href="/" class="btn btn-primary" id="t-home" onclick="trackEvent('404_home')"><i class="fas fa-home"></i> <span>Trang Chủ</span></a>
+    <a href="tel:+84915159499" class="btn btn-ghost" id="t-call" onclick="trackEvent('404_call')"><i class="fas fa-phone-alt"></i> <span>Gọi Ngay</span></a>
+    <a href="https://zalo.me/0915159499" target="_blank" class="btn btn-ghost" onclick="trackEvent('404_zalo')"><i class="fas fa-comment-dots"></i> <span>Zalo</span></a>
   </div>
 </div>
+
+<script>
+  // 404 i18n — auto detect browser language
+  (function () {
+    var I18N = {
+      en: {
+        title: "More coming soon …",
+        desc: "This page is being finished.<br>Please go back to the homepage or contact directly.",
+        home: "Home", call: "Call Now", zalo: "Zalo",
+        banner: "UPDATING THE LATEST THINGS",
+        htmlLang: "en"
+      },
+      ja: {
+        title: "近日更新 …",
+        desc: "このページは準備中です。<br>ホームに戻るか、直接お問い合わせください。",
+        home: "ホーム", call: "今すぐ電話", zalo: "Zalo",
+        banner: "最新情報を更新中",
+        htmlLang: "ja"
+      },
+      zh: {
+        title: "更多内容即将推出 …",
+        desc: "此部分正在完善中。<br>请返回首页或直接联系。",
+        home: "首页", call: "立即致电", zalo: "Zalo",
+        banner: "正在更新最新内容",
+        htmlLang: "zh-CN"
+      }
+    };
+    var lang = (navigator.language || 'vi').slice(0, 2).toLowerCase();
+    if (I18N[lang]) {
+      var t = I18N[lang];
+      document.documentElement.lang = t.htmlLang;
+      document.getElementById('t-title').innerHTML = t.title;
+      document.getElementById('t-desc').innerHTML = t.desc;
+      document.querySelector('#t-home span').textContent = t.home;
+      document.querySelector('#t-call span').textContent = t.call;
+      var bannerSpan = document.querySelector('#stagingBanner span');
+      if (bannerSpan) bannerSpan.textContent = t.banner;
+      document.title = t.title + ' | Nguyen Tan Phong';
+    }
+  })();
+</script>
 
 <!-- FOOTER — đồng bộ với bản Đơn giản -->
 <div class="footer-block">

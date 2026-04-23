@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /wireframe_
+Disallow: /bai-giang-
+Disallow: /luu
+Disallow: /index-v1
+Disallow: /thuong_hieu_so_phong
+Disallow: /_originals/
+
+Sitemap: https://www.nguyentanphong.com/sitemap.xml
