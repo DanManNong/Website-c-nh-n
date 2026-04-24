@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /v2
+Disallow: /v3
+Disallow: /v4
+Disallow: /preview-full
+Disallow: /coming-soon
 Disallow: /wireframe_
 Disallow: /bai-giang-
 Disallow: /luu

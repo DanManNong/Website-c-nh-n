@@ -4,11 +4,17 @@
   "redirects": [
     { "source": "/home", "destination": "/", "permanent": true },
     { "source": "/index", "destination": "/", "permanent": true },
-    { "source": "/english", "destination": "/en", "permanent": false },
-    { "source": "/japanese", "destination": "/ja", "permanent": false },
-    { "source": "/chinese", "destination": "/zh", "permanent": false },
-    { "source": "/jp", "destination": "/ja", "permanent": false },
-    { "source": "/cn", "destination": "/zh", "permanent": false }
+    { "source": "/preview-full", "destination": "/", "permanent": true },
+    { "source": "/preview-full.html", "destination": "/", "permanent": true },
+    { "source": "/full", "destination": "/", "permanent": true },
+    { "source": "/en", "destination": "/", "permanent": true },
+    { "source": "/ja", "destination": "/", "permanent": true },
+    { "source": "/zh", "destination": "/", "permanent": true },
+    { "source": "/english", "destination": "/", "permanent": true },
+    { "source": "/japanese", "destination": "/", "permanent": true },
+    { "source": "/chinese", "destination": "/", "permanent": true },
+    { "source": "/jp", "destination": "/", "permanent": true },
+    { "source": "/cn", "destination": "/", "permanent": true }
   ],
   "headers": [
     {
