@@ -39,3 +39,6 @@ thuong_hieu_so_phong.html
 
 # Tuyên ngôn offline — không deploy
 TUYEN-NGON.md
+
+# Admin panel — CHỈ mở LOCAL (mật khẩu hardcoded JS, không an toàn deploy public)
+admin.html

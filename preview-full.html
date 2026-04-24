@@ -59,7 +59,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style>
   :root {
     --navy: #1a1a1a;
@@ -1822,7 +1822,16 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
         list.innerHTML = '';
         data.articles.forEach(function (art, i) {
           var li = document.createElement('li');
-          li.innerHTML = '<a href="' + art.url + '" target="_blank" rel="noopener"><span class="idx">' + (i + 1) + '</span> ' + art.title + '</a>';
+          var a = document.createElement('a');
+          a.href = art.url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          var idx = document.createElement('span');
+          idx.className = 'idx';
+          idx.textContent = (i + 1);
+          a.appendChild(idx);
+          a.appendChild(document.createTextNode(' ' + art.title));
+          li.appendChild(a);
           list.appendChild(li);
         });
         document.getElementById('pressModal').classList.add('show');
@@ -2059,7 +2068,14 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     function openCatModal(key) {
       var cat = CAT_MAP[key]; if (!cat) return;
       document.getElementById('catModalTitle').textContent = cat.name;
-      document.getElementById('catModalHashtags').innerHTML = cat.tags.map(function(t){ return '<span style="display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:10px;background:rgba(224,170,121,0.15);color:var(--gold);font-weight:600;letter-spacing:0.02em;">' + t + '</span>'; }).join('');
+      var hashWrap = document.getElementById('catModalHashtags');
+      hashWrap.textContent = '';
+      cat.tags.forEach(function(t){
+        var s = document.createElement('span');
+        s.style.cssText = 'display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:10px;background:rgba(224,170,121,0.15);color:var(--gold);font-weight:600;letter-spacing:0.02em;';
+        s.textContent = t;
+        hashWrap.appendChild(s);
+      });
       // Filter articles có ít nhất 1 tag trùng với cat
       var matched = ARTICLES_POOL.filter(function(a){
         return a.tags.some(function(t){ return cat.tags.indexOf(t) !== -1; });
@@ -2068,11 +2084,29 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
       list.innerHTML = '';
       matched.forEach(function(art, i){
         var li = document.createElement('li');
-        var tagsHtml = art.tags.map(function(t){
+        var a = document.createElement('a');
+        a.href = '#';
+        a.addEventListener('click', function(e){ e.preventDefault(); });
+        var idx = document.createElement('span');
+        idx.className = 'idx';
+        idx.textContent = (i+1);
+        var body = document.createElement('div');
+        var titleDiv = document.createElement('div');
+        titleDiv.textContent = art.title;
+        var tagsDiv = document.createElement('div');
+        tagsDiv.style.marginTop = '4px';
+        art.tags.forEach(function(t){
           var match = cat.tags.indexOf(t) !== -1;
-          return '<span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;font-size:9.5px;' + (match ? 'background:var(--gold);color:var(--navy);font-weight:700;' : 'background:rgba(255,255,255,0.06);color:var(--text-soft);') + '">' + t + '</span>';
-        }).join('');
-        li.innerHTML = '<a href="#" onclick="event.preventDefault();"><span class="idx">' + (i+1) + '</span><div><div>' + art.title + '</div><div style="margin-top:4px;">' + tagsHtml + '</div></div></a>';
+          var tagSpan = document.createElement('span');
+          tagSpan.style.cssText = 'display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;font-size:9.5px;' + (match ? 'background:var(--gold);color:var(--navy);font-weight:700;' : 'background:rgba(255,255,255,0.06);color:var(--text-soft);');
+          tagSpan.textContent = t;
+          tagsDiv.appendChild(tagSpan);
+        });
+        body.appendChild(titleDiv);
+        body.appendChild(tagsDiv);
+        a.appendChild(idx);
+        a.appendChild(body);
+        li.appendChild(a);
         list.appendChild(li);
       });
       document.getElementById('catModal').classList.add('show');
