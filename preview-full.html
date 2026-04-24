@@ -865,25 +865,25 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 28px 4px;
+    gap: 8px;
+    padding: 24px 2px;
     color: var(--text-soft);
     font-family: 'Inter', sans-serif;
-    font-size: 8px;
+    font-size: 7.5px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 5px;
     transition: all 0.25s;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     line-height: 1.3;
-    min-width: 32px;
+    min-width: 22px;
     min-height: 140px;
   }
   .v-tab i {
-    font-size: 14px;
+    font-size: 12px;
     writing-mode: horizontal-tb;
   }
   .v-tab span {
@@ -898,9 +898,9 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     box-shadow: 0 3px 12px rgba(224,170,121,0.25);
   }
   @media (max-width: 768px) {
-    .v-tabs { padding: 3px; gap: 1px; }
-    .v-tab { padding: 20px 3px; min-width: 26px; min-height: 110px; font-size: 7.5px; }
-    .v-tab i { font-size: 12px; }
+    .v-tabs { padding: 2px; gap: 1px; }
+    .v-tab { padding: 18px 2px; min-width: 18px; min-height: 110px; font-size: 7px; }
+    .v-tab i { font-size: 10px; }
   }
 </style>
 
@@ -1309,7 +1309,9 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     </div>
     <div class="articles-grid">
       <a href="https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm" target="_blank" class="article-card">
-        <div class="article-thumb"><span class="article-tag">Kinh tế số</span></div>
+        <div class="article-thumb article-thumb-img" style="background-image:url('https://picsum.photos/seed/ecommerce-law/600/320');">
+          <span class="article-tag">Kinh tế số</span>
+        </div>
         <div class="article-body">
           <div class="article-meta">Người Lao Động · 2026</div>
           <h3 class="article-title">Trách nhiệm pháp lý của sàn TMĐT và KOL</h3>
@@ -1318,7 +1320,9 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
         </div>
       </a>
       <a href="https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html" target="_blank" class="article-card">
-        <div class="article-thumb"><span class="article-tag">Bất động sản</span></div>
+        <div class="article-thumb article-thumb-img" style="background-image:url('https://picsum.photos/seed/realestate-risk/600/320');">
+          <span class="article-tag">Bất động sản</span>
+        </div>
         <div class="article-body">
           <div class="article-meta">VnExpress</div>
           <h3 class="article-title">Nhận diện rủi ro pháp lý địa ốc 2026</h3>
@@ -1327,7 +1331,9 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
         </div>
       </a>
       <a href="https://nld.com.vn/dung-bam-nut-dong-y-chia-se-du-lieu-ca-nhan-cho-mang-xa-hoi-neu-chua-doc-dieu-nay-196251231174759209.htm" target="_blank" class="article-card">
-        <div class="article-thumb"><span class="article-tag">An ninh mạng</span></div>
+        <div class="article-thumb article-thumb-img" style="background-image:url('https://picsum.photos/seed/cybersecurity-data/600/320');">
+          <span class="article-tag">An ninh mạng</span>
+        </div>
         <div class="article-body">
           <div class="article-meta">Người Lao Động · 2025</div>
           <h3 class="article-title">Bảo vệ dữ liệu cá nhân trên không gian số</h3>
@@ -1336,6 +1342,27 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
         </div>
       </a>
     </div>
+    <style>
+      .article-thumb-img {
+        background-size: cover !important;
+        background-position: center !important;
+        position: relative;
+        min-height: 180px;
+      }
+      .article-thumb-img::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
+      }
+      .article-thumb-img .article-tag {
+        position: relative;
+        z-index: 2;
+      }
+      @media (max-width: 480px) {
+        .article-thumb-img { min-height: 140px; }
+      }
+    </style>
     <div class="view-all"><a href="wireframe_article_detail.html">Xem tất cả bài viết →</a></div>
   </div>
 </section>
@@ -1343,39 +1370,39 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 <!-- Z07 · PRESS / MEDIA -->
 <section class="block stagger" data-zone="Z07 · Báo Chí" style="background:rgba(0,0,0,0.2);">
   <div class="container">
-    <!-- Header đã bỏ theo yêu cầu · marquee logos 1 dòng liên tục -->
+    <!-- Marquee 7 báo — click logo hiển thị popup list bài -->
     <div class="press-marquee">
-      <div class="press-marquee-track">
-        <a href="https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm" target="_blank" class="press-logo">Người Lao Động</a>
-        <a href="https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html" target="_blank" class="press-logo">VnExpress</a>
-        <a href="https://tuoitre.vn/kiem-tra-xu-ly-hang-gia-rat-gian-nan-moi-den-cho-da-bi-theo-doi-20250702170347843.htm" target="_blank" class="press-logo">Tuổi Trẻ</a>
-        <a href="https://thanhnien.vn/phat-trien-thuong-mai-dien-tu-ben-vung-18524052110254321.htm" target="_blank" class="press-logo">Thanh Niên</a>
-        <a href="https://tienphong.vn/bao-ve-nguoi-tieu-dung-tren-san-thuong-mai-dien-tu-post1651234.tpo" target="_blank" class="press-logo">Tiền Phong</a>
-        <a href="https://plo.vn/quan-ly-thue-va-phap-ly-voi-nguoi-ban-hang-livestream-post789123.html" target="_blank" class="press-logo">Pháp Luật Online</a>
-        <a href="https://congthuong.vn/dua-san-pham-ocop-len-gian-hang-viet-truc-tuyen-324567.html" target="_blank" class="press-logo">Công Thương</a>
-        <!-- Duplicate cho marquee seamless -->
-        <a href="https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm" target="_blank" class="press-logo" aria-hidden="true">Người Lao Động</a>
-        <a href="https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html" target="_blank" class="press-logo" aria-hidden="true">VnExpress</a>
-        <a href="https://tuoitre.vn/kiem-tra-xu-ly-hang-gia-rat-gian-nan-moi-den-cho-da-bi-theo-doi-20250702170347843.htm" target="_blank" class="press-logo" aria-hidden="true">Tuổi Trẻ</a>
-        <a href="https://thanhnien.vn/phat-trien-thuong-mai-dien-tu-ben-vung-18524052110254321.htm" target="_blank" class="press-logo" aria-hidden="true">Thanh Niên</a>
-        <a href="https://tienphong.vn/bao-ve-nguoi-tieu-dung-tren-san-thuong-mai-dien-tu-post1651234.tpo" target="_blank" class="press-logo" aria-hidden="true">Tiền Phong</a>
-        <a href="https://plo.vn/quan-ly-thue-va-phap-ly-voi-nguoi-ban-hang-livestream-post789123.html" target="_blank" class="press-logo" aria-hidden="true">Pháp Luật Online</a>
-        <a href="https://congthuong.vn/dua-san-pham-ocop-len-gian-hang-viet-truc-tuyen-324567.html" target="_blank" class="press-logo" aria-hidden="true">Công Thương</a>
+      <div class="press-marquee-track" id="pressMarqueeTrack">
+        <button type="button" class="press-logo" onclick="openPressModal('nld')">Người Lao Động <span class="press-count">5</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('vnexpress')">VnExpress <span class="press-count">3</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('tuoitre')">Tuổi Trẻ <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('thanhnien')">Thanh Niên <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('tienphong')">Tiền Phong <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('plo')">Pháp Luật Online <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('congthuong')">Công Thương <span class="press-count">1</span></button>
+        <!-- Duplicate cho seamless loop -->
+        <button type="button" class="press-logo" onclick="openPressModal('nld')" aria-hidden="true" tabindex="-1">Người Lao Động <span class="press-count">5</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('vnexpress')" aria-hidden="true" tabindex="-1">VnExpress <span class="press-count">3</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('tuoitre')" aria-hidden="true" tabindex="-1">Tuổi Trẻ <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('thanhnien')" aria-hidden="true" tabindex="-1">Thanh Niên <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('tienphong')" aria-hidden="true" tabindex="-1">Tiền Phong <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('plo')" aria-hidden="true" tabindex="-1">Pháp Luật Online <span class="press-count">1</span></button>
+        <button type="button" class="press-logo" onclick="openPressModal('congthuong')" aria-hidden="true" tabindex="-1">Công Thương <span class="press-count">1</span></button>
       </div>
     </div>
     <style>
       .press-marquee {
         overflow: hidden;
         width: 100%;
-        mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-        -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
       }
       .press-marquee-track {
         display: flex;
-        gap: 40px;
+        gap: 56px;
         width: max-content;
-        animation: pressMarquee 40s linear infinite;
-        padding: 12px 0;
+        animation: pressMarquee 20s linear infinite;
+        padding: 18px 0;
       }
       .press-marquee:hover .press-marquee-track { animation-play-state: paused; }
       @keyframes pressMarquee {
@@ -1385,22 +1412,231 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
       .press-marquee .press-logo {
         flex-shrink: 0;
         white-space: nowrap;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 18px;
+        font-weight: 700;
         letter-spacing: 0.04em;
-        color: var(--text-soft);
-        padding: 8px 16px;
-        border-radius: 6px;
+        color: var(--text);
+        padding: 14px 24px;
+        border-radius: 10px;
         border: 1px solid var(--border);
-        background: rgba(0,0,0,0.25);
+        background: rgba(0,0,0,0.35);
+        transition: all 0.2s;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .press-marquee .press-logo:hover {
+        color: var(--navy);
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-color: var(--gold);
+        transform: translateY(-2px);
+      }
+      .press-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        border-radius: 11px;
+        background: var(--gold);
+        color: var(--navy);
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .press-marquee .press-logo:hover .press-count {
+        background: var(--navy);
+        color: var(--gold);
+      }
+      @media (max-width: 480px) {
+        .press-marquee-track { gap: 32px; animation-duration: 16s; padding: 12px 0; }
+        .press-marquee .press-logo { font-size: 14px; padding: 10px 16px; gap: 8px; }
+        .press-count { min-width: 18px; height: 18px; font-size: 9.5px; }
+      }
+
+      /* Press Modal */
+      .press-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 10002;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .press-modal-overlay.show { display: flex; }
+      .press-modal-box {
+        background: var(--cream);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        max-width: 640px;
+        width: 100%;
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 32px 28px;
+        position: relative;
+        box-shadow: 0 28px 80px rgba(0,0,0,0.6);
+      }
+      .press-modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid var(--border);
+        color: var(--text-soft);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .press-modal-close:hover { color: var(--gold); }
+      .press-modal-eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .press-modal-title {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--text);
+        margin-bottom: 18px;
+      }
+      .press-modal-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .press-modal-list a {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px;
+        background: rgba(0,0,0,0.3);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-soft);
+        font-size: 13px;
+        line-height: 1.5;
         transition: all 0.2s;
       }
-      .press-marquee .press-logo:hover { color: var(--gold); border-color: var(--gold); }
-      @media (max-width: 480px) {
-        .press-marquee-track { gap: 24px; animation-duration: 30s; }
-        .press-marquee .press-logo { font-size: 12px; padding: 6px 12px; }
+      .press-modal-list a:hover {
+        color: var(--gold);
+        border-color: var(--gold);
+        background: rgba(224,170,121,0.08);
+      }
+      .press-modal-list .idx {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--navy);
+        font-size: 10px;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
+
+    <!-- PRESS MODAL -->
+    <div id="pressModal" class="press-modal-overlay" onclick="if(event.target===this)closePressModal()">
+      <div class="press-modal-box">
+        <button onclick="closePressModal()" class="press-modal-close" aria-label="Đóng"><i class="fas fa-times"></i></button>
+        <div class="press-modal-eyebrow">Báo chí đưa tin</div>
+        <div class="press-modal-title" id="pressModalTitle">...</div>
+        <ul class="press-modal-list" id="pressModalList"></ul>
+      </div>
+    </div>
+
+    <script>
+      // Press data: 7 báo với số bài & link
+      var PRESS_DATA = {
+        nld: {
+          name: 'Người Lao Động',
+          articles: [
+            { title: 'Sàn thương mại điện tử không còn vô can', url: 'https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm' },
+            { title: 'Chấn chỉnh livestream bán hàng', url: 'https://nld.com.vn/chan-chinh-livestream-ban-hang-196250307215235956.htm' },
+            { title: 'Đừng bấm nút đồng ý chia sẻ dữ liệu cá nhân cho mạng xã hội', url: 'https://nld.com.vn/dung-bam-nut-dong-y-chia-se-du-lieu-ca-nhan-cho-mang-xa-hoi-neu-chua-doc-dieu-nay-196251231174759209.htm' },
+            { title: 'Người bán hàng giả làm quảng cáo, giới hôn nhân người bán hàng thật', url: 'https://nld.com.vn/nguoi-ban-hang-gia-lam-quang-cao-gioi-hun-nguoi-ban-hang-that-196250702120716556.htm' },
+            { title: 'Ưu nhược điểm khi đầu tư đất nền năm 2017 tại TP.HCM', url: 'https://thitruong.nld.com.vn/dia-oc/uu-nhuoc-diem-khi-dau-tu-dat-nen-nam-2017-tai-tp-hcm-20170205233759712.htm' }
+          ]
+        },
+        vnexpress: {
+          name: 'VnExpress',
+          articles: [
+            { title: '11 rủi ro khiến nhà đầu tư bất động sản mất sạch vốn', url: 'https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html' },
+            { title: 'Đầu tư homestay ven Sài Gòn để tích luỹ đất', url: 'https://vnexpress.net/dau-tu-homestay-ven-sai-gon-de-tich-luy-dat-3970522.html' },
+            { title: '5 ưu nhược điểm của đầu tư đất nền Sài Gòn năm 2017', url: 'https://vnexpress.net/5-uu-nhuoc-diem-cua-dau-tu-dat-nen-sai-gon-nam-2017-3536376.html' }
+          ]
+        },
+        tuoitre: {
+          name: 'Tuổi Trẻ',
+          articles: [
+            { title: 'Kiểm tra, xử lý hàng giả rất gian nan — mới đến chợ đã bị theo dõi', url: 'https://tuoitre.vn/kiem-tra-xu-ly-hang-gia-rat-gian-nan-moi-den-cho-da-bi-theo-doi-20250702170347843.htm' }
+          ]
+        },
+        thanhnien: {
+          name: 'Thanh Niên',
+          articles: [
+            { title: 'Phát triển thương mại điện tử bền vững', url: 'https://thanhnien.vn/phat-trien-thuong-mai-dien-tu-ben-vung-18524052110254321.htm' }
+          ]
+        },
+        tienphong: {
+          name: 'Tiền Phong',
+          articles: [
+            { title: 'Bảo vệ người tiêu dùng trên sàn thương mại điện tử', url: 'https://tienphong.vn/bao-ve-nguoi-tieu-dung-tren-san-thuong-mai-dien-tu-post1651234.tpo' }
+          ]
+        },
+        plo: {
+          name: 'Pháp Luật Online',
+          articles: [
+            { title: 'Quản lý thuế và pháp lý với người bán hàng livestream', url: 'https://plo.vn/quan-ly-thue-va-phap-ly-voi-nguoi-ban-hang-livestream-post789123.html' }
+          ]
+        },
+        congthuong: {
+          name: 'Công Thương',
+          articles: [
+            { title: 'Đưa sản phẩm OCOP lên gian hàng Việt trực tuyến', url: 'https://congthuong.vn/dua-san-pham-ocop-len-gian-hang-viet-truc-tuyen-324567.html' }
+          ]
+        }
+      };
+
+      function openPressModal(key) {
+        var data = PRESS_DATA[key];
+        if (!data) return;
+        document.getElementById('pressModalTitle').textContent = data.name + ' · ' + data.articles.length + ' bài';
+        var list = document.getElementById('pressModalList');
+        list.innerHTML = '';
+        data.articles.forEach(function (art, i) {
+          var li = document.createElement('li');
+          li.innerHTML = '<a href="' + art.url + '" target="_blank" rel="noopener"><span class="idx">' + (i + 1) + '</span> ' + art.title + '</a>';
+          list.appendChild(li);
+        });
+        document.getElementById('pressModal').classList.add('show');
+        document.body.style.overflow = 'hidden';
+        if (typeof trackEvent === 'function') trackEvent('press_modal_open', { paper: key });
+      }
+      function closePressModal() {
+        document.getElementById('pressModal').classList.remove('show');
+        document.body.style.overflow = '';
+      }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closePressModal();
+      });
+    </script>
   </div>
 </section>
 
