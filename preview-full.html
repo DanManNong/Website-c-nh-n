@@ -852,10 +852,111 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </script>
 
 <!-- PREVIEW BADGE (chỉ cho chú xem — không index) -->
-<div style="position:fixed;top:10px;left:10px;z-index:9999;background:rgba(237,28,36,0.95);color:#fff;border-radius:8px;padding:8px 14px;font-size:11px;font-weight:700;letter-spacing:0.1em;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(237,28,36,0.4);">
+<div style="position:fixed;top:10px;left:10px;z-index:10001;background:rgba(237,28,36,0.95);color:#fff;border-radius:8px;padding:8px 14px;font-size:11px;font-weight:700;letter-spacing:0.1em;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(237,28,36,0.4);">
   <i class="fas fa-eye" style="margin-right:6px"></i>PREVIEW · FULL v3
-  <a href="/" style="color:#fff;margin-left:12px;text-decoration:underline;font-weight:500;opacity:0.9;">← về bản chính (gold)</a>
+  <a href="/" style="color:#fff;margin-left:12px;text-decoration:underline;font-weight:500;opacity:0.9;">← gold</a>
 </div>
+
+<!-- ========== GRID OVERLAY 10 dọc × 20 ngang (A1-J20) ========== -->
+<style>
+  #gridOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 9998;
+    pointer-events: none;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    font-family: 'SF Mono', Consolas, Monaco, monospace;
+  }
+  #gridOverlay.hidden { display: none; }
+  #gridOverlay .cell {
+    border-right: 1px dashed rgba(224, 170, 121, 0.35);
+    border-bottom: 1px dashed rgba(224, 170, 121, 0.35);
+    position: relative;
+  }
+  #gridOverlay .cell:nth-child(10n) { border-right: none; }
+  #gridOverlay .cell:nth-last-child(-n+10) { border-bottom: none; }
+  #gridOverlay .cell .lbl {
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(224, 170, 121, 0.75);
+    background: rgba(0, 0, 0, 0.45);
+    padding: 1px 4px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+  /* Highlight col header A-J top and row number left for reference */
+  #gridOverlay .cell:nth-child(-n+10) .lbl { background: rgba(224, 170, 121, 0.9); color: #000; }
+  #gridOverlay .cell:nth-child(10n+1) .lbl { background: rgba(224, 170, 121, 0.9); color: #000; }
+
+  #gridToggle {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 10001;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid rgba(224, 170, 121, 0.5);
+    color: #E0AA79;
+    padding: 8px 14px;
+    border-radius: 24px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    font-family: 'Inter', sans-serif;
+  }
+  #gridToggle:hover { background: rgba(224, 170, 121, 0.15); }
+  @media (max-width: 480px) {
+    #gridOverlay .cell .lbl { font-size: 7px; padding: 1px 3px; }
+    #gridToggle { bottom: 10px; right: 10px; font-size: 10px; padding: 7px 12px; }
+  }
+</style>
+
+<div id="gridOverlay"></div>
+<button id="gridToggle" onclick="toggleGrid()">
+  <i class="fas fa-th"></i>
+  <span id="gridToggleText">Ẩn lưới</span>
+</button>
+<script>
+  // Generate 200 grid cells (10 cols × 20 rows) với labels A1-J20
+  (function () {
+    var overlay = document.getElementById('gridOverlay');
+    var cols = ['A','B','C','D','E','F','G','H','I','J'];
+    var html = '';
+    for (var row = 1; row <= 20; row++) {
+      for (var c = 0; c < 10; c++) {
+        html += '<div class="cell"><span class="lbl">' + cols[c] + row + '</span></div>';
+      }
+    }
+    overlay.innerHTML = html;
+
+    // Restore state từ localStorage
+    if (localStorage.getItem('gridHidden') === '1') {
+      overlay.classList.add('hidden');
+      document.getElementById('gridToggleText').textContent = 'Hiện lưới';
+    }
+  })();
+
+  function toggleGrid() {
+    var overlay = document.getElementById('gridOverlay');
+    var txt = document.getElementById('gridToggleText');
+    overlay.classList.toggle('hidden');
+    var isHidden = overlay.classList.contains('hidden');
+    txt.textContent = isHidden ? 'Hiện lưới' : 'Ẩn lưới';
+    localStorage.setItem('gridHidden', isHidden ? '1' : '0');
+  }
+</script>
 
 <!-- Z01 · LANGUAGE BAR -->
 <div class="lang-bar stagger">
