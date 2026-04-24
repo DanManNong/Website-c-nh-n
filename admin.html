@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | Nguyễn Tấn Phong</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Trang quản trị nội dung website nguyentanphong.com">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root {
+    --navy: #1a1a1a;
+    --cream: #2C2C2C;
+    --gold: #E0AA79;
+    --gold-light: #f0c896;
+    --text: #FFF;
+    --text-soft: rgba(255,255,255,0.6);
+    --border: rgba(224,170,121,0.25);
+    --red: #ED1C24;
+    --green: #27AE60;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { color: var(--gold-light); }
+
+  /* ========== PASSWORD GATE ========== */
+  #gate {
+    position: fixed;
+    inset: 0;
+    background: var(--navy);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+  }
+  #gate.hidden { display: none; }
+  #gate .lock {
+    font-size: 48px;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+  #gate h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  #gate p { color: var(--text-soft); font-size: 13px; text-align: center; max-width: 360px; }
+  #gate form {
+    display: flex;
+    gap: 10px;
+    max-width: 360px;
+    width: 100%;
+  }
+  #gate input {
+    flex: 1;
+    padding: 14px 16px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+  }
+  #gate input:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+  #gate button {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  #gate .err {
+    color: var(--red);
+    font-size: 12px;
+    min-height: 16px;
+  }
+
+  /* ========== LAYOUT ========== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,26,26,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  header h1 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  header .hdr-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  header .hdr-links a {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-soft);
+  }
+  header .hdr-links a:hover { color: var(--gold); border-color: var(--gold); }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 24px 60px;
+  }
+
+  .hero {
+    padding: 20px 0 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .hero h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .hero p { color: var(--text-soft); font-size: 13px; }
+
+  /* Stats row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .stats .card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stats .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .stats .lbl {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  @media (max-width: 700px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Zones table */
+  .zones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .zone {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    transition: all 0.2s;
+  }
+  .zone:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .zone .z-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .zone .z-code {
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+  }
+  .zone .z-status {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .zone .z-status.ok { background: rgba(39,174,96,0.15); color: var(--green); }
+  .zone .z-status.draft { background: rgba(237,28,36,0.15); color: var(--red); }
+  .zone .z-status.edit { background: rgba(224,170,121,0.15); color: var(--gold); }
+  .zone h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .zone p {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .zone .z-data {
+    background: rgba(0,0,0,0.35);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    font-size: 11px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+  .zone .z-data strong { color: var(--gold); }
+  .zone .z-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .zone .z-actions a {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-soft);
+  }
+  .zone .z-actions a:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* Section title */
+  .sec-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Submissions list */
+  .subs {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .subs table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .subs th, .subs td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .subs th {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .subs td { color: var(--text-soft); }
+  .subs .empty { color: var(--text-soft); font-size: 12px; padding: 20px; text-align: center; }
+  .subs .clear-btn {
+    margin-top: 12px;
+    padding: 6px 12px;
+    background: rgba(237,28,36,0.15);
+    border: 1px solid rgba(237,28,36,0.35);
+    color: var(--red);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* Warning notice */
+  .notice {
+    background: rgba(237,28,36,0.08);
+    border: 1px solid rgba(237,28,36,0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #ffb3a0;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .notice strong { color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="lock"><i class="fas fa-lock"></i></div>
+  <h1>Trang Quản Trị</h1>
+  <p>Truy cập chỉ dành cho chú Phong. Nhập mật khẩu để tiếp tục.</p>
+  <form id="gateForm">
+    <input type="password" id="gatePw" placeholder="Mật khẩu" autocomplete="current-password" autofocus>
+    <button type="submit">Vào</button>
+  </form>
+  <div class="err" id="gateErr"></div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <h1><i class="fas fa-user-shield"></i> Admin · nguyentanphong.com</h1>
+  <div class="hdr-links">
+    <a href="/" target="_blank"><i class="fas fa-id-card"></i> Danh Thiếp</a>
+    <a href="/preview-full" target="_blank"><i class="fas fa-user-tie"></i> Preview Full</a>
+    <a href="https://github.com/DanManNong/Website-c-nh-n" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    <a href="https://analytics.google.com" target="_blank"><i class="fas fa-chart-line"></i> GA4</a>
+    <a href="#" onclick="event.preventDefault();sessionStorage.removeItem('adminOk');location.reload();"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h2>👋 Chào chú Phong!</h2>
+    <p>Bảng điều khiển tổng quan nội dung website. Mỗi Zone (Zxx) là 1 khối hiển thị trên trang — click để xem chi tiết.</p>
+  </div>
+
+  <div class="notice">
+    <strong>⚠️ Lưu ý:</strong> Trang này chỉ để xem + quản lý. Để sửa content thực sự, nhắn cháu với mã zone (VD: "Z06 đổi ảnh bài 1") — cháu sẽ push code mới. Data đăng ký email chỉ lưu trên <code>localStorage</code> của trình duyệt này (demo).
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="card">
+      <div class="num">14</div>
+      <div class="lbl">Zones</div>
+    </div>
+    <div class="card">
+      <div class="num">4</div>
+      <div class="lbl">Ngôn ngữ</div>
+    </div>
+    <div class="card">
+      <div class="num">7</div>
+      <div class="lbl">Báo chí</div>
+    </div>
+    <div class="card">
+      <div class="num" id="leadCount">0</div>
+      <div class="lbl">Email đã đăng ký</div>
+    </div>
+  </div>
+
+  <div class="sec-title">📋 14 Zones nội dung</div>
+
+  <div class="zones">
+    <!-- Z01 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z01</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Ngôn Ngữ (Language Bar)</h3>
+      <p>Thanh chọn ngôn ngữ VN / EN / CN / KR / JP ở đầu trang.</p>
+      <div class="z-data">🌐 <strong>Đang có</strong>: VN, EN, JA, ZH (4 trang riêng)<br>💡 CN/KR/JP còn chỉ UI, chưa có file dịch KR</div>
+      <div class="z-actions">
+        <a href="/preview-full#Z01" target="_blank"><i class="fas fa-eye"></i> Xem</a>
+      </div>
+    </div>
+
+    <!-- Z02 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z02</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Thanh Menu (Nav Pills)</h3>
+      <p>5 pill liên kết đến các zone: Góc Nhìn · Thư Viện · Tài Liệu · Về Tôi · Liên Hệ.</p>
+      <div class="z-data">🔗 <strong>Link anchors</strong>:<br>#Z06 → Góc Nhìn<br>#Z08 → Thư Viện<br>#Z09 → Tài Liệu<br>#Z10 → Về Tôi<br>#Z13 → Liên Hệ</div>
+      <div class="z-actions"><a href="/preview-full#Z02" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z03 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z03</span><span class="z-status edit">Cần duyệt bio</span></div>
+      <h3>Danh Thiếp · Khối Giữa (Hero)</h3>
+      <p>Giới thiệu cá nhân — tên, chức danh, bio ngắn + avatar 360px (web) / 160px (mobile).</p>
+      <div class="z-data">
+        📝 <strong>Layout</strong>: 2 cột web / stack mobile<br>
+        👤 Tên: <strong>Nguyễn Tấn Phong</strong><br>
+        💼 4 dòng: Chuyên gia KTS · Luật gia · Tư vấn · TMĐT + TĐH<br>
+        📄 Bio: NHÁP (cần chú duyệt)
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z03" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z04 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z04</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Chỉ Số (Stats)</h3>
+      <p>4 chỉ số thống kê.</p>
+      <div class="z-data">
+        📊 <strong>10+ năm</strong> · 05 vai trò · 100+ bài viết · <strong>6,875 đối tác</strong>
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z04" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z05 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z05</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Vai Trò Chuyên Môn</h3>
+      <p>7 tổ chức đang đồng hành.</p>
+      <div class="z-data">
+        🏢 <strong>VECOM</strong> · CLEAD · ARI · TRACENT · EAGLE · <strong>HSGA</strong> · <strong>ULAW</strong>
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z05" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z06 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z06</span><span class="z-status edit">Ảnh nháp</span></div>
+      <h3>Góc Nhìn (Articles Marquee)</h3>
+      <p>5 bài thật chạy marquee chậm (80s). Ảnh đang dùng picsum.photos nháp.</p>
+      <div class="z-data">
+        📰 5 bài: NLD (KT số) · VnExpress (BĐS) · NLD (An ninh mạng) · NLD (Livestream) · Tuổi Trẻ (Hàng giả)
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z06" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z07 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z07</span><span class="z-status edit">Chờ logo thật</span></div>
+      <h3>Báo Chí (Press Marquee)</h3>
+      <p>7 báo chạy marquee 20s. Click → popup list bài.</p>
+      <div class="z-data">
+        📺 NLD · VnExpress · Tuổi Trẻ · Thanh Niên · Tiền Phong · PLO · Công Thương<br>
+        🖼️ Logo: đang dùng text, chưa thay logo hình
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z07" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z08 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z08</span><span class="z-status draft">Nháp content</span></div>
+      <h3>Thư Viện (Library)</h3>
+      <p>8 chuyên đề: 4 unlock (cần mật khẩu) + 4 locked.</p>
+      <div class="z-data">
+        🔓 Cẩm nang TMĐT 2026 · Livestream · Trọng tài · TĐH KD<br>
+        🔒 Thương hiệu số · ANM SME · Hợp đồng · BĐS
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z08" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z09 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z09</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Tài Liệu (Documents)</h3>
+      <p>Kho tài liệu + counter 6,875.</p>
+      <div class="z-data">
+        📂 Nút: Tải về (qua password gate) · Đăng ký mới
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z09" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z10 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z10</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Về Tôi (Manifesto)</h3>
+      <p>Tuyên ngôn thương hiệu + link trang Về Tôi.</p>
+      <div class="z-actions"><a href="/preview-full#Z10" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z11 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z11</span><span class="z-status edit">Nháp 20 bài</span></div>
+      <h3>Lĩnh Vực Nghiên Cứu</h3>
+      <p>5 lĩnh vực trọng tâm · click → popup filter 20 bài theo hashtag.</p>
+      <div class="z-data">
+        🏷️ 5 mục: TMĐT · BĐS · ANM · Trọng tài · Pháp luật<br>
+        📚 20 bài nháp (demo data — chú thay content thật sau)
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z11" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z12 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z12</span><span class="z-status edit">Bìa nháp</span></div>
+      <h3>Đăng Ký Tư Vấn (Lead Magnet)</h3>
+      <p>Form 3 field (name + email + phone) + validation. Bìa sách nháp.</p>
+      <div class="z-data">
+        📧 Form validate: email regex · typo domain check · minlength<br>
+        💾 Lưu: localStorage <code>leadSubmissions</code> (demo · chú tích hợp Mailchimp/Brevo sau)<br>
+        📕 Bìa sách: NHÁP gradient (chú upload bìa thật sau)
+      </div>
+      <div class="z-actions">
+        <a href="/preview-full#Z12" target="_blank"><i class="fas fa-eye"></i> Xem</a>
+        <a href="#leadSubs"><i class="fas fa-inbox"></i> Xem đăng ký</a>
+      </div>
+    </div>
+
+    <!-- Z13 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z13</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Liên Hệ (Contact Grid)</h3>
+      <p>6 kênh liên hệ + nút Lưu Danh Bạ (tải .vcf).</p>
+      <div class="z-data">
+        📞 Phone · Email · Zalo · FB · YT · LinkedIn<br>
+        💾 Nút Lưu Danh Bạ → download vCard 3.0
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z13" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+
+    <!-- Z14 -->
+    <div class="zone">
+      <div class="z-head"><span class="z-code">Z14</span><span class="z-status ok">Hoạt động</span></div>
+      <h3>Chân Trang (Footer)</h3>
+      <p>Chữ ký + copyright (đồng bộ bản Danh Thiếp).</p>
+      <div class="z-data">
+        🖋️ NguyenTanPhong.png (140px)<br>
+        © NGUYEN TAN PHONG. ALL RIGHTS RESERVED.
+      </div>
+      <div class="z-actions"><a href="/preview-full#Z14" target="_blank"><i class="fas fa-eye"></i> Xem</a></div>
+    </div>
+  </div>
+
+  <!-- SUBMISSIONS (Z12) -->
+  <div class="sec-title" id="leadSubs">📬 Email Đăng Ký (Z12)</div>
+  <div class="subs">
+    <div id="subsContent"></div>
+  </div>
+
+  <div class="sec-title">🎨 Preview Themes</div>
+  <div class="zones">
+    <div class="zone">
+      <div class="z-head"><span class="z-code">/</span><span class="z-status ok">Production</span></div>
+      <h3>🟡 Gold (chính thức)</h3>
+      <p>Bản Danh Thiếp đang chạy production. Tag stable-24042026.</p>
+      <div class="z-actions"><a href="/" target="_blank"><i class="fas fa-external-link-alt"></i> Mở</a></div>
+    </div>
+    <div class="zone">
+      <div class="z-head"><span class="z-code">/v2</span><span class="z-status draft">Preview</span></div>
+      <h3>🔵 Ocean Deep</h3>
+      <p>Theme nháp màu xanh biển.</p>
+      <div class="z-actions"><a href="/v2" target="_blank"><i class="fas fa-external-link-alt"></i> Mở</a></div>
+    </div>
+    <div class="zone">
+      <div class="z-head"><span class="z-code">/v3</span><span class="z-status draft">Preview</span></div>
+      <h3>🟢 Emerald Noble</h3>
+      <p>Theme nháp màu xanh ngọc.</p>
+      <div class="z-actions"><a href="/v3" target="_blank"><i class="fas fa-external-link-alt"></i> Mở</a></div>
+    </div>
+    <div class="zone">
+      <div class="z-head"><span class="z-code">/v4</span><span class="z-status draft">Preview</span></div>
+      <h3>🔴 Rose Imperial</h3>
+      <p>Theme nháp màu hồng hoàng gia.</p>
+      <div class="z-actions"><a href="/v4" target="_blank"><i class="fas fa-external-link-alt"></i> Mở</a></div>
+    </div>
+    <div class="zone">
+      <div class="z-head"><span class="z-code">/preview-full</span><span class="z-status edit">Đang dev</span></div>
+      <h3>👤 Trang Cá Nhân (Full v3)</h3>
+      <p>Bản đầy đủ — noindex, không link từ trang chủ.</p>
+      <div class="z-actions"><a href="/preview-full" target="_blank"><i class="fas fa-external-link-alt"></i> Mở</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============ PASSWORD GATE ============
+  // Mật khẩu mặc định: nhận 1 trong 3 để mở: '24042026', 'phong', '6875'
+  var ADMIN_PW = ['24042026', 'phong', '6875', 'ntp'];
+
+  var gate = document.getElementById('gate');
+  var gateForm = document.getElementById('gateForm');
+  var gatePw = document.getElementById('gatePw');
+  var gateErr = document.getElementById('gateErr');
+
+  if (sessionStorage.getItem('adminOk') === '1') {
+    gate.classList.add('hidden');
+    loadSubs();
+  }
+
+  gateForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = gatePw.value.trim().toLowerCase();
+    if (ADMIN_PW.indexOf(v) !== -1) {
+      sessionStorage.setItem('adminOk', '1');
+      gate.classList.add('hidden');
+      loadSubs();
+    } else {
+      gateErr.textContent = 'Sai mật khẩu. Thử lại nhé chú.';
+      gatePw.value = '';
+      gatePw.focus();
+    }
+  });
+
+  // ============ LOAD LEAD SUBMISSIONS ============
+  function loadSubs() {
+    var subs = JSON.parse(localStorage.getItem('leadSubmissions') || '[]');
+    var el = document.getElementById('subsContent');
+    var count = document.getElementById('leadCount');
+    count.textContent = subs.length;
+
+    if (subs.length === 0) {
+      el.innerHTML = '<div class="empty">Chưa có email đăng ký. Khi khách submit form Z12 sẽ hiện ở đây.</div>';
+      return;
+    }
+
+    var rows = subs.map(function(s, i){
+      return '<tr><td>' + (i+1) + '</td><td><strong>' + escapeHtml(s.name) + '</strong></td>' +
+             '<td><a href="mailto:' + escapeHtml(s.email) + '">' + escapeHtml(s.email) + '</a></td>' +
+             '<td>' + (s.phone ? escapeHtml(s.phone) : '—') + '</td>' +
+             '<td>' + new Date(s.at).toLocaleString('vi-VN') + '</td></tr>';
+    }).join('');
+
+    el.innerHTML = '<table><thead><tr><th>#</th><th>Họ tên</th><th>Email</th><th>SĐT</th><th>Thời gian</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<button class="clear-btn" onclick="clearSubs()"><i class="fas fa-trash"></i> Xoá toàn bộ (demo)</button>';
+  }
+
+  function clearSubs() {
+    if (!confirm('Xoá toàn bộ đăng ký trong localStorage? (chỉ mất dữ liệu demo local)')) return;
+    localStorage.removeItem('leadSubmissions');
+    loadSubs();
+  }
+
+  function escapeHtml(s){
+    return (s||'').replace(/[&<>"]/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+    });
+  }
+</script>
+
+</body>
+</html>
