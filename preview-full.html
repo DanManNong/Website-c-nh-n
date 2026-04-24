@@ -828,28 +828,71 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </style>
 </head>
 <body>
-<!-- STAGING BANNER -->
-<div id="stagingBanner">
-  <i class="fas fa-wrench" style="margin-right:10px"></i>
-  <span>ĐANG SỬA CHỮA · WEB TẠM · CHƯA PHẢI BẢN CHÍNH THỨC</span>
-</div>
+<!-- Banner ĐANG SỬA CHỮA đã bỏ theo yêu cầu -->
 
-<!-- TAB BAR -->
-<nav class="tab-bar" aria-label="Chọn phiên bản hiển thị">
-  <a href="/" class="tab-btn"><i class="fas fa-id-card"></i> Đơn giản</a>
-  <a href="/full" class="tab-btn active"><i class="fas fa-th-large"></i> Đầy đủ</a>
+<!-- VERTICAL SIDEBAR TABS — Danh Thiếp / Trang Cá Nhân (sát phải) -->
+<nav class="v-tabs" aria-label="Chuyển bản hiển thị">
+  <a href="/" class="v-tab" title="Bản Danh Thiếp (card đơn giản)">
+    <i class="fas fa-id-card"></i>
+    <span>DANH<br>THIẾP</span>
+  </a>
+  <a href="/preview-full" class="v-tab active" title="Trang Cá Nhân đầy đủ">
+    <i class="fas fa-user-tie"></i>
+    <span>TRANG<br>CÁ NHÂN</span>
+  </a>
 </nav>
-<script>
-  (function () {
-    // BANNER_ALWAYS = true → hiện trên MỌI hostname (kể cả production)
-    // Đổi thành false để auto-ẩn trên nguyentanphong.com (khi site hoàn thiện)
-    var BANNER_ALWAYS = true;
-    var h = location.hostname;
-    var isProduction = (h === 'nguyentanphong.com' || h === 'www.nguyentanphong.com');
-    var el = document.getElementById('stagingBanner');
-    if (el && (BANNER_ALWAYS || !isProduction)) el.classList.add('show');
-  })();
-</script>
+<style>
+  .v-tabs {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 9997;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 10px 0 0 10px;
+    padding: 4px;
+    box-shadow: -4px 0 18px rgba(0,0,0,0.3);
+  }
+  .v-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 10px;
+    color: var(--text-soft);
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 7px;
+    transition: all 0.25s;
+    writing-mode: horizontal-tb;
+    line-height: 1.2;
+    min-width: 64px;
+  }
+  .v-tab i { font-size: 16px; }
+  .v-tab:hover { color: var(--gold-light); background: rgba(224,170,121,0.08); }
+  .v-tab.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    box-shadow: 0 3px 12px rgba(224,170,121,0.25);
+  }
+  @media (max-width: 768px) {
+    .v-tabs { padding: 3px; gap: 1px; }
+    .v-tab { padding: 10px 8px; font-size: 8px; min-width: 54px; }
+    .v-tab i { font-size: 13px; }
+  }
+</style>
 
 <!-- PREVIEW BADGE (chỉ cho chú xem — không index) -->
 <div style="position:fixed;top:10px;left:10px;z-index:10001;background:rgba(237,28,36,0.95);color:#fff;border-radius:8px;padding:8px 14px;font-size:11px;font-weight:700;letter-spacing:0.1em;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(237,28,36,0.4);">
@@ -872,8 +915,8 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   }
   #gridOverlay.hidden { display: none; }
   #gridOverlay .cell {
-    border-right: 1px dashed rgba(224, 170, 121, 0.35);
-    border-bottom: 1px dashed rgba(224, 170, 121, 0.35);
+    border-right: 1px dashed rgba(224, 170, 121, 0.12);
+    border-bottom: 1px dashed rgba(224, 170, 121, 0.12);
     position: relative;
   }
   #gridOverlay .cell:nth-child(10n) { border-right: none; }
@@ -882,17 +925,17 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     position: absolute;
     top: 2px;
     left: 3px;
-    font-size: 9px;
-    font-weight: 700;
-    color: rgba(224, 170, 121, 0.75);
-    background: rgba(0, 0, 0, 0.45);
+    font-size: 8px;
+    font-weight: 600;
+    color: rgba(224, 170, 121, 0.45);
+    background: rgba(0, 0, 0, 0.25);
     padding: 1px 4px;
     border-radius: 3px;
     letter-spacing: 0.04em;
   }
   /* Highlight col header A-J top and row number left for reference */
-  #gridOverlay .cell:nth-child(-n+10) .lbl { background: rgba(224, 170, 121, 0.9); color: #000; }
-  #gridOverlay .cell:nth-child(10n+1) .lbl { background: rgba(224, 170, 121, 0.9); color: #000; }
+  #gridOverlay .cell:nth-child(-n+10) .lbl { background: rgba(224, 170, 121, 0.55); color: #000; }
+  #gridOverlay .cell:nth-child(10n+1) .lbl { background: rgba(224, 170, 121, 0.55); color: #000; }
 
   #gridToggle {
     position: fixed;
@@ -921,6 +964,43 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     #gridOverlay .cell .lbl { font-size: 7px; padding: 1px 3px; }
     #gridToggle { bottom: 10px; right: 10px; font-size: 10px; padding: 7px 12px; }
   }
+
+  /* ========== ZONE TINT + LABEL (để chú gọi tên block) ========== */
+  [data-zone] { position: relative; }
+  [data-zone]::before {
+    content: attr(data-zone);
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'SF Mono', Consolas, Monaco, monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(224, 170, 121, 0.55);
+    padding: 3px 10px;
+    border-radius: 14px;
+    z-index: 5;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  /* 5 tint alternating cho dễ phân biệt */
+  [data-zone="Z01"] { background: linear-gradient(rgba(100,150,255,0.035), transparent); }
+  [data-zone="Z02"] { background: linear-gradient(rgba(255,150,100,0.035), transparent); }
+  [data-zone="Z03"] { background: linear-gradient(rgba(100,255,150,0.035), transparent); }
+  [data-zone="Z04"] { background: linear-gradient(rgba(200,100,255,0.04), transparent); }
+  [data-zone="Z05"] { background: linear-gradient(rgba(255,200,100,0.035), transparent); }
+  [data-zone="Z06"] { background: linear-gradient(rgba(100,200,255,0.035), transparent); }
+  [data-zone="Z07"] { background: linear-gradient(rgba(255,100,150,0.035), transparent); }
+  [data-zone="Z08"] { background: linear-gradient(rgba(150,255,100,0.035), transparent); }
+  [data-zone="Z09"] { background: linear-gradient(rgba(100,255,200,0.035), transparent); }
+  [data-zone="Z10"] { background: linear-gradient(rgba(255,100,200,0.035), transparent); }
+  [data-zone="Z11"] { background: linear-gradient(rgba(180,180,255,0.04), transparent); }
+  [data-zone="Z12"] { background: linear-gradient(rgba(255,180,100,0.04), transparent); }
+  [data-zone="Z13"] { background: linear-gradient(rgba(100,220,255,0.035), transparent); }
+  [data-zone="Z14"] { background: linear-gradient(rgba(200,200,100,0.035), transparent); }
 </style>
 
 <div id="gridOverlay"></div>
@@ -959,7 +1039,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </script>
 
 <!-- Z01 · LANGUAGE BAR -->
-<div class="lang-bar stagger">
+<div class="lang-bar stagger" data-zone="Z01 · Ngôn Ngữ">
   <button class="lang-btn active" onclick="changeLang(this)">VN</button>
   <button class="lang-btn" onclick="changeLang(this)">EN</button>
   <button class="lang-btn" onclick="changeLang(this)">CN</button>
@@ -967,39 +1047,153 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <button class="lang-btn" onclick="changeLang(this)">JP</button>
 </div>
 
-<!-- Z02 · NAV -->
-<nav class="nav">
-  <a href="wireframe_nguyentanphong_v3.html" class="nav-logo">Nguyễn Tấn Phong<em>Tri thức · Pháp luật · Công nghệ</em></a>
-  <div class="nav-menu">
-    <a href="wireframe_article_detail.html">Góc Nhìn</a>
-    <a href="#">Thư Viện</a>
-    <a href="wireframe_tai_lieu.html">Tài Liệu</a>
-    <a href="wireframe_ve_toi.html">Về Tôi</a>
-    <a href="thuong_hieu_so_phong.html">Thương Hiệu Số</a>
-    <a href="#">Liên Hệ</a>
+<!-- Z02 · NAV (menu dạng pills, bỏ nút Danh Thiếp) -->
+<nav class="nav nav-pills" data-zone="Z02 · Thanh Menu">
+  <a href="#" class="nav-logo-compact">Nguyễn Tấn Phong<em>Tri thức · Pháp luật · Công nghệ</em></a>
+  <div class="nav-pills-menu">
+    <a href="#Z06" class="pill"><i class="fas fa-newspaper"></i> Góc Nhìn</a>
+    <a href="#Z08" class="pill"><i class="fas fa-book"></i> Thư Viện</a>
+    <a href="#Z09" class="pill"><i class="fas fa-folder-open"></i> Tài Liệu</a>
+    <a href="#Z10" class="pill"><i class="fas fa-user"></i> Về Tôi</a>
+    <a href="#Z13" class="pill"><i class="fas fa-phone-alt"></i> Liên Hệ</a>
   </div>
-  <button onclick="openQRModal()" class="nav-cta"><i class="fas fa-qrcode" style="margin-right:6px;"></i> Danh Thiếp</button>
 </nav>
+<style>
+  .nav-pills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo-compact {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    line-height: 1.4;
+  }
+  .nav-logo-compact em {
+    display: block;
+    font-style: normal;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+  .nav-pills-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 720px;
+  }
+  .nav-pills-menu .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.25);
+    color: var(--text-soft);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .nav-pills-menu .pill:hover {
+    color: var(--navy);
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-color: var(--gold);
+  }
+  .nav-pills-menu .pill i { font-size: 10px; }
+  @media (max-width: 480px) {
+    .nav-pills { padding: 16px 12px 12px; gap: 12px; }
+    .nav-logo-compact { font-size: 12px; }
+    .nav-pills-menu .pill { padding: 6px 11px; font-size: 10px; gap: 5px; }
+  }
+</style>
 
-<!-- Z03 · HERO -->
-<section class="hero stagger">
-  <div class="hero-label">Chuyên gia Kinh tế số &amp; Pháp luật · 2026</div>
-  <div class="hero-avatar">
-    <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-    <div class="hero-avatar-placeholder" style="display:none;">NTP</div>
+<!-- Z03 · HERO (redesign — dùng template bản Đơn giản, avatar nhỏ hơn) -->
+<section class="hero-simple stagger" data-zone="Z03 · Danh Thiếp (Khối giữa)">
+  <div class="hero-simple-tagline">Tri Thức &middot; Pháp Luật &middot; Công Nghệ</div>
+  <div class="hero-simple-avatar">
+    <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" onerror="this.style.display='none';">
   </div>
-  <h1>Nguyễn Tấn Phong</h1>
-  <div class="hero-sub">Tư vấn chiến lược Thương mại điện tử · Trọng tài viên thương mại quốc tế · Ủy viên BCH VECOM</div>
-  <div class="hero-tagline">Tri Thức · Pháp Luật · Công Nghệ</div>
-  <div class="hero-actions">
-    <button onclick="openQRModal()" class="btn-primary"><i class="fas fa-qrcode"></i> Danh thiếp điện tử</button>
-    <button onclick="openRegister()" class="btn-ghost"><i class="fas fa-edit"></i> Đăng ký tư vấn</button>
-    <a href="wireframe_article_detail.html" class="btn-ghost"><i class="fas fa-newspaper"></i> Đọc Góc Nhìn</a>
-  </div>
+  <h1 class="hero-simple-name">Nguyễn Tấn <strong>Phong</strong></h1>
+  <div class="hero-simple-line">Chuyên gia Kinh tế số &amp; Pháp luật</div>
+  <div class="hero-simple-line">Luật gia - Trọng tài viên</div>
+  <hr class="hero-simple-divider" aria-hidden="true">
+  <div class="hero-simple-line">Tư vấn chiến lược</div>
+  <div class="hero-simple-line">Thương mại điện tử và Tự động hoá kinh doanh</div>
 </section>
+<style>
+  .hero-simple {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+    text-align: center;
+  }
+  .hero-simple-tagline {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-simple-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid rgba(224,170,121,0.3);
+    margin: 0 auto 24px;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.4);
+  }
+  .hero-simple-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-simple-name {
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    white-space: nowrap;
+  }
+  .hero-simple-name strong { font-weight: 700; }
+  .hero-simple-line {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-bottom: 5px;
+    line-height: 1.45;
+  }
+  .hero-simple-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.55;
+    margin: 12px auto;
+    border: 0;
+  }
+  @media (max-width: 480px) {
+    .hero-simple { padding: 32px 16px 40px; }
+    .hero-simple-tagline { font-size: 9px; letter-spacing: 0.3em; margin-bottom: 18px; }
+    .hero-simple-avatar { width: 96px; height: 96px; margin-bottom: 18px; border-width: 1.5px; }
+    .hero-simple-name { font-size: 1.1rem; letter-spacing: 0.14em; }
+    .hero-simple-line { font-size: 10.5px; }
+    .hero-simple-divider { width: 32px; margin: 9px auto; }
+  }
+</style>
 
 <!-- Z04 · STATS -->
-<section class="stats stagger">
+<section class="stats stagger" data-zone="Z04 · Chỉ Số">
   <div class="stats-grid">
     <div class="stat-item">
       <div class="stat-num">10+</div>
@@ -1021,7 +1215,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- 5 PILLAR ROLES -->
-<section class="block stagger">
+<section class="block stagger" data-zone="Z05 · Vai Trò Chuyên Môn">
   <div class="container">
     <div class="block-header">
       <!-- Z05 · VAI TRÒ CHUYÊN MÔN -->
@@ -1059,7 +1253,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z06 · INSIGHT ARTICLES -->
-<section class="block stagger" style="border-top:1px solid var(--border);">
+<section class="block stagger" data-zone="Z06 · Góc Nhìn" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="block-header">
       <div class="block-eyebrow">Góc Nhìn &amp; Tri Thức Chuyên Gia</div>
@@ -1099,7 +1293,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z07 · PRESS / MEDIA -->
-<section class="block stagger" style="background:rgba(0,0,0,0.2);">
+<section class="block stagger" data-zone="Z07 · Báo Chí" style="background:rgba(0,0,0,0.2);">
   <div class="container">
     <div class="block-header">
       <div class="block-eyebrow">Báo Chí Đưa Tin</div>
@@ -1118,7 +1312,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z08 · LIBRARY -->
-<section class="block stagger">
+<section class="block stagger" data-zone="Z08 · Thư Viện">
   <div class="container">
     <div class="block-header">
       <div class="block-eyebrow">Thư Viện Tri Thức Chuyên Gia</div>
@@ -1150,7 +1344,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z09 · DOCUMENT SECTION -->
-<section class="block stagger" style="border-top:1px solid var(--border);">
+<section class="block stagger" data-zone="Z09 · Tài Liệu" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="doc-section">
       <h3>Kho Tài liệu Chuyên môn</h3>
@@ -1167,7 +1361,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z10 · MANIFESTO PREVIEW -->
-<section class="block stagger">
+<section class="block stagger" data-zone="Z10 · Về Tôi">
   <div class="container">
     <div class="manifesto-box">
       <div class="manifesto-box-eyebrow">Tuyên Ngôn Thương Hiệu</div>
@@ -1179,7 +1373,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z11 · CATEGORIES -->
-<section class="block stagger" style="border-top:1px solid var(--border);">
+<section class="block stagger" data-zone="Z11 · Chuyên Mục" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="block-header">
       <div class="block-eyebrow">Khám Phá Theo Chuyên Mục</div>
@@ -1196,7 +1390,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z12 · LEAD MAGNET -->
-<section class="block lead-magnet stagger">
+<section class="block lead-magnet stagger" data-zone="Z12 · Đăng Ký Tư Vấn">
   <div class="lm-wrapper">
     <div class="lm-mockup">
       <div class="lm-mockup-label">Cẩm Nang Miễn Phí</div>
@@ -1222,7 +1416,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z13 · CONTACT GRID -->
-<section class="block stagger" style="border-top:1px solid var(--border);">
+<section class="block stagger" data-zone="Z13 · Liên Hệ" style="border-top:1px solid var(--border);">
   <div class="container">
     <div class="block-header">
       <div class="block-eyebrow">Kết Nối</div>
@@ -1239,10 +1433,10 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   </div>
 </section>
 
-<!-- Z14 · FOOTER (minimalist — giống bản Đơn giản) -->
-<footer class="footer stagger" style="text-align:center;padding:60px 24px 40px;">
-  <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="footer-signature" onerror="this.style.display='none';" style="width:160px;filter:brightness(0) invert(1);opacity:0.85;margin:0 auto 16px;display:block;">
-  <div class="footer-copy" style="font-size:10px;letter-spacing:0.2em;opacity:0.5;text-transform:uppercase;">© 1981 NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
+<!-- Z14 · FOOTER (đồng bộ với bản chính) -->
+<footer class="footer stagger" data-zone="Z14 · Chân Trang" style="text-align:center;padding:60px 24px 40px;">
+  <img src="NguyenTanPhong.png" alt="Chữ ký Nguyễn Tấn Phong" class="footer-sig" onerror="this.style.display='none';" style="width:140px;filter:brightness(0) invert(1);opacity:0.85;margin:0 auto 10px;display:block;">
+  <div class="footer-copy" style="font-size:8px;letter-spacing:0.2em;color:rgba(255,255,255,0.5);text-transform:uppercase;">&copy; NGUYEN TAN PHONG. ALL RIGHTS RESERVED.</div>
 </footer>
 
 <!-- Z15 · SCROLL TO TOP -->
