@@ -112,6 +112,78 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   }
   .lang-btn.active, .lang-btn:hover { color: var(--gold); }
 
+  /* Mobile: lang-bar buttons blink giống Zalo/Phone sidebar */
+  @keyframes langBlink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.45; }
+  }
+  @media (max-width: 480px) {
+    .lang-bar { padding: 10px 16px; gap: 10px; }
+    .lang-bar .lang-btn {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      padding: 4px 8px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      animation: langBlink 2.4s ease-in-out infinite;
+    }
+    .lang-bar .lang-btn:nth-child(2) { animation-delay: 0.5s; }
+    .lang-bar .lang-btn:nth-child(3) { animation-delay: 1.0s; }
+    .lang-bar .lang-btn:nth-child(4) { animation-delay: 1.5s; }
+    .lang-bar .lang-btn:nth-child(5) { animation-delay: 2.0s; }
+    .lang-bar .lang-btn.active {
+      animation: none;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+  }
+
+  /* Bộ lang-switcher thứ 2 (chỉ mobile, dưới nút Lưu Danh Bạ) */
+  .lang-bar-m { display: none; }
+  @media (max-width: 480px) {
+    .lang-bar-m {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 18px auto 0;
+      max-width: 360px;
+      flex-wrap: wrap;
+    }
+    .lang-bar-m .lang-btn-m {
+      flex: 1 1 auto;
+      min-width: 54px;
+      padding: 9px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      animation: langBlink 2.4s ease-in-out infinite;
+      text-decoration: none;
+    }
+    .lang-bar-m .lang-btn-m:nth-child(2) { animation-delay: 0.5s; }
+    .lang-bar-m .lang-btn-m:nth-child(3) { animation-delay: 1.0s; }
+    .lang-bar-m .lang-btn-m:nth-child(4) { animation-delay: 1.5s; }
+    .lang-bar-m .lang-btn-m:nth-child(5) { animation-delay: 2.0s; }
+    .lang-bar-m .lang-btn-m.active {
+      animation: none;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+    .lang-bar-m .lang-btn-m:hover {
+      color: var(--gold-light);
+      border-color: var(--gold);
+    }
+  }
+
   /* NAV */
   .nav {
     background: rgba(0,0,0,0.6);
@@ -848,6 +920,8 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   </a>
 </nav>
 <style>
+  /* Ẩn 2 tab Danh Thiếp + Trang Cá Nhân · chỉ giữ Zalo + Phone */
+  .v-stack .v-tab { display: none !important; }
   /* Stack 4 ô tách rời với gap nhỏ — mỗi ô tự có bg + border + shadow */
   .v-stack {
     position: fixed;
@@ -1104,34 +1178,43 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <button class="lang-btn" onclick="changeLang(this)">JP</button>
 </div>
 
-<!-- Z02 · NAV (5 pills, không logo — ép 1 hàng ngang mobile) -->
-<nav class="nav nav-pills" data-zone="Z02 · Thanh Menu">
-  <div class="nav-pills-menu">
+<!-- Z02 · NAV — Marquee chạy chậm theo chiều ngang -->
+<nav class="nav nav-pills-marquee" data-zone="Z02 · Thanh Menu">
+  <div class="nav-pills-track">
     <a href="#Z06" class="pill"><i class="fas fa-newspaper"></i> <span>Góc Nhìn</span></a>
     <a href="#Z08" class="pill"><i class="fas fa-book"></i> <span>Thư Viện</span></a>
     <a href="#Z09" class="pill"><i class="fas fa-folder-open"></i> <span>Tài Liệu</span></a>
     <a href="#Z10" class="pill"><i class="fas fa-user"></i> <span>Về Tôi</span></a>
     <a href="#Z13" class="pill"><i class="fas fa-phone-alt"></i> <span>Liên Hệ</span></a>
+    <!-- Duplicate cho seamless loop -->
+    <a href="#Z06" class="pill" aria-hidden="true" tabindex="-1"><i class="fas fa-newspaper"></i> <span>Góc Nhìn</span></a>
+    <a href="#Z08" class="pill" aria-hidden="true" tabindex="-1"><i class="fas fa-book"></i> <span>Thư Viện</span></a>
+    <a href="#Z09" class="pill" aria-hidden="true" tabindex="-1"><i class="fas fa-folder-open"></i> <span>Tài Liệu</span></a>
+    <a href="#Z10" class="pill" aria-hidden="true" tabindex="-1"><i class="fas fa-user"></i> <span>Về Tôi</span></a>
+    <a href="#Z13" class="pill" aria-hidden="true" tabindex="-1"><i class="fas fa-phone-alt"></i> <span>Liên Hệ</span></a>
   </div>
 </nav>
 <style>
-  .nav-pills {
-    display: flex;
-    justify-content: center;
-    padding: 20px 20px 16px;
+  .nav-pills-marquee {
+    padding: 18px 0 14px;
     border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
   }
-  .nav-pills-menu {
+  .nav-pills-track {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 8px;
-    justify-content: center;
-    max-width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
+    gap: 12px;
+    width: max-content;
+    animation: navPillsMarquee 70s linear infinite;
+    padding-left: 12px;
   }
-  .nav-pills-menu::-webkit-scrollbar { display: none; }
-  .nav-pills-menu .pill {
+  .nav-pills-marquee:hover .nav-pills-track { animation-play-state: paused; }
+  @keyframes navPillsMarquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .nav-pills-track .pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -1148,21 +1231,17 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .nav-pills-menu .pill:hover {
+  .nav-pills-track .pill:hover {
     color: var(--navy);
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
     border-color: var(--gold);
   }
-  .nav-pills-menu .pill i { font-size: 10px; }
+  .nav-pills-track .pill i { font-size: 10px; }
   @media (max-width: 480px) {
-    .nav-pills { padding: 14px 8px 12px; }
-    .nav-pills-menu { gap: 5px; }
-    .nav-pills-menu .pill { padding: 6px 9px; font-size: 9px; gap: 4px; letter-spacing: 0.03em; }
-    .nav-pills-menu .pill i { font-size: 9px; }
-  }
-  @media (max-width: 360px) {
-    .nav-pills-menu .pill { padding: 5px 7px; font-size: 8.5px; }
-    .nav-pills-menu .pill span { letter-spacing: 0.02em; }
+    .nav-pills-marquee { padding: 12px 0 10px; }
+    .nav-pills-track { gap: 8px; animation-duration: 55s; padding-left: 8px; }
+    .nav-pills-track .pill { padding: 6px 10px; font-size: 9.5px; gap: 4px; letter-spacing: 0.03em; }
+    .nav-pills-track .pill i { font-size: 9px; }
   }
 </style>
 
@@ -2224,6 +2303,14 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
       <i class="fas fa-address-book"></i>
       <span>Lưu Danh Bạ</span>
     </button>
+
+    <!-- Lang-switcher bộ 2 (chỉ hiện trên mobile, blink giống Zalo/Phone) -->
+    <nav class="lang-bar-m" aria-label="Chọn ngôn ngữ">
+      <a href="/" class="lang-btn-m active">VN</a>
+      <a href="/en" class="lang-btn-m">EN</a>
+      <a href="/ja" class="lang-btn-m">JA</a>
+      <a href="/zh" class="lang-btn-m">ZH</a>
+    </nav>
     <style>
       .save-contact-z13 {
         display: flex;
