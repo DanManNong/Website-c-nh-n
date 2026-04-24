@@ -938,22 +938,16 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <a href="/" style="color:#fff;margin-left:12px;text-decoration:underline;font-weight:500;opacity:0.9;">← gold</a>
 </div>
 
-<!-- Kích hoạt dev-mode qua ?dev=1 hoặc localStorage -->
+<!-- Dev mode chỉ bật khi URL có ?dev=1 — mặc định TẮT (ẩn grid + Zxx labels + preview badge) -->
 <script>
   (function() {
+    // Clear localStorage legacy
+    try { localStorage.removeItem('devMode'); } catch (e) {}
     var params = new URLSearchParams(location.search);
-    if (params.get('dev') === '1') localStorage.setItem('devMode', '1');
-    if (params.get('dev') === '0') localStorage.removeItem('devMode');
-    if (localStorage.getItem('devMode') === '1') {
-      document.documentElement.addEventListener('DOMContentLoaded', function(){});
-      // Add class ngay khi body sẵn sàng
-      document.addEventListener('DOMContentLoaded', function() {
-        document.body.classList.add('dev-mode');
-      });
-      // Nếu DOM đã load
-      if (document.readyState !== 'loading') {
-        document.body.classList.add('dev-mode');
-      }
+    if (params.get('dev') === '1') {
+      var apply = function() { document.body.classList.add('dev-mode'); };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
+      else apply();
     }
   })();
 </script>
