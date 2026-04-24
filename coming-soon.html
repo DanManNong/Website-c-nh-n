@@ -473,6 +473,99 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <a href="/zh" onclick="trackEvent('lang_switch', {to: 'zh'})">ZH</a>
 </nav>
 
+<!-- SIDEBAR dọc bên phải: 2 tab + 2 ô vuông Zalo/Phone -->
+<nav class="v-tabs" aria-label="Chuyển bản hiển thị">
+  <a href="/" class="v-tab active" title="Bản Danh Thiếp">
+    <i class="fas fa-id-card"></i>
+    <span>Danh Thiếp</span>
+  </a>
+  <a href="/preview-full" class="v-tab" title="Trang Cá Nhân đầy đủ" onclick="trackEvent('open_full_version')">
+    <i class="fas fa-user-tie"></i>
+    <span>Trang Cá Nhân</span>
+  </a>
+  <a href="https://zalo.me/0915159499" target="_blank" class="v-sq" title="Zalo" onclick="trackEvent('contact_zalo')">
+    <i class="fas fa-comment-dots"></i>
+  </a>
+  <a href="tel:+84915159499" class="v-sq" title="Gọi ngay" onclick="trackEvent('contact_call')">
+    <i class="fas fa-phone-alt"></i>
+  </a>
+</nav>
+<style>
+  .v-tabs {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 9997;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 10px 0 0 10px;
+    padding: 4px;
+    box-shadow: -4px 0 18px rgba(0,0,0,0.3);
+  }
+  .v-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 22px 2px;
+    color: var(--text-soft);
+    font-family: 'Inter', sans-serif;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.25s;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    line-height: 1.3;
+    min-width: 18px;
+    min-height: 130px;
+  }
+  .v-tab i { font-size: 11px; writing-mode: horizontal-tb; }
+  .v-tab span { writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; }
+  .v-tab:hover { color: var(--gold-light); background: rgba(224,170,121,0.08); }
+  .v-tab.active {
+    background: linear-gradient(180deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    box-shadow: 0 3px 12px rgba(224,170,121,0.25);
+  }
+  /* 2 ô vuông Zalo + Phone */
+  .v-sq {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    min-height: 22px;
+    padding: 6px 2px;
+    border-radius: 5px;
+    color: var(--text-soft);
+    transition: all 0.2s;
+  }
+  .v-sq i { font-size: 11px; }
+  .v-sq:hover {
+    background: rgba(224,170,121,0.12);
+    color: var(--gold);
+    transform: scale(1.05);
+  }
+  @media (max-width: 768px) {
+    .v-tabs { padding: 3px; gap: 1px; }
+    .v-tab { padding: 18px 2px; min-width: 16px; min-height: 105px; font-size: 6.5px; }
+    .v-tab i { font-size: 9px; }
+    .v-sq { min-width: 16px; min-height: 18px; padding: 5px 2px; }
+    .v-sq i { font-size: 9px; }
+  }
+</style>
+
 <!-- Spacer top (giữ layout cân đối) -->
 <div style="height: 12px;"></div>
 
