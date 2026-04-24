@@ -840,19 +840,19 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     <i class="fas fa-user-tie"></i>
     <span>Trang Cá Nhân</span>
   </a>
-  <a href="https://zalo.me/0915159499" target="_blank" class="v-sq" title="Zalo">
+</nav>
+<nav class="v-contacts" aria-label="Liên hệ nhanh">
+  <a href="https://zalo.me/0915159499" target="_blank" class="v-sq blink" title="Zalo">
     <i class="fas fa-comment-dots"></i>
   </a>
-  <a href="tel:+84915159499" class="v-sq" title="Gọi ngay">
+  <a href="tel:+84915159499" class="v-sq blink" title="Gọi ngay">
     <i class="fas fa-phone-alt"></i>
   </a>
 </nav>
 <style>
-  .v-tabs {
+  .v-tabs, .v-contacts {
     position: fixed;
-    top: 50%;
     right: 0;
-    transform: translateY(-50%);
     z-index: 9997;
     display: flex;
     flex-direction: column;
@@ -864,18 +864,20 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     border-radius: 10px 0 0 10px;
-    padding: 4px;
+    padding: 3px;
     box-shadow: -4px 0 18px rgba(0,0,0,0.3);
   }
+  .v-tabs { top: calc(50% - 70px); transform: translateY(-50%); }
+  .v-contacts { top: calc(50% + 95px); transform: translateY(-50%); }
   .v-tab {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 22px 2px;
+    gap: 6px;
+    padding: 18px 2px;
     color: var(--text-soft);
     font-family: 'Inter', sans-serif;
-    font-size: 7px;
+    font-size: 6.5px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -885,10 +887,10 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     writing-mode: vertical-rl;
     text-orientation: mixed;
     line-height: 1.3;
-    min-width: 18px;
-    min-height: 130px;
+    min-width: 13px;
+    min-height: 120px;
   }
-  .v-tab i { font-size: 11px; writing-mode: horizontal-tb; }
+  .v-tab i { font-size: 10px; writing-mode: horizontal-tb; }
   .v-tab span { writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; }
   .v-tab:hover { color: var(--gold-light); background: rgba(224,170,121,0.08); }
   .v-tab.active {
@@ -896,30 +898,41 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     color: var(--navy);
     box-shadow: 0 3px 12px rgba(224,170,121,0.25);
   }
-  /* 2 ô vuông Zalo + Phone dưới sidebar */
+  /* 2 ô vuông Zalo + Phone — tách rời, blink nhẹ */
   .v-sq {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 18px;
-    min-height: 22px;
-    padding: 6px 2px;
+    min-width: 13px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
     border-radius: 5px;
-    color: var(--text-soft);
+    color: var(--text);
     transition: all 0.2s;
   }
   .v-sq i { font-size: 11px; }
   .v-sq:hover {
-    background: rgba(224,170,121,0.12);
+    background: rgba(224,170,121,0.15);
     color: var(--gold);
-    transform: scale(1.05);
+    transform: scale(1.1);
+    animation: none;
   }
+  @keyframes vBlink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(224, 170, 121, 0.35); }
+    50%      { opacity: 0.55; box-shadow: 0 0 0 3px rgba(224, 170, 121, 0); }
+  }
+  .v-sq.blink { animation: vBlink 2.2s ease-in-out infinite; }
+  .v-sq.blink:nth-child(2) { animation-delay: 1.1s; }
+
   @media (max-width: 768px) {
-    .v-tabs { padding: 3px; gap: 1px; }
-    .v-tab { padding: 18px 2px; min-width: 16px; min-height: 105px; font-size: 6.5px; }
-    .v-tab i { font-size: 9px; }
-    .v-sq { min-width: 16px; min-height: 18px; padding: 5px 2px; }
+    .v-tabs, .v-contacts { padding: 2px; gap: 1px; }
+    .v-tab { padding: 14px 2px; min-width: 11px; min-height: 100px; font-size: 6px; }
+    .v-tab i { font-size: 8px; }
+    .v-sq { min-width: 11px; width: 22px; height: 22px; }
     .v-sq i { font-size: 9px; }
+    .v-tabs { top: calc(50% - 55px); }
+    .v-contacts { top: calc(50% + 75px); }
   }
 </style>
 
@@ -1473,8 +1486,12 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 </section>
 
 <!-- Z07 · PRESS / MEDIA -->
-<section class="block stagger" data-zone="Z07 · Báo Chí" style="background:rgba(0,0,0,0.2);">
+<section id="Z07" class="block stagger" data-zone="Z07 · Báo Chí" style="background:rgba(0,0,0,0.2);">
   <div class="container">
+    <div class="block-header">
+      <div class="block-eyebrow">Truyền Thông</div>
+      <h2 class="block-title">Báo chí đưa tin</h2>
+    </div>
     <!-- Marquee 7 báo — click logo hiển thị popup list bài -->
     <div class="press-marquee">
       <div class="press-marquee-track" id="pressMarqueeTrack">
@@ -1748,7 +1765,10 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 <!-- Z08 · LIBRARY -->
 <section id="Z08" class="block stagger" data-zone="Z08 · Thư Viện">
   <div class="container">
-    <!-- Header đã bỏ theo yêu cầu -->
+    <div class="block-header">
+      <div class="block-eyebrow">Tri Thức Chuyên Gia</div>
+      <h2 class="block-title">Thư viện chuyên đề</h2>
+    </div>
     <div class="library-grid">
       <button class="lib-card" onclick="openGate('Cẩm nang TMĐT')">
         <div class="lib-icon"><i class="fas fa-fingerprint"></i></div>
