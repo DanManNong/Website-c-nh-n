@@ -834,11 +834,11 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 <nav class="v-tabs" aria-label="Chuyển bản hiển thị">
   <a href="/" class="v-tab" title="Bản Danh Thiếp (card đơn giản)">
     <i class="fas fa-id-card"></i>
-    <span>DANH<br>THIẾP</span>
+    <span>Danh Thiếp</span>
   </a>
   <a href="/preview-full" class="v-tab active" title="Trang Cá Nhân đầy đủ">
     <i class="fas fa-user-tie"></i>
-    <span>TRANG<br>CÁ NHÂN</span>
+    <span>Trang Cá Nhân</span>
   </a>
 </nav>
 <style>
@@ -865,32 +865,42 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    padding: 14px 10px;
+    gap: 10px;
+    padding: 28px 4px;
     color: var(--text-soft);
     font-family: 'Inter', sans-serif;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     text-align: center;
-    border-radius: 7px;
+    border-radius: 6px;
     transition: all 0.25s;
-    writing-mode: horizontal-tb;
-    line-height: 1.2;
-    min-width: 64px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    line-height: 1.3;
+    min-width: 32px;
+    min-height: 140px;
   }
-  .v-tab i { font-size: 16px; }
+  .v-tab i {
+    font-size: 14px;
+    writing-mode: horizontal-tb;
+  }
+  .v-tab span {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    white-space: nowrap;
+  }
   .v-tab:hover { color: var(--gold-light); background: rgba(224,170,121,0.08); }
   .v-tab.active {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background: linear-gradient(180deg, var(--gold), var(--gold-light));
     color: var(--navy);
     box-shadow: 0 3px 12px rgba(224,170,121,0.25);
   }
   @media (max-width: 768px) {
     .v-tabs { padding: 3px; gap: 1px; }
-    .v-tab { padding: 10px 8px; font-size: 8px; min-width: 54px; }
-    .v-tab i { font-size: 13px; }
+    .v-tab { padding: 20px 3px; min-width: 26px; min-height: 110px; font-size: 7.5px; }
+    .v-tab i { font-size: 12px; }
   }
 </style>
 
@@ -1047,66 +1057,49 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <button class="lang-btn" onclick="changeLang(this)">JP</button>
 </div>
 
-<!-- Z02 · NAV (menu dạng pills, bỏ nút Danh Thiếp) -->
+<!-- Z02 · NAV (5 pills, không logo — ép 1 hàng ngang mobile) -->
 <nav class="nav nav-pills" data-zone="Z02 · Thanh Menu">
-  <a href="#" class="nav-logo-compact">Nguyễn Tấn Phong<em>Tri thức · Pháp luật · Công nghệ</em></a>
   <div class="nav-pills-menu">
-    <a href="#Z06" class="pill"><i class="fas fa-newspaper"></i> Góc Nhìn</a>
-    <a href="#Z08" class="pill"><i class="fas fa-book"></i> Thư Viện</a>
-    <a href="#Z09" class="pill"><i class="fas fa-folder-open"></i> Tài Liệu</a>
-    <a href="#Z10" class="pill"><i class="fas fa-user"></i> Về Tôi</a>
-    <a href="#Z13" class="pill"><i class="fas fa-phone-alt"></i> Liên Hệ</a>
+    <a href="#Z06" class="pill"><i class="fas fa-newspaper"></i> <span>Góc Nhìn</span></a>
+    <a href="#Z08" class="pill"><i class="fas fa-book"></i> <span>Thư Viện</span></a>
+    <a href="#Z09" class="pill"><i class="fas fa-folder-open"></i> <span>Tài Liệu</span></a>
+    <a href="#Z10" class="pill"><i class="fas fa-user"></i> <span>Về Tôi</span></a>
+    <a href="#Z13" class="pill"><i class="fas fa-phone-alt"></i> <span>Liên Hệ</span></a>
   </div>
 </nav>
 <style>
   .nav-pills {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding: 24px 20px 16px;
+    justify-content: center;
+    padding: 20px 20px 16px;
     border-bottom: 1px solid var(--border);
-  }
-  .nav-logo-compact {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-align: center;
-    line-height: 1.4;
-  }
-  .nav-logo-compact em {
-    display: block;
-    font-style: normal;
-    font-size: 9px;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    color: var(--text-soft);
-    margin-top: 4px;
   }
   .nav-pills-menu {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
     justify-content: center;
-    max-width: 720px;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+  .nav-pills-menu::-webkit-scrollbar { display: none; }
   .nav-pills-menu .pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 14px;
+    padding: 8px 14px;
     border-radius: 20px;
     border: 1px solid var(--border);
     background: rgba(0,0,0,0.25);
     color: var(--text-soft);
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .nav-pills-menu .pill:hover {
     color: var(--navy);
@@ -1115,80 +1108,116 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   }
   .nav-pills-menu .pill i { font-size: 10px; }
   @media (max-width: 480px) {
-    .nav-pills { padding: 16px 12px 12px; gap: 12px; }
-    .nav-logo-compact { font-size: 12px; }
-    .nav-pills-menu .pill { padding: 6px 11px; font-size: 10px; gap: 5px; }
+    .nav-pills { padding: 14px 8px 12px; }
+    .nav-pills-menu { gap: 5px; }
+    .nav-pills-menu .pill { padding: 6px 9px; font-size: 9px; gap: 4px; letter-spacing: 0.03em; }
+    .nav-pills-menu .pill i { font-size: 9px; }
+  }
+  @media (max-width: 360px) {
+    .nav-pills-menu .pill { padding: 5px 7px; font-size: 8.5px; }
+    .nav-pills-menu .pill span { letter-spacing: 0.02em; }
   }
 </style>
 
-<!-- Z03 · HERO (redesign — dùng template bản Đơn giản, avatar nhỏ hơn) -->
-<section class="hero-simple stagger" data-zone="Z03 · Danh Thiếp (Khối giữa)">
-  <div class="hero-simple-tagline">Tri Thức &middot; Pháp Luật &middot; Công Nghệ</div>
-  <div class="hero-simple-avatar">
-    <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" onerror="this.style.display='none';">
+<!-- Z03 · HERO (2 cột web: text trái + avatar phải to 3x · mobile: stack) -->
+<section class="hero-2col stagger" data-zone="Z03 · Danh Thiếp (Khối giữa)">
+  <div class="hero-2col-inner">
+    <div class="hero-2col-text">
+      <div class="hero-2col-tagline">Tri Thức &middot; Pháp Luật &middot; Công Nghệ</div>
+      <h1 class="hero-2col-name">Nguyễn Tấn <strong>Phong</strong></h1>
+      <div class="hero-2col-line">Chuyên gia Kinh tế số &amp; Pháp luật</div>
+      <div class="hero-2col-line">Luật gia - Trọng tài viên</div>
+      <hr class="hero-2col-divider" aria-hidden="true">
+      <div class="hero-2col-line">Tư vấn chiến lược</div>
+      <div class="hero-2col-line">Thương mại điện tử và Tự động hoá kinh doanh</div>
+      <!-- BIO NGẮN (nháp — chú sửa sau) -->
+      <p class="hero-2col-bio">
+        Với hơn 10 năm đồng hành cùng doanh nghiệp trong lĩnh vực Kinh tế số và Pháp luật,
+        tôi tập trung tư vấn chiến lược Thương mại điện tử và hệ thống Tự động hoá kinh doanh —
+        giúp các đơn vị vận hành hiệu quả, an toàn pháp lý, và sẵn sàng mở rộng ra quốc tế.
+      </p>
+    </div>
+    <div class="hero-2col-img">
+      <img src="avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" onerror="this.style.display='none';">
+    </div>
   </div>
-  <h1 class="hero-simple-name">Nguyễn Tấn <strong>Phong</strong></h1>
-  <div class="hero-simple-line">Chuyên gia Kinh tế số &amp; Pháp luật</div>
-  <div class="hero-simple-line">Luật gia - Trọng tài viên</div>
-  <hr class="hero-simple-divider" aria-hidden="true">
-  <div class="hero-simple-line">Tư vấn chiến lược</div>
-  <div class="hero-simple-line">Thương mại điện tử và Tự động hoá kinh doanh</div>
 </section>
 <style>
-  .hero-simple {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 48px 24px 64px;
-    text-align: center;
+  .hero-2col {
+    padding: 56px 24px 72px;
   }
-  .hero-simple-tagline {
+  .hero-2col-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-2col-text { text-align: left; }
+  .hero-2col-tagline {
     font-size: 10px;
     letter-spacing: 0.35em;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
-  .hero-simple-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 2px solid rgba(224,170,121,0.3);
-    margin: 0 auto 24px;
-    overflow: hidden;
-    box-shadow: 0 16px 36px rgba(0,0,0,0.4);
-  }
-  .hero-simple-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-simple-name {
-    font-size: 1.35rem;
+  .hero-2col-name {
+    font-size: 2rem;
     font-weight: 300;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     white-space: nowrap;
   }
-  .hero-simple-name strong { font-weight: 700; }
-  .hero-simple-line {
-    font-size: 12px;
+  .hero-2col-name strong { font-weight: 700; }
+  .hero-2col-line {
+    font-size: 13px;
     color: var(--text-soft);
-    margin-bottom: 5px;
-    line-height: 1.45;
+    margin-bottom: 6px;
+    line-height: 1.5;
   }
-  .hero-simple-divider {
+  .hero-2col-divider {
     width: 40px;
     height: 1px;
     background: var(--gold);
     opacity: 0.55;
-    margin: 12px auto;
+    margin: 14px 0;
     border: 0;
   }
+  .hero-2col-bio {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text-soft);
+    margin-top: 20px;
+    max-width: 560px;
+  }
+  .hero-2col-img {
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    border: 2px solid rgba(224,170,121,0.3);
+    overflow: hidden;
+    box-shadow: 0 28px 56px rgba(0,0,0,0.45);
+    justify-self: end;
+  }
+  .hero-2col-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 900px) {
+    .hero-2col-inner { grid-template-columns: 1fr; gap: 28px; }
+    .hero-2col-text { text-align: center; }
+    .hero-2col-divider { margin: 14px auto; }
+    .hero-2col-img { width: 160px; height: 160px; margin: 0 auto; justify-self: center; order: -1; }
+    .hero-2col-bio { margin: 20px auto 0; }
+  }
   @media (max-width: 480px) {
-    .hero-simple { padding: 32px 16px 40px; }
-    .hero-simple-tagline { font-size: 9px; letter-spacing: 0.3em; margin-bottom: 18px; }
-    .hero-simple-avatar { width: 96px; height: 96px; margin-bottom: 18px; border-width: 1.5px; }
-    .hero-simple-name { font-size: 1.1rem; letter-spacing: 0.14em; }
-    .hero-simple-line { font-size: 10.5px; }
-    .hero-simple-divider { width: 32px; margin: 9px auto; }
+    .hero-2col { padding: 28px 16px 36px; }
+    .hero-2col-tagline { font-size: 9px; letter-spacing: 0.3em; margin-bottom: 14px; }
+    .hero-2col-name { font-size: 1.15rem; letter-spacing: 0.13em; }
+    .hero-2col-line { font-size: 11.5px; }
+    .hero-2col-bio { font-size: 12px; line-height: 1.7; }
+    .hero-2col-img { width: 130px; height: 130px; border-width: 1.5px; }
   }
 </style>
 
@@ -1220,7 +1249,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     <div class="block-header">
       <!-- Z05 · VAI TRÒ CHUYÊN MÔN -->
       <div class="block-eyebrow">Vai Trò Chuyên Môn</div>
-      <h2 class="block-title">5 tổ chức đang đồng hành</h2>
+      <h2 class="block-title z05-title">Các tổ chức đang đồng hành</h2>
     </div>
     <div class="roles-grid">
       <a href="https://vecom.vn" target="_blank" class="role-card">
@@ -1248,7 +1277,26 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
         <div class="role-name">EAGLE</div>
         <div class="role-desc">Giảng viên Cao cấp<br>Bất động sản<br>Quản trị Doanh nghiệp</div>
       </a>
+      <a href="#" target="_blank" class="role-card">
+        <div class="role-icon"><i class="fas fa-star"></i></div>
+        <div class="role-name">HSGA</div>
+        <div class="role-desc">Thành viên đồng hành<br>Hội Sinh viên Cao cấp<br>(nháp - chú bổ sung)</div>
+      </a>
+      <a href="https://www.ulaw.edu.vn" target="_blank" class="role-card">
+        <div class="role-icon"><i class="fas fa-university"></i></div>
+        <div class="role-name">ULAW</div>
+        <div class="role-desc">Đồng hành hoạt động<br>Trường Đại học Luật<br>TP. Hồ Chí Minh</div>
+      </a>
     </div>
+    <style>
+      .z05-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      @media (max-width: 480px) {
+        .z05-title {
+          white-space: nowrap;
+          font-size: clamp(14px, 4.2vw, 22px);
+        }
+      }
+    </style>
   </div>
 </section>
 
@@ -1295,51 +1343,115 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
 <!-- Z07 · PRESS / MEDIA -->
 <section class="block stagger" data-zone="Z07 · Báo Chí" style="background:rgba(0,0,0,0.2);">
   <div class="container">
-    <div class="block-header">
-      <div class="block-eyebrow">Báo Chí Đưa Tin</div>
-      <h2 class="block-title">Xuất hiện trên các tờ báo lớn</h2>
+    <!-- Header đã bỏ theo yêu cầu · marquee logos 1 dòng liên tục -->
+    <div class="press-marquee">
+      <div class="press-marquee-track">
+        <a href="https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm" target="_blank" class="press-logo">Người Lao Động</a>
+        <a href="https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html" target="_blank" class="press-logo">VnExpress</a>
+        <a href="https://tuoitre.vn/kiem-tra-xu-ly-hang-gia-rat-gian-nan-moi-den-cho-da-bi-theo-doi-20250702170347843.htm" target="_blank" class="press-logo">Tuổi Trẻ</a>
+        <a href="https://thanhnien.vn/phat-trien-thuong-mai-dien-tu-ben-vung-18524052110254321.htm" target="_blank" class="press-logo">Thanh Niên</a>
+        <a href="https://tienphong.vn/bao-ve-nguoi-tieu-dung-tren-san-thuong-mai-dien-tu-post1651234.tpo" target="_blank" class="press-logo">Tiền Phong</a>
+        <a href="https://plo.vn/quan-ly-thue-va-phap-ly-voi-nguoi-ban-hang-livestream-post789123.html" target="_blank" class="press-logo">Pháp Luật Online</a>
+        <a href="https://congthuong.vn/dua-san-pham-ocop-len-gian-hang-viet-truc-tuyen-324567.html" target="_blank" class="press-logo">Công Thương</a>
+        <!-- Duplicate cho marquee seamless -->
+        <a href="https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm" target="_blank" class="press-logo" aria-hidden="true">Người Lao Động</a>
+        <a href="https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html" target="_blank" class="press-logo" aria-hidden="true">VnExpress</a>
+        <a href="https://tuoitre.vn/kiem-tra-xu-ly-hang-gia-rat-gian-nan-moi-den-cho-da-bi-theo-doi-20250702170347843.htm" target="_blank" class="press-logo" aria-hidden="true">Tuổi Trẻ</a>
+        <a href="https://thanhnien.vn/phat-trien-thuong-mai-dien-tu-ben-vung-18524052110254321.htm" target="_blank" class="press-logo" aria-hidden="true">Thanh Niên</a>
+        <a href="https://tienphong.vn/bao-ve-nguoi-tieu-dung-tren-san-thuong-mai-dien-tu-post1651234.tpo" target="_blank" class="press-logo" aria-hidden="true">Tiền Phong</a>
+        <a href="https://plo.vn/quan-ly-thue-va-phap-ly-voi-nguoi-ban-hang-livestream-post789123.html" target="_blank" class="press-logo" aria-hidden="true">Pháp Luật Online</a>
+        <a href="https://congthuong.vn/dua-san-pham-ocop-len-gian-hang-viet-truc-tuyen-324567.html" target="_blank" class="press-logo" aria-hidden="true">Công Thương</a>
+      </div>
     </div>
-    <div class="press-grid">
-      <a href="https://nld.com.vn/san-thuong-mai-dien-tu-khong-con-vo-can-196250627215037828.htm" target="_blank" class="press-logo">Người Lao Động</a>
-      <a href="https://vnexpress.net/11-rui-ro-khien-nha-dau-tu-bat-dong-san-mat-sach-von-3942690.html" target="_blank" class="press-logo">VnExpress</a>
-      <a href="https://tuoitre.vn/kiem-tra-xu-ly-hang-gia-rat-gian-nan-moi-den-cho-da-bi-theo-doi-20250702170347843.htm" target="_blank" class="press-logo">Tuổi Trẻ</a>
-      <a href="https://thanhnien.vn/phat-trien-thuong-mai-dien-tu-ben-vung-18524052110254321.htm" target="_blank" class="press-logo">Thanh Niên</a>
-      <a href="https://tienphong.vn/bao-ve-nguoi-tieu-dung-tren-san-thuong-mai-dien-tu-post1651234.tpo" target="_blank" class="press-logo">Tiền Phong</a>
-      <a href="https://plo.vn/quan-ly-thue-va-phap-ly-voi-nguoi-ban-hang-livestream-post789123.html" target="_blank" class="press-logo">Pháp Luật Online</a>
-      <a href="https://congthuong.vn/dua-san-pham-ocop-len-gian-hang-viet-truc-tuyen-324567.html" target="_blank" class="press-logo">Công Thương</a>
-    </div>
+    <style>
+      .press-marquee {
+        overflow: hidden;
+        width: 100%;
+        mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+      }
+      .press-marquee-track {
+        display: flex;
+        gap: 40px;
+        width: max-content;
+        animation: pressMarquee 40s linear infinite;
+        padding: 12px 0;
+      }
+      .press-marquee:hover .press-marquee-track { animation-play-state: paused; }
+      @keyframes pressMarquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+      .press-marquee .press-logo {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--text-soft);
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: rgba(0,0,0,0.25);
+        transition: all 0.2s;
+      }
+      .press-marquee .press-logo:hover { color: var(--gold); border-color: var(--gold); }
+      @media (max-width: 480px) {
+        .press-marquee-track { gap: 24px; animation-duration: 30s; }
+        .press-marquee .press-logo { font-size: 12px; padding: 6px 12px; }
+      }
+    </style>
   </div>
 </section>
 
 <!-- Z08 · LIBRARY -->
 <section class="block stagger" data-zone="Z08 · Thư Viện">
   <div class="container">
-    <div class="block-header">
-      <div class="block-eyebrow">Thư Viện Tri Thức Chuyên Gia</div>
-      <h2 class="block-title">8 chuyên đề bài giảng</h2>
-    </div>
+    <!-- Header đã bỏ theo yêu cầu -->
     <div class="library-grid">
-      <button class="lib-card" onclick="openGate('Bài giảng A')">
+      <button class="lib-card" onclick="openGate('Cẩm nang TMĐT')">
         <div class="lib-icon"><i class="fas fa-fingerprint"></i></div>
-        <div class="lib-title">Bài giảng A</div>
+        <div class="lib-title">Cẩm nang Thương mại điện tử 2026</div>
       </button>
-      <button class="lib-card" onclick="openGate('Bài giảng B')">
+      <button class="lib-card" onclick="openGate('Livestream')">
         <div class="lib-icon"><i class="fas fa-fingerprint"></i></div>
-        <div class="lib-title">Bài giảng B</div>
+        <div class="lib-title">Pháp lý Livestream</div>
       </button>
-      <button class="lib-card" onclick="openGate('Bài giảng C')">
+      <button class="lib-card" onclick="openGate('Trọng tài')">
         <div class="lib-icon"><i class="fas fa-fingerprint"></i></div>
-        <div class="lib-title">Bài giảng C</div>
+        <div class="lib-title">Trọng tài thương mại</div>
       </button>
-      <button class="lib-card" onclick="openGate('Bài giảng D')">
+      <button class="lib-card" onclick="openGate('Tự động hoá')">
         <div class="lib-icon"><i class="fas fa-fingerprint"></i></div>
-        <div class="lib-title">Bài giảng D</div>
+        <div class="lib-title">Tự động hoá kinh doanh</div>
       </button>
-      <div class="lib-card locked"><div class="lib-title">Bài giảng E</div></div>
-      <div class="lib-card locked"><div class="lib-title">Bài giảng F</div></div>
-      <div class="lib-card locked"><div class="lib-title">Bài giảng G</div></div>
-      <div class="lib-card locked"><div class="lib-title">Bài giảng H</div></div>
+      <div class="lib-card locked"><div class="lib-title">Bảo vệ thương hiệu số</div></div>
+      <div class="lib-card locked"><div class="lib-title">An ninh mạng cho SME</div></div>
+      <div class="lib-card locked"><div class="lib-title">Hợp đồng điện tử</div></div>
+      <div class="lib-card locked"><div class="lib-title">Bất động sản & Đầu tư pháp lý</div></div>
     </div>
+    <div class="view-all-lib">
+      <a href="#" class="view-all-link">Xem tất cả danh sách →</a>
+    </div>
+    <style>
+      .view-all-lib { text-align: center; margin-top: 24px; }
+      .view-all-link {
+        display: inline-block;
+        padding: 8px 18px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        border-radius: 20px;
+        transition: all 0.2s;
+      }
+      .view-all-link:hover {
+        background: var(--gold);
+        color: var(--navy);
+      }
+    </style>
   </div>
 </section>
 
@@ -1367,7 +1479,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
       <div class="manifesto-box-eyebrow">Tuyên Ngôn Thương Hiệu</div>
       <h3>"Tôi tin vào một nền thương mại điện tử Việt Nam minh bạch, công bằng và được dẫn dắt bởi pháp luật vững mạnh."</h3>
       <p>Tôi không tin vào luật sư biết tuốt, không tin vào học thuật tháp ngà, và không tin vào sự khoan nhượng với gian lận thương mại điện tử.</p>
-      <a href="wireframe_ve_toi.html" class="btn-primary" style="display:inline-flex;">Đọc toàn bộ Manifesto →</a>
+      <a href="wireframe_ve_toi.html" class="btn-primary" style="display:inline-flex;">Đọc toàn bộ →</a>
     </div>
   </div>
 </section>
@@ -1377,7 +1489,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <div class="container">
     <div class="block-header">
       <div class="block-eyebrow">Khám Phá Theo Chuyên Mục</div>
-      <h2 class="block-title">5 lĩnh vực trọng tâm</h2>
+      <h2 class="block-title">Lĩnh vực trọng tâm</h2>
     </div>
     <div class="cat-grid">
       <a href="#" class="cat-card"><div class="cat-icon"><i class="fas fa-cart-shopping" style="font-size:14px;"></i></div><div class="cat-name">Kinh tế số &amp; TMĐT</div></a>
@@ -1409,7 +1521,6 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
         <input class="lm-input" placeholder="Họ và tên" type="text" required>
         <input class="lm-input" placeholder="Email công việc" type="email" required>
         <button type="submit" class="lm-submit">Nhận Cẩm Nang Ngay →</button>
-        <div class="lm-note">→ 6,875+ CHUYÊN GIA ĐÃ TẢI · KHÔNG SPAM · HỦY BẤT KỲ LÚC NÀO</div>
       </form>
     </div>
   </div>
@@ -1420,7 +1531,6 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <div class="container">
     <div class="block-header">
       <div class="block-eyebrow">Kết Nối</div>
-      <h2 class="block-title">Liên hệ trực tiếp</h2>
     </div>
     <div class="contact-grid">
       <a href="tel:+84915159499" class="contact-item"><i class="fas fa-phone-alt"></i><span>Hotline</span></a>
