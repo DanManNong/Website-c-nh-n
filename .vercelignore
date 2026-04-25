@@ -42,3 +42,7 @@ TUYEN-NGON.md
 
 # Admin panel — CHỈ mở LOCAL (mật khẩu hardcoded JS, không an toàn deploy public)
 admin.html
+
+# Doc 2 trang offline — không deploy
+DANH-THIEP.md
+TRANG-FULL.md
