@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "updated": "2026-04-26",
   "laws": [
     {
@@ -11,6 +11,16 @@
       "dieu": 41,
       "hieuluc": "01/07/2026",
       "color": "#ED1C24"
+    },
+    {
+      "id": "luat_116_2025",
+      "file": "data/luat_116_2025.js",
+      "title": "Luật An ninh mạng",
+      "sohieu": "116/2025/QH15",
+      "chuong": 8,
+      "dieu": 45,
+      "hieuluc": "01/07/2026",
+      "color": "#1565c0"
     }
   ]
 }

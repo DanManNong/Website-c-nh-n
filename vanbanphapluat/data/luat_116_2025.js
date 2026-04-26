@@ -1,0 +1,685 @@
+// ═══════════════════════════════════════════════════
+// DATA MODULE — Luật An ninh mạng 116/2025/QH15
+// Pháp lý Network Hướng Dương
+// ═══════════════════════════════════════════════════
+
+window.LUAT_REGISTRY = window.LUAT_REGISTRY || {};
+window.LUAT_REGISTRY['luat_116_2025'] = {
+
+  meta: {
+    id:      'luat_116_2025',
+    title:   'Luật An ninh mạng',
+    sohieu:  '116/2025/QH15',
+    chuong:  8,
+    dieu:    45,
+    hieuluc: '01/07/2026',
+    color:   '#1565c0',
+    colorCh: '#1976d2',
+    colorD:  '#42a5f5',
+  },
+
+// ── CHƯƠNG ─────────────────────────────────────────────────
+CH:[
+  {id:'c1',lbl:'Ch.I\nQuy định\nchung',from:1,to:7,
+   desc:'Chương I — Những quy định chung\nĐiều 1 đến Điều 7'},
+  {id:'c2',lbl:'Ch.II\nBảo vệ an ninh mạng\nđối với hệ thống thông tin',from:8,to:12,
+   desc:'Chương II — Bảo vệ an ninh mạng đối với hệ thống thông tin\nĐiều 8 đến Điều 12'},
+  {id:'c3',lbl:'Ch.III\nPhòng ngừa\nxử lý vi phạm',from:13,to:22,
+   desc:'Chương III — Phòng ngừa, xử lý hành vi xâm phạm an ninh mạng\nĐiều 13 đến Điều 22'},
+  {id:'c4',lbl:'Ch.IV\nHoạt động\nbảo vệ an ninh mạng',from:23,to:26,
+   desc:'Chương IV — Hoạt động bảo vệ an ninh mạng\nĐiều 23 đến Điều 26'},
+  {id:'c5',lbl:'Ch.V\nTiêu chuẩn\nsản phẩm dịch vụ',from:27,to:29,
+   desc:'Chương V — Tiêu chuẩn, quy chuẩn kỹ thuật, sản phẩm, dịch vụ an ninh mạng\nĐiều 27 đến Điều 29'},
+  {id:'c6',lbl:'Ch.VI\nLực lượng\nđiều kiện bảo đảm',from:30,to:38,
+   desc:'Chương VI — Lực lượng, điều kiện bảo đảm an ninh mạng\nĐiều 30 đến Điều 38'},
+  {id:'c7',lbl:'Ch.VII\nTrách nhiệm\ncơ quan tổ chức',from:39,to:42,
+   desc:'Chương VII — Trách nhiệm của cơ quan, tổ chức, cá nhân về an ninh mạng\nĐiều 39 đến Điều 42'},
+  {id:'c8',lbl:'Ch.VIII\nĐiều khoản\nthi hành',from:43,to:45,
+   desc:'Chương VIII — Điều khoản thi hành\nĐiều 43 đến Điều 45'},
+],
+
+// ── ĐIỀU LUẬT ───────────────────────────────────────────────
+DD:[
+{n:1,name:'Phạm vi điều chỉnh và đối tượng áp dụng',kw:['kBCA','kHTTT'],
+full:`1. Luật này quy định về an ninh mạng, bảo vệ an ninh mạng; quyền, nghĩa vụ, trách nhiệm của cơ quan, tổ chức, cá nhân có liên quan.
+
+2. Luật này áp dụng đối với:
+a) Cơ quan, tổ chức, cá nhân Việt Nam;
+b) Cơ quan, tổ chức, cá nhân nước ngoài tại Việt Nam và người gốc Việt Nam chưa xác định được quốc tịch đang sinh sống tại Việt Nam đã được cấp giấy chứng nhận căn cước;
+c) Cơ quan, tổ chức, cá nhân nước ngoài trực tiếp tham gia hoặc có liên quan đến hoạt động bảo vệ an ninh mạng, kinh doanh sản phẩm, dịch vụ an ninh mạng tại Việt Nam.`},
+
+{n:2,name:'Giải thích từ ngữ',kw:['kANM','kHTTT','kTC','kGD','kPM'],
+full:`Trong Luật này, các từ ngữ dưới đây được hiểu như sau:
+
+1. An ninh mạng là sự ổn định, an ninh, an toàn của không gian mạng; bảo vệ hệ thống thông tin và bảo đảm thông tin, dữ liệu, hoạt động trên không gian mạng không gây phương hại đến an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân.
+
+2. An ninh thông tin mạng là sự bảo đảm tính nguyên vẹn, tính bảo mật, tính khả dụng của thông tin trên không gian mạng, tránh bị truy cập, sử dụng, tiết lộ, sửa đổi trái phép, phá hoại hoặc hành vi khác đe dọa hoặc gây phương hại đến an ninh quốc gia, trật tự, an toàn xã hội.
+
+3. An ninh dữ liệu là sự bảo đảm chất lượng dữ liệu và các hoạt động xử lý, sử dụng dữ liệu trên không gian mạng phục vụ phát triển kinh tế - xã hội, chuyển đổi số quốc gia, tránh bị truy cập, sử dụng, tiết lộ, sửa đổi trái phép, phá hoại hoặc hành vi khác đe dọa hoặc gây phương hại đến an ninh quốc gia, trật tự, an toàn xã hội.
+
+4. Bảo vệ an ninh mạng là phòng ngừa, phát hiện, ngăn chặn, xử lý hành vi xâm phạm an ninh mạng.
+
+5. Không gian mạng là môi trường được hình thành bởi hệ thống mạng lưới kết nối của cơ sở hạ tầng công nghệ thông tin, bao gồm mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, cơ sở dữ liệu; là nơi con người thực hiện các hành vi xã hội không bị giới hạn bởi không gian và thời gian.
+
+6. Không gian mạng quốc gia là phần không gian mạng thuộc chủ quyền, quyền tài phán và quyền kiểm soát của Nhà nước Cộng hòa xã hội chủ nghĩa Việt Nam.
+
+7. Hệ thống thông tin là tập hợp phần cứng, phần mềm và dữ liệu được thiết lập phục vụ mục đích tạo lập, cung cấp, truyền đưa, thu thập, xử lý, lưu trữ và trao đổi thông tin trên không gian mạng.
+
+8. Chủ quản hệ thống thông tin là cơ quan, tổ chức, cá nhân có thẩm quyền quản lý trực tiếp đối với hệ thống thông tin.
+
+9. Phần mềm độc hại là phần mềm có khả năng gây ra hoạt động không bình thường cho một phần hoặc toàn bộ hệ thống thông tin hoặc thực hiện sao chép, sửa đổi, xóa bỏ trái phép thông tin lưu trữ trong hệ thống thông tin.
+
+10. Phần cứng độc hại là các bộ phận vật lý được thiết kế có chủ đích hoặc được gắn thêm ngoài cấu thành của phần cứng tiêu chuẩn nhằm thu thập thông tin, dữ liệu trái phép hoặc can thiệp, gây ngừng trệ, tê liệt, phá hoại hệ thống máy tính, hệ thống thông tin.
+
+11. Nhật ký hệ thống là tập hợp các bản ghi phản ánh thời gian, người dùng, hoạt động, trạng thái của hệ thống phục vụ cho quản lý, giám sát và bảo mật hệ thống.
+
+12. Tội phạm mạng là hành vi nguy hiểm cho xã hội được quy định trong Bộ luật Hình sự, do cá nhân hoặc tổ chức thực hiện trên không gian mạng bằng việc sử dụng công nghệ thông tin hoặc phương tiện điện tử.
+
+13. Tấn công mạng là hành vi thực hiện trên không gian mạng bằng việc sử dụng công nghệ thông tin hoặc phương tiện điện tử để chiếm đoạt thông tin, gây rối loạn, gián đoạn, tê liệt hoạt động, phá hoại hoặc kiểm soát hệ thống mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, cơ sở dữ liệu, phương tiện điện tử.
+
+14. Khủng bố mạng là hành vi thực hiện trên không gian mạng bằng việc sử dụng công nghệ thông tin hoặc phương tiện điện tử nhằm gây hoảng sợ trong công chúng hoặc làm mất ổn định chính trị.
+
+15. Gián điệp mạng là hành vi thực hiện trên không gian mạng bằng việc sử dụng công nghệ thông tin hoặc phương tiện điện tử bí mật xâm nhập để chiếm đoạt, thu thập, sao chép thông tin thuộc phạm vi bí mật nhà nước, dữ liệu quan trọng của cơ quan, tổ chức, cá nhân nhằm mục đích gây phương hại đến an ninh quốc gia, trật tự, an toàn xã hội.
+
+16. Nguy cơ đe dọa an ninh mạng là trạng thái không gian mạng xuất hiện dấu hiệu đe dọa xâm phạm an ninh quốc gia, gây tổn hại nghiêm trọng đến trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân.
+
+17. Sự cố an ninh mạng là sự việc bất ngờ xảy ra trên không gian mạng xâm phạm an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân.
+
+18. Tình huống nguy hiểm về an ninh mạng là trạng thái hoặc diễn biến trên không gian mạng khi có yếu tố tấn công, xâm nhập, kích động, làm lộ, mất thông tin hoặc hành vi khác đe dọa xâm phạm nghiêm trọng đến an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân.
+
+19. Tài khoản số là thông tin dùng để chứng thực, xác thực, phân quyền sử dụng các ứng dụng, dịch vụ trên không gian mạng.
+
+20. Mật mã dân sự là kỹ thuật mật mã và sản phẩm mật mã được sử dụng để bảo mật hoặc xác thực đối với thông tin không thuộc phạm vi bí mật nhà nước nhằm bảo đảm an ninh thông tin cho cơ quan, tổ chức, cá nhân.
+
+21. Sản phẩm an ninh mạng là phần cứng, phần mềm có chức năng bảo vệ an ninh mạng, an ninh thông tin mạng, an ninh dữ liệu, thông tin, dữ liệu, hệ thống thông tin, cơ sở hạ tầng công nghệ thông tin.
+
+22. Dịch vụ an ninh mạng là dịch vụ được cung cấp để bảo vệ an ninh mạng, an ninh thông tin mạng, an ninh dữ liệu, thông tin, dữ liệu, hệ thống thông tin, cơ sở hạ tầng công nghệ thông tin.
+
+23. Hệ thống thông tin cơ yếu là hệ thống thông tin dùng mật mã cơ yếu để bảo vệ thông tin thuộc phạm vi bí mật nhà nước để phục vụ hoạt động chuyên môn nghiệp vụ cơ yếu do tổ chức cơ yếu trực tiếp quản lý, vận hành.`},
+
+{n:3,name:'Chính sách của Nhà nước về an ninh mạng',kw:['kCS','kBCA','kHTC'],
+full:`1. Xây dựng không gian mạng lành mạnh, không gây phương hại đến an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân.
+
+2. Ưu tiên bảo vệ an ninh mạng trong các lĩnh vực quốc phòng, an ninh, cơ yếu, phát triển kinh tế - xã hội, khoa học, công nghệ và đối ngoại.
+
+3. Ưu tiên bố trí nguồn lực xây dựng, phát triển lực lượng chuyên trách bảo vệ an ninh mạng, bảo đảm nguồn nhân lực chất lượng cao phục vụ bảo vệ an ninh mạng; nâng cao năng lực cho tổ chức và cá nhân tham gia bảo vệ an ninh mạng; ưu tiên đầu tư cho hoạt động nghiên cứu, phát triển khoa học, công nghệ hiện đại phục vụ bảo vệ an ninh mạng; có cơ chế đặc thù, chính sách ưu đãi để huy động, thu hút, đào tạo và sử dụng nhân tài trong lĩnh vực an ninh mạng.
+
+4. Đẩy mạnh liên kết, đầu tư theo phương thức đối tác công tư trong bảo vệ an ninh mạng; khuyến khích, tạo điều kiện để cơ quan, tổ chức, cá nhân tham gia bảo vệ an ninh mạng, xử lý các nguy cơ đe dọa an ninh mạng; nghiên cứu, phát triển công nghệ, sản phẩm, dịch vụ, ứng dụng nhằm bảo vệ an ninh mạng; sử dụng sản phẩm, dịch vụ an ninh mạng của Việt Nam.
+
+5. Mở rộng hợp tác quốc tế về an ninh mạng để tăng cường khả năng bảo vệ an ninh mạng; phòng, chống tội phạm mạng và các mối đe dọa về an ninh mạng xuyên quốc gia; tiếp thu công nghệ hiện đại nhằm nâng cao năng lực tự chủ an ninh mạng quốc gia.`},
+
+{n:4,name:'Nguyên tắc bảo vệ an ninh mạng',kw:['kANM','kBCA'],
+full:`1. Tuân thủ Hiến pháp và pháp luật; bảo đảm an ninh, chủ quyền và lợi ích quốc gia trên không gian mạng.
+
+2. Đặt dưới sự lãnh đạo của Đảng Cộng sản Việt Nam; sự quản lý thống nhất của Nhà nước; huy động sức mạnh tổng hợp của hệ thống chính trị và toàn dân tộc; phát huy vai trò nòng cốt của lực lượng chuyên trách bảo vệ an ninh mạng.
+
+3. Kết hợp chặt chẽ giữa bảo vệ an ninh mạng với phát triển kinh tế - xã hội, bảo đảm quyền con người, quyền công dân, bảo vệ dữ liệu cá nhân, tạo điều kiện cho cơ quan, tổ chức, cá nhân hoạt động hợp pháp trên không gian mạng.
+
+4. Áp dụng các biện pháp để bảo vệ không gian mạng quốc gia; chủ động phòng ngừa, phát hiện, ngăn chặn, đấu tranh làm thất bại mọi hoạt động trên không gian mạng xâm phạm an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân; xử lý kịp thời, nghiêm minh các hành vi vi phạm pháp luật về an ninh mạng.
+
+5. Triển khai hoạt động bảo vệ an ninh mạng thường xuyên, liên tục đối với cơ sở hạ tầng không gian mạng quốc gia; chủ động áp dụng các biện pháp bảo vệ hệ thống thông tin quan trọng về an ninh quốc gia.`},
+
+{n:5,name:'Biện pháp bảo vệ an ninh mạng',kw:['kANM','kHTTT','kBCA'],
+full:`1. Biện pháp bảo vệ an ninh mạng bao gồm:
+a) Thẩm định an ninh mạng;
+b) Đánh giá điều kiện an ninh mạng;
+c) Kiểm tra an ninh mạng;
+d) Giám sát an ninh mạng;
+đ) Ứng phó, khắc phục sự cố an ninh mạng;
+e) Đấu tranh bảo vệ an ninh mạng;
+g) Sử dụng mật mã để bảo vệ thông tin mạng;
+h) Sử dụng giải pháp kỹ thuật để bảo vệ an ninh thông tin mạng, an ninh dữ liệu, hệ thống thông tin; ngăn chặn thông tin vi phạm pháp luật;
+i) Ngăn chặn, yêu cầu tạm ngừng, ngừng cung cấp thông tin mạng; đình chỉ, tạm đình chỉ các hoạt động thiết lập, cung cấp và sử dụng mạng viễn thông, mạng Internet, sản xuất và sử dụng thiết bị phát, thu phát sóng vô tuyến theo quy định của pháp luật;
+k) Yêu cầu xóa bỏ, truy cập xóa bỏ thông tin trái pháp luật hoặc thông tin sai sự thật, tin giả trên không gian mạng xâm phạm an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân;
+l) Thu thập dữ liệu điện tử liên quan đến hoạt động xâm phạm an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân trên không gian mạng;
+m) Phong tỏa, hạn chế hoạt động của hệ thống thông tin; đình chỉ, tạm đình chỉ hoặc yêu cầu ngừng hoạt động của hệ thống thông tin, thu hồi tên miền theo quy định của pháp luật;
+n) Khởi tố, điều tra, truy tố, xét xử theo quy định của Bộ luật Tố tụng hình sự;
+o) Biện pháp khác theo quy định của pháp luật về an ninh quốc gia, pháp luật về xử lý vi phạm hành chính.
+
+2. Chính phủ quy định chi tiết nội dung, trình tự, thủ tục, thẩm quyền áp dụng biện pháp bảo vệ an ninh mạng, trừ biện pháp quy định tại điểm n và điểm o khoản 1 Điều này.`},
+
+{n:6,name:'Hợp tác quốc tế về an ninh mạng',kw:['kHTC','kBCA'],
+full:`1. Hợp tác quốc tế về an ninh mạng được thực hiện trên cơ sở tôn trọng độc lập, chủ quyền, toàn vẹn lãnh thổ, không can thiệp vào công việc nội bộ của nhau, bình đẳng, cùng có lợi và tuân thủ Hiến pháp, pháp luật Việt Nam, điều ước quốc tế mà nước Cộng hòa xã hội chủ nghĩa Việt Nam là thành viên.
+
+2. Nội dung hợp tác quốc tế về an ninh mạng bao gồm:
+a) Chia sẻ thông tin, dữ liệu và cảnh báo sớm về nguy cơ, sự cố, tấn công mạng ảnh hưởng đến an ninh mạng;
+b) Xây dựng khuôn khổ pháp lý, chính sách và cơ chế hợp tác, phối hợp trong bảo vệ an ninh mạng; đàm phán, ký kết, tham gia thực hiện điều ước quốc tế, thỏa thuận quốc tế về an ninh mạng;
+c) Đào tạo, tư vấn, chia sẻ kinh nghiệm và nâng cao năng lực chuyên môn, kỹ thuật trong lĩnh vực an ninh mạng;
+d) Phòng, chống tội phạm mạng, tội phạm sử dụng công nghệ cao; phối hợp điều tra, xử lý vi phạm pháp luật, tội phạm mạng và tội phạm sử dụng công nghệ cao;
+đ) Nghiên cứu, phát triển, chuyển giao công nghệ, sản phẩm, giải pháp kỹ thuật phục vụ công tác bảo vệ an ninh mạng;
+e) Tổ chức hội nghị, hội thảo quốc tế và triển khai các chương trình, dự án hợp tác quốc tế về an ninh mạng;
+g) Hoạt động hợp tác quốc tế khác về an ninh mạng.
+
+3. Trách nhiệm hợp tác quốc tế về an ninh mạng được quy định như sau:
+a) Bộ Công an chịu trách nhiệm trước Chính phủ chủ trì, phối hợp thực hiện hợp tác quốc tế về an ninh mạng;
+b) Bộ Quốc phòng chịu trách nhiệm trước Chính phủ thực hiện hợp tác quốc tế về an ninh mạng trong phạm vi quản lý;
+c) Bộ Ngoại giao có trách nhiệm phối hợp với Bộ Công an, Bộ Quốc phòng trong hoạt động hợp tác quốc tế về an ninh mạng;
+d) Trường hợp hợp tác quốc tế về an ninh mạng có liên quan đến trách nhiệm của nhiều Bộ, ngành do Thủ tướng Chính phủ quyết định;
+đ) Hoạt động hợp tác quốc tế về an ninh mạng của Bộ, ngành khác, của địa phương phải có văn bản tham gia ý kiến của Bộ Công an trước khi triển khai.`},
+
+{n:7,name:'Các hành vi bị nghiêm cấm về an ninh mạng',kw:['kXP','kGD','kTC','kBMNN'],
+full:`1. Đăng tải, phát tán thông tin có nội dung sau trên không gian mạng:
+a) Tuyên truyền chống Nhà nước Cộng hòa xã hội chủ nghĩa Việt Nam bao gồm: tuyên truyền xuyên tạc, phỉ báng chính quyền nhân dân; chiến tranh tâm lý, kích động chiến tranh xâm lược, chia rẽ, gây thù hận giữa các dân tộc, tôn giáo và nhân dân các nước; xúc phạm dân tộc, quốc kỳ, quốc huy, quốc ca, vĩ nhân, lãnh tụ, danh nhân, anh hùng dân tộc;
+b) Xuyên tạc lịch sử, phủ nhận thành tựu cách mạng, phá hoại khối đại đoàn kết toàn dân tộc, xúc phạm tôn giáo, phân biệt đối xử về giới, phân biệt chủng tộc;
+c) Bịa đặt, vu khống, thông tin sai sự thật, xâm phạm nhân phẩm, danh dự, uy tín của người khác hoặc gây thiệt hại đến quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân khác;
+d) Sai sự thật gây hoang mang trong Nhân dân, gây thiệt hại cho hoạt động kinh tế - xã hội; thông tin bịa đặt, sai sự thật về sản phẩm, hàng hóa, tiền, trái phiếu, tín phiếu, công trái; thông tin bịa đặt, sai sự thật trong lĩnh vực tài chính, ngân hàng, thương mại điện tử, kinh doanh theo phương thức đa cấp, chứng khoán.
+
+2. Thực hiện hành vi sau trên không gian mạng:
+a) Tổ chức, hoạt động, câu kết, xúi giục, mua chuộc, lừa gạt, lôi kéo, đào tạo, huấn luyện người chống Nhà nước;
+c) Chiếm đoạt, mua bán, thu giữ, cố ý làm lộ thông tin thuộc bí mật nhà nước, bí mật công tác, bí mật kinh doanh; cố ý nghe lén, ghi âm, ghi hình trái phép; sử dụng, kinh doanh các sản phẩm mật mã dân sự không rõ nguồn gốc;
+d) Hoạt động mại dâm, tệ nạn xã hội, mua bán người; tuyên truyền văn hóa phẩm đồi trụy;
+đ) Lừa đảo chiếm đoạt tài sản; tổ chức đánh bạc, đánh bạc qua mạng Internet; trộm cắp cước viễn thông quốc tế; vi phạm bản quyền và sở hữu trí tuệ trên không gian mạng;
+e) Giả mạo trang thông tin điện tử của cơ quan, tổ chức, cá nhân; làm giả, lưu hành, trộm cắp, mua bán, thu thập, trao đổi trái phép thông tin thẻ tín dụng, tài khoản ngân hàng, tài sản mã hóa, tài sản số;
+g) Sử dụng trí tuệ nhân tạo hoặc công nghệ mới để giả mạo video, hình ảnh, giọng nói của người khác trái quy định của pháp luật; tạo lập, đăng tải, phát tán thông tin quy định tại khoản 1 Điều này;
+h) Thu thập, sử dụng, phát tán, trao đổi, chuyển nhượng, kinh doanh trái pháp luật thông tin, dữ liệu cá nhân của người khác;
+i) Hướng dẫn, xúi giục, lôi kéo, kích động người khác phạm tội hoặc thực hiện hành vi vi phạm pháp luật.
+
+3. Thực hiện tấn công mạng, khủng bố mạng, gián điệp mạng, tội phạm mạng, tội phạm sử dụng công nghệ cao; gây sự cố, tấn công, xâm nhập, chiếm quyền điều khiển, làm sai lệch, gián đoạn, ngừng trệ, tê liệt hoặc phá hoại hệ thống thông tin.
+
+4. Sản xuất, đưa vào sử dụng công cụ, phương tiện, phần mềm hoặc có hành vi cản trở, gây rối loạn hoặc phát tán thư rác, tin nhắn rác, cuộc gọi rác, chương trình tin học gây hại đến hoạt động của mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, phương tiện điện tử.
+
+5. Xâm nhập trái phép vào mạng viễn thông, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, cơ sở dữ liệu, phương tiện điện tử của người khác.
+
+6. Chống lại hoặc cản trở hoạt động của lực lượng bảo vệ an ninh mạng; tấn công, vô hiệu hóa trái pháp luật làm mất tác dụng biện pháp bảo vệ an ninh mạng.
+
+7. Lợi dụng hoặc lạm dụng hoạt động bảo vệ an ninh mạng để xâm phạm chủ quyền, lợi ích, an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân hoặc để trục lợi.
+
+8. Hành vi khác vi phạm quy định của Luật này.`},
+
+{n:8,name:'Phân loại cấp độ hệ thống thông tin',kw:['kHTTT','kBCA'],
+full:`1. Hệ thống thông tin được phân loại theo 5 cấp độ căn cứ vào mức độ tổn hại tới an ninh quốc gia, trật tự, an toàn xã hội, quyền, lợi ích hợp pháp của tổ chức, cá nhân, lợi ích công cộng khi bị sự cố hoặc có hành vi vi phạm pháp luật về an ninh mạng như sau:
+a) Cấp độ 1 có thể làm tổn hại tới quyền và lợi ích hợp pháp của tổ chức, cá nhân;
+b) Cấp độ 2 có thể làm tổn hại nghiêm trọng tới quyền và lợi ích hợp pháp của tổ chức, cá nhân hoặc làm tổn hại tới lợi ích công cộng;
+c) Cấp độ 3 có thể làm tổn hại đặc biệt nghiêm trọng tới quyền và lợi ích hợp pháp của tổ chức, cá nhân; tổn hại nghiêm trọng tới lợi ích công cộng; tổn hại hoặc tổn hại nghiêm trọng tới trật tự, an toàn xã hội hoặc làm tổn hại tới an ninh quốc gia;
+d) Cấp độ 4 có thể làm tổn hại đặc biệt nghiêm trọng tới lợi ích công cộng, trật tự, an toàn xã hội hoặc làm tổn hại nghiêm trọng tới an ninh quốc gia;
+đ) Cấp độ 5 có thể làm tổn hại đặc biệt nghiêm trọng tới an ninh quốc gia.
+
+2. Chính phủ quy định chi tiết tiêu chí xác định cấp độ hệ thống thông tin; quy định thẩm quyền, trình tự, thủ tục xác định cấp độ hệ thống thông tin và biện pháp, trách nhiệm, nghĩa vụ bảo đảm an ninh mạng theo từng cấp độ của hệ thống thông tin.`},
+
+{n:9,name:'Hệ thống thông tin quan trọng về an ninh quốc gia',kw:['kHTTT','kBCA','kANM'],
+full:`1. Hệ thống thông tin quan trọng về an ninh quốc gia là hệ thống thông tin có vai trò chiến lược, đặc biệt quan trọng đối với chính trị, quốc phòng, an ninh, ngoại giao, kinh tế, xã hội khi bị sự cố hoặc có hành vi vi phạm pháp luật về an ninh mạng có thể gây tổn hại tới an ninh quốc gia, tổn hại nghiêm trọng đến trật tự, an toàn xã hội, thuộc danh mục do Thủ tướng Chính phủ quyết định.
+
+2. Hệ thống thông tin quan trọng về an ninh quốc gia thuộc các lĩnh vực sau đây:
+a) Hệ thống thông tin quân sự, an ninh, ngoại giao, cơ yếu;
+b) Hệ thống thông tin lưu trữ, xử lý thông tin thuộc bí mật nhà nước;
+c) Hệ thống thông tin phục vụ lưu giữ, bảo quản hiện vật, tài liệu có giá trị đặc biệt quan trọng;
+d) Hệ thống thông tin phục vụ bảo quản vật liệu, chất đặc biệt nguy hiểm đối với con người, môi trường;
+đ) Hệ thống thông tin phục vụ bảo quản, chế tạo, quản lý cơ sở vật chất đặc biệt quan trọng khác liên quan đến an ninh quốc gia;
+e) Hệ thống thông tin quan trọng phục vụ hoạt động của cơ quan, tổ chức ở trung ương;
+g) Hệ thống thông tin quốc gia thuộc lĩnh vực năng lượng, tài chính, ngân hàng, viễn thông, giao thông vận tải, nông nghiệp, tài nguyên và môi trường, hóa chất, y tế, văn hóa;
+h) Hệ thống điều khiển và giám sát tự động tại công trình quan trọng liên quan đến an ninh quốc gia, mục tiêu quan trọng về an ninh quốc gia.
+
+3. Hệ thống thông tin quan trọng về an ninh quốc gia phải được thẩm định an ninh mạng, chứng nhận đủ điều kiện về an ninh mạng trước khi đưa vào vận hành, sử dụng; thường xuyên kiểm tra an ninh mạng, giám sát an ninh mạng trong quá trình sử dụng và kịp thời ứng phó, khắc phục sự cố an ninh mạng.
+
+4. Bộ Công an chủ trì, phối hợp với các Bộ, ngành, cơ quan, tổ chức, cá nhân có liên quan lập, trình Thủ tướng Chính phủ xem xét, quyết định danh mục hệ thống thông tin quan trọng về an ninh quốc gia.
+
+5. Chính phủ quy định chi tiết tiêu chí xác định hệ thống thông tin quan trọng về an ninh quốc gia.`},
+
+{n:10,name:'Nhiệm vụ, biện pháp bảo vệ an ninh mạng đối với hệ thống thông tin',kw:['kHTTT','kBCA','kANM'],
+full:`1. Nhiệm vụ bảo vệ an ninh mạng đối với hệ thống thông tin bao gồm:
+a) Xác định cấp độ an ninh mạng của hệ thống thông tin và hệ thống thông tin quan trọng về an ninh quốc gia;
+b) Đánh giá và quản lý rủi ro an ninh mạng hệ thống thông tin;
+c) Đôn đốc, giám sát, kiểm tra công tác bảo vệ an ninh mạng hệ thống thông tin;
+d) Tổ chức triển khai các biện pháp bảo vệ an ninh mạng hệ thống thông tin;
+đ) Thực hiện chế độ báo cáo theo quy định;
+e) Tổ chức tuyên truyền, nâng cao nhận thức về an ninh mạng.
+
+2. Biện pháp bảo vệ an ninh mạng đối với hệ thống thông tin bao gồm:
+a) Ban hành quy định về bảo đảm an ninh mạng trong thiết kế, xây dựng, quản lý, vận hành, sử dụng, nâng cấp, hủy bỏ hệ thống thông tin;
+b) Thẩm định an ninh mạng đối với hồ sơ, thiết kế của hệ thống thông tin;
+c) Đánh giá điều kiện an ninh mạng đối với hệ thống thông tin;
+d) Áp dụng biện pháp quản lý theo tiêu chuẩn, quy chuẩn kỹ thuật về an ninh mạng; nghiên cứu xây dựng hệ thống tường lửa quốc gia để phòng, chống nguy cơ, khắc phục sự cố an ninh mạng;
+đ) Tổ chức triển khai các biện pháp lưu trữ, sao lưu bảo vệ an ninh thông tin mạng và an ninh của các thành tố cấu thành hệ thống thông tin;
+e) Kiểm tra, giám sát việc tuân thủ quy định và đánh giá hiệu quả của các biện pháp quản lý và kỹ thuật được áp dụng;
+g) Thực hiện giám sát an ninh mạng;
+h) Ứng phó, khắc phục sự cố an ninh mạng đối với hệ thống thông tin.`},
+
+{n:11,name:'Trách nhiệm bảo vệ an ninh mạng đối với hệ thống thông tin quan trọng về an ninh quốc gia',kw:['kHTTT','kBCA','kANM'],
+full:`1. Chủ quản hệ thống thông tin quan trọng về an ninh quốc gia có trách nhiệm:
+a) Thực hiện quy định tại khoản 5 Điều 10 của Luật này;
+b) Khi thiết lập, mở rộng hoặc nâng cấp hệ thống thông tin quan trọng về an ninh quốc gia phải thực hiện kiểm tra an ninh mạng trước khi đi vào vận hành, khai thác; định kỳ hằng năm, tự kiểm tra an ninh mạng, đánh giá điều kiện an ninh mạng hệ thống thông tin quan trọng về an ninh quốc gia và thông báo kết quả kiểm tra bằng văn bản trước tháng 10 hằng năm cho lực lượng chuyên trách bảo vệ an ninh mạng có thẩm quyền;
+c) Chủ trì, phối hợp với lực lượng chuyên trách bảo vệ an ninh mạng có thẩm quyền trong việc thường xuyên thực hiện giám sát an ninh mạng; xây dựng cơ chế tự cảnh báo và tiếp nhận cảnh báo về nguy cơ đe dọa an ninh mạng; đề ra phương án ứng phó, khắc phục khẩn cấp;
+d) Xây dựng phương án ứng phó, khắc phục sự cố an ninh mạng; triển khai phương án ứng phó, khắc phục khi sự cố an ninh mạng xảy ra và kịp thời báo cáo với lực lượng chuyên trách bảo vệ an ninh mạng có thẩm quyền;
+đ) Phối hợp với lực lượng chuyên trách bảo vệ an ninh mạng trong việc thực hiện kiểm tra an ninh mạng đột xuất.
+
+2. Bộ Công an có trách nhiệm thực hiện thẩm định, đánh giá, kiểm tra, giám sát an ninh mạng và điều phối ứng phó, khắc phục sự cố an ninh mạng đối với hệ thống thông tin quan trọng về an ninh quốc gia (trừ hệ thống thông tin quân sự và hệ thống thông tin cơ yếu thuộc Ban Cơ yếu Chính phủ).
+
+3. Bộ Quốc phòng chủ trì thẩm định, đánh giá, kiểm tra, giám sát an ninh mạng và điều phối hoạt động ứng phó, khắc phục sự cố an ninh mạng đối với hệ thống thông tin quân sự.
+
+4. Ban Cơ yếu Chính phủ chủ trì tổ chức triển khai giải pháp dùng mật mã cơ yếu để bảo vệ thông tin bí mật nhà nước trong hệ thống thông tin quan trọng về an ninh quốc gia.`},
+
+{n:12,name:'Kiểm tra an ninh mạng đối với hệ thống thông tin của cơ quan, tổ chức không thuộc danh mục hệ thống thông tin quan trọng về an ninh quốc gia',kw:['kHTTT','kBCA'],
+full:`1. Kiểm tra an ninh mạng đối với hệ thống thông tin của cơ quan, tổ chức không thuộc danh mục hệ thống thông tin quan trọng về an ninh quốc gia trong trường hợp sau đây:
+a) Khi có hành vi được quy định tại các khoản 12, 13, 14 và 15 Điều 2 của Luật này;
+b) Khi có đề nghị của chủ quản hệ thống thông tin.
+
+2. Đối tượng kiểm tra an ninh mạng bao gồm:
+a) Phần cứng, phần mềm, thiết bị số được sử dụng trong hệ thống thông tin;
+b) Thông tin được lưu trữ, xử lý, truyền đưa trong hệ thống thông tin;
+c) Biện pháp bảo vệ bí mật nhà nước và phòng, chống lộ, mất bí mật nhà nước qua các kênh kỹ thuật.
+
+3. Chủ quản hệ thống thông tin có trách nhiệm thông báo cho lực lượng chuyên trách bảo vệ an ninh mạng thuộc Bộ Công an khi phát hiện hành vi vi phạm pháp luật về an ninh mạng trên hệ thống thông tin thuộc phạm vi quản lý.
+
+4. Lực lượng chuyên trách bảo vệ an ninh mạng thuộc Bộ Công an tiến hành kiểm tra an ninh mạng đối với hệ thống thông tin của cơ quan, tổ chức trong các trường hợp quy định tại khoản 1 Điều này.
+
+5. Chính phủ quy định trình tự, thủ tục kiểm tra an ninh mạng quy định tại Điều này.`},
+
+{n:13,name:'Các thông tin và hành vi sử dụng công nghệ thông tin, phương tiện điện tử xâm phạm an ninh quốc gia, trật tự, an toàn xã hội trên không gian mạng',kw:['kXP','kDL','kANM'],
+full:`1. Thông tin có nội dung tuyên truyền chống Nhà nước Cộng hòa xã hội chủ nghĩa Việt Nam, kích động gây bạo loạn, phá rối an ninh, gây rối trật tự công cộng bao gồm:
+a) Tuyên truyền thông tin, tài liệu có nội dung xuyên tạc, bôi nhọ, phỉ báng chính quyền nhân dân;
+b) Chiến tranh tâm lý, kích động chiến tranh xâm lược, chia rẽ, gây thù hận giữa các dân tộc, tôn giáo và nhân dân các nước;
+c) Xúc phạm dân tộc, quốc kỳ, quốc huy, quốc ca, vĩ nhân, lãnh tụ, danh nhân, anh hùng dân tộc;
+d) Kêu gọi, vận động, xúi giục, đe dọa, gây chia rẽ, tiến hành hoạt động vũ trang hoặc dùng bạo lực nhằm chống chính quyền nhân dân;
+đ) Kêu gọi, vận động, xúi giục, đe dọa, lôi kéo tụ tập đông người gây rối, chống người thi hành công vụ, cản trở hoạt động của cơ quan, tổ chức gây mất ổn định về an ninh, trật tự;
+e) Phản ánh sai lệch, không chính xác về đường biên giới quốc gia, chủ quyền quốc gia Việt Nam; đăng tải, truyền đưa hình ảnh sai lệch, không chính xác, không đầy đủ về bản đồ Việt Nam hoặc thể hiện sai chủ quyền quốc gia Việt Nam.
+
+2. Thông tin có nội dung phá hoại chính sách đoàn kết, chính sách kinh tế - xã hội nước Cộng hòa xã hội chủ nghĩa Việt Nam bao gồm các hành vi kích động, gây thù hận, chia rẽ dân tộc, tôn giáo, gây mâu thuẫn xã hội, phá hoại chính sách kinh tế - xã hội.
+
+3. Thông tin có nội dung xâm phạm quyền, lợi ích hợp pháp của tổ chức, cá nhân bao gồm: lan truyền thông tin xuyên tạc, bịa đặt, sai sự thật; kêu gọi tẩy chay sản phẩm, dịch vụ; mạo danh, giả mạo thông tin; xúc phạm danh dự, uy tín, nhân phẩm của người khác.
+
+4. Các hành vi thực hiện trên không gian mạng bằng việc sử dụng công nghệ thông tin, phương tiện điện tử xâm phạm an ninh quốc gia và trật tự, an toàn xã hội.`},
+
+{n:14,name:'Phòng ngừa, xử lý thông tin và hành vi sử dụng công nghệ thông tin, phương tiện điện tử xâm phạm an ninh quốc gia, trật tự, an toàn xã hội trên không gian mạng',kw:['kXP','kBCA','kDNMX'],
+full:`1. Chủ quản hệ thống thông tin, doanh nghiệp trong nước và nước ngoài cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ gia tăng trên không gian mạng có trách nhiệm triển khai biện pháp quản lý, kỹ thuật để phòng ngừa, phát hiện, ngăn chặn, gỡ bỏ thông tin có nội dung quy định tại các khoản 1, 2 và 3 Điều 13 của Luật này trên hệ thống thông tin thuộc phạm vi quản lý hoặc khi có yêu cầu của lực lượng chuyên trách bảo vệ an ninh mạng.
+
+2. Lực lượng chuyên trách bảo vệ an ninh mạng và cơ quan có thẩm quyền áp dụng biện pháp quy định tại khoản 1 Điều 5 của Luật này để xử lý thông tin trên không gian mạng và đấu tranh, phòng, chống hành vi sử dụng công nghệ thông tin, phương tiện điện tử xâm phạm an ninh quốc gia, trật tự, an toàn xã hội trên không gian mạng.
+
+3. Doanh nghiệp trong nước và ngoài nước cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ gia tăng trên không gian mạng và chủ quản hệ thống thông tin phối hợp với lực lượng chuyên trách bảo vệ an ninh mạng xử lý thông tin trên không gian mạng và phòng, chống hành vi vi phạm.
+
+4. Tổ chức, cá nhân soạn thảo, đăng tải, phát tán thông tin trên không gian mạng có nội dung quy định tại các khoản 1, 2 và 3 Điều 13 của Luật này phải gỡ bỏ thông tin khi có yêu cầu của lực lượng chuyên trách bảo vệ an ninh mạng và chịu trách nhiệm theo quy định của pháp luật.
+
+5. Chính phủ quy định chi tiết Điều này.`},
+
+{n:15,name:'Phòng, chống gián điệp mạng; bảo vệ thông tin thuộc bí mật nhà nước, bí mật công tác, bí mật kinh doanh, bí mật cá nhân, bí mật gia đình và đời sống riêng tư trên không gian mạng',kw:['kGD','kBMNN','kBCA'],
+full:`1. Hành vi gián điệp mạng; xâm phạm bí mật nhà nước, bí mật công tác, bí mật kinh doanh, bí mật cá nhân, bí mật gia đình và đời sống riêng tư trên không gian mạng bao gồm:
+a) Chiếm đoạt, mua bán, thu giữ, cố ý làm lộ thông tin thuộc bí mật nhà nước, bí mật công tác, bí mật kinh doanh; chiếm đoạt, mua bán, thu giữ, cố ý làm lộ bí mật cá nhân, bí mật gia đình và đời sống riêng tư gây ảnh hưởng đến danh dự, uy tín, nhân phẩm, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân;
+b) Cố ý xóa, làm hư hỏng, thất lạc, thay đổi thông tin thuộc bí mật nhà nước, bí mật công tác, bí mật kinh doanh, bí mật cá nhân, bí mật gia đình và đời sống riêng tư được truyền đưa, lưu trữ trên không gian mạng;
+c) Cố ý thay đổi, hủy bỏ hoặc làm vô hiệu hóa biện pháp kỹ thuật được xây dựng, áp dụng để bảo vệ thông tin thuộc bí mật nhà nước, bí mật công tác, bí mật kinh doanh, bí mật cá nhân, bí mật gia đình và đời sống riêng tư;
+d) Đưa lên không gian mạng những thông tin thuộc bí mật nhà nước, bí mật công tác, bí mật kinh doanh, bí mật cá nhân, bí mật gia đình và đời sống riêng tư trái quy định của pháp luật;
+đ) Cố ý nghe, ghi âm, ghi hình trái phép các cuộc đàm thoại;
+e) Hành vi khác cố ý xâm phạm bí mật nhà nước, bí mật công tác, bí mật kinh doanh, bí mật cá nhân, bí mật gia đình và đời sống riêng tư.
+
+2. Chủ quản hệ thống thông tin có trách nhiệm kiểm tra an ninh mạng nhằm phát hiện, loại bỏ mã độc, phần cứng độc hại; phát hiện, ngăn chặn và xử lý các hoạt động xâm nhập bất hợp pháp.
+
+3. Cơ quan, tổ chức soạn thảo, lưu trữ thông tin, tài liệu thuộc bí mật nhà nước có trách nhiệm bảo vệ bí mật nhà nước được soạn thảo, lưu giữ trên máy tính, thiết bị khác hoặc trao đổi trên không gian mạng.
+
+4. Bộ Công an có trách nhiệm kiểm tra an ninh mạng đối với hệ thống thông tin quan trọng về an ninh quốc gia; giám sát an ninh mạng; phát hiện, xử lý các hành vi thu thập trái phép thông tin thuộc bí mật nhà nước; tổ chức đào tạo, tập huấn nâng cao nhận thức và kiến thức về bảo vệ bí mật nhà nước trên không gian mạng.`},
+
+{n:16,name:'Phòng, chống xâm hại trẻ em trên không gian mạng',kw:['kTE','kDNMX'],
+full:`1. Trẻ em có quyền được tiếp cận thông tin, tham gia hoạt động xã hội, vui chơi, giải trí, bảo vệ bí mật cá nhân, đời sống riêng tư và các quyền khác trên không gian mạng theo quy định của pháp luật.
+
+2. Trẻ em sử dụng dịch vụ giá trị gia tăng trên không gian mạng thì cha, mẹ hoặc người giám hộ theo quy định của pháp luật về dân sự đăng ký tài khoản bằng thông tin của cha, mẹ hoặc người giám hộ và có trách nhiệm giám sát, quản lý nội dung trẻ em truy cập, đăng tải và chia sẻ thông tin trên các nền tảng dịch vụ đó.
+
+3. Chủ quản hệ thống thông tin, doanh nghiệp cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ giá trị gia tăng trên không gian mạng có các trách nhiệm: kiểm soát nội dung; ngăn chặn việc chia sẻ và xóa bỏ thông tin có nội dung gây nguy hại cho trẻ em; xây dựng, triển khai các hệ thống kỹ thuật hỗ trợ ngăn chặn nội dung xâm hại trẻ em; phối hợp với các cơ quan, tổ chức, doanh nghiệp thực hiện ngăn chặn các nguồn phát tán thông tin xâm hại trẻ em.
+
+4. Cơ quan, tổ chức, cá nhân tham gia hoạt động trên không gian mạng có trách nhiệm phối hợp với cơ quan có thẩm quyền trong bảo đảm quyền của trẻ em trên không gian mạng.
+
+5. Cơ quan, tổ chức, cha mẹ, người giám hộ, giáo viên, người chăm sóc trẻ em và cá nhân khác liên quan có trách nhiệm bảo đảm quyền của trẻ em, bảo vệ trẻ em khi tham gia không gian mạng theo quy định của pháp luật về trẻ em và quy định của Luật này.
+
+6. Lực lượng chuyên trách bảo vệ an ninh mạng và các cơ quan chức năng có trách nhiệm áp dụng biện pháp để phòng ngừa, phát hiện, ngăn chặn, xử lý nghiêm hành vi sử dụng không gian mạng gây nguy hại cho trẻ em, xâm hại trẻ em, xâm phạm quyền trẻ em.`},
+
+{n:17,name:'Phòng ngừa, phát hiện, ngăn chặn và xử lý phần mềm độc hại',kw:['kPM','kHTTT','kBCA'],
+full:`1. Cơ quan, tổ chức, cá nhân có trách nhiệm chủ động phòng ngừa, phát hiện, ngăn chặn phần mềm độc hại và thực hiện theo hướng dẫn, yêu cầu của cơ quan nhà nước có thẩm quyền.
+
+2. Chủ quản hệ thống thông tin quan trọng về an ninh quốc gia triển khai hệ thống kỹ thuật nhằm phòng ngừa, phát hiện, ngăn chặn và xử lý kịp thời phần mềm độc hại.
+
+3. Tổ chức, doanh nghiệp cung cấp dịch vụ thư điện tử, truyền đưa, lưu trữ thông tin phải có hệ thống lọc phần mềm độc hại trong quá trình gửi, nhận, lưu trữ thông tin trên hệ thống của mình và báo cáo cơ quan nhà nước có thẩm quyền theo quy định của pháp luật.
+
+4. Doanh nghiệp cung cấp dịch vụ Internet có biện pháp quản lý, phòng ngừa, phát hiện, ngăn chặn phát tán phần mềm độc hại và xử lý theo yêu cầu của cơ quan nhà nước có thẩm quyền.
+
+5. Bộ Công an chủ trì, phối hợp với Bộ Quốc phòng và Bộ, ngành có liên quan tổ chức phòng ngừa, phát hiện, ngăn chặn và xử lý phần mềm độc hại gây tổn hại tới an ninh quốc gia.`},
+
+{n:18,name:'Phòng, chống tấn công mạng',kw:['kTC','kHTTT','kBCA'],
+full:`1. Hành vi tấn công mạng và hành vi có liên quan đến tấn công mạng bao gồm:
+a) Phát tán chương trình tin học gây hại cho mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, cơ sở dữ liệu, phương tiện điện tử;
+b) Gây cản trở, rối loạn, làm tê liệt, gián đoạn, ngừng trệ hoạt động, ngăn chặn trái phép việc truyền đưa dữ liệu của không gian mạng;
+c) Xâm nhập, làm tổn hại, chiếm đoạt dữ liệu được lưu trữ, truyền đưa qua mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, cơ sở dữ liệu, phương tiện điện tử;
+d) Xâm nhập, tạo ra hoặc khai thác điểm yếu, lỗ hổng bảo mật và dịch vụ hệ thống để chiếm đoạt thông tin, thu lợi bất chính;
+đ) Sản xuất, mua bán, trao đổi, tặng cho công cụ, thiết bị, phần mềm có tính năng gây hại để sử dụng vào mục đích trái pháp luật;
+e) Hành vi khác gây ảnh hưởng đến hoạt động bình thường của mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin.
+
+2. Chủ quản hệ thống thông tin có trách nhiệm áp dụng biện pháp kỹ thuật để phòng ngừa, ngăn chặn hành vi quy định tại các điểm a, b, c, d và e khoản 1 Điều này đối với hệ thống thông tin thuộc phạm vi quản lý.
+
+3. Khi xảy ra tấn công mạng xâm phạm hoặc đe dọa xâm phạm chủ quyền, lợi ích, an ninh quốc gia, gây tổn hại nghiêm trọng trật tự, an toàn xã hội, lực lượng chuyên trách bảo vệ an ninh mạng chủ trì, phối hợp với chủ quản hệ thống thông tin và tổ chức, cá nhân có liên quan áp dụng biện pháp xác định nguồn gốc tấn công mạng, thu thập chứng cứ; yêu cầu doanh nghiệp cung cấp dịch vụ trên mạng chặn lọc thông tin để ngăn chặn, loại trừ hành vi tấn công mạng.
+
+4. Trách nhiệm phòng, chống tấn công mạng: Bộ Công an chủ trì trên phạm vi cả nước (trừ hệ thống thông tin quân sự và cơ yếu); Bộ Quốc phòng chủ trì đối với hệ thống thông tin quân sự; Ban Cơ yếu Chính phủ chủ trì đối với hệ thống thông tin cơ yếu.`},
+
+{n:19,name:'Phòng, chống khủng bố mạng',kw:['kTC','kBCA'],
+full:`1. Cơ quan nhà nước có thẩm quyền có trách nhiệm áp dụng biện pháp theo quy định của Luật này và pháp luật về phòng, chống khủng bố để xử lý khủng bố mạng.
+
+2. Chủ quản hệ thống thông tin thường xuyên rà soát, kiểm tra hệ thống thông tin thuộc phạm vi quản lý nhằm loại trừ nguy cơ khủng bố mạng.
+
+3. Khi phát hiện dấu hiệu, hành vi khủng bố mạng, cơ quan, tổ chức, cá nhân phải kịp thời báo cho lực lượng bảo vệ an ninh mạng. Cơ quan tiếp nhận tin báo có trách nhiệm tiếp nhận đầy đủ tin báo về khủng bố mạng và kịp thời thông báo cho lực lượng chuyên trách bảo vệ an ninh mạng.
+
+4. Bộ Công an chủ trì, phối hợp với Bộ, ngành có liên quan triển khai công tác phòng, chống khủng bố mạng, áp dụng biện pháp vô hiệu hóa nguồn khủng bố mạng, xử lý khủng bố mạng, hạn chế đến mức thấp nhất hậu quả xảy ra đối với hệ thống thông tin (trừ hệ thống thông tin quân sự và hệ thống thông tin cơ yếu thuộc Ban Cơ yếu Chính phủ).`},
+
+{n:20,name:'Phòng ngừa, xử lý tình huống nguy hiểm về an ninh mạng',kw:['kANM','kHTTT','kBCA'],
+full:`1. Tình huống nguy hiểm về an ninh mạng bao gồm:
+a) Xuất hiện thông tin kích động trên không gian mạng có nguy cơ xảy ra bạo loạn, phá rối an ninh, khủng bố;
+b) Tấn công vào hệ thống thông tin quan trọng về an ninh quốc gia;
+c) Tấn công nhiều hệ thống thông tin trên quy mô lớn, cường độ cao;
+d) Tấn công mạng nhằm phá hủy công trình quan trọng về an ninh quốc gia, mục tiêu quan trọng về an ninh quốc gia;
+đ) Tấn công mạng xâm phạm nghiêm trọng chủ quyền, lợi ích, an ninh quốc gia; gây tổn hại đặc biệt nghiêm trọng trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân.
+
+2. Trách nhiệm phòng ngừa tình huống nguy hiểm về an ninh mạng: Lực lượng chuyên trách phối hợp với chủ quản hệ thống thông tin quan trọng về an ninh quốc gia triển khai các giải pháp kỹ thuật, nghiệp vụ để phòng ngừa, phát hiện, xử lý tình huống nguy hiểm.
+
+3. Biện pháp xử lý tình huống nguy hiểm về an ninh mạng bao gồm: Triển khai ngay phương án phòng ngừa, ứng phó khẩn cấp; thông báo đến cơ quan, tổ chức, cá nhân có liên quan; thu thập thông tin liên quan; theo dõi, giám sát liên tục; phân tích, đánh giá thông tin, dự báo khả năng, phạm vi ảnh hưởng và mức độ thiệt hại; ngừng cung cấp thông tin mạng tại khu vực cụ thể hoặc ngắt cổng kết nối mạng quốc tế; bố trí lực lượng, phương tiện ngăn chặn, loại bỏ tình huống nguy hiểm; biện pháp khác theo quy định của Luật An ninh quốc gia.
+
+4. Thủ tướng Chính phủ xem xét, quyết định hoặc ủy quyền cho Bộ trưởng Bộ Công an xem xét, quyết định, xử lý tình huống nguy hiểm về an ninh mạng trong phạm vi cả nước hoặc từng địa phương hoặc đối với một mục tiêu cụ thể.`},
+
+{n:21,name:'Đấu tranh bảo vệ an ninh mạng',kw:['kANM','kBCA','kTC'],
+full:`1. Đấu tranh bảo vệ an ninh mạng là hoạt động có tổ chức do lực lượng chuyên trách bảo vệ an ninh mạng thực hiện trên không gian mạng nhằm bảo vệ an ninh quốc gia và bảo đảm trật tự, an toàn xã hội.
+
+2. Nội dung đấu tranh bảo vệ an ninh mạng bao gồm:
+a) Giám sát thông tin mạng và phòng ngừa, đấu tranh, xử lý tổ chức, cá nhân có hoạt động sử dụng không gian mạng xâm phạm an ninh quốc gia, trật tự, an toàn xã hội;
+b) Sử dụng giải pháp kỹ thuật để ngăn chặn thông tin vi phạm pháp luật;
+c) Phòng, chống tấn công và bảo vệ hoạt động ổn định của hệ thống thông tin quan trọng về an ninh quốc gia;
+d) Làm tê liệt hoặc hạn chế hoạt động sử dụng không gian mạng nhằm gây phương hại an ninh quốc gia hoặc gây tổn hại đặc biệt nghiêm trọng trật tự, an toàn xã hội;
+đ) Chủ động tấn công vô hiệu hóa mục tiêu trên không gian mạng nhằm bảo vệ an ninh quốc gia và bảo đảm trật tự, an toàn xã hội.
+
+3. Bộ Công an chủ trì, phối hợp với Bộ, ngành có liên quan thực hiện đấu tranh bảo vệ an ninh mạng.`},
+
+{n:22,name:'Ngăn chặn xung đột thông tin trên không gian mạng',kw:['kANM','kDNMX'],
+full:`1. Xung đột thông tin là việc hai hoặc nhiều tổ chức trong nước và nước ngoài sử dụng biện pháp công nghệ, kỹ thuật thông tin gây tổn hại đến thông tin, hệ thống thông tin trên không gian mạng làm ảnh hưởng đến an ninh quốc gia, trật tự, an toàn xã hội.
+
+2. Ngăn chặn xung đột thông tin trên không gian mạng là việc thực hiện các biện pháp công nghệ, kỹ thuật để giám sát, phát hiện, cảnh báo, xác định nguồn gốc, chặn lọc, gỡ bỏ, phản bác, định hướng dư luận, khắc phục, xử phạt và các biện pháp khác loại trừ xung đột thông tin trên không gian mạng.
+
+3. Tổ chức, cá nhân trong phạm vi nhiệm vụ, quyền hạn của mình có trách nhiệm: ngăn chặn xung đột thông tin trên không gian mạng từ hệ thống thông tin của mình; ngăn chặn hoạt động của tổ chức, cá nhân trong nước và nước ngoài có mục đích tạo xung đột thông tin trên không gian mạng; loại trừ việc tổ chức thực hiện đăng tải, phát tán thông tin trên không gian mạng có ảnh hưởng nghiêm trọng đến quốc phòng, an ninh quốc gia, trật tự, an toàn xã hội.
+
+4. Chính phủ quy định chi tiết Điều này.`},
+
+{n:23,name:'Triển khai hoạt động bảo vệ an ninh mạng trong cơ quan nhà nước, tổ chức chính trị, tổ chức chính trị - xã hội ở trung ương và địa phương',kw:['kHTTT','kANM','kBCA'],
+full:`1. Nội dung triển khai hoạt động bảo vệ an ninh mạng bao gồm:
+a) Xây dựng, hoàn thiện quy định, quy chế sử dụng mạng máy tính nội bộ, mạng máy tính có kết nối mạng Internet; phương án bảo đảm an ninh mạng đối với hệ thống thông tin; phương án ứng phó, khắc phục sự cố an ninh mạng;
+b) Ứng dụng, triển khai phương án, biện pháp, công nghệ bảo vệ an ninh mạng đối với hệ thống thông tin và thông tin, tài liệu được lưu trữ, soạn thảo, truyền đưa trên hệ thống thông tin thuộc phạm vi quản lý;
+c) Tổ chức bồi dưỡng kiến thức về an ninh mạng cho cán bộ, công chức, viên chức, người lao động; nâng cao năng lực bảo vệ an ninh mạng cho lực lượng bảo vệ an ninh mạng;
+d) Bảo vệ an ninh mạng trong hoạt động cung cấp dịch vụ công trên không gian mạng, cung cấp, trao đổi, thu thập thông tin với cơ quan, tổ chức, cá nhân;
+đ) Đầu tư, xây dựng hạ tầng cơ sở vật chất phù hợp với điều kiện bảo đảm triển khai hoạt động bảo vệ an ninh mạng đối với hệ thống thông tin;
+e) Kiểm tra an ninh mạng đối với hệ thống thông tin; phòng, chống hành vi vi phạm pháp luật về an ninh mạng; ứng phó, khắc phục sự cố an ninh mạng.
+
+2. Người đứng đầu cơ quan, tổ chức có trách nhiệm triển khai hoạt động bảo vệ an ninh mạng thuộc quyền quản lý.`},
+
+{n:24,name:'Bảo vệ an ninh mạng đối với cơ sở hạ tầng không gian mạng quốc gia, cổng kết nối mạng quốc tế',kw:['kANM','kHTTT','kDNMX'],
+full:`1. Bảo vệ an ninh mạng đối với cơ sở hạ tầng không gian mạng quốc gia, cổng kết nối mạng quốc tế phải bảo đảm kết hợp chặt chẽ giữa yêu cầu bảo vệ an ninh mạng với yêu cầu phát triển kinh tế - xã hội; khuyến khích cổng kết nối quốc tế đặt trên lãnh thổ Việt Nam; khuyến khích tổ chức, cá nhân tham gia đầu tư xây dựng cơ sở hạ tầng không gian mạng quốc gia.
+
+2. Cơ quan, tổ chức, cá nhân quản lý, khai thác cơ sở hạ tầng không gian mạng quốc gia, cổng kết nối mạng quốc tế có trách nhiệm:
+a) Bảo vệ an ninh mạng thuộc quyền quản lý; chịu sự quản lý, thanh tra, kiểm tra và thực hiện các yêu cầu về bảo vệ an ninh mạng của cơ quan nhà nước có thẩm quyền;
+b) Tạo điều kiện, thực hiện các biện pháp kỹ thuật, nghiệp vụ cần thiết để cơ quan nhà nước có thẩm quyền thực hiện nhiệm vụ bảo vệ an ninh mạng khi có đề nghị.`},
+
+{n:25,name:'Bảo đảm an ninh thông tin mạng',kw:['kDNMX','kDL','kBCA'],
+full:`1. Trang thông tin điện tử, cổng thông tin điện tử hoặc chuyên trang trên mạng xã hội của cơ quan, tổ chức, cá nhân không được cung cấp, đăng tải, truyền đưa thông tin có nội dung quy định tại các khoản 1, 2, 3 Điều 13 và khoản 1 Điều 15 của Luật này và thông tin khác có nội dung xâm phạm an ninh quốc gia.
+
+2. Doanh nghiệp trong nước và nước ngoài khi cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ gia tăng trên không gian mạng tại Việt Nam có trách nhiệm:
+a) Xác thực thông tin khi người dùng đăng ký tài khoản số; bảo mật thông tin, tài khoản của người dùng; cung cấp thông tin người dùng cho lực lượng chuyên trách bảo vệ an ninh mạng thuộc Bộ Công an chậm nhất là 24 giờ kể từ thời điểm có yêu cầu bằng văn bản; trường hợp khẩn cấp đe dọa xâm hại an ninh quốc gia, đe dọa tính mạng con người, yêu cầu cung cấp thông tin chậm nhất là 03 giờ;
+b) Ngăn chặn việc chia sẻ thông tin, xóa bỏ thông tin, gỡ bỏ dịch vụ, ứng dụng có nội dung vi phạm quy định của Luật này chậm nhất là 24 giờ kể từ thời điểm có yêu cầu của lực lượng chuyên trách bảo vệ an ninh mạng thuộc Bộ Công an; trường hợp khẩn cấp đe dọa xâm hại an ninh quốc gia, yêu cầu ngăn chặn, xóa bỏ thông tin chậm nhất là 06 giờ;
+c) Không cung cấp hoặc ngừng cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ gia tăng cho tổ chức, cá nhân đăng tải trên không gian mạng đối với thông tin có nội dung vi phạm;
+d) Lưu trữ thông tin cá nhân của người sử dụng dịch vụ, dữ liệu do người sử dụng dịch vụ tạo ra, bao gồm: tên tài khoản, thời gian sử dụng dịch vụ, thông tin thanh toán phí sử dụng dịch vụ, địa chỉ IP truy cập và các dữ liệu liên quan khác trong thời gian theo quy định của pháp luật.
+
+3. Doanh nghiệp trong nước và ngoài nước cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ gia tăng trên không gian mạng tại Việt Nam có hoạt động thu thập, khai thác, phân tích, xử lý dữ liệu về thông tin cá nhân, dữ liệu về mối quan hệ của người sử dụng dịch vụ, dữ liệu do người sử dụng dịch vụ tại Việt Nam tạo ra phải áp dụng các biện pháp bảo vệ dữ liệu theo quy định của pháp luật và lưu trữ dữ liệu này tại Việt Nam trong thời gian theo quy định của Chính phủ. Doanh nghiệp ngoài nước quy định tại khoản này phải đặt chi nhánh hoặc văn phòng đại diện tại Việt Nam.
+
+4. Chính phủ quy định chi tiết khoản 2 và khoản 3 Điều này.`},
+
+{n:26,name:'Bảo đảm an ninh dữ liệu',kw:['kDL','kANM','kHTTT'],
+full:`1. Bảo đảm an ninh dữ liệu là tổng thể các biện pháp kỹ thuật, tổ chức và pháp lý nhằm bảo vệ dữ liệu, phòng, chống xâm phạm an ninh dữ liệu.
+
+2. Nội dung bảo đảm an ninh dữ liệu bao gồm:
+a) Xây dựng chính sách, thiết lập quy trình về bảo đảm an ninh dữ liệu;
+b) Áp dụng biện pháp, tiêu chuẩn, quy chuẩn kỹ thuật theo quy định của pháp luật về an ninh mạng;
+c) Sử dụng mật mã cơ yếu, mật mã dân sự để bảo đảm an ninh dữ liệu;
+d) Triển khai cơ chế kiểm soát chặt chẽ nhân sự trực tiếp tham gia xử lý dữ liệu;
+đ) Kiểm tra, đánh giá rủi ro định kỳ nhằm phát hiện, ngăn chặn và xử lý kịp thời các nguy cơ đe dọa an ninh dữ liệu;
+e) Kiểm tra, đánh giá việc chuyển dữ liệu xuyên biên giới; điều kiện bảo đảm an ninh dữ liệu trong hệ thống thông tin quan trọng về an ninh quốc gia, các cơ sở dữ liệu, trung tâm dữ liệu, hệ thống lưu trữ dữ liệu;
+g) Các nội dung khác theo quy định của pháp luật.
+
+3. Chính phủ quy định chi tiết khoản 2 Điều này; quy định trách nhiệm bảo đảm an ninh dữ liệu.`},
+
+{n:27,name:'Tiêu chuẩn, quy chuẩn kỹ thuật an ninh mạng',kw:['kSP','kBCA'],
+full:`1. Tiêu chuẩn an ninh mạng, quy chuẩn kỹ thuật an ninh mạng được áp dụng đối với hệ thống thông tin, phần cứng, phần mềm, hệ thống quản lý, vận hành an ninh mạng, sản phẩm, dịch vụ an ninh mạng, công nghệ thông tin và thiết bị kết nối mạng.
+
+2. Việc chứng nhận hợp quy về an ninh mạng, công bố hợp quy về an ninh mạng, chứng nhận hợp chuẩn về an ninh mạng, công bố hợp chuẩn về an ninh mạng thực hiện theo quy định của pháp luật về tiêu chuẩn và quy chuẩn kỹ thuật.
+
+3. Việc đánh giá hợp chuẩn, hợp quy về an ninh mạng phục vụ hệ thống thông tin quan trọng về an ninh quốc gia và phục vụ hoạt động quản lý nhà nước về an ninh mạng được thực hiện tại tổ chức chứng nhận hợp chuẩn, hợp quy do Bộ trưởng Bộ Công an chỉ định.
+
+4. Bộ Công an có trách nhiệm: xây dựng dự thảo tiêu chuẩn quốc gia về an ninh mạng; quản lý chất lượng sản phẩm, dịch vụ an ninh mạng (trừ sản phẩm, dịch vụ mật mã dân sự); đăng ký, chỉ định và quản lý hoạt động của tổ chức chứng nhận sự phù hợp về an ninh mạng.
+
+5. Bộ trưởng Bộ Công an ban hành quy chuẩn kỹ thuật quốc gia về an ninh mạng.
+
+6. Bộ Quốc phòng đăng ký, chỉ định và quản lý hoạt động của tổ chức chứng nhận sự phù hợp về an ninh mạng trong lĩnh vực quân sự.`},
+
+{n:28,name:'Sản phẩm, dịch vụ an ninh mạng',kw:['kSP'],
+full:`1. Sản phẩm an ninh mạng bao gồm:
+a) Sản phẩm mật mã dân sự;
+b) Sản phẩm kiểm tra, đánh giá an ninh mạng;
+c) Sản phẩm giám sát an ninh mạng;
+d) Sản phẩm chống tấn công, xâm nhập;
+đ) Sản phẩm an ninh mạng khác.
+
+2. Dịch vụ an ninh mạng bao gồm:
+a) Dịch vụ kiểm tra, đánh giá an ninh mạng;
+b) Dịch vụ bảo mật thông tin không sử dụng mật mã dân sự;
+c) Dịch vụ mật mã dân sự;
+d) Dịch vụ tư vấn an ninh mạng;
+đ) Dịch vụ giám sát an ninh mạng;
+e) Dịch vụ ứng cứu sự cố an ninh mạng;
+g) Dịch vụ khôi phục dữ liệu;
+h) Dịch vụ phòng ngừa, chống tấn công mạng;
+i) Dịch vụ an ninh mạng khác.
+
+3. Chính phủ quy định chi tiết Điều này.`},
+
+{n:29,name:'Kinh doanh sản phẩm, dịch vụ an ninh mạng',kw:['kSP','kBCA'],
+full:`1. Doanh nghiệp kinh doanh sản phẩm, dịch vụ an ninh mạng phải có giấy phép kinh doanh sản phẩm, dịch vụ an ninh mạng.
+
+2. Doanh nghiệp kinh doanh sản phẩm, dịch vụ an ninh mạng có trách nhiệm:
+a) Thực hiện đúng giấy phép kinh doanh sản phẩm, dịch vụ an ninh mạng; tuân thủ quy định của pháp luật về an ninh mạng;
+b) Bảo đảm về chất lượng sản phẩm, dịch vụ an ninh mạng đúng với tiêu chuẩn công bố áp dụng, quy chuẩn kỹ thuật tương ứng theo quy định trước khi lưu thông trên thị trường;
+c) Lập, lưu giữ và bảo mật thông tin của khách hàng, quản lý hồ sơ, tài liệu về giải pháp kỹ thuật, công nghệ của sản phẩm, hoạt động cung cấp dịch vụ theo quy định của pháp luật;
+d) Từ chối cung cấp sản phẩm, dịch vụ an ninh mạng khi phát hiện tổ chức, cá nhân vi phạm pháp luật về sử dụng sản phẩm, dịch vụ an ninh mạng;
+đ) Phối hợp, tạo điều kiện, thực hiện yêu cầu của lực lượng chuyên trách bảo vệ an ninh mạng để thực hiện các biện pháp bảo vệ an ninh mạng.
+
+3. Chính phủ quy định việc cấp, tạm đình chỉ, thu hồi giấy phép kinh doanh sản phẩm, dịch vụ an ninh mạng; quy định việc nhập khẩu, xuất khẩu sản phẩm an ninh mạng.`},
+
+{n:30,name:'Lực lượng bảo vệ an ninh mạng',kw:['kLL','kBCA'],
+full:`1. Lực lượng bảo vệ an ninh mạng bao gồm:
+a) Lực lượng chuyên trách bảo vệ an ninh mạng được bố trí tại Bộ Công an, Bộ Quốc phòng;
+b) Lực lượng bảo vệ an ninh mạng được bố trí tại Bộ, ngành, Ủy ban nhân dân cấp tỉnh, cơ quan, tổ chức quản lý trực tiếp hệ thống thông tin quan trọng về an ninh quốc gia;
+c) Tổ chức, cá nhân được huy động tham gia bảo vệ an ninh mạng.
+
+2. Chính phủ quy định chi tiết khoản 1 Điều này; quy định việc phối hợp giữa các lực lượng bảo vệ an ninh mạng.`},
+
+{n:31,name:'Bảo đảm nguồn nhân lực bảo vệ an ninh mạng',kw:['kNL','kBCA'],
+full:`1. Nhà nước đào tạo, phát triển nguồn nhân lực bảo vệ an ninh mạng bảo đảm số lượng, chất lượng, đáp ứng yêu cầu năng lực bảo vệ an ninh mạng quốc gia.
+
+2. Lực lượng chuyên trách bảo vệ an ninh mạng được ưu tiên bố trí nhân lực theo vị trí việc làm, tiêu chuẩn chức danh, được áp dụng cơ chế tuyển dụng, xét tuyển, sử dụng, đào tạo, bồi dưỡng, đãi ngộ và thu hút nhân tài theo chính sách đặc thù do Chính phủ quy định.
+
+3. Chủ quản hệ thống thông tin quan trọng về an ninh quốc gia có trách nhiệm:
+a) Bố trí bộ phận hoặc nhân sự chuyên trách phù hợp với cấp độ bảo vệ của hệ thống;
+b) Bảo đảm người thực hiện nhiệm vụ an ninh mạng đáp ứng tiêu chuẩn chuyên môn, nghiệp vụ;
+c) Thường xuyên bồi dưỡng, cập nhật kỹ năng cho đội ngũ nhân sự liên quan đến vận hành, giám sát, ứng cứu và xử lý sự cố mạng.`},
+
+{n:32,name:'Tuyển chọn, đào tạo, phát triển lực lượng bảo vệ an ninh mạng',kw:['kNL'],
+full:`1. Công dân Việt Nam có đủ tiêu chuẩn về phẩm chất đạo đức, sức khỏe, trình độ, kiến thức về an ninh mạng, công nghệ thông tin, có nguyện vọng thì có thể được tuyển chọn vào lực lượng bảo vệ an ninh mạng.
+
+2. Ưu tiên đào tạo, phát triển lực lượng bảo vệ an ninh mạng có chất lượng cao; phát hiện tài năng trẻ về an ninh mạng, công nghệ thông tin để định hướng học tập, tuyển chọn, thu hút và sử dụng trong lĩnh vực an ninh mạng.
+
+3. Ưu tiên phát triển cơ sở đào tạo an ninh mạng đạt tiêu chuẩn quốc tế; khuyến khích liên kết, tạo cơ hội hợp tác về an ninh mạng giữa khu vực nhà nước và khu vực tư nhân, trong nước và nước ngoài.`},
+
+{n:33,name:'Giáo dục, bồi dưỡng kiến thức, nghiệp vụ an ninh mạng',kw:['kNL'],
+full:`1. Nội dung giáo dục, bồi dưỡng kiến thức an ninh mạng được đưa vào môn học giáo dục quốc phòng và an ninh trong nhà trường, chương trình bồi dưỡng kiến thức quốc phòng và an ninh theo quy định của Luật Giáo dục quốc phòng và an ninh.
+
+2. Bộ Công an chủ trì, phối hợp với Bộ, ngành có liên quan tổ chức bồi dưỡng nghiệp vụ an ninh mạng cho lực lượng bảo vệ an ninh mạng và công chức, viên chức, người lao động tham gia bảo vệ an ninh mạng.
+
+Bộ Quốc phòng, Ban Cơ yếu Chính phủ tổ chức bồi dưỡng nghiệp vụ an ninh mạng cho đối tượng thuộc phạm vi quản lý.`},
+
+{n:34,name:'Tập huấn kiến thức, kỹ năng chuyên sâu về an ninh mạng',kw:['kNL','kBCA'],
+full:`1. Lực lượng bảo vệ an ninh mạng quy định tại điểm a và điểm b khoản 1 Điều 30 của Luật này phải đáp ứng yêu cầu kiến thức, kỹ năng chuyên sâu về an ninh mạng.
+
+2. Người trực tiếp quản trị, vận hành hệ thống thông tin Cấp độ 3, Cấp độ 4, Cấp độ 5 trong cơ quan, tổ chức, doanh nghiệp Nhà nước phải được tập huấn kiến thức, kỹ năng chuyên sâu về an ninh mạng và được cấp chứng nhận, trừ các cá nhân đã được đào tạo chuyên ngành an ninh mạng.
+
+3. Bộ Công an chủ trì, phối hợp với các Bộ, ngành liên quan tổ chức tập huấn về kiến thức, kỹ năng chuyên sâu về an ninh mạng.
+
+4. Bộ Quốc phòng, Ban Cơ yếu Chính phủ tổ chức tập huấn kiến thức, kỹ năng chuyên sâu về an ninh mạng đối với đối tượng thuộc phạm vi quản lý.
+
+5. Chính phủ quy định về chuẩn kiến thức, kỹ năng chuyên sâu về an ninh mạng; chương trình, nội dung, việc chứng nhận tập huấn kiến thức, kỹ năng chuyên sâu về an ninh mạng.`},
+
+{n:35,name:'Phổ biến kiến thức về an ninh mạng',kw:['kNL','kCS'],
+full:`1. Nhà nước có chính sách phổ biến kiến thức về an ninh mạng trong phạm vi cả nước, khuyến khích cơ quan nhà nước phối hợp với tổ chức tư nhân, cá nhân thực hiện chương trình giáo dục và nâng cao nhận thức về an ninh mạng; ưu tiên phổ biến, hướng dẫn trẻ em, người cao tuổi, người khó khăn trong nhận thức để nâng cao khả năng tự bảo vệ quyền và lợi ích hợp pháp của mình trên không gian mạng.
+
+2. Bộ, ngành, cơ quan, tổ chức có trách nhiệm xây dựng và triển khai hoạt động phổ biến kiến thức về an ninh mạng cho cán bộ, công chức, viên chức, người lao động trong Bộ, ngành, cơ quan, tổ chức.
+
+3. Ủy ban nhân dân cấp tỉnh có trách nhiệm xây dựng và triển khai hoạt động phổ biến kiến thức, nâng cao nhận thức về an ninh mạng cho cơ quan, tổ chức, cá nhân của địa phương.`},
+
+{n:36,name:'Nghiên cứu, phát triển an ninh mạng',kw:['kCS','kSP'],
+full:`1. Nội dung nghiên cứu, phát triển an ninh mạng bao gồm:
+a) Xây dựng hệ thống phần mềm, trang thiết bị bảo vệ an ninh mạng;
+b) Phương pháp thẩm định phần mềm, trang thiết bị bảo vệ an ninh mạng đạt chuẩn và hạn chế tồn tại điểm yếu, lỗ hổng bảo mật, phần mềm độc hại;
+c) Phương pháp kiểm tra phần cứng, phần mềm được cung cấp thực hiện đúng chức năng;
+d) Phương pháp bảo vệ bí mật nhà nước, bí mật công tác, bí mật kinh doanh, bí mật cá nhân, bí mật gia đình và đời sống riêng tư; khả năng bảo mật khi truyền đưa thông tin trên không gian mạng;
+đ) Xác định nguồn gốc của thông tin được truyền đưa trên không gian mạng;
+e) Giải quyết nguy cơ đe dọa an ninh mạng;
+g) Xây dựng thao trường mạng, môi trường thử nghiệm an ninh mạng;
+h) Sáng kiến kỹ thuật nâng cao nhận thức, kỹ năng về an ninh mạng;
+i) Dự báo an ninh mạng;
+k) Nghiên cứu thực tiễn, phát triển lý luận an ninh mạng.
+
+2. Cơ quan, tổ chức, cá nhân có liên quan có quyền nghiên cứu, phát triển an ninh mạng.`},
+
+{n:37,name:'Nâng cao năng lực tự chủ về an ninh mạng',kw:['kCS','kSP','kLL'],
+full:`1. Nhà nước khuyến khích, tạo điều kiện để cơ quan, tổ chức, cá nhân nâng cao năng lực tự chủ về an ninh mạng và nâng cao khả năng sản xuất, kiểm tra, đánh giá, kiểm định thiết bị số, dịch vụ mạng, ứng dụng mạng.
+
+2. Chính phủ thực hiện các biện pháp sau đây để nâng cao năng lực tự chủ về an ninh mạng:
+a) Chỉ đạo xây dựng chính sách, chiến lược, quy hoạch phát triển công nghiệp an ninh mạng; tiêu chuẩn, quy chuẩn kỹ thuật đối với các sản phẩm phần cứng, phần mềm nhằm chủ động loại bỏ các nguy cơ về an ninh mạng ngay từ khi hình thành sản phẩm;
+b) Thúc đẩy chuyển giao, nghiên cứu, làm chủ và phát triển công nghệ, sản phẩm, dịch vụ công nghiệp an ninh mạng;
+c) Thúc đẩy ứng dụng công nghệ mới, công nghệ tiên tiến liên quan đến an ninh mạng;
+d) Tổ chức đào tạo, phát triển, tối ưu hóa sử dụng nguồn nhân lực an ninh mạng chất lượng cao;
+đ) Tăng cường môi trường kinh doanh, cải thiện điều kiện cạnh tranh, hỗ trợ doanh nghiệp nghiên cứu, sản xuất sản phẩm, dịch vụ, ứng dụng để bảo vệ an ninh mạng.
+
+3. Hoạt động đầu tư, thu hút nguồn lực phát triển hạ tầng công nghiệp an ninh mạng bao gồm các hoạt động đầu tư xây dựng hạ tầng công nghiệp an ninh mạng, bao gồm khu công nghiệp an ninh mạng tập trung, trung tâm dữ liệu lớn, phòng thí nghiệm trọng điểm quốc gia; là ngành, nghề đặc biệt ưu đãi đầu tư.`},
+
+{n:38,name:'Kinh phí bảo vệ an ninh mạng',kw:['kCS'],
+full:`1. Cơ quan, tổ chức, doanh nghiệp nhà nước, tổ chức chính trị, tổ chức chính trị - xã hội và các đơn vị sự nghiệp công lập do ngân sách nhà nước bảo đảm phải bố trí kinh phí bảo vệ an ninh mạng trong dự toán chi thực hiện nhiệm vụ chuyển đổi số, ứng dụng công nghệ thông tin hằng năm của cơ quan, tổ chức, đơn vị mình; bố trí tối thiểu 15% tổng kinh phí thực hiện chương trình, đề án, dự án đầu tư chuyển đổi số, ứng dụng công nghệ thông tin để bảo vệ an ninh mạng.
+
+2. Cơ quan, tổ chức, đơn vị không thuộc quy định tại khoản 1 Điều này tự bảo đảm kinh phí bảo vệ an ninh mạng cho cơ quan, tổ chức, đơn vị mình.`},
+
+{n:39,name:'Trách nhiệm quản lý nhà nước về an ninh mạng',kw:['kBCA','kANM'],
+full:`1. Chính phủ thống nhất quản lý nhà nước về an ninh mạng.
+
+2. Bộ Công an là cơ quan đầu mối giúp Chính phủ thực hiện quản lý nhà nước về an ninh mạng; chịu trách nhiệm trước Chính phủ thực hiện các nội dung quản lý nhà nước về an ninh mạng sau đây, trừ nội dung quy định tại khoản 3 và khoản 4 Điều này:
+a) Ban hành hoặc trình cơ quan nhà nước có thẩm quyền ban hành văn bản quy phạm pháp luật về an ninh mạng;
+b) Xây dựng, đề xuất chiến lược, chủ trương, chính sách, kế hoạch và phương án bảo vệ an ninh mạng; nghiên cứu, xây dựng, phát triển, sử dụng mật mã an ninh để bảo vệ an ninh dữ liệu thuộc phạm vi quản lý của Bộ Công an;
+c) Phối hợp với các cơ quan liên quan tổ chức tuyên truyền, phản bác thông tin có nội dung chống Nhà nước quy định tại khoản 1 Điều 13 của Luật này;
+d) Yêu cầu doanh nghiệp cung cấp dịch vụ trên mạng loại bỏ thông tin có nội dung vi phạm pháp luật về an ninh mạng;
+đ) Phòng ngừa, đấu tranh với hoạt động sử dụng không gian mạng xâm phạm chủ quyền, lợi ích, an ninh quốc gia, trật tự, an toàn xã hội và phòng, chống tội phạm mạng;
+e) Bảo đảm an ninh thông tin trên không gian mạng, an ninh dữ liệu; xây dựng cơ chế quản lý định danh địa chỉ IP; xác thực thông tin đăng ký tài khoản số; cảnh báo, chia sẻ thông tin an ninh mạng, nguy cơ đe dọa an ninh mạng;
+g) Tham mưu, đề xuất Chính phủ, Thủ tướng Chính phủ xem xét, quyết định việc phân công, phối hợp thực hiện các biện pháp bảo vệ an ninh mạng, phòng ngừa, xử lý hành vi vi phạm an ninh mạng trong trường hợp nội dung quản lý nhà nước liên quan đến phạm vi quản lý của nhiều Bộ, ngành;
+h) Kiểm tra, thanh tra, giải quyết khiếu nại, tố cáo và xử lý vi phạm pháp luật về an ninh mạng.
+
+3. Bộ Quốc phòng chịu trách nhiệm quản lý nhà nước về an ninh mạng trong phạm vi quản lý.
+
+4. Ban Cơ yếu Chính phủ giúp Bộ trưởng Bộ Quốc phòng thực hiện quản lý nhà nước về mật mã dân sự và an ninh mạng thuộc phạm vi quản lý theo quy định của pháp luật.
+
+5. Bộ, cơ quan ngang Bộ, cơ quan thuộc Chính phủ, trong phạm vi chức năng, nhiệm vụ, quyền hạn của mình, thực hiện công tác bảo vệ an ninh mạng; phối hợp với Bộ Công an thực hiện quản lý nhà nước về an ninh mạng.
+
+6. Ủy ban nhân dân cấp tỉnh thực hiện công tác bảo vệ an ninh mạng tại địa phương; phối hợp với Bộ Công an thực hiện quản lý nhà nước về an ninh mạng.`},
+
+{n:40,name:'Trách nhiệm của chủ quản hệ thống thông tin trong bảo vệ an ninh mạng',kw:['kHTTT','kANM','kBCA'],
+full:`1. Chủ quản hệ thống thông tin có trách nhiệm:
+a) Thực hiện bảo vệ hệ thống thông tin theo quy định tại Luật này;
+b) Kết nối hệ thống giám sát an ninh mạng, hệ thống phòng chống mã độc tập trung về Trung tâm An ninh mạng quốc gia của Bộ Công an hoặc Trung tâm An ninh mạng của tỉnh, thành phố để hỗ trợ giám sát an ninh mạng;
+c) Báo cáo sự cố an ninh mạng với cơ quan chuyên trách của Bộ Công an hoặc Bộ Quốc phòng.
+
+2. Chủ quản hệ thống thông tin có sử dụng ngân sách nhà nước ngoài trách nhiệm quy định tại khoản 1 Điều này thì có trách nhiệm sau đây:
+a) Có phương án bảo đảm an ninh mạng được cơ quan nhà nước có thẩm quyền thẩm định an ninh mạng khi thiết lập, mở rộng hoặc nâng cấp hệ thống thông tin;
+b) Chỉ định cá nhân, bộ phận phụ trách về an ninh mạng.`},
+
+{n:41,name:'Trách nhiệm của doanh nghiệp cung cấp dịch vụ trên không gian mạng',kw:['kDNMX','kDL','kBCA'],
+full:`1. Tuân thủ quy định của pháp luật về an ninh mạng.
+
+2. Cảnh báo khả năng mất an ninh mạng trong việc sử dụng dịch vụ trên không gian mạng do mình cung cấp và hướng dẫn biện pháp phòng ngừa đối với người sử dụng dịch vụ; xây dựng phương án ứng cứu khẩn cấp bảo đảm an ninh mạng để chủ động xử lý điểm yếu, rủi ro và sự cố an ninh mạng.
+
+3. Khi xảy ra sự cố an ninh mạng, ngay lập tức triển khai phương án ứng cứu khẩn cấp bảo đảm an ninh mạng, đồng thời báo cáo ngay với lực lượng chuyên trách bảo vệ an ninh mạng theo quy định của Luật này.
+
+4. Áp dụng các biện pháp, giải pháp kỹ thuật để bảo đảm an ninh mạng cho hoạt động xử lý dữ liệu, xử lý dữ liệu cá nhân theo quy định của Luật này, pháp luật về dữ liệu, pháp luật về bảo vệ dữ liệu cá nhân và quy định khác của pháp luật có liên quan.
+
+5. Có trách nhiệm định danh địa chỉ IP của tổ chức, cá nhân sử dụng dịch vụ internet; cung cấp thông tin định danh địa chỉ IP cho lực lượng chuyên trách bảo vệ an ninh mạng để thực hiện biện pháp bảo vệ an ninh mạng.
+
+6. Phối hợp thực hiện theo hướng dẫn của lực lượng chuyên trách bảo vệ an ninh mạng thuộc Bộ Công an để thiết lập hệ thống kết nối, đấu nối đường truyền kỹ thuật, truyền tải dữ liệu và đáp ứng các điều kiện cần thiết khác để triển khai các giải pháp, biện pháp bảo vệ an ninh mạng khi có yêu cầu.
+
+7. Doanh nghiệp cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ gia tăng trên không gian mạng tại Việt Nam có trách nhiệm thực hiện quy định tại Điều này, khoản 2 và khoản 3 Điều 25 của Luật này.`},
+
+{n:42,name:'Trách nhiệm của cơ quan, tổ chức, cá nhân sử dụng không gian mạng',kw:['kANM','kDL'],
+full:`1. Tuân thủ quy định của pháp luật về an ninh mạng.
+
+2. Có trách nhiệm bảo mật thông tin đăng ký, mở, quản lý, sử dụng tài khoản số của mình. Trường hợp sử dụng tài khoản số để thực hiện hành vi vi phạm pháp luật, tùy theo tính chất, mức độ của hành vi vi phạm, chủ tài khoản số, người sử dụng tài khoản số bị xử lý kỷ luật, xử phạt vi phạm hành chính hoặc bị truy cứu trách nhiệm hình sự; nếu gây thiệt hại đến lợi ích của Nhà nước, quyền và lợi ích hợp pháp của tổ chức, cá nhân thì phải bồi thường thiệt hại theo quy định pháp luật.
+
+3. Kịp thời cung cấp thông tin liên quan đến bảo vệ an ninh mạng, nguy cơ đe dọa an ninh mạng, hành vi xâm phạm an ninh mạng cho cơ quan có thẩm quyền, lực lượng bảo vệ an ninh mạng.
+
+4. Thực hiện yêu cầu và hướng dẫn của cơ quan có thẩm quyền trong bảo vệ an ninh mạng; giúp đỡ, tạo điều kiện cho cơ quan, tổ chức và người có trách nhiệm tiến hành các biện pháp bảo vệ an ninh mạng.`},
+
+{n:43,name:'Sửa đổi, bổ sung một số điều của các luật có liên quan',kw:['kXP'],
+full:`Luật An ninh mạng 116/2025/QH15 sửa đổi, bổ sung một số điều của các luật có liên quan, bao gồm:
+
+1. Luật Lưu trữ số 33/2024/QH15: Thay thế cụm từ "an toàn thông tin" bằng "an ninh mạng" tại một số điều khoản; bãi bỏ khoản 4 Điều 58.
+
+2. Luật Bảo vệ quyền lợi người tiêu dùng số 19/2023/QH15: Thay thế cụm từ "an toàn thông tin" bằng "an ninh thông tin" và "an ninh mạng" tại một số điều khoản.
+
+3. Luật Phí và lệ phí: Thay thế cụm từ "an toàn thông tin" bằng "an ninh mạng" trong Danh mục phí và lệ phí.
+
+4. Luật Công nghiệp công nghệ số số 71/2025/QH15: Điều chỉnh một số cụm từ liên quan đến an ninh mạng.
+
+5. Luật Dữ liệu số 60/2024/QH15: Thay thế cụm từ "an toàn, an ninh dữ liệu" bằng "an ninh dữ liệu" tại một số điều.
+
+6-17. Các luật khác liên quan: Luật Di sản văn hoá, Luật Viễn thông, Luật Giao dịch điện tử, Luật Thuế thu nhập doanh nghiệp, Luật Đất đai, Luật Tài nguyên nước, Luật Xử lý vi phạm hành chính, Luật Công an nhân dân, Luật Bầu cử, Luật Tổ chức Tòa án nhân dân, Luật Điện lực, Luật Hóa chất, Luật Đầu thầu, Luật Phòng thủ dân sự, Luật Năng lượng nguyên tử, Luật Thư viện: đồng loạt bãi bỏ hoặc thay thế cụm từ "an toàn thông tin mạng" bằng "an ninh mạng".`},
+
+{n:44,name:'Hiệu lực thi hành',kw:[],
+full:`1. Luật này có hiệu lực thi hành từ ngày 01 tháng 7 năm 2026.
+
+2. Luật An toàn thông tin mạng số 86/2015/QH13 đã được sửa đổi, bổ sung một số điều theo Luật số 35/2018/QH14; Luật An ninh mạng số 24/2018/QH14 hết hiệu lực kể từ ngày Luật này có hiệu lực thi hành.`},
+
+{n:45,name:'Điều khoản chuyển tiếp',kw:[],
+full:`1. Hệ thống thông tin đã được xác định cấp độ theo quy định của Luật An toàn thông tin mạng số 86/2015/QH13 đã được sửa đổi, bổ sung một số điều theo Luật số 35/2018/QH14 thì tiếp tục giữ cấp độ đã được xác định kể từ ngày Luật này có hiệu lực thi hành; trong thời hạn 12 tháng kể từ ngày Luật này có hiệu lực thi hành thì phải bảo đảm điều kiện, tiêu chuẩn, biện pháp bảo vệ an ninh mạng tương ứng với cấp độ theo quy định của Luật này.
+
+2. Các loại giấy phép kinh doanh sản phẩm, dịch vụ an toàn thông tin mạng, mật mã dân sự theo quy định của Luật An toàn thông tin mạng số 86/2015/QH13 đã được cấp trước ngày Luật này có hiệu lực thi hành có giá trị sử dụng đến hết thời hạn được ghi trên giấy phép.
+
+3. Các sản phẩm, dịch vụ, giải pháp, phương tiện kỹ thuật bảo đảm an toàn thông tin mạng theo quy định của Luật An toàn thông tin mạng số 86/2015/QH13 đã được đưa vào sử dụng trước ngày Luật này có hiệu lực thi hành tiếp tục được sử dụng; trong thời hạn 12 tháng kể từ ngày Luật này có hiệu lực thi hành thì phải bảo đảm các điều kiện an ninh mạng theo quy định của Luật này.`},
+],
+
+// ── TỪ KHOÁ ─────────────────────────────────────────────────
+KW:[
+  {id:'kANM', lbl:'An ninh\nmạng', type:'kwc',
+   terms:['an ninh mạng','bảo vệ an ninh mạng','không gian mạng quốc gia','không gian mạng','an ninh thông tin mạng','an ninh dữ liệu']},
+  {id:'kBCA', lbl:'Bộ Công an\n& Quản lý nhà nước', type:'kwc',
+   terms:['Bộ Công an','lực lượng chuyên trách bảo vệ an ninh mạng','Bộ Quốc phòng','Ban Cơ yếu Chính phủ','cơ quan nhà nước có thẩm quyền']},
+  {id:'kBMNN',lbl:'Bí mật\nnhà nước', type:'kwc',
+   terms:['bí mật nhà nước','bí mật công tác','bí mật kinh doanh','bí mật cá nhân','bí mật gia đình và đời sống riêng tư']},
+  {id:'kCS',  lbl:'Chính sách\nphát triển', type:'kwg',
+   terms:['chính sách','ưu tiên','khuyến khích','tạo điều kiện','ngân sách nhà nước']},
+  {id:'kDL',  lbl:'Dữ liệu\ncá nhân', type:'kwc',
+   terms:['dữ liệu cá nhân','thông tin cá nhân của người sử dụng dịch vụ','lưu trữ dữ liệu','bảo vệ dữ liệu','dữ liệu do người sử dụng dịch vụ tại Việt Nam tạo ra']},
+  {id:'kDNMX',lbl:'Doanh nghiệp\ncung cấp dịch vụ', type:'kwg',
+   terms:['doanh nghiệp cung cấp dịch vụ trên không gian mạng','doanh nghiệp trong nước và nước ngoài cung cấp dịch vụ trên mạng viễn thông, mạng Internet','doanh nghiệp cung cấp dịch vụ Internet']},
+  {id:'kGD',  lbl:'Gián điệp\nmạng', type:'kwc',
+   terms:['gián điệp mạng','chiếm đoạt, thu thập, sao chép thông tin thuộc phạm vi bí mật nhà nước','xâm nhập để chiếm đoạt']},
+  {id:'kHTC', lbl:'Hợp tác\nquốc tế', type:'kwg',
+   terms:['hợp tác quốc tế về an ninh mạng','điều ước quốc tế','chia sẻ thông tin, dữ liệu và cảnh báo sớm','tội phạm mạng và tội phạm sử dụng công nghệ cao']},
+  {id:'kHTTT',lbl:'Hệ thống\nthông tin', type:'kwc',
+   terms:['hệ thống thông tin','chủ quản hệ thống thông tin','hệ thống thông tin quan trọng về an ninh quốc gia','cấp độ an ninh mạng của hệ thống thông tin','phần cứng, phần mềm và dữ liệu']},
+  {id:'kLL',  lbl:'Lực lượng\nbảo vệ', type:'kwg',
+   terms:['lực lượng bảo vệ an ninh mạng','lực lượng chuyên trách','bố trí tại Bộ Công an, Bộ Quốc phòng','tuyển chọn vào lực lượng bảo vệ an ninh mạng']},
+  {id:'kNL',  lbl:'Nhân lực\n& Đào tạo', type:'kwg',
+   terms:['nguồn nhân lực bảo vệ an ninh mạng','đào tạo, phát triển','tập huấn kiến thức, kỹ năng chuyên sâu về an ninh mạng','bồi dưỡng kiến thức an ninh mạng','giáo dục, bồi dưỡng']},
+  {id:'kPM',  lbl:'Phần mềm\nđộc hại', type:'kwc',
+   terms:['phần mềm độc hại','phần cứng độc hại','mã độc','lọc phần mềm độc hại','ngăn chặn phần mềm độc hại']},
+  {id:'kSP',  lbl:'Sản phẩm\ndịch vụ an ninh mạng', type:'kwg',
+   terms:['sản phẩm an ninh mạng','dịch vụ an ninh mạng','giấy phép kinh doanh sản phẩm, dịch vụ an ninh mạng','tiêu chuẩn, quy chuẩn kỹ thuật an ninh mạng']},
+  {id:'kTC',  lbl:'Tấn công\nmạng', type:'kwc',
+   terms:['tấn công mạng','khủng bố mạng','tội phạm mạng','xâm nhập trái phép','chiếm đoạt thông tin','gây rối loạn, gián đoạn, tê liệt']},
+  {id:'kTE',  lbl:'Bảo vệ\ntrẻ em trên mạng', type:'kwg',
+   terms:['trẻ em','xâm hại trẻ em','xâm phạm quyền trẻ em','nội dung gây nguy hại cho trẻ em','người giám hộ']},
+  {id:'kXP',  lbl:'Xử lý\nvi phạm', type:'kwc',
+   terms:['xử lý vi phạm','xử phạt vi phạm hành chính','bị truy cứu trách nhiệm hình sự','xử lý kỷ luật','hành vi vi phạm pháp luật về an ninh mạng']},
+],
+
+NOKW_SET: new Set([]),
+
+};
