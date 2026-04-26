@@ -318,6 +318,20 @@ def generate_js(meta: dict, CH: list, articles: list, KW: list, color_idx: int =
     return '\n'.join(out), variant, color, emoji
 
 
+def update_vercel_rewrite(slug: str):
+    """Add rewrite rule for /legalmap/{slug} → viewer.html"""
+    vp = REPO_ROOT / 'vercel.json'
+    cfg = json.loads(vp.read_text())
+    rule = { "source": f"/legalmap/{slug}", "destination": "/legalmap/viewer.html" }
+    rewrites = cfg.setdefault('rewrites', [])
+    if any(r.get('source') == rule['source'] for r in rewrites):
+        print(f"  ⚠️  Rewrite cho /legalmap/{slug} đã có — skip")
+        return
+    rewrites.append(rule)
+    vp.write_text(json.dumps(cfg, ensure_ascii=False, indent=2))
+    print(f"  ✅ Đã thêm rewrite vercel.json: /legalmap/{slug}")
+
+
 def update_manifest(meta: dict, CH: list, DD: list, KW: list, variant: str, color: str, emoji: str):
     """Add law entry to manifest.json"""
     mf = json.loads(MANIFEST.read_text())
@@ -394,6 +408,9 @@ def main():
 
     print('📝 Update manifest...')
     update_manifest(meta, CH, articles, KW, variant, color, emoji)
+
+    print('🔁 Update vercel.json rewrite...')
+    update_vercel_rewrite(meta['slug'])
 
     print('')
     print('═══════════════════════════════════════════════════')
