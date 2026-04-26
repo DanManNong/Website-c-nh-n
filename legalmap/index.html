@@ -54,6 +54,23 @@ a{color:inherit;text-decoration:none}
   margin-bottom:28px;line-height:1.65;
 }
 
+/* BETA disclaimer */
+.beta-notice{
+  display:flex;align-items:flex-start;gap:12px;
+  margin:0 0 32px;padding:14px 18px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(255,193,7,.08),rgba(255,107,0,.04));
+  border:1px solid rgba(255,193,7,.22);
+}
+.beta-ic{font-size:22px;flex-shrink:0;line-height:1.2}
+.beta-tx{font-size:12.5px;line-height:1.6;color:rgba(240,200,150,.92)}
+.beta-tx strong{color:#ffc107;font-weight:700}
+.beta-tx em{color:#ff8a65;font-style:normal;font-weight:700}
+@media(max-width:560px){
+  .beta-notice{padding:12px 14px;gap:10px}
+  .beta-tx{font-size:12px;line-height:1.55}
+  .beta-ic{font-size:18px}
+}
+
 /* HERO */
 .hero{padding:32px 0 8px}
 .hero h1{
@@ -238,10 +255,12 @@ a{color:inherit;text-decoration:none}
 }
 @media(max-width:560px){.author-block{grid-template-columns:1fr;text-align:center;gap:14px}}
 .author-avatar{
-  width:90px;height:90px;border-radius:50%;background:var(--gold) center/cover;
+  width:90px;height:90px;border-radius:50%;
   border:3px solid var(--gold);box-shadow:0 8px 20px rgba(224,170,121,.3);
   display:flex;align-items:center;justify-content:center;font-size:36px;
+  overflow:hidden;flex-shrink:0;background:rgba(224,170,121,.1);
 }
+.author-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .author-name{font-size:18px;font-weight:800;color:#f0e8dc;margin-bottom:2px}
 .author-role{font-size:12px;color:var(--gold);letter-spacing:.06em;margin-bottom:10px}
 .author-quote{
@@ -254,6 +273,11 @@ a{color:inherit;text-decoration:none}
   background:rgba(224,170,121,.1);border:1px solid rgba(224,170,121,.25);color:var(--gold);
 }
 .author-cta a:hover{background:rgba(224,170,121,.2)}
+.author-cta a.cta-collab{
+  background:linear-gradient(135deg,#0096d9,#00b4f0);color:#fff;border-color:transparent;
+  box-shadow:0 4px 12px rgba(0,150,217,.3);
+}
+.author-cta a.cta-collab:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,150,217,.4)}
 
 /* CTA cuối */
 .final-cta{
@@ -281,7 +305,16 @@ a{color:inherit;text-decoration:none}
 
 /* Footer */
 .foot{margin-top:48px;padding-top:24px;border-top:1px solid rgba(224,170,121,.1);
-  text-align:center;font-size:11px;color:rgba(200,170,120,.5)}
+  text-align:center;font-size:11px;color:rgba(200,170,120,.5);line-height:1.7}
+.foot-line{display:inline}
+.foot-line + .foot-line::before{content:' · ';opacity:.5;margin:0 4px}
+.foot-sep{opacity:.5;margin:0 4px}
+@media(max-width:560px){
+  /* Footer trên phone — tách 3 dòng riêng */
+  .foot-line{display:block;margin-bottom:4px}
+  .foot-line + .foot-line::before{content:none}
+  .foot{font-size:11px;line-height:1.65}
+}
 
 @media(max-width:560px){
   body{padding:0 12px 40px}
@@ -313,7 +346,7 @@ a{color:inherit;text-decoration:none}
     <div class="brand-dot"></div>
     <div>
       <div class="brand-title">LegalMap <span class="brand-edition" style="color:rgba(224,170,121,.45);font-weight:600">·  🌻 Hướng Dương Edition</span></div>
-      <div class="brand-sub">Bản đồ pháp luật Việt Nam — tương tác từng điều, từng từ khoá</div>
+      <div class="brand-sub">Bản đồ pháp luật Việt Nam tương tác số !</div>
     </div>
   </div>
 
@@ -352,6 +385,16 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
   </section>
+
+  <!-- ═══ DISCLAIMER BETA ═══ -->
+  <div class="beta-notice" role="note" aria-label="Tuyên bố giai đoạn thử nghiệm">
+    <span class="beta-ic">⚠️</span>
+    <div class="beta-tx">
+      <strong>Bản thử nghiệm beta</strong> — LegalMap là công cụ tham khảo trực quan,
+      <em>KHÔNG thay thế</em> lời khuyên pháp lý chính thức. Mọi quyết định pháp lý cần
+      tham khảo văn bản gốc và ý kiến luật sư có chuyên môn.
+    </div>
+  </div>
 
   <!-- ═══ KHỐI 2 — 2 THẺ LUẬT ═══ -->
   <section class="sec" id="laws">
@@ -526,7 +569,9 @@ a{color:inherit;text-decoration:none}
     <h2 class="sec-h">Ai đứng sau LegalMap?</h2>
 
     <div class="author-block">
-      <div class="author-avatar">👤</div>
+      <div class="author-avatar">
+        <img src="/avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong" loading="lazy">
+      </div>
       <div>
         <div class="author-name">Nguyễn Tấn Phong</div>
         <div class="author-role">Chuyên gia Kinh tế số · Pháp luật Số</div>
@@ -537,7 +582,8 @@ a{color:inherit;text-decoration:none}
         </p>
         <div class="author-cta">
           <a href="/">👋 Xem trang cá nhân →</a>
-          <a href="mailto:nguyentanphong@example.com">✉️ Liên hệ</a>
+          <a href="mailto:hello@nguyentanphong.com">✉️ Liên hệ</a>
+          <a class="cta-collab" href="javascript:void(0)" onclick="inviteCollab()">🤝 Mời cộng tác — Bản đồ Mở →</a>
         </div>
       </div>
     </div>
@@ -565,8 +611,17 @@ a{color:inherit;text-decoration:none}
   </section>
 
   <div class="foot">
-    <strong style="color:var(--gold)">LegalMap</strong> <span style="opacity:.5">·</span> 🌻 Hướng Dương Edition <span style="opacity:.5">·</span> Một dự án của <a href="/" style="color:var(--gold)">Nguyễn Tấn Phong</a><br>
-    Bản đồ tương tác văn bản pháp luật Việt Nam — © 2026
+    <span class="foot-line foot-l1">
+      <strong style="color:var(--gold)">LegalMap</strong>
+      <span class="foot-sep">·</span>
+      🌻 Hướng Dương Edition
+    </span>
+    <span class="foot-line foot-l2">
+      Một dự án của <a href="/" style="color:var(--gold)">Nguyễn Tấn Phong</a>
+    </span>
+    <span class="foot-line foot-l3">
+      Bản đồ tương tác văn bản pháp luật Việt Nam — © 2026
+    </span>
   </div>
 
 </div>
@@ -739,6 +794,21 @@ function shareZalo(){window.open('https://zalo.me/share/url?url='+encodeURICompo
 function shareEmail(){window.location='mailto:?subject='+encodeURIComponent(SHARE_TXT)+'&body='+encodeURIComponent(SHARE_URL)}
 function copyLink(){
   navigator.clipboard.writeText(SHARE_URL).then(()=>alert('✅ Đã copy link!'));
+}
+
+// ─── Mời cộng tác — Bản đồ Mở qua Zalo ───────────
+function inviteCollab(){
+  const tpl = 'Chào anh Phong,\n\nTôi muốn cộng tác cùng anh hoàn thiện LegalMap (Bản đồ Mở).\n\nGiới thiệu nhanh:\n• Tên: [...]\n• Vai trò / chuyên môn: [luật sư, lập trình, dữ liệu, thiết kế, biên tập...]\n• Đề xuất đóng góp: [...]\n\n— Gửi từ ' + SHARE_URL;
+  const openZalo = () => window.open('https://zalo.me/0915159499', '_blank');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(tpl).then(()=>{
+      alert('✅ Mẫu lời mời cộng tác đã copy!\n\nBấm OK → mở Zalo → paste (Cmd+V) → điền thông tin → gửi.');
+      openZalo();
+    }).catch(()=>{ alert('Mở Zalo và nhắn:\n\n'+tpl); openZalo(); });
+  } else {
+    prompt('Copy lời mời sau, rồi gửi qua Zalo:', tpl);
+    openZalo();
+  }
 }
 
 // ─── Gợi ý bộ Luật mới qua Zalo ──────────────────
