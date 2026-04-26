@@ -152,7 +152,31 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
   <h1>Khám phá Luật<br>bằng bản đồ pháp lý</h1>
   <p class="sub">Click vào nút bên dưới để mở bản đồ tương tác từng luật</p>
 
-  <div class="law-grid" id="law-list"></div>
+  <!-- 2 thẻ tĩnh — luôn hiển thị dù JS lỗi -->
+  <div class="law-grid" id="law-list">
+    <a class="law-btn red" href="luat-tmdt">
+      <span class="lb-tag">🛒  Thương mại điện tử</span>
+      <div class="lb-num">122/2025/QH15 · Hiệu lực 01/07/2026</div>
+      <div class="lb-title">Luật Thương mại điện tử</div>
+      <div class="lb-stats">
+        <span><strong>7</strong> Chương</span>
+        <span><strong>41</strong> Điều</span>
+        <span>Có từ khoá liên kết</span>
+      </div>
+      <span class="lb-cta">📍 Mở bản đồ tương tác →</span>
+    </a>
+    <a class="law-btn blue" href="viewer?laws=luat_116_2025">
+      <span class="lb-tag">🛡️  An ninh mạng</span>
+      <div class="lb-num">116/2025/QH15 · Hiệu lực 01/07/2026</div>
+      <div class="lb-title">Luật An ninh mạng</div>
+      <div class="lb-stats">
+        <span><strong>8</strong> Chương</span>
+        <span><strong>45</strong> Điều</span>
+        <span>Có từ khoá liên kết</span>
+      </div>
+      <span class="lb-cta">📍 Mở bản đồ tương tác →</span>
+    </a>
+  </div>
 
   <div class="compare-section">
     <div class="compare-title">🔗 So sánh 2 văn bản Luật song song</div>
@@ -180,6 +204,7 @@ const STYLE_OF = {
 
 fetch('data/manifest.json').then(r=>r.json()).then(m=>{
   const list = document.getElementById('law-list');
+  list.innerHTML = ''; // clear fallback static cards trước khi JS render version đầy đủ
   const s1 = document.getElementById('sel1'), s2 = document.getElementById('sel2');
 
   m.laws.forEach(law=>{
