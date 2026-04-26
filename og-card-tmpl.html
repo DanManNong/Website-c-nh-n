@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Homepage OG Card · 1200x630</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#1a1a1a;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#fff}
+.card{
+  width:1200px;height:630px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 30%, rgba(224,170,121,.18) 0%, transparent 55%),
+    radial-gradient(circle at 20% 70%, rgba(237,28,36,.12) 0%, transparent 55%),
+    linear-gradient(135deg, #1a1a1a 0%, #2C2C2C 100%);
+  display:flex;align-items:center;
+}
+.card::before{
+  content:"";position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.18'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.left{
+  flex:1;padding:60px 0 60px 80px;position:relative;z-index:2;
+}
+.right{
+  flex:0 0 460px;padding:60px 80px 60px 20px;display:flex;align-items:center;justify-content:center;
+}
+.tagline{
+  font-size:14px;letter-spacing:.35em;color:#E0AA79;text-transform:uppercase;
+  margin-bottom:18px;font-weight:600;
+}
+.name{
+  font-size:60px;font-weight:300;letter-spacing:.06em;text-transform:uppercase;
+  color:#E0AA79;margin-bottom:16px;line-height:1.1;
+}
+.name strong{font-weight:800}
+.title-line{
+  font-size:18px;color:rgba(255,255,255,.65);line-height:1.55;margin-bottom:6px;
+  font-weight:400;
+}
+.divider{
+  width:60px;height:2px;background:linear-gradient(90deg,#E0AA79,transparent);
+  margin:20px 0;
+}
+.work{
+  font-size:18px;color:rgba(224,170,121,.85);font-weight:600;line-height:1.45;margin-bottom:14px;
+}
+.url-bar{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:15px;font-weight:600;color:#E0AA79;
+  padding:8px 16px;border-radius:24px;
+  background:rgba(224,170,121,.08);border:1px solid rgba(224,170,121,.3);
+  margin-top:14px;
+}
+.url-bar strong{color:#fff;font-weight:800}
+/* Avatar circle */
+.avatar-wrap{
+  width:340px;height:340px;border-radius:50%;
+  border:6px solid rgba(224,170,121,.4);
+  box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 60px rgba(224,170,121,.18);
+  overflow:hidden;
+  background:#000;
+  position:relative;
+}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+/* Top-right corner badge LegalMap */
+.lm-badge{
+  position:absolute;top:30px;right:30px;
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;color:#fff;
+  padding:8px 14px;border-radius:20px;
+  background:linear-gradient(135deg,#ED1C24,#C0392B);
+  box-shadow:0 6px 20px rgba(237,28,36,.35);
+  z-index:3;
+  letter-spacing:.05em;
+}
+.lm-badge .ic{font-size:14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="lm-badge"><span class="ic">🌻</span> NEW · LegalMap</span>
+
+  <div class="left">
+    <div class="tagline">TRI THỨC · PHÁP LUẬT · CÔNG NGHỆ</div>
+    <div class="name">Nguyễn Tấn <strong>Phong</strong></div>
+    <div class="title-line">Chuyên gia Kinh tế số &amp; Pháp luật</div>
+    <div class="title-line">Luật gia · Trọng tài viên</div>
+    <div class="divider"></div>
+    <div class="work">Tư vấn chiến lược</div>
+    <div class="title-line">Thương mại điện tử &amp; Tự động hoá kinh doanh</div>
+    <div class="url-bar">🔗 <strong>nguyentanphong</strong>.com</div>
+  </div>
+  <div class="right">
+    <div class="avatar-wrap">
+      <img src="/avatar-nguyentanphong.jpg" alt="Nguyễn Tấn Phong">
+    </div>
+  </div>
+</div>
+</body>
+</html>

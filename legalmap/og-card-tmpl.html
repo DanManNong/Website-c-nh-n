@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>LegalMap OG Card · 1200x630</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#0a0806;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#f0e8dc}
+.card{
+  width:1200px;height:630px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(237,28,36,.18) 0%, transparent 50%),
+    radial-gradient(circle at 15% 80%, rgba(25,118,210,.16) 0%, transparent 50%),
+    radial-gradient(circle at center, rgba(224,170,121,.06) 0%, transparent 70%),
+    #0a0806;
+  padding:60px 70px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+/* SVG sunflower deco */
+.deco{
+  position:absolute;right:-80px;top:50%;transform:translateY(-50%);
+  width:520px;height:520px;opacity:.12;pointer-events:none;
+}
+.brand-row{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.brand-dot{width:14px;height:14px;border-radius:50%;background:#ED1C24;box-shadow:0 0 16px rgba(237,28,36,.7)}
+.brand-name{font-size:24px;font-weight:800;color:#E0AA79;letter-spacing:.02em}
+.brand-edition{font-size:18px;font-weight:600;color:rgba(224,170,121,.55);margin-left:8px}
+.headline{
+  font-size:78px;font-weight:900;line-height:1.05;letter-spacing:-.02em;
+  color:#f0e8dc;max-width:780px;margin-bottom:24px;
+}
+.headline em{font-style:normal;color:#E0AA79;font-weight:900}
+.tagline{
+  font-size:22px;color:rgba(224,170,121,.85);
+  max-width:760px;line-height:1.5;font-weight:500;
+}
+.bottom-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.law-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:16px;font-weight:700;color:#fff;
+  padding:9px 18px;border-radius:24px;
+  letter-spacing:.05em;
+}
+.law-tag.tmdt{background:linear-gradient(135deg,#ED1C24,#C0392B);box-shadow:0 6px 22px rgba(237,28,36,.4)}
+.law-tag.anm{background:linear-gradient(135deg,#1976d2,#42a5f5);box-shadow:0 6px 22px rgba(25,118,210,.4)}
+.url{
+  font-size:18px;font-weight:600;color:rgba(224,170,121,.55);
+  letter-spacing:.04em;margin-left:auto;
+}
+.url strong{color:#E0AA79;font-weight:800}
+</style>
+</head>
+<body>
+<div class="card">
+  <!-- Sunflower SVG decoration -->
+  <svg class="deco" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#E0AA79" stroke="#E0AA79" stroke-width="1">
+      <!-- Petals -->
+      <ellipse cx="100" cy="40" rx="14" ry="38" />
+      <ellipse cx="100" cy="160" rx="14" ry="38" />
+      <ellipse cx="40" cy="100" rx="38" ry="14" />
+      <ellipse cx="160" cy="100" rx="38" ry="14" />
+      <ellipse cx="58" cy="58" rx="14" ry="38" transform="rotate(-45 58 58)" />
+      <ellipse cx="142" cy="142" rx="14" ry="38" transform="rotate(-45 142 142)" />
+      <ellipse cx="142" cy="58" rx="14" ry="38" transform="rotate(45 142 58)" />
+      <ellipse cx="58" cy="142" rx="14" ry="38" transform="rotate(45 58 142)" />
+    </g>
+    <circle cx="100" cy="100" r="22" fill="#ED1C24" />
+  </svg>
+
+  <div>
+    <div class="brand-row">
+      <div class="brand-dot"></div>
+      <div class="brand-name">LegalMap</div>
+      <div class="brand-edition">· 🌻 Hướng Dương Edition</div>
+    </div>
+    <h1 class="headline">Đọc một bộ Luật<br>như đọc một <em>tấm bản đồ.</em></h1>
+    <div class="tagline">Bản đồ pháp luật Việt Nam tương tác số — click một điều luật, full text hiện ngay. Click một từ khoá, mọi điều liên quan sáng cùng lúc.</div>
+  </div>
+
+  <div class="bottom-row">
+    <span class="law-tag tmdt">🛒 Luật TMĐT 122/2025</span>
+    <span class="law-tag anm">🛡️ Luật ANM 116/2025</span>
+    <div class="url">www.nguyentanphong.com<strong>/legalmap</strong></div>
+  </div>
+</div>
+</body>
+</html>
