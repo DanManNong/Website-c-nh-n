@@ -326,6 +326,16 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   }
   .save-contact:active { transform: translateY(0); }
   .save-contact i { font-size: 18px; }
+  /* Variant — nút Bản đồ văn bản pháp luật (cùng size, đổi màu sang đỏ-vàng) */
+  .save-contact--map {
+    background: linear-gradient(135deg, #ED1C24, #C0392B);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(237,28,36,0.35);
+    margin-top: -4px;            /* gần nút trên hơn 1 chút */
+  }
+  .save-contact--map:hover {
+    box-shadow: 0 10px 28px rgba(237,28,36,0.5);
+  }
   @media (max-width: 480px) {
     .save-contact { font-size: 13px; padding: 13px 18px; gap: 10px; }
     .save-contact i { font-size: 16px; }
@@ -473,16 +483,8 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <a href="/zh" onclick="trackEvent('lang_switch', {to: 'zh'})">ZH</a>
 </nav>
 
-<!-- SIDEBAR dọc bên phải — 4 ô tách rời từng khối với gap nhỏ -->
-<nav class="v-stack" aria-label="Điều hướng + liên hệ nhanh">
-  <a href="/" class="v-tab active" title="Bản Danh Thiếp">
-    <i class="fas fa-id-card"></i>
-    <span>Danh Thiếp</span>
-  </a>
-  <a href="/preview-full" class="v-tab" title="Trang Cá Nhân đầy đủ" onclick="trackEvent('open_full_version')">
-    <i class="fas fa-user-tie"></i>
-    <span>Trang Cá Nhân</span>
-  </a>
+<!-- SIDEBAR dọc bên phải — chỉ giữ Zalo + Gọi (đã bỏ tab Danh Thiếp + Trang Cá Nhân) -->
+<nav class="v-stack" aria-label="Liên hệ nhanh">
   <a href="https://zalo.me/0915159499" target="_blank" class="v-sq blink" title="Zalo" onclick="trackEvent('contact_zalo')">
     <i class="fas fa-comment-dots"></i>
   </a>
@@ -618,6 +620,13 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
     <i class="fas fa-address-book"></i>
     <span>Lưu Danh Bạ</span>
   </button>
+
+  <!-- LEGALMAP BUTTON — Bản đồ văn bản pháp luật -->
+  <a href="/legalmap" class="save-contact save-contact--map stagger s4" aria-label="Mở Bản đồ văn bản pháp luật"
+     onclick="trackEvent('open_legalmap', {location: 'home_button'})">
+    <i class="fas fa-map-marked-alt"></i>
+    <span>Bản đồ văn bản pháp luật</span>
+  </a>
 
   <!-- Phone block đã xóa — số gọi vẫn còn trong QR grid (nút "Gọi") -->
   <script>
