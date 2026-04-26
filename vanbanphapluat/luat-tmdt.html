@@ -1346,6 +1346,37 @@ function togCh(){
   cy.edges('[etype="lc"]')[stCH?'show':'hide']();
   document.getElementById('bch')?.classList.toggle('active',stCH);
 }
+
+// ═══════════════════════════════════════════════════
+// DEEP-LINK: ?dieu=N → auto focus điều N
+// ═══════════════════════════════════════════════════
+(function() {
+  function focusDieu(n) {
+    var nd = cy.getElementById('d' + n);
+    if (!nd || !nd.length) return false;
+    nd.trigger('tap');
+    cy.animate({ center: { eles: nd }, zoom: 1.6 }, { duration: 480 });
+    return true;
+  }
+  function applyFromURL() {
+    var p = new URLSearchParams(location.search);
+    var dieu = p.get('dieu');
+    if (dieu) focusDieu(dieu);
+  }
+  // Wait Cytoscape ready
+  if (document.readyState === 'complete') {
+    setTimeout(applyFromURL, 600);
+  } else {
+    window.addEventListener('load', function() { setTimeout(applyFromURL, 600); });
+  }
+  // Listen hashchange (vd #d-5 hoặc #dieu-5)
+  window.addEventListener('hashchange', function() {
+    var h = location.hash.replace('#','').replace('dieu-','').replace('d-','');
+    if (/^\d+$/.test(h)) focusDieu(h);
+  });
+  // Expose globally
+  window.focusDieu = focusDieu;
+})();
 </script>
 </body>
 </html>

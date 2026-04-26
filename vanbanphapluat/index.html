@@ -14,46 +14,106 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--gold:#E0AA79;--gold-l:#f0c896;--red:#ED1C24;--dark:#0a0806;--font:'Be Vietnam Pro',system-ui,sans-serif}
-body{background:var(--dark);font-family:var(--font);color:#c8d8e8;min-height:100vh;padding:40px 20px}
-.wrap{max-width:860px;margin:0 auto}
-.brand{display:flex;align-items:center;gap:12px;margin-bottom:40px}
+body{background:var(--dark);font-family:var(--font);color:#c8d8e8;min-height:100vh;padding:32px 16px 60px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:880px;margin:0 auto}
+
+/* Brand */
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:32px}
 .brand-dot{width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 10px rgba(237,28,36,.5)}
 .brand-title{font-size:18px;font-weight:800;color:var(--gold);letter-spacing:.02em}
 .brand-sub{font-size:12px;color:rgba(200,170,120,.5);margin-top:2px}
+
 h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-height:1.3}
-.sub{font-size:14px;color:rgba(200,170,120,.6);margin-bottom:36px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px}
-.card{
-  background:rgba(224,170,121,.04);border:1px solid rgba(224,170,121,.14);
-  border-radius:14px;padding:20px;cursor:pointer;
-  transition:all .2s;text-decoration:none;color:inherit;display:block;
+.sub{font-size:14px;color:rgba(200,170,120,.6);margin-bottom:32px}
+
+/* Card */
+.law-card{
+  background:rgba(224,170,121,.04);border:1px solid rgba(224,170,121,.16);
+  border-radius:14px;padding:22px;margin-bottom:18px;transition:all .2s;
 }
-.card:hover{background:rgba(224,170,121,.09);border-color:rgba(224,170,121,.3);transform:translateY(-2px)}
-.card-num{font-size:10px;font-weight:700;color:rgba(224,170,121,.5);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.card-title{font-size:15px;font-weight:700;color:#f0e8dc;margin-bottom:4px;line-height:1.4}
-.card-meta{font-size:11px;color:rgba(200,170,120,.5);margin-bottom:12px}
-.card-tags{display:flex;gap:6px;flex-wrap:wrap}
-.tag{font-size:9.5px;padding:3px 8px;border-radius:20px;background:rgba(224,170,121,.08);color:var(--gold);border:1px solid rgba(224,170,121,.2)}
+.law-card:hover{border-color:rgba(224,170,121,.32)}
+.lc-num{font-size:10px;font-weight:700;color:rgba(224,170,121,.55);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.lc-title{font-size:18px;font-weight:700;color:#f0e8dc;margin-bottom:6px;line-height:1.4}
+.lc-meta{font-size:11.5px;color:rgba(200,170,120,.55);margin-bottom:14px}
+.lc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.tag{font-size:9.5px;padding:3px 9px;border-radius:20px;background:rgba(224,170,121,.08);color:var(--gold);border:1px solid rgba(224,170,121,.2)}
+
+.lc-actions{display:flex;gap:8px;flex-wrap:wrap}
 .btn-view{
-  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
-  padding:8px 16px;background:linear-gradient(135deg,var(--gold),var(--gold-l));
-  color:#1a1a1a;font-weight:700;font-size:11px;border-radius:8px;
-  text-decoration:none;transition:opacity .15s;
+  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-l));
+  color:#1a1a1a;font-weight:700;font-size:11.5px;border-radius:8px;
+  font-family:inherit;cursor:pointer;border:none;
 }
-.btn-view:hover{opacity:.85}
-.compare-section{margin-top:20px;padding:20px;border:1px dashed rgba(224,170,121,.15);border-radius:12px}
-.compare-title{font-size:12px;font-weight:600;color:rgba(224,170,120,.6);margin-bottom:12px}
+.btn-view:hover{opacity:.88}
+.btn-toggle{
+  display:inline-flex;align-items:center;gap:6px;padding:9px 14px;
+  background:rgba(224,170,121,.08);border:1px solid rgba(224,170,121,.25);
+  color:var(--gold);font-size:11.5px;font-weight:600;border-radius:8px;
+  font-family:inherit;cursor:pointer;
+}
+.btn-toggle:hover{background:rgba(224,170,121,.15)}
+.btn-toggle .arrow{transition:transform .2s}
+.btn-toggle.open .arrow{transform:rotate(180deg)}
+
+/* Article list */
+.articles-wrap{display:none;margin-top:18px;padding-top:18px;border-top:1px dashed rgba(224,170,121,.18)}
+.articles-wrap.open{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.search-bar{
+  width:100%;padding:9px 14px;background:rgba(0,0,0,.3);
+  border:1px solid rgba(224,170,121,.22);border-radius:8px;
+  color:#c8d8e8;font-size:12.5px;font-family:inherit;margin-bottom:14px;
+}
+.search-bar:focus{outline:none;border-color:rgba(224,170,121,.5)}
+.search-bar::placeholder{color:rgba(200,170,120,.4)}
+.chuong-group{margin-bottom:14px}
+.chuong-label{
+  font-size:9.5px;font-weight:700;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;
+  padding:4px 10px;background:rgba(224,170,121,.08);border-radius:4px;display:inline-block;margin-bottom:8px;
+}
+.dieu-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
+.dieu-item{
+  display:flex;align-items:flex-start;gap:8px;padding:8px 12px;
+  background:rgba(255,255,255,.02);border:1px solid rgba(224,170,121,.1);
+  border-radius:7px;cursor:pointer;transition:all .15s;
+  font-size:11.5px;line-height:1.45;
+}
+.dieu-item:hover{background:rgba(224,170,121,.08);border-color:rgba(224,170,121,.3);transform:translateX(2px)}
+.dieu-num{
+  flex-shrink:0;font-weight:700;color:var(--gold);
+  background:rgba(224,170,121,.12);padding:2px 7px;border-radius:5px;
+  font-size:10px;min-width:38px;text-align:center;letter-spacing:.05em;
+}
+.dieu-name{color:#d8d8d8;flex:1}
+.no-results{font-size:12px;color:rgba(200,170,120,.5);text-align:center;padding:20px;font-style:italic}
+
+/* Compare */
+.compare-section{
+  margin-top:28px;padding:20px;border:1px dashed rgba(224,170,121,.18);
+  border-radius:12px;background:rgba(0,0,0,.2);
+}
+.compare-title{font-size:12px;font-weight:600;color:rgba(224,170,120,.65);margin-bottom:12px}
 .compare-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .compare-row select{
-  padding:7px 10px;background:rgba(0,0,0,.4);border:1px solid rgba(224,170,121,.2);
-  border-radius:8px;color:#c8d8e8;font-size:11px;font-family:var(--font);flex:1;min-width:180px;
+  padding:8px 11px;background:rgba(0,0,0,.4);border:1px solid rgba(224,170,121,.22);
+  border-radius:8px;color:#c8d8e8;font-size:11.5px;font-family:var(--font);flex:1;min-width:200px;
 }
 .btn-compare{
-  padding:8px 16px;background:rgba(224,170,121,.1);border:1px solid rgba(224,170,121,.25);
-  color:var(--gold);font-size:11px;font-weight:600;border-radius:8px;cursor:pointer;
-  font-family:var(--font);transition:all .18s;white-space:nowrap;
+  padding:9px 16px;background:rgba(224,170,121,.1);border:1px solid rgba(224,170,121,.28);
+  color:var(--gold);font-size:11.5px;font-weight:600;border-radius:8px;cursor:pointer;
+  font-family:var(--font);
 }
 .btn-compare:hover{background:rgba(224,170,121,.2)}
+
+@media(max-width:560px){
+  body{padding:20px 12px 40px}
+  h1{font-size:22px}
+  .law-card{padding:18px}
+  .lc-title{font-size:16px}
+  .dieu-list{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -61,15 +121,15 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
   <div class="brand">
     <div class="brand-dot"></div>
     <div>
-      <div class="brand-title">Pháp lý Network Hướng Dương</div>
+      <div class="brand-title">Văn bản pháp luật · Bản đồ Hướng Dương</div>
       <div class="brand-sub">Visualize văn bản pháp luật Việt Nam</div>
     </div>
   </div>
 
   <h1>Khám phá Luật<br>bằng bản đồ pháp lý</h1>
-  <p class="sub">Click vào văn bản Luật để xem cấu trúc, điều khoản và từ khoá tương tác</p>
+  <p class="sub">Click vào điều luật để mở thẳng vị trí điều đó trên bản đồ tương tác</p>
 
-  <div class="grid" id="law-grid"></div>
+  <div id="law-list"></div>
 
   <div class="compare-section">
     <div class="compare-title">🔗 So sánh 2 văn bản Luật song song</div>
@@ -81,27 +141,148 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
   </div>
 </div>
 
+<!-- Load data Luật TMĐT để render danh sách điều -->
+<script src="data/luat_122_2025.js"></script>
 <script>
+const ROUTE_OF = {
+  'luat_122_2025': 'luat-tmdt'  // standalone file shortcut
+};
+
 fetch('data/manifest.json').then(r=>r.json()).then(m=>{
-  const grid=document.getElementById('law-grid');
-  const s1=document.getElementById('sel1'), s2=document.getElementById('sel2');
+  const list = document.getElementById('law-list');
+  const s1 = document.getElementById('sel1'), s2 = document.getElementById('sel2');
+
   m.laws.forEach(law=>{
-    grid.innerHTML+=`<a class="card" href="viewer.html?laws=${law.id}">
-      <div class="card-num">${law.sohieu}</div>
-      <div class="card-title">${law.title}</div>
-      <div class="card-meta">${law.chuong} Chương · ${law.dieu} Điều · Hiệu lực ${law.hieuluc}</div>
-      <div class="card-tags"><span class="tag">${law.dieu} Điều luật</span><span class="tag">Có từ khoá</span></div>
-      <span class="btn-view">Xem bản đồ →</span>
-    </a>`;
-    [s1,s2].forEach(s=>s.innerHTML+=`<option value="${law.id}">${law.title} (${law.sohieu})</option>`);
+    const reg = window.LUAT_REGISTRY && window.LUAT_REGISTRY[law.id];
+    const route = ROUTE_OF[law.id] || ('viewer.html?laws=' + law.id);
+    const viewerLink = ROUTE_OF[law.id] || ('viewer.html?laws=' + law.id);
+
+    // Build card
+    const card = document.createElement('div');
+    card.className = 'law-card';
+
+    const head = document.createElement('div');
+    head.innerHTML = `
+      <div class="lc-num">${escapeHTML(law.sohieu)}</div>
+      <div class="lc-title">${escapeHTML(law.title)}</div>
+      <div class="lc-meta">${law.chuong} Chương · ${law.dieu} Điều · Hiệu lực ${escapeHTML(law.hieuluc)}</div>
+      <div class="lc-tags">
+        <span class="tag">${law.dieu} Điều luật</span>
+        <span class="tag">Có từ khoá</span>
+      </div>
+    `;
+    card.appendChild(head);
+
+    const actions = document.createElement('div');
+    actions.className = 'lc-actions';
+    actions.innerHTML = `
+      <a class="btn-view" href="${viewerLink}">📍 Xem bản đồ tổng thể →</a>
+      <button class="btn-toggle" type="button">📋 Danh sách ${law.dieu} điều <span class="arrow">▾</span></button>
+    `;
+    card.appendChild(actions);
+
+    // Articles wrap
+    const aw = document.createElement('div');
+    aw.className = 'articles-wrap';
+    if (reg && reg.DD && reg.CH) {
+      const search = document.createElement('input');
+      search.type = 'text';
+      search.className = 'search-bar';
+      search.placeholder = '🔍 Tìm điều luật theo số hoặc tên...';
+      aw.appendChild(search);
+
+      const groupsContainer = document.createElement('div');
+      aw.appendChild(groupsContainer);
+
+      // Render điều grouped by chương
+      function renderGroups(filter) {
+        groupsContainer.innerHTML = '';
+        const f = (filter || '').toLowerCase().trim();
+        let totalShown = 0;
+        reg.CH.forEach(ch => {
+          const group = document.createElement('div');
+          group.className = 'chuong-group';
+          const lbl = document.createElement('div');
+          lbl.className = 'chuong-label';
+          lbl.textContent = ch.lbl.replace(/\n/g, ' · ');
+          group.appendChild(lbl);
+
+          const ul = document.createElement('div');
+          ul.className = 'dieu-list';
+
+          const items = reg.DD.filter(d => d.n >= ch.from && d.n <= ch.to);
+          let shown = 0;
+          items.forEach(d => {
+            const name = d.name || ('Điều ' + d.n);
+            if (f && !(String(d.n).includes(f) || name.toLowerCase().includes(f))) return;
+            const a = document.createElement('a');
+            a.className = 'dieu-item';
+            a.href = viewerLink + (viewerLink.includes('?') ? '&' : '?') + 'dieu=' + d.n;
+            const num = document.createElement('span');
+            num.className = 'dieu-num';
+            num.textContent = 'Đ.' + d.n;
+            const nm = document.createElement('span');
+            nm.className = 'dieu-name';
+            nm.textContent = name;
+            a.appendChild(num);
+            a.appendChild(nm);
+            ul.appendChild(a);
+            shown++;
+            totalShown++;
+          });
+          if (shown > 0) {
+            group.appendChild(ul);
+            groupsContainer.appendChild(group);
+          }
+        });
+        if (totalShown === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'no-results';
+          empty.textContent = 'Không tìm thấy điều luật phù hợp.';
+          groupsContainer.appendChild(empty);
+        }
+      }
+      renderGroups('');
+
+      let timer;
+      search.addEventListener('input', e => {
+        clearTimeout(timer);
+        timer = setTimeout(() => renderGroups(e.target.value), 120);
+      });
+    } else {
+      aw.innerHTML = '<div class="no-results">Đang tải dữ liệu điều luật...</div>';
+    }
+    card.appendChild(aw);
+
+    // Toggle handler
+    const toggleBtn = actions.querySelector('.btn-toggle');
+    toggleBtn.addEventListener('click', () => {
+      aw.classList.toggle('open');
+      toggleBtn.classList.toggle('open');
+    });
+
+    list.appendChild(card);
+
+    // Compare selectors
+    [s1, s2].forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = law.id;
+      opt.textContent = law.title + ' (' + law.sohieu + ')';
+      s.appendChild(opt);
+    });
   });
-  if(m.laws.length>1) s2.selectedIndex=1;
+  if (m.laws.length > 1) s2.selectedIndex = 1;
 });
-function openCompare(){
-  const v1=document.getElementById('sel1').value;
-  const v2=document.getElementById('sel2').value;
-  if(v1===v2){alert('Hãy chọn 2 văn bản Luật khác nhau');return;}
-  window.open('viewer.html?laws='+v1+','+v2,'_blank');
+
+function openCompare() {
+  const v1 = document.getElementById('sel1').value;
+  const v2 = document.getElementById('sel2').value;
+  if (v1 === v2) { alert('Hãy chọn 2 văn bản Luật khác nhau'); return; }
+  window.open('viewer.html?laws=' + v1 + ',' + v2, '_blank');
+}
+
+function escapeHTML(s) {
+  return (s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
 </script>
 </body>
