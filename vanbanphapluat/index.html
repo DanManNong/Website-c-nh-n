@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Văn bản pháp luật · Bản đồ Hướng Dương | Nguyễn Tấn Phong</title>
-<meta name="description" content="Bản đồ tương tác văn bản pháp luật Việt Nam — visualize cấu trúc Chương · Điều · Từ khoá. Bắt đầu với Luật Thương mại điện tử 122/2025/QH15.">
+<meta name="description" content="Bản đồ tương tác văn bản pháp luật Việt Nam — visualize cấu trúc Chương · Điều · Từ khoá. Luật TMĐT 122/2025 và Luật An ninh mạng 116/2025.">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://www.nguyentanphong.com/vanbanphapluat">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <meta name="theme-color" content="#0a0806">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--gold:#E0AA79;--gold-l:#f0c896;--red:#ED1C24;--dark:#0a0806;--font:'Be Vietnam Pro',system-ui,sans-serif}
+:root{--gold:#E0AA79;--gold-l:#f0c896;--red:#ED1C24;--blue:#1565c0;--blue-l:#42a5f5;--dark:#0a0806;--font:'Be Vietnam Pro',system-ui,sans-serif}
 body{background:var(--dark);font-family:var(--font);color:#c8d8e8;min-height:100vh;padding:32px 16px 60px}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:880px;margin:0 auto}
+.wrap{max-width:1080px;margin:0 auto}
 
 /* Brand */
 .brand{display:flex;align-items:center;gap:12px;margin-bottom:32px}
@@ -25,42 +25,66 @@ a{color:inherit;text-decoration:none}
 .brand-sub{font-size:12px;color:rgba(200,170,120,.5);margin-top:2px}
 
 h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-height:1.3}
-.sub{font-size:14px;color:rgba(200,170,120,.6);margin-bottom:32px}
+.sub{font-size:14px;color:rgba(200,170,120,.6);margin-bottom:36px}
 
-/* Card */
-.law-card{
-  background:rgba(224,170,121,.04);border:1px solid rgba(224,170,121,.16);
-  border-radius:14px;padding:22px;margin-bottom:18px;transition:all .2s;
+/* Big law buttons grid */
+.law-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:18px;margin-bottom:36px;
 }
-.law-card:hover{border-color:rgba(224,170,121,.32)}
-.lc-num{font-size:10px;font-weight:700;color:rgba(224,170,121,.55);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
-.lc-title{font-size:18px;font-weight:700;color:#f0e8dc;margin-bottom:6px;line-height:1.4}
-.lc-meta{font-size:11.5px;color:rgba(200,170,120,.55);margin-bottom:14px}
-.lc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
-.tag{font-size:9.5px;padding:3px 9px;border-radius:20px;background:rgba(224,170,121,.08);color:var(--gold);border:1px solid rgba(224,170,121,.2)}
+.law-btn{
+  position:relative;display:flex;flex-direction:column;
+  padding:32px 28px;border-radius:18px;
+  background:rgba(255,255,255,.02);border:2px solid var(--accent,rgba(224,170,121,.2));
+  cursor:pointer;transition:all .25s;overflow:hidden;
+  text-align:left;
+}
+.law-btn::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 100% 0%, var(--accent,transparent) 0%, transparent 60%);
+  opacity:.18;pointer-events:none;transition:opacity .25s;
+}
+.law-btn:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.law-btn:hover::before{opacity:.35}
+.lb-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:4px 10px;border-radius:20px;
+  background:var(--accent);color:#fff;margin-bottom:14px;align-self:flex-start;
+  box-shadow:0 4px 12px var(--accent-shadow,rgba(0,0,0,.2));
+}
+.lb-num{font-size:11px;font-weight:600;color:rgba(200,170,120,.55);letter-spacing:.1em;margin-bottom:4px}
+.lb-title{font-size:24px;font-weight:800;color:#f0e8dc;line-height:1.25;margin-bottom:12px}
+.lb-stats{
+  display:flex;gap:14px;flex-wrap:wrap;
+  font-size:12px;color:rgba(200,170,120,.7);margin-bottom:20px;
+}
+.lb-stats span strong{color:var(--accent-text,var(--gold));font-weight:700}
+.lb-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;border-radius:10px;
+  background:var(--accent);color:#fff;font-weight:700;font-size:13px;
+  align-self:flex-start;transition:gap .2s;
+  box-shadow:0 6px 16px var(--accent-shadow,rgba(0,0,0,.3));
+}
+.law-btn:hover .lb-cta{gap:14px}
 
-.lc-actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn-view{
-  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-l));
-  color:#1a1a1a;font-weight:700;font-size:11.5px;border-radius:8px;
-  font-family:inherit;cursor:pointer;border:none;
-}
-.btn-view:hover{opacity:.88}
-.btn-toggle{
-  display:inline-flex;align-items:center;gap:6px;padding:9px 14px;
-  background:rgba(224,170,121,.08);border:1px solid rgba(224,170,121,.25);
-  color:var(--gold);font-size:11.5px;font-weight:600;border-radius:8px;
-  font-family:inherit;cursor:pointer;
-}
-.btn-toggle:hover{background:rgba(224,170,121,.15)}
-.btn-toggle .arrow{transition:transform .2s}
-.btn-toggle.open .arrow{transform:rotate(180deg)}
+/* Color variants */
+.law-btn.red{--accent:#ED1C24;--accent-text:#ff6b70;--accent-shadow:rgba(237,28,36,.35)}
+.law-btn.blue{--accent:#1976d2;--accent-text:#64b5f6;--accent-shadow:rgba(25,118,210,.35)}
 
-/* Article list */
-.articles-wrap{display:none;margin-top:18px;padding-top:18px;border-top:1px dashed rgba(224,170,121,.18)}
+/* Secondary: list 41/45 articles toggle (collapsed by default) */
+.lb-extra{margin-top:18px;padding-top:18px;border-top:1px dashed rgba(224,170,121,.15)}
+.lb-toggle{
+  background:none;border:none;color:rgba(224,170,121,.7);font-family:inherit;
+  font-size:12px;font-weight:600;cursor:pointer;padding:0;display:flex;align-items:center;gap:6px;
+}
+.lb-toggle:hover{color:var(--gold)}
+.lb-toggle .arrow{transition:transform .2s}
+.lb-toggle.open .arrow{transform:rotate(180deg)}
+.articles-wrap{display:none;margin-top:14px}
 .articles-wrap.open{display:block;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
 .search-bar{
   width:100%;padding:9px 14px;background:rgba(0,0,0,.3);
   border:1px solid rgba(224,170,121,.22);border-radius:8px;
@@ -70,28 +94,28 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
 .search-bar::placeholder{color:rgba(200,170,120,.4)}
 .chuong-group{margin-bottom:14px}
 .chuong-label{
-  font-size:9.5px;font-weight:700;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;
-  padding:4px 10px;background:rgba(224,170,121,.08);border-radius:4px;display:inline-block;margin-bottom:8px;
+  font-size:9.5px;font-weight:700;color:var(--accent-text,var(--gold));letter-spacing:.18em;text-transform:uppercase;
+  padding:4px 10px;background:rgba(255,255,255,.04);border-radius:4px;display:inline-block;margin-bottom:8px;
 }
-.dieu-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
+.dieu-list{display:grid;grid-template-columns:1fr;gap:5px}
 .dieu-item{
-  display:flex;align-items:flex-start;gap:8px;padding:8px 12px;
+  display:flex;align-items:flex-start;gap:8px;padding:7px 10px;
   background:rgba(255,255,255,.02);border:1px solid rgba(224,170,121,.1);
-  border-radius:7px;cursor:pointer;transition:all .15s;
+  border-radius:6px;cursor:pointer;transition:all .15s;
   font-size:11.5px;line-height:1.45;
 }
-.dieu-item:hover{background:rgba(224,170,121,.08);border-color:rgba(224,170,121,.3);transform:translateX(2px)}
+.dieu-item:hover{background:rgba(224,170,121,.08);border-color:var(--accent);transform:translateX(2px)}
 .dieu-num{
-  flex-shrink:0;font-weight:700;color:var(--gold);
-  background:rgba(224,170,121,.12);padding:2px 7px;border-radius:5px;
-  font-size:10px;min-width:38px;text-align:center;letter-spacing:.05em;
+  flex-shrink:0;font-weight:700;color:var(--accent-text,var(--gold));
+  background:rgba(255,255,255,.05);padding:2px 7px;border-radius:5px;
+  font-size:10px;min-width:38px;text-align:center;
 }
 .dieu-name{color:#d8d8d8;flex:1}
 .no-results{font-size:12px;color:rgba(200,170,120,.5);text-align:center;padding:20px;font-style:italic}
 
 /* Compare */
 .compare-section{
-  margin-top:28px;padding:20px;border:1px dashed rgba(224,170,121,.18);
+  margin-top:8px;padding:20px;border:1px dashed rgba(224,170,121,.18);
   border-radius:12px;background:rgba(0,0,0,.2);
 }
 .compare-title{font-size:12px;font-weight:600;color:rgba(224,170,120,.65);margin-bottom:12px}
@@ -110,9 +134,8 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
 @media(max-width:560px){
   body{padding:20px 12px 40px}
   h1{font-size:22px}
-  .law-card{padding:18px}
-  .lc-title{font-size:16px}
-  .dieu-list{grid-template-columns:1fr}
+  .law-btn{padding:24px 20px}
+  .lb-title{font-size:20px}
 }
 </style>
 </head>
@@ -127,9 +150,9 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
   </div>
 
   <h1>Khám phá Luật<br>bằng bản đồ pháp lý</h1>
-  <p class="sub">Click vào điều luật để mở thẳng vị trí điều đó trên bản đồ tương tác</p>
+  <p class="sub">Click vào nút bên dưới để mở bản đồ tương tác từng luật</p>
 
-  <div id="law-list"></div>
+  <div class="law-grid" id="law-list"></div>
 
   <div class="compare-section">
     <div class="compare-title">🔗 So sánh 2 văn bản Luật song song</div>
@@ -145,8 +168,14 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
 <script src="data/luat_122_2025.js"></script>
 <script src="data/luat_116_2025.js"></script>
 <script>
+// Mỗi luật có thể có 1 standalone viewer riêng (URL ngắn). Còn lại dùng /viewer?laws=ID
 const ROUTE_OF = {
-  'luat_122_2025': 'luat-tmdt'  // standalone file shortcut
+  'luat_122_2025': 'luat-tmdt'
+};
+// Màu sắc + emoji cho từng luật (UI hint)
+const STYLE_OF = {
+  'luat_122_2025': { cls:'red',  emoji:'🛒', tagText:'Thương mại điện tử' },
+  'luat_116_2025': { cls:'blue', emoji:'🛡️', tagText:'An ninh mạng' }
 };
 
 fetch('data/manifest.json').then(r=>r.json()).then(m=>{
@@ -155,47 +184,74 @@ fetch('data/manifest.json').then(r=>r.json()).then(m=>{
 
   m.laws.forEach(law=>{
     const reg = window.LUAT_REGISTRY && window.LUAT_REGISTRY[law.id];
-    const route = ROUTE_OF[law.id] || ('viewer?laws=' + law.id);
     const viewerLink = ROUTE_OF[law.id] || ('viewer?laws=' + law.id);
+    const style = STYLE_OF[law.id] || { cls:'', emoji:'⚖️', tagText:'Văn bản' };
 
-    // Build card
-    const card = document.createElement('div');
-    card.className = 'law-card';
+    // ─── Build big button card ───────────────────────────
+    const card = document.createElement('a');
+    card.className = 'law-btn ' + style.cls;
+    card.href = viewerLink;
 
-    const head = document.createElement('div');
-    head.innerHTML = `
-      <div class="lc-num">${escapeHTML(law.sohieu)}</div>
-      <div class="lc-title">${escapeHTML(law.title)}</div>
-      <div class="lc-meta">${law.chuong} Chương · ${law.dieu} Điều · Hiệu lực ${escapeHTML(law.hieuluc)}</div>
-      <div class="lc-tags">
-        <span class="tag">${law.dieu} Điều luật</span>
-        <span class="tag">Có từ khoá</span>
-      </div>
+    const tag = document.createElement('span');
+    tag.className = 'lb-tag';
+    tag.textContent = style.emoji + '  ' + style.tagText;
+    card.appendChild(tag);
+
+    const num = document.createElement('div');
+    num.className = 'lb-num';
+    num.textContent = law.sohieu + ' · Hiệu lực ' + law.hieuluc;
+    card.appendChild(num);
+
+    const title = document.createElement('div');
+    title.className = 'lb-title';
+    title.textContent = law.title;
+    card.appendChild(title);
+
+    const stats = document.createElement('div');
+    stats.className = 'lb-stats';
+    stats.innerHTML = `
+      <span><strong>${law.chuong}</strong> Chương</span>
+      <span><strong>${law.dieu}</strong> Điều</span>
+      <span>Có từ khoá liên kết</span>
     `;
-    card.appendChild(head);
+    card.appendChild(stats);
 
-    const actions = document.createElement('div');
-    actions.className = 'lc-actions';
-    actions.innerHTML = `
-      <a class="btn-view" href="${viewerLink}">📍 Xem bản đồ tổng thể →</a>
-      <button class="btn-toggle" type="button">📋 Danh sách ${law.dieu} điều <span class="arrow">▾</span></button>
-    `;
-    card.appendChild(actions);
+    const cta = document.createElement('span');
+    cta.className = 'lb-cta';
+    cta.innerHTML = '📍 Mở bản đồ tương tác →';
+    card.appendChild(cta);
 
-    // Articles wrap
-    const aw = document.createElement('div');
-    aw.className = 'articles-wrap';
+    // ─── Phần phụ: danh sách điều luật (collapse) ────────
     if (reg && reg.DD && reg.CH) {
+      const extra = document.createElement('div');
+      extra.className = 'lb-extra';
+      extra.addEventListener('click', e => e.stopPropagation()); // tránh click toggle dẫn sang viewer
+
+      const tg = document.createElement('button');
+      tg.type = 'button';
+      tg.className = 'lb-toggle';
+      tg.innerHTML = `📋 Xem danh sách ${law.dieu} điều luật <span class="arrow">▾</span>`;
+      tg.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        aw.classList.toggle('open');
+        tg.classList.toggle('open');
+      });
+      extra.appendChild(tg);
+
+      const aw = document.createElement('div');
+      aw.className = 'articles-wrap';
+
       const search = document.createElement('input');
       search.type = 'text';
       search.className = 'search-bar';
       search.placeholder = '🔍 Tìm điều luật theo số hoặc tên...';
+      search.addEventListener('click', e => e.stopPropagation());
       aw.appendChild(search);
 
       const groupsContainer = document.createElement('div');
       aw.appendChild(groupsContainer);
 
-      // Render điều grouped by chương
       function renderGroups(filter) {
         groupsContainer.innerHTML = '';
         const f = (filter || '').toLowerCase().trim();
@@ -219,13 +275,14 @@ fetch('data/manifest.json').then(r=>r.json()).then(m=>{
             const a = document.createElement('a');
             a.className = 'dieu-item';
             a.href = viewerLink + (viewerLink.includes('?') ? '&' : '?') + 'dieu=' + d.n;
-            const num = document.createElement('span');
-            num.className = 'dieu-num';
-            num.textContent = 'Đ.' + d.n;
+            a.addEventListener('click', e => e.stopPropagation());
+            const numEl = document.createElement('span');
+            numEl.className = 'dieu-num';
+            numEl.textContent = 'Đ.' + d.n;
             const nm = document.createElement('span');
             nm.className = 'dieu-name';
             nm.textContent = name;
-            a.appendChild(num);
+            a.appendChild(numEl);
             a.appendChild(nm);
             ul.appendChild(a);
             shown++;
@@ -250,17 +307,9 @@ fetch('data/manifest.json').then(r=>r.json()).then(m=>{
         clearTimeout(timer);
         timer = setTimeout(() => renderGroups(e.target.value), 120);
       });
-    } else {
-      aw.innerHTML = '<div class="no-results">Đang tải dữ liệu điều luật...</div>';
+      extra.appendChild(aw);
+      card.appendChild(extra);
     }
-    card.appendChild(aw);
-
-    // Toggle handler
-    const toggleBtn = actions.querySelector('.btn-toggle');
-    toggleBtn.addEventListener('click', () => {
-      aw.classList.toggle('open');
-      toggleBtn.classList.toggle('open');
-    });
 
     list.appendChild(card);
 
@@ -280,10 +329,6 @@ function openCompare() {
   const v2 = document.getElementById('sel2').value;
   if (v1 === v2) { alert('Hãy chọn 2 văn bản Luật khác nhau'); return; }
   window.open('viewer?laws=' + v1 + ',' + v2, '_blank');
-}
-
-function escapeHTML(s) {
-  return (s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
 </script>
 </body>
