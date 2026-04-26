@@ -100,6 +100,19 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
 .hbtn-tx{font-size:10.5px}
 .hbtn:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.22)}
 .hbtn.active{background:rgba(192,57,43,.12);border-color:rgba(192,57,43,.35);color:#e87070}
+/* Home button — màu xanh nổi bật */
+.hbtn-home{
+  background:linear-gradient(135deg,rgba(0,150,217,.18),rgba(0,180,240,.08)) !important;
+  border-color:rgba(0,180,240,.45) !important;
+  color:#64b5f6 !important;
+  text-decoration:none;
+}
+.hbtn-home:hover{
+  background:linear-gradient(135deg,rgba(0,150,217,.32),rgba(0,180,240,.16)) !important;
+  border-color:rgba(0,180,240,.6) !important;
+  color:#90caf9 !important;
+  box-shadow:0 4px 12px rgba(0,150,217,.25);
+}
 .hdivider{width:1px;height:18px;background:var(--border);margin:0 2px}
 
 /* ─── LEGEND ─────────────────────────── */
@@ -548,6 +561,8 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
     <span class="hd-sub">7 Chương · 41 Điều · Hiệu lực 01/07/2026</span>
   </div>
   <div class="hd-actions">
+    <a class="hbtn hbtn-home" href="/legalmap" title="Quay lại trang chủ LegalMap"><span class="hbtn-ic">🏠</span><span class="hbtn-tx">LegalMap</span></a>
+    <div class="hdivider"></div>
     <button class="hbtn" onclick="cy.fit(null,55)" title="Vừa khung — fit toàn bộ vào màn hình"><span class="hbtn-ic">⟲</span><span class="hbtn-tx">Vừa khung</span></button>
     <button class="hbtn" onclick="clr()" title="Bỏ chọn — xoá highlight"><span class="hbtn-ic">✕</span><span class="hbtn-tx">Bỏ chọn</span></button>
     <div class="hdivider"></div>
