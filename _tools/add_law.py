@@ -322,7 +322,7 @@ def update_vercel_rewrite(slug: str):
     """Add rewrite rule for /legalmap/{slug} → viewer.html"""
     vp = REPO_ROOT / 'vercel.json'
     cfg = json.loads(vp.read_text())
-    rule = { "source": f"/legalmap/{slug}", "destination": "/legalmap/viewer.html" }
+    rule = { "source": f"/legalmap/{slug}", "destination": "/legalmap/viewer" }
     rewrites = cfg.setdefault('rewrites', [])
     if any(r.get('source') == rule['source'] for r in rewrites):
         print(f"  ⚠️  Rewrite cho /legalmap/{slug} đã có — skip")

@@ -25,9 +25,9 @@
     { "source": "/coming-soon", "destination": "/", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/legalmap/122-2025", "destination": "/legalmap/viewer.html" },
-    { "source": "/legalmap/116-2025", "destination": "/legalmap/viewer.html" },
-    { "source": "/legalmap/91-2025", "destination": "/legalmap/viewer.html" }
+    { "source": "/legalmap/122-2025", "destination": "/legalmap/viewer" },
+    { "source": "/legalmap/116-2025", "destination": "/legalmap/viewer" },
+    { "source": "/legalmap/91-2025", "destination": "/legalmap/viewer" }
   ],
   "headers": [
     {
