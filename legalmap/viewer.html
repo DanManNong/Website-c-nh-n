@@ -307,25 +307,43 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
 #sidebar.collapsed{
   transform:translateX(calc(-100% - 16px));
 }
+/* ─── SB TOGGLE — đồng bộ Web/iPad/Phone:
+     đặt ngay TRÊN ĐẦU sidebar (left desktop, bottom-sheet mobile)
+     có hiệu ứng nhấp nháy gold để dễ thấy ─── */
 #sb-toggle{
   position:fixed;
-  left:332px; /* 16 + 300 + 16 */
-  top:50%;
-  transform:translateY(-50%);
-  width:22px;height:52px;
-  background:rgba(10,9,8,.94);
-  border:1px solid rgba(224,170,121,.2);
-  border-left:none;
-  border-radius:0 10px 10px 0;
+  /* Desktop: trên đầu sidebar trái */
+  left:166px;       /* 16 + 300/2 = giữa sidebar */
+  top:50px;         /* sát mép trên sidebar */
+  transform:translateX(-50%);
+  width:64px;height:28px;
+  background:linear-gradient(135deg,rgba(224,170,121,.22),rgba(224,170,121,.08));
+  border:1px solid rgba(224,170,121,.45);
+  border-radius:14px;
   cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--ntp-gold);font-size:13px;font-weight:700;
-  z-index:25;
-  transition:left .3s cubic-bezier(.4,0,.2,1), background .18s;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  color:var(--ntp-gold);font-size:14px;font-weight:700;
+  z-index:30;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
   user-select:none;
+  box-shadow:0 4px 14px rgba(224,170,121,.3),0 0 24px rgba(224,170,121,.18);
+  animation:sb-pulse 2s ease-in-out infinite;
 }
-#sb-toggle:hover{background:rgba(224,170,121,.1);}
-#sb-toggle.collapsed-state{left:16px;}
+#sb-toggle:hover{
+  background:linear-gradient(135deg,rgba(224,170,121,.35),rgba(224,170,121,.18));
+  transform:translateX(-50%) scale(1.08);
+  box-shadow:0 6px 20px rgba(224,170,121,.5),0 0 32px rgba(224,170,121,.3);
+}
+#sb-toggle.collapsed-state{
+  /* Khi sidebar ẩn — nút vẫn ở giữa màn hình trên cùng */
+  left:50%;top:74px;
+}
+@keyframes sb-pulse{
+  0%,100%{box-shadow:0 4px 14px rgba(224,170,121,.3),0 0 24px rgba(224,170,121,.18)}
+  50%{box-shadow:0 4px 18px rgba(224,170,121,.55),0 0 36px rgba(224,170,121,.35)}
+}
+#sb-toggle .sb-arrow{font-size:11px;line-height:1}
+#sb-toggle .sb-text{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 
 /* ─── TOOLTIP ───────────────────────────────────────── */
 #tooltip{
@@ -487,6 +505,20 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
   #search-wrap .s-ic{font-size:14px !important;left:24px !important}
   #search-results{max-height:30vh !important}
 
+  /* SB toggle — trên đầu BOTTOM SHEET (sheet ở 32vh tính từ đáy → toggle ở phía trên ngay sheet) */
+  #sb-toggle{
+    left:50% !important;
+    top:auto !important;
+    bottom:calc(68vh + 8px) !important;       /* 68vh là sheet height + 8 cách lề */
+    transform:translateX(-50%) !important;
+    width:80px !important;height:32px !important;
+    font-size:15px !important;
+  }
+  #sb-toggle.collapsed-state{
+    /* Khi sheet ẩn → toggle nằm sát đáy màn hình */
+    bottom:24px !important;top:auto !important;
+  }
+
   /* Loader compact */
   #loader .ld-logo{font-size:36px}
   #loader .ld-title{font-size:14px}
@@ -595,7 +627,7 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
 </div>
 
 <div id="tooltip"></div>
-<button id="sb-toggle" onclick="toggleSidebar()" title="Thu/mở bảng điều hướng">‹</button>
+<button id="sb-toggle" onclick="toggleSidebar()" title="Thu/mở bảng điều hướng" aria-label="Thu/mở bảng điều hướng"><span class="sb-arrow">▾</span><span class="sb-text">Bản đồ</span></button>
 
 <div id="cy"></div>
 <script>
@@ -957,6 +989,9 @@ function clr(){
   document.getElementById('panel-content').style.display='none';
   document.getElementById('panel-empty').style.display='';
   document.getElementById('panel-tags').innerHTML='';
+  // Zoom out — fit toàn bản đồ về vị trí gốc
+  const isMobile = window.innerWidth < 760;
+  cy.animate({ fit: { padding: isMobile ? 30 : 55 } }, { duration: 480, easing: 'ease-in-out' });
 }
 
 // ── 9. SIDEBAR TOGGLE ────────────────────────────────────────
@@ -965,7 +1000,9 @@ function toggleSidebar(){
   const tog=document.getElementById('sb-toggle');
   const col=sb.classList.toggle('collapsed');
   tog.classList.toggle('collapsed-state',col);
-  tog.textContent=col?'›':'‹';
+  // Cập nhật mũi tên: ▾ khi đang hiện (click để thu), ▴ khi đang ẩn (click để mở)
+  const arrow=tog.querySelector('.sb-arrow');
+  if(arrow) arrow.textContent = col ? '▴' : '▾';
 }
 
 // ── 10. TOOLTIP ───────────────────────────────────────────────
@@ -1011,12 +1048,15 @@ async function init(){
     allData.map(d=>d.meta.chuong+' Chương · '+d.meta.dieu+' Điều').join(' | ');
   document.title = titles+' — Network Hướng Dương';
 
-  // Init Cytoscape
+  // Init Cytoscape — KHÓA vị trí node (user không kéo được, vẫn pan + pinch zoom canvas)
   cy = cytoscape({
     container: document.getElementById('cy'),
     elements: els,
     style: getStyles(),
-    layout:{name:'preset',animate:false,positions:node=>window._POS[node.id()]||{x:0,y:0}}
+    layout:{name:'preset',animate:false,positions:node=>window._POS[node.id()]||{x:0,y:0}},
+    autoungrabify: true,    // Toàn bộ node KHÔNG kéo được
+    autounselectify: false, // Vẫn cho click chọn
+    boxSelectionEnabled: false,
   });
 
   // Collect all nodes for search
@@ -1085,6 +1125,15 @@ async function init(){
     nd.connectedEdges().removeClass('dim').addClass('hl-e');
     nd.neighborhood('node').removeClass('dim').forEach(n=>n.addClass(hlClass(n.data('type'))));
     showPanel(nd);
+    // Zoom logic — focus vào điều luật/từ khoá đang chọn
+    const tp = nd.data('type');
+    if (tp === 'dieu' || tp === 'kwc' || tp === 'kwg') {
+      const isMobile = window.innerWidth < 760;
+      cy.animate({
+        center: { eles: nd },
+        zoom: isMobile ? 1.4 : 1.6
+      }, { duration: 480, easing: 'ease-in-out' });
+    }
   });
   cy.on('tap',e=>{ if(e.target===cy) clr(); });
   cy.on('dblclick','node',e=>cy.animate({center:{eles:e.target},zoom:2.2},{duration:320}));
