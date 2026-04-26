@@ -50,6 +50,22 @@
       "tagEmoji": "🔒",
       "tagText": "Bảo vệ dữ liệu cá nhân",
       "pitch": "Khung pháp lý quyền riêng tư số — chủ thể dữ liệu, bên kiểm soát, đánh giá tác động, chuyển dữ liệu xuyên biên giới."
+    },
+    {
+      "id": "luat_019_2023",
+      "slug": "19-2023",
+      "file": "data/luat_019_2023.js",
+      "title": "Luật Bảo vệ quyền lợi người tiêu dùng",
+      "sohieu": "19/2023/QH15",
+      "chuong": 7,
+      "dieu": 80,
+      "kw": 8,
+      "hieuluc": "01/07/2024",
+      "color": "#00695C",
+      "variant": "teal",
+      "tagEmoji": "💡",
+      "tagText": "Bảo vệ quyền lợi người tiêu dùng",
+      "pitch": "Bản đồ tương tác Luật Bảo vệ quyền lợi người tiêu dùng — 7 chương · 80 điều · 8 từ khoá liên kết."
     }
   ]
 }
