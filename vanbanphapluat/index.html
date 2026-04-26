@@ -154,7 +154,7 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
 
   <!-- 2 thẻ tĩnh — luôn hiển thị dù JS lỗi -->
   <div class="law-grid" id="law-list">
-    <a class="law-btn red" href="luat-tmdt">
+    <a class="law-btn red" href="/vanbanphapluat/luat-tmdt">
       <span class="lb-tag">🛒  Thương mại điện tử</span>
       <div class="lb-num">122/2025/QH15 · Hiệu lực 01/07/2026</div>
       <div class="lb-title">Luật Thương mại điện tử</div>
@@ -165,7 +165,7 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
       </div>
       <span class="lb-cta">📍 Mở bản đồ tương tác →</span>
     </a>
-    <a class="law-btn blue" href="viewer?laws=luat_116_2025">
+    <a class="law-btn blue" href="/vanbanphapluat/viewer?laws=luat_116_2025">
       <span class="lb-tag">🛡️  An ninh mạng</span>
       <div class="lb-num">116/2025/QH15 · Hiệu lực 01/07/2026</div>
       <div class="lb-title">Luật An ninh mạng</div>
@@ -188,9 +188,9 @@ h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-hei
   </div>
 </div>
 
-<!-- Load data các luật để render danh sách điều (versioned để bypass cache cũ) -->
-<script src="data/luat_122_2025.js?v=20260426b"></script>
-<script src="data/luat_116_2025.js?v=20260426b"></script>
+<!-- Load data các luật để render danh sách điều (absolute path + versioned) -->
+<script src="/vanbanphapluat/data/luat_122_2025.js?v=20260426b"></script>
+<script src="/vanbanphapluat/data/luat_116_2025.js?v=20260426b"></script>
 <script>
 // Mỗi luật có thể có 1 standalone viewer riêng (URL ngắn). Còn lại dùng /viewer?laws=ID
 const ROUTE_OF = {
@@ -202,15 +202,15 @@ const STYLE_OF = {
   'luat_116_2025': { cls:'blue', emoji:'🛡️', tagText:'An ninh mạng' }
 };
 
-// Always bypass cache for manifest (small file, đảm bảo luôn mới nhất)
-fetch('data/manifest.json?v=20260426b', {cache: 'no-cache'}).then(r=>r.json()).then(m=>{
+// Always bypass cache for manifest (absolute path đảm bảo resolve đúng)
+fetch('/vanbanphapluat/data/manifest.json?v=20260426b', {cache: 'no-cache'}).then(r=>r.json()).then(m=>{
   const list = document.getElementById('law-list');
   list.innerHTML = ''; // clear fallback static cards trước khi JS render version đầy đủ
   const s1 = document.getElementById('sel1'), s2 = document.getElementById('sel2');
 
   m.laws.forEach(law=>{
     const reg = window.LUAT_REGISTRY && window.LUAT_REGISTRY[law.id];
-    const viewerLink = ROUTE_OF[law.id] || ('viewer?laws=' + law.id);
+    const viewerLink = '/vanbanphapluat/' + (ROUTE_OF[law.id] || ('viewer?laws=' + law.id));
     const style = STYLE_OF[law.id] || { cls:'', emoji:'⚖️', tagText:'Văn bản' };
 
     // ─── Build big button card ───────────────────────────
@@ -363,7 +363,7 @@ function openCompare() {
   const v1 = document.getElementById('sel1').value;
   const v2 = document.getElementById('sel2').value;
   if (v1 === v2) { alert('Hãy chọn 2 văn bản Luật khác nhau'); return; }
-  window.open('viewer?laws=' + v1 + ',' + v2, '_blank');
+  window.open('/vanbanphapluat/viewer?laws=' + v1 + ',' + v2, '_blank');
 }
 </script>
 </body>

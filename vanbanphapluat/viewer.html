@@ -915,7 +915,7 @@ async function init(){
   // Load data files
   for(const id of lawIds){
     if(!window.LUAT_REGISTRY||!window.LUAT_REGISTRY[id]){
-      try { await loadScript('data/'+id+'.js'); } catch(e){ console.error(e); }
+      try { await loadScript('/vanbanphapluat/data/'+id+'.js?v=20260426b'); } catch(e){ console.error(e); }
     }
   }
 
