@@ -29,7 +29,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pháp lý Network Hướng Dương | Nguyễn Tấn Phong</title>
 <meta name="robots" content="noindex">
-<link rel="canonical" href="https://www.nguyentanphong.com/vanbanphapluat">
+<link rel="canonical" href="https://www.nguyentanphong.com/legalmap">
 <link rel="icon" href="/favicon.ico">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
 <style>
@@ -88,13 +88,16 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
 .hd-sub{font-size:10.5px;color:var(--text-dim);margin-left:8px}
 .hd-actions{display:flex;gap:6px;align-items:center}
 .hbtn{
+  display:inline-flex;align-items:center;gap:5px;
   background:rgba(255,255,255,.05);
   border:1px solid var(--border2);
   color:var(--text-mid);
-  padding:5px 12px;border-radius:7px;
+  padding:6px 11px;border-radius:7px;
   font-size:10.5px;font-weight:500;cursor:pointer;
   transition:all .18s;font-family:var(--font);
 }
+.hbtn-ic{font-size:13px;line-height:1}
+.hbtn-tx{font-size:10.5px}
 .hbtn:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.22)}
 .hbtn.active{background:rgba(192,57,43,.12);border-color:rgba(192,57,43,.35);color:#e87070}
 .hdivider{width:1px;height:18px;background:var(--border);margin:0 2px}
@@ -425,6 +428,59 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
   padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;
   letter-spacing:.05em;text-transform:uppercase;margin-right:4px;
 }
+
+/* ═══ MOBILE RESPONSIVE ════════════════════════════════ */
+@media(max-width:760px){
+  /* Header: chỉ giữ icon trên mobile, ẩn text */
+  .hbtn{padding:7px 9px;border-radius:8px}
+  .hbtn-tx{display:none}                 /* chỉ hiện icon */
+  .hbtn-ic{font-size:15px}
+  .hdivider{display:none}
+  #hd{padding:10px 12px !important;flex-wrap:wrap;gap:8px}
+  .hd-brand{flex:1;min-width:0}
+  .hd-title{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+  .hd-sub{display:none}                  /* ẩn sub-title trên mobile cho gọn */
+  .hd-actions{gap:5px;flex-wrap:wrap}
+
+  /* Sidebar (legend + panel) → bottom sheet trượt từ dưới lên */
+  #sidebar{
+    left:0 !important;right:0 !important;top:auto !important;bottom:0;
+    width:100% !important;max-height:60vh !important;
+    flex-direction:column-reverse !important;     /* panel ở trên, legend ở dưới */
+    border-radius:18px 18px 0 0;
+    background:rgba(10,9,8,.95);backdrop-filter:blur(18px);
+    box-shadow:0 -8px 32px rgba(0,0,0,.6);
+    padding:8px 12px 12px;gap:8px;
+  }
+  #sidebar::before{
+    content:'';display:block;width:36px;height:4px;background:rgba(224,170,121,.3);
+    border-radius:3px;margin:0 auto 6px;
+  }
+  #lg{padding:10px 12px;border-radius:10px}
+  #lg .lg-section{font-size:8.5px;margin-bottom:6px}
+  #panel{max-height:46vh;border-radius:10px}
+  #panel-head{padding:10px 12px 8px}
+  #panel-title{font-size:13px}
+  #panel-body{padding:10px 12px}
+  #panel-content{font-size:11.5px;line-height:1.7}
+
+  /* Search box: nằm trong bottom sheet, font lớn hơn cho tap thoải mái */
+  #search-box{font-size:13px !important;padding:10px 12px 10px 34px !important;min-height:40px}
+  #search-wrap .s-ic{font-size:14px !important;left:24px !important}
+  #search-results{max-height:30vh !important}
+
+  /* Loader compact */
+  #loader .ld-logo{font-size:36px}
+  #loader .ld-title{font-size:14px}
+  #loader .ld-sub{font-size:11px}
+}
+
+/* Touch-friendly tap targets — bất kể viewport */
+@media(hover:none) and (pointer:coarse){
+  .hbtn{padding:8px 12px;min-height:36px}
+  #search-box{font-size:14px;padding:10px 14px}
+  .ptag{padding:5px 12px;font-size:11px}
+}
 </style>
 </head>
 <body>
@@ -442,12 +498,12 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
     <span class="hd-sub">7 Chương · 41 Điều · Hiệu lực 01/07/2026</span>
   </div>
   <div class="hd-actions">
-    <button class="hbtn" onclick="cy.fit(null,55)">⟲ Fit</button>
-    <button class="hbtn" onclick="clr()">✕ Clr</button>
+    <button class="hbtn" onclick="cy.fit(null,55)" title="Vừa khung — fit toàn bộ vào màn hình"><span class="hbtn-ic">⟲</span><span class="hbtn-tx">Vừa khung</span></button>
+    <button class="hbtn" onclick="clr()" title="Bỏ chọn — xoá highlight"><span class="hbtn-ic">✕</span><span class="hbtn-tx">Bỏ chọn</span></button>
     <div class="hdivider"></div>
-    <button class="hbtn" id="bkw" onclick="togKW()">Từ khoá</button>
-    <button class="hbtn" id="bd"  onclick="togD()">Điều luật</button>
-    <button class="hbtn" id="bch" onclick="togCh()">Chương</button>
+    <button class="hbtn" id="bkw" onclick="togKW()" title="Bật/tắt lớp Từ khoá"><span class="hbtn-ic">🏷️</span><span class="hbtn-tx">Từ khoá</span></button>
+    <button class="hbtn" id="bd"  onclick="togD()" title="Bật/tắt lớp Điều luật"><span class="hbtn-ic">📑</span><span class="hbtn-tx">Điều luật</span></button>
+    <button class="hbtn" id="bch" onclick="togCh()" title="Bật/tắt lớp Chương"><span class="hbtn-ic">📜</span><span class="hbtn-tx">Chương</span></button>
   </div>
 </div>
 
@@ -915,7 +971,7 @@ async function init(){
   // Load data files
   for(const id of lawIds){
     if(!window.LUAT_REGISTRY||!window.LUAT_REGISTRY[id]){
-      try { await loadScript('/vanbanphapluat/data/'+id+'.js?v=20260426b'); } catch(e){ console.error(e); }
+      try { await loadScript('/legalmap/data/'+id+'.js?v=20260426b'); } catch(e){ console.error(e); }
     }
   }
 
@@ -949,7 +1005,20 @@ async function init(){
   _allNodes = cy.nodes('[type="dieu"],[type="kwc"],[type="kwg"]').toArray();
 
   cy.ready(()=>{
-    cy.fit(null,55);
+    // Mobile: padding to hơn để bản đồ không tràn — user pinch để zoom xem chi tiết
+    const isMobile = window.innerWidth < 760;
+    const padding = isMobile ? 30 : 55;
+    cy.fit(null, padding);
+    if (isMobile) {
+      // Sau khi sidebar bottom-sheet show, fit lại tránh che mất nodes
+      setTimeout(() => cy.fit(null, 30), 600);
+      // Lắng nghe orientation/resize để re-fit
+      let rsTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(rsTimer);
+        rsTimer = setTimeout(() => cy.fit(null, 30), 200);
+      });
+    }
     setTimeout(()=>{
       const l=document.getElementById('loader');
       if(l){l.style.opacity='0';setTimeout(()=>l.remove(),600);}

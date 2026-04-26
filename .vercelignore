@@ -49,3 +49,7 @@ TRANG-FULL.md
 
 # Archive folder NguyenTanPhong — chỉ lưu local backup, không deploy
 _archive_nguyentanphong/
+
+# Draft preview content — chỉ xem local, không deploy
+**/index-draft.html
+**/*-draft.html

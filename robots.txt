@@ -7,6 +7,7 @@ Disallow: /v4
 Disallow: /preview-full
 Disallow: /coming-soon
 Disallow: /vanbanphapluat
+Disallow: /legalmap
 Disallow: /wireframe_
 Disallow: /bai-giang-
 Disallow: /luu
