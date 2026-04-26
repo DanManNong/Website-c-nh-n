@@ -34,3 +34,6 @@ _*.py
 
 # Wireframe legacy
 wireframe_nguyentanphong_v2.html
+
+# Archive backup từ folder NguyenTanPhong (giữ local, không push lên git)
+_archive_nguyentanphong/

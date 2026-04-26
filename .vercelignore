@@ -46,3 +46,6 @@ admin.html
 # Doc 2 trang offline — không deploy
 DANH-THIEP.md
 TRANG-FULL.md
+
+# Archive folder NguyenTanPhong — chỉ lưu local backup, không deploy
+_archive_nguyentanphong/
