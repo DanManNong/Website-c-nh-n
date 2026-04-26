@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Văn bản pháp luật · Bản đồ Hướng Dương | Nguyễn Tấn Phong</title>
+<meta name="description" content="Bản đồ tương tác văn bản pháp luật Việt Nam — visualize cấu trúc Chương · Điều · Từ khoá. Bắt đầu với Luật Thương mại điện tử 122/2025/QH15.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://www.nguyentanphong.com/vanbanphapluat">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<meta name="theme-color" content="#0a0806">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#E0AA79;--gold-l:#f0c896;--red:#ED1C24;--dark:#0a0806;--font:'Be Vietnam Pro',system-ui,sans-serif}
+body{background:var(--dark);font-family:var(--font);color:#c8d8e8;min-height:100vh;padding:40px 20px}
+.wrap{max-width:860px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:40px}
+.brand-dot{width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 10px rgba(237,28,36,.5)}
+.brand-title{font-size:18px;font-weight:800;color:var(--gold);letter-spacing:.02em}
+.brand-sub{font-size:12px;color:rgba(200,170,120,.5);margin-top:2px}
+h1{font-size:28px;font-weight:800;color:var(--gold-l);margin-bottom:8px;line-height:1.3}
+.sub{font-size:14px;color:rgba(200,170,120,.6);margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px}
+.card{
+  background:rgba(224,170,121,.04);border:1px solid rgba(224,170,121,.14);
+  border-radius:14px;padding:20px;cursor:pointer;
+  transition:all .2s;text-decoration:none;color:inherit;display:block;
+}
+.card:hover{background:rgba(224,170,121,.09);border-color:rgba(224,170,121,.3);transform:translateY(-2px)}
+.card-num{font-size:10px;font-weight:700;color:rgba(224,170,121,.5);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.card-title{font-size:15px;font-weight:700;color:#f0e8dc;margin-bottom:4px;line-height:1.4}
+.card-meta{font-size:11px;color:rgba(200,170,120,.5);margin-bottom:12px}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:9.5px;padding:3px 8px;border-radius:20px;background:rgba(224,170,121,.08);color:var(--gold);border:1px solid rgba(224,170,121,.2)}
+.btn-view{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  padding:8px 16px;background:linear-gradient(135deg,var(--gold),var(--gold-l));
+  color:#1a1a1a;font-weight:700;font-size:11px;border-radius:8px;
+  text-decoration:none;transition:opacity .15s;
+}
+.btn-view:hover{opacity:.85}
+.compare-section{margin-top:20px;padding:20px;border:1px dashed rgba(224,170,121,.15);border-radius:12px}
+.compare-title{font-size:12px;font-weight:600;color:rgba(224,170,120,.6);margin-bottom:12px}
+.compare-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.compare-row select{
+  padding:7px 10px;background:rgba(0,0,0,.4);border:1px solid rgba(224,170,121,.2);
+  border-radius:8px;color:#c8d8e8;font-size:11px;font-family:var(--font);flex:1;min-width:180px;
+}
+.btn-compare{
+  padding:8px 16px;background:rgba(224,170,121,.1);border:1px solid rgba(224,170,121,.25);
+  color:var(--gold);font-size:11px;font-weight:600;border-radius:8px;cursor:pointer;
+  font-family:var(--font);transition:all .18s;white-space:nowrap;
+}
+.btn-compare:hover{background:rgba(224,170,121,.2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <div>
+      <div class="brand-title">Pháp lý Network Hướng Dương</div>
+      <div class="brand-sub">Visualize văn bản pháp luật Việt Nam</div>
+    </div>
+  </div>
+
+  <h1>Khám phá Luật<br>bằng bản đồ pháp lý</h1>
+  <p class="sub">Click vào văn bản Luật để xem cấu trúc, điều khoản và từ khoá tương tác</p>
+
+  <div class="grid" id="law-grid"></div>
+
+  <div class="compare-section">
+    <div class="compare-title">🔗 So sánh 2 văn bản Luật song song</div>
+    <div class="compare-row">
+      <select id="sel1"></select>
+      <select id="sel2"></select>
+      <button class="btn-compare" onclick="openCompare()">Xem song song →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+fetch('data/manifest.json').then(r=>r.json()).then(m=>{
+  const grid=document.getElementById('law-grid');
+  const s1=document.getElementById('sel1'), s2=document.getElementById('sel2');
+  m.laws.forEach(law=>{
+    grid.innerHTML+=`<a class="card" href="viewer.html?laws=${law.id}">
+      <div class="card-num">${law.sohieu}</div>
+      <div class="card-title">${law.title}</div>
+      <div class="card-meta">${law.chuong} Chương · ${law.dieu} Điều · Hiệu lực ${law.hieuluc}</div>
+      <div class="card-tags"><span class="tag">${law.dieu} Điều luật</span><span class="tag">Có từ khoá</span></div>
+      <span class="btn-view">Xem bản đồ →</span>
+    </a>`;
+    [s1,s2].forEach(s=>s.innerHTML+=`<option value="${law.id}">${law.title} (${law.sohieu})</option>`);
+  });
+  if(m.laws.length>1) s2.selectedIndex=1;
+});
+function openCompare(){
+  const v1=document.getElementById('sel1').value;
+  const v2=document.getElementById('sel2').value;
+  if(v1===v2){alert('Hãy chọn 2 văn bản Luật khác nhau');return;}
+  window.open('viewer.html?laws='+v1+','+v2,'_blank');
+}
+</script>
+</body>
+</html>
