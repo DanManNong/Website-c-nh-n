@@ -65,3 +65,6 @@ bai-giang-b.html
 bai-giang-c.html
 bai-giang-d.html
 coming-soon.html
+
+# Internal tools — không deploy
+_tools/
