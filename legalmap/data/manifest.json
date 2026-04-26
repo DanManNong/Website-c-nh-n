@@ -1,36 +1,55 @@
 {
-  "version": "1.2",
+  "version": "2.0",
   "updated": "2026-04-26",
+  "schema_note": "Schema v2 — catalog render 100% từ manifest. Thêm luật mới: chỉ cần thêm 1 entry + 1 file data JS.",
   "laws": [
     {
       "id": "luat_122_2025",
+      "slug": "122-2025",
       "file": "data/luat_122_2025.js",
       "title": "Luật Thương mại điện tử",
       "sohieu": "122/2025/QH15",
       "chuong": 7,
       "dieu": 41,
+      "kw": 17,
       "hieuluc": "01/07/2026",
-      "color": "#ED1C24"
+      "color": "#ED1C24",
+      "variant": "red",
+      "tagEmoji": "🛒",
+      "tagText": "Thương mại điện tử",
+      "pitch": "Khung pháp lý cho TMĐT thế hệ mới — livestream, tiếp thị liên kết, nền tảng có yếu tố nước ngoài."
     },
     {
       "id": "luat_116_2025",
+      "slug": "116-2025",
       "file": "data/luat_116_2025.js",
       "title": "Luật An ninh mạng",
       "sohieu": "116/2025/QH15",
       "chuong": 8,
       "dieu": 45,
+      "kw": 16,
       "hieuluc": "01/07/2026",
-      "color": "#1565c0"
+      "color": "#1565c0",
+      "variant": "blue",
+      "tagEmoji": "🛡️",
+      "tagText": "An ninh mạng",
+      "pitch": "Bản đồ phòng tuyến số quốc gia — bảo vệ hệ thống thông tin, dữ liệu, an toàn không gian mạng."
     },
     {
       "id": "luat_091_2025",
+      "slug": "91-2025",
       "file": "data/luat_091_2025.js",
       "title": "Luật Bảo vệ dữ liệu cá nhân",
       "sohieu": "91/2025/QH15",
       "chuong": 5,
       "dieu": 39,
+      "kw": 16,
       "hieuluc": "01/01/2026",
-      "color": "#7B1FA2"
+      "color": "#7B1FA2",
+      "variant": "purple",
+      "tagEmoji": "🔒",
+      "tagText": "Bảo vệ dữ liệu cá nhân",
+      "pitch": "Khung pháp lý quyền riêng tư số — chủ thể dữ liệu, bên kiểm soát, đánh giá tác động, chuyển dữ liệu xuyên biên giới."
     }
   ]
 }
