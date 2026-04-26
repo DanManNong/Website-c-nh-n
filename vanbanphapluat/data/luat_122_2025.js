@@ -20,7 +20,7 @@ window.LUAT_REGISTRY['luat_122_2025'] = {
   },
 
   // ── DỮ LIỆU ────────────────────────────────────────
-  const CH=[
+  CH:[
   {id:'c1',lbl:'Ch.I\nQuy định\nchung',from:1,to:8,
    desc:'Chương I — Những quy định chung\nĐiều 1 đến Điều 8'},
   {id:'c2',lbl:'Ch.II\nChính sách\nphát triển',from:9,to:10,
@@ -35,12 +35,12 @@ window.LUAT_REGISTRY['luat_122_2025'] = {
    desc:'Chương VI — Ứng dụng công nghệ trong quản lý và xử lý vi phạm\nĐiều 37 đến Điều 39'},
   {id:'c7',lbl:'Ch.VII\nThi hành',from:40,to:41,
    desc:'Chương VII — Điều khoản thi hành\nĐiều 40 đến Điều 41'},
-];
+],
 
 // ═══════════════════════════════════════════════════
 // DỮ LIỆU: ĐIỀU LUẬT (nội dung đầy đủ từ văn bản gốc)
 // ═══════════════════════════════════════════════════
-const DD=[
+DD:[
 {n:1,name:'Phạm vi điều chỉnh',kw:['kNT','kCS'],
 full:`Luật này quy định về chính sách phát triển thương mại điện tử; nền tảng thương mại điện tử và trách nhiệm của các tổ chức, cá nhân trong hoạt động thương mại điện tử; thương mại điện tử có yếu tố nước ngoài; trách nhiệm của tổ chức cung cấp dịch vụ hỗ trợ thương mại điện tử; ứng dụng công nghệ trong quản lý và xử lý vi phạm trong thương mại điện tử.`},
 
@@ -546,12 +546,12 @@ full:`Luật này có hiệu lực thi hành từ ngày 01 tháng 7 năm 2026.`}
 full:`1. Website thương mại điện tử, ứng dụng thương mại điện tử được xác nhận thông báo, đăng ký hoạt động trước ngày Luật này có hiệu lực thi hành thì được tiếp tục hoạt động thương mại điện tử theo nội dung đã được xác nhận tại hồ sơ thông báo, đăng ký đến hết ngày 30 tháng 6 năm 2027.
 
 2. Tổ chức cung cấp dịch vụ chứng thực hợp đồng điện tử được xác nhận đăng ký trước ngày Luật này có hiệu lực thi hành thì được tiếp tục hoạt động đến hết ngày 30 tháng 6 năm 2027.`},
-];
+],
 
 // ═══════════════════════════════════════════════════
 // TỪ KHOÁ (sorted ABC sẽ tính trong buildPos)
 // ═══════════════════════════════════════════════════
-const KW=[
+KW:[
   {id:'kAF',  lbl:'Tiếp thị\nliên kết', type:'kwg',
    terms:['tiếp thị liên kết trong thương mại điện tử','người tiếp thị liên kết trong thương mại điện tử','dịch vụ tiếp thị liên kết trong thương mại điện tử','tổ chức, cá nhân cung cấp dịch vụ tiếp thị liên kết','mã giới thiệu','đường dẫn truy cập']},
   {id:'kAI',  lbl:'Hệ thống\nquản lý', type:'kwg',
@@ -586,9 +586,9 @@ const KW=[
    terms:['xử lý vi phạm trong thương mại điện tử','xử phạt vi phạm hành chính','hành vi vi phạm pháp luật','chặn truy cập, tạm ngừng chức năng giao dịch','gỡ bỏ nội dung, tạm ngừng, chấm dứt tài khoản vi phạm','bị xem xét xử lý hình sự']},
   {id:'kXT',  lbl:'Xác thực\ndanh tính', type:'kwc',
    terms:['xác thực điện tử danh tính','định danh và xác thực điện tử','xác thực danh tính người bán','xác thực danh tính người livestream bán hàng','xác thực danh tính người tiếp thị liên kết','giấy tờ hợp pháp']},
-];
+],
 
-const NOKW_SET=new Set(['kCS']);
+NOKW_SET: new Set(['kCS']),
 
 // ╔══ DATA_END ════════════════════════════════════════════╗
 
