@@ -26,7 +26,8 @@
   ],
   "rewrites": [
     { "source": "/legalmap/122-2025", "destination": "/legalmap/viewer?laws=luat_122_2025" },
-    { "source": "/legalmap/116-2025", "destination": "/legalmap/viewer?laws=luat_116_2025" }
+    { "source": "/legalmap/116-2025", "destination": "/legalmap/viewer?laws=luat_116_2025" },
+    { "source": "/legalmap/91-2025", "destination": "/legalmap/viewer?laws=luat_091_2025" }
   ],
   "headers": [
     {

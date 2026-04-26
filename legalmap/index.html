@@ -149,6 +149,7 @@ a{color:inherit;text-decoration:none}
 .law-btn:hover .lb-cta{gap:14px}
 .law-btn.red{--accent:#ED1C24;--accent-text:#ff6b70;--accent-shadow:rgba(237,28,36,.35)}
 .law-btn.blue{--accent:#1976d2;--accent-text:#64b5f6;--accent-shadow:rgba(25,118,210,.35)}
+.law-btn.purple{--accent:#9C27B0;--accent-text:#ce93d8;--accent-shadow:rgba(156,39,176,.35)}
 
 /* WHY section: 2-column transform */
 .why-grid{
@@ -403,7 +404,7 @@ a{color:inherit;text-decoration:none}
 
   <!-- ═══ KHỐI 2 — 2 THẺ LUẬT ═══ -->
   <section class="sec" id="laws">
-    <div class="avail-row">📚 Đang sẵn sàng · 2 bộ Luật</div>
+    <div class="avail-row">📚 Đang sẵn sàng · 3 bộ Luật</div>
     <div class="law-grid">
       <a class="law-btn red" href="/legalmap/122-2025">
         <span class="lb-tag">🛒  Thương mại điện tử</span>
@@ -425,6 +426,18 @@ a{color:inherit;text-decoration:none}
         <div class="lb-stats">
           <span><strong>8</strong> Chương</span>
           <span><strong>45</strong> Điều</span>
+          <span>16 từ khoá liên kết</span>
+        </div>
+        <span class="lb-cta">📍 Mở bản đồ tương tác →</span>
+      </a>
+      <a class="law-btn purple" href="/legalmap/91-2025">
+        <span class="lb-tag">🔒  Bảo vệ dữ liệu cá nhân</span>
+        <div class="lb-num">91/2025/QH15 · Hiệu lực 01/01/2026</div>
+        <div class="lb-title">Luật Bảo vệ dữ liệu cá nhân</div>
+        <div class="lb-pitch">Khung pháp lý quyền riêng tư số — chủ thể dữ liệu, bên kiểm soát, đánh giá tác động, chuyển dữ liệu xuyên biên giới.</div>
+        <div class="lb-stats">
+          <span><strong>5</strong> Chương</span>
+          <span><strong>39</strong> Điều</span>
           <span>16 từ khoá liên kết</span>
         </div>
         <span class="lb-cta">📍 Mở bản đồ tương tác →</span>
@@ -632,8 +645,9 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <!-- Load data các luật để render danh sách điều (versioned) -->
-<script src="/legalmap/data/luat_122_2025.js?v=20260426c"></script>
-<script src="/legalmap/data/luat_116_2025.js?v=20260426c"></script>
+<script src="/legalmap/data/luat_122_2025.js?v=20260426d"></script>
+<script src="/legalmap/data/luat_116_2025.js?v=20260426d"></script>
+<script src="/legalmap/data/luat_091_2025.js?v=20260426d"></script>
 <style>
 /* Toggle "Xem danh sách N điều luật" + article list (đặt trong thẻ Luật) */
 .lb-extra{margin-top:18px;padding-top:18px;border-top:1px dashed rgba(224,170,121,.15)}
@@ -681,6 +695,7 @@ a{color:inherit;text-decoration:none}
 const URL_SLUG = {
   'luat_122_2025': '/legalmap/122-2025',
   'luat_116_2025': '/legalmap/116-2025',
+  'luat_091_2025': '/legalmap/91-2025',
 };
 (function enhanceCards(){
   const cards = document.querySelectorAll('.law-btn');
@@ -778,7 +793,8 @@ const s1 = document.getElementById('sel1');
 const s2 = document.getElementById('sel2');
 const LAWS = [
   ['luat_122_2025','Luật Thương mại điện tử (122/2025/QH15)'],
-  ['luat_116_2025','Luật An ninh mạng (116/2025/QH15)']
+  ['luat_116_2025','Luật An ninh mạng (116/2025/QH15)'],
+  ['luat_091_2025','Luật Bảo vệ dữ liệu cá nhân (91/2025/QH15)']
 ];
 LAWS.forEach(([v,t])=>{
   [s1,s2].forEach(s=>{const o=document.createElement('option');o.value=v;o.textContent=t;s.appendChild(o)});

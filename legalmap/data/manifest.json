@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "updated": "2026-04-26",
   "laws": [
     {
@@ -21,6 +21,16 @@
       "dieu": 45,
       "hieuluc": "01/07/2026",
       "color": "#1565c0"
+    },
+    {
+      "id": "luat_091_2025",
+      "file": "data/luat_091_2025.js",
+      "title": "Luật Bảo vệ dữ liệu cá nhân",
+      "sohieu": "91/2025/QH15",
+      "chuong": 5,
+      "dieu": 39,
+      "hieuluc": "01/01/2026",
+      "color": "#7B1FA2"
     }
   ]
 }
