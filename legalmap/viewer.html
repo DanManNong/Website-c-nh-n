@@ -863,8 +863,12 @@ function doSearch(q){
       const badge=tp==='dieu'?'Điều luật':'Từ khoá';
       const cls=tp==='dieu'?'dieu':'kw';
       const name=nd.data('name')||'';
-      const hl=name.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<b>$1</b>');
-      return `<div class="sr-item" onclick="focusNode('${nd.id()}')">
+      // Escape HTML trước khi highlight để defense in depth — chống XSS nếu data file bị tampered
+      const safeName=escapeHTML(name);
+      const safeQ=escapeHTML(q).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      const hl=safeName.replace(new RegExp('('+safeQ+')','gi'),'<b>$1</b>');
+      const safeId=encodeURIComponent(nd.id()).replace(/'/g,'%27');
+      return `<div class="sr-item" onclick="focusNode('${safeId}')">
         <span class="sr-badge ${cls}">${badge}</span>
         <span class="sr-name">${hl}</span>
       </div>`;
@@ -1135,7 +1139,8 @@ async function init(){
   cy.on('mouseover','node',e=>{
     const nd=e.target,tp=nd.data('type');
     const name=nd.data('name')||nd.data('label').replace(/\n/g,' ');
-    tt.innerHTML=`<span class="tt-type">${TYPE_LABEL[tp]||tp}</span><span class="tt-name">${name}</span>`
+    // Escape để chống XSS defense-in-depth
+    tt.innerHTML=`<span class="tt-type">${escapeHTML(TYPE_LABEL[tp]||tp)}</span><span class="tt-name">${escapeHTML(name)}</span>`
       +(tp==='dieu'?`<span class="tt-hint">👆 Click để đọc nội dung</span>`:
         tp==='kwc'||tp==='kwg'?`<span class="tt-hint">🔗 Click để thấy điều liên quan</span>`:'');
     tt.style.display='block';

@@ -56,3 +56,12 @@ _archive_nguyentanphong/
 
 # OG card template — chỉ dùng để screenshot tạo og-image, không deploy
 **/og-card-tmpl.html
+
+# Backup pages cũ — không deploy public (đã có robots.txt Disallow nhưng vẫn lộ direct URL)
+luu.html
+index-v1.html
+bai-giang-a.html
+bai-giang-b.html
+bai-giang-c.html
+bai-giang-d.html
+coming-soon.html
