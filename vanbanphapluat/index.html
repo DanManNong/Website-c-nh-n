@@ -202,7 +202,8 @@ const STYLE_OF = {
   'luat_116_2025': { cls:'blue', emoji:'🛡️', tagText:'An ninh mạng' }
 };
 
-fetch('data/manifest.json').then(r=>r.json()).then(m=>{
+// Always bypass cache for manifest (small file, đảm bảo luôn mới nhất)
+fetch('data/manifest.json?v=20260426b', {cache: 'no-cache'}).then(r=>r.json()).then(m=>{
   const list = document.getElementById('law-list');
   list.innerHTML = ''; // clear fallback static cards trước khi JS render version đầy đủ
   const s1 = document.getElementById('sel1'), s2 = document.getElementById('sel2');
@@ -347,6 +348,15 @@ fetch('data/manifest.json').then(r=>r.json()).then(m=>{
     });
   });
   if (m.laws.length > 1) s2.selectedIndex = 1;
+}).catch(err => {
+  console.warn('[catalog] manifest/data load failed — giữ static fallback:', err);
+  // Vẫn populate compare select với 2 luật đã biết để user có thể so sánh
+  const s1 = document.getElementById('sel1'), s2 = document.getElementById('sel2');
+  [['luat_122_2025','Luật Thương mại điện tử (122/2025/QH15)'],
+   ['luat_116_2025','Luật An ninh mạng (116/2025/QH15)']].forEach(([v,t])=>{
+    [s1,s2].forEach(s=>{const o=document.createElement('option');o.value=v;o.textContent=t;s.appendChild(o)});
+  });
+  s2.selectedIndex = 1;
 });
 
 function openCompare() {
