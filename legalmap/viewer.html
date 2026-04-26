@@ -666,7 +666,22 @@ body{background:var(--bg);font-family:var(--font);overflow:hidden;color:var(--te
 // ── 1. ĐỌC URL PARAMS ────────────────────────────────────────
 function getParams(){
   const p = new URLSearchParams(window.location.search);
-  const lawIds = (p.get('laws') || p.get('law') || 'luat_122_2025').split(',').map(s=>s.trim());
+  let lawIds = (p.get('laws') || p.get('law') || '').split(',').map(s=>s.trim()).filter(Boolean);
+
+  // FIX: Detect law ID từ URL path khi Vercel rewrite (clean URL)
+  // /legalmap/91-2025  → luat_091_2025
+  // /legalmap/122-2025 → luat_122_2025
+  // /legalmap/116-2025 → luat_116_2025
+  if (!lawIds.length) {
+    const m = location.pathname.match(/\/legalmap\/(\d+)-(\d+)\/?$/);
+    if (m) {
+      const num = m[1].padStart(3, '0');   // 91 → 091, 122 → 122
+      lawIds = ['luat_' + num + '_' + m[2]];
+    }
+  }
+
+  // Default fallback nếu không tìm thấy
+  if (!lawIds.length) lawIds = ['luat_122_2025'];
   return { lawIds };
 }
 
