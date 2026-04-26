@@ -1027,7 +1027,8 @@ async function init(){
 }
 
 window.addEventListener('DOMContentLoaded', init);
-
+if (document.readyState !== 'loading') init();
+</script>
 
 </body>
 </html>
