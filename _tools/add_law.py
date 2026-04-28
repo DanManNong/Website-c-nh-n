@@ -37,7 +37,9 @@ COLOR_PALETTE = [
 ]
 
 ROMAN = {'I':1,'II':2,'III':3,'IV':4,'V':5,'VI':6,'VII':7,'VIII':8,'IX':9,'X':10,
-        'XI':11,'XII':12,'XIII':13,'XIV':14,'XV':15}
+        'XI':11,'XII':12,'XIII':13,'XIV':14,'XV':15,'XVI':16,'XVII':17,'XVIII':18,
+        'XIX':19,'XX':20,'XXI':21,'XXII':22,'XXIII':23,'XXIV':24,'XXV':25,'XXVI':26,
+        'XXVII':27,'XXVIII':28,'XXIX':29,'XXX':30}
 
 
 def convert_to_text(src: Path) -> str:
@@ -60,35 +62,58 @@ def convert_to_text(src: Path) -> str:
 
 
 def detect_meta(text: str) -> dict:
-    """Detect số hiệu, tên Luật, hiệu lực"""
+    """Detect số hiệu, tên Luật, hiệu lực — hỗ trợ cả Luật, Bộ luật, VBHN"""
     meta = {}
-    # Số hiệu: "Luật số: 91/2025/QH15"
-    m = re.search(r'Luật\s+số\s*[:.]?\s*(\d+/\d+/QH\d+)', text)
-    if not m:
-        m = re.search(r'\b(\d{1,3}/\d{4}/QH\d+)\b', text)
-    if m:
-        meta['sohieu'] = m.group(1)
-        n, y = m.group(1).split('/')[0], m.group(1).split('/')[1]
-        meta['number'] = int(n)
-        meta['year'] = int(y)
-        meta['id'] = f"luat_{int(n):03d}_{y}"
-        meta['slug'] = f"{int(n)}-{y}"
 
-    # Tên Luật: dòng "LUẬT\nXXX" — XXX là tên đầy đủ
+    # ─── 1. Số hiệu ───
+    # Ưu tiên VBHN-VPQH (văn bản hợp nhất)
+    m = re.search(r'\b(\d+/VBHN-[A-Z]+)\b', text)
+    if m:
+        meta['sohieu'] = m.group(1)  # ví dụ "135/VBHN-VPQH"
+        meta['number'] = int(re.match(r'\d+', m.group(1)).group(0))
+        # VBHN ngày tháng năm — extract năm gần đầu file
+        ym = re.search(r'ngày\s+\d+\s+tháng\s+\d+\s+năm\s+(\d{4})', text[:2000])
+        meta['year'] = int(ym.group(1)) if ym else 2025
+        meta['is_vbhn'] = True
+    else:
+        # Luật số / QH bình thường
+        m = re.search(r'(?:Luật|Bộ luật)\s+số\s*[:.]?\s*(\d+/\d+/QH\d+)', text)
+        if not m:
+            m = re.search(r'\b(\d{1,3}/\d{4}/QH\d+)\b', text)
+        if m:
+            meta['sohieu'] = m.group(1)
+            n, y = m.group(1).split('/')[0], m.group(1).split('/')[1]
+            meta['number'] = int(n)
+            meta['year'] = int(y)
+            meta['is_vbhn'] = False
+
+    if 'number' in meta and 'year' in meta:
+        meta['id'] = f"luat_{meta['number']:03d}_{meta['year']}"
+        meta['slug'] = f"{meta['number']}-{meta['year']}"
+
+    # ─── 2. Tên Luật ───
+    # Pattern 1: "LUẬT\nXXX YYY"
     m = re.search(r'^LUẬT\s*\n([^\n]+)', text, re.MULTILINE)
+    prefix = 'Luật'
+    # Pattern 2: "BỘ LUẬT\nXXX YYY" (Bộ luật Dân sự, Hình sự, Lao động, Tố tụng...)
+    if not m:
+        m = re.search(r'^BỘ LUẬT\s*\n([^\n]+)', text, re.MULTILINE)
+        prefix = 'Bộ luật'
+
     if m:
         title_raw = m.group(1).strip()
-        # Capitalize: "BẢO VỆ DỮ LIỆU CÁ NHÂN" → "Bảo vệ dữ liệu cá nhân"
+        # Capitalize: "HÌNH SỰ" → "Hình sự"
         title = ' '.join(w.capitalize() if i == 0 else w.lower() for i, w in enumerate(title_raw.split()))
-        meta['title'] = 'Luật ' + title
+        meta['title'] = f'{prefix} {title}'
 
-    # Hiệu lực: "có hiệu lực từ ngày 01 tháng 01 năm 2026" hoặc "Luật này có hiệu lực thi hành từ ngày..."
+    # ─── 3. Hiệu lực ───
+    # VBHN: "có hiệu lực kể từ ngày DD tháng MM năm YYYY"
     m = re.search(r'có hiệu lực[^.\n]*ngày\s+(\d+)\s+tháng\s+(\d+)\s+năm\s+(\d+)', text, re.IGNORECASE)
     if m:
         d, mo, y = m.group(1).zfill(2), m.group(2).zfill(2), m.group(3)
         meta['hieuluc'] = f"{d}/{mo}/{y}"
     else:
-        meta['hieuluc'] = '01/01/' + str(meta.get('year', 2026) + 1)  # fallback năm sau
+        meta['hieuluc'] = '01/01/' + str(meta.get('year', 2026) + 1)
 
     return meta
 
@@ -98,8 +123,10 @@ def detect_structure(text: str) -> tuple:
     lines = text.split('\n')
 
     ch_starts = []
+    # Roman numeral pattern up to XXX (30)
+    roman_pat = '|'.join(sorted(ROMAN.keys(), key=lambda r: -len(r)))  # longest first
     for i, l in enumerate(lines):
-        m = re.match(r'^Chương\s+(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV)\s*$', l.strip())
+        m = re.match(rf'^Chương\s+({roman_pat})\s*$', l.strip())
         if m:
             title = lines[i+1].strip() if i+1 < len(lines) else ''
             ch_starts.append({
