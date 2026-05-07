@@ -1029,10 +1029,145 @@
   @media (max-width: 1280px) {
     .national-trend { display: none; }
   }
+
+  /* ═══════════ MOBILE BOTTOM-SHEET LAYOUT (≤900px) ═══════════ */
   @media (max-width: 900px) {
-    #sidebar { width: 100%; position: absolute; right: 0; top: 0; bottom: 0; z-index: 2000; }
-    #sidebar.collapsed { margin-right: -100%; }
-    .header { max-width: calc(100% - 36px); }
+    /* Header: gọn 1 dòng, click (i) xem chi tiết */
+    .header {
+      top: 8px; left: 8px; right: 8px;
+      max-width: none;
+      padding: 10px 44px 10px 14px;
+      border-radius: 12px;
+    }
+    .header::before { display: none; }
+    .header .brand { margin-bottom: 0; gap: 10px; }
+    .header .logo { width: 32px; height: 32px; font-size: 16px; }
+    .header h1 { font-size: 14px; line-height: 1.2; }
+    .header .h1-sub { font-size: 10px; margin-top: 1px; }
+    .header .sub,
+    .header .source-tag { display: none; }
+    .header.expanded .sub { display: block; margin-top: 10px; font-size: 12px; line-height: 1.55; }
+    .header.expanded .source-tag { display: inline-block; margin: 8px 4px 0 0; }
+    .header-info-btn {
+      position: absolute;
+      top: 50%; right: 10px;
+      transform: translateY(-50%);
+      width: 30px; height: 30px;
+      background: rgba(201,170,113,0.12);
+      border: 1px solid rgba(201,170,113,0.3);
+      border-radius: 9px;
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 700;
+      font-style: italic;
+      font-family: 'Be Vietnam Pro', serif;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .header-info-btn:active { transform: translateY(-50%) scale(0.92); }
+    .header.expanded .header-info-btn {
+      background: var(--gold);
+      color: var(--bg-abyss);
+    }
+
+    /* Year selector + Mode: hàng 1 dưới header */
+    .year-selector {
+      top: 62px; left: 8px;
+      transform: none;
+      padding: 3px;
+      gap: 2px;
+      border-radius: 11px;
+    }
+    .year-selector button { padding: 6px 10px; border-radius: 8px; }
+    .year-selector button .big { font-size: 12px; }
+    .year-selector button .lbl { display: none; }
+
+    .mode-switch {
+      top: 62px; right: 8px; left: auto;
+      padding: 3px;
+      gap: 2px;
+      border-radius: 11px;
+    }
+    .mode-switch button { padding: 6px 10px; font-size: 11px; border-radius: 8px; }
+
+    /* Metric toggle: hàng 2, scroll-x nếu chật */
+    .metric-toggle {
+      top: 104px; left: 8px; right: 8px;
+      padding: 3px;
+      gap: 2px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
+      border-radius: 11px;
+    }
+    .metric-toggle::-webkit-scrollbar { display: none; }
+    .metric-toggle button {
+      padding: 6px 10px;
+      font-size: 11px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      border-radius: 8px;
+    }
+
+    /* Legend: nhỏ gọn ngay trên bottom sheet */
+    .legend {
+      top: auto; bottom: calc(60vh + 8px);
+      left: 8px; right: 8px;
+      max-width: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: bottom 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* SIDEBAR → BOTTOM SHEET */
+    #sidebar {
+      position: fixed;
+      top: auto; bottom: 0; left: 0; right: 0;
+      width: 100%; height: 60vh;
+      transform: translateY(0);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      border-radius: 18px 18px 0 0;
+      border-left: none;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -12px 40px rgba(0,0,0,0.5);
+      z-index: 1500;
+    }
+    #sidebar::before { display: none; }
+    #sidebar.collapsed {
+      transform: translateY(calc(100% - 72px));
+      margin-right: 0;
+    }
+    /* Drag handle pill */
+    #sidebar::after {
+      content: '';
+      position: absolute;
+      top: 7px; left: 50%;
+      transform: translateX(-50%);
+      width: 44px; height: 4px;
+      background: rgba(201,170,113,0.5);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .sidebar-header {
+      padding: 18px 16px 12px 16px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sidebar-header .eyebrow { font-size: 10px; }
+    .sidebar-header .prov-name { font-size: 18px; }
+    .sidebar-header .prov-sub { font-size: 11px; }
+    .body-tabs { padding: 0 12px; }
+    .body-tabs button { font-size: 11px; padding: 8px 6px; }
+    .content-list { padding: 12px 14px 24px; }
+
+    /* Khi sidebar collapsed, legend trượt xuống thấp hơn */
+    body.sb-collapsed .legend { bottom: 78px; }
+
+    /* Tắt zoom control trên mobile, dùng pinch */
+    .leaflet-control-zoom { display: none !important; }
   }
 </style>
 </head>
@@ -1134,6 +1269,7 @@ document.addEventListener('keydown', function(e){
     <div class="source-tag">Bản đồ nền: Cục Đo đạc, Bản đồ VN</div>
     <div class="source-tag vecom">VECOM EBI 2009–2025</div>
     <div class="source-tag" style="background:rgba(167,139,250,0.1); border-color:rgba(167,139,250,0.3); color:#c4b5fd">QĐ 60/2026 · BDTTG</div>
+    <button class="header-info-btn" id="headerInfoBtn" aria-label="Xem chi tiết" title="Xem mô tả">i</button>
   </div>
 
   <div class="year-selector" id="yearSelector">
@@ -2014,6 +2150,58 @@ function renderNationalTrend() {
   `;
 }
 
+// ════════ Mobile bottom-sheet behavior ════════
+const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+function setSheetState(state){
+  // state: 'expanded' | 'collapsed'
+  const sb = document.getElementById('sidebar');
+  if (!sb) return;
+  if (state === 'collapsed') {
+    sb.classList.add('collapsed');
+    document.body.classList.add('sb-collapsed');
+  } else {
+    sb.classList.remove('collapsed');
+    document.body.classList.remove('sb-collapsed');
+  }
+}
+function initMobileUX(){
+  if (!isMobile()) return;
+  // Bắt đầu ở trạng thái collapsed (peek 72px) để map full
+  setSheetState('collapsed');
+  // Tap header sidebar để toggle expand
+  const sbHeader = document.querySelector('.sidebar-header');
+  if (sbHeader) sbHeader.addEventListener('click', (e) => {
+    if (e.target.closest('button')) return; // tab buttons không trigger
+    const sb = document.getElementById('sidebar');
+    setSheetState(sb.classList.contains('collapsed') ? 'expanded' : 'collapsed');
+  });
+  // Header info button toggle full description
+  const infoBtn = document.getElementById('headerInfoBtn');
+  const header = document.querySelector('.header');
+  if (infoBtn && header) infoBtn.addEventListener('click', () => {
+    header.classList.toggle('expanded');
+  });
+  // Tap map (ngoài sidebar) thì collapse sheet
+  const mapEl = document.getElementById('map');
+  if (mapEl) mapEl.addEventListener('click', () => {
+    if (!document.getElementById('sidebar').classList.contains('collapsed')) {
+      // click vào map nói chung không collapse — chỉ collapse khi click trên area trống
+    }
+  }, { passive: true });
+}
+// Auto-expand sheet khi user chọn 1 tỉnh (mobile)
+const _origSelect = window.selectFeature;
+function _wrapSelect(){
+  if (typeof selectFeature === 'function' && !selectFeature._wrapped){
+    const orig = selectFeature;
+    window.selectFeature = function(feature, layer){
+      orig.call(this, feature, layer);
+      if (isMobile()) setSheetState('expanded');
+    };
+    window.selectFeature._wrapped = true;
+  }
+}
+
 (async function bootMap(){
   try {
     const mapEl = document.getElementById('map');
@@ -2032,6 +2220,8 @@ function renderNationalTrend() {
     if (ldDone) ldDone.remove();
     renderMode('34');
     renderNationalTrend();
+    initMobileUX();
+    _wrapSelect();
   } catch(err){
     console.error('Load EBI data failed:', err);
     const mapEl = document.getElementById('map');
