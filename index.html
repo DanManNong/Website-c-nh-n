@@ -338,6 +338,16 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   .save-contact--map:hover {
     box-shadow: 0 10px 28px rgba(237,28,36,0.5);
   }
+  /* Variant — nút Bản đồ TMĐT Việt Nam (xanh dương) */
+  .save-contact--tmdt {
+    background: linear-gradient(135deg, #1976d2, #0d47a1);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(25,118,210,0.35);
+    margin-top: -4px;
+  }
+  .save-contact--tmdt:hover {
+    box-shadow: 0 10px 28px rgba(25,118,210,0.5);
+  }
   @media (max-width: 480px) {
     .save-contact { font-size: 13px; padding: 13px 18px; gap: 10px; }
     .save-contact i { font-size: 16px; }
@@ -628,6 +638,13 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
      onclick="trackEvent('open_legalmap', {location: 'home_button'})">
     <i class="fas fa-map-marked-alt"></i>
     <span>Bản đồ văn bản pháp luật</span>
+  </a>
+
+  <!-- TMĐT MAP BUTTON — Bản đồ TMĐT Việt Nam -->
+  <a href="/ban-do-tmdt" class="save-contact save-contact--tmdt stagger s4" aria-label="Mở Bản đồ TMĐT Việt Nam"
+     onclick="trackEvent('open_ban_do_tmdt', {location: 'home_button'})">
+    <i class="fas fa-globe-asia"></i>
+    <span>Bản đồ TMĐT Việt Nam</span>
   </a>
 
   <!-- Phone block đã xóa — số gọi vẫn còn trong QR grid (nút "Gọi") -->
