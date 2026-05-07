@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-abyss: #050814;
@@ -42,7 +42,7 @@
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0; height: 100%;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg-abyss);
     color: var(--text);
     overflow: hidden;
@@ -96,7 +96,7 @@
   }
   .header h1 {
     margin: 0;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 21px;
     font-weight: 900;
     letter-spacing: 0.3px;
@@ -169,12 +169,12 @@
     cursor: pointer;
     font-size: 13px;
     font-weight: 600;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     min-width: 130px;
   }
   .year-selector button .big {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 22px;
     font-weight: 900;
     display: block;
@@ -226,7 +226,7 @@
     font-size: 11.5px;
     font-weight: 600;
     transition: all 0.2s;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
   }
   .mode-switch button:hover { color: var(--text); background: rgba(255,255,255,0.04); }
   .mode-switch button.active {
@@ -366,7 +366,7 @@
     margin-bottom: 6px;
   }
   .sidebar-header .prov-name {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 22px;
     font-weight: 900;
     margin: 0 0 6px 0;
@@ -424,7 +424,7 @@
     margin-bottom: 4px;
   }
   .tmdt-panel .ebi-score {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 38px;
     font-weight: 900;
     background: linear-gradient(180deg, #fff 0%, var(--accent-pink) 100%);
@@ -501,14 +501,14 @@
     font-weight: 600;
   }
   .stat .value {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 16px;
     font-weight: 900;
     color: var(--text);
     line-height: 1;
   }
   .stat .unit {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 9px;
     color: var(--text-dim);
     font-weight: 400;
@@ -575,7 +575,7 @@
     margin-bottom: 3px;
   }
   .dtts-mini .dmv {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 18px;
     font-weight: 900;
     color: #ddd6fe;
@@ -620,7 +620,7 @@
     border-bottom: 1px solid rgba(255,255,255,0.04);
   }
   .dtts-row-card .rc-name {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 14px;
     font-weight: 800;
     color: #ddd6fe;
@@ -650,7 +650,7 @@
     color: var(--text);
     font-size: 14px;
     font-weight: 800;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
   }
   .dtts-row-card .rc-stats .rc-val.hot { color: #f0a073; }
 
@@ -847,7 +847,7 @@
   .chart-dot { fill: var(--accent-pink); stroke: #fff; stroke-width: 1; }
   .chart-dot.dot-2 { fill: var(--accent-blue); }
   .chart-axis { stroke: var(--text-faint); stroke-width: 0.5; }
-  .chart-text { font-size: 9px; fill: var(--text-faint); font-family: 'Inter', sans-serif; }
+  .chart-text { font-size: 9px; fill: var(--text-faint); font-family: 'Be Vietnam Pro', sans-serif; }
   .chart-text.label { fill: var(--text-dim); font-weight: 600; }
 
   .data-points-table {
@@ -896,7 +896,7 @@
     border-color: rgba(255,110,199,0.2);
   }
   .member-row .m-name {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 13px;
     font-weight: 800;
     color: var(--text);
@@ -921,7 +921,7 @@
   .empty-state { text-align: center; padding: 80px 30px; color: var(--text-faint); }
   .empty-state .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
   .empty-state .title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 18px;
     color: var(--text-dim);
     margin-bottom: 6px;
@@ -980,7 +980,7 @@
   }
 
   /* ============== LEAFLET OVERRIDES ============== */
-  .leaflet-container { background: #f5f1e6 !important; font-family: 'Inter', sans-serif; }
+  .leaflet-container { background: #f5f1e6 !important; font-family: 'Be Vietnam Pro', sans-serif; }
   .leaflet-popup-content-wrapper {
     background: linear-gradient(180deg, var(--bg-raised) 0%, var(--bg-base) 100%);
     color: var(--text);
@@ -1045,7 +1045,7 @@
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   display:flex;align-items:center;justify-content:center;
   padding:20px;
-  font-family:'Inter',sans-serif;
+  font-family:'Be Vietnam Pro',sans-serif;
   animation:beta-fadein 0.3s ease;
 }
 @keyframes beta-fadein{from{opacity:0}to{opacity:1}}
