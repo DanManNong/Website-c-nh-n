@@ -1256,7 +1256,7 @@ async function fetchEbiData(){
   // Try cache first
   try {
     const c = JSON.parse(localStorage.getItem(CACHE_KEY)||'null');
-    if(c && (Date.now()-c.t) < CACHE_TTL){
+    if(c && (Date.now()-c.t) < CACHE_TTL && c.d && c.d.gj34 && c.d.gj63 && c.d.ebi_national){
       return c.d;
     }
   } catch(e){}
@@ -1268,7 +1268,9 @@ async function fetchEbiData(){
   const d = {};
   for (const r of geo) d[r.id] = r.data;
   for (const r of meta) d[r.key] = r.value;
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify({t:Date.now(), d})); } catch(e){}
+  if (d.gj34 && d.gj63 && d.wards && d.ebi_national) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({t:Date.now(), d})); } catch(e){}
+  }
   return d;
 }
 const QD60_META = {
@@ -2026,8 +2028,8 @@ function renderNationalTrend() {
     GJ34 = d.gj34; GJ63 = d.gj63; WARDS = d.wards;
     EBI_NATIONAL = d.ebi_national; EBI_TOP5 = d.ebi_top5;
     HCM_HN_HISTORY = d.hcm_hn_history; EBI_NOTES = d.ebi_notes;
-    const ld = document.getElementById('ebi-loading');
-    if (ld) ld.remove();
+    const ldDone = document.getElementById('ebi-loading');
+    if (ldDone) ldDone.remove();
     renderMode('34');
     renderNationalTrend();
   } catch(err){
