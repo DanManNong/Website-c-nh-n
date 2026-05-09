@@ -32,6 +32,9 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 .header .meta b{color:var(--gold)}
 
 /* OVERLAY CONTROL */
+
+.moc-label-lt{background:rgba(22,22,29,.9)!important;color:#FF9800!important;border:1px solid rgba(255,152,0,.5)!important;border-radius:4px!important;padding:2px 5px!important;font-size:9px!important;font-weight:700!important;font-family:'JetBrains Mono',monospace!important;box-shadow:0 2px 6px rgba(0,0,0,.4)!important}
+.moc-label-lt:before{display:none!important}
 .moc-label{background:rgba(22,22,29,.9)!important;color:#FF5722!important;border:1px solid rgba(255,87,34,.4)!important;border-radius:4px!important;padding:2px 5px!important;font-size:9px!important;font-weight:700!important;font-family:'JetBrains Mono',monospace!important;box-shadow:0 2px 6px rgba(0,0,0,.4)!important}
 .moc-label:before{display:none!important}
 .phong-label{background:#FF1744!important;color:#fff!important;border:none!important;border-radius:5px!important;padding:4px 8px!important;font-size:11px!important;font-weight:700!important;box-shadow:0 4px 12px rgba(255,23,68,.5)!important;font-family:inherit!important}
@@ -42,6 +45,8 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 .leaflet-control-layers{background:rgba(22,22,29,.95)!important;backdrop-filter:blur(14px);border:1px solid var(--border)!important;border-radius:11px!important;color:var(--text)!important;padding:10px 12px!important;box-shadow:0 8px 22px rgba(0,0,0,.4)!important;font-family:inherit!important;max-width:300px}
 .leaflet-control-layers-list label{font-size:11px;font-weight:500;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:6px;line-height:1.3}
 .leaflet-control-layers-list label:hover{color:var(--gold)}
+.leaflet-control-layers input[type=radio]{accent-color:var(--gold);width:13px;height:13px;flex-shrink:0}
+.leaflet-control-layers-separator{border-top:1px solid rgba(255,255,255,.1)!important;margin:6px 0!important}
 .leaflet-control-layers input[type=checkbox]{accent-color:var(--gold);width:13px;height:13px;flex-shrink:0}
 .leaflet-control-layers-overlays{margin:0!important}
 
@@ -138,13 +143,12 @@ const IMG_BBOX = [[10.380754405000001, 106.900617385], [10.393745294999999, 106.
 const IMG_URL = '/assets/787_2013_1045_00.jpg';
 
 const map = L.map('map',{center:[10.405992,106.958086],zoom:18,minZoom:13,maxZoom:19,zoomControl:true});
-L.tileLayer.wms('https://cache.bando.com.vn/service?',{
-  layers:'vietnam_2026',format:'image/png',transparent:true,version:'1.3.0',
-  attribution:'<a href="https://sapnhap.bando.com.vn" target="_blank">Cục Đo đạc, Bản đồ và TT Địa lý VN</a>'
-}).addTo(map);
-L.tileLayer.wms('https://cache.bando.com.vn/service?',{
-  layers:'vietnam_label_2026',format:'image/png',transparent:true,version:'1.3.0'
-}).addTo(map);
+const baseEsri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles &copy; Esri'});
+const baseCarto = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:20,subdomains:'abcd',attribution:'&copy; <a href="https://carto.com">CARTO</a>'});
+const baseVN1 = L.tileLayer.wms('https://cache.bando.com.vn/service?',{layers:'vietnam_2026',format:'image/png',transparent:true,version:'1.3.0',attribution:'<a href="https://sapnhap.bando.com.vn">Cục Đo đạc VN</a>'});
+const baseVN2 = L.tileLayer.wms('https://cache.bando.com.vn/service?',{layers:'vietnam_label_2026',format:'image/png',transparent:true,version:'1.3.0'});
+const baseVN = L.layerGroup([baseVN1, baseVN2]);
+baseEsri.addTo(map);
 
 // Image overlay (raster quy hoạch)
 // Boundary
@@ -192,12 +196,19 @@ async function loadKML(url, label){
   try {
     kml1Layer = await loadKML('/assets/to136moi2.geojson', 'tờ 136');
     kml2Layer = await loadKML('/assets/123-ATD-CMD.geojson', '123-ATD');
-    // Don't add by default - too many features. Use layer control.
-    L.control.layers(null, {
-      '📍 Tờ 136 (Long Thạnh · 5,381 đối tượng)': kml1Layer,
-      '📍 123-ATD-Phạm Hùng Chương (12,734 đối tượng)': kml2Layer,
-      'Khu Long Thạnh boundary (27 mốc)': longThanhLayer
-    }, {position:'topright', collapsed:false}).addTo(map);
+    L.control.layers(
+      {
+        '🌐 Esri (Google-like)': baseEsri,
+        '⚪ Carto Light (nhẹ)': baseCarto,
+        '🇻🇳 VN 2026 (chi tiết)': baseVN
+      },
+      {
+        'Khu Long Thạnh (27 mốc · 78.78ha)': longThanhGroup,
+        '📍 Tờ 136 (5,381 đối tượng)': kml1Layer,
+        '📍 123-ATD-Phạm Hùng Chương (12,734)': kml2Layer
+      },
+      {position:'topright', collapsed:false}
+    ).addTo(map);
   } catch(e) {
     console.warn('KML load failed:', e);
   }
@@ -210,11 +221,20 @@ const checkLine = L.geoJSON(LINE_5_10, {
 }).addTo(map);
 checkLine.bindTooltip('🔍 Kiểm tra Tđ.5 ↔ Tđ.10 (1058.8m)', {permanent:false, sticky:true});
 
-// Long Thạnh polygon (cũ — orange)
+// Long Thạnh polygon + 27 markers (orange) — group
 const longThanhLayer = L.geoJSON(LONG_THANH, {
-  style: {color:'#FF9800', weight:2, fillOpacity:0.05, fillColor:'#FF9800', dashArray:'4,4'}
-}).addTo(map);
-longThanhLayer.bindTooltip('Khu DC Long Thạnh (27 mốc · 78.78ha · cũ)', {sticky:true});
+  style: {color:'#FF9800', weight:2.5, fillOpacity:0.05, fillColor:'#FF9800', dashArray:'4,4'}
+});
+longThanhLayer.bindTooltip('Khu DC Long Thạnh (27 mốc · 78.78ha)', {sticky:true});
+const ltMarkers = LONG_THANH.geometry.coordinates[0].slice(0,-1).map((c, i) => {
+  return L.circleMarker([c[1], c[0]], {
+    radius: 5,
+    color: '#FF9800',
+    fillColor: '#FF9800',
+    fillOpacity: 0.9, weight: 2
+  }).bindTooltip(`LT.${i+1}`, {permanent:true, direction:'top', className:'moc-label-lt'});
+});
+const longThanhGroup = L.layerGroup([longThanhLayer, ...ltMarkers]);
 
 // Markers cho 14 mốc
 L.geoJSON(BOUNDARY, {
