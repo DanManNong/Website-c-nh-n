@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-<title>TEST · Khu Long Thạnh — Cần Giờ · nguyentanphong.com</title>
+<title>Bản đồ thửa đất Cần Thạnh · nguyentanphong.com</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -19,9 +19,8 @@
 }
 body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden}
 
-.demo-banner{position:fixed;top:0;left:0;right:0;z-index:5000;background:linear-gradient(90deg,#43a047,#66bb6a,#43a047);color:#fff;padding:8px 14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:12px;font-weight:700;box-shadow:0 2px 12px rgba(0,0,0,.3)}
 
-#app{display:flex;height:100vh;width:100vw;padding-top:34px}
+#app{display:flex;height:100vh;width:100vw;padding-top:0}
 #map{flex:1;background:#1a2030}
 
 .header{position:absolute;top:46px;left:14px;z-index:1000;background:rgba(22,22,29,.95);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:14px;padding:14px 18px;max-width:340px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
@@ -33,42 +32,11 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 .header .meta b{color:var(--gold)}
 
 /* OVERLAY CONTROL */
-.overlay-ctrl{position:absolute;top:46px;right:14px;z-index:1000;background:rgba(22,22,29,.95);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:0 8px 22px rgba(0,0,0,.4);width:280px}
-.overlay-ctrl .ctrl-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
-.overlay-ctrl .toggle-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.overlay-ctrl .switch{position:relative;width:44px;height:24px;background:rgba(255,255,255,.12);border-radius:12px;cursor:pointer;transition:background .2s}
-.overlay-ctrl .switch.on{background:var(--gold)}
-.overlay-ctrl .switch::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s}
-.overlay-ctrl .switch.on::after{left:23px}
-.overlay-ctrl .switch-label{font-size:12px;font-weight:600;flex:1}
-.overlay-ctrl .opacity-row{margin-bottom:6px}
-.overlay-ctrl .opacity-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-soft);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
-.overlay-ctrl input[type=range]{width:100%;-webkit-appearance:none;height:5px;background:rgba(255,255,255,.1);border-radius:3px;outline:none}
-.overlay-ctrl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.5)}
-.overlay-ctrl .hint{font-size:10px;color:var(--text-dim);margin-top:8px;line-height:1.5;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)}
-
-
-
 .moc-label{background:rgba(22,22,29,.9)!important;color:#FF5722!important;border:1px solid rgba(255,87,34,.4)!important;border-radius:4px!important;padding:2px 5px!important;font-size:9px!important;font-weight:700!important;font-family:'JetBrains Mono',monospace!important;box-shadow:0 2px 6px rgba(0,0,0,.4)!important}
 .moc-label:before{display:none!important}
 .phong-label{background:#FF1744!important;color:#fff!important;border:none!important;border-radius:5px!important;padding:4px 8px!important;font-size:11px!important;font-weight:700!important;box-shadow:0 4px 12px rgba(255,23,68,.5)!important;font-family:inherit!important}
 .phong-label:before{border-top-color:#FF1744!important}
 
-
-.gcp-section{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05)}
-.gcp-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-family:'JetBrains Mono',monospace}
-.gcp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-.gcp-grid label{font-size:9px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
-.gcp-grid input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);padding:5px 6px;border-radius:5px;font-size:11px;font-family:'JetBrains Mono',monospace;margin-top:2px}
-.gcp-grid input:focus{outline:none;border-color:var(--gold)}
-.gcp-actions{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;margin-bottom:8px}
-.gcp-btn{padding:6px 0;background:rgba(224,170,121,.08);border:1px solid rgba(224,170,121,.2);border-radius:5px;color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
-.gcp-btn:hover{background:var(--gold);color:#1a1a1a}
-.gcp-btn.save{background:rgba(67,160,71,.15);border-color:rgba(67,160,71,.4);color:#81c784}
-.gcp-btn.save:hover{background:#43a047;color:#fff}
-.gcp-btn.reset{background:rgba(255,87,34,.1);border-color:rgba(255,87,34,.3);color:#ff8a65}
-.gcp-btn.reset:hover{background:#ff5722;color:#fff}
-.gcp-hint{font-size:10px;color:var(--text-dim);margin-top:6px;line-height:1.4}
 
 /* SIDEBAR */
 #sidebar{width:360px;background:linear-gradient(180deg,var(--card),#0d0d12);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-8px 0 32px rgba(0,0,0,.4)}
@@ -99,17 +67,11 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
   .header{top:42px;left:8px;right:8px;max-width:none;padding:8px 12px}
   .header h1{font-size:13px}
   .header .h1-sub,.header .meta{display:none}
-  .overlay-ctrl{top:96px;left:8px;right:8px;width:auto}
-  #sidebar{display:none}
+    #sidebar{display:none}
 }
 </style>
 </head>
 <body>
-
-<div class="demo-banner">
-  <span>🧪</span>
-  <span><b>TEST PAGE</b> — Verify polygon từ tọa độ ranh ACSA + 30 thửa demo bên trong · Khu Long Thạnh, Long Hòa, Cần Giờ</span>
-</div>
 
 <div id="app">
   <div id="map"></div>
@@ -131,37 +93,6 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
     </div>
   </div>
 
-  <div class="overlay-ctrl">
-    <div class="ctrl-title">Bản đồ quy hoạch nền</div>
-    <div class="toggle-row">
-      <div class="switch on" id="ovToggle"></div>
-      <div class="switch-label">Hiển thị overlay</div>
-    </div>
-    <div class="opacity-row">
-      <div class="opacity-label"><span>Độ trong suốt</span><span id="opVal">70%</span></div>
-      <input type="range" id="opSlider" min="0" max="100" value="70">
-    </div>
-    <div class="gcp-section">
-      <div class="gcp-title">⚙ Tinh chỉnh vị trí ảnh (GCP)</div>
-      <div class="gcp-grid">
-        <label>Bắc (N lat)<input type="number" step="0.0001" id="bN" value="10.4153"></label>
-        <label>Nam (S lat)<input type="number" step="0.0001" id="bS" value="10.4014"></label>
-        <label>Đông (E lng)<input type="number" step="0.0001" id="bE" value="106.9672"></label>
-        <label>Tây (W lng)<input type="number" step="0.0001" id="bW" value="106.9454"></label>
-      </div>
-      <div class="gcp-actions">
-        <button class="gcp-btn" onclick="adjustImg(0,1)" title="Up">↑</button>
-        <button class="gcp-btn" onclick="adjustImg(-1,0)" title="Left">←</button>
-        <button class="gcp-btn" onclick="adjustImg(1,0)" title="Right">→</button>
-        <button class="gcp-btn" onclick="adjustImg(0,-1)" title="Down">↓</button>
-        <button class="gcp-btn" onclick="adjustZoom(1)" title="Bigger">＋</button>
-        <button class="gcp-btn" onclick="adjustZoom(-1)" title="Smaller">－</button>
-        <button class="gcp-btn save" onclick="copyBbox()" title="Copy bbox">📋</button>
-        <button class="gcp-btn reset" onclick="resetBbox()" title="Reset">↺</button>
-      </div>
-      <div class="gcp-hint" id="gcpHint">Step: <b>0.0005°</b> (~50m) · Bấm 📋 copy bbox khi đã align</div>
-    </div>
-  </div>
 
   <div id="sidebar">
     <div class="sb-header" id="sbHeader">
@@ -208,75 +139,6 @@ L.tileLayer.wms('https://cache.bando.com.vn/service?',{
 }).addTo(map);
 
 // Image overlay (raster quy hoạch)
-// Dynamic imageOverlay với GCP controls
-const DEFAULT_BBOX = [[10.4014, 106.9454],[10.4153, 106.9672]];
-let CURRENT_BBOX = JSON.parse(localStorage.getItem('ct_bbox')||'null') || DEFAULT_BBOX;
-let imgOverlay = L.imageOverlay(IMG_URL, CURRENT_BBOX, {opacity: 0.7, interactive: false}).addTo(map);
-
-function syncInputsFromBbox(){
-  document.getElementById('bN').value = CURRENT_BBOX[1][0].toFixed(4);
-  document.getElementById('bS').value = CURRENT_BBOX[0][0].toFixed(4);
-  document.getElementById('bE').value = CURRENT_BBOX[1][1].toFixed(4);
-  document.getElementById('bW').value = CURRENT_BBOX[0][1].toFixed(4);
-}
-function applyBboxFromInputs(){
-  const n=parseFloat(document.getElementById('bN').value);
-  const s=parseFloat(document.getElementById('bS').value);
-  const e=parseFloat(document.getElementById('bE').value);
-  const w=parseFloat(document.getElementById('bW').value);
-  if(isNaN(n)||isNaN(s)||isNaN(e)||isNaN(w))return;
-  CURRENT_BBOX = [[s,w],[n,e]];
-  imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.setItem('ct_bbox', JSON.stringify(CURRENT_BBOX));
-}
-['bN','bS','bE','bW'].forEach(id=>document.getElementById(id).oninput=applyBboxFromInputs);
-syncInputsFromBbox();
-
-// Step nudge controls
-function adjustImg(dx, dy){
-  const STEP = 0.0005; // ~50m
-  CURRENT_BBOX[0][0] += dy*STEP; CURRENT_BBOX[1][0] += dy*STEP;
-  CURRENT_BBOX[0][1] += dx*STEP; CURRENT_BBOX[1][1] += dx*STEP;
-  imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.setItem('ct_bbox', JSON.stringify(CURRENT_BBOX));
-  syncInputsFromBbox();
-}
-function adjustZoom(dir){
-  // dir=1: bigger (expand bbox), dir=-1: smaller (contract)
-  const cy = (CURRENT_BBOX[0][0]+CURRENT_BBOX[1][0])/2;
-  const cx = (CURRENT_BBOX[0][1]+CURRENT_BBOX[1][1])/2;
-  const factor = dir===1 ? 1.05 : 0.952;
-  const dy = (CURRENT_BBOX[1][0]-CURRENT_BBOX[0][0])/2 * factor;
-  const dx = (CURRENT_BBOX[1][1]-CURRENT_BBOX[0][1])/2 * factor;
-  CURRENT_BBOX = [[cy-dy, cx-dx],[cy+dy, cx+dx]];
-  imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.setItem('ct_bbox', JSON.stringify(CURRENT_BBOX));
-  syncInputsFromBbox();
-}
-function copyBbox(){
-  const txt = `imageBbox: [[${CURRENT_BBOX[0][0].toFixed(6)}, ${CURRENT_BBOX[0][1].toFixed(6)}], [${CURRENT_BBOX[1][0].toFixed(6)}, ${CURRENT_BBOX[1][1].toFixed(6)}]]`;
-  navigator.clipboard.writeText(txt).catch(()=>{});
-  document.getElementById('gcpHint').innerHTML = '✅ <b>Đã copy:</b> ' + txt;
-}
-function resetBbox(){
-  CURRENT_BBOX = JSON.parse(JSON.stringify(DEFAULT_BBOX));
-  imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.removeItem('ct_bbox');
-  syncInputsFromBbox();
-  document.getElementById('gcpHint').innerHTML = '↺ Reset về default. Step <b>0.0005°</b> (~50m)';
-}
-
-// Keyboard shortcuts
-document.addEventListener('keydown', e=>{
-  if(e.target.tagName==='INPUT')return;
-  if(e.key==='ArrowUp'){adjustImg(0,1);e.preventDefault()}
-  if(e.key==='ArrowDown'){adjustImg(0,-1);e.preventDefault()}
-  if(e.key==='ArrowLeft'){adjustImg(-1,0);e.preventDefault()}
-  if(e.key==='ArrowRight'){adjustImg(1,0);e.preventDefault()}
-  if(e.key==='+'||e.key==='='){adjustZoom(1);e.preventDefault()}
-  if(e.key==='-'){adjustZoom(-1);e.preventDefault()}
-});
-
 // Boundary
 const boundaryLayer = L.geoJSON(BOUNDARY, {
   style: {color: '#FF5722', weight: 3, fillOpacity: 0, dashArray: '6,4'}
@@ -380,32 +242,6 @@ function showParcel(f) {
   `).join('');
 }
 
-// Overlay controls
-const ovToggle = document.getElementById('ovToggle');
-const opSlider = document.getElementById('opSlider');
-const opVal = document.getElementById('opVal');
-let overlayVisible = true;
-
-ovToggle.onclick = () => {
-  overlayVisible = !overlayVisible;
-  ovToggle.classList.toggle('on', overlayVisible);
-  if (overlayVisible) imgOverlay.addTo(map);
-  else map.removeLayer(imgOverlay);
-};
-opSlider.oninput = () => {
-  const v = parseInt(opSlider.value);
-  opVal.textContent = v + '%';
-  imgOverlay.setOpacity(v/100);
-};
-
-// Handle missing image gracefully
-const imgEl = imgOverlay.getElement();
-if (imgEl) {
-  imgEl.onerror = () => {
-    document.querySelector('.overlay-ctrl .hint').innerHTML = 
-      '⚠ <b>File ảnh chưa có</b><br>Đặt file vào <code style="background:rgba(255,255,255,.1);padding:2px 4px;border-radius:3px;font-size:10px">/assets/787_2013_1045_00.jpg</code>';
-  };
-}
 </script>
 </body>
 </html>
