@@ -38,6 +38,13 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 .phong-label:before{border-top-color:#FF1744!important}
 
 
+
+.leaflet-control-layers{background:rgba(22,22,29,.95)!important;backdrop-filter:blur(14px);border:1px solid var(--border)!important;border-radius:11px!important;color:var(--text)!important;padding:10px 12px!important;box-shadow:0 8px 22px rgba(0,0,0,.4)!important;font-family:inherit!important;max-width:300px}
+.leaflet-control-layers-list label{font-size:11px;font-weight:500;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:6px;line-height:1.3}
+.leaflet-control-layers-list label:hover{color:var(--gold)}
+.leaflet-control-layers input[type=checkbox]{accent-color:var(--gold);width:13px;height:13px;flex-shrink:0}
+.leaflet-control-layers-overlays{margin:0!important}
+
 /* SIDEBAR */
 #sidebar{width:360px;background:linear-gradient(180deg,var(--card),#0d0d12);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-8px 0 32px rgba(0,0,0,.4)}
 .sb-header{padding:22px;border-bottom:1px solid rgba(224,170,121,.1)}
@@ -123,6 +130,7 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 <script>
 const BOUNDARY = {"type":"Feature","properties":{"name":"Khu trung tâm và dân cư Huyện Cần Giờ","alt_name":"Khu Cần Thạnh","huyen":"Cần Giờ","tinh":"TP.HCM","loai":"Quy hoạch chi tiết 1/2000","nguon":"ACSA · UBND H. Cần Giờ","so_diem_moc":14,"dien_tich_m2":2024264.9,"dien_tich_ha":202.43,"convert":"VN2000 HCM TM-3 + datum shift QĐ 05/2007"},"geometry":{"type":"Polygon","coordinates":[[[106.9481549,10.4020552],[106.9533064,10.4023842],[106.957571,10.4030374],[106.9588483,10.4037175],[106.9619484,10.4053404],[106.9662114,10.4075814],[106.9648302,10.4105202],[106.9629716,10.4127227],[106.9613391,10.4146819],[106.9572263,10.4136526],[106.9505418,10.4119538],[106.9464347,10.4109092],[106.9469643,10.4082189],[106.9476673,10.4045673],[106.9481549,10.4020552]]]}};
 
+const LONG_THANH = {"type":"Feature","properties":{"name":"Khu DC Long Thạnh","so_diem_moc":27,"dien_tich_ha":78.78},"geometry":{"type":"Polygon","coordinates":[[[106.9029955,10.383812],[106.9031986,10.3836678],[106.9035938,10.3835644],[106.9043978,10.3830779],[106.9050091,10.3827698],[106.9051548,10.382614],[106.9061185,10.3803233],[106.9074637,10.3808814],[106.9095813,10.3816259],[106.9106704,10.3829224],[106.9116696,10.3856943],[106.9125604,10.3862986],[106.9145462,10.3861646],[106.9149817,10.3871324],[106.9130725,10.3893111],[106.9131033,10.3900675],[106.9116677,10.3921332],[106.9110584,10.3919293],[106.9097687,10.3906168],[106.9091898,10.3897692],[106.9077355,10.3883215],[106.907418,10.3878238],[106.9063075,10.3882835],[106.9055131,10.3882901],[106.9055084,10.387707],[106.9052706,10.3869558],[106.9042446,10.3855378],[106.9029955,10.383812]]]}};
 const LINE_5_10 = {"type":"Feature","properties":{"name":"Đường kiểm tra Tđ.5↔Tđ.10","from":"Tđ.5","to":"Tđ.10","color":"#FFEB3B"},"geometry":{"type":"LineString","coordinates":[[106.9619484,10.4053404],[106.9572263,10.4136526]]}};
 const THUA_PHONG = {"type":"Feature","properties":{"ten":"Thửa đất chú Phong","dien_tich_m2":95.0,"so_diem":4,"vi_tri_tam":[10.4059917,106.9580862],"convert":"VN2000 HCM TM-3 + datum shift QĐ05/2007"},"geometry":{"type":"Polygon","coordinates":[[[106.958111,10.4059064],[106.9580221,10.4060539],[106.9580614,10.406077],[106.9581502,10.4059295],[106.958111,10.4059064]]]}};
 const PARCELS = {"type":"FeatureCollection","features":[]};
@@ -156,11 +164,57 @@ window.zoomToBoundary = function(){
   map.flyToBounds(boundaryLayer.getBounds(), {padding: [60,60], duration: 0.8});
 };
 
+// === Async load KML data ===
+const canvasRenderer = L.canvas({padding: 0.5});
+
+const kmlStyle = (f) => {
+  const t = f.geometry.type;
+  if (t === 'Polygon') return {color:'#9C27B0', weight:1.5, fillOpacity:0.1, fillColor:'#9C27B0'};
+  if (t === 'LineString') return {color:'#03A9F4', weight:1, opacity:0.6};
+  return {radius:2, color:'#03A9F4', fillColor:'#03A9F4', fillOpacity:0.6, weight:1};
+};
+
+let kml1Layer = null, kml2Layer = null;
+async function loadKML(url, label){
+  const res = await fetch(url);
+  const data = await res.json();
+  return L.geoJSON(data, {
+    renderer: canvasRenderer,
+    style: kmlStyle,
+    pointToLayer: (f, latlng) => L.circleMarker(latlng, kmlStyle(f)),
+    onEachFeature: (f, l) => {
+      if (f.properties.name) l.bindTooltip(label + ' · ' + f.properties.name, {sticky:true});
+    }
+  });
+}
+
+(async () => {
+  try {
+    kml1Layer = await loadKML('/assets/to136moi2.geojson', 'tờ 136');
+    kml2Layer = await loadKML('/assets/123-ATD-CMD.geojson', '123-ATD');
+    // Don't add by default - too many features. Use layer control.
+    L.control.layers(null, {
+      '📍 Tờ 136 (Long Thạnh · 5,381 đối tượng)': kml1Layer,
+      '📍 123-ATD-Phạm Hùng Chương (12,734 đối tượng)': kml2Layer,
+      'Khu Long Thạnh boundary (27 mốc)': longThanhLayer
+    }, {position:'topright', collapsed:false}).addTo(map);
+  } catch(e) {
+    console.warn('KML load failed:', e);
+  }
+})();
+
+
 // Line kiểm tra Tđ.5 ↔ Tđ.10 (vàng dashed)
 const checkLine = L.geoJSON(LINE_5_10, {
   style: {color:'#FFEB3B', weight:2.5, dashArray:'8,5', opacity:0.9}
 }).addTo(map);
 checkLine.bindTooltip('🔍 Kiểm tra Tđ.5 ↔ Tđ.10 (1058.8m)', {permanent:false, sticky:true});
+
+// Long Thạnh polygon (cũ — orange)
+const longThanhLayer = L.geoJSON(LONG_THANH, {
+  style: {color:'#FF9800', weight:2, fillOpacity:0.05, fillColor:'#FF9800', dashArray:'4,4'}
+}).addTo(map);
+longThanhLayer.bindTooltip('Khu DC Long Thạnh (27 mốc · 78.78ha · cũ)', {sticky:true});
 
 // Markers cho 14 mốc
 L.geoJSON(BOUNDARY, {
