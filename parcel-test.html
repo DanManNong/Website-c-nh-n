@@ -253,7 +253,7 @@ const loaiColor = {
   CCC:'#9b8b8a', TIN:'#8b7355', DGT:'#6b6b6b', CXP:'#9ccc65'
 };
 
-const parcelLayer = // Thửa đất CHÚ PHONG — highlight đỏ rực, label luôn hiện
+// Thửa đất CHÚ PHONG — highlight đỏ rực, label luôn hiện
 const phongLayer = L.geoJSON(THUA_PHONG, {
   style: {color:'#FF1744', weight:3, fillOpacity:0.7, fillColor:'#FF1744'},
   onEachFeature: (f, l) => {
@@ -274,7 +274,7 @@ const phongLayer = L.geoJSON(THUA_PHONG, {
   }
 }).addTo(map);
 
-L.geoJSON(PARCELS, {
+const parcelLayer = L.geoJSON(PARCELS, {
   style: f => {
     const c = loaiColor[f.properties.loai_dat]||'#888';
     return {color: c, weight: 1.2, fillOpacity: 0.55, fillColor: c};
