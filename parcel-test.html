@@ -113,7 +113,7 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
     </div>
   </div>
 
-  <div class="overlay-ctrl" style="display:none">
+  <div class="overlay-ctrl">
     <div class="ctrl-title">Bản đồ quy hoạch nền</div>
     <div class="toggle-row">
       <div class="switch on" id="ovToggle"></div>
@@ -165,7 +165,7 @@ const LINE_5_10 = {"type":"Feature","properties":{"name":"Đường kiểm tra T
 const THUA_PHONG = {"type":"Feature","properties":{"ten":"Thửa đất chú Phong","dien_tich_m2":95.0,"so_diem":4,"vi_tri_tam":[10.4059917,106.9580862],"convert":"VN2000 HCM TM-3 + datum shift QĐ05/2007"},"geometry":{"type":"Polygon","coordinates":[[[106.958111,10.4059064],[106.9580221,10.4060539],[106.9580614,10.406077],[106.9581502,10.4059295],[106.958111,10.4059064]]]}};
 const PARCELS = {"type":"FeatureCollection","features":[]};
 const IMG_BBOX = [[10.380754405000001, 106.900617385], [10.393745294999999, 106.913802315]];
-const IMG_URL = '/assets/quy-hoach-long-thanh.jpg';
+const IMG_URL = '/assets/quy-hoach-can-thanh.jpg';
 
 const map = L.map('map',{center:[10.405992,106.958086],zoom:18,minZoom:13,maxZoom:19,zoomControl:true});
 L.tileLayer.wms('https://cache.bando.com.vn/service?',{
@@ -178,10 +178,9 @@ L.tileLayer.wms('https://cache.bando.com.vn/service?',{
 
 // Image overlay (raster quy hoạch)
 // Dynamic imageOverlay với GCP controls
-const DEFAULT_BBOX = [[10.3808, 106.9006],[10.3937, 106.9138]];
-let CURRENT_BBOX = JSON.parse(localStorage.getItem('lt_bbox')||'null') || DEFAULT_BBOX;
-let imgOverlay = L.imageOverlay(IMG_URL, CURRENT_BBOX, {opacity: 0.7, interactive: false});
-// imgOverlay.addTo(map); // disabled — chờ ảnh Cần Thạnh
+const DEFAULT_BBOX = [[10.4014, 106.9454],[10.4153, 106.9672]];
+let CURRENT_BBOX = JSON.parse(localStorage.getItem('ct_bbox')||'null') || DEFAULT_BBOX;
+let imgOverlay = L.imageOverlay(IMG_URL, CURRENT_BBOX, {opacity: 0.7, interactive: false}).addTo(map);
 
 function syncInputsFromBbox(){
   document.getElementById('bN').value = CURRENT_BBOX[1][0].toFixed(4);
@@ -197,7 +196,7 @@ function applyBboxFromInputs(){
   if(isNaN(n)||isNaN(s)||isNaN(e)||isNaN(w))return;
   CURRENT_BBOX = [[s,w],[n,e]];
   imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.setItem('lt_bbox', JSON.stringify(CURRENT_BBOX));
+  localStorage.setItem('ct_bbox', JSON.stringify(CURRENT_BBOX));
 }
 ['bN','bS','bE','bW'].forEach(id=>document.getElementById(id).oninput=applyBboxFromInputs);
 syncInputsFromBbox();
@@ -208,7 +207,7 @@ function adjustImg(dx, dy){
   CURRENT_BBOX[0][0] += dy*STEP; CURRENT_BBOX[1][0] += dy*STEP;
   CURRENT_BBOX[0][1] += dx*STEP; CURRENT_BBOX[1][1] += dx*STEP;
   imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.setItem('lt_bbox', JSON.stringify(CURRENT_BBOX));
+  localStorage.setItem('ct_bbox', JSON.stringify(CURRENT_BBOX));
   syncInputsFromBbox();
 }
 function adjustZoom(dir){
@@ -220,7 +219,7 @@ function adjustZoom(dir){
   const dx = (CURRENT_BBOX[1][1]-CURRENT_BBOX[0][1])/2 * factor;
   CURRENT_BBOX = [[cy-dy, cx-dx],[cy+dy, cx+dx]];
   imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.setItem('lt_bbox', JSON.stringify(CURRENT_BBOX));
+  localStorage.setItem('ct_bbox', JSON.stringify(CURRENT_BBOX));
   syncInputsFromBbox();
 }
 function copyBbox(){
@@ -231,7 +230,7 @@ function copyBbox(){
 function resetBbox(){
   CURRENT_BBOX = JSON.parse(JSON.stringify(DEFAULT_BBOX));
   imgOverlay.setBounds(L.latLngBounds(CURRENT_BBOX));
-  localStorage.removeItem('lt_bbox');
+  localStorage.removeItem('ct_bbox');
   syncInputsFromBbox();
   document.getElementById('gcpHint').innerHTML = '↺ Reset về default. Step <b>0.0005°</b> (~50m)';
 }
@@ -362,7 +361,7 @@ const imgEl = imgOverlay.getElement();
 if (imgEl) {
   imgEl.onerror = () => {
     document.querySelector('.overlay-ctrl .hint').innerHTML = 
-      '⚠ <b>File ảnh chưa có</b><br>Đặt file vào <code style="background:rgba(255,255,255,.1);padding:2px 4px;border-radius:3px;font-size:10px">/assets/quy-hoach-long-thanh.jpg</code>';
+      '⚠ <b>File ảnh chưa có</b><br>Đặt file vào <code style="background:rgba(255,255,255,.1);padding:2px 4px;border-radius:3px;font-size:10px">/assets/quy-hoach-can-thanh.jpg</code>';
   };
 }
 </script>
