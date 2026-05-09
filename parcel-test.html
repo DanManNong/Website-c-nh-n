@@ -106,6 +106,8 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
         <div class="h1-sub">Quy hoạch 1/2000 · 200ha · Cần Giờ</div>
       </div>
     </div>
+    <button class="zoom-btn" onclick="zoomToPhong()">🏠 Zoom tới thửa chú</button>
+    <button class="zoom-btn alt" onclick="zoomToBoundary()">📐 Toàn polygon</button>
     <div class="meta">
       <b>202.43 ha</b> · 14 mốc tọa độ<br>
       Convert <b>VN2000 + datum QĐ 05/2007</b><br>
@@ -250,7 +252,18 @@ document.addEventListener('keydown', e=>{
 const boundaryLayer = L.geoJSON(BOUNDARY, {
   style: {color: '#FF5722', weight: 3, fillOpacity: 0, dashArray: '6,4'}
 }).addTo(map);
+// Auto fit to polygon ban đầu
 map.fitBounds(boundaryLayer.getBounds(), {padding: [60, 60]});
+
+// Sau 1.5s tự zoom vào thửa của chú để chú thấy ngay
+setTimeout(()=>zoomToPhong(), 1500);
+
+window.zoomToPhong = function(){
+  map.flyTo([10.405992, 106.958086], 19, {duration: 0.8});
+};
+window.zoomToBoundary = function(){
+  map.flyToBounds(boundaryLayer.getBounds(), {padding: [60,60], duration: 0.8});
+};
 
 // Line kiểm tra Tđ.5 ↔ Tđ.10 (vàng dashed)
 const checkLine = L.geoJSON(LINE_5_10, {
@@ -281,7 +294,7 @@ const loaiColor = {
 
 // Thửa đất CHÚ PHONG — highlight đỏ rực, label luôn hiện
 const phongLayer = L.geoJSON(THUA_PHONG, {
-  style: {color:'#FF1744', weight:3, fillOpacity:0.7, fillColor:'#FF1744'},
+  style: {color:'#FF1744', weight:4, fillOpacity:0.85, fillColor:'#FF1744', className:'phong-layer-pulse'},
   onEachFeature: (f, l) => {
     l.bindTooltip('🏠 ' + f.properties.ten + '<br>' + f.properties.dien_tich_m2 + ' m²', 
       {permanent: true, direction: 'top', className: 'phong-label'});
