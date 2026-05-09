@@ -48,6 +48,9 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 .overlay-ctrl .hint{font-size:10px;color:var(--text-dim);margin-top:8px;line-height:1.5;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)}
 
 
+
+.moc-label{background:rgba(22,22,29,.9)!important;color:#FF5722!important;border:1px solid rgba(255,87,34,.4)!important;border-radius:4px!important;padding:2px 5px!important;font-size:9px!important;font-weight:700!important;font-family:'JetBrains Mono',monospace!important;box-shadow:0 2px 6px rgba(0,0,0,.4)!important}
+.moc-label:before{display:none!important}
 .phong-label{background:#FF1744!important;color:#fff!important;border:none!important;border-radius:5px!important;padding:4px 8px!important;font-size:11px!important;font-weight:700!important;box-shadow:0 4px 12px rgba(255,23,68,.5)!important;font-family:inherit!important}
 .phong-label:before{border-top-color:#FF1744!important}
 
@@ -99,14 +102,14 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
     <div class="brand">
       <div class="logo">▰</div>
       <div>
-        <h1>Thửa đất TEST</h1>
-        <div class="h1-sub">Cần Thạnh · Huyện Cần Giờ · TP.HCM</div>
+        <h1>Khu Cần Thạnh</h1>
+        <div class="h1-sub">Quy hoạch 1/2000 · 200ha · Cần Giờ</div>
       </div>
     </div>
     <div class="meta">
-      <b>95 m²</b> · 4 góc ranh<br>
+      <b>202.43 ha</b> · 14 mốc tọa độ<br>
       Convert <b>VN2000 + datum QĐ 05/2007</b><br>
-      Đợi bảng mốc Cần Thạnh →
+      Sai số diện tích: 1.2%
     </div>
   </div>
 
@@ -136,12 +139,13 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
       <div style="font-size:11px;color:var(--text-soft);margin-top:4px">Click 1 thửa trên bản đồ</div>
     </div>
     <div class="area-stats">
-      <h4>📊 Thửa đất TEST</h4>
-      <div class="stat-row"><span>Diện tích</span><b>95 m²</b></div>
-      <div class="stat-row"><span>Số góc</span><b>4 điểm</b></div>
-      <div class="stat-row"><span>Vị trí</span><b>Cần Thạnh, Cần Giờ</b></div>
-      <div class="stat-row"><span>Datum</span><b>QĐ 05/2007</b></div>
-      <div class="stat-row"><span>Status</span><b>✅ Verified</b></div>
+      <h4>📊 Tổng quan Khu Cần Thạnh</h4>
+      <div class="stat-row"><span>Diện tích polygon</span><b>202.43 ha</b></div>
+      <div class="stat-row"><span>Diện tích bản đồ</span><b>200 ha (I+II)</b></div>
+      <div class="stat-row"><span>Sai số</span><b>1.2%</b></div>
+      <div class="stat-row"><span>Số mốc ranh</span><b>14 điểm</b></div>
+      <div class="stat-row"><span>Thửa chú Phong</span><b>✅ Trong polygon</b></div>
+      <div class="stat-row"><span>Line Tđ.5↔Tđ.10</span><b>1,058.8m</b></div>
     </div>
     <div class="sb-content" id="sbContent">
       <div class="empty-state">
@@ -155,8 +159,9 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-const BOUNDARY = {"type":"FeatureCollection","features":[]};
+const BOUNDARY = {"type":"Feature","properties":{"name":"Khu trung tâm và dân cư Huyện Cần Giờ","alt_name":"Khu Cần Thạnh","huyen":"Cần Giờ","tinh":"TP.HCM","loai":"Quy hoạch chi tiết 1/2000","nguon":"ACSA · UBND H. Cần Giờ","so_diem_moc":14,"dien_tich_m2":2024264.9,"dien_tich_ha":202.43,"convert":"VN2000 HCM TM-3 + datum shift QĐ 05/2007"},"geometry":{"type":"Polygon","coordinates":[[[106.9481549,10.4020552],[106.9533064,10.4023842],[106.957571,10.4030374],[106.9588483,10.4037175],[106.9619484,10.4053404],[106.9662114,10.4075814],[106.9648302,10.4105202],[106.9629716,10.4127227],[106.9613391,10.4146819],[106.9572263,10.4136526],[106.9505418,10.4119538],[106.9464347,10.4109092],[106.9469643,10.4082189],[106.9476673,10.4045673],[106.9481549,10.4020552]]]}};
 
+const LINE_5_10 = {"type":"Feature","properties":{"name":"Đường kiểm tra Tđ.5↔Tđ.10","from":"Tđ.5","to":"Tđ.10","color":"#FFEB3B"},"geometry":{"type":"LineString","coordinates":[[106.9619484,10.4053404],[106.9572263,10.4136526]]}};
 const THUA_PHONG = {"type":"Feature","properties":{"ten":"Thửa đất chú Phong","dien_tich_m2":95.0,"so_diem":4,"vi_tri_tam":[10.4059917,106.9580862],"convert":"VN2000 HCM TM-3 + datum shift QĐ05/2007"},"geometry":{"type":"Polygon","coordinates":[[[106.958111,10.4059064],[106.9580221,10.4060539],[106.9580614,10.406077],[106.9581502,10.4059295],[106.958111,10.4059064]]]}};
 const PARCELS = {"type":"FeatureCollection","features":[]};
 const IMG_BBOX = [[10.380754405000001, 106.900617385], [10.393745294999999, 106.913802315]];
@@ -246,7 +251,28 @@ document.addEventListener('keydown', e=>{
 const boundaryLayer = L.geoJSON(BOUNDARY, {
   style: {color: '#FF5722', weight: 3, fillOpacity: 0, dashArray: '6,4'}
 }).addTo(map);
-// map.fitBounds(boundaryLayer.getBounds(), {padding: [60, 60]});  // BOUNDARY rỗng — sẽ fit vào THUA_PHONG sau
+map.fitBounds(boundaryLayer.getBounds(), {padding: [60, 60]});
+
+// Line kiểm tra Tđ.5 ↔ Tđ.10 (vàng dashed)
+const checkLine = L.geoJSON(LINE_5_10, {
+  style: {color:'#FFEB3B', weight:2.5, dashArray:'8,5', opacity:0.9}
+}).addTo(map);
+checkLine.bindTooltip('🔍 Kiểm tra Tđ.5 ↔ Tđ.10 (1058.8m)', {permanent:false, sticky:true});
+
+// Markers cho 14 mốc
+L.geoJSON(BOUNDARY, {
+  pointToLayer: () => null
+});
+const mocLatLngs = BOUNDARY.geometry.coordinates[0].slice(0,-1);
+mocLatLngs.forEach((c, i) => {
+  const isCheck = (i+1)===5 || (i+1)===10;
+  L.circleMarker([c[1], c[0]], {
+    radius: isCheck ? 8 : 5,
+    color: isCheck ? '#FFEB3B' : '#FF5722',
+    fillColor: isCheck ? '#FFEB3B' : '#FF5722',
+    fillOpacity: 0.9, weight: 2
+  }).bindTooltip(`Tđ.${i+1}${isCheck?' ★':''}`, {permanent:true, direction:'top', className:'moc-label'}).addTo(map);
+});
 
 // Parcel layer
 const loaiColor = {
@@ -274,7 +300,6 @@ const phongLayer = L.geoJSON(THUA_PHONG, {
     });
   }
 }).addTo(map);
-map.fitBounds(phongLayer.getBounds().pad(0.5));  // Zoom thoáng quanh thửa
 
 const parcelLayer = L.geoJSON(PARCELS, {
   style: f => {
