@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Brand Guide — nguyentanphong.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1a1a1a;
+  --gold:#E0AA79;
+  --gold-light:#f0c896;
+  --cream:#2C2C2C;
+  --text:#FFFFFF;
+  --text-soft:rgba(255,255,255,0.72);
+  --border:rgba(224,170,121,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* ── BG PATTERN (exact from site) ── */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E");
+}
+
+.wrap{max-width:680px;margin:0 auto;padding:40px 24px 80px;position:relative;z-index:1}
+
+/* ── HEADER ── */
+.header{text-align:center;margin-bottom:48px}
+.header .tag{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:12px}
+.header h1{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.header h1 span{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header .url{font-size:13px;color:var(--text-soft);margin-top:8px;letter-spacing:.08em}
+.divider{height:1px;background:var(--border);margin:40px 0}
+
+/* ── SECTION ── */
+.section{margin-bottom:48px}
+.section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:.8}
+.section h2{font-size:20px;font-weight:700;margin-bottom:6px}
+.section .desc{font-size:13px;color:var(--text-soft);margin-bottom:24px;line-height:1.7}
+
+/* ── COLOR CARDS ── */
+.color-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.color-card{border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .15s;border:1px solid rgba(255,255,255,.06)}
+.color-card:hover{transform:translateY(-3px)}
+.color-card:active{transform:scale(.97)}
+.color-swatch{height:80px;position:relative;display:flex;align-items:flex-end;padding:10px 12px}
+.color-swatch.bordered{border:1px solid rgba(255,255,255,.15)}
+.color-meta{background:rgba(0,0,0,.6);backdrop-filter:blur(8px);padding:10px 12px}
+.color-hex{font-weight:700;font-size:14px;letter-spacing:.05em;font-variant-numeric:tabular-nums}
+.color-name{font-size:11px;color:var(--text-soft);margin-top:2px}
+.color-role{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+
+/* Full-width card */
+.color-card.full{grid-column:1/-1}
+.color-card.full .color-swatch{height:56px}
+
+/* ── GRADIENT SECTION ── */
+.gradient-row{display:flex;flex-direction:column;gap:12px}
+.gradient-card{height:56px;border-radius:10px;display:flex;align-items:center;padding:0 16px;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:transform .15s;border:1px solid rgba(255,255,255,.06)}
+.gradient-card:hover{transform:translateY(-2px)}
+.gradient-card .code{margin-left:auto;font-weight:400;font-size:11px;opacity:.6}
+
+/* ── FONT SECTION ── */
+.font-showcase{background:var(--cream);border-radius:14px;padding:28px 24px;border:1px solid var(--border)}
+.font-name{font-size:24px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.font-family{font-size:12px;color:var(--text-soft);letter-spacing:.1em;margin-bottom:24px}
+.weight-row{display:flex;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(224,170,121,.1)}
+.weight-row:last-child{border-bottom:none}
+.weight-label{font-size:11px;color:var(--text-soft);min-width:80px;flex-shrink:0}
+.weight-sample{font-size:18px;flex:1}
+.w300{font-weight:300}.w400{font-weight:400}.w500{font-weight:500}.w600{font-weight:600}.w700{font-weight:700}.w800{font-weight:800}
+
+.spacing-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.spacing-item{background:rgba(224,170,121,.06);border-radius:8px;padding:12px;text-align:center}
+.spacing-item .val{font-size:11px;color:var(--gold);font-weight:600;letter-spacing:.1em;margin-bottom:4px}
+.spacing-item .sample{font-size:13px;color:var(--text-soft)}
+
+/* ── PATTERN SECTION ── */
+.pattern-box{height:120px;border-radius:12px;background:var(--navy);border:1px solid var(--border);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pattern-box::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E");
+}
+.pattern-label{position:relative;z-index:1;font-size:11px;color:var(--text-soft);letter-spacing:.15em;text-transform:uppercase}
+
+/* ── RADIUS SECTION ── */
+.radius-row{display:flex;gap:16px;flex-wrap:wrap}
+.radius-item{text-align:center}
+.radius-box{width:48px;height:48px;background:rgba(224,170,121,.12);border:1px solid var(--border);margin-bottom:6px}
+.radius-val{font-size:10px;color:var(--text-soft)}
+
+/* ── TOKENS TABLE ── */
+.token-table{width:100%;border-collapse:collapse;font-size:12px}
+.token-table th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--gold);font-weight:600;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+.token-table td{padding:8px 10px;border-bottom:1px solid rgba(224,170,121,.08);color:var(--text-soft)}
+.token-table td:first-child{font-family:monospace;color:var(--gold-light);font-size:11px}
+.token-table td:nth-child(2){font-family:monospace;font-size:11px;color:#fff}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--gold);color:var(--navy);padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;opacity:0;transition:all .25s;pointer-events:none;z-index:200}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:40px 0 0;border-top:1px solid var(--border);margin-top:48px}
+.footer p{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="tag">Brand identity guide</div>
+    <h1>nguyen<span>tanphong</span>.com</h1>
+    <div class="url">Tri Thức · Pháp Luật · Công Nghệ</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 1. COLORS ═══ -->
+  <div class="section">
+    <div class="section-label">01 · Bảng màu</div>
+    <h2>Core palette</h2>
+    <div class="desc">Hệ màu chính của website — dark theme, tông ấm gold trên nền đen than.</div>
+
+    <div class="color-grid">
+      <div class="color-card" onclick="copy('#E0AA79')">
+        <div class="color-swatch" style="background:#E0AA79"></div>
+        <div class="color-meta">
+          <div class="color-hex">#E0AA79</div>
+          <div class="color-name">Gold — Primary</div>
+          <div class="color-role">--gold · CTA, heading, icon</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('#f0c896')">
+        <div class="color-swatch" style="background:#f0c896"></div>
+        <div class="color-meta">
+          <div class="color-hex">#f0c896</div>
+          <div class="color-name">Gold Light</div>
+          <div class="color-role">--gold-light · hover, gradient end</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('#1a1a1a')">
+        <div class="color-swatch" style="background:#1a1a1a"></div>
+        <div class="color-meta">
+          <div class="color-hex">#1a1a1a</div>
+          <div class="color-name">Navy</div>
+          <div class="color-role">--navy · deepest background</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('#2C2C2C')">
+        <div class="color-swatch" style="background:#2C2C2C"></div>
+        <div class="color-meta">
+          <div class="color-hex">#2C2C2C</div>
+          <div class="color-name">Cream (Dark)</div>
+          <div class="color-role">--cream · main background</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('#FFFFFF')">
+        <div class="color-swatch bordered" style="background:#FFFFFF"></div>
+        <div class="color-meta">
+          <div class="color-hex">#FFFFFF</div>
+          <div class="color-name">White — Text</div>
+          <div class="color-role">--text · primary text</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('rgba(255,255,255,0.72)')">
+        <div class="color-swatch" style="background:rgba(255,255,255,0.72)"></div>
+        <div class="color-meta">
+          <div class="color-hex">rgba(…0.72)</div>
+          <div class="color-name">Soft White</div>
+          <div class="color-role">--text-soft · sub text</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ACCENT COLORS ═══ -->
+  <div class="section">
+    <div class="section-label">02 · Màu nhấn</div>
+    <h2>Accent colors</h2>
+    <div class="desc">Màu phụ dùng cho các nút chức năng đặc biệt trên trang.</div>
+
+    <div class="color-grid">
+      <div class="color-card" onclick="copy('#ED1C24')">
+        <div class="color-swatch" style="background:linear-gradient(135deg,#ED1C24,#C0392B)"></div>
+        <div class="color-meta">
+          <div class="color-hex">#ED1C24</div>
+          <div class="color-name">NTP Red</div>
+          <div class="color-role">Nút "Bản đồ pháp luật"</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('#FF6B3D')">
+        <div class="color-swatch" style="background:linear-gradient(90deg,#ED1C24,#FF6B3D,#ED1C24)"></div>
+        <div class="color-meta">
+          <div class="color-hex">#FF6B3D</div>
+          <div class="color-name">Orange Flame</div>
+          <div class="color-role">Animated gradient stripe</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('#1976d2')">
+        <div class="color-swatch" style="background:linear-gradient(135deg,#1976d2,#0d47a1)"></div>
+        <div class="color-meta">
+          <div class="color-hex">#1976d2</div>
+          <div class="color-name">TMĐT Blue</div>
+          <div class="color-role">Nút "Bản đồ TMĐT"</div>
+        </div>
+      </div>
+      <div class="color-card" onclick="copy('#C0392B')">
+        <div class="color-swatch" style="background:#C0392B"></div>
+        <div class="color-meta">
+          <div class="color-hex">#C0392B</div>
+          <div class="color-name">Red Deep</div>
+          <div class="color-role">Gradient end (dark red)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GRADIENTS ═══ -->
+  <div class="section">
+    <div class="section-label">03 · Gradient</div>
+    <h2>Gradient styles</h2>
+    <div class="desc">Các gradient chính dùng cho CTA, nút bấm, và accent bar.</div>
+
+    <div class="gradient-row">
+      <div class="gradient-card" style="background:linear-gradient(135deg,#E0AA79,#f0c896);color:#1a1a1a" onclick="copy('linear-gradient(135deg, #E0AA79, #f0c896)')">
+        Gold Primary <span class="code">135deg</span>
+      </div>
+      <div class="gradient-card" style="background:linear-gradient(180deg,#E0AA79,#f0c896);color:#1a1a1a" onclick="copy('linear-gradient(180deg, #E0AA79, #f0c896)')">
+        Gold Vertical <span class="code">180deg</span>
+      </div>
+      <div class="gradient-card" style="background:linear-gradient(135deg,#ED1C24,#C0392B);color:#fff" onclick="copy('linear-gradient(135deg, #ED1C24, #C0392B)')">
+        Red Legal <span class="code">135deg</span>
+      </div>
+      <div class="gradient-card" style="background:linear-gradient(135deg,#1976d2,#0d47a1);color:#fff" onclick="copy('linear-gradient(135deg, #1976d2, #0d47a1)')">
+        Blue TMĐT <span class="code">135deg</span>
+      </div>
+      <div class="gradient-card" style="background:linear-gradient(90deg,#ED1C24,#FF6B3D,#ED1C24);color:#fff" onclick="copy('linear-gradient(90deg, #ED1C24, #FF6B3D, #ED1C24)')">
+        Animated Flame <span class="code">3 stops</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ TYPOGRAPHY ═══ -->
+  <div class="section">
+    <div class="section-label">04 · Typography</div>
+    <h2>Be Vietnam Pro</h2>
+    <div class="desc">Font chính duy nhất — thiết kế riêng cho tiếng Việt, hỗ trợ đầy đủ dấu.</div>
+
+    <div class="font-showcase">
+      <div class="font-name">Be Vietnam Pro</div>
+      <div class="font-family">font-family: 'Be Vietnam Pro', sans-serif</div>
+
+      <div class="weight-row">
+        <div class="weight-label">Light · 300</div>
+        <div class="weight-sample w300">Tri Thức · Pháp Luật · Công Nghệ</div>
+      </div>
+      <div class="weight-row">
+        <div class="weight-label">Regular · 400</div>
+        <div class="weight-sample w400">Tri Thức · Pháp Luật · Công Nghệ</div>
+      </div>
+      <div class="weight-row">
+        <div class="weight-label">Medium · 500</div>
+        <div class="weight-sample w500">Tri Thức · Pháp Luật · Công Nghệ</div>
+      </div>
+      <div class="weight-row">
+        <div class="weight-label">Semi · 600</div>
+        <div class="weight-sample w600">Tri Thức · Pháp Luật · Công Nghệ</div>
+      </div>
+      <div class="weight-row">
+        <div class="weight-label">Bold · 700</div>
+        <div class="weight-sample w700">Tri Thức · Pháp Luật · Công Nghệ</div>
+      </div>
+      <div class="weight-row">
+        <div class="weight-label">Extra · 800</div>
+        <div class="weight-sample w800">Tri Thức · Pháp Luật · Công Nghệ</div>
+      </div>
+
+      <div class="spacing-grid">
+        <div class="spacing-item">
+          <div class="val">0.08em</div>
+          <div class="sample" style="letter-spacing:.08em">Body text</div>
+        </div>
+        <div class="spacing-item">
+          <div class="val">0.15em</div>
+          <div class="sample" style="letter-spacing:.15em">Subtitle</div>
+        </div>
+        <div class="spacing-item">
+          <div class="val">0.25em</div>
+          <div class="sample" style="letter-spacing:.25em">Label</div>
+        </div>
+        <div class="spacing-item">
+          <div class="val">0.35em</div>
+          <div class="sample" style="letter-spacing:.35em;font-size:11px">TAGLINE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ PATTERN ═══ -->
+  <div class="section">
+    <div class="section-label">05 · Background pattern</div>
+    <h2>Curved lines overlay</h2>
+    <div class="desc">SVG pattern lặp lại — đường cong gold với stroke-opacity 0.15 trên nền tối.</div>
+    <div class="pattern-box">
+      <div class="pattern-label">SVG · 60×60px · repeat · stroke #E0AA79 @ 15%</div>
+    </div>
+  </div>
+
+  <!-- ═══ BORDER RADIUS ═══ -->
+  <div class="section">
+    <div class="section-label">06 · Border radius</div>
+    <h2>Corner values</h2>
+    <div class="desc">Các giá trị bo góc sử dụng trên website.</div>
+    <div class="radius-row">
+      <div class="radius-item"><div class="radius-box" style="border-radius:5px"></div><div class="radius-val">5px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:6px"></div><div class="radius-val">6px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:7px"></div><div class="radius-val">7px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:8px"></div><div class="radius-val">8px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:10px"></div><div class="radius-val">10px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:12px"></div><div class="radius-val">12px</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ TOKENS TABLE ═══ -->
+  <div class="section">
+    <div class="section-label">07 · CSS tokens</div>
+    <h2>Design tokens</h2>
+    <div class="desc">Toàn bộ CSS custom properties dùng trên website — copy trực tiếp vào code.</div>
+
+    <table class="token-table">
+      <thead><tr><th>Variable</th><th>Value</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr onclick="copy('#1a1a1a')"><td>--navy</td><td>#1a1a1a</td><td>Deep background</td></tr>
+        <tr onclick="copy('#E0AA79')"><td>--gold</td><td>#E0AA79</td><td>Primary accent</td></tr>
+        <tr onclick="copy('#f0c896')"><td>--gold-light</td><td>#f0c896</td><td>Gradient end, hover</td></tr>
+        <tr onclick="copy('#2C2C2C')"><td>--cream</td><td>#2C2C2C</td><td>Main background</td></tr>
+        <tr onclick="copy('#FFFFFF')"><td>--text</td><td>#FFFFFF</td><td>Primary text</td></tr>
+        <tr onclick="copy('rgba(255,255,255,0.72)')"><td>--text-soft</td><td>rgba(…0.72)</td><td>Sub text</td></tr>
+        <tr onclick="copy('rgba(224,170,121,0.25)')"><td>--border</td><td>rgba(…0.25)</td><td>Border, divider</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>NGUYỄN TẤN PHONG · BRAND IDENTITY REFERENCE · 2026</p>
+  </div>
+</div>
+
+<div class="toast" id="toast">Đã copy!</div>
+
+<script>
+function copy(val){
+  navigator.clipboard.writeText(val).catch(()=>{
+    const t=document.createElement('textarea');t.value=val;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);
+  });
+  const toast=document.getElementById('toast');
+  toast.textContent='Đã copy: '+val;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),1400);
+}
+document.querySelectorAll('.token-table tbody tr').forEach(r=>r.style.cursor='pointer');
+</script>
+</body>
+</html>

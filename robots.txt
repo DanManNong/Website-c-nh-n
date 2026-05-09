@@ -14,5 +14,6 @@ Disallow: /luu
 Disallow: /index-v1
 Disallow: /thuong_hieu_so_phong
 Disallow: /_originals/
+Disallow: /brand
 
 Sitemap: https://www.nguyentanphong.com/sitemap.xml
