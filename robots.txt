@@ -18,5 +18,6 @@ Disallow: /brand
 Disallow: /palettes
 Disallow: /preview-color
 Disallow: /parcel
+Disallow: /parcel-test
 
 Sitemap: https://www.nguyentanphong.com/sitemap.xml
