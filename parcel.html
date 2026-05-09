@@ -228,7 +228,8 @@ const PARCELS  = {"type":"FeatureCollection","features":[{"type":"Feature","geom
 const SUPA_URL = 'https://dcmtbgcltopnqsiedwlg.supabase.co';
 const SUPA_KEY = 'sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
 
-const map = L.map('map',{center:[10.74,106.85],zoom:10,minZoom:9,maxZoom:18,zoomControl:true});
+const map = L.map('map',{center:[10.74,106.85],zoom:10,minZoom:9,maxZoom:18,zoomControl:false});
+L.control.zoom({position:'topright'}).addTo(map);
 // Esri World Street Map — giống Google Maps, free, không cần API key
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
   maxZoom:19,
