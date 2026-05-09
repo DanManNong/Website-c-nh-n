@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Preview Color · nguyentanphong.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* Mặc định: bộ NTP_18 — refresh warm gold */
+  --bg:#372D21;
+  --card:#484745;
+  --primary:#EFB164;
+  --primary-light:#CECCC8;
+  --neutral:#878D90;
+  --accent-1:#816441;
+  --accent-2:#372D21;
+  --text:#FFFFFF;
+  --text-soft:rgba(255,255,255,0.72);
+  --extra:#F5F0E5;
+}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .4s,color .4s;padding:0 0 60px}
+
+/* SWITCHER */
+.switcher{position:sticky;top:0;z-index:100;background:rgba(10,10,12,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);padding:14px 16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.switcher .label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace;margin-right:4px}
+.switcher button{font-family:'Be Vietnam Pro',sans-serif;background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.switcher button:hover{border-color:#fff;color:#fff}
+.switcher button.active{background:#fff;color:#000;border-color:#fff}
+.switcher .palette-strip{display:flex;width:48px;height:8px;border-radius:2px;overflow:hidden;margin-top:2px}
+.switcher .palette-strip span{flex:1}
+
+/* PREVIEW CARD (mock trang chủ) */
+.preview-wrap{max-width:480px;margin:30px auto;padding:0 20px}
+.bg-pattern{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;background-image:var(--pattern-svg)}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:36px 28px;box-shadow:0 24px 64px rgba(0,0,0,.4);position:relative;z-index:1;transition:background .4s}
+
+.tagline-top{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--primary);text-align:center;margin-bottom:18px;font-weight:600}
+
+.avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-light));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:800;color:var(--card);position:relative;border:3px solid var(--primary)}
+
+.name{font-size:32px;font-weight:300;text-align:center;line-height:1.1;margin-bottom:6px;letter-spacing:-.01em}
+.name strong{font-weight:800;background:linear-gradient(135deg,var(--primary),var(--primary-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.name-sub{text-align:center;font-size:11px;color:var(--text-soft);letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px}
+
+.title-line{text-align:center;font-size:13px;color:var(--text-soft);line-height:1.7;margin-bottom:28px;padding:0 8px}
+.title-line b{color:var(--primary);font-weight:700}
+
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--primary) 50%,transparent);opacity:.4;margin:24px 0}
+
+/* BUTTONS */
+.save-contact{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 18px;border-radius:12px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;margin-bottom:12px;border:none;transition:transform .15s,box-shadow .2s;letter-spacing:.02em}
+.save-contact:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.3)}
+
+.save-contact--save{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:var(--card)}
+.save-contact--map{background:linear-gradient(135deg,var(--accent-1),var(--accent-2));color:#fff}
+.save-contact--tmdt{background:linear-gradient(135deg,var(--neutral),var(--accent-1));color:#fff}
+
+/* COLOR REFERENCE */
+.ref{margin-top:30px;padding:18px 16px;background:rgba(0,0,0,.3);border-radius:12px;border:1px solid rgba(255,255,255,.05)}
+.ref-title{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--primary);font-family:'JetBrains Mono',monospace;margin-bottom:10px;opacity:.8}
+.ref-strip{display:flex;height:36px;border-radius:6px;overflow:hidden;margin-bottom:8px}
+.ref-strip span{flex:1;cursor:pointer;transition:flex .3s}
+.ref-strip span:hover{flex:2}
+.ref-hexes{display:flex;gap:4px;flex-wrap:wrap}
+.ref-hexes code{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-soft);background:rgba(255,255,255,.04);padding:2px 6px;border-radius:4px;letter-spacing:.05em}
+
+/* META INFO */
+.meta-card{max-width:480px;margin:20px auto 0;padding:0 20px}
+.meta-card h3{font-family:'Be Vietnam Pro',serif;font-size:18px;font-weight:600;color:var(--primary);margin-bottom:6px;text-align:center}
+.meta-card p{font-size:12px;color:rgba(255,255,255,.55);line-height:1.7;text-align:center}
+
+/* PROS / CONS */
+.judge{max-width:480px;margin:20px auto;padding:18px 20px;background:rgba(0,0,0,.25);border-radius:14px;border:1px solid rgba(255,255,255,.05)}
+.judge-row{display:flex;gap:8px;margin-bottom:8px;font-size:12px;line-height:1.6}
+.judge-row:last-child{margin-bottom:0}
+.judge-row .icon{flex-shrink:0;font-weight:700;width:18px}
+.judge-row.pro .icon{color:#7DD87D}
+.judge-row.con .icon{color:#FF8A65}
+.judge-row .text{color:rgba(255,255,255,.75);flex:1}
+</style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+
+<!-- SWITCHER -->
+<div class="switcher">
+  <span class="label">Preview palette:</span>
+  <button class="active" data-p="ntp18" onclick="switchPalette('ntp18',this)">
+    <span>NTP 18 · Refresh Gold</span>
+    <span class="palette-strip">
+      <span style="background:#372D21"></span><span style="background:#816441"></span><span style="background:#EFB164"></span><span style="background:#878D90"></span><span style="background:#CECCC8"></span><span style="background:#484745"></span><span style="background:#F5F0E5"></span>
+    </span>
+  </button>
+  <button data-p="ntp04" onclick="switchPalette('ntp04',this)">
+    <span>NTP 04 · Tối giản</span>
+    <span class="palette-strip">
+      <span style="background:#1A1A1A"></span><span style="background:#36454F"></span><span style="background:#B2BEB5"></span><span style="background:#D3D3D3"></span><span style="background:#F5F6F8"></span><span style="background:#FFFFFF"></span><span style="background:#1A5F7A"></span>
+    </span>
+  </button>
+  <button data-p="ntp31" onclick="switchPalette('ntp31',this)">
+    <span>NTP 31 · Cổ điển</span>
+    <span class="palette-strip">
+      <span style="background:#1C160F"></span><span style="background:#51483E"></span><span style="background:#7F562E"></span><span style="background:#BD720F"></span><span style="background:#FDDF5E"></span><span style="background:#D0CFC6"></span><span style="background:#F5F0E5"></span>
+    </span>
+  </button>
+  <button data-p="ntp25" onclick="switchPalette('ntp25',this)">
+    <span>NTP 25 · Vibrant</span>
+    <span class="palette-strip">
+      <span style="background:#322039"></span><span style="background:#0A3945"></span><span style="background:#4F8B82"></span><span style="background:#21C394"></span><span style="background:#855853"></span><span style="background:#DE592E"></span><span style="background:#F5F0E5"></span>
+    </span>
+  </button>
+  <button data-p="current" onclick="switchPalette('current',this)">
+    <span>Hiện tại · Gold/Navy</span>
+    <span class="palette-strip">
+      <span style="background:#1a1a1a"></span><span style="background:#2C2C2C"></span><span style="background:#E0AA79"></span><span style="background:#f0c896"></span><span style="background:#FFFFFF"></span><span style="background:#ED1C24"></span><span style="background:#1976d2"></span>
+    </span>
+  </button>
+</div>
+
+<div class="meta-card">
+  <h3 id="paletteTitle">NTP 18 — Refresh Gold</h3>
+  <p id="paletteDesc">Gold ấm + xám warm + cream — refresh nhẹ tone hiện tại, giữ tinh thần "trí thức · pháp luật".</p>
+</div>
+
+<!-- PREVIEW MOCK -->
+<div class="preview-wrap">
+  <div class="card">
+    <div class="tagline-top">Tri Thức · Pháp Luật · Công Nghệ</div>
+    <div class="avatar">N</div>
+    <h1 class="name">Nguyễn Tấn <strong>Phong</strong></h1>
+    <div class="name-sub">Luật sư · Chuyên gia kinh tế số</div>
+    <div class="title-line">
+      Sáng lập <b>nguyentanphong.com</b> — không gian số tổng hợp các nghiên cứu về <b>luật pháp</b>, <b>thương mại điện tử</b> và <b>chuyển đổi số</b>.
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="save-contact save-contact--save">
+      <span>📥</span> Lưu danh bạ vào điện thoại
+    </button>
+    <a href="#" class="save-contact save-contact--map">
+      <span>⚖️</span> Bản đồ pháp luật
+    </a>
+    <a href="#" class="save-contact save-contact--tmdt">
+      <span>🌐</span> Bản đồ TMĐT Việt Nam
+    </a>
+
+    <div class="ref">
+      <div class="ref-title" id="refTitle">PALETTE NTP_18 · 7 colors</div>
+      <div class="ref-strip" id="refStrip"></div>
+      <div class="ref-hexes" id="refHexes"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROS/CONS -->
+<div class="judge" id="judgeBox"></div>
+
+<script>
+const PALETTES = {
+  ntp18: {
+    title: 'NTP 18 — Refresh Gold',
+    desc: 'Gold ấm + xám warm + cream. Refresh nhẹ tone hiện tại, giữ tinh thần "trí thức · pháp luật". Cùng họ với palette gold đang dùng nhưng đa dạng hơn.',
+    colors: ['EFB164','816441','484745','878D90','CECCC8','372D21','F5F0E5'],
+    css: {
+      '--bg':'#372D21','--card':'#484745','--primary':'#EFB164','--primary-light':'#F5F0E5',
+      '--neutral':'#878D90','--accent-1':'#816441','--accent-2':'#1c1612','--text':'#FFFFFF','--text-soft':'rgba(255,255,255,0.72)','--extra':'#CECCC8'
+    },
+    pros: ['Cùng họ gold-warm hiện tại — không gây sốc người xem cũ','Đa dạng hơn (7 sắc) → linh hoạt cho nhiều thành phần UI','Tone "trí thức cổ điển" giữ được'],
+    cons: ['Cần điều chỉnh nút LegalMap đỏ + TMĐT xanh để hợp tone','Bg #372D21 hơi nâu, có thể tối hơn navy hiện tại']
+  },
+  ntp04: {
+    title: 'NTP 04 — Tối giản sang trọng',
+    desc: 'Đen-xám-trắng + accent xanh cổ vịt. Look "luxury minimal" như brand luxury fashion / luật quốc tế.',
+    colors: ['1A1A1A','36454F','B2BEB5','D3D3D3','F5F6F8','FFFFFF','1A5F7A'],
+    css: {
+      '--bg':'#1A1A1A','--card':'#36454F','--primary':'#1A5F7A','--primary-light':'#B2BEB5',
+      '--neutral':'#D3D3D3','--accent-1':'#36454F','--accent-2':'#1A1A1A','--text':'#F5F6F8','--text-soft':'rgba(245,246,248,0.72)','--extra':'#FFFFFF'
+    },
+    pros: ['Sang trọng tối giản — luxury feel mạnh','Xanh cổ vịt accent rất "hi-trust" cho ngành luật','Tương phản tối-sáng tốt cho A11y'],
+    cons: ['Mất "ấm áp" gold — lạnh hơn brand cũ','Quá monochrome có thể đơn điệu','Cần tái thiết kế hoàn toàn nút CTA']
+  },
+  ntp31: {
+    title: 'NTP 31 — Cổ điển vintage',
+    desc: 'Brown-gold đậm + vàng mật ong. Tone "vintage thư viện cổ điển" — sách luật + da bò + đèn vàng.',
+    colors: ['1C160F','D0CFC6','51483E','7F562E','BD720F','FDDF5E','F5F0E5'],
+    css: {
+      '--bg':'#1C160F','--card':'#51483E','--primary':'#FDDF5E','--primary-light':'#BD720F',
+      '--neutral':'#D0CFC6','--accent-1':'#7F562E','--accent-2':'#1C160F','--text':'#F5F0E5','--text-soft':'rgba(245,240,229,0.7)','--extra':'#FDDF5E'
+    },
+    pros: ['Đậm chất "thư viện luật cổ điển" — rất hợp ngành','Vàng mật ong sang trọng hơn gold hiện tại','Cảm giác bền vững, có chiều sâu'],
+    cons: ['Quá đậm/tối — có thể mệt mắt khi đọc lâu','Hơi vintage — không hợp "công nghệ"','Vàng FDDF5E quá rực — cần tone xuống']
+  },
+  ntp25: {
+    title: 'NTP 25 — Vibrant teal/orange',
+    desc: 'Tím-cam-teal-xanh lá rực rỡ. Look "tech startup hiện đại" nhưng lệch xa khỏi tone luật/tri thức.',
+    colors: ['322039','DE592E','855853','21C394','4F8B82','0A3945','F5F0E5'],
+    css: {
+      '--bg':'#0A3945','--card':'#322039','--primary':'#21C394','--primary-light':'#F5F0E5',
+      '--neutral':'#4F8B82','--accent-1':'#DE592E','--accent-2':'#855853','--text':'#FFFFFF','--text-soft':'rgba(255,255,255,0.72)','--extra':'#21C394'
+    },
+    pros: ['Năng động, hiện đại, "dotcom startup"','Tương phản mạnh → memorable','Teal #21C394 rất "fresh tech"'],
+    cons: ['⚠ Lệch hoàn toàn brand luật/tri thức hiện tại','Cam #DE592E gần đỏ LegalMap → confuse','Quá nhiều hue rực — overwhelming','Không hợp "luật sư · chuyên gia"']
+  },
+  current: {
+    title: 'Hiện tại — Gold + Navy',
+    desc: 'Bộ màu trang chủ đang chạy thực tế. Gold #E0AA79 trên navy #1a1a1a + đỏ LegalMap + xanh TMĐT.',
+    colors: ['1a1a1a','2C2C2C','E0AA79','f0c896','FFFFFF','ED1C24','1976d2'],
+    css: {
+      '--bg':'#1a1a1a','--card':'#2C2C2C','--primary':'#E0AA79','--primary-light':'#f0c896',
+      '--neutral':'rgba(255,255,255,0.6)','--accent-1':'#ED1C24','--accent-2':'#1976d2','--text':'#FFFFFF','--text-soft':'rgba(255,255,255,0.72)','--extra':'#FFFFFF'
+    },
+    pros: ['Brand đã có nhận diện rõ trên thị trường','Tone "luật + tri thức" rất phù hợp','Gold ấm + đen sang trọng cổ điển'],
+    cons: ['Hơi giống nhiều brand luxury/luật khác','Có thể refresh để khác biệt hơn']
+  }
+};
+
+function switchPalette(key, btn){
+  const p = PALETTES[key];
+  // Apply CSS vars
+  Object.entries(p.css).forEach(([k,v]) => document.documentElement.style.setProperty(k, v));
+  // Update active button
+  document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // Update meta
+  document.getElementById('paletteTitle').textContent = p.title;
+  document.getElementById('paletteDesc').textContent = p.desc;
+  // Update reference strip
+  const stripHTML = p.colors.map(c => `<span style="background:#${c}" title="#${c}" onclick="copy('#${c}')"></span>`).join('');
+  document.getElementById('refStrip').innerHTML = stripHTML;
+  document.getElementById('refTitle').textContent = `PALETTE ${key.toUpperCase()} · ${p.colors.length} colors`;
+  document.getElementById('refHexes').innerHTML = p.colors.map(c => `<code>#${c}</code>`).join('');
+  // Update pros/cons
+  const judge = document.getElementById('judgeBox');
+  judge.innerHTML =
+    p.pros.map(t => `<div class="judge-row pro"><span class="icon">✓</span><span class="text">${t}</span></div>`).join('') +
+    p.cons.map(t => `<div class="judge-row con"><span class="icon">✗</span><span class="text">${t}</span></div>`).join('');
+}
+
+// SVG pattern (copy from brand)
+document.documentElement.style.setProperty('--pattern-svg', `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.57 13.43-30 30-30m0 60c-16.57 0-30-13.43-30-30M30 30C30 46.57 16.57 60 0 60M0 0c16.57 0 30 13.43 30 30' fill='none' stroke='%23E0AA79' stroke-width='0.6' stroke-opacity='0.15'/%3E%3C/svg%3E")`);
+
+function copy(val){
+  navigator.clipboard.writeText(val).catch(()=>{});
+}
+
+// Initial render
+switchPalette('ntp18', document.querySelector('.switcher button.active'));
+</script>
+</body>
+</html>

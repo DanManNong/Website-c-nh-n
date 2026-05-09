@@ -16,5 +16,6 @@ Disallow: /thuong_hieu_so_phong
 Disallow: /_originals/
 Disallow: /brand
 Disallow: /palettes
+Disallow: /preview-color
 
 Sitemap: https://www.nguyentanphong.com/sitemap.xml
