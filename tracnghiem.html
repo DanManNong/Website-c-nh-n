@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V45VVRDW8T"></script>
@@ -450,6 +450,107 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
 .footer a{color:var(--text-soft);margin:0 8px}
 .footer a:hover{color:var(--gold)}
 
+/* === EAGLE LOGO === */
+.eagle-logo-link{display:inline-block;margin-bottom:24px;transition:transform .2s}
+.eagle-logo-link:hover{transform:translateY(-2px)}
+.eagle-logo{display:block;width:220px;height:auto;border-radius:8px;box-shadow:0 8px 24px rgba(114,47,55,0.35)}
+
+/* === FOOTER NEW === */
+.footer{
+  margin-top:auto;padding:32px 20px 28px;text-align:center;
+  border-top:1px solid var(--border);background:rgba(0,0,0,0.18);
+}
+.footer-sig{
+  font-family:'Caveat',cursive;font-size:38px;line-height:1;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:4px;letter-spacing:1px;
+}
+.footer-role{
+  color:var(--text-soft);font-size:11.5px;letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:18px;
+}
+.footer-links{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px 6px;
+  font-size:13px;margin-bottom:14px;
+}
+.footer-links a{color:var(--text-soft);padding:0 8px;transition:color .15s}
+.footer-links a:hover{color:var(--gold)}
+.footer-links span{color:rgba(255,255,255,0.15)}
+.footer-zalo{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 18px;border-radius:99px;
+  background:var(--gold-dim);color:var(--gold);
+  font-size:13px;font-weight:500;
+  border:1px solid var(--gold-dim2);transition:all .2s;
+}
+.footer-zalo:hover{background:var(--gold);color:var(--navy)}
+.footer-fine{
+  color:var(--text-soft);font-size:11px;margin-top:18px;line-height:1.6;
+  max-width:520px;margin-left:auto;margin-right:auto;
+}
+
+/* === AUDIO TOGGLE === */
+.btn-icon.muted i{opacity:0.4}
+.btn-icon.muted::after{
+  content:"";position:absolute;width:18px;height:1.5px;
+  background:var(--text-soft);transform:rotate(-45deg);
+}
+.btn-icon{position:relative}
+
+/* === MODAL === */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.78);
+  backdrop-filter:blur(6px);z-index:150;
+  display:none;align-items:center;justify-content:center;padding:20px;
+  animation:fadein .2s;
+}
+.modal-overlay.show{display:flex}
+.modal-card{
+  background:var(--navy-mid);border:1px solid var(--border);
+  border-radius:20px;padding:30px 26px;max-width:420px;width:100%;
+  text-align:center;
+}
+.modal-icon{
+  width:60px;height:60px;border-radius:50%;
+  background:var(--gold-dim);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin:0 auto 18px;
+}
+.modal-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.modal-desc{color:var(--text-mid);font-size:13.5px;margin-bottom:22px;line-height:1.6}
+.modal-input{
+  width:100%;padding:14px 16px;border-radius:12px;
+  background:var(--navy-soft);border:1.5px solid transparent;
+  color:var(--text);font-size:18px;font-family:'JetBrains Mono',monospace;
+  text-align:center;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.modal-input:focus{outline:none;border-color:var(--gold);background:var(--navy-light)}
+.modal-error{color:var(--red);font-size:12px;margin:6px 0 12px;display:none}
+.modal-error.show{display:block}
+.modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.modal-actions .btn-primary{width:100%;justify-content:center}
+.modal-actions .btn-secondary{width:100%;justify-content:center}
+.modal-close{
+  display:block;text-align:center;margin-top:14px;
+  color:var(--text-soft);font-size:13px;cursor:pointer;
+}
+.modal-close:hover{color:var(--gold)}
+.modal-hint{
+  margin-top:14px;padding:10px 14px;border-radius:10px;
+  background:rgba(124,217,146,0.08);border:1px solid rgba(124,217,146,0.25);
+  color:var(--green);font-size:12px;
+}
+
+/* === MOBILE OPTIM === */
+*{-webkit-tap-highlight-color:transparent}
+button,a,.quiz-option,.mode-card{touch-action:manipulation}
+input,textarea{font-size:16px}  /* iOS no auto-zoom */
+@supports(padding:max(0px)){
+  body{padding-bottom:env(safe-area-inset-bottom)}
+}
+
 @media (max-width:680px){
   .topbar{padding:12px 14px}
   .brand-name{display:none}
@@ -461,6 +562,13 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
   .quiz-question{font-size:16.5px}
   .hero{padding:40px 16px 20px}
   .hero-stats{gap:20px}
+  .eagle-logo{width:180px}
+  .footer{padding:26px 16px 22px}
+  .footer-sig{font-size:34px}
+  .footer-links{font-size:12.5px;gap:4px}
+  .footer-fine{font-size:10.5px}
+  .modal-card{padding:24px 20px}
+  .modal-input{font-size:16px;letter-spacing:2px}
 }
 </style>
 </head>
@@ -481,6 +589,7 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
     <div class="user-chip" id="userChip" style="display:none">
       <i class="fas fa-user"></i><span id="userName">—</span>
     </div>
+    <button class="btn-icon" id="btnMute" title="Bật/tắt âm thanh" onclick="toggleMute()"><i class="fas fa-volume-high"></i></button>
     <button class="btn-icon" id="btnHistory" title="Lịch sử của tôi" style="display:none"><i class="fas fa-clock-rotate-left"></i></button>
     <button class="btn-icon" id="btnHome" title="Về dashboard" style="display:none"><i class="fas fa-house"></i></button>
   </div>
@@ -491,7 +600,34 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
 <!-- LANDING -->
 <section class="screen active" id="screen-landing">
   <div class="hero">
-    <div class="hero-tag">Eagle Academy × Nguyễn Tấn Phong</div>
+    <a href="https://eagleacademy.vn" target="_blank" rel="noopener" class="eagle-logo-link" aria-label="Eagle Academy">
+      <svg class="eagle-logo" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Eagle Academy">
+        <rect width="280" height="100" rx="6" fill="#722F37"/>
+        <g transform="translate(190,12)" fill="#E5C5A8">
+          <!-- Top flame -->
+          <path d="M40 6 Q34 0 38 -6 Q40 -2 42 -6 Q46 0 40 6 Z"/>
+          <!-- Shield border -->
+          <path d="M8 8 L72 8 L72 60 Q72 76 40 80 Q8 76 8 60 Z" fill="none" stroke="#E5C5A8" stroke-width="1.6"/>
+          <!-- Eagle silhouette wings spread -->
+          <g transform="translate(40,28)">
+            <path d="M-22 -2 L-15 -6 L-9 -10 L-3 -12 L0 -14 L3 -12 L9 -10 L15 -6 L22 -2 L18 0 L11 -2 L14 4 L8 1 L4 6 L0 0 L-4 6 L-8 1 L-14 4 L-11 -2 L-18 0 Z"/>
+            <ellipse cx="0" cy="-10" rx="2" ry="3"/>
+          </g>
+          <!-- Columns 6 -->
+          <rect x="13" y="46" width="3.5" height="22"/>
+          <rect x="20" y="46" width="3.5" height="22"/>
+          <rect x="27" y="46" width="3.5" height="22"/>
+          <rect x="46" y="46" width="3.5" height="22"/>
+          <rect x="53" y="46" width="3.5" height="22"/>
+          <rect x="60" y="46" width="3.5" height="22"/>
+          <!-- Top platform + bottom base -->
+          <rect x="10" y="42" width="60" height="4"/>
+          <rect x="8" y="68" width="64" height="3"/>
+        </g>
+        <text x="22" y="50" font-family="Georgia,'Times New Roman',serif" font-size="34" font-weight="700" fill="#E5C5A8" letter-spacing="2">EAGLE</text>
+        <text x="22" y="74" font-family="Georgia,serif" font-size="12" font-weight="400" fill="#E5C5A8" letter-spacing="8">ACADEMY</text>
+      </svg>
+    </a>
     <h1 class="hero-title">Trắc nghiệm <span>Môi giới BĐS</span></h1>
     <p class="hero-sub">Ôn thi sát hạch chứng chỉ hành nghề Môi giới Bất động sản — 320 câu hỏi thực tế, 5 chế độ luyện thi, lưu lịch sử và bảng xếp hạng. Miễn phí.</p>
     <div class="hero-stats">
@@ -502,14 +638,6 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
     <div class="hero-cta-row">
       <button class="btn-primary" onclick="goRegister()"><i class="fas fa-graduation-cap"></i>Bắt đầu học</button>
       <button class="btn-secondary" onclick="enterAnonymous()">Vào học nhanh (không lưu)</button>
-    </div>
-    <div class="hero-trust">
-      <div class="hero-trust-label">Nguồn câu hỏi</div>
-      <div class="hero-trust-items">
-        <span><i class="fas fa-book"></i> Luật KDBĐS 2023</span>
-        <span><i class="fas fa-gavel"></i> NĐ 96/2024/NĐ-CP</span>
-        <span><i class="fas fa-school"></i> Tài liệu Eagle Academy</span>
-      </div>
     </div>
   </div>
 </section>
@@ -583,7 +711,7 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
             <div class="mode-desc">3 câu mỗi ngày · giữ streak liên tiếp · habit ôn thi mỗi sáng</div>
             <div class="mode-meta"><span><i class="fas fa-list-ol"></i>3 câu</span><span><i class="fas fa-fire"></i><span id="streakNum">0</span> ngày streak</span></div>
           </button>
-          <button class="mode-card" onclick="goBank()">
+          <button class="mode-card" onclick="requestBankAccess()">
             <div class="mode-icon"><i class="fas fa-book-open"></i></div>
             <div class="mode-title">Bank câu hỏi</div>
             <div class="mode-desc">Tra cứu toàn bộ 320 câu · lọc theo chương trình · xem đáp án</div>
@@ -704,10 +832,36 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
 </main>
 
 <footer class="footer">
-  <div>© Nguyễn Tấn Phong · <a href="/">Trang chủ</a> · <a href="/legalmap">LegalMap</a> · <a href="/parcel-scan">Quét sổ đỏ</a></div>
-  <div style="margin-top:6px">Câu hỏi do Eagle Academy + chuyên gia luật biên soạn. Phiên bản BETA — góp ý: <a href="https://zalo.me/0915159499">Zalo 0915 159 499</a></div>
+  <div class="footer-sig">Nguyễn Tấn Phong</div>
+  <div class="footer-role">Luật gia · Trọng tài viên · Chuyên gia Kinh tế số</div>
+  <nav class="footer-links">
+    <a href="/">Trang chủ</a><span>·</span>
+    <a href="/legalmap">LegalMap</a><span>·</span>
+    <a href="/parcel-scan">Quét sổ đỏ</a><span>·</span>
+    <a href="/ban-do-tmdt">Bản đồ TMĐT</a>
+  </nav>
+  <a href="https://zalo.me/0915159499" target="_blank" rel="noopener" class="footer-zalo">
+    <i class="fas fa-comment-dots"></i> Góp ý qua Zalo · 0915 159 499
+  </a>
+  <div class="footer-fine">© <span id="footerYear">2026</span> Nguyễn Tấn Phong · Câu hỏi do <a href="https://eagleacademy.vn" target="_blank" rel="noopener" style="color:var(--text-soft);text-decoration:underline">Eagle Academy</a> + chuyên gia luật biên soạn · Phiên bản BETA</div>
 </footer>
 
+</div>
+
+<div class="modal-overlay" id="bankModal">
+  <div class="modal-card">
+    <div class="modal-icon"><i class="fas fa-lock"></i></div>
+    <div class="modal-title">Bank câu hỏi · Eagle Academy</div>
+    <div class="modal-desc">Phần này dành riêng cho học viên Eagle Academy. Vui lòng nhập <strong>mã truy cập hôm nay</strong> để mở khoá.</div>
+    <input type="text" class="modal-input" id="bankCode" placeholder="EA-XXXX" maxlength="7" autocomplete="off" autocapitalize="characters">
+    <div class="modal-error" id="bankError">Mã không đúng. Mã được làm mới mỗi ngày.</div>
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="checkBankCode()"><i class="fas fa-key"></i>Mở Bank</button>
+      <a href="https://zalo.me/0915159499?text=Ch%C3%A1u%20xin%20m%C3%A3%20Bank%20Eagle%20Academy%20h%C3%B4m%20nay" target="_blank" rel="noopener" class="btn-secondary"><i class="fas fa-comment-dots"></i>Xin mã qua Zalo</a>
+    </div>
+    <div class="modal-hint" id="bankHint" style="display:none"></div>
+    <a class="modal-close" onclick="closeBankModal()">Đóng</a>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1000,9 +1154,11 @@ function selectAnswer(idx){
   if(idx === correct){
     fbHead.className = 'quiz-feedback-head right';
     fbHead.innerHTML = '<i class="fas fa-circle-check"></i> Chính xác!';
+    playSound(true);
   } else {
     fbHead.className = 'quiz-feedback-head wrong';
     fbHead.innerHTML = `<i class="fas fa-circle-xmark"></i> Chưa đúng. Đáp án đúng là <strong>${['A','B','C','D'][correct]}</strong>.`;
+    playSound(false);
   }
   fbText.textContent = q.explanation || '';
   fbSrc.textContent = q.source ? 'Nguồn: '+q.source : '';
@@ -1244,7 +1400,133 @@ function fireConfetti(){
   }
 }
 
+// === AUDIO ===
+let audioCtx = null;
+const KEY_MUTE = 'ntp_tracnghiem_mute';
+function getAudioCtx(){
+  if(!audioCtx){
+    try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+  }
+  return audioCtx;
+}
+function playSound(correct){
+  if(localStorage.getItem(KEY_MUTE) === '1') return;
+  const ctx = getAudioCtx();
+  if(!ctx) return;
+  try{
+    if(ctx.state === 'suspended') ctx.resume();
+    if(correct){
+      // Pleasant 2-note chime: E5 -> A5
+      [659.25, 880.0].forEach((freq, i)=>{
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = freq;
+        const start = ctx.currentTime + i*0.08;
+        g.gain.setValueAtTime(0, start);
+        g.gain.linearRampToValueAtTime(0.18, start+0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, start+0.35);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(start); o.stop(start+0.4);
+      });
+    } else {
+      // Soft buzz
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'square';
+      o.frequency.setValueAtTime(220, ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(110, ctx.currentTime+0.18);
+      g.gain.setValueAtTime(0.08, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.22);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(); o.stop(ctx.currentTime+0.25);
+    }
+  }catch(e){}
+}
+function toggleMute(){
+  const muted = localStorage.getItem(KEY_MUTE) === '1';
+  if(muted){
+    localStorage.removeItem(KEY_MUTE);
+    toast('🔊 Bật âm thanh');
+  } else {
+    localStorage.setItem(KEY_MUTE, '1');
+    toast('🔇 Tắt âm thanh');
+  }
+  refreshMuteIcon();
+}
+function refreshMuteIcon(){
+  const btn = document.getElementById('btnMute');
+  if(!btn) return;
+  const muted = localStorage.getItem(KEY_MUTE) === '1';
+  btn.classList.toggle('muted', muted);
+  btn.querySelector('i').className = muted ? 'fas fa-volume-xmark' : 'fas fa-volume-high';
+}
+
+// === BANK ACCESS LOCK ===
+function todayCode(){
+  const d = new Date();
+  const dayOfYear = Math.floor((d - new Date(d.getFullYear(),0,0))/86400000);
+  const yy = d.getFullYear() % 100;
+  // deterministic, unpredictable without formula
+  const n = ((dayOfYear * 73 + yy * 911 + 137) ^ (dayOfYear << 3)) & 0xFFFF;
+  return 'EA-' + (n % 9000 + 1000).toString();
+}
+function bankAccessKey(){
+  const d = new Date();
+  return 'ntp_tracnghiem_bank_'+d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+}
+function requestBankAccess(){
+  // Already unlocked today?
+  if(localStorage.getItem(bankAccessKey()) === '1'){
+    goBank();
+    return;
+  }
+  document.getElementById('bankCode').value = '';
+  document.getElementById('bankError').classList.remove('show');
+  // Admin mode: ?showcode=1 in URL → reveal today's code (for chú Phong)
+  const hint = document.getElementById('bankHint');
+  if(new URLSearchParams(location.search).get('showcode') === '1'){
+    hint.textContent = '🔑 Mã hôm nay: '+todayCode();
+    hint.style.display = '';
+  } else {
+    hint.style.display = 'none';
+  }
+  document.getElementById('bankModal').classList.add('show');
+  setTimeout(()=>document.getElementById('bankCode').focus(), 200);
+}
+function closeBankModal(){
+  document.getElementById('bankModal').classList.remove('show');
+}
+function checkBankCode(){
+  const input = document.getElementById('bankCode').value.trim().toUpperCase();
+  const err = document.getElementById('bankError');
+  if(input === todayCode()){
+    localStorage.setItem(bankAccessKey(), '1');
+    closeBankModal();
+    if(typeof gtag !== 'undefined') gtag('event','bank_unlock');
+    toast('✅ Mở khoá Bank thành công');
+    goBank();
+  } else {
+    err.classList.add('show');
+    if(typeof gtag !== 'undefined') gtag('event','bank_unlock_fail');
+  }
+}
+
+// === FOOTER YEAR ===
+(function(){
+  const y = document.getElementById('footerYear');
+  if(y) y.textContent = new Date().getFullYear();
+})();
+
 // === GO ===
+refreshMuteIcon();
+// Hook bank code Enter key
+document.getElementById('bankCode').addEventListener('keydown', e=>{
+  if(e.key === 'Enter'){ e.preventDefault(); checkBankCode(); }
+});
+// Click outside modal closes it
+document.getElementById('bankModal').addEventListener('click', e=>{
+  if(e.target.id === 'bankModal') closeBankModal();
+});
 init();
 </script>
 </body>
