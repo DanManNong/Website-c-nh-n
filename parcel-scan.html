@@ -644,28 +644,53 @@ function setFormat(fmt) {
   }
 }
 
-// Parse WGS84 từ Google Maps format
+// Parse WGS84 — multi-format: decimal · DMS · Google Maps URL · shortened
 function parseWGS84Quick() {
   const input = document.getElementById('wgsInput').value.trim();
   if (!input) { toast('Nhập tọa độ trước', 'error'); return; }
-  
-  // Match patterns:
-  //   "10.4070, 106.9580"
-  //   "10.4070,106.9580"
-  //   "10.4070 106.9580"
-  //   "10°24'25.2"N 106°57'29.1"E"  (DMS)
-  //   "10.4070000, 106.9580000"
-  
+
   let lat, lng;
-  // Try decimal format first
-  const decMatch = input.match(/(-?\d+(?:\.\d+)?)\s*[,;\s]\s*(-?\d+(?:\.\d+)?)/);
-  if (decMatch) {
-    lat = parseFloat(decMatch[1]);
-    lng = parseFloat(decMatch[2]);
+
+  // 1. Shortened Google Maps URL → cần expand
+  if (/^https?:\/\/(maps\.app\.goo\.gl|goo\.gl\/maps)\//i.test(input)) {
+    window.open(input, '_blank');
+    toast('🔗 Mở link → đợi load → copy URL từ address bar → paste lại', 'success');
+    setTimeout(()=>{
+      document.getElementById('wgsInput').focus();
+      document.getElementById('wgsInput').select();
+    }, 500);
+    return;
   }
-  
+
+  // 2. Full Google Maps URL → extract coords
+  if (/^https?:\/\//.test(input) && /google\.com\/maps|maps\.google\.com/i.test(input)) {
+    const atMatch  = input.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    const placeMatch = input.match(/\/place\/(-?\d+\.\d+),(-?\d+\.\d+)/);
+    const qMatch   = input.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/);
+    const llMatch  = input.match(/[?&]ll=(-?\d+\.\d+),(-?\d+\.\d+)/);
+    const m = atMatch || placeMatch || qMatch || llMatch;
+    if (m) { lat = parseFloat(m[1]); lng = parseFloat(m[2]); }
+  }
+
+  // 3. DMS: 10°24'25.2"N 106°57'29.1"E
   if (isNaN(lat) || isNaN(lng)) {
-    toast('Format không nhận diện được. Dùng: lat, lng (vd: 10.4070, 106.9580)', 'error');
+    const dms = input.match(/(\d+)°(\d+)['′]([\d.]+)["″]?\s*([NS])\s+(\d+)°(\d+)['′]([\d.]+)["″]?\s*([EW])/i);
+    if (dms) {
+      lat = parseInt(dms[1]) + parseInt(dms[2])/60 + parseFloat(dms[3])/3600;
+      if (dms[4].toUpperCase() === 'S') lat = -lat;
+      lng = parseInt(dms[5]) + parseInt(dms[6])/60 + parseFloat(dms[7])/3600;
+      if (dms[8].toUpperCase() === 'W') lng = -lng;
+    }
+  }
+
+  // 4. Decimal: "10.4070, 106.9580"
+  if (isNaN(lat) || isNaN(lng)) {
+    const dec = input.match(/(-?\d+(?:\.\d+)?)\s*[,;\s]\s*(-?\d+(?:\.\d+)?)/);
+    if (dec) { lat = parseFloat(dec[1]); lng = parseFloat(dec[2]); }
+  }
+
+  if (isNaN(lat) || isNaN(lng)) {
+    toast('Format không nhận diện. Hỗ trợ: decimal · DMS · Google Maps URL', 'error');
     return;
   }
   
