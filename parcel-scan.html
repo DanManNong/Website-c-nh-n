@@ -167,6 +167,22 @@ input[type=file]{display:none}
 .info-cell .ic-val{font-size:14px;font-weight:700;color:var(--text);font-family:'JetBrains Mono',monospace}
 .info-cell .ic-sub{font-size:10px;color:var(--text-dim);margin-top:2px}
 
+
+/* SECTION TOGGLE */
+.section-head{cursor:pointer;user-select:none;transition:background .15s}
+.section-head:hover{background:rgba(224,170,121,.04)}
+.sec-toggle{margin-left:8px;color:var(--gold);font-size:11px;transition:transform .25s;flex-shrink:0;width:20px;text-align:center}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section.collapsed .section-body{display:none}
+
+/* SECTION 4 — center display */
+.center-display{padding:18px;background:linear-gradient(135deg,rgba(224,170,121,.1),rgba(240,200,150,.02));border:1px solid var(--border);border-radius:12px;margin-bottom:14px;text-align:center}
+.cd-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+.cd-value{font-size:18px;font-weight:700;color:var(--text);font-family:'JetBrains Mono',monospace;letter-spacing:.02em;margin-bottom:6px}
+.cd-sub{font-size:11px;color:var(--text-soft)}
+.cd-sub a{color:var(--gold);text-decoration:none;font-weight:600}
+.cd-sub a:hover{text-decoration:underline}
+
 /* ── EXPORT ── */
 .export-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
 .export-btn{padding:11px 14px;background:var(--card-2);border:1px solid var(--border-soft);border-radius:10px;color:var(--text-soft);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -217,11 +233,12 @@ input[type=file]{display:none}
 <div class="wrap">
 
   <!-- SECTION 1: NGUỒN -->
-  <div class="section">
-    <div class="section-head">
+  <div class="section" id="sec1">
+    <div class="section-head" onclick="toggleSection('sec1')">
       <div class="section-num">1</div>
       <div class="section-title">Chọn nguồn dữ liệu</div>
       <div class="section-sub">QR · Image · Manual</div>
+      <div class="sec-toggle">▼</div>
     </div>
     <div class="section-body">
       <div class="tabs">
@@ -298,11 +315,12 @@ Tđ.3  626128.3300  1148507.2400
   </div>
 
   <!-- SECTION 2: TỌA ĐỘ -->
-  <div class="section">
-    <div class="section-head">
+  <div class="section" id="sec2">
+    <div class="section-head" onclick="toggleSection('sec2')">
       <div class="section-num">2</div>
       <div class="section-title">Bảng tọa độ</div>
       <div class="section-sub" id="coordCount">0 điểm</div>
+      <div class="sec-toggle">▼</div>
     </div>
     <div class="section-body">
 
@@ -372,11 +390,12 @@ Tđ.3  626128.3300  1148507.2400
   </div>
 
   <!-- SECTION 3: BẢN ĐỒ -->
-  <div class="section">
-    <div class="section-head">
+  <div class="section" id="sec3">
+    <div class="section-head" onclick="toggleSection('sec3')">
       <div class="section-num">3</div>
       <div class="section-title">Bản đồ + Polygon</div>
       <div class="section-sub" id="mapStatus">Chờ data</div>
+      <div class="sec-toggle">▼</div>
     </div>
     <div class="section-body">
       <div id="map"></div>
@@ -413,29 +432,32 @@ Tđ.3  626128.3300  1148507.2400
   </div>
 
   <!-- SECTION 4: EXPORT -->
-  <div class="section">
-    <div class="section-head">
+  <div class="section" id="sec4">
+    <div class="section-head" onclick="toggleSection('sec4')">
       <div class="section-num">4</div>
       <div class="section-title">Xuất file</div>
-      <div class="section-sub">GeoJSON · KML · JSON</div>
+      <div class="section-sub">KML · WGS84</div>
+      <div class="sec-toggle">▼</div>
     </div>
     <div class="section-body">
+      <div class="center-display" id="centerDisplay">
+        <div class="cd-label">📍 Điểm tâm thửa đất (WGS84)</div>
+        <div class="cd-value" id="centerWGS84">— Chưa có dữ liệu —</div>
+        <div class="cd-sub" id="centerLink"></div>
+      </div>
       <div class="export-bar">
-        <button class="export-btn" id="exGeoJSON" onclick="exportFile('geojson')" disabled>
-          <span class="ex-ic">📥</span> GeoJSON
-        </button>
         <button class="export-btn" id="exKML" onclick="exportFile('kml')" disabled>
-          <span class="ex-ic">📥</span> KML
+          <span class="ex-ic">📥</span> Tải file KML
         </button>
-        <button class="export-btn" id="exJSON" onclick="exportFile('json')" disabled>
-          <span class="ex-ic">📥</span> JSON tọa độ
+        <button class="export-btn" id="exCopyPoint" onclick="copyCenterPoint()" disabled>
+          <span class="ex-ic">📋</span> Copy WGS84
         </button>
-        <button class="export-btn" id="exCopy" onclick="copyCoords()" disabled>
-          <span class="ex-ic">📋</span> Copy clipboard
+        <button class="export-btn" id="exShare" onclick="sharePoint()" disabled>
+          <span class="ex-ic">🔗</span> Share
         </button>
       </div>
       <div class="paste-hint" style="margin-top:10px">
-        💡 File lưu local trên máy chú · Format chuẩn để import vào Google Earth, QGIS, ArcGIS
+        💡 KML import vào Google Earth/Maps · WGS84 link mở Google Maps điểm tâm thửa
       </div>
     </div>
   </div>
@@ -873,12 +895,16 @@ function plotPolygon(coords) {
   document.getElementById('infoArea').textContent = area.toLocaleString('vi-VN', {maximumFractionDigits: 1});
   document.getElementById('infoAreaSub').textContent = `m² · ${(area/10000).toFixed(4)} ha`;
   document.getElementById('infoCenter').textContent = `${center.lat.toFixed(6)}, ${center.lng.toFixed(6)}`;
+  // Update Section 4 center display
+  document.getElementById('centerWGS84').textContent = `${center.lat.toFixed(7)}, ${center.lng.toFixed(7)}`;
+  const gmapsUrl = `https://www.google.com/maps/place/${center.lat.toFixed(7)},${center.lng.toFixed(7)}`;
+  document.getElementById('centerLink').innerHTML = `<a href="${gmapsUrl}" target="_blank">🌐 Mở Google Maps</a>`;
   document.getElementById('infoProvince').textContent = getProvinceName().split(' (')[0];
   document.getElementById('infoKTT').textContent = `KTT ${getKTT()}°`;
   document.getElementById('mapStatus').textContent = `✓ ${coords.length-1} điểm`;
 
   // Enable export
-  ['exGeoJSON','exKML','exJSON','exCopy'].forEach(id => document.getElementById(id).disabled = false);
+  ['exKML','exCopyPoint','exShare'].forEach(id => document.getElementById(id).disabled = false);
 }
 
 function initMap() {
@@ -978,6 +1004,107 @@ function copyCoords() {
     toast('✓ Đã copy clipboard', 'success');
   });
 }
+
+
+function copyCenterPoint() {
+  if (!lastConvertedCoords) return;
+  const center = polygonCenter(lastConvertedCoords);
+  const text = `${center.lat.toFixed(7)}, ${center.lng.toFixed(7)}`;
+  const url = `https://www.google.com/maps/place/${center.lat.toFixed(7)},${center.lng.toFixed(7)}`;
+  const fullText = `${text}\n${url}`;
+  navigator.clipboard.writeText(fullText).then(() => {
+    toast('✓ Đã copy WGS84 + link Google Maps', 'success');
+  });
+}
+
+async function sharePoint() {
+  if (!lastConvertedCoords) return;
+  const center = polygonCenter(lastConvertedCoords);
+  const url = `https://www.google.com/maps/place/${center.lat.toFixed(7)},${center.lng.toFixed(7)}`;
+  const province = getProvinceName().split(' (')[0];
+  const area = polygonArea(lastConvertedCoords);
+  const text = `📍 Thửa đất ${province}\nDiện tích: ${area.toFixed(0)} m² (${(area/10000).toFixed(2)} ha)\nTọa độ: ${center.lat.toFixed(6)}, ${center.lng.toFixed(6)}\nMap: ${url}`;
+  
+  // Try native Web Share API
+  if (navigator.share) {
+    try {
+      // Generate KML file để share kèm
+      const kmlContent = generateKML();
+      const kmlBlob = new Blob([kmlContent], {type: 'application/vnd.google-earth.kml+xml'});
+      const kmlFile = new File([kmlBlob], `parcel-${Date.now()}.kml`, {type: 'application/vnd.google-earth.kml+xml'});
+      
+      // Share with file if supported
+      if (navigator.canShare && navigator.canShare({files: [kmlFile]})) {
+        await navigator.share({
+          title: `Thửa đất ${province}`,
+          text: text,
+          files: [kmlFile]
+        });
+      } else {
+        // Fallback: share text + URL only
+        await navigator.share({
+          title: `Thửa đất ${province}`,
+          text: text,
+          url: url
+        });
+      }
+      toast('✓ Đã share', 'success');
+    } catch(e) {
+      if (e.name !== 'AbortError') {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(text).then(() => {
+          toast('✓ Đã copy (Web Share không hỗ trợ)', 'success');
+        });
+      }
+    }
+  } else {
+    // Desktop fallback: copy + show options
+    navigator.clipboard.writeText(text).then(() => {
+      toast('✓ Đã copy text — paste vào chat/email', 'success');
+    });
+  }
+}
+
+function generateKML() {
+  if (!lastConvertedCoords) return '';
+  const coordStr = lastConvertedCoords.map(c => `${c.lng},${c.lat},0`).join(' ');
+  const province = getProvinceName();
+  const area = polygonArea(lastConvertedCoords);
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Thửa đất ${province}</name>
+    <Placemark>
+      <name>Polygon thửa đất</name>
+      <description>Diện tích: ${area.toFixed(1)} m² (${(area/10000).toFixed(4)} ha)</description>
+      <Style><LineStyle><color>ff7990e0</color><width>3</width></LineStyle><PolyStyle><color>4079aae0</color></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing>
+        <coordinates>${coordStr}</coordinates>
+      </LinearRing></outerBoundaryIs></Polygon>
+    </Placemark>
+  </Document>
+</kml>`;
+}
+
+// SECTION TOGGLE
+function toggleSection(secId) {
+  const sec = document.getElementById(secId);
+  sec.classList.toggle('collapsed');
+  // Save state
+  const collapsed = {};
+  document.querySelectorAll('.section').forEach(s => {
+    collapsed[s.id] = s.classList.contains('collapsed');
+  });
+  try { localStorage.setItem('parcel_scan_collapsed', JSON.stringify(collapsed)); } catch(e){}
+}
+// Restore state on load
+try {
+  const saved = JSON.parse(localStorage.getItem('parcel_scan_collapsed') || '{}');
+  Object.entries(saved).forEach(([id, isCol]) => {
+    if (isCol) document.getElementById(id)?.classList.add('collapsed');
+  });
+} catch(e){}
+
 
 // ════════════════════════════════════════
 // TOAST
