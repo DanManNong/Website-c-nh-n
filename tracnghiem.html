@@ -10,8 +10,17 @@
 <meta property="og:title" content="Trắc nghiệm Môi giới BĐS · Nguyễn Tấn Phong">
 <meta property="og:description" content="320 câu hỏi · 5 chế độ thi · Bảng xếp hạng · Lưu lịch sử. Miễn phí cho người môi giới BĐS.">
 <meta property="og:url" content="https://www.nguyentanphong.com/tracnghiem">
-<meta property="og:image" content="https://www.nguyentanphong.com/og-image.jpg">
+<meta property="og:image" content="https://www.nguyentanphong.com/assets/og-tracnghiem.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Trắc nghiệm Môi giới BĐS — Eagle Academy × Nguyễn Tấn Phong">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="nguyentanphong.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trắc nghiệm Môi giới BĐS · Nguyễn Tấn Phong">
+<meta name="twitter:description" content="320 câu hỏi · 5 chế độ thi · Miễn phí.">
+<meta name="twitter:image" content="https://www.nguyentanphong.com/assets/og-tracnghiem.jpg">
 
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -466,6 +475,14 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
   -webkit-background-clip:text;background-clip:text;color:transparent;
   margin-bottom:4px;letter-spacing:1px;
 }
+.footer-sig-img{
+  display:block;margin:0 auto 8px;height:auto;max-width:240px;
+  /* Tint dark png to gold */
+  filter:brightness(0) saturate(100%) invert(75%) sepia(35%) saturate(560%) hue-rotate(338deg) brightness(95%) contrast(89%);
+}
+@media (max-width:680px){
+  .footer-sig-img{max-width:200px}
+}
 .footer-role{
   color:var(--text-soft);font-size:11.5px;letter-spacing:1.5px;
   text-transform:uppercase;margin-bottom:18px;
@@ -601,32 +618,7 @@ input,textarea{font-size:16px}  /* iOS no auto-zoom */
 <section class="screen active" id="screen-landing">
   <div class="hero">
     <a href="https://eagleacademy.vn" target="_blank" rel="noopener" class="eagle-logo-link" aria-label="Eagle Academy">
-      <svg class="eagle-logo" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Eagle Academy">
-        <rect width="280" height="100" rx="6" fill="#722F37"/>
-        <g transform="translate(190,12)" fill="#E5C5A8">
-          <!-- Top flame -->
-          <path d="M40 6 Q34 0 38 -6 Q40 -2 42 -6 Q46 0 40 6 Z"/>
-          <!-- Shield border -->
-          <path d="M8 8 L72 8 L72 60 Q72 76 40 80 Q8 76 8 60 Z" fill="none" stroke="#E5C5A8" stroke-width="1.6"/>
-          <!-- Eagle silhouette wings spread -->
-          <g transform="translate(40,28)">
-            <path d="M-22 -2 L-15 -6 L-9 -10 L-3 -12 L0 -14 L3 -12 L9 -10 L15 -6 L22 -2 L18 0 L11 -2 L14 4 L8 1 L4 6 L0 0 L-4 6 L-8 1 L-14 4 L-11 -2 L-18 0 Z"/>
-            <ellipse cx="0" cy="-10" rx="2" ry="3"/>
-          </g>
-          <!-- Columns 6 -->
-          <rect x="13" y="46" width="3.5" height="22"/>
-          <rect x="20" y="46" width="3.5" height="22"/>
-          <rect x="27" y="46" width="3.5" height="22"/>
-          <rect x="46" y="46" width="3.5" height="22"/>
-          <rect x="53" y="46" width="3.5" height="22"/>
-          <rect x="60" y="46" width="3.5" height="22"/>
-          <!-- Top platform + bottom base -->
-          <rect x="10" y="42" width="60" height="4"/>
-          <rect x="8" y="68" width="64" height="3"/>
-        </g>
-        <text x="22" y="50" font-family="Georgia,'Times New Roman',serif" font-size="34" font-weight="700" fill="#E5C5A8" letter-spacing="2">EAGLE</text>
-        <text x="22" y="74" font-family="Georgia,serif" font-size="12" font-weight="400" fill="#E5C5A8" letter-spacing="8">ACADEMY</text>
-      </svg>
+      <img class="eagle-logo" src="/assets/eagle-logo.png" alt="Eagle Academy" width="220" height="98">
     </a>
     <h1 class="hero-title">Trắc nghiệm <span>Môi giới BĐS</span></h1>
     <p class="hero-sub">Ôn thi sát hạch chứng chỉ hành nghề Môi giới Bất động sản — 320 câu hỏi thực tế, 5 chế độ luyện thi, lưu lịch sử và bảng xếp hạng. Miễn phí.</p>
@@ -832,7 +824,7 @@ input,textarea{font-size:16px}  /* iOS no auto-zoom */
 </main>
 
 <footer class="footer">
-  <div class="footer-sig">Nguyễn Tấn Phong</div>
+  <img class="footer-sig-img" src="/assets/NguyenTanPhong.png" alt="Nguyễn Tấn Phong" width="240" height="60">
   <div class="footer-role">Luật gia · Trọng tài viên · Chuyên gia Kinh tế số</div>
   <nav class="footer-links">
     <a href="/">Trang chủ</a><span>·</span>
