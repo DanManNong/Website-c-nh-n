@@ -898,6 +898,16 @@ const QUESTIONS = [{"id":"EAGLE-D1-Q001","de":1,"section":"chuyen_mon","q":"Sự
 // === SUPABASE ===
 const SB_URL = 'https://dcmtbgcltopnqsiedwlg.supabase.co';
 const SB_KEY = 'sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
+const KEY_ANON = 'ntp_tracnghiem_anon_id';
+function getAnonId(){
+  let id = localStorage.getItem(KEY_ANON);
+  if(!id){
+    try{ id = 'a-' + (crypto.randomUUID ? crypto.randomUUID().slice(0,16) : Math.random().toString(36).slice(2,14)); }
+    catch{ id = 'a-' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+    localStorage.setItem(KEY_ANON, id);
+  }
+  return id;
+}
 let sb = null;
 function initSupabase(){
   if(sb) return sb;
@@ -1314,21 +1324,23 @@ function finishQuiz(timeOut){
   if(state.user && !state.user.anon){
     state.attempts.push(attempt);
     localStorage.setItem(KEY_ATT, JSON.stringify(state.attempts));
-    // Sync to Supabase via SECURITY DEFINER fn
-    const c = initSupabase();
-    if(c){
-      c.rpc('tracnghiem_insert_attempt', {
-        p_phone: state.user.phone,
-        p_name: state.user.name,
-        p_mode: q.mode,
-        p_score: score,
-        p_total: total,
-        p_elapsed_sec: elapsed,
-      }).then(({error})=>{
-        if(error) console.warn('SB insert attempt failed:', error.message);
-        else if(state.screen === 'dashboard') renderLeaderboard(); // refresh
-      });
-    }
+  }
+  // Sync attempt to Supabase cho TẤT CẢ user (registered + anon) — chú đếm được
+  const c = initSupabase();
+  if(c && state.user){
+    const isAnon = state.user.anon;
+    c.rpc('tracnghiem_insert_attempt', {
+      p_phone: isAnon ? null : state.user.phone,
+      p_name: state.user.name || (isAnon ? 'Khách' : 'Học viên'),
+      p_mode: q.mode,
+      p_score: score,
+      p_total: total,
+      p_elapsed_sec: elapsed,
+      p_anon_id: getAnonId(),
+    }).then(({error})=>{
+      if(error) console.warn('SB insert attempt failed:', error.message);
+      else if(state.screen === 'dashboard') renderLeaderboard(); // refresh
+    });
   }
   if(q.mode === 'daily' && score >= 2){
     markDailyDone();

@@ -74,6 +74,8 @@ h2 i{color:var(--gold);margin-right:6px}
   background:var(--navy-mid);border:1px solid var(--border);border-radius:12px;padding:18px 20px;
 }
 .stat-num{font-size:32px;font-weight:700;color:var(--gold);line-height:1}
+.stat-blue .stat-num{color:var(--blue)}
+.stat-blue{border-color:rgba(122,184,224,0.3)}
 .stat-label{font-size:11px;color:var(--text-soft);text-transform:uppercase;letter-spacing:1px;margin-top:6px}
 .stat-sub{font-size:12px;color:var(--green);margin-top:4px}
 
@@ -163,6 +165,9 @@ td.c,th.c{text-align:center}
     <table id="usersTable"></table>
   </div>
 
+  <h2><i class="fas fa-user-secret"></i> Khách anonymous <span style="font-weight:400;color:var(--text-soft)">(<span id="anonCount">0</span>)</span></h2>
+  <div class="card" style="padding:0;overflow-x:auto" id="anonUsersWrap"></div>
+
   <h2><i class="fas fa-bullseye"></i> Lượt làm gần nhất <span style="font-weight:400;color:var(--text-soft)">(<span id="attemptsCount">0</span>)</span></h2>
   <div class="card" style="padding:0;overflow-x:auto">
     <table id="attemptsTable"></table>
@@ -240,6 +245,7 @@ function renderAll(data){
   renderStats(data.stats);
   renderCodes();
   renderUsers(data.users);
+  renderAnonUsers(data.anon_users || []);
   renderAttempts(data.attempts);
   renderModes(data.mode_stats);
 }
@@ -247,18 +253,47 @@ function renderAll(data){
 function renderStats(s){
   const el = document.getElementById('statsGrid');
   const cards = [
-    ['Tổng học viên', s.total_users, s.users_today ? `+${s.users_today} hôm nay` : null],
-    ['Tổng lượt làm', s.total_attempts, s.attempts_today ? `+${s.attempts_today} hôm nay` : null],
-    ['Tuần này', s.attempts_week, `${s.users_week} đăng ký mới`],
-    ['Điểm TB', s.avg_score_pct + '%', null],
+    ['Học viên đăng ký', s.total_users, s.users_today ? `+${s.users_today} hôm nay` : null, 'gold'],
+    ['Khách (chưa đăng ký)', s.anon_users || 0, s.anon_users_today ? `+${s.anon_users_today} hôm nay` : null, 'blue'],
+    ['Tổng lượt làm', s.total_attempts, s.attempts_today ? `+${s.attempts_today} hôm nay` : null, 'gold'],
+    ['Lượt khách anon', s.anon_attempts || 0, s.anon_attempts_today ? `+${s.anon_attempts_today} hôm nay` : null, 'blue'],
+    ['Tuần này', s.attempts_week, `${s.users_week} đăng ký mới`, 'gold'],
+    ['Điểm TB', s.avg_score_pct + '%', null, 'gold'],
   ];
-  el.innerHTML = cards.map(([label, num, sub])=>`
-    <div class="stat-card">
+  el.innerHTML = cards.map(([label, num, sub, color])=>`
+    <div class="stat-card stat-${color}">
       <div class="stat-num">${num}</div>
       <div class="stat-label">${label}</div>
       ${sub ? `<div class="stat-sub">↑ ${sub}</div>` : ''}
     </div>
   `).join('');
+}
+
+function renderAnonUsers(anons){
+  const wrap = document.getElementById('anonUsersWrap');
+  if(!wrap) return;
+  document.getElementById('anonCount').textContent = anons.length;
+  if(!anons.length){
+    wrap.innerHTML = '<div class="empty">Chưa có khách anonymous nào.</div>';
+    return;
+  }
+  let html = `<table><thead><tr>
+    <th>Anon ID</th><th class="r">Lượt làm</th><th class="r hide-mobile">Cao nhất</th>
+    <th class="hide-mobile">Lần đầu</th><th>Lần cuối</th>
+  </tr></thead><tbody>`;
+  anons.forEach(u=>{
+    const first = new Date(u.first_attempt_at).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const last = new Date(u.last_attempt_at).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    html += `<tr>
+      <td class="mono" style="font-size:11px;color:var(--text-soft)">${esc(u.anon_id)}</td>
+      <td class="r"><strong>${u.attempts}</strong></td>
+      <td class="r hide-mobile" style="color:var(--gold);font-weight:600">${u.best_pct!==null?u.best_pct+'%':'—'}</td>
+      <td class="hide-mobile">${first}</td>
+      <td>${last}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
 }
 
 function todayCode(d){
@@ -330,8 +365,11 @@ function renderAttempts(atts){
   atts.forEach(a=>{
     const dt = new Date(a.at).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     const mins = Math.floor(a.elapsed_sec/60), secs = a.elapsed_sec%60;
+    const idTag = a.user_phone
+      ? `<span class="mono" style="color:var(--text-soft);font-size:11px">${esc(a.user_phone)}</span>`
+      : `<span class="mono" style="color:var(--blue);font-size:11px;background:rgba(122,184,224,0.1);padding:1px 6px;border-radius:4px">anon · ${esc((a.anon_id||'').slice(2,8))}</span>`;
     html += `<tr>
-      <td><strong>${esc(a.user_name)}</strong> <span class="mono" style="color:var(--text-soft);font-size:11px">${esc(a.user_phone)}</span></td>
+      <td><strong>${esc(a.user_name)}</strong> ${idTag}</td>
       <td><span class="tag tag-${a.mode}">${modeNames[a.mode]||a.mode}</span></td>
       <td class="r"><strong>${a.score}/${a.total}</strong></td>
       <td class="r hide-mobile" style="color:${a.pct>=80?'var(--green)':a.pct>=60?'var(--gold)':'var(--red)'};font-weight:700">${a.pct}%</td>
