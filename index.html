@@ -348,6 +348,16 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   .save-contact--tmdt:hover {
     box-shadow: 0 10px 28px rgba(25,118,210,0.5);
   }
+  /* Variant — nút Thi chứng chỉ MGBĐS (màu Eagle Academy nâu đỏ) */
+  .save-contact--eagle {
+    background: linear-gradient(135deg, #8B3942, #5A1F26);
+    color: #E5C5A8;
+    box-shadow: 0 6px 20px rgba(114,47,55,0.45);
+    margin-top: -4px;
+  }
+  .save-contact--eagle:hover {
+    box-shadow: 0 10px 28px rgba(114,47,55,0.6);
+  }
   @media (max-width: 480px) {
     .save-contact { font-size: 13px; padding: 13px 18px; gap: 10px; }
     .save-contact i { font-size: 16px; }
@@ -645,6 +655,13 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
      onclick="trackEvent('open_ban_do_tmdt', {location: 'home_button'})">
     <i class="fas fa-globe-asia"></i>
     <span>Bản đồ TMĐT Việt Nam</span>
+  </a>
+
+  <!-- TRẮC NGHIỆM BUTTON — Thi chứng chỉ Môi giới BĐS (Eagle Academy) -->
+  <a href="/tracnghiem" class="save-contact save-contact--eagle stagger s4" aria-label="Mở trang ôn thi chứng chỉ Môi giới Bất động sản"
+     onclick="trackEvent('open_tracnghiem', {location: 'home_button'})">
+    <i class="fas fa-graduation-cap"></i>
+    <span>Thi chứng chỉ Môi giới BĐS</span>
   </a>
 
   <!-- Phone block đã xóa — số gọi vẫn còn trong QR grid (nút "Gọi") -->
