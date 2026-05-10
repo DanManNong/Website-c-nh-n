@@ -1027,39 +1027,106 @@ function renderMyStats(){
 }
 
 // === QUIZ START ===
+// === ANTI-REPEAT MEMORY ===
+// Lưu các câu đã hiển thị gần đây để ưu tiên câu mới mỗi lần chơi
+const KEY_SEEN_PREFIX = 'ntp_tracnghiem_seen_';
+function getSeen(mode){
+  try{ return new Set(JSON.parse(localStorage.getItem(KEY_SEEN_PREFIX+mode) || '[]')); }
+  catch{ return new Set(); }
+}
+function pushSeen(mode, ids, poolSize){
+  const set = getSeen(mode);
+  ids.forEach(id => set.add(id));
+  // Reset khi đã thấy >= 80% pool (tránh hết câu chơi)
+  if(set.size >= Math.floor(poolSize * 0.8)){
+    localStorage.setItem(KEY_SEEN_PREFIX+mode, '[]');
+  } else {
+    localStorage.setItem(KEY_SEEN_PREFIX+mode, JSON.stringify([...set]));
+  }
+}
+function pickFresh(pool, n, mode){
+  const seen = getSeen(mode);
+  const fresh = pool.filter(q => !seen.has(q.id));
+  // Nếu fresh đủ → shuffle fresh; thiếu → bù từ seen pool
+  let picked;
+  if(fresh.length >= n){
+    picked = shuffle(fresh).slice(0, n);
+  } else {
+    const old = pool.filter(q => seen.has(q.id));
+    picked = shuffle(fresh).concat(shuffle(old)).slice(0, n);
+  }
+  return picked;
+}
+
+// === DAILY CHALLENGE memory (per ngày) ===
+const KEY_DAILY_DONE = 'ntp_tracnghiem_daily_done_';
+function dailyDoneToday(){
+  try{ return new Set(JSON.parse(localStorage.getItem(KEY_DAILY_DONE+todayKey()) || '[]')); }
+  catch{ return new Set(); }
+}
+function pushDailyDone(ids){
+  const set = dailyDoneToday();
+  ids.forEach(id => set.add(id));
+  localStorage.setItem(KEY_DAILY_DONE+todayKey(), JSON.stringify([...set]));
+  // Cleanup keys ngày cũ (giữ tối đa 7 ngày)
+  for(let i=0;i<localStorage.length;i++){
+    const k = localStorage.key(i);
+    if(k && k.startsWith(KEY_DAILY_DONE) && k !== KEY_DAILY_DONE+todayKey()){
+      // keep last 7 days only
+      const dk = k.slice(KEY_DAILY_DONE.length);
+      const [y,m,d] = dk.split('-').map(Number);
+      const date = new Date(y, m-1, d);
+      if((Date.now() - date.getTime()) > 7*86400000) localStorage.removeItem(k);
+    }
+  }
+}
+
 function pickQuestions(mode){
   const eagle = QUESTIONS.filter(q=>q.de !== 'extended');
-  const ext = QUESTIONS.filter(q=>q.de === 'extended');
   const all = QUESTIONS;
+
   if(mode === 'quick'){
-    return shuffle(all).slice(0,10);
+    const picked = pickFresh(all, 10, 'quick');
+    pushSeen('quick', picked.map(q=>q.id), all.length);
+    return picked;
   }
   if(mode === 'random50'){
-    // balanced: 25 cs + 25 cm
-    const cs = shuffle(all.filter(q=>q.section==='co_so')).slice(0,25);
-    const cm = shuffle(all.filter(q=>q.section==='chuyen_mon')).slice(0,25);
+    // balanced: 25 cs + 25 cm, tránh trùng giữa các lần
+    const csPool = all.filter(q=>q.section==='co_so');
+    const cmPool = all.filter(q=>q.section==='chuyen_mon');
+    const cs = pickFresh(csPool, 25, 'random50_cs');
+    const cm = pickFresh(cmPool, 25, 'random50_cm');
+    pushSeen('random50_cs', cs.map(q=>q.id), csPool.length);
+    pushSeen('random50_cm', cm.map(q=>q.id), cmPool.length);
     return shuffle(cs.concat(cm));
   }
   if(mode === 'random100'){
-    const cs = shuffle(all.filter(q=>q.section==='co_so')).slice(0,50);
-    const cm = shuffle(all.filter(q=>q.section==='chuyen_mon')).slice(0,50);
+    const csPool = all.filter(q=>q.section==='co_so');
+    const cmPool = all.filter(q=>q.section==='chuyen_mon');
+    const cs = pickFresh(csPool, 50, 'random100_cs');
+    const cm = pickFresh(cmPool, 50, 'random100_cm');
+    pushSeen('random100_cs', cs.map(q=>q.id), csPool.length);
+    pushSeen('random100_cm', cm.map(q=>q.id), cmPool.length);
     return shuffle(cs.concat(cm));
   }
   if(mode === 'daily'){
-    // 3 deterministic for today
-    const today = new Date();
-    const seed = today.getFullYear()*1000 + today.getMonth()*50 + today.getDate();
-    const sorted = all.slice().sort((a,b)=>a.id.localeCompare(b.id));
-    const out = [];
-    for(let i=0;i<3;i++){
-      out.push(sorted[(seed*7 + i*131) % sorted.length]);
+    // 3 câu MỚI mỗi lần chơi trong ngày (anti-repeat per day)
+    const done = dailyDoneToday();
+    let pool = all.filter(q => !done.has(q.id));
+    // Nếu hết câu mới trong ngày → reset
+    if(pool.length < 3){
+      localStorage.setItem(KEY_DAILY_DONE+todayKey(), '[]');
+      pool = all;
     }
-    return out;
+    const picked = shuffle(pool).slice(0, 3);
+    pushDailyDone(picked.map(q=>q.id));
+    return picked;
   }
   if(mode === 'eagle'){
-    // pick a random đề from 1/2/3
+    // Pick đề random + shuffle thứ tự câu trong đề
     const de = 1 + Math.floor(Math.random()*3);
-    return eagle.filter(q=>q.de === de);
+    const arr = eagle.filter(q=>q.de === de);
+    return shuffle(arr);
   }
   return shuffle(all).slice(0,10);
 }
