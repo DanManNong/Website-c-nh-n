@@ -477,12 +477,15 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
   margin-bottom:4px;letter-spacing:1px;
 }
 .footer-sig-img{
-  display:block;margin:0 auto 18px;height:auto;max-width:240px;
+  display:block;margin:0 auto 18px;height:auto;max-width:180px;
   /* Tint dark png to gold */
   filter:brightness(0) saturate(100%) invert(75%) sepia(35%) saturate(560%) hue-rotate(338deg) brightness(95%) contrast(89%);
 }
 @media (max-width:680px){
-  .footer-sig-img{max-width:200px}
+  .footer-sig-img{max-width:150px}
+}
+.footer-zalo-icon{
+  width:18px;height:18px;border-radius:5px;display:inline-block;flex-shrink:0;
 }
 .footer-role{
   color:var(--text-soft);font-size:11.5px;letter-spacing:1.5px;
@@ -826,10 +829,12 @@ input,textarea{font-size:16px}  /* iOS no auto-zoom */
 
 <footer class="footer">
   <img class="footer-sig-img" src="/assets/NguyenTanPhong.png" alt="Nguyễn Tấn Phong" width="240" height="60">
-  <a href="https://zalo.me/0915159499" target="_blank" rel="noopener" class="footer-zalo">
-    <i class="fas fa-comment-dots"></i> Góp ý qua Zalo · 0915 159 499
+  <a href="https://zalo.me/0915159499" target="_blank" rel="noopener" class="footer-zalo" aria-label="Góp ý qua Zalo cho Nguyễn Tấn Phong">
+    <svg class="footer-zalo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="24" height="24" rx="5" fill="#0068FF"/>
+      <text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#fff">Z</text>
+    </svg> Góp ý
   </a>
-  <div class="footer-fine">© <span id="footerYear">2026</span> Nguyễn Tấn Phong · Câu hỏi do <a href="https://eagleacademy.vn" target="_blank" rel="noopener" style="color:var(--text-soft);text-decoration:underline">Eagle Academy</a> + chuyên gia luật biên soạn · Phiên bản BETA</div>
 </footer>
 
 </div>
