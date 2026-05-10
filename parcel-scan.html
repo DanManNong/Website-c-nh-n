@@ -168,6 +168,17 @@ input[type=file]{display:none}
 .info-cell .ic-sub{font-size:10px;color:var(--text-dim);margin-top:2px}
 
 
+
+/* WGS84 quick input */
+.wgs-quick{padding:14px;background:linear-gradient(135deg,rgba(67,160,71,.08),rgba(67,160,71,.01));border:1px solid rgba(67,160,71,.25);border-radius:12px;margin-bottom:14px}
+.wq-label{display:block;font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:.05em}
+.wq-row{display:grid;grid-template-columns:1fr auto;gap:8px}
+.wq-row input{padding:11px 14px;background:var(--card-2);border:1px solid var(--border-soft);border-radius:9px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none}
+.wq-row input:focus{border-color:var(--green)}
+.wq-btn{padding:0 18px;background:linear-gradient(135deg,#43a047,#2e7d32);color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.wq-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(67,160,71,.3)}
+.wq-hint{font-size:11px;color:var(--text-dim);margin-top:8px;line-height:1.5}
+
 /* SECTION TOGGLE */
 .section-head{cursor:pointer;user-select:none;transition:background .15s}
 .section-head:hover{background:rgba(224,170,121,.04)}
@@ -323,6 +334,18 @@ Tđ.3  626128.3300  1148507.2400
       <div class="sec-toggle">▼</div>
     </div>
     <div class="section-body">
+
+      <!-- WGS84 QUICK INPUT (chỉ hiện khi tab WGS84) -->
+      <div class="wgs-quick" id="wgsQuick" style="display:none">
+        <label class="wq-label">📍 Paste tọa độ WGS84 từ Google Maps</label>
+        <div class="wq-row">
+          <input type="text" id="wgsInput" placeholder="VD: 10.4070000, 106.9580000" autocomplete="off">
+          <button class="wq-btn" onclick="parseWGS84Quick()">Plot điểm</button>
+        </div>
+        <div class="wq-hint">
+          💡 Right-click trên Google Maps → click tọa độ để copy → paste vào đây
+        </div>
+      </div>
 
       <div class="coord-controls">
         <div class="ctrl">
@@ -598,17 +621,90 @@ function setFormat(fmt) {
   CURRENT_FORMAT = fmt;
   document.getElementById('fmtVN2000').classList.toggle('active', fmt==='vn2000');
   document.getElementById('fmtWGS84').classList.toggle('active', fmt==='wgs84');
-  // Hide OCR zone when WGS84 (chỉ paste tay)
-  document.querySelector('.ocr-zone').style.display = fmt === 'wgs84' ? 'none' : '';
-  // Hide province select when WGS84 (không cần KTT)
-  document.querySelector('.coord-controls').style.opacity = fmt === 'wgs84' ? '0.5' : '1';
-  if (fmt === 'vn2000') {
+  
+  const isWGS = fmt === 'wgs84';
+  // WGS84 mode: hiện wgs-quick, ẩn OCR + table + controls
+  document.getElementById('wgsQuick').style.display = isWGS ? 'block' : 'none';
+  document.querySelector('.ocr-zone').style.display = isWGS ? 'none' : '';
+  document.querySelector('.coord-controls').style.display = isWGS ? 'none' : 'grid';
+  document.querySelector('.coord-headers').style.display = isWGS ? 'none' : 'grid';
+  document.getElementById('coordTable').style.display = isWGS ? 'none' : 'flex';
+  document.querySelector('.coord-add').style.display = isWGS ? 'none' : 'flex';
+  document.getElementById('convertBtn').style.display = isWGS ? 'none' : 'block';
+  
+  if (!isWGS) {
     document.getElementById('hdrX').textContent = 'X (Northing)';
     document.getElementById('hdrY').textContent = 'Y (Easting)';
-  } else {
-    document.getElementById('hdrX').textContent = 'Lat (vĩ độ)';
-    document.getElementById('hdrY').textContent = 'Lng (kinh độ)';
   }
+}
+
+// Parse WGS84 từ Google Maps format
+function parseWGS84Quick() {
+  const input = document.getElementById('wgsInput').value.trim();
+  if (!input) { toast('Nhập tọa độ trước', 'error'); return; }
+  
+  // Match patterns:
+  //   "10.4070, 106.9580"
+  //   "10.4070,106.9580"
+  //   "10.4070 106.9580"
+  //   "10°24'25.2"N 106°57'29.1"E"  (DMS)
+  //   "10.4070000, 106.9580000"
+  
+  let lat, lng;
+  // Try decimal format first
+  const decMatch = input.match(/(-?\d+(?:\.\d+)?)\s*[,;\s]\s*(-?\d+(?:\.\d+)?)/);
+  if (decMatch) {
+    lat = parseFloat(decMatch[1]);
+    lng = parseFloat(decMatch[2]);
+  }
+  
+  if (isNaN(lat) || isNaN(lng)) {
+    toast('Format không nhận diện được. Dùng: lat, lng (vd: 10.4070, 106.9580)', 'error');
+    return;
+  }
+  
+  // Validate VN range
+  if (lat < 8 || lat > 24 || lng < 102 || lng > 110) {
+    toast(`Tọa độ ngoài VN (lat: ${lat}, lng: ${lng})`, 'error');
+    return;
+  }
+  
+  // Plot single point
+  if (!leafletMap) initMap();
+  
+  // Remove old layers
+  if (currentPolygonLayer) leafletMap.removeLayer(currentPolygonLayer);
+  currentMarkers.forEach(m => leafletMap.removeLayer(m));
+  currentMarkers = [];
+  
+  // Add single marker
+  const marker = L.circleMarker([lat, lng], {
+    radius: 12, color: '#43a047', fillColor: '#43a047', fillOpacity: 0.8, weight: 3
+  }).bindPopup(`<b>Điểm WGS84</b><br>${lat.toFixed(7)}, ${lng.toFixed(7)}<br><a href="https://www.google.com/maps/place/${lat},${lng}" target="_blank">Mở Google Maps</a>`).addTo(leafletMap);
+  currentMarkers.push(marker);
+  leafletMap.setView([lat, lng], 18);
+  marker.openPopup();
+  
+  // Save to lastConvertedCoords for export (single-point pseudo polygon)
+  lastConvertedCoords = [{label:'Điểm', lat, lng}, {label:'Điểm (close)', lat, lng}];
+  
+  // Update info
+  document.getElementById('infoPoints').textContent = '1';
+  document.getElementById('infoArea').textContent = '0';
+  document.getElementById('infoAreaSub').textContent = 'm² · single point';
+  document.getElementById('infoCenter').textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+  document.getElementById('infoProvince').textContent = '—';
+  document.getElementById('infoKTT').textContent = 'WGS84';
+  document.getElementById('mapStatus').textContent = '✓ 1 điểm';
+  
+  // Section 4 update
+  document.getElementById('centerWGS84').textContent = `${lat.toFixed(7)}, ${lng.toFixed(7)}`;
+  document.getElementById('centerLink').innerHTML = `<a href="https://www.google.com/maps/place/${lat},${lng}" target="_blank">🌐 Mở Google Maps</a>`;
+  
+  // Enable export buttons (KML sẽ là Point thay vì Polygon — handled in generateKML)
+  ['exKML','exCopyPoint','exShare'].forEach(id => document.getElementById(id).disabled = false);
+  
+  toast(`✓ Plot ${lat.toFixed(6)}, ${lng.toFixed(6)}`, 'success');
 }
 
 // ════════════════════════════════════════
@@ -1071,6 +1167,26 @@ async function sharePoint() {
 
 function generateKML() {
   if (!lastConvertedCoords) return '';
+  // Detect single point vs polygon
+  const isSinglePoint = lastConvertedCoords.length === 2 && 
+    lastConvertedCoords[0].lat === lastConvertedCoords[1].lat &&
+    lastConvertedCoords[0].lng === lastConvertedCoords[1].lng;
+  
+  if (isSinglePoint) {
+    const c = lastConvertedCoords[0];
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Điểm WGS84</name>
+    <Placemark>
+      <name>Điểm tọa độ</name>
+      <description>WGS84: ${c.lat.toFixed(7)}, ${c.lng.toFixed(7)}</description>
+      <Point><coordinates>${c.lng},${c.lat},0</coordinates></Point>
+    </Placemark>
+  </Document>
+</kml>`;
+  }
+  
   const coordStr = lastConvertedCoords.map(c => `${c.lng},${c.lat},0`).join(' ');
   const province = getProvinceName();
   const area = polygonArea(lastConvertedCoords);
@@ -1180,23 +1296,34 @@ async function runOCR(dataUrl) {
   const progress = document.getElementById('ocrProgress');
   progress.classList.add('show');
   status.textContent = 'Đang OCR...';
-  progress.textContent = 'Đang tải Tesseract engine (lần đầu chậm ~5s)...';
+  progress.textContent = 'Khởi tạo Tesseract...';
 
   try {
+    console.log('[OCR] Creating Tesseract worker with local paths');
     const worker = await Tesseract.createWorker('eng', 1, {
-      workerPath: '/assets/tessdata/worker.min.js',
-      langPath: '/assets/tessdata/',
-      corePath: '/assets/tessdata/',
+      workerPath: location.origin + '/assets/tessdata/worker.min.js',
+      langPath: location.origin + '/assets/tessdata/',
+      corePath: location.origin + '/assets/tessdata/tesseract-core.wasm.js',
       logger: m => {
+        console.log('[Tesseract]', m);
         if (m.status === 'recognizing text') {
-          progress.textContent = `Đang nhận diện chữ... ${Math.round(m.progress*100)}%`;
+          progress.textContent = `Nhận diện chữ... ${Math.round(m.progress*100)}%`;
+        } else if (m.status === 'loading language traineddata') {
+          progress.textContent = `Tải language data... ${Math.round(m.progress*100)}%`;
+        } else if (m.status === 'initializing api') {
+          progress.textContent = 'Khởi tạo API OCR...';
+        } else if (m.status === 'loading tesseract core') {
+          progress.textContent = `Tải core... ${Math.round(m.progress*100)}%`;
         } else {
-          progress.textContent = m.status;
+          progress.textContent = m.status || 'Processing...';
         }
-      }
+      },
+      errorHandler: e => console.error('[Tesseract error]', e)
     });
+    progress.textContent = 'Đang nhận diện chữ trong ảnh...';
     const { data: { text } } = await worker.recognize(dataUrl);
     await worker.terminate();
+    console.log('[OCR] Text extracted:', text.substring(0,500));
 
     progress.textContent = '✓ OCR xong, đang parse...';
     const parsed = parseCoordTableFromOCR(text);
