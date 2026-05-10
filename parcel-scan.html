@@ -169,6 +169,10 @@ input[type=file]{display:none}
 
 
 
+
+.format-row{margin-bottom:14px}
+.fmt-label{display:block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+
 /* WGS84 quick input */
 .wgs-quick{padding:14px;background:linear-gradient(135deg,rgba(67,160,71,.08),rgba(67,160,71,.01));border:1px solid rgba(67,160,71,.25);border-radius:12px;margin-bottom:14px}
 .wq-label{display:block;font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:.05em}
@@ -339,7 +343,7 @@ Tđ.3  626128.3300  1148507.2400
       <div class="wgs-quick" id="wgsQuick" style="display:none">
         <label class="wq-label">📍 Paste tọa độ WGS84 từ Google Maps</label>
         <div class="wq-row">
-          <input type="text" id="wgsInput" placeholder="VD: 10.4070000, 106.9580000" autocomplete="off">
+          <input type="text" id="wgsInput" placeholder="Paste: tọa độ HOẶC link Google Maps (https://maps.app.goo.gl/... cũng OK)" autocomplete="off">
           <button class="wq-btn" onclick="parseWGS84Quick()">Plot điểm</button>
         </div>
         <div class="wq-hint">
@@ -347,25 +351,27 @@ Tđ.3  626128.3300  1148507.2400
         </div>
       </div>
 
+      <!-- FORMAT TOGGLE (luôn hiện - cho phép switch lại) -->
+      <div class="format-row">
+        <label class="fmt-label">Format tọa độ đầu vào</label>
+        <div class="format-toggle">
+          <button id="fmtVN2000" class="active" onclick="setFormat('vn2000')">
+            <span class="fmt-name">VN2000</span>
+            <span class="fmt-sub">X, Y meters · cần KTT tỉnh</span>
+          </button>
+          <button id="fmtWGS84" onclick="setFormat('wgs84')">
+            <span class="fmt-name">WGS84</span>
+            <span class="fmt-sub">lat, lng degrees · Google Maps</span>
+          </button>
+        </div>
+      </div>
+
       <div class="coord-controls">
-        <div class="ctrl">
+        <div class="ctrl" style="grid-column: 1 / -1">
           <label>Tỉnh / Thành phố (kinh tuyến trục)</label>
           <select id="provinceSelect">
             <option value="105.75">— Chọn tỉnh —</option>
           </select>
-        </div>
-        <div class="ctrl">
-          <label>Format tọa độ đầu vào</label>
-          <div class="format-toggle">
-            <button id="fmtVN2000" class="active" onclick="setFormat('vn2000')">
-              <span class="fmt-name">VN2000</span>
-              <span class="fmt-sub">X, Y meters</span>
-            </button>
-            <button id="fmtWGS84" onclick="setFormat('wgs84')">
-              <span class="fmt-name">WGS84</span>
-              <span class="fmt-sub">lat, lng degrees</span>
-            </button>
-          </div>
         </div>
       </div>
 
