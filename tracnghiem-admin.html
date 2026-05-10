@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Trắc nghiệm Môi giới BĐS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="/assets/supabase.min.js" defer></script>
+
+<style>
+:root{
+  --navy:#1a1a1a;--navy-mid:#222;--navy-light:#2c2c2c;--navy-soft:#333;
+  --gold:#E0AA79;--gold-light:#f0c896;--gold-dim:rgba(224,170,121,0.15);
+  --text:#fff;--text-soft:rgba(255,255,255,0.55);--text-mid:rgba(255,255,255,0.78);
+  --border:rgba(224,170,121,0.2);
+  --green:#7CD992;--red:#FF6B7A;--blue:#7AB8E0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Be Vietnam Pro',-apple-system,sans-serif;
+  background:var(--navy);color:var(--text);font-size:14px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--gold);text-decoration:none}
+.mono{font-family:'JetBrains Mono',monospace}
+
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,0.3);position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(10px);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--gold)}
+.brand-tag{font-size:10px;color:var(--red);background:rgba(255,107,122,0.12);padding:3px 8px;border-radius:4px;font-weight:700;letter-spacing:1px}
+.refresh-info{font-size:12px;color:var(--text-soft)}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:8px;
+  background:var(--gold-dim);color:var(--gold);
+  border:1px solid var(--border);cursor:pointer;font:inherit;font-size:13px;font-weight:500;
+  transition:all .15s;text-decoration:none;
+}
+.btn:hover{background:var(--gold);color:var(--navy)}
+.btn-blue{background:rgba(122,184,224,0.12);color:var(--blue);border-color:rgba(122,184,224,0.3)}
+.btn-blue:hover{background:var(--blue);color:var(--navy)}
+
+main{max-width:1200px;margin:0 auto;padding:24px}
+
+.gate{
+  max-width:380px;margin:60px auto;padding:30px 26px;
+  background:var(--navy-mid);border:1px solid var(--border);border-radius:18px;
+  text-align:center;
+}
+.gate h1{font-size:22px;margin-bottom:6px}
+.gate p{color:var(--text-soft);margin-bottom:20px;font-size:13px}
+.gate input{
+  width:100%;padding:12px 14px;border-radius:10px;background:var(--navy-soft);
+  border:1.5px solid transparent;color:var(--text);font:inherit;
+  font-family:'JetBrains Mono',monospace;text-align:center;letter-spacing:1px;
+}
+.gate input:focus{outline:none;border-color:var(--gold)}
+.gate .btn{width:100%;justify-content:center;margin-top:14px}
+.gate .err{color:var(--red);font-size:12px;margin-top:8px;display:none}
+.gate .err.show{display:block}
+
+h2{font-size:13px;font-weight:600;color:var(--text-soft);text-transform:uppercase;letter-spacing:1.5px;margin:24px 0 12px}
+h2 i{color:var(--gold);margin-right:6px}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.stat-card{
+  background:var(--navy-mid);border:1px solid var(--border);border-radius:12px;padding:18px 20px;
+}
+.stat-num{font-size:32px;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:11px;color:var(--text-soft);text-transform:uppercase;letter-spacing:1px;margin-top:6px}
+.stat-sub{font-size:12px;color:var(--green);margin-top:4px}
+
+.card{
+  background:var(--navy-mid);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:20px;
+}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.card-head h3{font-size:15px;font-weight:600}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05)}
+th{color:var(--text-soft);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:1px;background:rgba(0,0,0,0.2)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(224,170,121,0.04)}
+td.r,th.r{text-align:right}
+td.c,th.c{text-align:center}
+.tag{padding:2px 8px;border-radius:99px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:inline-block}
+.tag-quick{background:rgba(122,184,224,0.15);color:var(--blue)}
+.tag-eagle{background:rgba(224,170,121,0.15);color:var(--gold)}
+.tag-random50,.tag-random100{background:rgba(124,217,146,0.15);color:var(--green)}
+.tag-daily{background:rgba(255,107,122,0.15);color:var(--red)}
+
+.codes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.code-card{
+  background:var(--navy-soft);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;
+}
+.code-card.today{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);border-color:var(--gold)}
+.code-card.today .code-date{color:var(--navy)}
+.code-card.today .code-val{color:var(--navy)}
+.code-date{font-size:11px;color:var(--text-soft);margin-bottom:4px}
+.code-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--gold);letter-spacing:2px}
+
+.empty{padding:30px;text-align:center;color:var(--text-soft);font-size:13px}
+
+@media (max-width:680px){
+  main{padding:14px}
+  .topbar{padding:12px 14px}
+  .brand{font-size:13px}
+  table{font-size:12px}
+  th,td{padding:8px 6px}
+  .hide-mobile{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <i class="fas fa-shield-halved"></i>
+    Trắc nghiệm · Admin
+    <span class="brand-tag">PRIVATE</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:14px">
+    <span class="refresh-info" id="refreshInfo">—</span>
+    <button class="btn" onclick="loadData()" title="Làm mới"><i class="fas fa-rotate-right"></i> Refresh</button>
+  </div>
+</header>
+
+<main>
+
+<!-- GATE (when no key) -->
+<section id="gate" class="gate" style="display:none">
+  <h1>🔒 Admin Access</h1>
+  <p>Vui lòng nhập mã quản trị để xem dashboard.</p>
+  <input type="password" id="gateKey" placeholder="Mã admin..." autocomplete="off">
+  <button class="btn" onclick="checkGate()"><i class="fas fa-key"></i> Vào</button>
+  <div class="err" id="gateErr">Sai mã. Vui lòng kiểm tra lại.</div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dash" style="display:none">
+
+  <h2><i class="fas fa-chart-line"></i> Tổng quan</h2>
+  <div class="stats-grid" id="statsGrid"></div>
+
+  <h2><i class="fas fa-key"></i> Mã Bank Eagle (rotate hàng ngày)</h2>
+  <div class="card">
+    <div class="codes-grid" id="codesGrid"></div>
+  </div>
+
+  <h2><i class="fas fa-users"></i> Học viên đăng ký <span style="font-weight:400;color:var(--text-soft)">(<span id="usersCount">0</span>)</span></h2>
+  <div class="card" style="padding:0;overflow-x:auto">
+    <div style="padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)">
+      <div style="font-size:12px;color:var(--text-soft)">Click số điện thoại để gọi · Click tên để xem Zalo</div>
+      <button class="btn btn-blue" onclick="exportUsersCSV()"><i class="fas fa-file-csv"></i> Tải CSV</button>
+    </div>
+    <table id="usersTable"></table>
+  </div>
+
+  <h2><i class="fas fa-bullseye"></i> Lượt làm gần nhất <span style="font-weight:400;color:var(--text-soft)">(<span id="attemptsCount">0</span>)</span></h2>
+  <div class="card" style="padding:0;overflow-x:auto">
+    <table id="attemptsTable"></table>
+  </div>
+
+  <h2><i class="fas fa-chart-pie"></i> Phân bổ chế độ</h2>
+  <div class="card" style="padding:0;overflow-x:auto">
+    <table id="modesTable"></table>
+  </div>
+
+</section>
+
+</main>
+
+<script>
+const SB_URL = 'https://dcmtbgcltopnqsiedwlg.supabase.co';
+const SB_KEY = 'sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
+let sb = null;
+let SECRET = null;
+let refreshHandle = null;
+
+function init(){
+  // Try get secret from URL
+  const url = new URL(location.href);
+  SECRET = url.searchParams.get('key') || sessionStorage.getItem('admin_key');
+  if(SECRET){
+    document.getElementById('dash').style.display = '';
+    loadData();
+    refreshHandle = setInterval(loadData, 30000);
+  } else {
+    document.getElementById('gate').style.display = '';
+    document.getElementById('gateKey').focus();
+    document.getElementById('gateKey').addEventListener('keydown', e=>{
+      if(e.key === 'Enter'){ e.preventDefault(); checkGate(); }
+    });
+  }
+}
+
+function checkGate(){
+  const key = document.getElementById('gateKey').value.trim();
+  if(!key){ return; }
+  SECRET = key;
+  // Try a request to verify
+  loadData(true);
+}
+
+async function loadData(isVerify = false){
+  if(!sb){
+    if(typeof supabase === 'undefined'){ setTimeout(loadData, 300); return; }
+    sb = supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession:false, autoRefreshToken:false }});
+  }
+  const { data, error } = await sb.rpc('tracnghiem_admin_get_data', { p_secret: SECRET });
+  if(error){
+    if(isVerify){
+      document.getElementById('gateErr').classList.add('show');
+      SECRET = null;
+      return;
+    }
+    document.getElementById('refreshInfo').textContent = 'Lỗi: ' + (error.message||'');
+    document.getElementById('refreshInfo').style.color = 'var(--red)';
+    return;
+  }
+  // Hide gate, show dash
+  sessionStorage.setItem('admin_key', SECRET);
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('dash').style.display = '';
+  if(!refreshHandle) refreshHandle = setInterval(loadData, 30000);
+
+  renderAll(data);
+  document.getElementById('refreshInfo').textContent = '⟳ ' + new Date().toLocaleTimeString('vi-VN');
+  document.getElementById('refreshInfo').style.color = 'var(--text-soft)';
+}
+
+function renderAll(data){
+  renderStats(data.stats);
+  renderCodes();
+  renderUsers(data.users);
+  renderAttempts(data.attempts);
+  renderModes(data.mode_stats);
+}
+
+function renderStats(s){
+  const el = document.getElementById('statsGrid');
+  const cards = [
+    ['Tổng học viên', s.total_users, s.users_today ? `+${s.users_today} hôm nay` : null],
+    ['Tổng lượt làm', s.total_attempts, s.attempts_today ? `+${s.attempts_today} hôm nay` : null],
+    ['Tuần này', s.attempts_week, `${s.users_week} đăng ký mới`],
+    ['Điểm TB', s.avg_score_pct + '%', null],
+  ];
+  el.innerHTML = cards.map(([label, num, sub])=>`
+    <div class="stat-card">
+      <div class="stat-num">${num}</div>
+      <div class="stat-label">${label}</div>
+      ${sub ? `<div class="stat-sub">↑ ${sub}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function todayCode(d){
+  d = d || new Date();
+  const dayOfYear = Math.floor((d - new Date(d.getFullYear(),0,0))/86400000);
+  const yy = d.getFullYear() % 100;
+  const n = ((dayOfYear * 73 + yy * 911 + 137) ^ (dayOfYear << 3)) & 0xFFFF;
+  return 'EA-' + (n % 9000 + 1000).toString();
+}
+
+function renderCodes(){
+  const el = document.getElementById('codesGrid');
+  const today = new Date();
+  const arr = [];
+  for(let i=0;i<10;i++){
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    arr.push({date:d, code:todayCode(d), isToday:i===0});
+  }
+  el.innerHTML = arr.map(({date,code,isToday})=>`
+    <div class="code-card ${isToday?'today':''}">
+      <div class="code-date">${isToday?'<strong>HÔM NAY</strong> · ':''}${date.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'})}</div>
+      <div class="code-val">${code}</div>
+    </div>
+  `).join('');
+}
+
+function renderUsers(users){
+  document.getElementById('usersCount').textContent = users.length;
+  const t = document.getElementById('usersTable');
+  if(!users.length){
+    t.innerHTML = '<tr><td><div class="empty">Chưa có học viên đăng ký.</div></td></tr>';
+    return;
+  }
+  let html = `<thead><tr>
+    <th>SĐT</th><th>Tên</th><th class="hide-mobile">Sàn / Cty</th>
+    <th class="r">Lượt làm</th><th class="r hide-mobile">Cao nhất</th>
+    <th class="hide-mobile">Đăng ký</th><th>Cuối cùng</th>
+  </tr></thead><tbody>`;
+  users.forEach(u=>{
+    const dt = new Date(u.created_at).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const last = u.last_attempt_at ? new Date(u.last_attempt_at).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '<span style="color:var(--text-soft)">—</span>';
+    html += `<tr>
+      <td><a href="tel:${esc(u.phone)}" class="mono">${esc(u.phone)}</a> · <a href="https://zalo.me/${esc(u.phone)}" target="_blank" title="Zalo"><i class="fas fa-comment-dots" style="color:#0068FF"></i></a></td>
+      <td><strong>${esc(u.name)}</strong></td>
+      <td class="hide-mobile">${esc(u.san||'')}</td>
+      <td class="r"><strong>${u.total_attempts}</strong></td>
+      <td class="r hide-mobile" style="color:var(--gold);font-weight:600">${u.best_pct!==null?u.best_pct+'%':'—'}</td>
+      <td class="hide-mobile">${dt}</td>
+      <td>${last}</td>
+    </tr>`;
+  });
+  html += '</tbody>';
+  t.innerHTML = html;
+}
+
+function renderAttempts(atts){
+  document.getElementById('attemptsCount').textContent = atts.length;
+  const t = document.getElementById('attemptsTable');
+  if(!atts.length){
+    t.innerHTML = '<tr><td><div class="empty">Chưa có lượt làm bài nào.</div></td></tr>';
+    return;
+  }
+  const modeNames = {quick:'Quick',eagle:'Eagle gốc',random50:'Trộn 50',random100:'Trộn 100',daily:'Daily'};
+  let html = `<thead><tr>
+    <th>Học viên</th><th>Mode</th><th class="r">Điểm</th><th class="r hide-mobile">%</th>
+    <th class="r hide-mobile">Phút</th><th>Lúc</th>
+  </tr></thead><tbody>`;
+  atts.forEach(a=>{
+    const dt = new Date(a.at).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const mins = Math.floor(a.elapsed_sec/60), secs = a.elapsed_sec%60;
+    html += `<tr>
+      <td><strong>${esc(a.user_name)}</strong> <span class="mono" style="color:var(--text-soft);font-size:11px">${esc(a.user_phone)}</span></td>
+      <td><span class="tag tag-${a.mode}">${modeNames[a.mode]||a.mode}</span></td>
+      <td class="r"><strong>${a.score}/${a.total}</strong></td>
+      <td class="r hide-mobile" style="color:${a.pct>=80?'var(--green)':a.pct>=60?'var(--gold)':'var(--red)'};font-weight:700">${a.pct}%</td>
+      <td class="r hide-mobile">${mins}:${secs.toString().padStart(2,'0')}</td>
+      <td>${dt}</td>
+    </tr>`;
+  });
+  html += '</tbody>';
+  t.innerHTML = html;
+}
+
+function renderModes(modes){
+  const t = document.getElementById('modesTable');
+  if(!modes.length){
+    t.innerHTML = '<tr><td><div class="empty">Chưa có data.</div></td></tr>';
+    return;
+  }
+  const modeNames = {quick:'Quick Quiz',eagle:'Đề Eagle gốc',random50:'Đề trộn 50',random100:'Đề trộn 100',daily:'Daily Challenge'};
+  const total = modes.reduce((s,m)=>s+m.plays,0);
+  let html = `<thead><tr><th>Chế độ</th><th class="r">Lượt chơi</th><th class="r">% tổng</th><th class="r">Điểm TB</th></tr></thead><tbody>`;
+  modes.forEach(m=>{
+    const pct = total ? Math.round(m.plays/total*100) : 0;
+    html += `<tr>
+      <td><span class="tag tag-${m.mode}">${modeNames[m.mode]||m.mode}</span></td>
+      <td class="r"><strong>${m.plays}</strong></td>
+      <td class="r">${pct}%</td>
+      <td class="r" style="color:var(--gold);font-weight:600">${m.avg_pct}%</td>
+    </tr>`;
+  });
+  html += '</tbody>';
+  t.innerHTML = html;
+}
+
+function exportUsersCSV(){
+  const rows = [...document.querySelectorAll('#usersTable tbody tr')];
+  if(!rows.length){ alert('Chưa có học viên.'); return; }
+  const header = ['SĐT','Tên','Sàn','Lượt làm','Cao nhất %','Đăng ký','Cuối cùng'];
+  const csv = [header.join(',')];
+  rows.forEach(r=>{
+    const cells = [...r.cells].map(td=>{
+      const text = td.textContent.replace(/\s+/g,' ').trim().replace(/"/g,'""');
+      return `"${text}"`;
+    });
+    csv.push(cells.join(','));
+  });
+  const blob = new Blob(['﻿' + csv.join('\n')], {type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'tracnghiem-hocvien-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function esc(s){
+  return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
