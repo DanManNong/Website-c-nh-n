@@ -598,6 +598,10 @@ function setFormat(fmt) {
   CURRENT_FORMAT = fmt;
   document.getElementById('fmtVN2000').classList.toggle('active', fmt==='vn2000');
   document.getElementById('fmtWGS84').classList.toggle('active', fmt==='wgs84');
+  // Hide OCR zone when WGS84 (chỉ paste tay)
+  document.querySelector('.ocr-zone').style.display = fmt === 'wgs84' ? 'none' : '';
+  // Hide province select when WGS84 (không cần KTT)
+  document.querySelector('.coord-controls').style.opacity = fmt === 'wgs84' ? '0.5' : '1';
   if (fmt === 'vn2000') {
     document.getElementById('hdrX').textContent = 'X (Northing)';
     document.getElementById('hdrY').textContent = 'Y (Easting)';
@@ -1180,6 +1184,9 @@ async function runOCR(dataUrl) {
 
   try {
     const worker = await Tesseract.createWorker('eng', 1, {
+      workerPath: '/assets/tessdata/worker.min.js',
+      langPath: '/assets/tessdata/',
+      corePath: '/assets/tessdata/',
       logger: m => {
         if (m.status === 'recognizing text') {
           progress.textContent = `Đang nhận diện chữ... ${Math.round(m.progress*100)}%`;
@@ -1193,6 +1200,19 @@ async function runOCR(dataUrl) {
 
     progress.textContent = '✓ OCR xong, đang parse...';
     const parsed = parseCoordTableFromOCR(text);
+    
+    // Auto-detect province from OCR text
+    const detectedProvince = detectProvinceFromText(text);
+    if (detectedProvince) {
+      const sel = document.getElementById('provinceSelect');
+      for (let opt of sel.options) {
+        if (opt.text.toLowerCase().includes(detectedProvince.toLowerCase())) {
+          sel.value = opt.value;
+          toast(`✓ Auto detect: ${detectedProvince}`, 'success');
+          break;
+        }
+      }
+    }
     
     if (parsed.length >= 3) {
       clearAll();
@@ -1211,6 +1231,40 @@ async function runOCR(dataUrl) {
     status.textContent = '✗ Lỗi';
     toast('OCR thất bại: ' + e.message, 'error');
   }
+}
+
+
+function detectProvinceFromText(text) {
+  // Tìm tên tỉnh trong OCR text
+  const provinces = ['Lâm Đồng','Lam Dong','Hồ Chí Minh','Ho Chi Minh','TP.HCM','TPHCM','Hà Nội','Ha Noi',
+    'Đồng Nai','Dong Nai','Bình Dương','Binh Duong','Bà Rịa','Vũng Tàu','Vung Tau',
+    'Cần Thơ','Can Tho','An Giang','Long An','Tây Ninh','Tay Ninh','Bến Tre','Ben Tre',
+    'Tiền Giang','Tien Giang','Bình Thuận','Binh Thuan','Khánh Hòa','Khanh Hoa',
+    'Đà Nẵng','Da Nang','Hải Phòng','Hai Phong','Quảng Ninh','Quang Ninh',
+    'Phú Yên','Phu Yen','Bình Định','Binh Dinh','Quảng Nam','Quang Nam',
+    'Quảng Ngãi','Quang Ngai','Thừa Thiên Huế','Thua Thien Hue','Quảng Trị','Quang Tri',
+    'Quảng Bình','Quang Binh','Hà Tĩnh','Ha Tinh','Nghệ An','Nghe An','Thanh Hóa','Thanh Hoa',
+    'Ninh Bình','Ninh Binh','Nam Định','Nam Dinh','Thái Bình','Thai Binh','Hưng Yên','Hung Yen',
+    'Hải Dương','Hai Duong','Bắc Ninh','Bac Ninh','Vĩnh Phúc','Vinh Phuc','Phú Thọ','Phu Tho',
+    'Thái Nguyên','Thai Nguyen','Bắc Giang','Bac Giang','Bắc Kạn','Bac Kan','Cao Bằng','Cao Bang',
+    'Lạng Sơn','Lang Son','Hà Giang','Ha Giang','Tuyên Quang','Tuyen Quang','Lào Cai','Lao Cai',
+    'Yên Bái','Yen Bai','Lai Châu','Lai Chau','Điện Biên','Dien Bien','Sơn La','Son La',
+    'Hòa Bình','Hoa Binh','Hà Nam','Ha Nam','Đắk Lắk','Dak Lak','Đắk Nông','Dak Nong',
+    'Gia Lai','Kon Tum','Ninh Thuận','Ninh Thuan','Bình Phước','Binh Phuoc',
+    'Sóc Trăng','Soc Trang','Trà Vinh','Tra Vinh','Vĩnh Long','Vinh Long','Hậu Giang','Hau Giang',
+    'Bạc Liêu','Bac Lieu','Cà Mau','Ca Mau','Kiên Giang','Kien Giang','Đồng Tháp','Dong Thap'];
+  
+  const lowerText = text.toLowerCase();
+  for (const p of provinces) {
+    if (lowerText.includes(p.toLowerCase())) {
+      // Map về tên Vietnamese chuẩn
+      const vnName = p.replace('Lam Dong','Lâm Đồng').replace('Ho Chi Minh','Hồ Chí Minh')
+        .replace('TP.HCM','TP.HCM').replace('TPHCM','TP.HCM').replace('Ha Noi','Hà Nội')
+        .replace('Dong Nai','Đồng Nai').replace('Binh Duong','Bình Dương');
+      return vnName.split(' ').slice(0,2).join(' '); // first 2 words to match dropdown
+    }
+  }
+  return null;
 }
 
 function parseCoordTableFromOCR(text) {
