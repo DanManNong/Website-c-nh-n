@@ -92,6 +92,34 @@ input[type=file]{display:none}
 .meta-grid .lbl{color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:10px}
 .meta-grid .val{color:var(--text);font-weight:500;font-family:'JetBrains Mono',monospace}
 
+
+/* ── OCR ZONE ── */
+.ocr-zone{padding:14px;background:linear-gradient(135deg,rgba(33,150,243,.06),rgba(33,150,243,.01));border:1px solid rgba(33,150,243,.2);border-radius:12px;margin-bottom:14px}
+.ocr-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--blue)}
+.ocr-status{font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-weight:500}
+.ocr-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.ocr-btn{padding:10px 14px;background:var(--card-2);border:1px solid var(--border-soft);border-radius:9px;color:var(--text);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px}
+.ocr-btn:hover{border-color:var(--blue);color:var(--blue)}
+.ocr-btn.primary{background:linear-gradient(135deg,#2196f3,#1976d2);color:#fff;border-color:#2196f3}
+.ocr-btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(33,150,243,.3);color:#fff}
+.ocr-btn:disabled{opacity:.4;cursor:not-allowed}
+.ocr-preview{margin-top:10px;text-align:center;display:none}
+.ocr-preview.show{display:block}
+.ocr-preview img{max-width:100%;max-height:160px;border-radius:8px;border:1px solid var(--border-soft)}
+.ocr-progress{display:none;margin-top:10px;padding:8px 12px;background:rgba(33,150,243,.1);border-radius:8px;font-size:11px;color:var(--blue);text-align:center;font-family:'JetBrains Mono',monospace}
+.ocr-progress.show{display:block}
+.ocr-hint{font-size:10px;color:var(--text-dim);margin-top:8px;line-height:1.6}
+
+/* Camera capture modal */
+.cam-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9998;align-items:center;justify-content:center;padding:20px;flex-direction:column}
+.cam-modal.show{display:flex}
+.cam-video{max-width:100%;max-height:70vh;border-radius:14px;border:2px solid var(--gold)}
+.cam-controls{display:flex;gap:10px;margin-top:18px}
+.cam-controls button{padding:12px 20px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;border:none;cursor:pointer}
+.cam-snap{background:linear-gradient(135deg,#43a047,#2e7d32);color:#fff;font-size:16px}
+.cam-cancel{background:rgba(255,255,255,.1);color:#fff}
+.cam-hint{color:#fff;font-size:11px;margin-top:10px;opacity:.7;text-align:center;max-width:400px}
+
 /* ── COORD TABLE ── */
 .coord-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 @media(max-width:600px){.coord-controls{grid-template-columns:1fr}}
@@ -300,6 +328,29 @@ Tđ.3  626128.3300  1148507.2400
         </div>
       </div>
 
+      <!-- OCR UPLOAD ZONE -->
+      <div class="ocr-zone">
+        <div class="ocr-title">
+          <span>📸 Chụp ảnh / Upload bảng tọa độ</span>
+          <span class="ocr-status" id="ocrStatus">Sẵn sàng</span>
+        </div>
+        <div class="ocr-buttons">
+          <button class="ocr-btn primary" onclick="startCameraCapture()">
+            📷 Chụp ảnh
+          </button>
+          <button class="ocr-btn" onclick="document.getElementById('ocrFileInput').click()">
+            🖼 Upload ảnh
+          </button>
+          <input type="file" id="ocrFileInput" accept="image/*" capture="environment" onchange="handleOCRFile(event)" style="display:none">
+        </div>
+        <div class="ocr-preview" id="ocrPreview"></div>
+        <div class="ocr-progress" id="ocrProgress"></div>
+        <div class="ocr-hint">
+          💡 Chụp ảnh thẳng bảng tọa độ (như sổ chú gửi). Cháu OCR + auto-fill bảng dưới.<br>
+          Sai số có thể cần edit tay → bấm 🗑 xóa cell, gõ lại
+        </div>
+      </div>
+
       <div class="coord-headers">
         <div>Mốc</div>
         <div id="hdrX">X (Northing)</div>
@@ -395,12 +446,27 @@ Tđ.3  626128.3300  1148507.2400
   NGUYỄN TẤN PHONG · PARCEL SCAN TOOL · 2026 · Convert VN2000 + datum QĐ 05/2007
 </div>
 
+
+<!-- CAMERA CAPTURE MODAL -->
+<div class="cam-modal" id="camModal">
+  <video class="cam-video" id="camVideo" autoplay playsinline></video>
+  <canvas id="camCanvas" style="display:none"></canvas>
+  <div class="cam-controls">
+    <button class="cam-snap" onclick="snapPhoto()">📸 Chụp</button>
+    <button class="cam-cancel" onclick="closeCameraCapture()">Hủy</button>
+  </div>
+  <div class="cam-hint">
+    Đưa bảng tọa độ vào khung hình · Giữ máy thẳng · Đủ ánh sáng
+  </div>
+</div>
+
 <div class="toast" id="toast">Hello</div>
 
 <!-- Libraries (load in order) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.0/tesseract.min.js"></script>
 
 <script>
 // ════════════════════════════════════════
@@ -923,6 +989,142 @@ function toast(msg, type = '') {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2400);
 }
+
+
+// ════════════════════════════════════════
+// OCR + CAMERA CAPTURE
+// ════════════════════════════════════════
+let camStream = null;
+
+async function startCameraCapture() {
+  try {
+    camStream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}});
+    document.getElementById('camVideo').srcObject = camStream;
+    document.getElementById('camModal').classList.add('show');
+  } catch(e) {
+    toast('Không bật được camera: ' + e.message, 'error');
+  }
+}
+
+function closeCameraCapture() {
+  if (camStream) {
+    camStream.getTracks().forEach(t => t.stop());
+    camStream = null;
+  }
+  document.getElementById('camModal').classList.remove('show');
+}
+
+function snapPhoto() {
+  const video = document.getElementById('camVideo');
+  const canvas = document.getElementById('camCanvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+  closeCameraCapture();
+  showOCRPreview(dataUrl);
+  runOCR(dataUrl);
+}
+
+function handleOCRFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const dataUrl = ev.target.result;
+    showOCRPreview(dataUrl);
+    runOCR(dataUrl);
+  };
+  reader.readAsDataURL(file);
+}
+
+function showOCRPreview(dataUrl) {
+  const prev = document.getElementById('ocrPreview');
+  prev.innerHTML = `<img src="${dataUrl}" alt="OCR source">`;
+  prev.classList.add('show');
+}
+
+async function runOCR(dataUrl) {
+  const status = document.getElementById('ocrStatus');
+  const progress = document.getElementById('ocrProgress');
+  progress.classList.add('show');
+  status.textContent = 'Đang OCR...';
+  progress.textContent = 'Đang tải Tesseract engine (lần đầu chậm ~5s)...';
+
+  try {
+    const worker = await Tesseract.createWorker('eng', 1, {
+      logger: m => {
+        if (m.status === 'recognizing text') {
+          progress.textContent = `Đang nhận diện chữ... ${Math.round(m.progress*100)}%`;
+        } else {
+          progress.textContent = m.status;
+        }
+      }
+    });
+    const { data: { text } } = await worker.recognize(dataUrl);
+    await worker.terminate();
+
+    progress.textContent = '✓ OCR xong, đang parse...';
+    const parsed = parseCoordTableFromOCR(text);
+    
+    if (parsed.length >= 3) {
+      clearAll();
+      parsed.forEach(p => addRow(p.label, p.x, p.y));
+      status.textContent = `✓ Tìm được ${parsed.length} điểm`;
+      progress.textContent = `✓ Tự động fill ${parsed.length} dòng. Vui lòng kiểm tra + edit nếu sai số`;
+      toast(`✓ OCR ${parsed.length} điểm — kiểm tra lại`, 'success');
+      setTimeout(() => progress.classList.remove('show'), 4000);
+    } else {
+      status.textContent = '⚠ Không parse được';
+      progress.textContent = `⚠ Tìm được ${parsed.length} điểm. Text raw:\n${text.substring(0, 200)}...`;
+      toast('OCR không tìm đủ điểm — nhập tay bên dưới', 'error');
+    }
+  } catch(e) {
+    progress.textContent = '✗ Lỗi: ' + e.message;
+    status.textContent = '✗ Lỗi';
+    toast('OCR thất bại: ' + e.message, 'error');
+  }
+}
+
+function parseCoordTableFromOCR(text) {
+  // Parse table format like:
+  //   1  1151000.95  632089.60
+  //   Tđ.1  626062.7  1148534.39
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+  const result = [];
+  for (const line of lines) {
+    // Look for pattern: optional label + 2 numbers (6+ digits, decimal)
+    const match = line.match(/(\S+)?\s*(\d{6,8}[.,]\d+)\s+(\d{6,8}[.,]\d+)/);
+    if (match) {
+      let label = match[1] || '';
+      let n1 = parseFloat(match[2].replace(',', '.'));
+      let n2 = parseFloat(match[3].replace(',', '.'));
+      
+      // If label is itself a number (vì nhiều OCR đọc label STT là số), thì label được dùng làm n1
+      if (label && /^\d+$/.test(label)) {
+        // OK, it's a STT number like "1", "2"
+        result.push({label: 'Tđ.'+label, x: n1, y: n2});
+      } else if (label && !isNaN(parseFloat(label))) {
+        // Number-looking label, use as label  
+        result.push({label: 'Tđ.'+label.replace(/[^\d]/g,''), x: n1, y: n2});
+      } else if (label) {
+        result.push({label: label.replace(/[^\w.]/g,''), x: n1, y: n2});
+      } else {
+        result.push({label: '', x: n1, y: n2});
+      }
+    }
+  }
+  
+  // Dedup: nếu điểm cuối == điểm đầu (close polygon), bỏ
+  if (result.length >= 4) {
+    const first = result[0], last = result[result.length-1];
+    if (Math.abs(first.x - last.x) < 0.01 && Math.abs(first.y - last.y) < 0.01) {
+      result.pop();
+    }
+  }
+  return result;
+}
+
 
 // Add some demo rows on load
 addRow('Tđ.1', '', '');
