@@ -346,6 +346,40 @@ main{flex:1;padding:0;display:flex;flex-direction:column}
 .quiz-option.wrong .quiz-option-letter{background:var(--red);color:#fff}
 .quiz-option.locked{cursor:default}
 
+/* === FLASHCARD MODE === */
+.flash-statement{
+  background:var(--navy-light);border:1.5px solid var(--gold-dim2);
+  border-radius:14px;padding:18px 20px;margin-bottom:20px;
+}
+.flash-prompt{
+  font-size:13px;color:var(--text-soft);text-align:center;margin-bottom:14px;
+}
+.flash-prompt strong{color:var(--gold)}
+.flash-option{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 16px;border-radius:10px;
+  background:var(--navy-soft);
+  font-size:15px;line-height:1.55;
+}
+.flash-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.flash-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:18px 16px;border-radius:14px;
+  font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;
+  border:2px solid;cursor:pointer;transition:all .15s;font-family:inherit;
+}
+.flash-btn i{font-size:20px}
+.flash-btn-true{background:rgba(124,217,146,0.1);color:var(--green);border-color:rgba(124,217,146,0.4)}
+.flash-btn-true:hover:not(.locked){background:var(--green);color:var(--navy);border-color:var(--green)}
+.flash-btn-false{background:rgba(255,107,122,0.1);color:var(--red);border-color:rgba(255,107,122,0.4)}
+.flash-btn-false:hover:not(.locked){background:var(--red);color:#fff;border-color:var(--red)}
+.flash-btn.locked{cursor:default;opacity:0.6}
+.flash-btn.locked.right{opacity:1;box-shadow:0 0 0 3px rgba(124,217,146,0.4)}
+.flash-btn.locked.wrong{opacity:1;box-shadow:0 0 0 3px rgba(255,107,122,0.4)}
+.flash-btn.right-shadow{opacity:1;box-shadow:0 0 0 3px rgba(124,217,146,0.4)}
+
 .quiz-feedback{
   margin-top:18px;padding:14px 16px;border-radius:12px;
   background:var(--navy-soft);border:1px solid var(--border);
@@ -728,11 +762,11 @@ input,textarea{font-size:16px}  /* iOS no auto-zoom */
             <div class="mode-desc">Random 50 câu từ pool 320 câu · cân bằng cơ sở + chuyên môn · 30 phút</div>
             <div class="mode-meta"><span><i class="fas fa-list-ol"></i>50 câu</span><span><i class="fas fa-stopwatch"></i>30 phút</span></div>
           </button>
-          <button class="mode-card" onclick="startQuiz('random100')">
-            <div class="mode-icon"><i class="fas fa-dice"></i></div>
-            <div class="mode-title">Đề trộn 100 câu</div>
-            <div class="mode-desc">Random 100 câu từ pool 320 · giả lập đề thi thật · 60 phút</div>
-            <div class="mode-meta"><span><i class="fas fa-list-ol"></i>100 câu</span><span><i class="fas fa-stopwatch"></i>60 phút</span></div>
+          <button class="mode-card" onclick="startQuiz('flashcard')">
+            <div class="mode-icon"><i class="fas fa-toggle-on"></i></div>
+            <div class="mode-title">Lật đúng / sai</div>
+            <div class="mode-desc">30 thẻ tốc độ · mỗi thẻ 1 câu + 1 đáp án · bấm ĐÚNG hay SAI · ôn nhanh</div>
+            <div class="mode-meta"><span><i class="fas fa-bolt-lightning"></i>30 thẻ</span><span><i class="fas fa-stopwatch"></i>5 phút</span></div>
           </button>
           <button class="mode-card" onclick="startQuiz('daily')">
             <div class="mode-icon"><i class="fas fa-fire"></i></div>
@@ -1150,14 +1184,22 @@ function pickQuestions(mode){
     pushSeen('random50_cm', cm.map(q=>q.id), cmPool.length);
     return shuffle(cs.concat(cm));
   }
-  if(mode === 'random100'){
-    const csPool = all.filter(q=>q.section==='co_so');
-    const cmPool = all.filter(q=>q.section==='chuyen_mon');
-    const cs = pickFresh(csPool, 50, 'random100_cs');
-    const cm = pickFresh(cmPool, 50, 'random100_cm');
-    pushSeen('random100_cs', cs.map(q=>q.id), csPool.length);
-    pushSeen('random100_cm', cm.map(q=>q.id), cmPool.length);
-    return shuffle(cs.concat(cm));
+  if(mode === 'flashcard'){
+    // 30 thẻ; mỗi thẻ = 1 câu hỏi + 1 lựa chọn (50% true 50% false)
+    const picked = pickFresh(all, 30, 'flashcard');
+    pushSeen('flashcard', picked.map(q=>q.id), all.length);
+    return picked.map(q => {
+      const showCorrect = Math.random() < 0.5;
+      let optIdx;
+      if(showCorrect){
+        optIdx = q.correct;
+      } else {
+        // pick a random WRONG option
+        const wrongs = q.options.map((_,i)=>i).filter(i => i !== q.correct);
+        optIdx = wrongs[Math.floor(Math.random()*wrongs.length)];
+      }
+      return { ...q, _flash: { optIdx, isTrue: optIdx === q.correct } };
+    });
   }
   if(mode === 'daily'){
     // 3 câu MỚI mỗi lần chơi trong ngày (anti-repeat per day)
@@ -1181,7 +1223,7 @@ function pickQuestions(mode){
   return shuffle(all).slice(0,10);
 }
 
-const TIMERS = {quick:300, eagle:3600, random50:1800, random100:3600, daily:0};
+const TIMERS = {quick:300, eagle:3600, random50:1800, random100:3600, daily:0, flashcard:300};
 
 function startQuiz(mode){
   const qs = pickQuestions(mode);
@@ -1231,23 +1273,78 @@ function renderQuestion(){
   if(q.section === 'co_so') meta.innerHTML += '<span class="tag tag-cs">Cơ sở</span>';
   else if(q.section === 'chuyen_mon') meta.innerHTML += '<span class="tag tag-cm">Chuyên môn</span>';
   if(q.de === 'extended') meta.innerHTML += '<span class="tag tag-beta">BETA · luật mới</span>';
+  if(state.quiz.mode === 'flashcard') meta.innerHTML += '<span class="tag" style="background:rgba(122,184,224,0.15);color:#7AB8E0">Lật đúng/sai</span>';
   // text
   document.getElementById('qText').textContent = q.q;
   // options
   const opts = document.getElementById('qOptions');
   opts.innerHTML = '';
   const letters = ['A','B','C','D'];
-  q.options.forEach((opt,i)=>{
-    const btn = document.createElement('button');
-    btn.className = 'quiz-option';
-    btn.innerHTML = `<div class="quiz-option-letter">${letters[i]}</div><div>${escapeHtml(opt)}</div>`;
-    btn.onclick = ()=>selectAnswer(i);
-    opts.appendChild(btn);
-  });
+
+  if(state.quiz.mode === 'flashcard'){
+    // Hiển thị 1 lựa chọn duy nhất + 2 nút Đúng/Sai
+    const flash = q._flash;
+    const optBox = document.createElement('div');
+    optBox.className = 'flash-statement';
+    optBox.innerHTML = `<div class="flash-prompt">Theo bạn, đáp án dưới đây <strong>đúng hay sai</strong>?</div>
+      <div class="flash-option"><div class="quiz-option-letter">${letters[flash.optIdx]}</div><div>${escapeHtml(q.options[flash.optIdx])}</div></div>`;
+    opts.appendChild(optBox);
+    const btnRow = document.createElement('div');
+    btnRow.className = 'flash-actions';
+    btnRow.innerHTML = `
+      <button class="flash-btn flash-btn-true" onclick="selectFlash(true)"><i class="fas fa-circle-check"></i>ĐÚNG</button>
+      <button class="flash-btn flash-btn-false" onclick="selectFlash(false)"><i class="fas fa-circle-xmark"></i>SAI</button>`;
+    opts.appendChild(btnRow);
+  } else {
+    q.options.forEach((opt,i)=>{
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.innerHTML = `<div class="quiz-option-letter">${letters[i]}</div><div>${escapeHtml(opt)}</div>`;
+      btn.onclick = ()=>selectAnswer(i);
+      opts.appendChild(btn);
+    });
+  }
   // feedback hide
   document.getElementById('qFeedback').classList.remove('show');
   document.getElementById('btnNext').disabled = true;
   document.getElementById('btnSkip').style.display = '';
+}
+
+function selectFlash(userSaysTrue){
+  if(!state.quiz) return;
+  const cur = state.quiz.currentIdx;
+  if(state.quiz.answers[cur] !== null) return;
+  const q = state.quiz.questions[cur];
+  const isCorrect = userSaysTrue === q._flash.isTrue;
+  state.quiz.answers[cur] = isCorrect ? q.correct : -2; // mark differently from skip
+  // Visual feedback on the buttons
+  document.querySelectorAll('.flash-btn').forEach(b => b.classList.add('locked'));
+  const trueBtn = document.querySelector('.flash-btn-true');
+  const falseBtn = document.querySelector('.flash-btn-false');
+  const userBtn = userSaysTrue ? trueBtn : falseBtn;
+  const expectedBtn = q._flash.isTrue ? trueBtn : falseBtn;
+  userBtn.classList.add(isCorrect ? 'right' : 'wrong');
+  if(!isCorrect) expectedBtn.classList.add('right-shadow');
+  // Inline feedback
+  const fb = document.getElementById('qFeedback');
+  const fbHead = document.getElementById('qFeedbackHead');
+  const fbText = document.getElementById('qFeedbackText');
+  const fbSrc = document.getElementById('qFeedbackSource');
+  if(isCorrect){
+    fbHead.className = 'quiz-feedback-head right';
+    fbHead.innerHTML = `<i class="fas fa-circle-check"></i> Chính xác! Đáp án ${q._flash.isTrue ? 'này đúng' : 'này SAI'}.`;
+  } else {
+    fbHead.className = 'quiz-feedback-head wrong';
+    fbHead.innerHTML = `<i class="fas fa-circle-xmark"></i> Chưa đúng. Đáp án ${q._flash.isTrue ? 'này đúng' : 'này SAI'}. Đáp án đúng là <strong>${['A','B','C','D'][q.correct]}. ${escapeHtml(q.options[q.correct])}</strong>`;
+  }
+  fbText.textContent = q.explanation || '';
+  fbSrc.textContent = q.source ? 'Nguồn: '+q.source : '';
+  fbText.style.display = q.explanation ? '' : 'none';
+  fb.classList.add('show');
+  document.getElementById('btnNext').disabled = false;
+  document.getElementById('btnSkip').style.display = 'none';
+  playSound(isCorrect);
+  if(typeof gtag !== 'undefined') gtag('event','answer',{q_id:q.id, correct:isCorrect, mode:'flashcard'});
 }
 
 function selectAnswer(idx){
@@ -1402,7 +1499,7 @@ function renderHistory(){
     el.innerHTML = '<div class="empty"><i class="fas fa-clock-rotate-left"></i><div>Chưa có lượt làm nào.</div></div>';
     return;
   }
-  const modeNames = {quick:'Quick Quiz', eagle:'Đề Eagle', random50:'Đề trộn 50', random100:'Đề trộn 100', daily:'Daily Challenge'};
+  const modeNames = {quick:'Quick Quiz', eagle:'Đề Eagle', random50:'Đề trộn 50', random100:'Đề trộn 100', daily:'Daily Challenge', flashcard:'Lật đúng/sai'};
   let html = '';
   state.attempts.slice().reverse().forEach(a=>{
     const pct = Math.round(a.score/a.total*100);

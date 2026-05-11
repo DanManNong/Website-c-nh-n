@@ -97,6 +97,7 @@ td.c,th.c{text-align:center}
 .tag-eagle{background:rgba(224,170,121,0.15);color:var(--gold)}
 .tag-random50,.tag-random100{background:rgba(124,217,146,0.15);color:var(--green)}
 .tag-daily{background:rgba(255,107,122,0.15);color:var(--red)}
+.tag-flashcard{background:rgba(186,122,224,0.15);color:#BA7AE0}
 
 .codes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
 .code-card{
@@ -357,7 +358,7 @@ function renderAttempts(atts){
     t.innerHTML = '<tr><td><div class="empty">Chưa có lượt làm bài nào.</div></td></tr>';
     return;
   }
-  const modeNames = {quick:'Quick',eagle:'Eagle gốc',random50:'Trộn 50',random100:'Trộn 100',daily:'Daily'};
+  const modeNames = {quick:'Quick',eagle:'Eagle gốc',random50:'Trộn 50',random100:'Trộn 100',daily:'Daily',flashcard:'Lật Đ/S'};
   let html = `<thead><tr>
     <th>Học viên</th><th>Mode</th><th class="r">Điểm</th><th class="r hide-mobile">%</th>
     <th class="r hide-mobile">Phút</th><th>Lúc</th>
@@ -387,7 +388,7 @@ function renderModes(modes){
     t.innerHTML = '<tr><td><div class="empty">Chưa có data.</div></td></tr>';
     return;
   }
-  const modeNames = {quick:'Quick Quiz',eagle:'Đề Eagle gốc',random50:'Đề trộn 50',random100:'Đề trộn 100',daily:'Daily Challenge'};
+  const modeNames = {quick:'Quick Quiz',eagle:'Đề Eagle gốc',random50:'Đề trộn 50',random100:'Đề trộn 100',daily:'Daily Challenge',flashcard:'Lật đúng/sai'};
   const total = modes.reduce((s,m)=>s+m.plays,0);
   let html = `<thead><tr><th>Chế độ</th><th class="r">Lượt chơi</th><th class="r">% tổng</th><th class="r">Điểm TB</th></tr></thead><tbody>`;
   modes.forEach(m=>{
