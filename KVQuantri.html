@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Coop Assets — Trang quản trị | Saigon Co.op</title>
+<link rel="icon" type="image/jpeg" href="KV/coop-assets.jpg">
+<link rel="apple-touch-icon" href="KV/coop-assets.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coop Assets — by Saigon Co.op">
+<meta property="og:title" content="Coop Assets — Trang quản trị">
+<meta property="og:description" content="Trang quản trị nội bộ — quản lý danh mục, phân quyền mặt bằng & kho bãi. Liên hiệp HTX Thương mại TP. Hồ Chí Minh.">
+<meta property="og:url" content="https://www.nguyentanphong.com/KVQuantri">
+<meta property="og:image" content="https://www.nguyentanphong.com/KV/coop-assets.jpg">
+<meta property="og:image:width" content="526">
+<meta property="og:image:height" content="535">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coop Assets — Trang quản trị">
+<meta name="twitter:image" content="https://www.nguyentanphong.com/KV/coop-assets.jpg">
+<style>
+  :root{
+    --dark:#2A4541; --dark2:#2E322D; --red:#DE0E03;
+    --sand:#E0CDA2; --sage:#BDBEA1; --yellow:#FCDD71; --beige:#C9B79C;
+    --ink:#1c2421; --paper:#f7f4ec; --line:rgba(42,69,65,.12);
+    --shadow:0 1px 3px rgba(46,50,45,.08),0 8px 24px rgba(46,50,45,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+
+  .app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+  .sidebar{background:var(--dark2);color:#e9efe9;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+  .brand{display:flex;align-items:center;gap:11px;padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .brand .logo{width:38px;height:38px;border-radius:9px;background:var(--paper);display:grid;place-items:center;flex:none}
+  .brand .logo svg{width:24px;height:24px}
+  .brand b{font-size:16px;letter-spacing:.3px;display:block;line-height:1.15}
+  .brand small{font-size:10.5px;opacity:.6;letter-spacing:1.2px;text-transform:uppercase}
+  .admintag{font-size:10px;font-weight:700;letter-spacing:1px;background:var(--red);color:#fff;padding:2px 7px;border-radius:5px;margin-top:5px;display:inline-block}
+  .nav{padding:14px 12px;flex:1}
+  .nav .label{font-size:10.5px;text-transform:uppercase;letter-spacing:1.3px;opacity:.45;padding:14px 12px 6px}
+  .nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;font-size:14px;color:#cdd8d3;margin-bottom:2px;transition:.15s}
+  .nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+  .nav a.active{background:var(--red);color:#fff;font-weight:600}
+  .nav a .ic{width:18px;text-align:center;opacity:.9}
+  .side-foot{padding:16px 18px;border-top:1px solid rgba(255,255,255,.08);font-size:11.5px;opacity:.55}
+
+  .main{display:flex;flex-direction:column;min-width:0}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  .topbar h1{font-size:18px;font-weight:700;color:var(--dark)}
+  .topbar .sub{font-size:12.5px;color:#7c857f;margin-top:1px}
+  .roleswitch{display:flex;align-items:center;gap:10px}
+  .roleswitch .lbl{font-size:12px;color:#7c857f}
+  .seg{display:flex;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:3px}
+  .seg button{border:none;background:none;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:7px;color:#5b645e}
+  .seg button.on{background:var(--dark);color:#fff}
+  .who{display:flex;align-items:center;gap:10px}
+  .who .av{width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:600;font-size:13px}
+  .who .meta b{font-size:13px;display:block}.who .meta span{font-size:11.5px;color:#7c857f}
+
+  .content{padding:24px 28px;max-width:1280px;width:100%}
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+  .toolbar .left{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{font-size:13px;font-weight:600;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--dark);display:inline-flex;align-items:center;gap:7px;transition:.15s}
+  .btn:hover{border-color:var(--dark)}
+  .btn.primary{background:var(--red);color:#fff;border-color:var(--red)}
+  .btn.primary:hover{filter:brightness(.93)}
+  .btn.dark{background:var(--dark);color:#fff;border-color:var(--dark)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn[disabled]:hover{border-color:var(--line)}
+
+  .banner{display:none;align-items:center;gap:10px;background:rgba(252,221,113,.4);color:#8a6d09;border:1px solid rgba(252,221,113,.8);border-radius:11px;padding:11px 16px;font-size:13px;margin-bottom:18px}
+  .banner.show{display:flex}
+
+  .layout{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .card .hd{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--line)}
+  .card .hd h2{font-size:15px;color:var(--dark)}
+  .card .hd .note{font-size:12px;color:#8a938d}
+
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:#8a938d;padding:11px 18px;border-bottom:1px solid var(--line);font-weight:700}
+  td{padding:12px 18px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle}
+  tbody tr{cursor:pointer}
+  tbody tr:hover{background:var(--paper)}
+  tbody tr.sel{background:rgba(42,69,65,.06)}
+  tbody tr:last-child td{border-bottom:none}
+  .mono{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-weight:700;color:var(--dark);letter-spacing:.3px}
+  .badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;display:inline-block}
+  .b-kho{background:rgba(42,69,65,.12);color:var(--dark)}
+  .b-mb1{background:rgba(252,221,113,.45);color:#8a6d09}
+  .b-mb2{background:rgba(222,14,3,.1);color:var(--red)}
+  .rowact{display:flex;gap:6px}
+  .iconbtn{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;font-size:13px;color:#5b645e}
+  .iconbtn:hover{border-color:var(--dark);color:var(--dark)}
+
+  /* Editor panel */
+  .tabs{display:flex;gap:4px;padding:12px 18px 0;border-bottom:1px solid var(--line)}
+  .tabs button{border:none;background:none;font-size:13px;font-weight:600;color:#7c857f;padding:9px 12px;border-bottom:2px solid transparent}
+  .tabs button.on{color:var(--dark);border-color:var(--red)}
+  .panel{padding:18px}
+  .panel.hide{display:none}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:12px;font-weight:600;color:#5b645e;margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:13.5px;font-family:inherit;color:var(--ink);background:#fff;outline:none}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--dark)}
+  .field input:disabled,.field select:disabled,.field textarea:disabled{background:var(--paper);color:#6b746e;cursor:not-allowed}
+  .field .hint{font-size:11px;color:#9aa39d;margin-top:5px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .codebox{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-weight:700;font-size:15px;letter-spacing:1px;color:var(--dark);background:var(--paper);border:1px dashed var(--sage);border-radius:9px;padding:11px 14px;text-align:center}
+  .seg-parts{display:flex;gap:8px;margin-top:8px}
+  .seg-parts div{flex:1;text-align:center;font-size:10.5px;color:#8a938d}
+  .seg-parts div b{display:block;font-family:"SF Mono",monospace;font-size:14px;color:var(--dark)}
+  .upload{border:1.5px dashed var(--sage);border-radius:11px;padding:20px;text-align:center;color:#7c857f;font-size:13px;background:var(--paper)}
+  .upload b{color:var(--dark)}
+  .files{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+  .files .f{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;padding:8px 11px;background:var(--paper);border-radius:8px}
+  .files .f .x{color:var(--red);font-weight:700}
+  .panel-foot{display:flex;justify-content:flex-end;gap:9px;padding:14px 18px;border-top:1px solid var(--line)}
+
+  /* Users / permissions */
+  .urow{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .urow:last-child{border:none}
+  .uinfo{display:flex;align-items:center;gap:11px}
+  .uinfo .av{width:34px;height:34px;border-radius:50%;background:var(--sage);color:var(--dark2);display:grid;place-items:center;font-weight:600;font-size:12px}
+  .uinfo b{font-size:13.5px;display:block}.uinfo span{font-size:11.5px;color:#7c857f}
+  .roletag{font-size:11px;font-weight:700;padding:4px 11px;border-radius:999px}
+  .r-admin{background:rgba(222,14,3,.1);color:var(--red)}
+  .r-staff{background:var(--sage);color:var(--dark2)}
+
+  .foot{padding:22px 28px;text-align:center;font-size:12px;color:#9aa39d}
+
+  .tb-left{display:flex;align-items:center;gap:12px;min-width:0}
+  .hamburger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:18px;color:var(--dark);place-items:center;flex:none}
+  .backdrop{display:none;position:fixed;inset:0;background:rgba(28,36,33,.45);z-index:40}
+  .backdrop.show{display:block}
+
+  @supports(padding:max(0px)){
+    .topbar{padding-left:max(28px,env(safe-area-inset-left));padding-right:max(28px,env(safe-area-inset-right));padding-top:max(16px,env(safe-area-inset-top))}
+    .content,.foot{padding-left:max(28px,env(safe-area-inset-left));padding-right:max(28px,env(safe-area-inset-right))}
+  }
+
+  @media(max-width:980px){
+    .app{grid-template-columns:1fr}
+    .hamburger{display:grid}
+    .sidebar{display:flex;position:fixed;top:0;bottom:0;left:0;width:264px;max-width:84vw;transform:translateX(-100%);transition:transform .25s ease;z-index:50;padding-left:env(safe-area-inset-left)}
+    .sidebar.open{transform:none}
+    .layout{grid-template-columns:1fr}
+    .two{grid-template-columns:1fr}
+    .topbar{flex-wrap:wrap}
+    .roleswitch{flex-wrap:wrap;gap:8px}
+  }
+  @media(max-width:430px){
+    .content{padding:18px 16px}
+    .topbar h1{font-size:16px}
+    .roleswitch .lbl{display:none}
+    .who .meta{display:none}
+    .field input,.field select,.field textarea,.search input{font-size:16px}
+    td,th{padding-left:14px;padding-right:14px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1d3a5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10 12 3l9 7"/><path d="M5 9v11h14V9"/><rect x="10" y="13" width="4" height="4" fill="#1d3a5c" stroke="none"/>
+        </svg>
+      </span>
+      <span><b>Coop Assets</b><small>by Saigon Co.op</small><span class="admintag">QUẢN TRỊ</span></span>
+    </div>
+    <nav class="nav">
+      <div class="label">Quản trị dữ liệu</div>
+      <a class="active"><span class="ic">▤</span> Danh mục tài sản</a>
+      <a><span class="ic">⚖</span> Hồ sơ pháp lý</a>
+      <a><span class="ic">◎</span> Vị trí & bản đồ</a>
+      <a><span class="ic">₫</span> Chi phí & công nợ</a>
+      <div class="label">Hệ thống</div>
+      <a><span class="ic">◷</span> Báo cáo & xuất dữ liệu</a>
+      <a><span class="ic">⚙</span> Phân quyền người dùng</a>
+      <a><span class="ic">⤺</span> Nhật ký thay đổi</a>
+      <a href="KVchung.html"><span class="ic">▣</span> Về trang hiển thị</a>
+    </nav>
+    <div class="side-foot">Liên hiệp HTX Thương mại<br>TP. Hồ Chí Minh · Nội bộ</div>
+  </aside>
+  <div class="backdrop" id="backdrop" onclick="toggleNav()"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-left">
+        <button class="hamburger" onclick="toggleNav()" aria-label="Mở menu">☰</button>
+        <div>
+          <h1>Quản lý danh mục tài sản</h1>
+          <div class="sub">Thêm mới · cập nhật · phân quyền truy cập</div>
+        </div>
+      </div>
+      <div class="roleswitch">
+        <span class="lbl">Xem dưới vai trò:</span>
+        <div class="seg">
+          <button class="on" id="rAdmin" onclick="setRole('admin')">Quản trị viên</button>
+          <button id="rStaff" onclick="setRole('staff')">Nhân viên</button>
+        </div>
+        <div class="who">
+          <div class="av" id="av">QT</div>
+          <div class="meta"><b id="uname">Trần Văn B</b><span id="urole">Quản trị viên</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="banner" id="banner">🔒 Bạn đang xem dưới vai trò <b style="margin:0 4px">Nhân viên</b> — chỉ được tra cứu và xem chi tiết. Các thao tác chỉnh sửa đã bị khoá.</div>
+
+      <div class="toolbar">
+        <div class="left">
+          <button class="btn primary act" onclick="alert('Mở biểu mẫu thêm tài sản mới')">＋ Thêm tài sản</button>
+          <button class="btn act">⬆ Nhập từ Excel</button>
+          <button class="btn">⬇ Xuất báo cáo</button>
+        </div>
+        <div class="left">
+          <button class="btn">⚙ Phân quyền</button>
+        </div>
+      </div>
+
+      <div class="layout">
+        <!-- LIST -->
+        <section class="card">
+          <div class="hd"><h2>Danh mục đơn vị</h2><span class="note">48 đơn vị</span></div>
+          <table>
+            <thead><tr><th>Mã định danh</th><th>Tên đơn vị</th><th>Loại</th><th>Thao tác</th></tr></thead>
+            <tbody id="tbody">
+              <tr class="sel" onclick="pick(this,'KHOLHGOM7','Kho Gò Ô Môi')"><td class="mono">KHOLHGOM7</td><td>Kho Gò Ô Môi</td><td><span class="badge b-kho">KHO</span></td><td><div class="rowact"><button class="iconbtn act">✎</button><button class="iconbtn act">🗑</button></div></td></tr>
+              <tr onclick="pick(this,'KHOLHCF2C','Kho 2C')"><td class="mono">KHOLHCF2C</td><td>Kho 2C</td><td><span class="badge b-kho">KHO</span></td><td><div class="rowact"><button class="iconbtn act">✎</button><button class="iconbtn act">🗑</button></div></td></tr>
+              <tr onclick="pick(this,'MB1LHNVB0','Mặt bằng 21 Nguyễn Văn Bá')"><td class="mono">MB1LHNVB0</td><td>Mặt bằng 21 Nguyễn Văn Bá</td><td><span class="badge b-mb1">MB1</span></td><td><div class="rowact"><button class="iconbtn act">✎</button><button class="iconbtn act">🗑</button></div></td></tr>
+              <tr onclick="pick(this,'MB2LHCMCQ','Co.opmart Cống Quỳnh')"><td class="mono">MB2LHCMCQ</td><td>Co.opmart Cống Quỳnh</td><td><span class="badge b-mb2">MB2</span></td><td><div class="rowact"><button class="iconbtn act">✎</button><button class="iconbtn act">🗑</button></div></td></tr>
+              <tr onclick="pick(this,'MB2ĐLCFVV','Co.opFood Vĩnh Viễn')"><td class="mono">MB2ĐLCFVV</td><td>Co.opFood Vĩnh Viễn</td><td><span class="badge b-mb2">MB2</span></td><td><div class="rowact"><button class="iconbtn act">✎</button><button class="iconbtn act">🗑</button></div></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- EDITOR -->
+        <section class="card">
+          <div class="hd"><h2 id="edTitle">Kho Gò Ô Môi</h2><span class="note" id="edCode">KHOLHGOM7</span></div>
+          <div class="tabs">
+            <button class="on" onclick="tab(0,this)">Thông tin</button>
+            <button onclick="tab(1,this)">Pháp lý</button>
+            <button onclick="tab(2,this)">Vị trí</button>
+            <button onclick="tab(3,this)">Chi phí</button>
+          </div>
+
+          <!-- TAB 0 -->
+          <div class="panel" data-p="0">
+            <div class="field">
+              <label>Mã định danh (9 ký tự)</label>
+              <div class="codebox">KHO·LH·GOM7</div>
+              <div class="seg-parts">
+                <div><b>KHO</b>Loại tài sản</div><div><b>LH</b>Đơn vị chủ quản</div><div><b>GOM7</b>Thông tin</div>
+              </div>
+            </div>
+            <div class="two">
+              <div class="field"><label>Loại tài sản</label>
+                <select class="ed"><option>KHO — Kho lưu trữ</option><option>MB1 — Chưa khai thác</option><option>MB2 — Đang khai thác</option></select></div>
+              <div class="field"><label>Đơn vị chủ quản</label>
+                <select class="ed"><option>LH — Liên hiệp</option><option>CN — Chi nhánh</option><option>ĐL — Công ty độc lập</option></select></div>
+            </div>
+            <div class="field"><label>Tên đơn vị</label><input class="ed" value="Kho Gò Ô Môi"></div>
+            <div class="field"><label>Đơn vị quản lý / lưu tài liệu</label><input class="ed" value="Liên hiệp — kho tài sản"></div>
+          </div>
+
+          <!-- TAB 1 -->
+          <div class="panel hide" data-p="1">
+            <div class="field"><label>Hình thức sở hữu</label>
+              <select class="ed"><option>LH sở hữu</option><option>Thuê dài hạn của Nhà nước</option><option>Thuê lại của cá nhân/tổ chức/DN</option><option>Được giao quyền — chưa có QĐ/giấy CN</option></select></div>
+            <div class="two">
+              <div class="field"><label>Thời hạn sử dụng</label><input class="ed" value="Không thời hạn"></div>
+              <div class="field"><label>Được cho thuê lại?</label><select class="ed"><option>Có</option><option>Không</option></select></div>
+            </div>
+            <div class="field"><label>Mục đích sử dụng / quy hoạch</label><textarea class="ed" rows="2">Kho lưu trữ tài sản, không thuộc diện quy hoạch.</textarea></div>
+            <div class="field"><label>Hồ sơ pháp lý (scan)</label>
+              <div class="upload">⬆ Kéo thả hoặc <b>chọn tệp</b> để tải lên<br><span style="font-size:11px">PDF, JPG, PNG — tối đa 20MB/tệp</span></div>
+              <div class="files">
+                <div class="f"><span>📄 GiayCN_QuyenSuDung.pdf</span><span class="x act">✕</span></div>
+                <div class="f"><span>📄 HopDong_Thue.pdf</span><span class="x act">✕</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2 -->
+          <div class="panel hide" data-p="2">
+            <div class="field"><label>Địa chỉ</label><input class="ed" value="Đường Gò Ô Môi, Quận 7 (cũ), TP.HCM"></div>
+            <div class="field"><label>Liên kết Google Maps / chỉ đường</label><input class="ed" value="https://maps.google.com/?q=..."></div>
+            <div class="field"><label>Hình ảnh thực tế</label>
+              <div class="upload">⬆ Tải lên hình ảnh vị trí & hiện trạng</div></div>
+            <div class="field"><label>Ghi chú đặc điểm khu vực</label><textarea class="ed" rows="2">Gần khu dân cư, mặt tiền đường lớn, thuận tiện xe tải ra vào.</textarea></div>
+          </div>
+
+          <!-- TAB 3 -->
+          <div class="panel hide" data-p="3">
+            <div class="two">
+              <div class="field"><label>Tiền thuê định kỳ (đồng/tháng)</label><input class="ed" value="0"></div>
+              <div class="field"><label>Thuế & phí (đồng/tháng)</label><input class="ed" value="12.000.000"></div>
+            </div>
+            <div class="field"><label>Đơn vị chi trả</label>
+              <select class="ed"><option>Liên hiệp chi trả trực tiếp</option><option>Đơn vị kinh doanh tự chi trả</option><option>LH thu hộ — chi hộ</option></select></div>
+            <div class="two">
+              <div class="field"><label>Công nợ hiện tại (đồng)</label><input class="ed" value="0"></div>
+              <div class="field"><label>Thu từ cho thuê lại (đồng/tháng)</label><input class="ed" value="0"></div>
+            </div>
+          </div>
+
+          <div class="panel-foot">
+            <button class="btn act">Huỷ</button>
+            <button class="btn primary act" onclick="alert('Đã lưu thay đổi (bản mẫu)')">💾 Lưu thay đổi</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- USERS -->
+      <section class="card" style="margin-top:20px">
+        <div class="hd"><h2>Phân quyền người dùng</h2><button class="btn act" style="font-size:12px;padding:7px 13px">＋ Thêm người dùng</button></div>
+        <div>
+          <div class="urow"><div class="uinfo"><div class="av">TB</div><div><b>Trần Văn B</b><span>Phòng Quản lý tài sản · Liên hiệp</span></div></div><span class="roletag r-admin">Quản trị viên</span></div>
+          <div class="urow"><div class="uinfo"><div class="av">NA</div><div><b>Nguyễn Thị A</b><span>Phòng Quản lý tài sản</span></div></div><span class="roletag r-staff">Nhân viên</span></div>
+          <div class="urow"><div class="uinfo"><div class="av">LC</div><div><b>Lê Văn C</b><span>Chi nhánh Co.opmart</span></div></div><span class="roletag r-staff">Nhân viên</span></div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="foot">© 2026 Liên hiệp Hợp tác xã Thương mại TP. Hồ Chí Minh — Saigon Co.op · Coop Assets · Tài liệu nội bộ, không phổ biến ra ngoài.</footer>
+  </div>
+</div>
+
+<script>
+  function toggleNav(){
+    document.querySelector('.sidebar').classList.toggle('open');
+    document.getElementById('backdrop').classList.toggle('show');
+  }
+  document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>{
+    document.querySelector('.sidebar').classList.remove('open');
+    document.getElementById('backdrop').classList.remove('show');
+  }));
+  function tab(i,btn){
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('hide',+p.dataset.p!==i));
+  }
+  function pick(tr,code,name){
+    document.querySelectorAll('#tbody tr').forEach(r=>r.classList.remove('sel'));tr.classList.add('sel');
+    document.getElementById('edTitle').textContent=name;document.getElementById('edCode').textContent=code;
+  }
+  function setRole(r){
+    const isStaff=r==='staff';
+    document.getElementById('rStaff').classList.toggle('on',isStaff);
+    document.getElementById('rAdmin').classList.toggle('on',!isStaff);
+    document.getElementById('banner').classList.toggle('show',isStaff);
+    document.getElementById('uname').textContent=isStaff?'Nguyễn Thị A':'Trần Văn B';
+    document.getElementById('urole').textContent=isStaff?'Nhân viên':'Quản trị viên';
+    document.getElementById('av').textContent=isStaff?'NV':'QT';
+    document.getElementById('av').style.background=isStaff?'var(--sage)':'var(--red)';
+    document.getElementById('av').style.color=isStaff?'var(--dark2)':'#fff';
+    // khoá mọi thao tác chỉnh sửa khi là nhân viên
+    document.querySelectorAll('.ed').forEach(el=>el.disabled=isStaff);
+    document.querySelectorAll('.act').forEach(el=>el.disabled=isStaff);
+  }
+</script>
+</body>
+</html>
