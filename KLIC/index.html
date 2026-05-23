@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cẩm Nang Pháp Lý cho Creator Việt Nam 2026 | KLIC</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Cẩm nang pháp lý dành cho KOL/KOC/Creator Việt Nam trước thời điểm các luật mới có hiệu lực 1/7/2026. Phát hành bởi KLIC.">
+<style>
+  :root{
+    --navy:#0f2742; --blue:#1c4e8a; --blue-light:#2f6fb8; --accent:#e8a72e;
+    --red:#c0392b; --red-bg:#fdeceа; --green:#1e8449; --green-bg:#eafaf1;
+    --ink:#1a2733; --muted:#5b6b7a; --line:#dde5ed; --bg:#f4f7fb; --card:#ffffff;
+    --warn-bg:#fff8e6; --warn-border:#e8a72e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{line-height:1.25;font-weight:700}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ===== Top alert bar ===== */
+  .alertbar{background:var(--red);color:#fff;text-align:center;font-weight:700;padding:10px 14px;font-size:15px;letter-spacing:.3px;position:sticky;top:0;z-index:50}
+  .alertbar #cd{font-variant-numeric:tabular-nums}
+
+  /* ===== Hero ===== */
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--blue) 100%);color:#fff;padding:54px 0 46px;text-align:center}
+  .hero .eyebrow{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .hero h1{font-size:clamp(28px,5vw,46px);margin:12px 0 6px}
+  .hero .sub{font-size:clamp(18px,3vw,26px);font-weight:600;color:#cfe0f2}
+  .hero .quote{font-style:italic;color:#aebfd2;margin:16px auto 22px;max-width:640px;font-size:17px}
+  .hero .laws{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;font-size:14px;color:#d7e4f3;max-width:680px;margin:0 auto}
+  .hero .laws span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:20px}
+
+  /* ===== Stats ===== */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:-32px auto 0;position:relative;z-index:5}
+  .stat{background:var(--card);border-radius:14px;padding:22px 16px;text-align:center;box-shadow:0 8px 24px rgba(15,39,66,.10);border-top:4px solid var(--accent)}
+  .stat .num{font-size:42px;font-weight:800;color:var(--blue);line-height:1}
+  .stat .lbl{font-size:13.5px;color:var(--muted);margin-top:8px;font-weight:600}
+
+  /* ===== Generic section ===== */
+  section{padding:40px 0}
+  .sec-title{font-size:clamp(22px,3.5vw,30px);color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .sec-intro{color:var(--muted);margin-bottom:24px;max-width:760px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 2px 8px rgba(15,39,66,.04)}
+
+  /* audience + note */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .pill-list{list-style:none}
+  .pill-list li{padding:7px 0;display:flex;gap:9px;align-items:flex-start}
+  .pill-list li::before{content:"✓";color:var(--green);font-weight:800}
+  .note{background:var(--warn-bg);border-left:5px solid var(--warn-border);border-radius:8px;padding:16px 18px}
+  .note b{color:var(--navy)}
+
+  /* law overview cards */
+  .lawcard{border-radius:12px;padding:22px;color:#fff}
+  .lawcard.cyber{background:linear-gradient(150deg,#143a63,#1c4e8a)}
+  .lawcard.ecom{background:linear-gradient(150deg,#0d5c4a,#13876b)}
+  .lawcard.ads{background:linear-gradient(150deg,#7a4a12,#b06f1c)}
+  .lawcard h3{font-size:20px;margin-bottom:4px}
+  .lawcard .eff{display:inline-block;background:rgba(255,255,255,.18);padding:3px 10px;border-radius:14px;font-size:12.5px;font-weight:700;margin-bottom:12px}
+  .lawcard ul{list-style:none}
+  .lawcard li{padding:5px 0;font-size:14.5px;padding-left:18px;position:relative}
+  .lawcard li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+  .verified{font-size:12px;background:rgba(255,255,255,.15);border-radius:6px;padding:6px 10px;margin-top:12px;display:block}
+
+  /* myths */
+  .myth{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .myth:last-child{border-bottom:0}
+  .myth .x{color:var(--red);font-weight:800;font-size:18px}
+  .myth b{color:var(--navy)}
+  .tag-wrong{color:var(--red);font-weight:800}
+
+  /* risk blocks */
+  .group-head{background:var(--navy);color:#fff;padding:10px 18px;border-radius:8px;font-weight:700;font-size:15px;letter-spacing:.5px;margin:30px 0 16px}
+  .risk{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:18px;overflow:hidden;box-shadow:0 2px 10px rgba(15,39,66,.05)}
+  .risk-head{display:flex;gap:14px;align-items:center;padding:16px 20px;background:#f7fafd;border-bottom:1px solid var(--line)}
+  .risk-head .no{flex:0 0 46px;height:46px;background:var(--blue);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px}
+  .risk-head h3{font-size:17.5px;color:var(--navy)}
+  .risk-body{padding:18px 20px}
+  .risk-body p{margin-bottom:10px}
+  .block{border-radius:9px;padding:13px 16px;margin:12px 0}
+  .block.bad{background:#fdecea;border-left:4px solid var(--red)}
+  .block.good{background:#eafaf1;border-left:4px solid var(--green)}
+  .block h4{font-size:14px;margin-bottom:8px}
+  .block.bad h4{color:var(--red)}
+  .block.good h4{color:var(--green)}
+  .block ul{list-style:none}
+  .block li{padding:4px 0 4px 22px;position:relative;font-size:14.5px}
+  .block.bad li::before{content:"✗";position:absolute;left:0;color:var(--red);font-weight:700}
+  .block.good li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+  .penalty{display:inline-block;background:var(--navy);color:#fff;font-weight:700;font-size:13.5px;padding:7px 14px;border-radius:8px;margin-top:6px}
+
+  /* tables */
+  .tablewrap{overflow-x:auto;margin:6px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--navy);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#f7fafd}
+
+  /* checklist */
+  .check{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(15,39,66,.05)}
+  .check .chead{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  .check .step{flex:0 0 auto;background:var(--accent);color:#3a2a06;font-weight:800;border-radius:8px;padding:4px 12px;font-size:14px}
+  .check h3{font-size:16.5px;color:var(--navy)}
+  .check label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14.5px}
+  .check input{margin-top:5px;width:17px;height:17px;accent-color:var(--blue);flex:0 0 auto}
+  .check .arrow{margin-top:10px;font-size:13.5px;color:var(--muted);background:#f7fafd;border-radius:7px;padding:9px 12px;border-left:3px solid var(--blue-light)}
+
+  /* quick ref */
+  .qref{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .qref .col{border-radius:12px;padding:20px}
+  .qref .never{background:#fdecea;border:1px solid #f1b8b2}
+  .qref .always{background:#eafaf1;border:1px solid #abe2c2}
+  .qref h3{font-size:17px;margin-bottom:12px}
+  .qref .never h3{color:var(--red)}
+  .qref .always h3{color:var(--green)}
+  .qref ul{list-style:none}
+  .qref li{padding:6px 0 6px 24px;position:relative;font-size:14px;border-bottom:1px dashed rgba(0,0,0,.07)}
+  .qref li:last-child{border-bottom:0}
+  .qref .never li::before{content:"✗";position:absolute;left:0;color:var(--red);font-weight:800}
+  .qref .always li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+
+  /* correction callout */
+  .fix{background:#eef4fb;border:1px dashed var(--blue-light);border-radius:8px;padding:8px 12px;font-size:12.5px;color:var(--blue);margin-top:8px}
+  .fix b{color:var(--navy)}
+
+  /* contact / footer */
+  .contact{background:linear-gradient(160deg,var(--navy),var(--blue));color:#fff;border-radius:14px;padding:34px;text-align:center}
+  .contact h2{font-size:24px;margin-bottom:6px}
+  .contact .links{display:flex;flex-direction:column;gap:8px;max-width:520px;margin:18px auto 0;text-align:left}
+  .contact .links a,.contact .links span{color:#dbe7f5}
+  .contact .links div{background:rgba(255,255,255,.07);padding:10px 14px;border-radius:8px}
+  .btn{display:inline-block;background:var(--accent);color:#3a2a06;font-weight:800;padding:13px 28px;border-radius:30px;margin-top:20px}
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:26px 20px 40px}
+  .disclaimer{max-width:760px;margin:20px auto 0;font-size:12.5px;color:var(--muted);text-align:center}
+
+  @media(max-width:680px){
+    .stats{grid-template-columns:1fr;gap:12px}
+    .twocol,.qref{grid-template-columns:1fr}
+    .laws{font-size:12.5px}
+  }
+  @media print{
+    .alertbar,.btn{display:none}
+    body{background:#fff;font-size:12px}
+    .hero,.contact,.lawcard{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section{padding:14px 0}
+    .risk,.check,.card{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="alertbar">⚠️ HIỆU LỰC TỪ 1/7/2026 — CÒN <span id="cd">…</span> ⚠️</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Cẩm nang pháp lý</div>
+    <h1>DÀNH CHO CREATOR VIỆT NAM</h1>
+    <div class="sub">Những điều bạn phải biết trước khi Luật mới có hiệu lực</div>
+    <p class="quote">"Sáng tạo có trách nhiệm không phải là giới hạn — đó là nền tảng cho ảnh hưởng lớn hơn."</p>
+    <div class="laws">
+      <span>⚖️ Luật An ninh mạng 2025</span>
+      <span>🛒 Luật Thương mại điện tử</span>
+      <span>📢 Luật Quảng cáo (sửa đổi) 2025</span>
+      <span>💰 Quy định thuế Creator</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="num">10</div><div class="lbl">Rủi ro pháp lý phổ biến nhất</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">Việc bắt buộc làm trước 1/7</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Đồng bạn cần bỏ khi đọc cẩm nang này</div></div>
+  </div>
+</div>
+
+<!-- Audience -->
+<section>
+  <div class="wrap">
+    <div class="twocol">
+      <div class="card">
+        <h3 style="color:var(--navy);margin-bottom:10px">📋 Cẩm nang này dành cho</h3>
+        <ul class="pill-list">
+          <li>KOL / KOC / Content Creator cá nhân</li>
+          <li>Livestreamer bán hàng trực tuyến</li>
+          <li>Creator làm affiliate marketing</li>
+          <li>Người đang muốn trở thành Creator</li>
+        </ul>
+      </div>
+      <div class="note">
+        <b>⚠️ Lưu ý quan trọng</b>
+        <p style="margin-top:8px">Cẩm nang này cung cấp thông tin chung để Creator tham khảo và chuẩn bị. Không thay thế tư vấn pháp lý chuyên sâu cho từng trường hợp cụ thể. Khi có tình huống phức tạp, vui lòng tham khảo luật sư.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--muted)">Phát hành bởi <b>KLIC</b> · Tháng 6/2026 · klicvietnam.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <h2 class="sec-title">Tổng quan — Các văn bản pháp lý có hiệu lực</h2>
+    <p class="sec-intro">Cùng với hai bộ luật lớn có hiệu lực ngày <b>1/7/2026</b> và Luật Quảng cáo sửa đổi đã có hiệu lực từ <b>1/1/2026</b>, đây là giai đoạn thay đổi pháp lý lớn nhất mà ngành Creator Việt Nam từng đối mặt.</p>
+
+    <div class="twocol">
+      <div class="lawcard cyber">
+        <h3>⚖️ Luật An ninh mạng 2025</h3>
+        <span class="eff">Hiệu lực: 1/7/2026</span>
+        <ul>
+          <li>Hợp nhất Luật An toàn thông tin mạng 2015 &amp; Luật An ninh mạng 2018</li>
+          <li>Quy định mới về tin giả, lừa đảo trực tuyến</li>
+          <li>Trách nhiệm xác minh thông tin trước khi đăng</li>
+          <li>Bảo vệ dữ liệu cá nhân, nội dung ảnh hưởng cộng đồng</li>
+          <li>Cơ chế gỡ bỏ nội dung vi phạm</li>
+        </ul>
+        <span class="verified">✓ Đã kiểm chứng: Luật số 116/2025/QH15, thông qua 10/12/2025</span>
+      </div>
+
+      <div class="lawcard ecom">
+        <h3>🛒 Luật Thương mại điện tử</h3>
+        <span class="eff">Hiệu lực: 1/7/2026</span>
+        <ul>
+          <li>Lần đầu Việt Nam có luật TMĐT độc lập (luật mới, không phải sửa đổi)</li>
+          <li>Xác thực điện tử danh tính người livestream</li>
+          <li>Trách nhiệm KOC/Affiliate trong giao dịch TMĐT</li>
+          <li>Cấm cung cấp thông tin gian dối về hàng hóa</li>
+          <li>Nghĩa vụ minh bạch &amp; bảo vệ người tiêu dùng</li>
+        </ul>
+        <span class="verified">✓ Đã kiểm chứng: Thông qua 10/12/2025, hiệu lực 1/7/2026</span>
+      </div>
+    </div>
+
+    <div class="lawcard ads" style="margin-top:18px">
+      <h3>📢 Luật Quảng cáo (sửa đổi) 2025 — quan trọng nhất với Creator</h3>
+      <span class="eff">Hiệu lực: 1/1/2026 (đã áp dụng)</span>
+      <ul>
+        <li>Lần đầu định nghĩa <b>"người chuyển tải sản phẩm quảng cáo"</b> — đưa KOL/KOC vào khung pháp lý rõ ràng</li>
+        <li>Bắt buộc gắn dấu hiệu nhận biết "quảng cáo" trong bài viết, video, livestream</li>
+        <li>Phải xác minh &amp; thực sự sử dụng sản phẩm trước khi quảng cáo</li>
+        <li>Chịu trách nhiệm liên đới về nội dung quảng cáo sai sự thật</li>
+      </ul>
+      <span class="verified">✓ Đã kiểm chứng: Luật sửa đổi, bổ sung Luật Quảng cáo, hiệu lực 1/1/2026 — đây là căn cứ pháp lý cốt lõi cho phần Disclosure bên dưới</span>
+    </div>
+
+    <div class="card" style="margin-top:22px">
+      <h3 style="color:var(--navy);margin-bottom:6px">⚠️ 3 điều Creator thường nghĩ sai về Luật mới</h3>
+      <div class="myth"><span class="x">✗</span><div>"Luật này chỉ áp dụng cho doanh nghiệp, không áp dụng cho cá nhân" — <span class="tag-wrong">SAI.</span> Áp dụng cho mọi cá nhân hoạt động thương mại trên nền tảng số.</div></div>
+      <div class="myth"><span class="x">✗</span><div>"Tôi chỉ review sản phẩm, không bán hàng — nên không cần tuân thủ" — <span class="tag-wrong">SAI.</span> Affiliate link và sponsored review đều thuộc phạm vi điều chỉnh.</div></div>
+      <div class="myth"><span class="x">✗</span><div>"Nền tảng sẽ chịu trách nhiệm thay tôi" — <span class="tag-wrong">SAI.</span> Creator chịu trách nhiệm cá nhân về nội dung mình đăng, dù trên nền tảng nào.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 RISKS -->
+<section>
+  <div class="wrap">
+    <h2 class="sec-title">10 rủi ro pháp lý phổ biến nhất</h2>
+    <p class="sec-intro">Dựa trên khảo sát 54 Creator và Focus Group với các đơn vị trong ngành do KLIC thực hiện — đây là 10 rủi ro Creator hay mắc phải, thường là vô tình, không phải cố ý.</p>
+
+    <div class="group-head">NHÓM 1 — Quảng cáo &amp; Disclosure</div>
+
+    <!-- 01 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">01</div><h3>Không disclosure nội dung quảng cáo đúng cách</h3></div>
+      <div class="risk-body">
+        <p>Theo <b>Luật Quảng cáo (sửa đổi) 2025</b> và Nghị định 38/2021: tất cả nội dung được trả tiền (dù tiền mặt, sản phẩm hay dịch vụ đổi lại) phải được ghi rõ là quảng cáo ở <b>vị trí dễ thấy</b>.</p>
+        <div class="block bad"><h4>⚠️ Làm sai phổ biến</h4><ul>
+          <li>Ghi #ad / #sponsored nhưng ẩn trong đống 20+ hashtag cuối caption</li>
+          <li>Chỉ ghi trong caption mà không hiển thị trong video</li>
+          <li>Dùng "Collab with @brand" — chưa đủ theo quy định mới</li>
+          <li>Không disclosure khi nhận sản phẩm miễn phí để review</li>
+        </ul></div>
+        <div class="block good"><h4>✅ Làm đúng như thế này</h4><ul>
+          <li>Trong video: hiển thị chữ "Quảng cáo"/"Sponsored" ít nhất 3 giây đầu, font đủ lớn để đọc</li>
+          <li>Trong caption: ghi #QuangCao / #Sponsored ở đoạn đầu — trước khi bị cắt "xem thêm"</li>
+          <li>Trên TikTok: bật tính năng "Branded Content" trong app</li>
+          <li>Khi nhận gifted product: ghi rõ "Sản phẩm được [Brand] tài trợ"</li>
+        </ul></div>
+        <span class="penalty">Mức phạt: 10–20 triệu đồng (Nghị định 38/2021/NĐ-CP)</span>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">02</div><h3>Review sản phẩm sai sự thật — dù theo yêu cầu của brand</h3></div>
+      <div class="risk-body">
+        <p>Người đặt hàng review là brand, nhưng Creator là người chịu trách nhiệm pháp lý về nội dung. "Brand bắt tôi làm vậy" <b>không</b> phải lý do miễn trách.</p>
+        <div class="block bad"><h4>⚠️ Tình huống phổ biến</h4><ul>
+          <li>Review skincare "trắng da trong 3 ngày" khi không có bằng chứng khoa học</li>
+          <li>TPCN "chữa được bệnh X" khi chưa được Bộ Y tế công nhận</li>
+          <li>Quảng cáo "hàng chính hãng" khi không xác minh nguồn gốc</li>
+        </ul></div>
+        <div class="block good"><h4>✅ Cách bảo vệ bản thân</h4><ul>
+          <li>Yêu cầu brand cung cấp tài liệu kiểm định sản phẩm trước khi nhận campaign</li>
+          <li>Chỉ nói những gì bạn đã thực sự trải nghiệm — không đọc script nguyên si</li>
+          <li>Thêm disclaimer: "Kết quả có thể khác nhau tùy cơ địa mỗi người"</li>
+          <li>Giữ email/chat với brand làm bằng chứng nếu bị yêu cầu nói sai</li>
+        </ul></div>
+        <span class="penalty">Mức phạt: 20–40 triệu đồng + bồi thường thiệt hại</span>
+        <div class="fix"><b>Cập nhật căn cứ:</b> Quảng cáo sai sự thật bị cấm theo Điều 8 Luật Quảng cáo và xử phạt theo Nghị định 38/2021 — đồng thời chịu điều chỉnh của Luật Quảng cáo (sửa đổi) 2025.</div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">03</div><h3>Quảng cáo sản phẩm thuộc danh mục cần giấy phép</h3></div>
+      <div class="risk-body">
+        <p>Một số ngành hàng yêu cầu giấy phép đặc biệt mới được phép quảng cáo — Creator thường không biết điều này.</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Ngành hàng</th><th>Yêu cầu</th><th>Rủi ro nếu vi phạm</th></tr></thead>
+          <tbody>
+            <tr><td>Thực phẩm chức năng, thuốc</td><td>Cần số đăng ký Bộ Y tế còn hiệu lực</td><td>Phạt 20–40 triệu + thu hồi toàn bộ nội dung</td></tr>
+            <tr><td>Mỹ phẩm có công dụng đặc biệt</td><td>Không được claim điều trị/chữa bệnh</td><td>Phạt 10–30 triệu</td></tr>
+            <tr><td>Tài chính, đầu tư, crypto</td><td>Cần giấy phép UBCK/NHNN</td><td>Phạt 50–100 triệu + hình sự nếu gian lận</td></tr>
+            <tr><td>Rượu bia</td><td>Giới hạn nội dung, không nhắm vào &lt;18 tuổi</td><td>Phạt 5–30 triệu</td></tr>
+            <tr><td>Dịch vụ giáo dục</td><td>Cần giấy phép Bộ GD&amp;ĐT</td><td>Phạt 10–20 triệu</td></tr>
+          </tbody>
+        </table></div>
+        <div class="block good"><h4>✅ Làm đúng</h4><ul>
+          <li>Luôn yêu cầu brand cung cấp giấy phép quảng cáo trước khi nhận campaign các ngành hàng trên</li>
+          <li>Đưa yêu cầu này vào checklist trước khi ký hợp đồng</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="group-head">NHÓM 2 — Thuế &amp; Tài chính</div>
+
+    <!-- 04 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">04</div><h3>Không khai báo thuế thu nhập từ brand deal — rủi ro nghiêm trọng nhất</h3></div>
+      <div class="risk-body">
+        <p>Từ 1/7/2026, cơ quan thuế có thêm công cụ đối soát dữ liệu từ nền tảng TMĐT. Thu nhập từ brand deal, affiliate, livestream, donation — <b>tất cả</b> đều là thu nhập chịu thuế.</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Loại thu nhập</th><th>Thuế suất</th><th>Ghi chú</th></tr></thead>
+          <tbody>
+            <tr><td>Brand deal (hợp đồng dịch vụ)</td><td>PIT lũy tiến 5–35%</td><td>Brand thường khấu trừ 10% trước khi trả</td></tr>
+            <tr><td>Affiliate commission</td><td>Theo tỷ lệ + PIT</td><td>Một số nền tảng khấu trừ tại nguồn</td></tr>
+            <tr><td>Donation/Tip từ livestream</td><td>Chịu thuế TNCN</td><td>TikTok, YouTube đã bắt đầu báo cáo cho cơ quan thuế</td></tr>
+            <tr><td>AdSense/YouTube</td><td>Khấu trừ tại nguồn (nước ngoài)</td><td>Phải khai thu nhập nước ngoài trong quyết toán thuế VN</td></tr>
+            <tr><td>Doanh thu dưới ngưỡng miễn thuế</td><td>Miễn thuế</td><td><b>Từ 1/1/2026: ngưỡng là 500 triệu/năm</b> — cộng dồn nhiều nguồn có thể vượt ngưỡng</td></tr>
+          </tbody>
+        </table></div>
+        <div class="fix"><b>Cập nhật quan trọng:</b> Ngưỡng miễn thuế GTGT &amp; TNCN cho hộ/cá nhân kinh doanh đã được nâng lên <b>500 triệu đồng/năm</b> từ 1/1/2026 (Luật Thuế GTGT 2024 + Luật Thuế TNCN sửa đổi) — thay cho mức 100 triệu/năm cũ.</div>
+        <div class="block good"><h4>✅ Hành động cần làm NGAY</h4><ul>
+          <li>Tổng hợp tất cả thu nhập từ nghề Creator trong 6 tháng đầu 2026</li>
+          <li>Nếu tổng năm ước tính &gt;500 triệu: đăng ký mã số thuế cá nhân nếu chưa có</li>
+          <li>Yêu cầu brand cung cấp hóa đơn/chứng từ cho từng hợp đồng</li>
+          <li>Giữ lại tất cả hợp đồng và xác nhận thanh toán ít nhất 5 năm</li>
+          <li>Cân nhắc tư vấn kế toán/thuế nếu thu nhập lớn</li>
+        </ul></div>
+        <span class="penalty">Hậu quả: Nợ thuế tích lũy + phạt chậm nộp 0,03%/ngày + truy thu tối đa 10 năm</span>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">05</div><h3>Không có hợp đồng rõ ràng với brand — "thỏa thuận miệng" là bẫy nguy hiểm</h3></div>
+      <div class="risk-body">
+        <p>Hợp đồng bằng chat Zalo/Messenger không có giá trị pháp lý đầy đủ. Khi tranh chấp xảy ra, Creator thường thua vì không có bằng chứng.</p>
+        <div class="block good"><h4>✅ 5 điều PHẢI có trong mọi hợp đồng brand deal</h4><ul>
+          <li><b>Phạm vi công việc cụ thể:</b> bao nhiêu video/post, nội dung gì, đăng ở đâu</li>
+          <li><b>Quyền từ chối:</b> Creator được từ chối nếu yêu cầu vi phạm pháp luật hoặc đạo đức</li>
+          <li><b>Thời hạn độc quyền:</b> bao lâu không được nhận campaign đối thủ</li>
+          <li><b>Thanh toán:</b> số tiền, thời hạn, hình thức — không được mơ hồ</li>
+          <li><b>Quyền sở hữu nội dung:</b> sau campaign, ai sở hữu video/ảnh</li>
+        </ul></div>
+        <div class="note" style="margin-top:6px">
+          <b>✅ Mẫu email yêu cầu hợp đồng</b>
+          <p style="margin-top:8px;font-style:italic">"Cảm ơn bạn đã liên hệ. Để đảm bảo quyền lợi cho cả 2 phía, tôi cần nhận hợp đồng bằng văn bản với các điều khoản cụ thể trước khi bắt đầu. Bạn có thể gửi cho tôi draft hợp đồng không?"</p>
+          <p style="margin-top:8px;font-size:13.5px;color:var(--muted)">→ Nếu brand từ chối cung cấp hợp đồng: đây là dấu hiệu cần thận trọng.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-head">NHÓM 3 — Bản quyền &amp; Nội dung</div>
+
+    <!-- 06 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">06</div><h3>Dùng nhạc/ảnh có bản quyền</h3></div>
+      <div class="risk-body">
+        <p>Nhạc trên TikTok/Reels chỉ an toàn khi dùng thư viện nhạc <b>in-app</b>. Nhạc từ Spotify/YouTube đăng lên TikTok = vi phạm, dù bạn nghĩ "mọi người đều làm vậy". Ảnh từ Google không phải ảnh nào cũng free — chỉ dùng ảnh từ Unsplash, Pexels, Pixabay hoặc tự chụp.</p>
+        <span class="penalty">Hậu quả: Claim bản quyền, demonetize, mất kênh, có thể bị kiện dân sự (Luật SHTT)</span>
+        <div class="block good"><h4>✅ Cách phòng</h4><ul>
+          <li>Chỉ dùng nhạc từ thư viện in-app</li>
+          <li>Với ảnh: ghi rõ nguồn hoặc mua license</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">07</div><h3>Đăng thông tin chưa được kiểm chứng</h3></div>
+      <div class="risk-body">
+        <p>Theo <b>Luật An ninh mạng 2025</b>: đăng thông tin sai sự thật gây hoang mang, ảnh hưởng đến tổ chức/cá nhân là vi phạm — dù bạn đăng lại từ nguồn khác.</p>
+        <span class="penalty">Hậu quả: Phạt 10–20 triệu. Gây thiệt hại nghiêm trọng có thể bị xử lý hình sự</span>
+        <div class="block good"><h4>✅ Cách phòng</h4><ul>
+          <li>Thêm "Chưa xác minh" khi share tin tức</li>
+          <li>Không đăng tin về sức khỏe, tài chính, pháp lý khi chưa kiểm tra nguồn gốc</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">08</div><h3>Nội dung liên quan trẻ em</h3></div>
+      <div class="risk-body">
+        <p>Quy định mới siết chặt hơn: nội dung nhắm vào trẻ em (&lt;16 tuổi) phải tuân thủ quy định đặc biệt. Không được cho trẻ em xuất hiện trong nội dung quảng cáo mà không có sự đồng ý của phụ huynh được chứng nhận.</p>
+        <span class="penalty">Hậu quả: Phạt 20–40 triệu. Nền tảng có thể xóa kênh</span>
+        <div class="block good"><h4>✅ Cách phòng</h4><ul>
+          <li>Nếu có con/cháu trong video: xin phép bằng văn bản</li>
+          <li>Không gắn nội dung quảng cáo vào nội dung có trẻ em</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="group-head">NHÓM 4 — Livestream &amp; TMĐT</div>
+
+    <!-- 09 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">09</div><h3>Bán hàng Livestream không có giấy tờ hàng hóa</h3></div>
+      <div class="risk-body">
+        <p>Theo <b>Luật Thương mại điện tử</b> mới, Creator bán hàng qua livestream phải: cung cấp được hóa đơn/chứng từ khi khách yêu cầu; không bán hàng giả, hàng nhái, hàng không rõ nguồn gốc; không claim tính năng sản phẩm vượt quá thực tế.</p>
+        <span class="penalty">Hậu quả: Phạt 20–100 triệu tùy mức độ. Có thể bị đình chỉ hoạt động TMĐT</span>
+        <div class="block good"><h4>✅ Cách phòng</h4><ul>
+          <li>Chỉ bán hàng từ đối tác có giấy tờ đầy đủ</li>
+          <li>Yêu cầu supplier cung cấp invoice gốc</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="risk">
+      <div class="risk-head"><div class="no">10</div><h3>Affiliate Marketing: thiếu minh bạch về mối quan hệ</h3></div>
+      <div class="risk-body">
+        <p>Affiliate link là "quảng cáo có trả thù lao" — phải disclosure như sponsored content. "Mua giúp mình nhé" khi đó là affiliate link = vi phạm disclosure. Theo quy định mới, phải ghi rõ: "Link affiliate — tôi nhận hoa hồng khi bạn mua qua link này".</p>
+        <span class="penalty">Hậu quả: Phạt 5–20 triệu. Mất uy tín với audience</span>
+        <div class="block good"><h4>✅ Cách phòng</h4><ul>
+          <li>Caption luôn ghi: "Link affiliate trong bio — tôi được hưởng hoa hồng" hoặc gắn tag #Affiliate</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <h2 class="sec-title">Checklist — 5 việc phải làm trước 1/7/2026</h2>
+    <p class="sec-intro">In trang này ra. Dán lên bàn làm việc. Tick từng ô khi hoàn thành.</p>
+
+    <div class="check">
+      <div class="chead"><span class="step">#1</span><h3>AUDIT toàn bộ nội dung sponsored trong 6 tháng qua</h3></div>
+      <label><input type="checkbox">Có ghi #QuangCao / #Sponsored ở vị trí dễ thấy không?</label>
+      <label><input type="checkbox">Có bật Branded Content trên TikTok không?</label>
+      <label><input type="checkbox">Nội dung có claim quá sự thật không?</label>
+      <div class="arrow">→ Nếu có bài sai: chỉnh sửa caption hoặc thêm disclosure ngay. Đừng để đến 1/7.</div>
+    </div>
+
+    <div class="check">
+      <div class="chead"><span class="step">#2</span><h3>Tổng hợp thu nhập và kiểm tra nghĩa vụ thuế</h3></div>
+      <label><input type="checkbox">Tổng hợp tất cả thu nhập từ nghề Creator từ đầu năm 2026</label>
+      <label><input type="checkbox">Tính tổng: Brand deal + Affiliate + Livestream + AdSense + Donation</label>
+      <label><input type="checkbox">Nếu &gt;500 triệu/năm: kiểm tra đã đăng ký MST cá nhân chưa</label>
+      <label><input type="checkbox">Nếu thu nhập lớn: đặt lịch gặp kế toán thuế</label>
+      <div class="arrow">→ Khai báo thuế sớm tốt hơn bị truy thu sau. Cơ quan thuế đang nhận dữ liệu từ nền tảng TMĐT. (Ngưỡng miễn thuế 2026: 500 triệu/năm)</div>
+    </div>
+
+    <div class="check">
+      <div class="chead"><span class="step">#3</span><h3>Cập nhật template hợp đồng cho mọi brand deal từ nay</h3></div>
+      <label><input type="checkbox">Soạn hoặc tải template hợp đồng cơ bản (KLIC cung cấp cho hội viên)</label>
+      <label><input type="checkbox">Đảm bảo có điều khoản: Phạm vi công việc / Quyền từ chối / Thanh toán / Sở hữu nội dung</label>
+      <label><input type="checkbox">Không ký hợp đồng có điều khoản mơ hồ về "thay đổi yêu cầu"</label>
+      <div class="arrow">→ Từ 1/7: hợp đồng điện tử (email xác nhận) có giá trị pháp lý nếu đáp ứng điều kiện Luật TMĐT.</div>
+    </div>
+
+    <div class="check">
+      <div class="chead"><span class="step">#4</span><h3>Xây dựng quy trình nhận brief chuẩn trước khi ký</h3></div>
+      <label><input type="checkbox">Tạo checklist "Câu hỏi phải hỏi brand trước khi nhận campaign"</label>
+      <label><input type="checkbox">Brand có cung cấp giấy phép quảng cáo (đặc biệt với ngành hàng nhạy cảm)?</label>
+      <label><input type="checkbox">Sản phẩm có chứng nhận chất lượng từ cơ quan có thẩm quyền không?</label>
+      <label><input type="checkbox">Brief có yêu cầu claim nào vượt quá sự thật không?</label>
+      <div class="arrow">→ Từ chối brief thiếu minh bạch là quyền của Creator — và là cách bảo vệ bản thân tốt nhất.</div>
+    </div>
+
+    <div class="check">
+      <div class="chead"><span class="step">#5</span><h3>Tham gia 1 buổi đào tạo pháp lý trước 1/7</h3></div>
+      <label><input type="checkbox">Đăng ký Workshop "Luật mới từ A-Z cho Creator" — KLIC × EcomHub (1/7/2026)</label>
+      <label><input type="checkbox">Tải và đọc Cẩm nang này đầy đủ — chia sẻ với Creator bạn quan tâm</label>
+      <label><input type="checkbox">Gia nhập KLIC để được hỗ trợ pháp lý và cập nhật văn bản mới</label>
+      <div class="arrow">→ Workshop 1/7 miễn phí cho hội viên KLIC. Có phí cho người ngoài. Đăng ký: klicvietnam.com/workshop</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK REFERENCE -->
+<section>
+  <div class="wrap">
+    <h2 class="sec-title">Tờ tham chiếu nhanh — in ra dán lên bàn</h2>
+    <div class="qref">
+      <div class="col never">
+        <h3>🚫 Tuyệt đối không làm</h3>
+        <ul>
+          <li>Đăng sponsored content mà không có #QuangCao ở đầu caption</li>
+          <li>Review sản phẩm với claim vượt quá thực tế</li>
+          <li>Bán hàng livestream không có giấy tờ nguồn gốc</li>
+          <li>Dùng nhạc copyrighted ngoài thư viện in-app</li>
+          <li>Đăng tin chưa kiểm chứng về sức khỏe/tài chính</li>
+          <li>Nhận campaign mà không có hợp đồng văn bản</li>
+          <li>Quảng cáo thuốc/TPCN không có số ĐK Bộ Y tế</li>
+          <li>Không khai báo thu nhập từ nghề Creator</li>
+        </ul>
+      </div>
+      <div class="col always">
+        <h3>✅ Luôn phải làm</h3>
+        <ul>
+          <li>Ghi #QuangCao / #Sponsored ở ĐẦU caption/video</li>
+          <li>Bật Branded Content trên TikTok khi đăng sponsored</li>
+          <li>Yêu cầu hợp đồng văn bản trước khi bắt đầu</li>
+          <li>Kiểm tra giấy phép quảng cáo với ngành hàng nhạy cảm</li>
+          <li>Lưu giữ tất cả hợp đồng và chứng từ thanh toán</li>
+          <li>Khai báo thu nhập đúng hạn</li>
+          <li>Ghi "Link Affiliate" khi dùng affiliate link</li>
+          <li>Chỉ nói những gì bạn đã thực sự trải nghiệm</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="color:var(--navy);margin:28px 0 12px">Mức phạt tham chiếu nhanh</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Vi phạm</th><th>Mức phạt</th><th>Căn cứ pháp lý</th></tr></thead>
+      <tbody>
+        <tr><td>Không disclosure nội dung quảng cáo</td><td>10–20 triệu đồng</td><td>NĐ 38/2021 + Luật QC (sửa đổi) 2025</td></tr>
+        <tr><td>Quảng cáo sai sự thật, gây hiểu nhầm</td><td>20–40 triệu đồng</td><td>Điều 8 Luật QC + NĐ 38/2021</td></tr>
+        <tr><td>Quảng cáo thuốc/TPCN sai quy định</td><td>30–50 triệu đồng</td><td>NĐ 38/2021 + Luật Dược</td></tr>
+        <tr><td>Đăng thông tin sai sự thật gây hoang mang</td><td>10–20 triệu đồng</td><td>Luật An ninh mạng 2025</td></tr>
+        <tr><td>Bán hàng online không có chứng từ nguồn gốc</td><td>20–100 triệu đồng</td><td>Luật TMĐT 2025</td></tr>
+        <tr><td>Vi phạm bản quyền nhạc/ảnh</td><td>Claim + bồi thường thiệt hại</td><td>Luật Sở hữu trí tuệ</td></tr>
+        <tr><td>Trốn thuế thu nhập</td><td>Truy thu + phạt 20% + 0,03%/ngày</td><td>Luật Quản lý Thuế</td></tr>
+        <tr><td>Quảng cáo nội dung tài chính không phép</td><td>50–100 triệu + đình chỉ</td><td>Luật Chứng khoán + NHNN</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <div class="wrap">
+    <div class="contact">
+      <h2>Cần hỗ trợ? Liên hệ KLIC</h2>
+      <p style="color:#cfe0f2">Tổ chức nghề nghiệp đầu tiên cho KOL/KOC Việt Nam</p>
+      <div class="links">
+        <div>🌐 Website: <a href="https://klicvietnam.com" target="_blank" rel="noopener">klicvietnam.com</a></div>
+        <div>📝 Tham gia hội viên: <a href="https://klicvietnam.com/join-klic" target="_blank" rel="noopener">klicvietnam.com/join-klic</a></div>
+        <div>📅 Workshop Luật mới 1/7 (miễn phí cho hội viên): <a href="https://klicvietnam.com/workshop" target="_blank" rel="noopener">klicvietnam.com/workshop</a></div>
+        <div>📘 Fanpage: KLIC – Chi hội sáng tạo nội dung trên nền tảng số Việt Nam</div>
+        <div>📍 L17-11, Tầng 17, Vincom Center, 72 Lê Thánh Tôn, Q.1, TP.HCM</div>
+      </div>
+      <a class="btn" href="https://klicvietnam.com/join-klic" target="_blank" rel="noopener">Gia nhập KLIC</a>
+      <p style="margin-top:18px;font-size:13px;color:#aebfd2">Hội viên KLIC được hỗ trợ pháp lý nhóm miễn phí 1 lần/quý</p>
+    </div>
+
+    <p class="disclaimer">Cẩm nang này được phát hành miễn phí — vui lòng chia sẻ để Creator được bảo vệ tốt hơn. Thông tin mang tính tham khảo, không thay thế tư vấn pháp lý cho từng trường hợp cụ thể.</p>
+  </div>
+</section>
+
+<footer>
+  © KLIC 2026 · Phát hành lần đầu 06/6/2026 · Cập nhật theo quy định mới có hiệu lực 1/7/2026
+</footer>
+
+<script>
+  (function(){
+    var target = new Date('2026-07-01T00:00:00+07:00');
+    var el = document.getElementById('cd');
+    function tick(){
+      var now = new Date();
+      var diff = target - now;
+      if(diff <= 0){ el.textContent = 'ĐÃ CÓ HIỆU LỰC'; return; }
+      var days = Math.ceil(diff / 86400000);
+      el.textContent = '~' + days + ' NGÀY';
+    }
+    tick(); setInterval(tick, 3600000);
+  })();
+</script>
+</body>
+</html>

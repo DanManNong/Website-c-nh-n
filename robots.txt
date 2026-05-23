@@ -20,5 +20,6 @@ Disallow: /preview-color
 Disallow: /parcel
 Disallow: /parcel-test
 Disallow: /parcel-scan
+Disallow: /KLIC
 
 Sitemap: https://www.nguyentanphong.com/sitemap.xml
