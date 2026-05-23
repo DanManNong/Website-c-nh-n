@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Báo giá — Coop Assets</title>
+<style>
+  :root{--dark:#2A4541;--red:#DE0E03;--ink:#1C2421;--mut:#6B746E;--paper:#F3EFE4;--line:#D8D2C4;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#e9e5da;font-family:Arial,Helvetica,sans-serif;color:var(--ink);padding:24px}
+  .page{width:210mm;min-height:297mm;background:#fff;margin:0 auto;padding:14mm 16mm 12mm;box-shadow:0 4px 24px rgba(0,0,0,.15)}
+  .hd{display:flex;align-items:center;gap:16px}
+  .hd img{width:74px;height:75px;object-fit:contain}
+  .hd h1{font-size:21px;color:var(--dark);letter-spacing:.3px}
+  .hd .s1{font-size:13px;margin-top:3px}
+  .hd .s2{font-size:11px;color:var(--mut);font-style:italic;margin-top:2px}
+  .rule{height:3px;background:var(--red);margin:9px 0 13px}
+  .info{display:flex;gap:10px;margin-bottom:14px}
+  .info .b{flex:1;background:var(--paper);border-radius:7px;padding:8px 12px}
+  .info .b small{display:block;font-size:10.5px;color:var(--mut)}
+  .info .b b{font-size:12.5px;color:var(--dark)}
+  h2{font-size:13px;color:var(--dark);margin:14px 0 6px}
+  p.scope{font-size:11.5px;line-height:1.55}
+  table{width:100%;border-collapse:collapse;margin-top:4px}
+  th,td{border:1px solid var(--line);padding:7px 10px;font-size:11.5px;vertical-align:middle}
+  thead th{background:var(--dark);color:#fff;font-size:11px;text-align:left}
+  th.r,td.r{text-align:right}
+  .g{font-weight:bold;color:var(--dark)}
+  tr.rec{background:#FBEDEC}
+  tr.rec .g,tr.rec td.r{color:var(--red)}
+  td .nm{font-weight:bold}
+  td .ds{font-size:10.5px;color:var(--mut)}
+  .recnote{font-size:11.5px;color:var(--mut);margin:7px 0 4px}
+  .recnote b{color:var(--red)}
+  .two{display:flex;gap:22px;margin-top:10px}
+  .two .col{flex:1}
+  .two h2{margin-top:0}
+  ul{list-style:none}
+  ul li{font-size:11px;line-height:1.5;padding-left:14px;position:relative;margin-bottom:3px}
+  ul li:before{content:"•";color:var(--red);font-weight:bold;position:absolute;left:0}
+  .disc{font-size:10.5px;font-style:italic;color:var(--mut);border-top:1px solid var(--line);padding-top:9px;margin-top:14px}
+  .sign{display:flex;gap:22px;margin-top:14px;text-align:center}
+  .sign .col{flex:1}
+  .sign .t{font-size:11.5px;font-weight:bold;color:var(--dark)}
+  .sign .nm2{font-size:11px;color:var(--ink);margin-top:2px}
+  .sign .n{font-size:10px;font-style:italic;color:var(--mut);margin-top:44px}
+  .foot{text-align:center;font-size:10px;color:var(--mut);margin-top:14px}
+  @media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;width:auto;min-height:auto}@page{size:A4;margin:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hd">
+    <img src="KV/coop-assets.jpg" alt="Coop Assets">
+    <div>
+      <h1>BÁO GIÁ DỊCH VỤ PHẦN MỀM</h1>
+      <div class="s1">Hệ thống Quản lý Mặt bằng &amp; Kho bãi — “Coop Assets”</div>
+      <div class="s2">Đơn vị thụ hưởng: Liên hiệp HTX Thương mại TP. Hồ Chí Minh (Saigon Co.op)</div>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="info">
+    <div class="b"><small>Số báo giá</small><b>BG-CA-2026-01</b></div>
+    <div class="b"><small>Ngày báo giá</small><b>23/05/2026</b></div>
+    <div class="b"><small>Hiệu lực</small><b>30 ngày kể từ ngày báo giá</b></div>
+  </div>
+
+  <h2>1. PHẠM VI CÔNG VIỆC (TRỌN GÓI — CHÌA KHOÁ TRAO TAY)</h2>
+  <p class="scope">Phân tích yêu cầu • Thiết kế UI/UX theo nhận diện • Xây dựng hệ mã tài sản 9 ký tự • Cơ sở dữ liệu (pháp lý / vị trí / chi phí) • Tải &amp; lưu hồ sơ scan • Tích hợp bản đồ • Dashboard thống kê theo loại mã • Đăng nhập &amp; phân quyền Admin/Nhân viên • Nhập Excel, xuất báo cáo • Triển khai, đào tạo &amp; bàn giao.</p>
+
+  <h2>2. CÁC GÓI TRIỂN KHAI &amp; KHUNG GIÁ</h2>
+  <table>
+    <thead><tr><th style="width:8%">Gói</th><th>Nội dung</th><th class="r" style="width:26%">Khung giá (VNĐ)</th></tr></thead>
+    <tbody>
+      <tr><td class="g">A</td><td><div class="nm">Demo / Prototype</div><div class="ds">Hoàn thiện bộ giao diện trình bày ý tưởng, dữ liệu mẫu — chưa có backend.</div></td><td class="r g">8 – 25 triệu</td></tr>
+      <tr class="rec"><td class="g">B</td><td><div class="nm">MVP chạy thật</div><div class="ds">Đăng nhập + phân quyền, CSDL, CRUD, dashboard, tải hồ sơ, triển khai. Đủ vận hành nội bộ.</div></td><td class="r">80 – 180 triệu</td></tr>
+      <tr class="rec"><td class="g">C</td><td><div class="nm">Trọn gói đầy đủ</div><div class="ds">Toàn bộ tính năng theo đặc tả: bản đồ, nhập/xuất Excel, báo cáo, tối ưu, đào tạo, bảo hành.</div></td><td class="r">180 – 400 triệu</td></tr>
+    </tbody>
+  </table>
+  <div class="recnote">Khuyến nghị cho quy mô đơn vị: <b>gói B–C, khoảng 120 – 300 triệu</b> trọn gói.</div>
+
+  <div class="two">
+    <div class="col">
+      <h2>3. CHI PHÍ ĐỊNH KỲ</h2>
+      <ul>
+        <li>Hosting/hạ tầng: 3 – 15 triệu/năm (tuỳ cấu hình bảo mật nội bộ).</li>
+        <li>Bảo trì &amp; hỗ trợ: 15 – 20% giá trị dự án/năm.</li>
+        <li>Tên miền riêng (nếu cần): 0,3 – 1 triệu/năm.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h2>4. ĐIỀU KHOẢN</h2>
+      <ul>
+        <li>Thanh toán theo mốc: 30% tạm ứng – 40% xong MVP – 30% nghiệm thu.</li>
+        <li>Bảo hành 3 – 6 tháng sau bàn giao.</li>
+        <li>Giá chưa bao gồm VAT.</li>
+        <li>Chưa gồm: app mobile native, OCR đọc giấy tờ, đồng bộ ERP (tính riêng).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="disc">Đây là khung giá tham chiếu theo mặt bằng thị trường; con số cuối cùng được chốt theo phạm vi chi tiết, số lượng đơn vị/người dùng và mức độ bảo mật nội bộ.</div>
+
+  <div class="sign">
+    <div class="col"><div class="t">ĐƠN VỊ BÁO GIÁ</div><div class="nm2">Nguyễn Tấn Phong</div><div class="n">(Ký, ghi rõ họ tên)</div></div>
+    <div class="col"><div class="t">KHÁCH HÀNG</div><div class="nm2">&nbsp;</div><div class="n">(Ký, ghi rõ họ tên)</div></div>
+  </div>
+
+  <div class="foot">Nguyễn Tấn Phong · nguyentanphong.com · hello@nguyentanphong.com</div>
+</div>
+</body>
+</html>
