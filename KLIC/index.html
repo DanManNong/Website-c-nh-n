@@ -170,7 +170,23 @@
     .risk-body,.card,.check,.qref .col{padding:16px}
     h1,.sec-title{word-break:break-word}
   }
+  /* ===== Password gate (iOS style) ===== */
+  #gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(160deg,var(--navy),var(--blue));display:flex;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+  #gate .box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:22px;padding:36px 26px;max-width:380px;width:100%;text-align:center;color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+  #gate .lock{font-size:44px;line-height:1}
+  #gate h2{font-size:21px;margin:14px 0 6px}
+  #gate p{color:#cfe0f2;font-size:14px;margin-bottom:22px}
+  #gate input{width:100%;font-size:17px;text-align:center;letter-spacing:4px;padding:15px 16px;border-radius:14px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;outline:none;-webkit-appearance:none}
+  #gate input::placeholder{color:#9fb4cc;letter-spacing:1px}
+  #gate input:focus{border-color:var(--accent);background:rgba(255,255,255,.18)}
+  #gate button{width:100%;margin-top:14px;min-height:52px;border:0;border-radius:14px;background:var(--accent);color:#3a2a06;font-weight:800;font-size:16px;cursor:pointer;-webkit-appearance:none;transition:transform .08s}
+  #gate button:active{transform:scale(.98)}
+  #gate .err{color:#ffd2cc;font-size:13.5px;min-height:18px;margin-top:12px}
+  #gate .foot{margin-top:18px;font-size:12px;color:#9fb4cc}
+  body.locked{overflow:hidden;height:100vh}
+
   @media print{
+    #gate{display:none!important}
     .alertbar,.btn{display:none}
     body{background:#fff;font-size:12px}
     .hero,.contact,.lawcard{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -179,7 +195,53 @@
   }
 </style>
 </head>
-<body>
+<body class="locked">
+
+<div id="gate" aria-label="Yêu cầu mã truy cập">
+  <form class="box" id="gateForm" autocomplete="off">
+    <div class="lock">🔒</div>
+    <h2>Nội dung dành cho thành viên</h2>
+    <p>Vui lòng nhập mã truy cập để xem Cẩm nang Pháp lý dành cho Creator.</p>
+    <input id="gatePass" type="password" inputmode="text" autocapitalize="characters" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="Nhập mã truy cập" aria-label="Mã truy cập">
+    <button type="submit">Mở khóa</button>
+    <div class="err" id="gateErr" role="alert"></div>
+    <div class="foot">© KLIC 2026</div>
+  </form>
+</div>
+<script>
+(function(){
+  var GATE_HASH='8668f032ab52bd79a6f78e773980756c150a15d5f91118013212823bf0919ba6';
+  var KEY='klic_gate_ok';
+  var gate=document.getElementById('gate');
+  var form=document.getElementById('gateForm');
+  var pass=document.getElementById('gatePass');
+  var err=document.getElementById('gateErr');
+  function unlock(){ if(gate&&gate.parentNode){gate.parentNode.removeChild(gate);} document.body.classList.remove('locked'); }
+  try{ if(sessionStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
+  setTimeout(function(){ try{pass.focus();}catch(e){} },200);
+  async function sha256(s){
+    var buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+  }
+  form.addEventListener('submit', async function(ev){
+    ev.preventDefault();
+    var v=(pass.value||'').trim().toUpperCase();
+    if(!v) return;
+    try{
+      var h=await sha256(v);
+      if(h===GATE_HASH){
+        try{ sessionStorage.setItem(KEY,'1'); }catch(e){}
+        unlock();
+      }else{
+        err.textContent='Mã truy cập không đúng. Vui lòng thử lại.';
+        pass.value=''; pass.focus();
+      }
+    }catch(e){
+      err.textContent='Cần mở qua HTTPS để xác thực. Vui lòng thử lại trên trang chính thức.';
+    }
+  });
+})();
+</script>
 
 <div class="alertbar">⚠️ HIỆU LỰC TỪ 1/7/2026 — CÒN <span id="cd">…</span> ⚠️</div>
 
