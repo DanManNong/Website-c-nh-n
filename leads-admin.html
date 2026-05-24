@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Leads · Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="/assets/supabase.min.js" defer></script>
+<style>
+  :root{ --bg:#1a1a1a; --panel:#222; --gold:#E0AA79; --gold2:#f0c896; --text:#fff; --soft:rgba(255,255,255,.55); --border:rgba(224,170,121,.25); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.5; padding:max(16px,env(safe-area-inset-top)) 16px 40px; }
+  .wrap{ max-width:1000px; margin:0 auto; }
+  h1{ font-size:20px; font-weight:700; margin-bottom:4px; }
+  h1 .gold{ color:var(--gold); }
+  .sub{ color:var(--soft); font-size:13px; margin-bottom:20px; }
+
+  /* GATE */
+  #gate{ max-width:340px; margin:60px auto; text-align:center; }
+  #gate input{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--border); background:var(--panel); color:var(--text); font-size:15px; margin:12px 0; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:10px; border:1px solid var(--gold); background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#1a1a1a; font-weight:700; font-size:14px; cursor:pointer; }
+  .btn-ghost{ background:transparent; color:var(--gold); }
+  #gateErr{ color:#ff7a7a; font-size:13px; min-height:18px; margin-top:6px; }
+
+  /* STATS */
+  .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+  .stat{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:14px; text-align:center; }
+  .stat .n{ font-size:26px; font-weight:700; color:var(--gold); }
+  .stat .l{ font-size:11px; color:var(--soft); text-transform:uppercase; letter-spacing:.05em; }
+
+  .bar{ display:flex; gap:10px; align-items:center; margin-bottom:14px; flex-wrap:wrap; }
+  .bar .btn{ font-size:13px; padding:9px 14px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  th,td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); }
+  th{ color:var(--gold); font-size:11px; text-transform:uppercase; letter-spacing:.05em; }
+  tr:hover td{ background:rgba(255,255,255,.03); }
+  td a{ color:var(--gold2); }
+  .empty{ text-align:center; color:var(--soft); padding:40px; }
+  .hide{ display:none!important; }
+  @media(max-width:560px){ .stats{grid-template-columns:repeat(3,1fr)} table{font-size:11px} th,td{padding:8px 6px} .col-nguon{display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- GATE -->
+  <div id="gate">
+    <h1><i class="fas fa-lock" style="color:var(--gold)"></i> Leads <span class="gold">Admin</span></h1>
+    <p class="sub">Nhập mã admin để xem danh sách đăng ký.</p>
+    <input type="password" id="gateKey" placeholder="Mã admin…" autocomplete="off" onkeydown="if(event.key==='Enter')login()">
+    <div id="gateErr"></div>
+    <button class="btn" onclick="login()"><i class="fas fa-unlock"></i> Mở</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dash" class="hide">
+    <h1>Leads <span class="gold">— Đăng Ký Tư Vấn</span></h1>
+    <p class="sub">Form Z12 · nguyentanphong.com</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n" id="sTotal">0</div><div class="l">Tổng</div></div>
+      <div class="stat"><div class="n" id="sWeek">0</div><div class="l">7 ngày</div></div>
+      <div class="stat"><div class="n" id="sToday">0</div><div class="l">Hôm nay</div></div>
+    </div>
+
+    <div class="bar">
+      <button class="btn" onclick="load()"><i class="fas fa-rotate"></i> Tải lại</button>
+      <button class="btn btn-ghost" onclick="exportCSV()"><i class="fas fa-file-csv"></i> Tải CSV</button>
+    </div>
+
+    <table>
+      <thead><tr><th>#</th><th>Họ tên</th><th>Email</th><th>SĐT</th><th class="col-nguon">Nguồn</th><th>Thời gian</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div id="empty" class="empty hide">Chưa có lead nào.</div>
+  </div>
+
+</div>
+
+<script>
+  var SB_URL = 'https://dcmtbgcltopnqsiedwlg.supabase.co';
+  var SB_KEY = 'sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
+  var SECRET = '';
+  var sb = null;
+  var LEADS = [];
+
+  function getSb(){
+    if(sb) return sb;
+    if(typeof supabase === 'undefined') return null;
+    sb = supabase.createClient(SB_URL, SB_KEY, { auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }});
+    return sb;
+  }
+
+  // Cho phép ?key=... trên URL (tiện bookmark) — đợi thư viện defer tải xong
+  window.addEventListener('load', function(){
+    var p = new URLSearchParams(location.search).get('key');
+    if(p){ SECRET = p; login(true); }
+  });
+
+  async function login(silent){
+    var err = document.getElementById('gateErr');
+    if(!silent) SECRET = document.getElementById('gateKey').value.trim();
+    if(!SECRET){ err.textContent='Nhập mã.'; return; }
+    err.textContent = 'Đang kiểm tra…';
+    var ok = await load();
+    if(ok){
+      document.getElementById('gate').classList.add('hide');
+      document.getElementById('dash').classList.remove('hide');
+    }else if(!silent){
+      err.textContent = 'Mã sai hoặc lỗi kết nối.';
+    }
+  }
+
+  async function load(){
+    var c = getSb();
+    if(!c){ document.getElementById('gateErr').textContent='Thư viện chưa tải xong, thử lại.'; return false; }
+    var res = await c.rpc('leads_admin_get', { p_secret: SECRET });
+    if(res.error){ console.warn(res.error); return false; }
+    var d = res.data || {};
+    var st = d.stats || {};
+    document.getElementById('sTotal').textContent = st.total || 0;
+    document.getElementById('sWeek').textContent  = st.week  || 0;
+    document.getElementById('sToday').textContent = st.today || 0;
+    LEADS = d.leads || [];
+    render();
+    return true;
+  }
+
+  function fmt(ts){
+    if(!ts) return '';
+    var dt = new Date(ts);
+    return dt.toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function render(){
+    var tb = document.getElementById('rows');
+    var empty = document.getElementById('empty');
+    if(!LEADS.length){ tb.innerHTML=''; empty.classList.remove('hide'); return; }
+    empty.classList.add('hide');
+    tb.innerHTML = LEADS.map(function(l,i){
+      var tel = l.sdt ? '<a href="tel:'+esc(l.sdt)+'">'+esc(l.sdt)+'</a>' : '<span style="color:var(--soft)">—</span>';
+      return '<tr>'
+        + '<td>'+(i+1)+'</td>'
+        + '<td>'+esc(l.ho_ten||'—')+'</td>'
+        + '<td><a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a></td>'
+        + '<td>'+tel+'</td>'
+        + '<td class="col-nguon">'+esc(l.nguon||'')+'</td>'
+        + '<td>'+esc(fmt(l.created_at))+'</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function exportCSV(){
+    if(!LEADS.length){ alert('Chưa có lead.'); return; }
+    var header = ['Ho ten','Email','SDT','Nguon','Thoi gian'];
+    var rows = [header.join(',')];
+    LEADS.forEach(function(l){
+      var cells = [l.ho_ten, l.email, l.sdt, l.nguon, fmt(l.created_at)].map(function(c){
+        c = (c==null?'':String(c)).replace(/"/g,'""');
+        return '"'+c+'"';
+      });
+      rows.push(cells.join(','));
+    });
+    var blob = new Blob(['﻿'+rows.join('\n')], { type:'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'leads-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  }
+</script>
+</body>
+</html>

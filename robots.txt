@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /leads-admin
+Disallow: /tracnghiem-admin
 Disallow: /v2
 Disallow: /v3
 Disallow: /v4
