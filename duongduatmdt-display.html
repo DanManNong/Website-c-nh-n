@@ -18,6 +18,19 @@
   .glow.a{top:-160px;left:-140px;width:480px;height:480px;background:rgba(232,194,116,.12)}
   .glow.b{bottom:-180px;right:-140px;width:480px;height:480px;background:rgba(156,107,46,.22)}
   #root{position:relative;z-index:1;height:100vh;width:100vw}
+  #topName{position:fixed;top:0;left:0;right:0;z-index:40;text-align:center;pointer-events:none;
+    padding:1vh 0;font-weight:900;font-size:1.5vw;letter-spacing:.06em;color:var(--champagne);
+    background:linear-gradient(180deg,rgba(11,11,11,.7),rgba(11,11,11,0));text-shadow:0 2px 8px rgba(0,0,0,.6)}
+  #topName span{color:rgba(245,239,226,.55);font-weight:700}
+  #ctrlBar{position:fixed;bottom:0;left:0;right:0;z-index:45;display:flex;gap:1vw;justify-content:center;
+    padding:1.4vh 2vw calc(1.4vh + env(safe-area-inset-bottom));background:linear-gradient(0deg,rgba(11,11,11,.85),rgba(11,11,11,0))}
+  #ctrlBar button{border:none;border-radius:14px;padding:1.4vh 3vw;font-size:1.5vw;font-weight:800;font-family:inherit;cursor:pointer;
+    display:flex;align-items:center;gap:.6vw;transition:transform .1s,opacity .15s}
+  #ctrlBar button:active{transform:scale(.97)}
+  #ctrlBar .b-start{background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206;font-size:1.9vw;padding:1.6vh 4vw}
+  #ctrlBar .b-next{background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206}
+  #ctrlBar .b-finish{background:#b91c1c;color:#fff}
+  #ctrlBar .b-ghost{background:rgba(245,239,226,.12);color:var(--cream);border:1px solid rgba(245,239,226,.25)}
 
   .center{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:40px}
   .center .flag{font-size:7rem;line-height:1}
@@ -77,6 +90,8 @@
 <body>
 <div class="glow a"></div><div class="glow b"></div>
 <div id="root"></div>
+<div id="topName">🏁 ĐƯỜNG ĐUA THƯƠNG MẠI ĐIỆN TỬ <span>· Tăng trưởng thần tốc</span></div>
+<div id="ctrlBar" class="hidden"></div>
 
 <script src="/assets/supabase.min.js"></script>
 <script src="/assets/qrcode.min.js"></script>
@@ -111,6 +126,21 @@
     let acc=0; const w=effWin();
     for(let i=0;i<st.prizes.length;i++){ const p=st.prizes[i]; if(w<acc+p.quantity) return {name:p.name,quantity:p.quantity,slot:(w-acc)+1,groupIdx:i}; acc+=p.quantity; }
     return null; // hết giải
+  }
+
+  async function setStatus(s){ if(!token||!st.roundId) return; await rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:s}); poll(); }
+  let lastCtrlKey=null;
+  function renderCtrl(){
+    const bar=$('ctrlBar');
+    if(!token || !st.roundId || st.status==='finished'){ if(lastCtrlKey!=='hide'){ bar.classList.add('hidden'); bar.innerHTML=''; lastCtrlKey='hide'; } return; }
+    const s=st.status; const more=effWin()<totalSlots();
+    const key=s+'|'+more; if(key===lastCtrlKey) return; lastCtrlKey=key;
+    let h='';
+    if(s==='registration'||s==='closed'){ h='<button class="b-start" data-a="countdown">▶ BẮT ĐẦU</button>'; }
+    else if(s==='countdown'){ h='<button class="b-finish" data-a="finished">⏹ Kết thúc</button>'; }
+    else if(s==='playing'){ if(more) h+='<button class="b-next" data-a="countdown">🔄 CHƠI TIẾP</button>'; h+='<button class="b-finish" data-a="finished">⏹ Kết thúc</button>'; }
+    bar.innerHTML=h; bar.classList.remove('hidden');
+    bar.querySelectorAll('button').forEach(b=>b.addEventListener('click',function(){ const a=this.dataset.a; if(a==='finished' && !confirm('Kết thúc game?')) return; setStatus(a); }));
   }
 
   function setMode(m){
@@ -214,7 +244,7 @@
   async function poll(){
     const rows=await rpc('dd_active_round');
     const r=Array.isArray(rows)?rows[0]:null;
-    if(!r){ st.roundId=null; st.status=null; setMode('idle'); return; }
+    if(!r){ st.roundId=null; st.status=null; setMode('idle'); renderCtrl(); return; }
     if(r.server_now) st.skew=new Date(r.server_now).getTime()-Date.now();
     const changedRound=st.roundId!==r.id;
     if(changedRound){ recorded=new Set(); drawSignal=null; drawStarted=false; const rc=$('raceContainer'); if(rc) rc.remove(); iframeReady=false; st.winCount=0; }
@@ -242,6 +272,7 @@
     } else if(r.status==='finished'){
       setMode('finished'); refreshWinners();
     }
+    renderCtrl();
   }
 
   poll(); setInterval(poll,1500);

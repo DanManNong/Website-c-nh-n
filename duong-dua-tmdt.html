@@ -1581,6 +1581,16 @@ renderP();renderPr();updateStats();updateSel();renderRes();
     const nav = document.getElementById('mainNav');
     if(nav) nav.style.display='none';
     if(typeof showScreen === 'function') showScreen('draw');
+    // Dọn dữ liệu nháp cũ trong localStorage — chế độ nhúng CHỈ hiển thị người chơi từ DB (SET_PARTICIPANTS)
+    try{
+      participants=[]; prizes=[]; winners=[]; window._skipCodes=new Set();
+      if(typeof save==='function') save();
+      if(typeof renderP==='function') renderP();
+      if(typeof renderPr==='function') renderPr();
+      if(typeof updateStats==='function') updateStats();
+      if(typeof updateSel==='function') updateSel();
+      if(typeof buildRace==='function') buildRace();
+    }catch(_e){ console.warn('clear draft', _e); }
   }
 
   // Lắng nghe SET_PARTICIPANTS từ RaceCanvas
