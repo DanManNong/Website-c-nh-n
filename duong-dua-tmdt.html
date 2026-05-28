@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏁 Đường Đua Thương Mại Điện Tử</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0B0B0B;
+  --graphite: #333533;
+  --cream: #FBFED3;
+  --champagne: #E8C274;
+  --gold: #C9A05F;
+  --bronze: #896123;
+  --gold-glow: rgba(232,194,116,0.25);
+  --glass: rgba(251,254,211,0.04);
+  --glass-border: rgba(201,160,95,0.18);
+  --danger: #e74c3c;
+  --success: #2ecc71;
+  --info: var(--champagne);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--ink);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 24px;
+  background:rgba(11,11,11,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--glass-border);
+}
+.nav-brand {
+  font-size:1rem; font-weight:800; letter-spacing:2px; text-transform:uppercase;
+  background:linear-gradient(135deg,var(--champagne),var(--gold),var(--bronze));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.nav-tabs { display:flex; gap:3px; }
+.nav-tab {
+  padding:8px 18px; border:none; border-radius:9999px;
+  background:transparent; color:rgba(251,254,211,0.5);
+  font-family:inherit; font-size:0.8rem; font-weight:600;
+  letter-spacing:0.5px; cursor:pointer; transition:all 0.3s;
+}
+.nav-tab:hover { color:var(--cream); background:var(--glass); }
+.nav-tab.active {
+  background:linear-gradient(135deg,var(--champagne),var(--gold));
+  color:var(--ink); font-weight:700;
+}
+.nav-right { display:flex; align-items:center; gap:12px; }
+.nav-count {
+  background:var(--glass); padding:5px 14px; border-radius:9999px;
+  border:1px solid var(--glass-border); font-size:0.78rem; font-weight:600;
+}
+.nav-count strong { color:var(--champagne); font-size:1rem; }
+.btn-icon {
+  background:var(--glass); border:1px solid var(--glass-border);
+  color:var(--cream); padding:6px 12px; border-radius:8px;
+  cursor:pointer; font-size:0.82rem; transition:all 0.3s;
+}
+.btn-icon:hover { background:rgba(201,160,95,0.12); }
+
+/* ===== SCREENS ===== */
+.screen { display:none; padding-top:60px; min-height:100vh; position:relative; z-index:1; }
+.screen.active { display:block; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding:10px 22px; border:none; border-radius:9999px;
+  font-family:inherit; font-weight:600; font-size:0.85rem;
+  cursor:pointer; transition:all 0.3s;
+  display:inline-flex; align-items:center; gap:6px;
+  letter-spacing:0.3px;
+}
+.btn-gold {
+  background:linear-gradient(135deg,var(--champagne),var(--gold));
+  color:var(--ink);
+}
+.btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 24px var(--gold-glow); }
+.btn-danger { background:rgba(231,76,60,0.12); color:var(--danger); border:1px solid rgba(231,76,60,0.2); }
+.btn-danger:hover { background:rgba(231,76,60,0.2); }
+.btn-outline {
+  background:transparent; color:var(--champagne);
+  border:2px solid var(--champagne);
+}
+.btn-outline:hover { background:var(--champagne); color:var(--ink); }
+.btn-sec { background:var(--glass); color:var(--cream); border:1px solid var(--glass-border); }
+.btn-sec:hover { background:rgba(201,160,95,0.1); }
+.btn-bronze { background:linear-gradient(135deg,var(--bronze),#a07830); color:var(--cream); }
+.btn-bronze:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(137,97,35,0.4); }
+
+/* ===== ADMIN ===== */
+.admin-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; padding:20px; max-width:1400px; margin:0 auto; }
+.panel {
+  background:rgba(51,53,51,0.6); border-radius:1rem;
+  border:1px solid var(--glass-border); padding:22px;
+  backdrop-filter:blur(4px);
+}
+.panel-title {
+  font-size:0.95rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  background:linear-gradient(135deg,var(--champagne),var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:14px; display:flex; align-items:center; gap:8px;
+}
+.code-row { display:flex; gap:8px; margin-bottom:14px; }
+.code-row input {
+  flex:1; padding:12px 16px;
+  background:var(--ink); border:1px solid var(--glass-border);
+  border-radius:10px; color:var(--cream);
+  font-family:'Montserrat',monospace; font-size:1.15rem;
+  letter-spacing:6px; text-align:center; outline:none;
+  transition:border-color 0.3s;
+}
+.code-row input:focus { border-color:var(--champagne); }
+.code-row input::placeholder { letter-spacing:2px; font-size:0.82rem; color:rgba(251,254,211,0.3); }
+.btn-row { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
+
+.p-list { max-height:360px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--bronze) transparent; }
+.p-item {
+  display:flex; align-items:center; gap:10px;
+  padding:9px 12px; border-radius:10px;
+  background:var(--glass); margin-bottom:5px;
+  border:1px solid transparent; transition:all 0.3s;
+  animation:slideIn 0.3s ease-out;
+}
+.p-item:hover { border-color:var(--glass-border); }
+@keyframes slideIn { from{opacity:0;transform:translateX(-16px)} to{opacity:1;transform:translateX(0)} }
+.p-avatar {
+  width:34px; height:34px; border-radius:50%;
+  background:linear-gradient(135deg,var(--bronze),var(--champagne));
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:0.78rem; color:var(--ink);
+  overflow:hidden; flex-shrink:0;
+}
+.p-avatar img { width:100%; height:100%; object-fit:cover; }
+.p-info { flex:1; }
+.p-name { font-weight:700; font-size:0.85rem; }
+.p-code { font-size:0.7rem; color:var(--gold); letter-spacing:2px; font-weight:500; }
+.p-del { background:none; border:none; color:rgba(251,254,211,0.3); cursor:pointer; font-size:1rem; padding:4px; transition:color 0.3s; }
+.p-del:hover { color:var(--danger); }
+
+.prize-form { display:grid; grid-template-columns:1fr 66px auto; gap:8px; margin-bottom:14px; }
+.prize-form input {
+  padding:10px 14px; background:var(--ink); border:1px solid var(--glass-border);
+  border-radius:8px; color:var(--cream); font-family:inherit; font-size:0.82rem; outline:none;
+}
+.prize-form input:focus { border-color:var(--champagne); }
+.pr-item {
+  display:flex; align-items:center; gap:10px;
+  padding:11px 14px; background:var(--glass); border-radius:10px;
+  margin-bottom:5px; border-left:3px solid var(--gold);
+}
+.pr-icon { font-size:1.3rem; }
+.pr-details { flex:1; }
+.pr-name { font-weight:700; font-size:0.88rem; }
+.pr-qty { font-size:0.75rem; color:var(--gold); font-weight:500; }
+
+.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.stat-box { padding:14px; background:var(--glass); border-radius:12px; text-align:center; border:1px solid var(--glass-border); }
+.stat-num { font-size:1.7rem; font-weight:900; }
+.stat-label { font-size:0.72rem; color:var(--gold); font-weight:600; letter-spacing:0.5px; text-transform:uppercase; }
+
+.form-group { margin-bottom:12px; }
+.form-group label { display:block; font-size:0.75rem; color:var(--gold); margin-bottom:3px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+.form-group input {
+  width:100%; padding:10px 14px; background:var(--ink);
+  border:1px solid var(--glass-border); border-radius:8px;
+  color:var(--cream); font-family:inherit; font-size:0.85rem; outline:none;
+}
+.form-group input:focus { border-color:var(--champagne); }
+.empty { text-align:center; padding:28px 20px; color:rgba(251,254,211,0.35); }
+.empty .ico { font-size:2.2rem; margin-bottom:6px; }
+
+/* ===== DRAW SCREEN ===== */
+.draw-wrap {
+  height:calc(100vh - 60px);
+  display:flex; flex-direction:column;
+  position:relative; overflow:hidden;
+  background:linear-gradient(180deg,var(--ink),var(--graphite));
+}
+/* Draw controls inline in nav */
+.nav-draw-ctrl {
+  display:none; align-items:center; gap:8px; flex-shrink:0;
+}
+.nav-draw-ctrl.show { display:flex; }
+.draw-prize-label {
+  font-size:0.78rem; font-weight:700; color:var(--champagne);
+  max-width:140px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* Countdown inline in nav */
+.cd-wrap { display:none; align-items:center; flex-shrink:0; }
+.cd-wrap.show { display:flex; }
+.cd-circle { position:relative; width:42px; height:42px; }
+.cd-circle svg { transform:rotate(-90deg); }
+.cd-circle circle { fill:none; stroke-width:5; }
+.cd-circle .cd-bg { stroke:rgba(201,160,95,0.15); }
+.cd-circle .cd-prog {
+  stroke:var(--champagne); stroke-linecap:round;
+  filter:drop-shadow(0 0 8px var(--gold-glow));
+  transition:stroke-dashoffset 0.08s linear;
+}
+.cd-num {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; font-weight:900; color:var(--champagne);
+}
+
+/* ===== RACE AREA ===== */
+.race-area {
+  flex:1; position:relative; overflow:hidden;
+  background:
+    linear-gradient(180deg,
+      rgba(11,11,11,0.9) 0%,
+      rgba(51,53,51,0.7) 10%,
+      rgba(137,97,35,0.12) 50%,
+      rgba(51,53,51,0.7) 90%,
+      rgba(11,11,11,0.9) 100%
+    );
+}
+/* Track lines */
+.race-area::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 69px,
+      rgba(201,160,95,0.08) 69px,
+      rgba(201,160,95,0.08) 70px
+    );
+}
+/* Moving dots on track */
+.race-area::after {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 58px,
+      rgba(232,194,116,0.04) 58px,
+      rgba(232,194,116,0.04) 60px
+    );
+  animation:trackScroll 3s linear infinite;
+}
+@keyframes trackScroll { from{transform:translateX(0)} to{transform:translateX(60px)} }
+
+/* Finish line */
+.finish-line {
+  position:absolute; right:70px; top:0; bottom:0; width:6px;
+  background:repeating-linear-gradient(180deg,var(--champagne) 0,var(--champagne) 8px,var(--ink) 8px,var(--ink) 16px);
+  opacity:0.6; z-index:5;
+}
+.finish-flag { position:absolute; right:36px; top:8px; font-size:1.6rem; z-index:6; }
+
+/* Animal units float freely in race area */
+.animal-unit {
+  position:absolute;
+  display:flex; align-items:center; gap:6px;
+  transition:left 0.45s ease-in-out, top 0.45s ease-in-out, opacity 0.8s;
+  z-index:10; cursor:default;
+}
+/* Finalists: slower, more dramatic movement */
+.animal-unit.finalist {
+  transition:left 1.2s ease-in-out, top 1.2s ease-in-out, opacity 0.8s;
+}
+.animal-unit.eliminated {
+  transition:left 1s ease-out, top 1s ease-out, opacity 1s;
+}
+.animal-svg-wrap {
+  width:184px; height:184px;
+  filter:drop-shadow(3px 5px 10px rgba(0,0,0,0.5));
+  animation:animalBob 1.5s ease-in-out infinite;
+  position:relative;
+}
+@keyframes animalBob {
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+.animal-unit.racing .animal-svg-wrap {
+  animation:animalRun 0.4s ease-in-out infinite;
+}
+@keyframes animalRun {
+  0%{transform:translateY(0) scaleX(1)}
+  30%{transform:translateY(-6px) scaleX(1.04)}
+  60%{transform:translateY(-1px) scaleX(0.98)}
+  100%{transform:translateY(0) scaleX(1)}
+}
+.animal-name-tag {
+  background:rgba(11,11,11,0.75);
+  backdrop-filter:blur(6px);
+  border:1px solid var(--glass-border);
+  padding:5px 14px; border-radius:9999px;
+  font-weight:600; font-size:0.82rem;
+  white-space:nowrap; max-width:180px;
+  overflow:hidden; text-overflow:ellipsis;
+  color:var(--cream); letter-spacing:0.3px;
+}
+.animal-name-tag .dn-avatar {
+  display:inline-block; width:18px; height:18px;
+  border-radius:50%; vertical-align:middle; margin-right:4px;
+  background:var(--gold); overflow:hidden;
+}
+.animal-name-tag .dn-avatar img { width:100%; height:100%; object-fit:cover; }
+
+.animal-unit.winner-animal { z-index:20; }
+.animal-unit.winner-animal .animal-svg-wrap {
+  animation:animalWin 0.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 40px var(--gold-glow));
+}
+@keyframes animalWin {
+  0%,100%{transform:translateY(0) scale(1.15)}
+  50%{transform:translateY(-12px) scale(1.25)}
+}
+.animal-unit.finalist {
+  z-index:15;
+  filter:drop-shadow(0 0 16px var(--gold-glow));
+}
+.animal-unit.finalist .animal-svg-wrap {
+  animation:finalistPulse 0.6s ease-in-out infinite;
+}
+@keyframes finalistPulse {
+  0%,100%{transform:scale(1) translateY(0)}
+  50%{transform:scale(1.08) translateY(-6px)}
+}
+.animal-unit.eliminated {
+  opacity:0.1;
+  filter:grayscale(1);
+  transition:all 1s ease-out;
+}
+.animal-unit.loser { opacity:0.18; }
+
+/* Draw select & button */
+.draw-select {
+  padding:7px 14px; background:var(--graphite);
+  border:1px solid var(--glass-border); border-radius:9999px;
+  color:var(--cream); font-family:inherit; font-size:0.78rem;
+  font-weight:600; outline:none; cursor:pointer;
+}
+.draw-select:focus { border-color:var(--champagne); }
+.btn-draw {
+  padding:8px 22px;
+  background:linear-gradient(135deg,var(--champagne),var(--gold));
+  color:var(--ink); border:none; border-radius:9999px;
+  font-family:inherit; font-size:0.8rem; font-weight:800;
+  cursor:pointer; letter-spacing:0.5px; transition:all 0.3s;
+  text-transform:uppercase; position:relative; overflow:hidden;
+  white-space:nowrap;
+}
+.btn-draw:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 10px 30px var(--gold-glow); }
+.btn-draw:disabled { opacity:0.3; cursor:not-allowed; }
+.btn-draw::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
+  transform:translateX(-100%); transition:transform 0.6s;
+}
+.btn-draw:hover:not(:disabled)::after { transform:translateX(100%); }
+
+/* ===== WINNER OVERLAY ===== */
+.winner-overlay {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(11,11,11,0.94); backdrop-filter:blur(24px);
+  align-items:center; justify-content:center; flex-direction:column;
+}
+.winner-overlay.show { display:flex; }
+.w-card { text-align:center; animation:wReveal 0.8s cubic-bezier(0.175,0.885,0.32,1.275); }
+@keyframes wReveal { from{opacity:0;transform:scale(0.5) translateY(40px)} to{opacity:1;transform:scale(1) translateY(0)} }
+.w-label {
+  font-size:0.85rem; font-weight:700;
+  color:var(--gold); letter-spacing:4px; text-transform:uppercase;
+  margin-bottom:20px;
+}
+.w-animal-big { width:280px; height:280px; margin:0 auto 8px; animation:animalWin 0.6s ease-in-out infinite; }
+.w-avatar-big {
+  width:80px; height:80px; border-radius:50%;
+  background:linear-gradient(135deg,var(--champagne),var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.8rem; font-weight:900; color:var(--ink);
+  margin:0 auto 16px;
+  box-shadow:0 0 60px var(--gold-glow);
+  overflow:hidden;
+}
+.w-avatar-big img { width:100%; height:100%; object-fit:cover; }
+.w-name {
+  font-size:2.4rem; font-weight:900;
+  background:linear-gradient(135deg,var(--champagne),#fff,var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:6px;
+}
+.w-prize { font-size:1rem; color:var(--champagne); margin-bottom:28px; font-weight:600; }
+.w-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+/* Confetti */
+.confetti-box { position:fixed; inset:0; pointer-events:none; z-index:250; }
+.confetti-p { position:absolute; top:-20px; animation:cFall 3s ease-in forwards; }
+@keyframes cFall { 0%{opacity:1;transform:translateY(0) rotate(0)} 100%{opacity:0;transform:translateY(100vh) rotate(720deg)} }
+
+/* ===== RESULTS ===== */
+.res-wrap { padding:20px; max-width:1200px; margin:0 auto; }
+.res-head { text-align:center; margin-bottom:24px; }
+.res-title {
+  font-size:2rem; font-weight:900; letter-spacing:1px;
+  background:linear-gradient(135deg,var(--champagne),var(--gold),var(--bronze));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.res-tabs { display:flex; gap:4px; justify-content:center; margin-bottom:20px; }
+.res-tab {
+  padding:8px 22px; border:1px solid var(--glass-border);
+  border-radius:9999px; background:transparent; color:rgba(251,254,211,0.5);
+  font-family:inherit; font-weight:600; cursor:pointer; transition:all 0.3s;
+}
+.res-tab.active { background:var(--champagne); color:var(--ink); border-color:var(--champagne); }
+.res-section { display:none; }
+.res-section.active { display:block; }
+.pr-group { margin-bottom:20px; }
+.pr-gtitle {
+  font-size:1.1rem; font-weight:800; letter-spacing:0.5px;
+  background:linear-gradient(135deg,var(--champagne),var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:10px; display:flex; align-items:center; gap:8px;
+}
+.w-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; }
+.w-card-sm {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 16px; background:rgba(51,53,51,0.6);
+  border:1px solid var(--glass-border); border-radius:1rem;
+  animation:slideIn 0.4s ease-out;
+}
+.wc-av {
+  width:38px; height:38px; border-radius:50%;
+  background:linear-gradient(135deg,var(--bronze),var(--champagne));
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; color:var(--ink); font-size:0.82rem;
+  overflow:hidden; flex-shrink:0;
+}
+.wc-av img { width:100%; height:100%; object-fit:cover; }
+.wc-inf { flex:1; }
+.wc-n { font-weight:700; font-size:0.88rem; }
+.wc-c { font-size:0.7rem; color:var(--gold); letter-spacing:1px; font-weight:500; }
+
+.sum-table { width:100%; border-collapse:separate; border-spacing:0 5px; }
+.sum-table th {
+  text-align:left; padding:8px 14px; color:var(--gold);
+  font-size:0.72rem; text-transform:uppercase; letter-spacing:1.5px; font-weight:700;
+}
+.sum-table td { padding:12px 14px; background:rgba(51,53,51,0.6); font-size:0.85rem; }
+.sum-table tr td:first-child { border-radius:10px 0 0 10px; }
+.sum-table tr td:last-child { border-radius:0 10px 10px 0; }
+
+/* Audio */
+.audio-ctrl { position:fixed; bottom:16px; right:16px; z-index:300; display:flex; gap:6px; }
+.audio-btn {
+  width:42px; height:42px; border-radius:50%;
+  background:var(--graphite); border:1px solid var(--glass-border);
+  color:var(--cream); font-size:1.1rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:all 0.3s;
+}
+.audio-btn:hover { background:rgba(201,160,95,0.15); }
+.audio-btn.muted { opacity:0.3; }
+
+/* Toast */
+.toast-box { position:fixed; top:68px; right:16px; z-index:500; }
+.toast {
+  padding:10px 18px; background:var(--graphite);
+  border:1px solid var(--glass-border); border-radius:10px;
+  margin-bottom:6px; font-size:0.8rem; font-weight:500;
+  animation:toastIn 0.3s ease-out;
+  display:flex; align-items:center; gap:6px;
+}
+.toast.ok { border-left:3px solid var(--success); }
+.toast.err { border-left:3px solid var(--danger); }
+.toast.inf { border-left:3px solid var(--champagne); }
+@keyframes toastIn { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+
+@media(max-width:768px){
+  .admin-grid{grid-template-columns:1fr}
+  .nav{padding:8px 12px;flex-wrap:wrap;gap:6px}
+  .draw-title{font-size:1.2rem}
+  .w-name{font-size:1.6rem}
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bronze);border-radius:3px}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-brand" id="navBrand">ĐƯỜNG ĐUA THƯƠNG MẠI ĐIỆN TỬ</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showScreen('admin')">Quản trị</button>
+    <button class="nav-tab" onclick="showScreen('draw')">Đường đua</button>
+    <button class="nav-tab" onclick="showScreen('results')">Kết quả</button>
+  </div>
+  <!-- Draw controls: visible only on draw screen -->
+  <div class="nav-draw-ctrl" id="navDrawCtrl">
+    <div class="draw-prize-label" id="dTitle2"></div>
+    <select class="draw-select" id="dSelect" onchange="onSelChange()">
+      <option value="">— Chọn giải —</option>
+    </select>
+    <button class="btn-draw" id="btnDraw" onclick="startDraw()" disabled>🏁 XUẤT PHÁT</button>
+    <div class="cd-wrap" id="cdWrap">
+      <div class="cd-circle">
+        <svg width="46" height="46" viewBox="0 0 90 90">
+          <circle class="cd-bg" cx="45" cy="45" r="40"/>
+          <circle class="cd-prog" id="cdProg" cx="45" cy="45" r="40" stroke-dasharray="251.33" stroke-dashoffset="0"/>
+        </svg>
+        <div class="cd-num" id="cdNum">16</div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-count">👥 <strong id="totalP">0</strong></div>
+    <button class="btn-icon" onclick="toggleFS()">⛶</button>
+  </div>
+</nav>
+
+<div class="toast-box" id="toastBox"></div>
+
+<!-- ======= ADMIN ======= -->
+<div class="screen active" id="screen-admin">
+<div class="admin-grid">
+  <div>
+    <div class="panel">
+      <div class="panel-title">🎫 Đăng ký tham gia</div>
+      <div class="code-row">
+        <input type="text" id="codeIn" maxlength="6" placeholder="Nhập mã 6 số"
+          oninput="this.value=this.value.replace(/\D/g,'')" onkeydown="if(event.key==='Enter')regCode()">
+        <button class="btn btn-gold" onclick="regCode()">Đăng ký</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-sec" onclick="genCode()">🎲 Sinh mã</button>
+        <button class="btn btn-sec" onclick="genBulk()">📋 Sinh 10 mã</button>
+        <button class="btn btn-danger" onclick="clearAll()">🗑 Xoá hết</button>
+      </div>
+      <div id="genShow" style="display:none;margin-bottom:12px;padding:10px;background:var(--ink);border-radius:8px;text-align:center;border:1px solid var(--glass-border);">
+        <div style="font-size:0.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">Mã vừa tạo</div>
+        <div id="genVal" style="font-size:1.8rem;font-weight:900;color:var(--champagne);letter-spacing:8px;"></div>
+      </div>
+      <div class="p-list" id="pList"><div class="empty"><div class="ico">👥</div><p>Chưa có người tham gia</p></div></div>
+    </div>
+    <div class="panel" style="margin-top:14px;">
+      <div class="panel-title">✏️ Sửa thông tin</div>
+      <div class="code-row">
+        <input type="text" id="editCodeIn" maxlength="6" placeholder="Nhập mã để tìm" oninput="this.value=this.value.replace(/\D/g,'')">
+        <button class="btn btn-sec" onclick="findEdit()">🔍 Tìm</button>
+      </div>
+      <div id="editArea" style="display:none;">
+        <div class="form-group"><label>Tên</label><input type="text" id="editName"></div>
+        <div class="form-group"><label>URL ảnh</label><input type="text" id="editAvatar" placeholder="https://..."></div>
+        <button class="btn btn-gold" onclick="saveEdit()" style="margin-top:6px;">💾 Lưu</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="panel">
+      <div class="panel-title">🏆 Giải thưởng</div>
+      <div class="prize-form">
+        <input type="text" id="prNameIn" placeholder="Tên giải">
+        <input type="number" id="prQtyIn" min="1" value="1" style="text-align:center">
+        <button class="btn btn-gold" onclick="addPrize()">+ Thêm</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-sec" onclick="loadDefault()" style="font-size:0.78rem;">📦 Mẫu mặc định</button>
+      </div>
+      <div id="prList"><div class="empty"><div class="ico">🏆</div><p>Chưa có giải</p></div></div>
+    </div>
+    <div class="panel" style="margin-top:14px;">
+      <div class="panel-title">📊 Thống kê</div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-num" style="color:var(--champagne)" id="s1">0</div><div class="stat-label">Người tham gia</div></div>
+        <div class="stat-box"><div class="stat-num" style="color:var(--gold)" id="s2">0</div><div class="stat-label">Tổng giải</div></div>
+        <div class="stat-box"><div class="stat-num" style="color:var(--danger)" id="s3">0</div><div class="stat-label">Đã trúng</div></div>
+        <div class="stat-box"><div class="stat-num" style="color:var(--cream)" id="s4">0</div><div class="stat-label">Còn lại</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======= DRAW ======= -->
+<div class="screen" id="screen-draw">
+<div class="draw-wrap">
+  <div class="race-area" id="raceArea">
+    <div class="finish-line"></div>
+    <div class="finish-flag">🏁</div>
+  </div>
+</div>
+</div>
+
+<!-- WINNER OVERLAY -->
+<div class="winner-overlay" id="wOverlay">
+  <div class="w-card">
+    <div class="w-label">✦ CHÚC MỪNG NGƯỜI CHIẾN THẮNG ✦</div>
+    <div class="w-animal-big" id="wAnimalBig"></div>
+    <div class="w-avatar-big" id="wAvBig"></div>
+    <div class="w-name" id="wNameBig"></div>
+    <div class="w-prize" id="wPrizeName"></div>
+    <div class="w-actions">
+      <button class="btn btn-gold" style="padding:14px 36px;font-size:0.95rem;" onclick="closeWinner()">✅ Xác nhận</button>
+      <button class="btn btn-bronze" style="padding:14px 36px;font-size:0.95rem;" onclick="redraw()">🔄 Quay lại (Vắng mặt)</button>
+    </div>
+  </div>
+</div>
+<div class="confetti-box" id="confettiBox"></div>
+
+<!-- ======= RESULTS ======= -->
+<div class="screen" id="screen-results">
+<div class="res-wrap">
+  <div class="res-head"><div class="res-title">🏆 BẢNG VÀNG TRÚNG THƯỞNG</div></div>
+  <div class="res-tabs">
+    <button class="res-tab active" onclick="showResTab('byPr')">Theo giải</button>
+    <button class="res-tab" onclick="showResTab('sum')">Tổng kết</button>
+  </div>
+  <div class="res-section active" id="resByPr"><div id="resByPrC"><div class="empty"><div class="ico">🏆</div><p>Chưa có kết quả</p></div></div></div>
+  <div class="res-section" id="resSum"><div id="resSumC"><div class="empty"><div class="ico">📊</div><p>Chưa có dữ liệu</p></div></div></div>
+</div>
+</div>
+
+<div class="audio-ctrl">
+  <button class="audio-btn" id="btnMusic" onclick="toggleMusic()" title="Nhạc nền">🎵</button>
+  <button class="audio-btn" id="btnSfx" onclick="toggleSfx()" title="Hiệu ứng">🔊</button>
+</div>
+
+<script>
+// ===== STATE =====
+let participants=JSON.parse(localStorage.getItem('dd_p')||'[]');
+let prizes=JSON.parse(localStorage.getItem('dd_pr')||'[]');
+let winners=JSON.parse(localStorage.getItem('dd_w')||'[]');
+let isDrawing=false,editingCode=null,lastWinner=null,lastPrize=null;
+let musicOn=true,sfxOn=true;
+window._skipCodes=new Set();
+function save(){
+  localStorage.setItem('dd_p',JSON.stringify(participants));
+  localStorage.setItem('dd_pr',JSON.stringify(prizes));
+  localStorage.setItem('dd_w',JSON.stringify(winners));
+}
+
+// ===== AUDIO =====
+let audioCtx=null;
+function getAudio(){
+  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  return audioCtx;
+}
+function playNote(freq,dur=0.15,type='square',vol=0.06){
+  if(!sfxOn)return;
+  try{const ctx=getAudio(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type=type;o.frequency.setValueAtTime(freq,ctx.currentTime);
+  g.gain.setValueAtTime(vol,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+dur);
+  o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+dur);}catch(e){}
+}
+function playClick(){playNote(700,0.05,'square',0.03)}
+function playCountBeep(n){n<=3?playNote(880,0.25,'sine',0.12):playNote(520,0.08,'sine',0.04)}
+function playFanfare(){
+  if(!sfxOn)return;
+  [523,659,784,1047,784,1047,1319].forEach((f,i)=>setTimeout(()=>playNote(f,0.3,'sine',0.1),i*130));
+}
+function playRunSound(){if(!sfxOn)return;[300,340,380,340].forEach((f,i)=>setTimeout(()=>playNote(f,0.08,'square',0.02),i*100));}
+let bgInt=null;
+function startBgMusic(){
+  if(!musicOn)return;stopBgMusic();
+  const m=[262,294,330,349,392,349,330,294,330,392,440,392,330,294,262,294,349,392,440,523,440,392,349,330];
+  let i=0;bgInt=setInterval(()=>{if(!musicOn){stopBgMusic();return;}playNote(m[i%m.length],0.15,'sine',0.02);i++;},220);
+}
+function stopBgMusic(){if(bgInt){clearInterval(bgInt);bgInt=null;}}
+function toggleMusic(){musicOn=!musicOn;document.getElementById('btnMusic').classList.toggle('muted',!musicOn);if(!musicOn)stopBgMusic();}
+function toggleSfx(){sfxOn=!sfxOn;document.getElementById('btnSfx').classList.toggle('muted',!sfxOn);}
+
+// ===== ANIMAL SVGs =====
+// Each animal is a function returning SVG string
+const ANIMALS = [
+  // 0: Lion
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="30" fill="#D4A017"/>
+    <circle cx="50" cy="50" r="38" fill="none" stroke="#C9A05F" stroke-width="8" stroke-dasharray="6 4" opacity="0.6"/>
+    <circle cx="50" cy="50" r="24" fill="#E8C274"/>
+    <circle cx="42" cy="44" r="3.5" fill="#222"/><circle cx="43" cy="43" r="1.2" fill="#fff"/>
+    <circle cx="58" cy="44" r="3.5" fill="#222"/><circle cx="59" cy="43" r="1.2" fill="#fff"/>
+    <ellipse cx="50" cy="54" rx="6" ry="4" fill="#896123"/>
+    <path d="M47 58 Q50 63 53 58" stroke="#222" stroke-width="1.5" fill="none"/>
+    <path d="M38 36 Q34 28 42 32" stroke="#C9A05F" stroke-width="2" fill="none"/>
+    <path d="M62 36 Q66 28 58 32" stroke="#C9A05F" stroke-width="2" fill="none"/>
+  </svg>`,
+  // 1: Cat
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="28" ry="24" fill="#A0522D"/>
+    <circle cx="50" cy="42" r="22" fill="#CD853F"/>
+    <polygon points="32,30 28,10 40,24" fill="#CD853F"/><polygon points="32,30 28,10 40,24" fill="#DEB887" opacity="0.5"/>
+    <polygon points="68,30 72,10 60,24" fill="#CD853F"/><polygon points="68,30 72,10 60,24" fill="#DEB887" opacity="0.5"/>
+    <ellipse cx="42" cy="40" rx="4" ry="5" fill="#2E8B57"/><circle cx="42" cy="40" r="2" fill="#111"/>
+    <ellipse cx="58" cy="40" rx="4" ry="5" fill="#2E8B57"/><circle cx="58" cy="40" r="2" fill="#111"/>
+    <ellipse cx="50" cy="48" rx="3" ry="2" fill="#FF9999"/>
+    <path d="M47 50 Q50 54 53 50" stroke="#222" stroke-width="1.2" fill="none"/>
+    <line x1="28" y1="44" x2="38" y2="46" stroke="#222" stroke-width="0.8"/>
+    <line x1="28" y1="48" x2="38" y2="48" stroke="#222" stroke-width="0.8"/>
+    <line x1="62" y1="46" x2="72" y2="44" stroke="#222" stroke-width="0.8"/>
+    <line x1="62" y1="48" x2="72" y2="48" stroke="#222" stroke-width="0.8"/>
+    <path d="M70 72 Q78 80 72 85" stroke="#A0522D" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>`,
+  // 2: Rabbit
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="62" rx="24" ry="22" fill="#F5F5DC"/>
+    <circle cx="50" cy="46" r="20" fill="#FFF8DC"/>
+    <ellipse cx="40" cy="18" rx="7" ry="22" fill="#FFF8DC" transform="rotate(-10 40 18)"/>
+    <ellipse cx="40" cy="18" rx="4" ry="18" fill="#FFB6C1" opacity="0.5" transform="rotate(-10 40 18)"/>
+    <ellipse cx="60" cy="18" rx="7" ry="22" fill="#FFF8DC" transform="rotate(10 60 18)"/>
+    <ellipse cx="60" cy="18" rx="4" ry="18" fill="#FFB6C1" opacity="0.5" transform="rotate(10 60 18)"/>
+    <circle cx="43" cy="43" r="3" fill="#C0392B"/><circle cx="44" cy="42" r="1" fill="#fff"/>
+    <circle cx="57" cy="43" r="3" fill="#C0392B"/><circle cx="58" cy="42" r="1" fill="#fff"/>
+    <ellipse cx="50" cy="50" rx="3" ry="2" fill="#FFB6C1"/>
+    <circle cx="42" cy="54" r="5" fill="#FFB6C1" opacity="0.3"/>
+    <circle cx="58" cy="54" r="5" fill="#FFB6C1" opacity="0.3"/>
+    <path d="M47 52 Q50 56 53 52" stroke="#222" stroke-width="1" fill="none"/>
+  </svg>`,
+  // 3: Bear
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="52" r="30" fill="#8B4513"/>
+    <circle cx="30" cy="30" r="10" fill="#8B4513"/><circle cx="30" cy="30" r="6" fill="#A0522D"/>
+    <circle cx="70" cy="30" r="10" fill="#8B4513"/><circle cx="70" cy="30" r="6" fill="#A0522D"/>
+    <circle cx="50" cy="50" r="24" fill="#A0522D"/>
+    <circle cx="42" cy="44" r="3.5" fill="#222"/><circle cx="43" cy="43" r="1.2" fill="#fff"/>
+    <circle cx="58" cy="44" r="3.5" fill="#222"/><circle cx="59" cy="43" r="1.2" fill="#fff"/>
+    <ellipse cx="50" cy="55" rx="8" ry="6" fill="#D2B48C"/>
+    <ellipse cx="50" cy="53" rx="4" ry="3" fill="#222"/>
+    <path d="M46 58 Q50 63 54 58" stroke="#222" stroke-width="1.5" fill="none"/>
+  </svg>`,
+  // 4: Fox
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="26" ry="22" fill="#D35400"/>
+    <circle cx="50" cy="44" r="22" fill="#E67E22"/>
+    <polygon points="30,32 22,8 40,28" fill="#E67E22"/>
+    <polygon points="30,32 24,12 38,28" fill="#FDEBD0" opacity="0.6"/>
+    <polygon points="70,32 78,8 60,28" fill="#E67E22"/>
+    <polygon points="70,32 76,12 62,28" fill="#FDEBD0" opacity="0.6"/>
+    <path d="M36 46 Q50 38 64 46 Q50 42 36 46" fill="#FDEBD0"/>
+    <circle cx="42" cy="42" r="3" fill="#27AE60"/><circle cx="42" cy="42" r="1.5" fill="#111"/>
+    <circle cx="58" cy="42" r="3" fill="#27AE60"/><circle cx="58" cy="42" r="1.5" fill="#111"/>
+    <ellipse cx="50" cy="50" rx="3" ry="2" fill="#222"/>
+    <ellipse cx="50" cy="60" rx="10" ry="8" fill="#FDEBD0"/>
+    <path d="M46 54 Q50 58 54 54" stroke="#222" stroke-width="1" fill="none"/>
+  </svg>`,
+  // 5: Panda
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="52" r="30" fill="#F5F5F5"/>
+    <circle cx="32" cy="32" r="10" fill="#222"/><circle cx="68" cy="32" r="10" fill="#222"/>
+    <ellipse cx="40" cy="44" rx="9" ry="8" fill="#222"/>
+    <ellipse cx="60" cy="44" rx="9" ry="8" fill="#222"/>
+    <circle cx="40" cy="44" r="4" fill="#fff"/><circle cx="41" cy="43" r="2" fill="#222"/>
+    <circle cx="60" cy="44" r="4" fill="#fff"/><circle cx="61" cy="43" r="2" fill="#222"/>
+    <ellipse cx="50" cy="56" rx="4" ry="3" fill="#222"/>
+    <path d="M46 60 Q50 64 54 60" stroke="#222" stroke-width="1.5" fill="none"/>
+    <circle cx="40" cy="58" r="4" fill="#FFB6C1" opacity="0.3"/>
+    <circle cx="60" cy="58" r="4" fill="#FFB6C1" opacity="0.3"/>
+  </svg>`,
+  // 6: Owl
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="26" ry="28" fill="#6D4C41"/>
+    <circle cx="50" cy="44" r="22" fill="#8D6E63"/>
+    <polygon points="34,30 30,18 40,28" fill="#8D6E63"/>
+    <polygon points="66,30 70,18 60,28" fill="#8D6E63"/>
+    <circle cx="40" cy="42" r="10" fill="#FFF8E1"/><circle cx="40" cy="42" r="6" fill="#FF8F00"/><circle cx="40" cy="42" r="3" fill="#222"/>
+    <circle cx="60" cy="42" r="10" fill="#FFF8E1"/><circle cx="60" cy="42" r="6" fill="#FF8F00"/><circle cx="60" cy="42" r="3" fill="#222"/>
+    <polygon points="50,50 46,56 54,56" fill="#E8C274"/>
+    <path d="M38 66 Q42 60 46 66 Q50 60 54 66 Q58 60 62 66" fill="#D7CCC8"/>
+    <ellipse cx="30" cy="56" rx="8" ry="14" fill="#5D4037" transform="rotate(-15 30 56)"/>
+    <ellipse cx="70" cy="56" rx="8" ry="14" fill="#5D4037" transform="rotate(15 70 56)"/>
+  </svg>`,
+  // 7: Penguin
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="56" rx="24" ry="30" fill="#2C3E50"/>
+    <ellipse cx="50" cy="60" rx="16" ry="22" fill="#ECF0F1"/>
+    <circle cx="50" cy="36" r="16" fill="#2C3E50"/>
+    <circle cx="43" cy="34" r="3" fill="#fff"/><circle cx="43" cy="34" r="1.5" fill="#222"/>
+    <circle cx="57" cy="34" r="3" fill="#fff"/><circle cx="57" cy="34" r="1.5" fill="#222"/>
+    <polygon points="50,40 46,46 54,46" fill="#E8C274"/>
+    <ellipse cx="28" cy="56" rx="6" ry="16" fill="#2C3E50" transform="rotate(-10 28 56)"/>
+    <ellipse cx="72" cy="56" rx="6" ry="16" fill="#2C3E50" transform="rotate(10 72 56)"/>
+    <ellipse cx="42" cy="86" rx="8" ry="4" fill="#E8C274"/>
+    <ellipse cx="58" cy="86" rx="8" ry="4" fill="#E8C274"/>
+  </svg>`,
+  // 8: Duck (classic)
+  (sz)=>`<svg viewBox="0 0 100 90" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="70" cy="32" r="16" fill="#E8C274"/>
+    <circle cx="76" cy="28" r="4" fill="#fff"/><circle cx="77.5" cy="27.5" r="2" fill="#222"/>
+    <path d="M82 33 Q95 36 82 40 Z" fill="#D35400"/>
+    <ellipse cx="46" cy="58" rx="34" ry="22" fill="#E8C274"/>
+    <ellipse cx="38" cy="52" rx="18" ry="14" fill="#C9A05F" transform="rotate(-10 38 52)"/>
+    <path d="M12 50 Q2 40 8 36 Q14 42 14 50 Z" fill="#C9A05F"/>
+    <ellipse cx="48" cy="76" rx="36" ry="6" fill="rgba(255,255,255,0.08)"/>
+  </svg>`,
+  // 9: Frog
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="60" rx="30" ry="22" fill="#27AE60"/>
+    <circle cx="50" cy="48" r="22" fill="#2ECC71"/>
+    <circle cx="36" cy="32" r="10" fill="#2ECC71"/><circle cx="36" cy="32" r="7" fill="#fff"/><circle cx="36" cy="32" r="3.5" fill="#222"/>
+    <circle cx="64" cy="32" r="10" fill="#2ECC71"/><circle cx="64" cy="32" r="7" fill="#fff"/><circle cx="64" cy="32" r="3.5" fill="#222"/>
+    <path d="M38 56 Q50 64 62 56" stroke="#1E8449" stroke-width="2" fill="none"/>
+    <circle cx="40" cy="52" r="5" fill="#F9E79F" opacity="0.25"/>
+    <circle cx="60" cy="52" r="5" fill="#F9E79F" opacity="0.25"/>
+    <ellipse cx="34" cy="76" rx="10" ry="5" fill="#229954"/><ellipse cx="66" cy="76" rx="10" ry="5" fill="#229954"/>
+  </svg>`,
+  // 10: Unicorn
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="60" rx="28" ry="24" fill="#F8F9FA"/>
+    <circle cx="50" cy="44" r="20" fill="#FFF"/>
+    <polygon points="50,6 46,28 54,28" fill="#E8C274"/>
+    <polygon points="50,6 48,20 50,28" fill="#C9A05F" opacity="0.5"/>
+    <path d="M30 38 Q22 30 28 22 Q26 32 32 36" fill="#FFB6C1"/>
+    <path d="M32 36 Q24 28 30 20" stroke="#E8C274" stroke-width="1" fill="none"/>
+    <circle cx="42" cy="42" r="3" fill="#9B59B6"/><circle cx="43" cy="41" r="1.2" fill="#fff"/>
+    <circle cx="58" cy="42" r="3" fill="#9B59B6"/><circle cx="59" cy="41" r="1.2" fill="#fff"/>
+    <path d="M46 50 Q50 54 54 50" stroke="#FFB6C1" stroke-width="1.5" fill="none"/>
+    <ellipse cx="44" cy="48" rx="4" ry="2.5" fill="#FFB6C1" opacity="0.3"/>
+    <path d="M22 56 Q14 50 18 44 Q16 52 24 54" fill="#DCC6E0"/>
+    <path d="M78 56 Q86 50 82 44 Q84 52 76 54" fill="#AED6F1"/>
+  </svg>`,
+  // 11: Dog
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="60" rx="26" ry="24" fill="#D4A76A"/>
+    <circle cx="50" cy="44" r="22" fill="#E8C274"/>
+    <ellipse cx="30" cy="30" rx="10" ry="16" fill="#C9A05F" transform="rotate(-20 30 30)"/>
+    <ellipse cx="70" cy="30" rx="10" ry="16" fill="#C9A05F" transform="rotate(20 70 30)"/>
+    <circle cx="42" cy="42" r="3.5" fill="#222"/><circle cx="43" cy="41" r="1.2" fill="#fff"/>
+    <circle cx="58" cy="42" r="3.5" fill="#222"/><circle cx="59" cy="41" r="1.2" fill="#fff"/>
+    <ellipse cx="50" cy="52" rx="6" ry="4" fill="#222"/>
+    <path d="M44 56 Q50 62 56 56" stroke="#222" stroke-width="1.5" fill="none"/>
+    <ellipse cx="50" cy="58" rx="12" ry="8" fill="#FFF8DC"/>
+    <path d="M72 70 Q82 66 86 72 Q80 70 74 74" fill="#C9A05F" stroke-linecap="round"/>
+  </svg>`,
+  // 12: Elephant
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="32" ry="26" fill="#9E9E9E"/>
+    <circle cx="50" cy="40" r="24" fill="#BDBDBD"/>
+    <ellipse cx="26" cy="42" rx="14" ry="18" fill="#BDBDBD"/><ellipse cx="26" cy="42" rx="10" ry="14" fill="#F48FB1" opacity="0.3"/>
+    <ellipse cx="74" cy="42" rx="14" ry="18" fill="#BDBDBD"/><ellipse cx="74" cy="42" rx="10" ry="14" fill="#F48FB1" opacity="0.3"/>
+    <circle cx="40" cy="36" r="3" fill="#222"/><circle cx="41" cy="35" r="1" fill="#fff"/>
+    <circle cx="60" cy="36" r="3" fill="#222"/><circle cx="61" cy="35" r="1" fill="#fff"/>
+    <path d="M50 46 Q48 56 44 66 Q50 68 56 66 Q52 56 50 46" fill="#9E9E9E"/>
+  </svg>`,
+  // 13: Tiger
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="28" ry="24" fill="#E65100"/>
+    <circle cx="50" cy="42" r="22" fill="#FF8F00"/>
+    <polygon points="30,30 26,14 38,26" fill="#FF8F00"/>
+    <polygon points="70,30 74,14 62,26" fill="#FF8F00"/>
+    <path d="M36 36 L44 38 M56 38 L64 36" stroke="#222" stroke-width="2.5"/>
+    <path d="M42 30 L46 34 M58 34 L54 30" stroke="#222" stroke-width="2"/>
+    <circle cx="42" cy="40" r="3.5" fill="#fff"/><circle cx="42" cy="40" r="2" fill="#222"/>
+    <circle cx="58" cy="40" r="3.5" fill="#fff"/><circle cx="58" cy="40" r="2" fill="#222"/>
+    <ellipse cx="50" cy="48" rx="4" ry="3" fill="#FFE0B2"/><ellipse cx="50" cy="47" rx="2.5" ry="2" fill="#E65100"/>
+    <path d="M46 52 Q50 56 54 52" stroke="#222" stroke-width="1.2" fill="none"/>
+  </svg>`,
+  // 14: Monkey
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="24" ry="22" fill="#795548"/>
+    <circle cx="50" cy="42" r="22" fill="#8D6E63"/>
+    <circle cx="28" cy="42" r="10" fill="#8D6E63"/><circle cx="28" cy="42" r="7" fill="#FFCCBC"/>
+    <circle cx="72" cy="42" r="10" fill="#8D6E63"/><circle cx="72" cy="42" r="7" fill="#FFCCBC"/>
+    <ellipse cx="50" cy="48" rx="14" ry="12" fill="#FFCCBC"/>
+    <circle cx="42" cy="40" r="3" fill="#222"/><circle cx="43" cy="39" r="1" fill="#fff"/>
+    <circle cx="58" cy="40" r="3" fill="#222"/><circle cx="59" cy="39" r="1" fill="#fff"/>
+    <ellipse cx="50" cy="50" rx="3" ry="2" fill="#5D4037"/>
+    <path d="M44 54 Q50 58 56 54" stroke="#5D4037" stroke-width="1.2" fill="none"/>
+  </svg>`,
+  // 15: Dolphin
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="50" rx="36" ry="18" fill="#42A5F5"/>
+    <path d="M84 46 Q96 40 90 50 Q96 60 84 54" fill="#42A5F5"/>
+    <ellipse cx="42" cy="52" rx="20" ry="10" fill="#BBDEFB"/>
+    <circle cx="30" cy="46" r="3" fill="#222"/><circle cx="31" cy="45" r="1" fill="#fff"/>
+    <path d="M16 48 Q10 44 14 50 Q10 56 16 52" fill="#42A5F5"/>
+    <path d="M50 32 Q54 20 48 30 Q52 22 50 32" fill="#1E88E5"/>
+    <path d="M26 54 Q30 58 34 54" stroke="#222" stroke-width="1" fill="none"/>
+  </svg>`,
+  // 16: Horse
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="48" cy="60" rx="30" ry="22" fill="#8D6E63"/>
+    <ellipse cx="68" cy="38" rx="14" ry="20" fill="#A1887F" transform="rotate(15 68 38)"/>
+    <polygon points="62,20 58,6 66,14" fill="#A1887F"/>
+    <polygon points="72,22 76,8 68,16" fill="#A1887F"/>
+    <circle cx="74" cy="34" r="3" fill="#222"/><circle cx="75" cy="33" r="1" fill="#fff"/>
+    <ellipse cx="80" cy="42" rx="6" ry="3" fill="#795548"/>
+    <path d="M56 24 Q50 16 54 10 Q48 18 56 24" fill="#5D4037"/>
+    <path d="M58 26 Q52 18 56 12" stroke="#5D4037" stroke-width="2" fill="none"/>
+    <path d="M14 56 Q6 50 10 44 Q8 52 16 54" fill="#5D4037"/>
+  </svg>`,
+  // 17: Deer
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="60" rx="26" ry="22" fill="#D4A76A"/>
+    <circle cx="50" cy="40" r="18" fill="#E8C274"/>
+    <path d="M38 26 L34 10 L38 18 L32 6 M62 26 L66 10 L62 18 L68 6" stroke="#8D6E63" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="43" cy="38" r="3" fill="#222"/><circle cx="44" cy="37" r="1" fill="#fff"/>
+    <circle cx="57" cy="38" r="3" fill="#222"/><circle cx="58" cy="37" r="1" fill="#fff"/>
+    <ellipse cx="50" cy="46" rx="3" ry="2" fill="#222"/>
+    <circle cx="44" cy="44" r="4" fill="#FFCCBC" opacity="0.3"/>
+    <circle cx="56" cy="44" r="4" fill="#FFCCBC" opacity="0.3"/>
+  </svg>`,
+  // 18: Koala
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="26" ry="24" fill="#78909C"/>
+    <circle cx="50" cy="42" r="22" fill="#90A4AE"/>
+    <circle cx="30" cy="34" r="12" fill="#90A4AE"/><circle cx="30" cy="34" r="8" fill="#CFD8DC"/>
+    <circle cx="70" cy="34" r="12" fill="#90A4AE"/><circle cx="70" cy="34" r="8" fill="#CFD8DC"/>
+    <circle cx="42" cy="42" r="3" fill="#222"/><circle cx="43" cy="41" r="1" fill="#fff"/>
+    <circle cx="58" cy="42" r="3" fill="#222"/><circle cx="59" cy="41" r="1" fill="#fff"/>
+    <ellipse cx="50" cy="50" rx="6" ry="4" fill="#455A64"/>
+    <path d="M46 54 Q50 58 54 54" stroke="#222" stroke-width="1" fill="none"/>
+  </svg>`,
+  // 19: Hamster
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="56" rx="28" ry="26" fill="#FFCC80"/>
+    <circle cx="50" cy="44" r="22" fill="#FFE0B2"/>
+    <polygon points="34,28 30,16 40,26" fill="#FFE0B2"/>
+    <polygon points="66,28 70,16 60,26" fill="#FFE0B2"/>
+    <circle cx="42" cy="42" r="3" fill="#222"/><circle cx="43" cy="41" r="1" fill="#fff"/>
+    <circle cx="58" cy="42" r="3" fill="#222"/><circle cx="59" cy="41" r="1" fill="#fff"/>
+    <ellipse cx="50" cy="50" rx="3" ry="2" fill="#FF8A80"/>
+    <circle cx="36" cy="52" r="8" fill="#FFAB91" opacity="0.35"/>
+    <circle cx="64" cy="52" r="8" fill="#FFAB91" opacity="0.35"/>
+    <path d="M46 54 Q50 58 54 54" stroke="#222" stroke-width="1" fill="none"/>
+    <line x1="28" y1="48" x2="38" y2="48" stroke="#666" stroke-width="0.6"/>
+    <line x1="62" y1="48" x2="72" y2="48" stroke="#666" stroke-width="0.6"/>
+  </svg>`,
+  // 20: Turtle
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="56" rx="30" ry="24" fill="#4CAF50"/>
+    <ellipse cx="50" cy="54" rx="26" ry="20" fill="#66BB6A"/>
+    <path d="M36 46 L50 38 L64 46 L58 56 L42 56 Z" fill="#388E3C" opacity="0.4"/>
+    <circle cx="68" cy="42" r="10" fill="#81C784"/>
+    <circle cx="73" cy="40" r="2.5" fill="#222"/><circle cx="74" cy="39" r="0.8" fill="#fff"/>
+    <path d="M78 44 Q82 44 80 42" stroke="#222" stroke-width="1" fill="none"/>
+    <ellipse cx="30" cy="70" rx="6" ry="4" fill="#81C784"/>
+    <ellipse cx="70" cy="70" rx="6" ry="4" fill="#81C784"/>
+    <path d="M22 54 Q14 50 18 56" fill="#81C784"/>
+  </svg>`,
+  // 21: Whale
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="54" rx="38" ry="22" fill="#5C6BC0"/>
+    <ellipse cx="44" cy="58" rx="24" ry="12" fill="#9FA8DA"/>
+    <circle cx="30" cy="48" r="3.5" fill="#222"/><circle cx="31" cy="47" r="1.2" fill="#fff"/>
+    <path d="M16 52 Q8 48 12 54 Q8 58 16 56" fill="#5C6BC0"/>
+    <path d="M86 48 Q96 38 92 52 Q96 62 86 56" fill="#5C6BC0"/>
+    <path d="M50 34 Q52 26 48 30 Q54 22 50 34" fill="#7986CB"/>
+    <path d="M26 56 Q30 60 34 56" stroke="#222" stroke-width="1" fill="none"/>
+  </svg>`,
+  // 22: Eagle
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="58" rx="22" ry="24" fill="#5D4037"/>
+    <circle cx="50" cy="40" r="18" fill="#F5F5F5"/>
+    <circle cx="42" cy="38" r="3" fill="#FF8F00"/><circle cx="42" cy="38" r="1.5" fill="#222"/>
+    <circle cx="58" cy="38" r="3" fill="#FF8F00"/><circle cx="58" cy="38" r="1.5" fill="#222"/>
+    <polygon points="50,44 44,52 56,52" fill="#FF8F00"/>
+    <ellipse cx="26" cy="54" rx="10" ry="18" fill="#5D4037" transform="rotate(-20 26 54)"/>
+    <ellipse cx="74" cy="54" rx="10" ry="18" fill="#5D4037" transform="rotate(20 74 54)"/>
+    <path d="M44 30 Q50 24 56 30" fill="#F5F5F5"/>
+  </svg>`,
+  // 23: Pig
+  (sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="56" rx="28" ry="26" fill="#F48FB1"/>
+    <circle cx="50" cy="42" r="22" fill="#F8BBD0"/>
+    <polygon points="32,30 28,16 38,28" fill="#F8BBD0"/>
+    <polygon points="68,30 72,16 62,28" fill="#F8BBD0"/>
+    <circle cx="42" cy="40" r="3" fill="#222"/><circle cx="43" cy="39" r="1" fill="#fff"/>
+    <circle cx="58" cy="40" r="3" fill="#222"/><circle cx="59" cy="39" r="1" fill="#fff"/>
+    <ellipse cx="50" cy="50" rx="8" ry="6" fill="#EC407A"/>
+    <circle cx="46" cy="50" r="2" fill="#AD1457"/>
+    <circle cx="54" cy="50" r="2" fill="#AD1457"/>
+    <path d="M44 56 Q50 60 56 56" stroke="#222" stroke-width="1" fill="none"/>
+  </svg>`,
+];
+
+function getAnimalSVG(idx, sz=52) { return ANIMALS[idx % ANIMALS.length](sz); }
+function getAnimalName(idx) {
+  return ['🦁 Sư tử','🐱 Mèo','🐰 Thỏ','🐻 Gấu','🦊 Cáo','🐼 Gấu trúc','🦉 Cú','🐧 Cánh cụt','🦆 Vịt','🐸 Ếch','🦄 Kỳ lân','🐶 Chó','🐘 Voi','🐯 Hổ','🐵 Khỉ','🐬 Cá heo','🐴 Ngựa','🦌 Hươu','🐨 Koala','🐹 Hamster','🐢 Rùa','🐳 Cá voi','🦅 Đại bàng','🐷 Heo'][idx % 24];
+}
+
+// Winner animal (bigger, with crown)
+function winnerAnimalSVG(idx) {
+  // Wrap normal animal with crown overlay
+  return `<svg viewBox="0 0 120 120" width="280" height="280" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(10,20) scale(1)">${ANIMALS[idx%ANIMALS.length](100)}</g>
+    <path d="M30 22 L38 6 L48 18 L58 2 L66 18 L76 6 L80 26 L28 26 Z" fill="#E8C274" stroke="#C9A05F" stroke-width="1"/>
+    <circle cx="38" cy="10" r="2.5" fill="#E74C3C"/>
+    <circle cx="58" cy="6" r="2.5" fill="#2ECC71"/>
+    <circle cx="76" cy="10" r="2.5" fill="#3498DB"/>
+    <text x="8" y="38" font-size="14">✨</text>
+    <text x="100" y="32" font-size="14">✨</text>
+    <text x="4" y="90" font-size="10">⭐</text>
+    <text x="106" y="86" font-size="10">⭐</text>
+  </svg>`;
+}
+
+// ===== TOAST =====
+function toast(msg,type='inf'){
+  const c=document.getElementById('toastBox');
+  const t=document.createElement('div');
+  t.className=`toast ${type}`;
+  const ic={ok:'✅',err:'❌',inf:'💡'};
+  t.innerHTML=`${ic[type]||''} ${msg}`;
+  c.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(30px)';setTimeout(()=>t.remove(),300)},3000);
+}
+
+// ===== SCREENS =====
+function showScreen(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+n).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',['admin','draw','results'][i]===n));
+  // Show/hide draw controls in nav
+  const dc=document.getElementById('navDrawCtrl');
+  if(n==='draw'){ dc.classList.add('show'); buildRace(); }
+  else { dc.classList.remove('show'); }
+  if(n==='results') renderRes();
+  playClick();
+}
+
+// ===== CODE =====
+function genCode(){
+  const c=String(Math.floor(100000+Math.random()*900000));
+  document.getElementById('codeIn').value=c;
+  document.getElementById('genShow').style.display='block';
+  document.getElementById('genVal').textContent=c;
+  playClick();
+}
+function genBulk(){
+  let n=0;
+  for(let i=0;i<10;i++){
+    const c=String(Math.floor(100000+Math.random()*900000));
+    if(!participants.find(p=>p.code===c)){
+      participants.push({code:c,name:'Khách #'+c.slice(-3),avatar:null,id:Date.now()+i});n++;
+    }
+  }
+  save();renderP();updateStats();toast(`Đã thêm ${n} người`,'ok');
+}
+
+// ===== PARTICIPANTS =====
+function regCode(){
+  const inp=document.getElementById('codeIn');const c=inp.value.trim();
+  if(c.length!==6){toast('Mã phải 6 chữ số','err');return;}
+  if(participants.find(p=>p.code===c)){toast('Mã đã tồn tại','err');return;}
+  participants.push({code:c,name:'Khách #'+c.slice(-3),avatar:null,id:Date.now()});
+  save();renderP();updateStats();inp.value='';playClick();toast(`Đăng ký: ${c}`,'ok');
+}
+function delP(code){participants=participants.filter(p=>p.code!==code);save();renderP();updateStats();playClick();}
+function clearAll(){if(!confirm('Xoá hết?'))return;participants=[];save();renderP();updateStats();toast('Đã xoá','inf');}
+function renderP(){
+  const el=document.getElementById('pList');
+  if(!participants.length){el.innerHTML='<div class="empty"><div class="ico">👥</div><p>Chưa có người tham gia</p></div>';return;}
+  el.innerHTML=participants.map((p,i)=>`
+    <div class="p-item">
+      <div class="p-avatar">${p.avatar?`<img src="${p.avatar}" onerror="this.parentElement.textContent='${esc(p.name)[0]}'">`:esc(p.name)[0].toUpperCase()}</div>
+      <div class="p-info"><div class="p-name">${esc(p.name)}</div><div class="p-code">${p.code}</div></div>
+      <span style="font-size:0.7rem;color:var(--gold);opacity:0.5">${getAnimalName(i)}</span>
+      <button class="p-del" onclick="delP('${p.code}')">✕</button>
+    </div>`).join('');
+  document.getElementById('totalP').textContent=participants.length;
+}
+
+function findEdit(){
+  const c=document.getElementById('editCodeIn').value.trim();
+  const p=participants.find(x=>x.code===c);
+  if(!p){toast('Không tìm thấy','err');return;}
+  editingCode=c;
+  document.getElementById('editName').value=p.name||'';
+  document.getElementById('editAvatar').value=p.avatar||'';
+  document.getElementById('editArea').style.display='block';
+}
+function saveEdit(){
+  const p=participants.find(x=>x.code===editingCode);if(!p)return;
+  p.name=document.getElementById('editName').value.trim()||('Khách #'+p.code.slice(-3));
+  p.avatar=document.getElementById('editAvatar').value.trim()||null;
+  save();renderP();document.getElementById('editArea').style.display='none';
+  toast('Đã cập nhật','ok');playClick();
+}
+
+// ===== PRIZES =====
+function addPrize(){
+  const nm=document.getElementById('prNameIn').value.trim();
+  const qt=parseInt(document.getElementById('prQtyIn').value)||1;
+  if(!nm){toast('Nhập tên giải','err');return;}
+  const icons=['🥇','🥈','🥉','🎁','⭐','💎','🏅','🎯'];
+  prizes.push({id:Date.now(),name:nm,qty:qt,drawn:0,icon:icons[prizes.length%icons.length]});
+  save();renderPr();updateStats();updateSel();
+  document.getElementById('prNameIn').value='';document.getElementById('prQtyIn').value='1';
+  toast(`Thêm: ${nm}`,'ok');playClick();
+}
+function delPr(id){prizes=prizes.filter(p=>p.id!==id);winners=winners.filter(w=>w.prizeId!==id);save();renderPr();updateStats();updateSel();}
+function loadDefault(){
+  if(prizes.length&&!confirm('Thay thế giải hiện tại?'))return;
+  prizes=[
+    {id:1,name:'Giải Đặc biệt',qty:1,drawn:0,icon:'💎'},
+    {id:2,name:'Giải Nhất',qty:1,drawn:0,icon:'🥇'},
+    {id:3,name:'Giải Nhì',qty:2,drawn:0,icon:'🥈'},
+    {id:4,name:'Giải Ba',qty:3,drawn:0,icon:'🥉'},
+    {id:5,name:'Giải Khuyến khích',qty:5,drawn:0,icon:'🎁'},
+  ];
+  winners=[];save();renderPr();updateStats();updateSel();toast('Đã tải mẫu','ok');
+}
+function renderPr(){
+  const el=document.getElementById('prList');
+  if(!prizes.length){el.innerHTML='<div class="empty"><div class="ico">🏆</div><p>Chưa có giải</p></div>';return;}
+  el.innerHTML=prizes.map(p=>`
+    <div class="pr-item"><div class="pr-icon">${p.icon}</div>
+    <div class="pr-details"><div class="pr-name">${esc(p.name)}</div><div class="pr-qty">SL: ${p.qty} · Đã quay: ${p.drawn}</div></div>
+    <button class="btn btn-danger" style="padding:4px 10px;font-size:0.7rem;" onclick="delPr(${p.id})">Xoá</button></div>`).join('');
+}
+function updateSel(){
+  const sel=document.getElementById('dSelect');
+  const avail=prizes.filter(p=>p.drawn<p.qty);
+  sel.innerHTML='<option value="">— Chọn giải —</option>'+avail.map(p=>`<option value="${p.id}">${p.icon} ${p.name} (còn ${p.qty-p.drawn})</option>`).join('');
+}
+function onSelChange(){
+  const pr=prizes.find(p=>p.id==document.getElementById('dSelect').value);
+  const btn=document.getElementById('btnDraw');
+  const label=document.getElementById('dTitle2');
+  if(pr){
+    label.textContent=`${pr.icon} ${pr.name} (${pr.qty-pr.drawn})`;
+    btn.disabled=false;
+  } else {
+    label.textContent='';
+    btn.disabled=true;
+  }
+  buildRace();
+}
+function updateStats(){
+  document.getElementById('totalP').textContent=participants.length;
+  document.getElementById('s1').textContent=participants.length;
+  document.getElementById('s2').textContent=prizes.reduce((s,p)=>s+p.qty,0);
+  document.getElementById('s3').textContent=winners.length;
+  document.getElementById('s4').textContent=prizes.reduce((s,p)=>s+(p.qty-p.drawn),0);
+}
+function getEligible(){
+  const won=new Set(winners.map(w=>w.code));
+  return participants.filter(p=>!won.has(p.code)&&!window._skipCodes.has(p.code));
+}
+
+// ===== BUILD RACE =====
+function buildRace(){
+  const area=document.getElementById('raceArea');
+  area.querySelectorAll('.animal-unit,.extra-info').forEach(e=>e.remove());
+  const eligible=getEligible();
+  if(!eligible.length){
+    const d=document.createElement('div');d.className='extra-info';
+    d.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;';
+    d.innerHTML='<div class="empty"><div class="ico">🏁</div><p>Chưa có thí sinh</p></div>';
+    area.appendChild(d);return;
+  }
+
+  const aW=area.clientWidth||800;
+  const aH=area.clientHeight||400;
+  // Size animals based on count
+  const sz=eligible.length<=12?184:eligible.length<=25?152:eligible.length<=50?128:104;
+
+  eligible.forEach((p,i)=>{
+    const pIdx=participants.indexOf(p);
+    const unit=document.createElement('div');
+    unit.className='animal-unit';
+    unit.dataset.code=p.code;
+    // Spread across left 75% of area in a scattered grid
+    const cols=Math.ceil(Math.sqrt(eligible.length*1.3));
+    const rows=Math.ceil(eligible.length/cols);
+    const cellW=(aW*0.7)/cols;
+    const cellH=aH/rows;
+    const col=i%cols, row=Math.floor(i/cols);
+    const x=col*cellW+Math.random()*cellW*0.5+10;
+    const y=row*cellH+Math.random()*cellH*0.4+5;
+    unit.style.left=x+'px';
+    unit.style.top=y+'px';
+    unit.style.animationDelay=(Math.random()*2)+'s';
+    // Lúc đua: icon thú thuần + tên ngắn (2 từ cuối) dưới chân xe.
+    // Avatar thật chỉ hiện khi winner reveal — giữ vibe game không bị giống "danh sách check-in".
+    var shortName = (function(name){
+      if(!name) return '';
+      var parts = String(name).trim().split(/\s+/).filter(Boolean);
+      return parts.slice(-2).join(' ');
+    })(p.name);
+    unit.innerHTML=`
+      <div class="animal-svg-wrap" style="width:${sz}px;height:${sz}px">${getAnimalSVG(pIdx>=0?pIdx:i,sz)}</div>
+      <div class="animal-name-tag" style="font-size:${sz<=120?'0.72rem':'0.85rem'}">
+        ${esc(shortName)}
+      </div>`;
+    area.appendChild(unit);
+  });
+}
+
+// ===== DRAW =====
+function startDraw(){
+  if(isDrawing)return;
+  const prizeId=parseInt(document.getElementById('dSelect').value);
+  const prize=prizes.find(p=>p.id===prizeId);
+  if(!prize){toast('Chọn giải trước','err');return;}
+  const eligible=getEligible();
+  if(!eligible.length){toast('Không còn thí sinh','err');return;}
+  if(prize.drawn>=prize.qty){toast('Giải đã quay đủ','err');return;}
+
+  isDrawing=true;
+  document.getElementById('btnDraw').disabled=true;
+
+  const cdW=document.getElementById('cdWrap');
+  const prog=document.getElementById('cdProg');
+  const numEl=document.getElementById('cdNum');
+  const circ=2*Math.PI*40;
+  prog.style.strokeDasharray=circ;prog.style.strokeDashoffset='0';
+
+  const units=document.querySelectorAll('.animal-unit');
+
+  const area=document.getElementById('raceArea');
+  const aW=(area.clientWidth||800);
+  const aH=(area.clientHeight||400);
+  const maxX=aW-260;
+  const maxY=aH-120;
+
+  // PHASE 1: Pull all animals to starting line
+  const totalUnits=units.length;
+  units.forEach((d,i)=>{
+    const spacing=Math.min(80, (aH-20)/totalUnits);
+    const baseY=5+i*spacing;
+    d.style.left='10px';
+    d.style.top=baseY+'px';
+    d.dataset.baseY=baseY;
+    d.dataset.seed=String(Math.random()*100);
+  });
+
+  // PHASE 2: After lineup completes (1.5s), start racing
+  setTimeout(()=>{
+    units.forEach(d=>d.classList.add('racing'));
+    startBgMusic();
+
+    const totalDur=16000;   // 16 seconds total
+    const freeDur=13000;    // 13s free race
+    let racePhase='free';
+
+    // Track each animal's progress (0 to 1) + persistent speed personality
+    const progress=new Map();
+    const speedFactor=new Map();
+    units.forEach(d=>{
+      progress.set(d,0);
+      // Random speed personality: some fast (1.4-2.0), some avg (0.8-1.3), some slow (0.3-0.7)
+      const roll=Math.random();
+      let spd;
+      if(roll<0.2) spd=0.3+Math.random()*0.4;       // 20% stragglers
+      else if(roll<0.5) spd=0.7+Math.random()*0.35;  // 30% slow-mid
+      else if(roll<0.8) spd=1.0+Math.random()*0.4;   // 30% mid-fast
+      else spd=1.4+Math.random()*0.6;                 // 20% leaders
+      speedFactor.set(d,spd);
+    });
+
+    // Progressive race: spread pack across 13s with natural gaps
+    let tick=0;
+    const totalTicks=Math.floor(freeDur/400); // ~32 ticks
+    let raceInt=setInterval(()=>{
+      if(racePhase!=='free') return;
+      tick++;
+      const timeFraction=tick/totalTicks; // 0→1 over 13s
+      units.forEach(d=>{
+        const factor=speedFactor.get(d)||1;
+        // Base speed ramps up over time, multiplied by personal factor
+        const baseSpeed=(0.008+timeFraction*0.018)*factor;
+        const jitter=(Math.random()-0.5)*0.01;
+        let cur=progress.get(d)||0;
+        // Leaders cap at ~0.72, stragglers at ~0.15-0.35
+        const personalCap=Math.min(0.75, 0.15+factor*0.32);
+        cur=Math.min(cur+baseSpeed+jitter, personalCap);
+        // Occasional burst or stumble
+        if(Math.random()<0.06) cur+=factor*0.008;      // burst
+        if(Math.random()<0.05) cur=Math.max(cur-0.008, 0); // stumble
+        progress.set(d,cur);
+        const x=10+cur*maxX;
+        const baseY=parseFloat(d.dataset.baseY)||0;
+        const wobble=Math.sin(tick*0.4+parseFloat(d.dataset.seed||0))*16;
+        d.style.left=x+'px';
+        d.style.top=(baseY+wobble)+'px';
+      });
+      playRunSound();
+    },400);
+
+    const startT=Date.now();
+    let lastSec=16;
+    let cdInt=setInterval(()=>{
+      const elapsed=Date.now()-startT;
+      const remain=Math.max(0,totalDur-elapsed);
+      const sec=Math.ceil(remain/1000);
+      if(sec!==lastSec){playCountBeep(sec);lastSec=sec;}
+      numEl.textContent=sec;
+      prog.style.strokeDashoffset=circ*(1-remain/totalDur);
+      if(remain<=0)clearInterval(cdInt);
+    },50);
+
+    cdW.classList.add('show');
+
+    // Pre-pick the winner at race start
+    const curE=getEligible();
+    const actualWinner=curE[Math.floor(Math.random()*curE.length)];
+    const others=curE.filter(p=>p.code!==actualWinner.code);
+    const shuffled=others.sort(()=>Math.random()-0.5);
+
+    // 12% surprise chance
+    const isSurprise=others.length>=10 && Math.random()<0.12;
+
+    // Build top10 (includes winner unless surprise)
+    const top10Codes=new Set(isSurprise?[]:[actualWinner.code]);
+    for(let i=0;top10Codes.size<Math.min(9,shuffled.length)+(isSurprise?1:0);i++){
+      if(i<shuffled.length) top10Codes.add(shuffled[i].code);
+    }
+    // Build top5 from top10 (includes winner unless surprise)
+    const top10Arr=[...top10Codes];
+    const top5Codes=new Set(isSurprise?[]:[actualWinner.code]);
+    const t10shuffled=top10Arr.filter(c=>c!==actualWinner.code).sort(()=>Math.random()-0.5);
+    for(let i=0;top5Codes.size<Math.min(4,t10shuffled.length)+(isSurprise?1:0);i++){
+      if(i<t10shuffled.length) top5Codes.add(t10shuffled[i]);
+    }
+    if(isSurprise&&t10shuffled.length>=5) top5Codes.add(t10shuffled[4]);
+
+    const finishX=aW-300;
+
+    // --- PHASE 3a: At 13s → Top 10 near finish ---
+    setTimeout(()=>{
+      racePhase='top10';
+      clearInterval(raceInt);
+      playNote(660,0.3,'sine',0.1);
+
+      let fIdx=0;
+      units.forEach(d=>{
+        d.classList.remove('racing');
+        if(top10Codes.has(d.dataset.code)){
+          d.classList.add('finalist');
+          const row=fIdx%5, col=Math.floor(fIdx/5);
+          const x=finishX-col*100+Math.random()*30;
+          const y=aH*0.08+row*(aH*0.18)+Math.random()*10;
+          d.style.left=x+'px';
+          d.style.top=y+'px';
+          fIdx++;
+        } else {
+          d.classList.add('eliminated');
+          // Stay at actual race position (natural spread preserved)
+          const curPos=progress.get(d)||0;
+          const baseY=parseFloat(d.dataset.baseY)||0;
+          d.style.left=(10+curPos*maxX)+'px';
+          d.style.top=baseY+'px';
+        }
+      });
+
+      // Top10 slow jitter — tension builds (2.5s, slower pace)
+      let jitterInt=setInterval(()=>{
+        document.querySelectorAll('.animal-unit.finalist').forEach(d=>{
+          const cx=parseFloat(d.style.left)||0;
+          const cy=parseFloat(d.style.top)||0;
+          d.style.left=(cx+Math.random()*10-5)+'px';
+          d.style.top=(cy+Math.random()*8-4)+'px';
+        });
+        playNote(500+Math.random()*300,0.06,'sine',0.03);
+      },1200);
+
+      // --- PHASE 3b: At 15.5s → Top 5 (extended from 14.5s) ---
+      setTimeout(()=>{
+        clearInterval(jitterInt);
+        playNote(880,0.3,'sine',0.12);
+
+        const t5Positions=[
+          {x:finishX+10,  y:aH*0.10},
+          {x:finishX+40,  y:aH*0.28},
+          {x:finishX-10,  y:aH*0.46},
+          {x:finishX+30,  y:aH*0.64},
+          {x:finishX,     y:aH*0.80},
+        ];
+        let fi=0;
+        units.forEach(d=>{
+          if(top5Codes.has(d.dataset.code)){
+            d.classList.add('finalist');
+            d.classList.remove('eliminated');
+            const pos=t5Positions[fi%t5Positions.length];
+            d.style.left=pos.x+'px';
+            d.style.top=pos.y+'px';
+            fi++;
+          } else if(top10Codes.has(d.dataset.code)){
+            // Top10 but not top5: just behind the finalists
+            d.classList.remove('finalist');
+            d.classList.add('eliminated');
+            const behindX=finishX-80-Math.random()*100;
+            d.style.left=Math.max(10,behindX)+'px';
+          }
+        });
+
+        // Top5 very slow jitter — MAXIMUM suspense (3.5s, slower + note build-up)
+        let noteStep=0;
+        let fJitter=setInterval(()=>{
+          document.querySelectorAll('.animal-unit.finalist').forEach((d,i)=>{
+            const pos=t5Positions[i%t5Positions.length];
+            // Micro-jitter chậm dần — gây cấn nhất ở 2 giải đầu
+            const jitterAmount=Math.max(2, 8 - noteStep*0.8);
+            d.style.left=(pos.x+Math.random()*jitterAmount-jitterAmount/2)+'px';
+            d.style.top=(pos.y+Math.random()*(jitterAmount*0.8)-(jitterAmount*0.4))+'px';
+          });
+          // Notes tăng pitch dần → cảm giác countdown
+          const pitch=500 + noteStep*60 + Math.random()*100;
+          playNote(pitch,0.07,'sine',0.05);
+          noteStep++;
+        },600);
+
+        // --- PHASE 4: At 19s → Winner (extended +3s tổng) ---
+        setTimeout(()=>{
+          clearInterval(fJitter);clearInterval(cdInt);
+          stopBgMusic();
+
+          if(isSurprise){
+            const winUnit=[...units].find(d=>d.dataset.code===actualWinner.code);
+            if(winUnit){
+              winUnit.classList.remove('eliminated');
+              winUnit.classList.add('finalist');
+              winUnit.style.opacity='1';
+            }
+            setTimeout(()=>markWinner(actualWinner,units,aW,aH),500);
+          } else {
+            markWinner(actualWinner,units,aW,aH);
+          }
+
+          lastWinner=actualWinner;lastPrize=prize;
+          winners.push({code:actualWinner.code,name:actualWinner.name,avatar:actualWinner.avatar,
+            prizeId:prize.id,prizeName:prize.name,prizeIcon:prize.icon,time:Date.now()});
+          prize.drawn++;save();updateStats();updateSel();
+
+          setTimeout(()=>{
+            showWinnerOv(actualWinner,prize);cdW.classList.remove('show');isDrawing=false;
+          },1800);
+        },3500); // 3.5s after top5 = 19s total (tăng từ 1.5s → +2s gây cấn)
+
+      },2500); // 2.5s after top10 = 15.5s (tăng từ 1.5s → +1s)
+
+    },freeDur); // 13s
+
+  },1500); // end Phase 2 (after lineup)
+}
+
+function markWinner(winner, units, aW, aH){
+  units.forEach(d=>{
+    d.classList.remove('racing','finalist');
+    if(d.dataset.code===winner.code){
+      d.classList.add('winner-animal');
+      d.classList.remove('eliminated');
+      d.style.left=(aW-240)+'px';
+      d.style.top=(aH/2-90)+'px';
+      d.style.opacity='1';
+    } else {
+      d.classList.remove('finalist');
+      d.classList.add('loser');
+    }
+  });
+}
+
+function showWinnerOv(w,pr){
+  const wIdx=participants.indexOf(participants.find(p=>p.code===w.code));
+  document.getElementById('wAnimalBig').innerHTML=winnerAnimalSVG(wIdx>=0?wIdx:0);
+  document.getElementById('wAvBig').innerHTML=w.avatar?`<img src="${w.avatar}" onerror="this.parentElement.textContent='${esc(w.name)[0]}'">`:esc(w.name)[0].toUpperCase();
+  document.getElementById('wNameBig').textContent=w.name;
+  document.getElementById('wPrizeName').textContent=`${pr.icon} ${pr.name}`;
+  document.getElementById('wOverlay').classList.add('show');
+  launchConfetti();playFanfare();
+}
+
+function closeWinner(){
+  document.getElementById('wOverlay').classList.remove('show');
+  document.getElementById('confettiBox').innerHTML='';
+  document.getElementById('btnDraw').disabled=false;
+  lastWinner=null;lastPrize=null;
+  buildRace();onSelChange();playClick();
+}
+
+function redraw(){
+  if(!lastWinner||!lastPrize)return;
+  const idx=winners.findIndex(w=>w.code===lastWinner.code&&w.prizeId===lastPrize.id);
+  if(idx>=0)winners.splice(idx,1);
+  lastPrize.drawn=Math.max(0,lastPrize.drawn-1);
+  window._skipCodes.add(lastWinner.code);
+  save();updateStats();updateSel();
+  document.getElementById('wOverlay').classList.remove('show');
+  document.getElementById('confettiBox').innerHTML='';
+  toast(`${lastWinner.name} vắng mặt — quay lại!`,'inf');
+  lastWinner=null;
+  buildRace();document.getElementById('btnDraw').disabled=false;
+  setTimeout(()=>startDraw(),800);
+}
+
+// ===== CONFETTI =====
+function launchConfetti(){
+  const c=document.getElementById('confettiBox');c.innerHTML='';
+  const cols=['#E8C274','#C9A05F','#FBFED3','#896123','#fff','#FFB6C1','#2ECC71'];
+  for(let i=0;i<90;i++){
+    const p=document.createElement('div');p.className='confetti-p';
+    p.style.left=Math.random()*100+'%';
+    p.style.background=cols[Math.floor(Math.random()*cols.length)];
+    p.style.animationDelay=Math.random()*1+'s';
+    p.style.animationDuration=(2+Math.random()*2)+'s';
+    p.style.width=(6+Math.random()*10)+'px';
+    p.style.height=(6+Math.random()*10)+'px';
+    p.style.borderRadius=Math.random()>0.5?'50%':'2px';
+    c.appendChild(p);
+  }
+}
+
+// ===== RESULTS =====
+function showResTab(t){
+  document.querySelectorAll('.res-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.res-section').forEach(s=>s.classList.remove('active'));
+  if(t==='byPr'){document.querySelectorAll('.res-tab')[0].classList.add('active');document.getElementById('resByPr').classList.add('active');}
+  else{document.querySelectorAll('.res-tab')[1].classList.add('active');document.getElementById('resSum').classList.add('active');}
+  playClick();
+}
+function renderRes(){
+  const bp=document.getElementById('resByPrC');
+  if(!winners.length){bp.innerHTML='<div class="empty"><div class="ico">🏆</div><p>Chưa có kết quả</p></div>';}
+  else{
+    let h='';
+    prizes.forEach(pr=>{
+      const pw=winners.filter(w=>w.prizeId===pr.id);if(!pw.length)return;
+      h+=`<div class="pr-group"><div class="pr-gtitle">${pr.icon} ${esc(pr.name)}</div><div class="w-grid">`;
+      pw.forEach(w=>{
+        h+=`<div class="w-card-sm"><div class="wc-av">${w.avatar?`<img src="${w.avatar}" onerror="this.parentElement.textContent='${esc(w.name)[0]}'">`:esc(w.name)[0].toUpperCase()}</div>
+        <div class="wc-inf"><div class="wc-n">${esc(w.name)}</div><div class="wc-c">${w.code}</div></div></div>`;
+      });
+      h+=`</div></div>`;
+    });
+    bp.innerHTML=h;
+  }
+  const sm=document.getElementById('resSumC');
+  if(!winners.length){sm.innerHTML='<div class="empty"><div class="ico">📊</div><p>Chưa có dữ liệu</p></div>';}
+  else{
+    let rows=winners.map((w,i)=>`<tr><td>${i+1}</td><td>${w.prizeIcon} ${esc(w.prizeName)}</td>
+      <td style="font-weight:700">${esc(w.name)}</td><td style="color:var(--gold);letter-spacing:1px;font-weight:500">${w.code}</td>
+      <td style="color:var(--gold);font-size:0.78rem;opacity:0.7">${new Date(w.time).toLocaleTimeString('vi-VN')}</td></tr>`).join('');
+    sm.innerHTML=`<table class="sum-table"><thead><tr><th>#</th><th>Giải</th><th>Người trúng</th><th>Mã</th><th>Giờ</th></tr></thead>
+      <tbody>${rows}</tbody></table>
+      <div style="margin-top:20px;text-align:center;">
+        <button class="btn btn-outline" onclick="exportCSV()">📥 Xuất CSV</button>
+        <button class="btn btn-danger" onclick="resetRes()" style="margin-left:8px;">🔄 Reset</button></div>`;
+  }
+}
+function exportCSV(){
+  if(!winners.length)return;
+  let csv='STT,Giải,Người trúng,Mã,Giờ\n';
+  winners.forEach((w,i)=>{csv+=`${i+1},"${w.prizeName}","${w.name}",${w.code},${new Date(w.time).toLocaleString('vi-VN')}\n`;});
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ket-qua-duong-dua-tmdt.csv';a.click();
+  toast('Đã xuất CSV','ok');
+}
+function resetRes(){
+  if(!confirm('Xoá toàn bộ kết quả?'))return;
+  winners=[];window._skipCodes=new Set();prizes.forEach(p=>p.drawn=0);
+  save();renderRes();updateStats();updateSel();renderPr();toast('Đã reset','inf');
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+function toggleFS(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen();}
+
+// INIT
+renderP();renderPr();updateStats();updateSel();renderRes();
+
+// ===== PLATFORM INTEGRATION — postMessage bridge =====
+// Cho phép RaceCanvas.tsx gửi participants + nhận winner event
+(function(){
+  // Kiểm tra embedded mode (từ admin live race page)
+  const isEmbedded = window.location.search.includes('embedded=1') || window.parent !== window;
+
+  // Gửi IFRAME_READY khi load xong
+  if(isEmbedded){
+    window.parent.postMessage({type:'IFRAME_READY'},'*');
+    // Stage mode: ẩn toàn bộ nav, chỉ hiện đường đua.
+    // MC điều khiển XUẤT PHÁT từ trang cha qua message START_RACE.
+    document.body.classList.add('embedded');
+    const nav = document.getElementById('mainNav');
+    if(nav) nav.style.display='none';
+    if(typeof showScreen === 'function') showScreen('draw');
+  }
+
+  // Lắng nghe SET_PARTICIPANTS từ RaceCanvas
+  window.addEventListener('message', function(e){
+    if(!e.data || !e.data.type) return;
+
+    if(e.data.type === 'PING'){
+      window.parent.postMessage({type:'IFRAME_READY'},'*');
+      return;
+    }
+
+    // MC bấm "BẮT ĐẦU" ở trang cha → chạy đường đua
+    if(e.data.type === 'START_RACE'){
+      if(typeof showScreen === 'function') showScreen('draw');
+      const sel = document.getElementById('dSelect');
+      if(sel && !sel.value){
+        for(let i=0;i<sel.options.length;i++){
+          if(sel.options[i].value){ sel.value = sel.options[i].value; break; }
+        }
+        if(typeof onSelChange === 'function') onSelChange();
+      }
+      const btn = document.getElementById('btnDraw');
+      if(btn) btn.disabled = false;
+      setTimeout(function(){ try{ startDraw(); }catch(err){ console.warn('START_RACE', err); } }, 120);
+      return;
+    }
+
+    if(e.data.type === 'SET_PARTICIPANTS'){
+      const incoming = e.data.participants || [];
+      if(!incoming.length) return;
+
+      // Clear và reload participants từ DB (xoá localStorage cũ).
+      // Avatar được forward để dùng lúc winner reveal (wAvBig + w-card-sm).
+      // Lúc đua: icon thú là main visual, KHÔNG render avatar overlay.
+      participants = incoming.map(function(p,i){
+        return {
+          code:p.code,
+          name:p.name||('Khách #'+p.code.slice(-3)),
+          avatar:p.avatar||null,
+          id:Date.now()+i,
+        };
+      });
+      save(); renderP(); updateStats();
+
+      // Set prize nếu được gửi kèm (qty = số người trúng cho giải này)
+      if(e.data.prize){
+        const qty = Math.max(1, parseInt(e.data.prizeQty,10) || 1);
+        const exist = prizes[0];
+        if(!exist || exist.name !== e.data.prize || exist.qty !== qty){
+          // Giữ số đã quay nếu cùng tên giải
+          const drawn = (exist && exist.name === e.data.prize) ? exist.drawn : 0;
+          prizes = [{id:(exist&&exist.name===e.data.prize)?exist.id:Date.now(), name:e.data.prize, icon:'🏆', qty:qty, drawn:drawn}];
+          save(); renderPr(); updateStats(); updateSel();
+        }
+      }
+      return;
+    }
+  });
+
+  // Patch showWinnerOv để gửi RACE_WINNER về parent
+  const _origShowWinnerOv = showWinnerOv;
+  window.showWinnerOv = function(w, pr){
+    _origShowWinnerOv(w, pr);
+    if(isEmbedded){
+      window.parent.postMessage({type:'RACE_WINNER', code:w.code, name:w.name, prize:pr.name},'*');
+    }
+  };
+})();
+</script>
+</body>
+</html>
