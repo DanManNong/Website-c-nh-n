@@ -291,6 +291,9 @@ body {
 .animal-unit.racing .animal-svg-wrap {
   animation:animalRun 0.4s ease-in-out infinite;
 }
+/* PERF khi đông (>60 xe): tắt animation nhún/chạy + đổ bóng (nặng paint) để mượt với 200+ icon */
+#raceArea.many .animal-svg-wrap{animation:none!important;filter:none!important}
+#raceArea.many .animal-unit.racing .animal-svg-wrap{animation:none!important}
 @keyframes animalRun {
   0%{transform:translateY(0) scaleX(1)}
   30%{transform:translateY(-6px) scaleX(1.04)}
@@ -1157,10 +1160,11 @@ function buildRace(){
     d.innerHTML='<div class="empty"><div class="ico">🏁</div><p>Chưa có thí sinh</p></div>';
     area.appendChild(d);return;
   }
-  // PERF: chỉ render tối đa RACE_CAP xe đua (lấy mẫu NGẪU NHIÊN mỗi lượt → mọi người vẫn cơ hội bằng nhau), tránh lag khi đông
-  const RACE_CAP=48;
+  // Hiển thị tất cả người chơi (tới RACE_CAP). Khi đông sẽ bật chế độ .many (tắt animation/bóng) cho mượt.
+  const RACE_CAP=300;
   const eligible = all.length>RACE_CAP ? all.slice().sort(()=>Math.random()-0.5).slice(0,RACE_CAP) : all;
   window._renderedCodes = new Set(eligible.map(p=>p.code));
+  area.classList.toggle('many', eligible.length>60);
 
   const aW=area.clientWidth||800;
   const aH=area.clientHeight||400;
