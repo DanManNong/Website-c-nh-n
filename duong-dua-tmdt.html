@@ -1161,7 +1161,7 @@ function buildRace(){
     area.appendChild(d);return;
   }
   // Hiển thị tất cả người chơi (tới RACE_CAP). Khi đông sẽ bật chế độ .many (tắt animation/bóng) cho mượt.
-  const RACE_CAP=300;
+  const RACE_CAP=600;
   const eligible = all.length>RACE_CAP ? all.slice().sort(()=>Math.random()-0.5).slice(0,RACE_CAP) : all;
   window._renderedCodes = new Set(eligible.map(p=>p.code));
   area.classList.toggle('many', eligible.length>60);
