@@ -667,7 +667,7 @@ function playFanfare(){
   if(!sfxOn)return;
   [523,659,784,1047,784,1047,1319].forEach((f,i)=>setTimeout(()=>playNote(f,0.3,'sine',0.1),i*130));
 }
-function playRunSound(){if(!sfxOn)return;[300,340,380,340].forEach((f,i)=>setTimeout(()=>playNote(f,0.08,'square',0.02),i*100));}
+function playRunSound(){if(!sfxOn)return;playNote(320,0.05,'sine',0.012);}
 let bgInt=null;
 function startBgMusic(){
   if(!musicOn)return;stopBgMusic();
@@ -1150,13 +1150,17 @@ function getEligible(){
 function buildRace(){
   const area=document.getElementById('raceArea');
   area.querySelectorAll('.animal-unit,.extra-info').forEach(e=>e.remove());
-  const eligible=getEligible();
-  if(!eligible.length){
+  const all=getEligible();
+  if(!all.length){
     const d=document.createElement('div');d.className='extra-info';
     d.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;';
     d.innerHTML='<div class="empty"><div class="ico">🏁</div><p>Chưa có thí sinh</p></div>';
     area.appendChild(d);return;
   }
+  // PERF: chỉ render tối đa RACE_CAP xe đua (lấy mẫu NGẪU NHIÊN mỗi lượt → mọi người vẫn cơ hội bằng nhau), tránh lag khi đông
+  const RACE_CAP=48;
+  const eligible = all.length>RACE_CAP ? all.slice().sort(()=>Math.random()-0.5).slice(0,RACE_CAP) : all;
+  window._renderedCodes = new Set(eligible.map(p=>p.code));
 
   const aW=area.clientWidth||800;
   const aH=area.clientHeight||400;
@@ -1283,7 +1287,7 @@ function startDraw(){
         d.style.left=x+'px';
         d.style.top=(baseY+wobble)+'px';
       });
-      playRunSound();
+      if(tick%2===0) playRunSound();
     },400);
 
     const startT=Date.now();
@@ -1300,8 +1304,8 @@ function startDraw(){
 
     cdW.classList.add('show');
 
-    // Pre-pick the winner at race start
-    const curE=getEligible();
+    // Pre-pick the winner at race start — CHỈ trong nhóm xe đang render (đã lấy mẫu công bằng ở buildRace)
+    const curE=getEligible().filter(p=>!window._renderedCodes||window._renderedCodes.has(p.code));
     const actualWinner=curE[Math.floor(Math.random()*curE.length)];
     const others=curE.filter(p=>p.code!==actualWinner.code);
     const shuffled=others.sort(()=>Math.random()-0.5);

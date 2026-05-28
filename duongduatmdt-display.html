@@ -57,6 +57,9 @@
   .qr-card .qr-box img,.qr-card .qr-box canvas{width:100%!important;height:100%!important}
   .qr-side .cap{font-size:1.7vw;font-weight:800;color:var(--champagne)}
   .qr-side .url{font-size:1vw;color:rgba(245,239,226,.6)}
+  .qr-side .qstart{margin-top:6px;border:none;border-radius:16px;padding:1.6vh 3.5vw;font-size:2vw;font-weight:900;font-family:inherit;cursor:pointer;
+    background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206;box-shadow:0 14px 40px -10px rgba(232,194,116,.6)}
+  .qr-side .qstart:active{transform:scale(.97)}
   .board-side{flex:1;display:flex;flex-direction:column;min-width:0;background:rgba(22,22,15,.5);border:1px solid rgba(232,194,116,.18);border-radius:24px;padding:1.6vh 1.4vw}
   .board-side .bh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.2vh}
   .board-side .bh .t{font-size:1.4vw;font-weight:800;color:var(--champagne)}
@@ -133,12 +136,20 @@
   let lastCtrlKey=null;
   function renderCtrl(){
     const bar=$('ctrlBar');
-    if(!token || !st.roundId || st.status==='finished'){ if(lastCtrlKey!=='hide'){ bar.classList.add('hidden'); bar.innerHTML=''; lastCtrlKey='hide'; } return; }
-    const s=st.status; const more=effWin()<totalSlots();
+    if(!token){ bar.classList.add('hidden'); bar.innerHTML=''; lastCtrlKey='notoken'; return; }
+    const s=st.status;
+    // reg/closed: nút BẮT ĐẦU nằm DƯỚI mã QR (#qrStart), ẩn thanh dưới
+    if(s==='registration'||s==='closed'){
+      bar.classList.add('hidden'); bar.innerHTML='';
+      const qs=$('qrStart');
+      if(qs && qs.dataset.k!=='start'){ qs.dataset.k='start'; qs.innerHTML='<button class="qstart">▶ BẮT ĐẦU</button>'; qs.querySelector('button').addEventListener('click',()=>setStatus('countdown')); }
+      lastCtrlKey='reg'; return;
+    }
+    if(!st.roundId || s==='finished'){ if(lastCtrlKey!=='hide'){ bar.classList.add('hidden'); bar.innerHTML=''; lastCtrlKey='hide'; } return; }
+    const more=effWin()<totalSlots();
     const key=s+'|'+more; if(key===lastCtrlKey) return; lastCtrlKey=key;
     let h='';
-    if(s==='registration'||s==='closed'){ h='<button class="b-start" data-a="countdown">▶ BẮT ĐẦU</button>'; }
-    else if(s==='countdown'){ h='<button class="b-finish" data-a="finished">⏹ Kết thúc</button>'; }
+    if(s==='countdown'){ h='<button class="b-finish" data-a="finished">⏹ Kết thúc</button>'; }
     else if(s==='playing'){ if(more) h+='<button class="b-next" data-a="countdown">🔄 CHƠI TIẾP</button>'; h+='<button class="b-finish" data-a="finished">⏹ Kết thúc</button>'; }
     bar.innerHTML=h; bar.classList.remove('hidden');
     bar.querySelectorAll('button').forEach(b=>b.addEventListener('click',function(){ const a=this.dataset.a; if(a==='finished' && !confirm('Kết thúc game?')) return; setStatus(a); }));
@@ -156,8 +167,8 @@
         '<span class="status" id="dStatus"></span>'+
         '<div class="prize-row" id="prizeRow"></div>'+
         '<div class="reg-body">'+
-          '<div class="qr-side"><div class="qr-card"><div class="qr-box" id="qrBox"></div></div><div class="cap">📲 Quét mã để tham gia</div><div class="url">nguyentanphong.com/duongduatmdt</div></div>'+
-          '<div class="board-side"><div class="bh"><span class="t">Người chơi đã tham gia</span><span class="cnt"><span id="dCount">0</span> <small>người</small></span></div><div class="pgrid" id="pgrid"></div></div>'+
+          '<div class="qr-side"><div class="qr-card"><div class="qr-box" id="qrBox"></div></div><div class="cap">📲 Quét mã để tham gia</div><div class="url">nguyentanphong.com/duongduatmdt</div><div id="qrStart"></div></div>'+
+          '<div class="board-side"><div class="bh"><span class="t">Người chơi đã tham gia</span></div><div class="pgrid" id="pgrid"></div></div>'+
         '</div></div>';
       qrDone=false; renderQR();
     } else if(m==='countdown'){
