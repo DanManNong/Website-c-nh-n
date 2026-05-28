@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0B0B">
+<title>Reset nhanh — Đường Đua TMĐT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#0B0B0B; --graphite:#16160F; --cream:#F5EFE2; --champagne:#E8C274; --green:#4ade80; --rose:#fb7185; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--ink);color:var(--cream);min-height:100dvh;-webkit-font-smoothing:antialiased}
+  button{font-family:inherit;cursor:pointer}
+  .hidden{display:none!important}
+  .spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(26,18,6,.3);border-top-color:#1a1206;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  input{width:100%;background:rgba(11,11,11,.6);border:1.5px solid rgba(232,194,116,.25);color:var(--cream);border-radius:13px;padding:13px 15px;font-size:1rem;font-family:inherit}
+  input:focus{outline:none;border-color:var(--champagne)}
+
+  .wrap{max-width:460px;margin:0 auto;padding:24px 18px 60px}
+  .gate{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .gate-card{width:100%;max-width:360px;background:rgba(22,22,15,.8);border:1px solid rgba(251,113,133,.35);border-radius:22px;padding:30px 26px;text-align:center}
+  .gate-card .lock{font-size:2.6rem;margin-bottom:10px}
+  .gate-card h1{font-size:1.2rem;font-weight:800;margin-bottom:18px}
+  .gerr{color:#fda4af;font-size:.82rem;margin-top:12px;min-height:1em}
+
+  h1.title{font-size:1.4rem;font-weight:900;text-align:center;margin-bottom:4px}
+  .sub{text-align:center;color:rgba(245,239,226,.55);font-size:.85rem;margin-bottom:22px}
+  .now{background:rgba(22,22,15,.6);border:1px solid rgba(232,194,116,.2);border-radius:16px;padding:16px;text-align:center;margin-bottom:22px}
+  .now .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(245,239,226,.45)}
+  .now .val{font-size:1.05rem;font-weight:700;margin-top:3px}
+  .now .badge{display:inline-block;font-size:.74rem;font-weight:700;padding:4px 12px;border-radius:999px;margin-top:8px;background:rgba(232,194,116,.16);color:var(--champagne)}
+
+  .btn{width:100%;border:none;border-radius:15px;padding:18px;font-size:1.1rem;font-weight:800;margin-bottom:12px;transition:transform .1s,opacity .15s}
+  .btn:active{transform:scale(.98)} .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn-new{background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206}
+  .btn-reopen{background:#16a34a;color:#fff}
+  .btn-stop{background:#b45309;color:#fff}
+  .btn-finish{background:#b91c1c;color:#fff}
+  .f{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+  .f label{font-size:.78rem;color:rgba(245,239,226,.6);font-weight:600}
+  .row2{display:flex;gap:10px} .row2 .f{flex:1} .row2 .f.q{flex:0 0 110px}
+  .divider{height:1px;background:rgba(232,194,116,.15);margin:18px 0}
+  .small{font-size:.95rem;padding:13px}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:80;background:var(--graphite);border:1px solid rgba(232,194,116,.4);color:var(--cream);padding:12px 20px;border-radius:12px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+  .back{display:block;text-align:center;margin-top:18px;font-size:.85rem;color:rgba(232,194,116,.6);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="lock">🛟</div>
+    <h1>Reset nhanh — nhập mật khẩu</h1>
+    <form id="gateForm">
+      <input id="gatePass" type="password" placeholder="Mật khẩu điều khiển" autocomplete="current-password" required>
+      <button class="btn btn-new" type="submit" id="gateBtn" style="margin-top:14px">Mở</button>
+    </form>
+    <div class="gerr" id="gateErr"></div>
+  </div>
+</div>
+
+<div id="app" class="hidden"><div class="wrap">
+  <h1 class="title">🛟 Reset nhanh</h1>
+  <div class="sub">Dùng khi game bị kẹt/lỗi giữa chừng.</div>
+
+  <div class="now">
+    <div class="lbl">Phiên hiện tại</div>
+    <div class="val" id="nowPrize">—</div>
+    <div class="badge" id="nowStatus">—</div>
+    <div style="font-size:.8rem;color:rgba(245,239,226,.5);margin-top:6px"><span id="nowCount">0</span> người đã đăng ký</div>
+  </div>
+
+  <div class="f"><label>Tên giải (cho phiên mới)</label><input id="inPrize" placeholder="VD: iPhone 16 Pro" maxlength="80"></div>
+  <div class="row2">
+    <div class="f q"><label>Số người trúng</label><input id="inQty" type="number" min="1" max="50" value="1"></div>
+  </div>
+  <button class="btn btn-new" id="btnNew">🔄 TẠO PHIÊN MỚI (reset sạch)</button>
+
+  <div class="divider"></div>
+
+  <button class="btn btn-reopen small" id="btnReopen">🔓 Mở lại nhận đăng ký (giữ người chơi)</button>
+  <button class="btn btn-stop small" id="btnStop">🔒 Ngưng nhận đăng ký</button>
+  <button class="btn btn-finish small" id="btnFinish">⏹ Kết thúc phiên hiện tại</button>
+
+  <a class="back" href="/duongduatmdt-control" target="_blank" rel="noopener">→ Về trang điều khiển</a>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/assets/supabase.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  const SB_URL='https://dcmtbgcltopnqsiedwlg.supabase.co';
+  const SB_KEY='sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
+  let sb=null; try{ sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}}); }catch(e){ console.error(e); }
+  const $=id=>document.getElementById(id);
+  const TOKEN_KEY='dd_ctrl_token';
+  let token=sessionStorage.getItem(TOKEN_KEY)||null;
+  let roundId=null;
+  let toastT=null;
+  function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2400);}
+  function esc(s){const d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
+  async function rpc(fn,args){ if(!sb)return null; const{data,error}=await sb.rpc(fn,args||{}); if(error){console.warn(fn,error.message);return {ok:false,error:error.message};} return data; }
+
+  $('gateForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const pass=$('gatePass').value; const btn=$('gateBtn'); const err=$('gateErr'); err.textContent='';
+    btn.disabled=true; const old=btn.textContent; btn.innerHTML='<span class="spin"></span>…';
+    const res=await rpc('dd_admin_login',{p_token:pass});
+    btn.disabled=false; btn.textContent=old;
+    if(res&&res.ok){ token=pass; sessionStorage.setItem(TOKEN_KEY,pass); open(); }
+    else err.textContent='Mật khẩu không đúng.';
+  });
+  function open(){ $('gate').classList.add('hidden'); $('app').classList.remove('hidden'); poll(); setInterval(poll,2500); }
+
+  async function poll(){
+    const rows=await rpc('dd_active_round');
+    const r=Array.isArray(rows)?rows[0]:null;
+    if(!r){ roundId=null; $('nowPrize').textContent='(chưa có phiên)'; $('nowStatus').textContent='—'; $('nowCount').textContent='0'; return; }
+    roundId=r.id;
+    $('nowPrize').textContent=(r.prize||'Giải thưởng')+(r.prize_qty>1?(' ×'+r.prize_qty):'');
+    const lbl={registration:'🔓 Đang mở đăng ký',closed:'🔒 Đã ngưng nhận',countdown:'⏳ Đang đếm ngược',playing:'🏁 Đang quay',finished:'✅ Kết thúc'};
+    $('nowStatus').textContent=lbl[r.status]||r.status;
+    $('nowCount').textContent=r.player_count||0;
+  }
+
+  async function setStatus(s,msg){ if(!roundId){ toast('Chưa có phiên'); return; } const res=await rpc('dd_admin_set_status',{p_token:token,p_round:roundId,p_status:s}); if(res&&res.ok){ toast(msg); poll(); } else toast((res&&res.error)||'Lỗi'); }
+
+  $('btnNew').addEventListener('click', async function(){
+    const prize=$('inPrize').value.trim(); const qty=Math.max(1,parseInt($('inQty').value,10)||1);
+    if(!prize){ toast('Nhập tên giải trước'); return; }
+    if(!confirm('TẠO PHIÊN MỚI: kết thúc phiên hiện tại + xoá toàn bộ người chơi đang có. Chắc chắn?')) return;
+    const res=await rpc('dd_admin_new_round',{p_token:token,p_prize:prize,p_qty:qty});
+    if(res&&res.ok){ toast('✅ Đã tạo phiên mới sạch'); poll(); } else toast((res&&res.error)||'Lỗi');
+  });
+  $('btnReopen').addEventListener('click',()=>setStatus('registration','✅ Đã mở lại đăng ký'));
+  $('btnStop').addEventListener('click',()=>setStatus('closed','✅ Đã ngưng nhận'));
+  $('btnFinish').addEventListener('click',function(){ if(confirm('Kết thúc phiên hiện tại?')) setStatus('finished','✅ Đã kết thúc'); });
+
+  if(token) open(); else $('gatePass').focus();
+})();
+</script>
+</body>
+</html>

@@ -1594,6 +1594,8 @@ renderP();renderPr();updateStats();updateSel();renderRes();
 
     // MC bấm "BẮT ĐẦU" ở trang cha → chạy đường đua
     if(e.data.type === 'START_RACE'){
+      // Nếu đang hiện overlay người thắng trước → tự xác nhận (đóng) để quay tiếp người khác
+      try{ var _ov=document.getElementById('wOverlay'); if(_ov && _ov.classList.contains('show') && typeof closeWinner==='function'){ closeWinner(); } }catch(_e){}
       if(typeof showScreen === 'function') showScreen('draw');
       const sel = document.getElementById('dSelect');
       if(sel && !sel.value){
