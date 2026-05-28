@@ -34,14 +34,14 @@
 
   .center{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:40px}
   .center .flag{font-size:7rem;line-height:1}
-  .center h1{font-size:5.4vw;font-weight:900;white-space:nowrap;background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .center h1{font-size:min(4.6vw,8vh);font-weight:900;white-space:nowrap;background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .center .subt{font-size:1.7vw;font-weight:700;color:var(--champagne);letter-spacing:.06em;opacity:.85}
   .center p{color:rgba(245,239,226,.6);font-size:1.2rem}
 
   /* hero (flag/title/slogan — mỗi thứ 1 dòng) */
-  .hero{text-align:center;padding:2.4vh 0 1vh}
-  .hero .flag{font-size:5.2vh;line-height:1;white-space:nowrap}
-  .hero .slogan{white-space:nowrap;font-weight:900;font-size:5vw;letter-spacing:-.02em;margin-top:.4vh;
+  .hero{text-align:center;padding:1.6vh 2vw .6vh;overflow:hidden;max-width:100vw}
+  .hero .flag{font-size:4.4vh;line-height:1;white-space:nowrap}
+  .hero .slogan{white-space:nowrap;font-weight:900;font-size:min(4vw,7vh);letter-spacing:-.02em;margin-top:.3vh;
         background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .hero .title{white-space:nowrap;font-weight:700;font-size:1.7vw;color:var(--champagne);margin-top:.2vh;letter-spacing:.06em;opacity:.85}
 
@@ -147,6 +147,8 @@
   function setMode(m){
     if(mode===m) return false;
     mode=m;
+    // Dòng tên trên đầu chỉ hiện khi đếm ngược/đua (lúc reg/chờ/kết quả đã có tiêu đề to → tránh dư)
+    var tn=$('topName'); if(tn) tn.style.display=(m==='countdown'||m==='race')?'block':'none';
     if(m==='idle'){
       root.innerHTML='<div class="center"><div class="flag">🏁</div><h1>Tăng trưởng thần tốc</h1><div class="subt">Đường Đua Thương Mại Điện Tử</div><p>Đang chờ ban tổ chức mở phiên…</p></div>';
     } else if(m==='reg'){
