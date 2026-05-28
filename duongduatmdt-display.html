@@ -21,7 +21,7 @@
   #topName{position:fixed;top:0;left:0;right:0;z-index:40;text-align:center;pointer-events:none;
     padding:1vh 0;font-weight:900;font-size:1.5vw;letter-spacing:.06em;color:var(--champagne);
     background:linear-gradient(180deg,rgba(11,11,11,.7),rgba(11,11,11,0));text-shadow:0 2px 8px rgba(0,0,0,.6)}
-  #topName span{color:rgba(245,239,226,.55);font-weight:700}
+  #topName span{color:rgba(245,239,226,.5);font-weight:700;font-size:.7em}
   #ctrlBar{position:fixed;bottom:0;left:0;right:0;z-index:45;display:flex;gap:1vw;justify-content:center;
     padding:1.4vh 2vw calc(1.4vh + env(safe-area-inset-bottom));background:linear-gradient(0deg,rgba(11,11,11,.85),rgba(11,11,11,0))}
   #ctrlBar button{border:none;border-radius:14px;padding:1.4vh 3vw;font-size:1.5vw;font-weight:800;font-family:inherit;cursor:pointer;
@@ -34,15 +34,16 @@
 
   .center{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:40px}
   .center .flag{font-size:7rem;line-height:1}
-  .center h1{font-size:2.6vw;font-weight:900;white-space:nowrap;background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .center h1{font-size:5.4vw;font-weight:900;white-space:nowrap;background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .center .subt{font-size:1.7vw;font-weight:700;color:var(--champagne);letter-spacing:.06em;opacity:.85}
   .center p{color:rgba(245,239,226,.6);font-size:1.2rem}
 
   /* hero (flag/title/slogan — mỗi thứ 1 dòng) */
   .hero{text-align:center;padding:2.4vh 0 1vh}
   .hero .flag{font-size:5.2vh;line-height:1;white-space:nowrap}
-  .hero .title{white-space:nowrap;font-weight:900;font-size:3.4vw;letter-spacing:-.02em;margin-top:.4vh;
+  .hero .slogan{white-space:nowrap;font-weight:900;font-size:5vw;letter-spacing:-.02em;margin-top:.4vh;
         background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .hero .slogan{white-space:nowrap;font-weight:700;font-size:1.7vw;color:var(--champagne);margin-top:.2vh;letter-spacing:.04em}
+  .hero .title{white-space:nowrap;font-weight:700;font-size:1.7vw;color:var(--champagne);margin-top:.2vh;letter-spacing:.06em;opacity:.85}
 
   .reg{height:100vh;display:flex;flex-direction:column;padding:1vh 3vw 2vh}
   .prize-row{display:flex;flex-wrap:wrap;gap:.7vw;justify-content:center;margin:1vh 0}
@@ -90,7 +91,7 @@
 <body>
 <div class="glow a"></div><div class="glow b"></div>
 <div id="root"></div>
-<div id="topName">🏁 ĐƯỜNG ĐUA THƯƠNG MẠI ĐIỆN TỬ <span>· Tăng trưởng thần tốc</span></div>
+<div id="topName">🏁 TĂNG TRƯỞNG THẦN TỐC <span>· Đường đua TMĐT</span></div>
 <div id="ctrlBar" class="hidden"></div>
 
 <script src="/assets/supabase.min.js"></script>
@@ -118,7 +119,7 @@
   let st={ roundId:null, status:null, prizes:[{name:'Giải thưởng',quantity:1}], countdownAt:null, skew:0, count:0, winCount:0 };
   let players=[], codeMap={}, mode=null, iframeReady=false, drawSignal=null, drawStarted=false, recorded=new Set(), qrDone=false;
 
-  const HERO='<div class="hero"><div class="flag">🏁</div><div class="title">Đường Đua Thương Mại Điện Tử</div><div class="slogan">Tăng trưởng thần tốc</div></div>';
+  const HERO='<div class="hero"><div class="flag">🏁</div><div class="slogan">Tăng trưởng thần tốc</div><div class="title">Đường Đua Thương Mại Điện Tử</div></div>';
 
   function totalSlots(){ return st.prizes.reduce((s,p)=>s+p.quantity,0); }
   function effWin(){ return Math.max(st.winCount, recorded.size); }
@@ -147,7 +148,7 @@
     if(mode===m) return false;
     mode=m;
     if(m==='idle'){
-      root.innerHTML='<div class="center"><div class="flag">🏁</div><h1>Đường Đua Thương Mại Điện Tử</h1><p>Đang chờ ban tổ chức mở phiên…</p></div>';
+      root.innerHTML='<div class="center"><div class="flag">🏁</div><h1>Tăng trưởng thần tốc</h1><div class="subt">Đường Đua Thương Mại Điện Tử</div><p>Đang chờ ban tổ chức mở phiên…</p></div>';
     } else if(m==='reg'){
       root.innerHTML='<div class="reg">'+HERO+
         '<span class="status" id="dStatus"></span>'+
