@@ -59,6 +59,7 @@
   .btn.full{grid-column:1/-1}
   .btn:active{transform:scale(.98)} .btn:disabled{opacity:.5;cursor:not-allowed}
   .btn-display{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff}
+  .btn-quayso{background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff}
   .btn-start{background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206;font-size:1.3rem;padding:22px}
   .btn-stop{background:#b45309;color:#fff} .btn-reopen{background:rgba(245,239,226,.1);color:var(--cream);border:1px solid rgba(245,239,226,.25)}
   .btn-next{background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206}
@@ -191,6 +192,7 @@
   $('lnkLogout').addEventListener('click',function(e){ e.preventDefault(); sessionStorage.removeItem(TOKEN_KEY); token=null; location.reload(); });
   function openApp(){ $('gate').classList.add('hidden'); $('app').classList.remove('hidden'); renderPrizeEditor(); poll(); }
   function openDisplay(){ const url='/duongduatmdt-display'+(token?('#t='+encodeURIComponent(token)):''); window.open(url,'ddDisplay','noopener'); }
+  function openQuayso(){ const url='/quayso-display'+(token?('#t='+encodeURIComponent(token)):''); window.open(url,'ddQuayso','noopener'); }
 
   $('btnNewRound').addEventListener('click', async function(){
     const list=collectPrizes();
@@ -208,6 +210,7 @@
     const a=$('actions'); const hint=$('actionHint'); const s=st.status;
     if(!st.roundId){ a.innerHTML='<div class="empty full" style="grid-column:1/-1">Chưa có phiên. Bấm "Tạo phiên mới" ở trên.</div>'; hint.textContent=''; return; }
     let h=b('btnDisplay','btn-display full','📺 Hiển thị đường đua (mở màn hình)');
+    h+=b('btnQuayso','btn-quayso full','🎰 Quay số (game dự phòng)');
     if(s==='registration'){ h+=b('btnStop','btn-stop','🔒 Ngưng nhận'); h+=b('btnStart','btn-start','▶ Bắt đầu'); hint.textContent='Bấm "Hiển thị đường đua" mở màn chiếu. "Bắt đầu" → đếm ngược 15s rồi tự quay giải đầu tiên.'; }
     else if(s==='closed'){ h+=b('btnReopen','btn-reopen','🔓 Mở lại nhận'); h+=b('btnStart','btn-start','▶ Bắt đầu'); hint.textContent='Đã ngưng nhận. Bấm "Bắt đầu" để quay.'; }
     else if(s==='countdown'){ h+=b('btnFinish','btn-finish full','⏹ Kết thúc game'); hint.textContent='Màn hình đang đếm ngược & quay. Chờ kết quả.'; }
@@ -215,6 +218,7 @@
     else if(s==='finished'){ h+=b('btnNew2','btn-new full','🔄 Tạo phiên mới'); hint.textContent='Game đã kết thúc.'; }
     a.innerHTML=h;
     bind('btnDisplay',openDisplay);
+    bind('btnQuayso',openQuayso);
     bind('btnStop',()=>setStatus('closed'));
     bind('btnReopen',()=>setStatus('registration'));
     bind('btnStart',()=>setStatus('countdown'));
