@@ -163,7 +163,7 @@
   <div class="setup" id="setupRow">
     <div class="f"><label>Tên giải thưởng</label><input class="prize" id="inPrize" placeholder="VD: iPhone 16 Pro" maxlength="80"></div>
     <div class="f"><label>Số người trúng</label><input class="qty" id="inQty" type="number" min="1" max="20" value="1"></div>
-    <button class="btn btn-green" id="btnNewRound">🔓 Mở phiên mới</button>
+    <button class="btn btn-green" id="btnNewRound">🔄 Tạo phiên mới / Reset</button>
   </div>
 
   <!-- contextual controls -->
@@ -243,6 +243,7 @@
     const prize=$('inPrize').value.trim();
     const qty=Math.max(1,parseInt($('inQty').value,10)||1);
     if(!prize){ toast('Nhập tên giải thưởng trước'); return; }
+    if(st.roundId && !confirm('Tạo phiên MỚI sẽ kết thúc phiên hiện tại và xoá danh sách người chơi khỏi màn hình. Tiếp tục?')) return;
     const res=await rpc('dd_admin_new_round',{p_token:token,p_prize:prize});
     if(res&&res.ok){ st.qty=qty; sessionStorage.setItem('dd_qty',String(qty)); mcStarted=false; recordedWinners=0; toast('Đã mở phiên mới — đăng ký đang mở'); poll(); }
     else { toast((res&&res.error)||'Lỗi tạo phiên'); }
@@ -255,8 +256,8 @@
   function renderControls(){
     const c=$('controls'); const s=st.status;
     let h='';
-    if(!st.roundId){ c.innerHTML=''; $('setupRow').classList.remove('hidden'); return; }
-    $('setupRow').classList.toggle('hidden', !!st.roundId);
+    $('setupRow').classList.remove('hidden');  // luôn hiện nút tạo/reset phiên
+    if(!st.roundId){ c.innerHTML=''; return; }
     if(s==='registration'){
       h+=btn('btnClose','btn-ghost','🔒 Đóng đăng ký');
       h+=btn('btnStart','btn-blue','▶ Bắt đầu (đếm ngược 15s)');
