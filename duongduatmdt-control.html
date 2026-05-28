@@ -16,19 +16,18 @@
   .hidden{display:none!important}
   .spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
   @keyframes sp{to{transform:rotate(360deg)}}
+  input{background:rgba(11,11,11,.6);border:1.5px solid rgba(232,194,116,.25);color:var(--cream);border-radius:12px;padding:12px 13px;font-size:.95rem;font-family:inherit}
+  input:focus{outline:none;border-color:var(--champagne)}
 
   .wrap{max-width:680px;margin:0 auto;padding:18px 16px 60px}
-  /* gate */
   .gate{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:20px}
   .gate-card{width:100%;max-width:380px;background:rgba(22,22,15,.8);border:1px solid rgba(232,194,116,.25);border-radius:22px;padding:30px 26px;text-align:center}
   .gate-card .lock{font-size:2.6rem;margin-bottom:10px}
-  .gate-card h1{font-size:1.25rem;font-weight:800;margin-bottom:4px}
-  .gate-card p{color:rgba(245,239,226,.55);font-size:.85rem;margin-bottom:20px}
-  input{width:100%;background:rgba(11,11,11,.6);border:1.5px solid rgba(232,194,116,.25);color:var(--cream);border-radius:13px;padding:13px 15px;font-size:1rem;font-family:inherit}
-  input:focus{outline:none;border-color:var(--champagne)}
+  .gate-card h1{font-size:1.25rem;font-weight:800;margin-bottom:18px}
+  .gate-card input{width:100%}
   .gerr{color:#fda4af;font-size:.82rem;margin-top:12px;min-height:1em}
 
-  .topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
   .topbar .brand{font-weight:900;font-size:1.05rem;color:var(--champagne)}
   .badge{font-size:.74rem;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap}
   .b-reg{background:rgba(74,222,128,.16);color:#86efac} .b-closed{background:rgba(250,204,21,.16);color:#fde047}
@@ -40,29 +39,34 @@
 
   .card{background:rgba(22,22,15,.55);border:1px solid rgba(232,194,116,.18);border-radius:18px;padding:16px;margin-bottom:16px}
   .card h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(245,239,226,.5);margin-bottom:12px;font-weight:700}
-  .setup{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
-  .setup .f{display:flex;flex-direction:column;gap:5px}
-  .setup label{font-size:.72rem;color:rgba(245,239,226,.6);font-weight:600}
-  .setup input{padding:11px 13px;font-size:.95rem}
-  .setup input.prize{width:280px;max-width:60vw} .setup input.qty{width:90px;text-align:center}
 
-  .stat{display:flex;align-items:center;gap:8px;font-size:1rem;color:rgba(245,239,226,.75);margin-bottom:14px}
+  /* prize editor */
+  .prow{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .prow input.pn{flex:1}
+  .prow input.pq{width:64px;text-align:center}
+  .prow .del{background:rgba(185,28,28,.18);color:#fca5a5;border:none;border-radius:10px;width:38px;height:42px;font-size:1rem;flex-shrink:0}
+  .addp{background:rgba(232,194,116,.12);color:var(--champagne);border:1px dashed rgba(232,194,116,.4);border-radius:11px;padding:9px;width:100%;font-size:.88rem;font-weight:600;margin-top:4px}
+  .sum{font-size:.8rem;color:rgba(245,239,226,.55);margin-top:8px} .sum b{color:var(--champagne)}
+
+  .stat{display:flex;align-items:center;gap:8px;font-size:1rem;color:rgba(245,239,226,.75);margin-bottom:10px}
   .stat b{font-size:1.6rem;color:var(--champagne);font-weight:900}
+  .curprize{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .curprize .c{background:rgba(232,194,116,.1);border:1px solid rgba(232,194,116,.25);color:var(--champagne);border-radius:999px;padding:5px 11px;font-size:.78rem;font-weight:600}
+  .curprize .done{opacity:.45;text-decoration:line-through}
 
-  /* big action buttons */
   .actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .actions .full{grid-column:1/-1}
   .btn{border:none;border-radius:15px;padding:18px;font-size:1.1rem;font-weight:800;transition:transform .1s,opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn.full{grid-column:1/-1}
   .btn:active{transform:scale(.98)} .btn:disabled{opacity:.5;cursor:not-allowed}
   .btn-display{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff}
   .btn-start{background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206;font-size:1.3rem;padding:22px}
   .btn-stop{background:#b45309;color:#fff} .btn-reopen{background:rgba(245,239,226,.1);color:var(--cream);border:1px solid rgba(245,239,226,.25)}
   .btn-next{background:linear-gradient(135deg,#E8C274,#C9A24E);color:#1a1206}
-  .btn-finish{background:#b91c1c;color:#fff} .btn-new{background:#16a34a;color:#fff}
+  .btn-finish{background:#b91c1c;color:#fff} .btn-new{background:#16a34a;color:#fff;padding:13px;font-size:.98rem}
 
   .mini-board{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;max-height:34vh;overflow-y:auto}
   .mb{display:flex;align-items:center;gap:9px;background:rgba(11,11,11,.45);border:1px solid rgba(232,194,116,.12);border-radius:11px;padding:8px 10px}
-  .mb .av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;color:#1a1206;background:linear-gradient(135deg,#E8C274,#9C6B2E);font-size:.85rem}
+  .mb .em{font-size:1.4rem;flex-shrink:0;width:26px;text-align:center}
   .mb .nm{font-weight:600;font-size:.88rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mb .ph{font-size:.72rem;color:rgba(245,239,226,.45)}
   .empty{text-align:center;color:rgba(245,239,226,.4);padding:24px 0;font-size:.9rem}
@@ -80,7 +84,6 @@
   <div class="gate-card">
     <div class="lock">🔐</div>
     <h1>Điều khiển Đường Đua</h1>
-    <p>Khu vực nhân viên sự kiện. Nhập mật khẩu.</p>
     <form id="gateForm">
       <input id="gatePass" type="password" placeholder="Mật khẩu điều khiển" autocomplete="current-password" required>
       <button class="btn btn-start" type="submit" id="gateBtn" style="width:100%;margin-top:16px;font-size:1.05rem;padding:14px">Mở bảng điều khiển</button>
@@ -94,29 +97,29 @@
     <span class="brand">🏁 Điều khiển</span>
     <span class="badge b-none" id="statusBadge">—</span>
     <span class="sp"></span>
-    <a class="lnk" id="lnkPlayer" href="/duongduatmdt" target="_blank" rel="noopener">🔗 Trang chơi</a>
-    <a class="lnk" id="lnkReset" href="/duongduatmdt-reset" target="_blank" rel="noopener">🛟 Reset</a>
+    <a class="lnk" href="/duongduatmdt" target="_blank" rel="noopener">🔗 Trang chơi</a>
+    <a class="lnk" href="/duongduatmdt-reset" target="_blank" rel="noopener">🛟 Reset</a>
     <a class="lnk" id="lnkLogout" href="#">Thoát</a>
   </div>
 
   <div class="card">
-    <h2>Tạo / Reset phiên</h2>
-    <div class="setup">
-      <div class="f"><label>Tên giải thưởng</label><input class="prize" id="inPrize" placeholder="VD: iPhone 16 Pro" maxlength="80"></div>
-      <div class="f"><label>Số người trúng</label><input class="qty" id="inQty" type="number" min="1" max="50" value="1"></div>
-      <button class="btn btn-new" id="btnNewRound" style="padding:12px 18px;font-size:.95rem">🔄 Tạo phiên mới</button>
-    </div>
-    <div class="hint">Mỗi phiên = 1 giải. "Số người trúng" = quay được bao nhiêu người cho giải này.</div>
+    <h2>Danh sách giải (tạo / reset phiên)</h2>
+    <div id="prizeRows"></div>
+    <button class="addp" id="addPrize">+ Thêm giải</button>
+    <div class="sum" id="prizeSum"></div>
+    <button class="btn btn-new full" id="btnNewRound" style="margin-top:12px">🔄 Tạo phiên mới với danh sách giải này</button>
+    <div class="hint">Quay lần lượt từ trên xuống. VD mặc định: 2 Khuyến khích → Ba → Nhì → Nhất (quay 5 lần).</div>
   </div>
 
   <div class="card">
     <div class="stat">👥 <b id="barCount">0</b> người đã đăng ký</div>
+    <div class="curprize" id="curPrize"></div>
     <div class="actions" id="actions"></div>
     <div class="hint" id="actionHint"></div>
   </div>
 
   <div class="card">
-    <h2>Người chơi (SĐT ẩn)</h2>
+    <h2>Người chơi (linh vật + SĐT ẩn)</h2>
     <div class="mini-board" id="miniBoard"></div>
   </div>
 
@@ -134,19 +137,46 @@
   'use strict';
   const SB_URL='https://dcmtbgcltopnqsiedwlg.supabase.co';
   const SB_KEY='sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
+  const ZOO=['🦁','🐱','🐰','🐻','🦊','🐼','🦉','🐧','🦆','🐸','🦄','🐶','🐘','🐯','🐵','🐬','🐴','🦌','🐨','🐹','🐢','🐳','🦅','🐷'];
+  const animal=i=>ZOO[((i%24)+24)%24];
   let sb=null; try{ sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}}); }catch(e){ console.error(e); }
 
   const $=id=>document.getElementById(id);
   const TOKEN_KEY='dd_ctrl_token';
   let token=sessionStorage.getItem(TOKEN_KEY)||null;
-  let st={ roundId:null, status:null, prize:null, qty:1, count:0 };
+  let st={ roundId:null, status:null, prizes:[], count:0, winCount:0 };
+
+  const DEFAULT_PRIZES=[{name:'Giải khuyến khích',quantity:2},{name:'Giải ba',quantity:1},{name:'Giải nhì',quantity:1},{name:'Giải nhất',quantity:1}];
+  let editorRows=DEFAULT_PRIZES.map(p=>({...p}));
+  let editorInit=false;
 
   function esc(s){const d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
-  function initials(n){const p=(n||'').trim().split(/\s+/);return (p[p.length-1]||'?').slice(0,1).toUpperCase();}
-  function mask(phone){return 'xxx'+String(phone||'').replace(/\D/g,'').slice(-3);}
+  function parsePrizes(p){ if(!p) return [{name:'Giải thưởng',quantity:1}]; try{ const a=JSON.parse(p); if(Array.isArray(a)&&a.length) return a.map(x=>({name:String(x.name||'Giải'),quantity:Math.max(1,parseInt(x.quantity,10)||1)})); }catch(e){} return [{name:p,quantity:1}]; }
   let toastT=null;
   function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2400);}
   async function rpc(fn,args){ if(!sb)return null; const{data,error}=await sb.rpc(fn,args||{}); if(error){console.warn(fn,error.message);return {ok:false,error:error.message};} return data; }
+
+  // ---- prize editor ----
+  function renderPrizeEditor(){
+    const box=$('prizeRows');
+    box.innerHTML=editorRows.map((p,i)=>'<div class="prow">'+
+      '<input class="pn" data-i="'+i+'" data-f="name" value="'+esc(p.name)+'" placeholder="Tên giải" maxlength="40">'+
+      '<input class="pq" data-i="'+i+'" data-f="qty" type="number" min="1" max="50" value="'+p.quantity+'">'+
+      '<button class="del" data-i="'+i+'" title="Xoá">✕</button></div>').join('');
+    box.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',function(){
+      const i=+this.dataset.i, f=this.dataset.f;
+      if(f==='name') editorRows[i].name=this.value;
+      else editorRows[i].quantity=Math.max(1,parseInt(this.value,10)||1);
+      updateSum();
+    }));
+    box.querySelectorAll('.del').forEach(b=>b.addEventListener('click',function(){
+      editorRows.splice(+this.dataset.i,1); if(!editorRows.length) editorRows.push({name:'',quantity:1}); renderPrizeEditor();
+    }));
+    updateSum();
+  }
+  function updateSum(){ const n=editorRows.reduce((s,p)=>s+(p.quantity||0),0); $('prizeSum').innerHTML='Tổng: <b>'+editorRows.length+'</b> loại giải · <b>'+n+'</b> lần quay'; }
+  $('addPrize').addEventListener('click',function(){ editorRows.push({name:'',quantity:1}); renderPrizeEditor(); });
+  function collectPrizes(){ return editorRows.map(p=>({name:(p.name||'').trim(),quantity:Math.max(1,p.quantity||1)})).filter(p=>p.name); }
 
   // ---- auth ----
   $('gateForm').addEventListener('submit', async function(e){
@@ -159,42 +189,29 @@
     else err.textContent='Mật khẩu không đúng.';
   });
   $('lnkLogout').addEventListener('click',function(e){ e.preventDefault(); sessionStorage.removeItem(TOKEN_KEY); token=null; location.reload(); });
-  function openApp(){ $('gate').classList.add('hidden'); $('app').classList.remove('hidden'); wireLinks(); poll(); }
+  function openApp(){ $('gate').classList.add('hidden'); $('app').classList.remove('hidden'); renderPrizeEditor(); poll(); }
+  function openDisplay(){ const url='/duongduatmdt-display'+(token?('#t='+encodeURIComponent(token)):''); window.open(url,'ddDisplay','noopener'); }
 
-  function wireLinks(){
-    // chèn token vào link hiển thị + reset (không hiện trên màn chiếu)
-    if(token){
-      $('lnkReset').href='/duongduatmdt-reset';
-    }
-  }
-  function openDisplay(){
-    const url='/duongduatmdt-display'+(token?('#t='+encodeURIComponent(token)):'');
-    window.open(url,'ddDisplay','noopener');
-  }
-
-  // ---- new round ----
   $('btnNewRound').addEventListener('click', async function(){
-    const prize=$('inPrize').value.trim();
-    const qty=Math.max(1,parseInt($('inQty').value,10)||1);
-    if(!prize){ toast('Nhập tên giải thưởng trước'); return; }
+    const list=collectPrizes();
+    if(!list.length){ toast('Nhập ít nhất 1 giải'); return; }
     if(st.roundId && !confirm('Tạo phiên MỚI sẽ kết thúc phiên hiện tại và xoá danh sách người chơi khỏi màn hình. Tiếp tục?')) return;
-    const res=await rpc('dd_admin_new_round',{p_token:token,p_prize:prize,p_qty:qty});
+    const qty=list.reduce((s,p)=>s+p.quantity,0);
+    const res=await rpc('dd_admin_new_round',{p_token:token,p_prize:JSON.stringify(list),p_qty:qty});
     if(res&&res.ok){ toast('Đã tạo phiên mới — đang mở đăng ký'); poll(); }
     else toast((res&&res.error)||'Lỗi tạo phiên');
   });
 
   async function setStatus(s){ const res=await rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:s}); if(!(res&&res.ok)) toast((res&&res.error)||'Lỗi'); poll(); return res&&res.ok; }
 
-  // ---- render action buttons by status ----
   function renderActions(){
     const a=$('actions'); const hint=$('actionHint'); const s=st.status;
     if(!st.roundId){ a.innerHTML='<div class="empty full" style="grid-column:1/-1">Chưa có phiên. Bấm "Tạo phiên mới" ở trên.</div>'; hint.textContent=''; return; }
-    let h='';
-    h+=b('btnDisplay','btn-display full','📺 Hiển thị đường đua (mở màn hình)');
-    if(s==='registration'){ h+=b('btnStop','btn-stop','🔒 Ngưng nhận'); h+=b('btnStart','btn-start','▶ Bắt đầu'); hint.textContent='Bấm "Hiển thị đường đua" để mở màn chiếu trước. "Bắt đầu" → màn hình đếm ngược 15s rồi tự quay.'; }
+    let h=b('btnDisplay','btn-display full','📺 Hiển thị đường đua (mở màn hình)');
+    if(s==='registration'){ h+=b('btnStop','btn-stop','🔒 Ngưng nhận'); h+=b('btnStart','btn-start','▶ Bắt đầu'); hint.textContent='Bấm "Hiển thị đường đua" mở màn chiếu. "Bắt đầu" → đếm ngược 15s rồi tự quay giải đầu tiên.'; }
     else if(s==='closed'){ h+=b('btnReopen','btn-reopen','🔓 Mở lại nhận'); h+=b('btnStart','btn-start','▶ Bắt đầu'); hint.textContent='Đã ngưng nhận. Bấm "Bắt đầu" để quay.'; }
     else if(s==='countdown'){ h+=b('btnFinish','btn-finish full','⏹ Kết thúc game'); hint.textContent='Màn hình đang đếm ngược & quay. Chờ kết quả.'; }
-    else if(s==='playing'){ h+=b('btnNext','btn-next','🔄 Quay tiếp (người kế)'); h+=b('btnFinish','btn-finish','⏹ Kết thúc'); hint.textContent='Đã quay xong 1 người. "Quay tiếp" để chọn người kế (cho giải nhiều người).'; }
+    else if(s==='playing'){ h+=b('btnNext','btn-next','🔄 Quay giải tiếp'); h+=b('btnFinish','btn-finish','⏹ Kết thúc'); hint.textContent='Đã quay xong 1 người. "Quay giải tiếp" để quay người/giải kế tiếp.'; }
     else if(s==='finished'){ h+=b('btnNew2','btn-new full','🔄 Tạo phiên mới'); hint.textContent='Game đã kết thúc.'; }
     a.innerHTML=h;
     bind('btnDisplay',openDisplay);
@@ -203,10 +220,19 @@
     bind('btnStart',()=>setStatus('countdown'));
     bind('btnNext',()=>setStatus('countdown'));
     bind('btnFinish',()=>{ if(confirm('Kết thúc game?')) setStatus('finished'); });
-    bind('btnNew2',()=>{ $('inPrize').focus(); toast('Nhập giải mới ở trên rồi bấm "Tạo phiên mới"'); });
+    bind('btnNew2',()=>{ window.scrollTo({top:0,behavior:'smooth'}); toast('Sửa danh sách giải ở trên rồi bấm "Tạo phiên mới"'); });
   }
   function b(id,cls,label){ return '<button class="btn '+cls+'" id="'+id+'">'+label+'</button>'; }
   function bind(id,fn){ const el=$(id); if(el) el.addEventListener('click',fn); }
+
+  function renderCurPrize(){
+    const box=$('curPrize'); if(!st.roundId||!st.prizes.length){ box.innerHTML=''; return; }
+    // tô mờ giải đã quay xong dựa trên winCount
+    let acc=0; const w=st.winCount;
+    box.innerHTML=st.prizes.map(p=>{ const done=w>=acc+p.quantity; const partial=!done && w>acc; acc+=p.quantity;
+      return '<span class="c'+(done?' done':'')+'">🎁 '+esc(p.name)+(p.quantity>1?(' ×'+p.quantity):'')+(partial?(' ('+(w-(acc-p.quantity))+'/'+p.quantity+')'):'')+'</span>'; }).join('')
+      + ' <span class="c" style="background:none;border:none;color:rgba(245,239,226,.5)">Đã quay '+w+'/'+st.prizes.reduce((s,p)=>s+p.quantity,0)+'</span>';
+  }
 
   async function refreshBoard(){
     if(!st.roundId) return;
@@ -214,11 +240,12 @@
     const g=$('miniBoard'); if(!g) return;
     if(!rows||!rows.length){ g.innerHTML='<div class="empty" style="grid-column:1/-1">Chưa có ai đăng ký.</div>'; return; }
     const sig=rows.map(r=>r.phone_masked+r.name).join('|'); if(g.dataset.sig===sig) return; g.dataset.sig=sig;
-    g.innerHTML=rows.map(r=>'<div class="mb"><div class="av">'+esc(initials(r.name))+'</div><div class="nm">'+esc(r.name)+'</div><div class="ph">'+esc(r.phone_masked)+'</div></div>').join('');
+    g.innerHTML=rows.map((r,i)=>'<div class="mb"><span class="em">'+animal(i)+'</span><div class="nm">'+esc(r.name)+'</div><div class="ph">'+esc(r.phone_masked)+'</div></div>').join('');
   }
   async function refreshWinners(){
     if(!st.roundId) return;
     const rows=await rpc('dd_winners_list',{p_round:st.roundId});
+    st.winCount=Array.isArray(rows)?rows.length:st.winCount;
     const card=$('winCard'); const box=$('winList');
     if(!rows||!rows.length){ card.style.display='none'; return; }
     card.style.display=''; box.innerHTML=rows.map(w=>'<div class="wrow"><div style="flex:1;min-width:0"><div class="pz">'+esc(w.prize)+'</div><div class="nm">'+esc(w.name)+' <span class="ph" style="color:rgba(245,239,226,.45);font-size:.82rem;font-weight:500">'+esc(w.phone_masked)+'</span></div></div></div>').join('');
@@ -232,21 +259,24 @@
     if(!r){
       st.roundId=null; st.status=null;
       $('statusBadge').className='badge b-none'; $('statusBadge').textContent='Chưa có phiên';
-      $('barCount').textContent='0';
+      $('barCount').textContent='0'; $('curPrize').innerHTML='';
       if(lastStatus!=='none'){ renderActions(); lastStatus='none'; }
       $('miniBoard').innerHTML='<div class="empty" style="grid-column:1/-1">—</div>'; $('winCard').style.display='none';
       return;
     }
-    st.roundId=r.id; st.status=r.status; st.prize=r.prize; st.qty=r.prize_qty||1; st.count=r.player_count||0;
+    st.roundId=r.id; st.status=r.status; st.prizes=parsePrizes(r.prize); st.count=r.player_count||0;
+    // lần đầu thấy phiên: nạp danh sách giải hiện tại vào editor để admin thấy/sửa
+    if(!editorInit && r.prize){ const cur=parsePrizes(r.prize); if(cur.length){ editorRows=cur.map(p=>({...p})); renderPrizeEditor(); } editorInit=true; }
     const badges={registration:['b-reg','🔓 Đang mở đăng ký'],closed:['b-closed','🔒 Đã ngưng nhận'],countdown:['b-cd','⏳ Đang đếm ngược / quay'],playing:['b-play','🏁 Đang quay'],finished:['b-fin','✅ Kết thúc']};
     const bd=badges[r.status]||['b-none','—'];
     $('statusBadge').className='badge '+bd[0]; $('statusBadge').textContent=bd[1];
     $('barCount').textContent=st.count;
+    await refreshWinners();
+    renderCurPrize();
     if(r.status!==lastStatus || r.id!==lastRound){ renderActions(); lastStatus=r.status; lastRound=r.id; }
-    refreshBoard(); refreshWinners();
+    refreshBoard();
   }
 
-  // boot
   if(token){ openApp(); } else { $('gatePass').focus(); }
   setInterval(poll, 2200);
 })();

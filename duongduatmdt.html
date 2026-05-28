@@ -2,189 +2,185 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0B0B0B">
-<title>Đường Đua TMĐT — Đăng ký chơi</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Đường Đua TMĐT — Tham gia</title>
 <style>
   :root{
-    --ink:#0B0B0B; --graphite:#16160F; --cream:#F5EFE2; --champagne:#E8C274;
-    --bronze:#9C6B2E; --green:#4ade80; --rose:#fb7185;
+    --bg:#000; --card:#1c1c1e; --card2:#2c2c2e; --sep:rgba(255,255,255,.08);
+    --label:#ebebf0; --label2:rgba(235,235,240,.6); --label3:rgba(235,235,240,.3);
+    --champagne:#E8C274; --gold:#C9A24E; --green:#30d158; --blue:#0a84ff; --red:#ff453a;
+    --r:22px;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
   body{
-    font-family:'Inter',system-ui,sans-serif; background:var(--ink); color:var(--cream);
-    min-height:100dvh; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","SF Pro Icons","Helvetica Neue",system-ui,sans-serif;
+    background:var(--bg); color:var(--label); -webkit-font-smoothing:antialiased;
+    overflow-x:hidden; letter-spacing:-0.01em;
   }
-  .wrap{max-width:520px; margin:0 auto; padding:20px 16px 40px; min-height:100dvh; display:flex; flex-direction:column}
-  .glow{position:fixed; border-radius:50%; filter:blur(80px); pointer-events:none; z-index:0}
-  .glow.a{top:-120px; left:-100px; width:340px; height:340px; background:rgba(232,194,116,.10)}
-  .glow.b{bottom:-140px; right:-100px; width:340px; height:340px; background:rgba(156,107,46,.22)}
-  .content{position:relative; z-index:1; flex:1; display:flex; flex-direction:column}
+  .app{max-width:430px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;
+       padding:max(env(safe-area-inset-top),14px) 16px calc(env(safe-area-inset-bottom) + 28px);position:relative}
+  .glow{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+  .glow.a{top:-120px;left:50%;transform:translateX(-50%);width:300px;height:300px;background:rgba(232,194,116,.14)}
+  .content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column}
 
-  .brand{display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:6px}
-  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--champagne);box-shadow:0 0 12px var(--champagne)}
-  .brand .t{font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:var(--champagne)}
-  h1{font-size:1.5rem; font-weight:800; text-align:center; line-height:1.2; margin-bottom:4px;
-     background:linear-gradient(135deg,#F5EFE2,#E8C274); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
-  .sub{text-align:center; color:rgba(245,239,226,.55); font-size:.85rem; margin-bottom:20px}
+  /* hero — flag / title / tagline mỗi thứ 1 dòng */
+  .hero{text-align:center;padding:8px 0 4px}
+  .flag{font-size:clamp(3.2rem,17vw,4.6rem);line-height:1;white-space:nowrap}
+  .title{white-space:nowrap;font-weight:800;font-size:clamp(1rem,4.9vw,1.4rem);margin-top:6px;letter-spacing:-0.03em;
+         background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tagline{white-space:nowrap;font-size:clamp(.82rem,3.9vw,1rem);font-weight:600;color:var(--champagne);margin-top:3px;letter-spacing:.02em}
 
-  .card{background:rgba(22,22,15,.7); border:1px solid rgba(232,194,116,.22); border-radius:22px; padding:22px;
-        backdrop-filter:blur(8px); box-shadow:0 20px 50px -20px rgba(0,0,0,.6)}
-  .prize-pill{display:inline-flex; align-items:center; gap:7px; background:rgba(232,194,116,.12);
-        border:1px solid rgba(232,194,116,.35); color:var(--champagne); border-radius:999px;
-        padding:7px 15px; font-size:.82rem; font-weight:600; margin:0 auto 16px; }
+  .card{background:var(--card);border-radius:var(--r);padding:18px;margin-top:16px}
+  .prize-pill{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:4px}
+  .pchip{background:var(--card2);border-radius:999px;padding:6px 12px;font-size:.82rem;font-weight:600;color:var(--champagne);white-space:nowrap}
+  .prize-lead{text-align:center;font-size:.8rem;color:var(--label2);font-weight:600;margin-bottom:10px}
 
-  label{display:block; font-size:.8rem; font-weight:600; color:rgba(245,239,226,.8); margin:14px 0 6px}
-  input{width:100%; background:rgba(11,11,11,.6); border:1.5px solid rgba(232,194,116,.25); color:var(--cream);
-        border-radius:14px; padding:14px 16px; font-size:1.02rem; font-family:inherit; transition:border-color .15s}
-  input:focus{outline:none; border-color:var(--champagne)}
-  input::placeholder{color:rgba(245,239,226,.3)}
-  .btn{width:100%; border:none; border-radius:14px; padding:15px; font-size:1.05rem; font-weight:700;
-        font-family:inherit; cursor:pointer; margin-top:20px; transition:transform .1s, opacity .15s}
-  .btn-gold{background:linear-gradient(135deg,#E8C274,#C9A24E); color:#1a1206}
-  .btn:active{transform:scale(.98)}
-  .btn:disabled{opacity:.5; cursor:not-allowed}
-  .err{background:rgba(251,113,133,.12); border:1px solid rgba(251,113,133,.4); color:#fda4af;
-       border-radius:12px; padding:11px 14px; font-size:.85rem; margin-top:14px; display:none}
+  label.fl{display:block;font-size:.8rem;font-weight:600;color:var(--label2);margin:14px 4px 7px}
+  input{width:100%;background:var(--card2);border:none;color:var(--label);border-radius:13px;
+        padding:15px 16px;font-size:17px;font-family:inherit;outline:2px solid transparent;transition:outline-color .15s}
+  input:focus{outline-color:var(--champagne)}
+  input::placeholder{color:var(--label3)}
+  .btn{width:100%;border:none;border-radius:15px;padding:16px;font-size:17px;font-weight:700;font-family:inherit;
+       cursor:pointer;margin-top:18px;transition:transform .12s,opacity .15s}
+  .btn:active{transform:scale(.975)} .btn:disabled{opacity:.5}
+  .btn-gold{background:linear-gradient(180deg,#E8C274,#C9A24E);color:#1a1206}
+  .note{font-size:.74rem;color:var(--label3);text-align:center;margin-top:14px;line-height:1.5}
+  .err{background:rgba(255,69,58,.14);color:#ff6961;border-radius:12px;padding:11px 14px;font-size:.85rem;margin-top:14px;display:none}
   .err.show{display:block}
 
-  /* board */
-  .stat-row{display:flex; gap:10px; margin-bottom:16px}
-  .stat{flex:1; text-align:center; background:rgba(11,11,11,.5); border:1px solid rgba(232,194,116,.18);
-        border-radius:16px; padding:12px}
-  .stat .n{font-size:1.7rem; font-weight:800; color:var(--champagne); line-height:1}
-  .stat .l{font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:rgba(245,239,226,.5); margin-top:5px}
-  .you-badge{display:flex; align-items:center; gap:10px; background:rgba(74,222,128,.1);
-        border:1px solid rgba(74,222,128,.35); border-radius:14px; padding:12px 14px; margin-bottom:14px}
-  .you-badge .ic{font-size:1.3rem}
-  .you-badge b{color:var(--green)}
-  .board-h{display:flex; align-items:center; justify-content:space-between; margin:4px 2px 10px}
-  .board-h .ttl{font-size:.82rem; font-weight:700; color:var(--champagne); letter-spacing:.04em}
-  .live{display:inline-flex; align-items:center; gap:6px; font-size:.7rem; color:var(--green)}
-  .live .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.4s infinite}
+  /* you badge */
+  .you{display:flex;align-items:center;gap:12px;background:rgba(48,209,88,.12);border-radius:16px;padding:13px 14px;margin-bottom:14px}
+  .you .em{font-size:1.9rem;line-height:1}
+  .you .tx{font-size:.92rem;line-height:1.3}
+  .you b{color:var(--green)}
+
+  .stat-row{display:flex;gap:10px;margin-bottom:14px}
+  .stat{flex:1;background:var(--card2);border-radius:16px;padding:13px;text-align:center}
+  .stat .n{font-size:1.8rem;font-weight:800;color:var(--champagne);line-height:1}
+  .stat .l{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--label2);margin-top:5px}
+
+  .lbl-row{display:flex;align-items:center;justify-content:space-between;margin:2px 4px 9px}
+  .lbl-row .t{font-size:.82rem;font-weight:700;color:var(--champagne)}
+  .live{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;color:var(--green);font-weight:600}
+  .live .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.4s infinite}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.5)}}
-  .players{display:flex; flex-direction:column; gap:8px; max-height:48vh; overflow-y:auto; padding-right:2px}
-  .prow{display:flex; align-items:center; gap:11px; background:rgba(11,11,11,.45); border:1px solid rgba(232,194,116,.12);
-        border-radius:13px; padding:9px 12px; animation:slideIn .35s ease}
-  .prow.me{border-color:rgba(74,222,128,.5); background:rgba(74,222,128,.07)}
-  @keyframes slideIn{from{opacity:0; transform:translateY(-8px)}to{opacity:1; transform:none}}
-  .av{width:38px;height:38px;border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-      font-weight:800; font-size:1rem; color:#1a1206; background:linear-gradient(135deg,#E8C274,#9C6B2E)}
-  .prow .nm{font-weight:600; font-size:.95rem; flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  .prow .ph{font-size:.78rem; color:rgba(245,239,226,.45); font-variant-numeric:tabular-nums; letter-spacing:.03em}
-  .empty{text-align:center; color:rgba(245,239,226,.4); font-size:.85rem; padding:30px 0}
+
+  .plist{display:flex;flex-direction:column;gap:7px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .prow{display:flex;align-items:center;gap:12px;background:var(--card2);border-radius:14px;padding:10px 13px;animation:slide .35s ease}
+  .prow.me{background:rgba(48,209,88,.13);outline:1.5px solid rgba(48,209,88,.4)}
+  @keyframes slide{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+  .prow .em{font-size:1.7rem;line-height:1;width:34px;text-align:center;flex-shrink:0}
+  .prow .nm{font-weight:600;font-size:.98rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prow .ph{font-size:.78rem;color:var(--label3);font-variant-numeric:tabular-nums}
+  .empty{text-align:center;color:var(--label3);font-size:.88rem;padding:28px 0}
 
   /* full-screen states */
-  .stage{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px; padding:20px 0}
-  .cd-num{font-size:7rem; font-weight:800; line-height:1; color:var(--champagne);
-          text-shadow:0 0 40px rgba(232,194,116,.5); font-variant-numeric:tabular-nums}
-  .cd-ring{position:relative; width:200px; height:200px; display:flex; align-items:center; justify-content:center}
-  .cd-ring svg{position:absolute; inset:0; transform:rotate(-90deg)}
-  .big-emoji{font-size:4.5rem; animation:bob 1.6s ease-in-out infinite}
+  .stage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:24px 0}
+  .cd-ring{position:relative;width:220px;height:220px;display:flex;align-items:center;justify-content:center}
+  .cd-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+  .cd-num{font-size:7.5rem;font-weight:800;color:var(--champagne);font-variant-numeric:tabular-nums;text-shadow:0 0 50px rgba(232,194,116,.5)}
+  .big-emoji{font-size:5rem}
+  .stage h2{font-size:1.7rem;font-weight:800}
+  .stage p{color:var(--label2);font-size:1rem;max-width:300px;line-height:1.5}
+  .up{font-size:2.6rem;animation:up 1.2s ease-in-out infinite}
+  @keyframes up{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-12px);opacity:1}}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  .stage h2{font-size:1.6rem; font-weight:800; color:var(--cream)}
-  .stage p{color:rgba(245,239,226,.6); font-size:.95rem; max-width:300px}
-  .look-arrow{font-size:2.4rem; animation:up 1.2s ease-in-out infinite}
-  @keyframes up{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-10px);opacity:1}}
+  .bob{animation:bob 1.6s ease-in-out infinite}
 
-  .win-card{background:rgba(232,194,116,.08); border:1px solid rgba(232,194,116,.3); border-radius:16px;
-        padding:14px; margin-bottom:9px; display:flex; align-items:center; gap:12px}
-  .win-card .pz{font-size:.72rem; color:var(--champagne); font-weight:700; text-transform:uppercase; letter-spacing:.05em}
-  .win-card .wn{font-size:1.05rem; font-weight:700}
-  .footer{text-align:center; margin-top:24px; font-size:.72rem; color:rgba(245,239,226,.35)}
-  .footer a{color:rgba(232,194,116,.6); text-decoration:none}
+  .wcard{display:flex;align-items:center;gap:13px;background:rgba(232,194,116,.1);border-radius:16px;padding:14px;margin-bottom:9px}
+  .wcard .em{font-size:1.9rem}
+  .wcard .pz{font-size:.72rem;color:var(--champagne);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+  .wcard .wn{font-size:1.05rem;font-weight:700}
+
+  .footer{text-align:center;margin-top:22px;font-size:.72rem;color:var(--label3)}
+  .footer a{color:rgba(232,194,116,.6);text-decoration:none}
   .hidden{display:none!important}
   .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(26,18,6,.3);border-top-color:#1a1206;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px;margin-right:6px}
   @keyframes sp{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<div class="glow a"></div><div class="glow b"></div>
-<div class="wrap"><div class="content">
+<div class="glow a"></div>
+<div class="app"><div class="content">
 
-  <div class="brand"><span class="dot"></span><span class="t">VOBF 2026 · Mini Game</span></div>
-  <h1>🏁 Đường Đua Thương Mại Điện Tử</h1>
-  <div class="sub" id="prizeSub">Đăng ký để tham gia vòng đua nhận giải</div>
+  <div class="hero">
+    <div class="flag">🏁</div>
+    <h1 class="title">Đường Đua Thương Mại Điện Tử</h1>
+    <div class="tagline">Tăng trưởng thần tốc</div>
+  </div>
 
-  <!-- 1. LOADING -->
-  <div class="card" id="vLoading"><div class="empty"><span class="spin" style="border-top-color:#E8C274;border-color:rgba(232,194,116,.3)"></span> Đang tải…</div></div>
+  <!-- LOADING -->
+  <div class="card" id="vLoading"><div class="empty"><span class="spin" style="border-color:rgba(232,194,116,.3);border-top-color:#E8C274"></span> Đang tải…</div></div>
 
-  <!-- 2. CLOSED / no round -->
+  <!-- CLOSED -->
   <div class="card hidden" id="vClosed">
-    <div class="stage" style="min-height:auto;padding:24px 0">
-      <div class="big-emoji">⏳</div>
+    <div class="stage" style="min-height:auto;padding:18px 0">
+      <div class="big-emoji bob">⏳</div>
       <h2 id="closedTitle">Chưa mở đăng ký</h2>
-      <p id="closedMsg">Vui lòng chờ ban tổ chức mở vòng đăng ký. Trang sẽ tự cập nhật.</p>
+      <p id="closedMsg">Vui lòng chờ ban tổ chức mở vòng đăng ký.</p>
     </div>
   </div>
 
-  <!-- 3. REGISTER FORM -->
+  <!-- FORM -->
   <div class="card hidden" id="vForm">
-    <div style="text-align:center"><span class="prize-pill" id="prizePill">🎁 Giải thưởng</span></div>
+    <div class="prize-lead">🎁 Giải thưởng</div>
+    <div class="prize-pill" id="prizePills"></div>
     <form id="regForm" autocomplete="on">
-      <label for="fName">Họ và tên</label>
+      <label class="fl" for="fName">Họ và tên</label>
       <input id="fName" name="name" type="text" placeholder="Nguyễn Văn A" autocomplete="name" required maxlength="60">
-      <label for="fPhone">Số điện thoại</label>
+      <label class="fl" for="fPhone">Số điện thoại</label>
       <input id="fPhone" name="phone" type="tel" inputmode="numeric" placeholder="09xx xxx xxx" autocomplete="tel" required maxlength="15">
       <div class="err" id="formErr"></div>
       <button class="btn btn-gold" type="submit" id="regBtn">Tham gia đường đua 🏁</button>
     </form>
-    <p style="font-size:.72rem;color:rgba(245,239,226,.4);text-align:center;margin-top:14px">
-      SĐT chỉ dùng để xác định người trúng giải. Trên bảng chỉ hiển thị <b>xxx + 3 số cuối</b>.
-    </p>
+    <p class="note">SĐT chỉ dùng để xác định người trúng giải. Trên bảng chỉ hiển thị <b>xxx + 3 số cuối</b>.</p>
   </div>
 
-  <!-- 4. WAITING ROOM (board) -->
+  <!-- BOARD -->
   <div class="card hidden" id="vBoard">
-    <div class="you-badge"><span class="ic">✅</span><div>Bạn đã tham gia, <b id="meName">bạn</b>! Chờ ban tổ chức bắt đầu.</div></div>
+    <div class="you"><span class="em" id="meEmoji">🦁</span><div class="tx">Bạn đã tham gia, <b id="meName">bạn</b>! Linh vật của bạn là <b id="meAnimal">Sư tử</b>. Chờ bắt đầu nhé.</div></div>
     <div class="stat-row">
       <div class="stat"><div class="n" id="cntPlayers">0</div><div class="l">Người chơi</div></div>
-      <div class="stat"><div class="n" style="font-size:1.05rem;line-height:1.5" id="cntPrize">—</div><div class="l">Giải thưởng</div></div>
+      <div class="stat"><div class="n" id="cntPrize" style="font-size:1.6rem">0</div><div class="l">Giải thưởng</div></div>
     </div>
-    <div class="board-h"><span class="ttl">DANH SÁCH THAM GIA</span><span class="live"><span class="pulse"></span>TRỰC TIẾP</span></div>
-    <div class="players" id="playerList"></div>
+    <div class="lbl-row"><span class="t">DANH SÁCH THAM GIA</span><span class="live"><span class="dot"></span>TRỰC TIẾP</span></div>
+    <div class="plist" id="playerList"></div>
   </div>
 
-  <!-- 5. COUNTDOWN -->
+  <!-- COUNTDOWN -->
   <div class="card hidden" id="vCountdown">
     <div class="stage">
-      <div class="t" style="color:var(--champagne);letter-spacing:.2em;font-size:.78rem">SẮP XUẤT PHÁT</div>
+      <div class="tagline" style="font-size:.9rem">SẮP XUẤT PHÁT</div>
       <div class="cd-ring">
-        <svg width="200" height="200" viewBox="0 0 200 200">
-          <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(232,194,116,.15)" stroke-width="8"/>
-          <circle id="cdProg" cx="100" cy="100" r="92" fill="none" stroke="#E8C274" stroke-width="8" stroke-linecap="round"
-                  stroke-dasharray="578" stroke-dashoffset="0"/>
-        </svg>
+        <svg width="220" height="220" viewBox="0 0 220 220"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(232,194,116,.15)" stroke-width="9"/><circle id="cdProg" cx="110" cy="110" r="100" fill="none" stroke="#E8C274" stroke-width="9" stroke-linecap="round" stroke-dasharray="628" stroke-dashoffset="0"/></svg>
         <div class="cd-num" id="cdNum">15</div>
       </div>
       <h2>Chuẩn bị!</h2>
-      <p>Vòng đua sắp bắt đầu. Hãy nhìn lên màn hình sân khấu 👀</p>
+      <p>Hãy nhìn lên màn hình sân khấu 👀</p>
     </div>
   </div>
 
-  <!-- 6. PLAYING -->
+  <!-- PLAYING -->
   <div class="card hidden" id="vPlaying">
     <div class="stage">
-      <div class="look-arrow">⬆️</div>
-      <div class="big-emoji" style="animation:none">📺</div>
+      <div class="up">⬆️</div>
+      <div class="big-emoji">📺</div>
       <h2>Đang đua!</h2>
-      <p>Hãy nhìn lên <b style="color:var(--champagne)">màn hình sân khấu</b> để xem xe của bạn về đích nhé!</p>
+      <p>Nhìn lên <b style="color:var(--champagne)">màn hình sân khấu</b> xem linh vật của bạn về đích nhé!</p>
     </div>
   </div>
 
-  <!-- 7. FINISHED -->
+  <!-- FINISHED -->
   <div class="card hidden" id="vFinished">
-    <div style="text-align:center;margin-bottom:16px">
-      <div class="big-emoji" style="animation:none">🎉</div>
-      <h2 style="font-size:1.4rem;font-weight:800;margin-top:8px">Kết quả vòng đua</h2>
-    </div>
+    <div style="text-align:center;margin-bottom:14px"><div class="big-emoji">🎉</div><h2 style="margin-top:8px">Kết quả</h2></div>
     <div id="winnersList"></div>
     <div class="empty hidden" id="noWinners">Chưa có người trúng giải.</div>
-    <p style="text-align:center;color:rgba(245,239,226,.5);font-size:.85rem;margin-top:16px">Cảm ơn bạn đã tham gia! 🙏</p>
+    <p style="text-align:center;color:var(--label2);font-size:.88rem;margin-top:14px">Cảm ơn bạn đã tham gia! 🙏</p>
   </div>
 
   <div class="footer">Tổ chức bởi <a href="https://nguyentanphong.com" target="_blank" rel="noopener">Nguyễn Tấn Phong</a> · HEXA</div>
@@ -195,175 +191,111 @@
 <script>
 (function(){
   'use strict';
-  const SB_URL = 'https://dcmtbgcltopnqsiedwlg.supabase.co';
-  const SB_KEY = 'sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
-  let sb = null;
-  try{
-    sb = supabase.createClient(SB_URL, SB_KEY, { auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false} });
-  }catch(e){ console.error('Supabase init failed', e); }
+  const SB_URL='https://dcmtbgcltopnqsiedwlg.supabase.co';
+  const SB_KEY='sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq';
+  // 24 linh vật — KHỚP thứ tự con vật khi đua (getAnimalName trong duong-dua-tmdt.html)
+  const ZOO=['🦁','🐱','🐰','🐻','🦊','🐼','🦉','🐧','🦆','🐸','🦄','🐶','🐘','🐯','🐵','🐬','🐴','🦌','🐨','🐹','🐢','🐳','🦅','🐷'];
+  const ZOO_NAME=['Sư tử','Mèo','Thỏ','Gấu','Cáo','Gấu trúc','Cú','Cánh cụt','Vịt','Ếch','Kỳ lân','Chó','Voi','Hổ','Khỉ','Cá heo','Ngựa','Hươu','Koala','Hamster','Rùa','Cá voi','Đại bàng','Heo'];
+  const animal=i=>ZOO[((i%24)+24)%24];
 
-  const REG_PREFIX = 'dd_reg_';   // dd_reg_<roundId> -> {name, phone}
-  const $ = id => document.getElementById(id);
-  const views = ['vLoading','vClosed','vForm','vBoard','vCountdown','vPlaying','vFinished'];
+  let sb=null; try{ sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}}); }catch(e){ console.error(e); }
+
+  const REG_PREFIX='dd_reg_';
+  const $=id=>document.getElementById(id);
+  const views=['vLoading','vClosed','vForm','vBoard','vCountdown','vPlaying','vFinished'];
   function show(v){ views.forEach(x=>$(x).classList.toggle('hidden', x!==v)); }
+  function esc(s){const d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
+  function getReg(r){ try{ return JSON.parse(localStorage.getItem(REG_PREFIX+r)||'null'); }catch{ return null; } }
+  function setReg(r,d){ localStorage.setItem(REG_PREFIX+r,JSON.stringify(d)); }
 
-  let state = {
-    roundId:null, status:null, prize:null, countdownAt:null, clockSkew:0,
-    me:null, view:null
-  };
-
-  function getReg(roundId){ try{ return JSON.parse(localStorage.getItem(REG_PREFIX+roundId)||'null'); }catch{ return null; } }
-  function setReg(roundId, data){ localStorage.setItem(REG_PREFIX+roundId, JSON.stringify(data)); }
-
-  function initials(name){ const p=(name||'').trim().split(/\s+/); const last=p[p.length-1]||'?'; return last.slice(0,1).toUpperCase(); }
-  function esc(s){ const d=document.createElement('div'); d.textContent=s==null?'':String(s); return d.innerHTML; }
-
-  // ---- RPC helpers ----
-  async function rpc(fn, args){
-    if(!sb) return null;
-    const { data, error } = await sb.rpc(fn, args||{});
-    if(error){ console.warn('rpc '+fn, error.message); return null; }
-    return data;
+  // prize có thể là JSON list [{name,quantity}] hoặc text đơn
+  function parsePrizes(p){
+    if(!p) return [{name:'Giải thưởng',quantity:1}];
+    try{ const a=JSON.parse(p); if(Array.isArray(a)&&a.length) return a.map(x=>({name:String(x.name||'Giải'),quantity:Math.max(1,parseInt(x.quantity,10)||1)})); }catch(e){}
+    return [{name:p,quantity:1}];
   }
 
-  // ---- main poll loop ----
+  let state={ roundId:null, status:null, prizes:[], countdownAt:null, skew:0, me:null, view:null, playerCount:0 };
+
+  async function rpc(fn,args){ if(!sb)return null; const{data,error}=await sb.rpc(fn,args||{}); if(error){console.warn(fn,error.message);return null;} return data; }
+
   async function poll(){
-    const rows = await rpc('dd_active_round');
-    const r = Array.isArray(rows) ? rows[0] : null;
+    const rows=await rpc('dd_active_round');
+    const r=Array.isArray(rows)?rows[0]:null;
+    if(!r){ state.roundId=null; $('closedTitle').textContent='Chưa mở đăng ký'; $('closedMsg').textContent='Vui lòng chờ ban tổ chức mở vòng đăng ký. Trang sẽ tự cập nhật.'; render('vClosed'); return; }
+    if(r.server_now) state.skew=new Date(r.server_now).getTime()-Date.now();
+    state.roundId=r.id; state.status=r.status; state.prizes=parsePrizes(r.prize);
+    state.countdownAt=r.countdown_at?new Date(r.countdown_at).getTime():null;
+    state.playerCount=r.player_count||0; state.me=getReg(r.id);
 
-    if(!r){
-      state.roundId=null; state.status=null;
-      $('closedTitle').textContent='Chưa mở đăng ký';
-      $('closedMsg').textContent='Vui lòng chờ ban tổ chức mở vòng đăng ký. Trang sẽ tự cập nhật.';
-      render('vClosed');
-      return;
-    }
+    const totalWin=state.prizes.reduce((s,p)=>s+p.quantity,0);
+    $('cntPrize').textContent=totalWin;
+    $('prizePills').innerHTML=state.prizes.map(p=>'<span class="pchip">'+esc(p.name)+(p.quantity>1?(' ×'+p.quantity):'')+'</span>').join('');
 
-    // clock skew (server vs client) for countdown accuracy
-    if(r.server_now){ state.clockSkew = new Date(r.server_now).getTime() - Date.now(); }
-    state.roundId = r.id;
-    state.status = r.status;
-    state.prize = r.prize;
-    state.countdownAt = r.countdown_at ? new Date(r.countdown_at).getTime() : null;
-    state.playerCount = r.player_count || 0;
-    state.me = getReg(r.id);
-
-    // prize labels
-    const pz = r.prize ? r.prize : 'Giải thưởng bí mật';
-    $('prizeSub').textContent = 'Giải thưởng: ' + pz;
-    $('prizePill').textContent = '🎁 ' + pz;
-    $('cntPrize').textContent = pz;
-
-    // route by status
-    if(r.status==='registration'){
-      if(state.me){ await refreshBoard(); render('vBoard'); }
-      else { render('vForm'); }
-    } else if(r.status==='closed'){
-      if(state.me){ await refreshBoard(); render('vBoard'); }
-      else {
-        $('closedTitle').textContent='Đã đóng đăng ký';
-        $('closedMsg').textContent='Vòng đăng ký đã đóng. Hẹn bạn ở vòng sau!';
-        render('vClosed');
-      }
-    } else if(r.status==='countdown'){
-      render('vCountdown');
-    } else if(r.status==='playing'){
-      render('vPlaying');
-    } else if(r.status==='finished'){
-      await refreshWinners();
-      render('vFinished');
-    }
+    if(r.status==='registration'){ if(state.me){ await refreshBoard(); render('vBoard'); } else render('vForm'); }
+    else if(r.status==='closed'){ if(state.me){ await refreshBoard(); render('vBoard'); } else { $('closedTitle').textContent='Đã đóng đăng ký'; $('closedMsg').textContent='Vòng đăng ký đã đóng. Hẹn bạn vòng sau!'; render('vClosed'); } }
+    else if(r.status==='countdown'){ render('vCountdown'); }
+    else if(r.status==='playing'){ render('vPlaying'); }
+    else if(r.status==='finished'){ await refreshWinners(); render('vFinished'); }
   }
-
-  function render(v){ state.view=v; show(v); if(v==='vBoard') updateBoardHeader(); }
-
-  function updateBoardHeader(){
-    $('cntPlayers').textContent = state.playerCount;
-    if(state.me) $('meName').textContent = state.me.name;
-  }
+  function render(v){ state.view=v; show(v); if(v==='vBoard') updateHeader(); }
+  function updateHeader(){ $('cntPlayers').textContent=state.playerCount; if(state.me) $('meName').textContent=state.me.name; }
 
   async function refreshBoard(){
     if(!state.roundId) return;
-    const rows = await rpc('dd_board', { p_round: state.roundId });
-    const list = $('playerList');
-    if(!rows || !rows.length){ list.innerHTML='<div class="empty">Chưa có ai. Hãy là người đầu tiên!</div>'; return; }
-    state.playerCount = rows.length;
-    const myMask = state.me ? ('xxx'+ String(state.me.phone).replace(/\D/g,'').slice(-3)) : null;
-    list.innerHTML = rows.map(function(p){
-      const isMe = myMask && p.phone_masked===myMask && p.name===state.me.name;
-      return '<div class="prow'+(isMe?' me':'')+'">'+
-        '<div class="av">'+esc(initials(p.name))+'</div>'+
+    const rows=await rpc('dd_board',{p_round:state.roundId});
+    const list=$('playerList');
+    if(!rows||!rows.length){ list.innerHTML='<div class="empty">Chưa có ai. Hãy là người đầu tiên!</div>'; return; }
+    state.playerCount=rows.length;
+    const myMask=state.me?('xxx'+String(state.me.phone).replace(/\D/g,'').slice(-3)):null;
+    let myIdx=-1;
+    list.innerHTML=rows.map(function(p,i){
+      const isMe=myMask && p.phone_masked===myMask && p.name===state.me.name;
+      if(isMe) myIdx=i;
+      return '<div class="prow'+(isMe?' me':'')+'"><span class="em">'+animal(i)+'</span>'+
         '<div class="nm">'+esc(p.name)+(isMe?' <span style="color:var(--green);font-size:.75rem">(bạn)</span>':'')+'</div>'+
         '<div class="ph">'+esc(p.phone_masked)+'</div></div>';
     }).join('');
-    updateBoardHeader();
+    if(myIdx>=0){ $('meEmoji').textContent=animal(myIdx); $('meAnimal').textContent=ZOO_NAME[((myIdx%24)+24)%24]; }
+    updateHeader();
   }
 
   async function refreshWinners(){
     if(!state.roundId) return;
-    const rows = await rpc('dd_winners_list', { p_round: state.roundId });
-    const box = $('winnersList'); const none = $('noWinners');
-    if(!rows || !rows.length){ box.innerHTML=''; none.classList.remove('hidden'); return; }
+    const rows=await rpc('dd_winners_list',{p_round:state.roundId});
+    const box=$('winnersList'); const none=$('noWinners');
+    if(!rows||!rows.length){ box.innerHTML=''; none.classList.remove('hidden'); return; }
     none.classList.add('hidden');
-    box.innerHTML = rows.map(function(w){
-      return '<div class="win-card"><div class="av">🏆</div><div style="flex:1;min-width:0">'+
-        '<div class="pz">'+esc(w.prize)+'</div>'+
-        '<div class="wn">'+esc(w.name)+' <span style="color:rgba(245,239,226,.4);font-size:.82rem;font-weight:500">'+esc(w.phone_masked)+'</span></div>'+
-        '</div></div>';
-    }).join('');
+    box.innerHTML=rows.map(function(w,i){ return '<div class="wcard"><span class="em">🏆</span><div style="flex:1;min-width:0">'+
+      '<div class="pz">'+esc(w.prize)+'</div>'+
+      '<div class="wn">'+esc(w.name)+' <span style="color:var(--label3);font-size:.82rem;font-weight:500">'+esc(w.phone_masked)+'</span></div></div></div>'; }).join('');
   }
 
-  // ---- countdown ticker (local, server-aligned) ----
-  const CD_TOTAL = 15, CIRC = 578;
-  function tickCountdown(){
-    if(state.view!=='vCountdown' || !state.countdownAt){ return; }
-    const nowServer = Date.now() + state.clockSkew;
-    let remain = CD_TOTAL - (nowServer - state.countdownAt)/1000;
-    if(remain<0) remain=0;
-    const secs = Math.ceil(remain);
-    $('cdNum').textContent = secs;
-    $('cdProg').style.strokeDashoffset = String(CIRC * (1 - remain/CD_TOTAL));
-  }
+  const CD_TOTAL=15, CIRC=628;
+  setInterval(function(){
+    if(state.view!=='vCountdown'||!state.countdownAt) return;
+    const nowS=Date.now()+state.skew;
+    let remain=CD_TOTAL-(nowS-state.countdownAt)/1000; if(remain<0)remain=0;
+    $('cdNum').textContent=Math.ceil(remain);
+    $('cdProg').style.strokeDashoffset=String(CIRC*(1-remain/CD_TOTAL));
+  },150);
 
-  // ---- registration ----
   $('regForm').addEventListener('submit', async function(e){
     e.preventDefault();
-    const errEl = $('formErr'); errEl.classList.remove('show');
-    const name = $('fName').value.trim();
-    const phoneRaw = $('fPhone').value;
-    const phone = phoneRaw.replace(/\D/g,'');
+    const errEl=$('formErr'); errEl.classList.remove('show');
+    const name=$('fName').value.trim(); const phone=$('fPhone').value.replace(/\D/g,'');
     if(name.length<2){ errEl.textContent='Vui lòng nhập họ và tên.'; errEl.classList.add('show'); return; }
-    if(phone.length<9 || phone.length>11){ errEl.textContent='Số điện thoại không hợp lệ (9–11 số).'; errEl.classList.add('show'); return; }
-
+    if(phone.length<9||phone.length>11){ errEl.textContent='Số điện thoại không hợp lệ (9–11 số).'; errEl.classList.add('show'); return; }
     const btn=$('regBtn'); btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>Đang đăng ký…';
-    const res = await rpc('dd_register', { p_name:name, p_phone:phone });
+    const res=await rpc('dd_register',{p_name:name,p_phone:phone});
     btn.disabled=false; btn.innerHTML=old;
-
-    if(res && res.ok){
-      setReg(res.round_id, { name:name, phone:phone });
-      state.me = { name:name, phone:phone };
-      state.roundId = res.round_id;
-      await refreshBoard();
-      render('vBoard');
-    } else {
-      errEl.textContent = (res && res.error) ? res.error : 'Có lỗi xảy ra, thử lại sau.';
-      errEl.classList.add('show');
-    }
+    if(res&&res.ok){ setReg(res.round_id,{name:name,phone:phone}); state.me={name:name,phone:phone}; state.roundId=res.round_id; await refreshBoard(); render('vBoard'); }
+    else { errEl.textContent=(res&&res.error)?res.error:'Có lỗi xảy ra, thử lại sau.'; errEl.classList.add('show'); }
   });
 
-  // auto-format phone display (light)
-  $('fPhone').addEventListener('input', function(){
-    let v=this.value.replace(/[^\d ]/g,'');
-    this.value=v;
-  });
-
-  // ---- loops ----
-  show('vLoading');
-  poll();
-  setInterval(poll, 2200);
-  // board refresh slightly offset when in waiting room
-  setInterval(function(){ if(state.view==='vBoard') refreshBoard(); }, 2600);
-  setInterval(tickCountdown, 200);
+  show('vLoading'); poll();
+  setInterval(poll,2200);
+  setInterval(function(){ if(state.view==='vBoard') refreshBoard(); },2600);
 })();
 </script>
 </body>
