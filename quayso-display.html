@@ -65,20 +65,19 @@
   #cdOverlay .lbl{font-size:1.6vw;letter-spacing:.3em;color:rgba(245,239,226,.6);text-transform:uppercase}
   #cdOverlay .num{font-size:40vh;font-weight:900;line-height:.85;color:var(--champagne);text-shadow:0 0 80px rgba(232,194,116,.6)}
 
-  /* spin stage */
-  .spin{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vh;text-align:center}
-  .spin .pz{font-size:2.4vw;font-weight:900;color:var(--champagne)}
-  .reelCard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1vh;
-    width:min(70vw,900px);padding:5vh 4vw;border-radius:36px;background:rgba(22,22,15,.85);
-    border:2px solid rgba(232,194,116,.4);box-shadow:0 30px 100px -20px rgba(0,0,0,.8);transition:transform .2s}
-  .reelCard .em{font-size:18vh;line-height:1}
-  .reelCard .nm{font-size:6vw;font-weight:900;line-height:1.05;background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:64vw}
-  .reelCard .ph{font-size:2.4vw;color:rgba(245,239,226,.55);font-variant-numeric:tabular-nums;letter-spacing:.04em}
-  .reelCard.spinning{filter:blur(1px)}
-  .reelCard.win{border-color:var(--champagne);box-shadow:0 0 0 6px rgba(232,194,116,.25),0 30px 120px -10px rgba(232,194,116,.6);animation:winpop .6s cubic-bezier(.175,.885,.32,1.275)}
-  @keyframes winpop{0%{transform:scale(.8)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
-  .spin .hint{font-size:1.6vw;color:rgba(245,239,226,.5);font-weight:700;letter-spacing:.1em}
+  /* spin stage — vòng tròn */
+  .spin{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4vh;text-align:center}
+  .spin .pz{font-size:2.2vw;font-weight:900;color:var(--champagne)}
+  .wheelWrap{position:relative;width:min(70vh,72vw);height:min(70vh,72vw)}
+  #wheelSvg{width:100%;height:100%;transform:rotate(0deg);transform-origin:50% 50%;display:block;filter:drop-shadow(0 18px 55px rgba(0,0,0,.6))}
+  #wheelSvg.spin-anim{transition:transform 5s cubic-bezier(.13,.66,.1,1)}
+  .wheelWrap .pointer{position:absolute;top:-1vh;left:50%;transform:translateX(-50%);z-index:5;width:0;height:0;
+    border-left:1.7vh solid transparent;border-right:1.7vh solid transparent;border-top:3.2vh solid #fff;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+  .wheelWrap .hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:4;width:11vh;height:11vh;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#fff,#E8C274 60%,#9C6B2E);display:flex;align-items:center;justify-content:center;font-size:5vh;
+    box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 -4px 10px rgba(0,0,0,.25)}
+  .spin .result{min-height:4.5vh;font-size:3vw;font-weight:900;white-space:nowrap;background:linear-gradient(180deg,#fff,#E8C274);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .spin .hint{font-size:1.5vw;color:rgba(245,239,226,.5);font-weight:700;letter-spacing:.08em}
 
   .fin{height:100vh;display:flex;flex-direction:column;align-items:center;padding:3vh 3vw;overflow:hidden}
   .fin .flag{font-size:5vh}
@@ -115,7 +114,7 @@
   const animal=i=>ZOO[((i%24)+24)%24];
   let sb=null; try{ sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}}); }catch(e){ console.error(e); }
 
-  let token=null;
+  let token='VOBF2026';  // đã gỡ nhập mã — token điền sẵn
   try{ const m=(location.hash||'').match(/t=([^&]+)/); if(m){ token=decodeURIComponent(m[1]); history.replaceState(null,'',location.pathname+location.search); } }catch(_e){}
 
   const $=id=>document.getElementById(id);
@@ -127,7 +126,7 @@
   async function setStatus(s){ if(!token||!st.roundId) return; await rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:s}); poll(); }
 
   let st={ roundId:null, status:null, prizes:[{name:'Giải thưởng',quantity:1}], countdownAt:null, skew:0, count:0, winCount:0 };
-  let players=[], mode=null, drawSignal=null, drawStarted=false, spinning=false, wonSet=new Set(), qrDone=false, lastCtrlKey=null;
+  let players=[], mode=null, drawSignal=null, drawStarted=false, spinning=false, wonSet=new Set(), qrDone=false, lastCtrlKey=null, wheelRot=0;
 
   function totalSlots(){ return st.prizes.reduce((s,p)=>s+p.quantity,0); }
   function effWin(){ return Math.max(st.winCount, wonSet.size); }
@@ -169,8 +168,9 @@
       root.innerHTML='<div id="cdOverlay"><div class="pz" id="cdPrize"></div><div class="lbl">Sắp quay số</div><div class="num" id="cdNum">15</div></div>';
     } else if(m==='spin'){
       root.innerHTML='<div class="spin"><div class="pz" id="spinPz"></div>'+
-        '<div class="reelCard" id="reelCard"><div class="em" id="reelEm">🎲</div><div class="nm" id="reelName">…</div><div class="ph" id="reelPhone"></div></div>'+
-        '<div class="hint" id="spinHint">Đang quay…</div></div>';
+        '<div class="wheelWrap"><div class="pointer"></div><svg id="wheelSvg" viewBox="0 0 640 640"></svg><div class="hub">🎯</div></div>'+
+        '<div class="result" id="spinResult"></div>'+
+        '<div class="hint" id="spinHint">Chuẩn bị quay…</div></div>';
     } else if(m==='finished'){
       root.innerHTML='<div class="fin"><div class="flag">🏆</div><h1>Người trúng giải</h1><div class="wlist" id="wlist"></div></div>';
       refreshWinners();
@@ -227,40 +227,70 @@
     if(ws.size>=wonSet.size) wonSet=ws; // tránh tụt khi chưa kịp đồng bộ
   }
 
-  // ---------- spin ----------
-  function setReel(p, final){
-    const em=$('reelEm'), nm=$('reelName'), ph=$('reelPhone'), card=$('reelCard');
-    if(!em) return;
-    em.textContent=animalForPlayer(p); nm.textContent=p.name; ph.textContent=mask(p.phone);
-    if(card){ card.classList.toggle('win',!!final); card.classList.toggle('spinning',!final); }
+  // ---------- vòng quay ----------
+  function shortName(n){ var p=String(n||'').trim().split(/\s+/).filter(Boolean); return p.slice(-2).join(' ')||'?'; }
+  function buildWheel(labels){
+    const N=labels.length, cx=320, cy=320, R=302, rLabel=200, seg=360/N;
+    const cols=['#E8C274','#211c12','#C9A24E','#2c2519','#cBA968','#1c1810'];
+    let s='';
+    for(let i=0;i<N;i++){
+      const a0=(i*seg-90)*Math.PI/180, a1=((i+1)*seg-90)*Math.PI/180;
+      const x0=cx+R*Math.cos(a0), y0=cy+R*Math.sin(a0), x1=cx+R*Math.cos(a1), y1=cy+R*Math.sin(a1);
+      s+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+R+' '+R+' 0 0 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+' Z" fill="'+cols[i%cols.length]+'" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>';
+      const am=((i+0.5)*seg-90)*Math.PI/180;
+      const lx=cx+rLabel*Math.cos(am), ly=cy+rLabel*Math.sin(am);
+      const rot=(i+0.5)*seg;
+      const light=(i%2===0);
+      s+='<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" fill="'+(light?'#1a1206':'#F5EFE2')+'" font-size="21" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(1)+' '+lx.toFixed(1)+' '+ly.toFixed(1)+')">'+esc(shortName(labels[i]))+'</text>';
+    }
+    s+='<circle cx="320" cy="320" r="302" fill="none" stroke="rgba(232,194,116,.7)" stroke-width="5"/>';
+    return s;
   }
   function startSpin(){
     if(spinning) return;
     const elig=players.filter(p=>!wonSet.has(p.id));
     const g=currentGroup();
-    if(!elig.length || !g){ const h=$('spinHint'); if(h) h.textContent='Đã quay đủ giải.'; return; }
-    spinning=true;
+    const hint=$('spinHint');
+    if(!elig.length || !g){ if(hint) hint.textContent='Đã quay đủ giải.'; return; }
+    spinning=true; lastCtrlKey=null;
     const pz=$('spinPz'); if(pz) pz.textContent='🎁 '+g.name+(g.quantity>1?(' ('+g.slot+'/'+g.quantity+')'):'');
-    const hint=$('spinHint'); if(hint) hint.textContent='Đang quay…';
+    const res=$('spinResult'); if(res) res.textContent='';
+    if(hint) hint.textContent='Đang quay…';
     const winner=elig[Math.floor(Math.random()*elig.length)];
-    const start=Date.now(); const DUR=4200;
+
+    const N=12, wIdx=Math.floor(Math.random()*N);
+    const others=players.filter(p=>p.id!==winner.id);
+    for(let i=others.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=others[i];others[i]=others[j];others[j]=t; }
+    const labels=[]; let oi=0;
+    for(let i=0;i<N;i++){ labels.push(i===wIdx ? winner.name : ((others[oi++]||winner).name)); }
+
+    const svg=$('wheelSvg'); if(!svg){ spinning=false; return; }
+    svg.innerHTML=buildWheel(labels);
+    svg.classList.remove('spin-anim');
+    wheelRot=((wheelRot%360)+360)%360;
+    svg.style.transform='rotate('+wheelRot+'deg)';
+    void svg.offsetWidth;
+    const seg=360/N;
+    const desired=360-((wIdx+0.5)*seg);
+    const delta=((desired-wheelRot)%360+360)%360;
+    const jitter=(Math.random()-0.5)*(seg*0.6);
+    const target=wheelRot+360*6+delta+jitter;
     try{ ac(); }catch(e){}
-    function frame(){
-      const t=(Date.now()-start)/DUR;
-      if(t>=1){
-        setReel(winner,true);
-        if(hint) hint.textContent='🎉 Chúc mừng!';
-        confetti(); fanfare();
-        recordWinner(winner);
-        spinning=false; lastCtrlKey=null; renderCtrl();
-        return;
-      }
-      setReel(players[Math.floor(Math.random()*players.length)], false);
-      if(t>0.55) tick();
-      const delay=45 + Math.pow(t,2.7)*560;
-      setTimeout(frame, delay);
+    svg.classList.add('spin-anim');
+    svg.style.transform='rotate('+target+'deg)';
+    wheelRot=target;
+
+    let tk=0; const tkInt=setInterval(function(){ tk++; if(tk>24||!spinning){clearInterval(tkInt);return;} tick(); }, 200);
+    let done=false;
+    function finish(){
+      if(done) return; done=true; clearInterval(tkInt);
+      if(res) res.textContent='🏆 '+winner.name;
+      if(hint) hint.textContent='🎉 Chúc mừng!';
+      confetti(); fanfare(); recordWinner(winner);
+      spinning=false; lastCtrlKey=null; renderCtrl();
     }
-    frame();
+    svg.addEventListener('transitionend', finish, {once:true});
+    setTimeout(finish, 5400);
   }
   function recordWinner(p){
     wonSet.add(p.id);

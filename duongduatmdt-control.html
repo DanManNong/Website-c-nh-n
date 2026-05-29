@@ -81,7 +81,7 @@
 </head>
 <body>
 
-<div class="gate" id="gate">
+<div class="gate hidden" id="gate">
   <div class="gate-card">
     <div class="lock">🔐</div>
     <h1>Điều khiển Đường Đua</h1>
@@ -144,7 +144,7 @@
 
   const $=id=>document.getElementById(id);
   const TOKEN_KEY='dd_ctrl_token';
-  let token=sessionStorage.getItem(TOKEN_KEY)||null;
+  let token='VOBF2026';  // đã gỡ nhập mã — token điền sẵn
   let st={ roundId:null, status:null, prizes:[], count:0, winCount:0 };
 
   const DEFAULT_PRIZES=[{name:'Giải khuyến khích',quantity:2},{name:'Giải ba',quantity:1},{name:'Giải nhì',quantity:1},{name:'Giải nhất',quantity:1}];
@@ -281,7 +281,7 @@
     refreshBoard();
   }
 
-  if(token){ openApp(); } else { $('gatePass').focus(); }
+  openApp();
   setInterval(poll, 2200);
 })();
 </script>

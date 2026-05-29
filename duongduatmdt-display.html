@@ -110,7 +110,7 @@
   const animal=i=>ZOO[((i%24)+24)%24];
   let sb=null; try{ sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}}); }catch(e){ console.error(e); }
 
-  let token=null;
+  let token='VOBF2026';  // đã gỡ nhập mã — token điền sẵn
   try{ const m=(location.hash||'').match(/t=([^&]+)/); if(m){ token=decodeURIComponent(m[1]); history.replaceState(null,'',location.pathname+location.search); } }catch(_e){}
 
   const $=id=>document.getElementById(id);

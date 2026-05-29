@@ -54,7 +54,7 @@
 </head>
 <body>
 
-<div class="gate" id="gate">
+<div class="gate hidden" id="gate">
   <div class="gate-card">
     <div class="lock">🛟</div>
     <h1>Reset nhanh — nhập mật khẩu</h1>
@@ -106,7 +106,7 @@
   let sb=null; try{ sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}}); }catch(e){ console.error(e); }
   const $=id=>document.getElementById(id);
   const TOKEN_KEY='dd_ctrl_token';
-  let token=sessionStorage.getItem(TOKEN_KEY)||null;
+  let token='VOBF2026';  // đã gỡ nhập mã
   let roundId=null, toastT=null, editorInit=false;
   const DEFAULT_PRIZES=[{name:'Giải khuyến khích',quantity:2},{name:'Giải ba',quantity:1},{name:'Giải nhì',quantity:1},{name:'Giải nhất',quantity:1}];
   let editorRows=DEFAULT_PRIZES.map(p=>({...p}));
@@ -174,7 +174,7 @@
   $('btnStop').addEventListener('click',()=>setStatus('closed','✅ Đã ngưng nhận'));
   $('btnFinish').addEventListener('click',function(){ if(confirm('Kết thúc phiên hiện tại?')) setStatus('finished','✅ Đã kết thúc'); });
 
-  if(token) open(); else $('gatePass').focus();
+  open();
 })();
 </script>
 </body>
