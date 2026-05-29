@@ -120,6 +120,20 @@
   </div>
 
   <div class="card">
+    <h2>Thêm người chơi</h2>
+    <div class="setup">
+      <div class="f"><label>Họ tên</label><input class="prize" id="addName" placeholder="Nguyễn Văn A" maxlength="60"></div>
+      <div class="f"><label>SĐT (10 số)</label><input id="addPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="09xxxxxxxx" style="width:160px"></div>
+      <button class="btn btn-new" id="btnAddOne" style="padding:12px 16px;font-size:.92rem">➕ Thêm 1</button>
+    </div>
+    <div class="setup" style="margin-top:10px">
+      <div class="f"><label>Số lượng test</label><input class="qty" id="addQty" type="number" min="1" max="500" value="50"></div>
+      <button class="btn btn-display" id="btnAddBulk" style="padding:12px 16px;font-size:.92rem">➕ Thêm N người test</button>
+    </div>
+    <div class="hint">Chỉ thêm được khi phiên "Đang mở đăng ký". SĐT phải đủ 10 số.</div>
+  </div>
+
+  <div class="card">
     <h2>Người chơi (linh vật + SĐT ẩn)</h2>
     <div class="mini-board" id="miniBoard"></div>
   </div>
@@ -201,6 +215,33 @@
     const res=await rpc('dd_admin_new_round',{p_token:token,p_prize:JSON.stringify(list),p_qty:qty});
     if(res&&res.ok){ toast('Đã tạo phiên mới — đang mở đăng ký'); poll(); }
     else toast((res&&res.error)||'Lỗi tạo phiên');
+  });
+
+  // ---- thêm người chơi (thủ công + test) ----
+  $('btnAddOne').addEventListener('click', async function(){
+    const name=$('addName').value.trim(); const phone=$('addPhone').value.replace(/\D/g,'');
+    if(name.length<2){ toast('Nhập họ tên'); return; }
+    if(phone.length!==10){ toast('SĐT phải đủ 10 số'); return; }
+    const res=await rpc('dd_register',{p_name:name,p_phone:phone});
+    if(res&&res.ok){ toast('Đã thêm: '+name); $('addName').value=''; $('addPhone').value=''; poll(); }
+    else toast((res&&res.error)||'Lỗi (phiên phải đang mở đăng ký)');
+  });
+  $('btnAddBulk').addEventListener('click', async function(){
+    const n=Math.min(500,Math.max(1,parseInt($('addQty').value,10)||1));
+    if(!confirm('Thêm '+n+' người TEST vào phiên đang chạy?')) return;
+    const btn=$('btnAddBulk'); btn.disabled=true; const old=btn.textContent;
+    const base=Math.floor(Math.random()*8999+1000);  // tránh trùng phone giữa các lần
+    let ok=0;
+    for(let i=0;i<n;i+=15){
+      const batch=[];
+      for(let j=i;j<Math.min(n,i+15);j++){
+        const phone='09'+String(((base+j)*9301)%100000000).padStart(8,'0');  // 10 số
+        batch.push(rpc('dd_register',{p_name:'Test '+(j+1),p_phone:phone}).then(r=>{ if(r&&r.ok) ok++; }));
+      }
+      btn.textContent='Đang thêm… '+Math.min(n,i+15)+'/'+n;
+      await Promise.all(batch);
+    }
+    btn.disabled=false; btn.textContent=old; toast('Đã thêm xong ('+ok+' lượt)'); poll();
   });
 
   async function setStatus(s){ const res=await rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:s}); if(!(res&&res.ok)) toast((res&&res.error)||'Lỗi'); poll(); return res&&res.ok; }

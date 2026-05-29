@@ -285,7 +285,7 @@
     const errEl=$('formErr'); errEl.classList.remove('show');
     const name=$('fName').value.trim(); const phone=$('fPhone').value.replace(/\D/g,'');
     if(name.length<2){ errEl.textContent='Vui lòng nhập họ và tên.'; errEl.classList.add('show'); return; }
-    if(phone.length<9||phone.length>11){ errEl.textContent='Số điện thoại không hợp lệ (9–11 số).'; errEl.classList.add('show'); return; }
+    if(phone.length!==10){ errEl.textContent='Số điện thoại phải đủ 10 số.'; errEl.classList.add('show'); return; }
     const btn=$('regBtn'); btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="spin"></span>Đang đăng ký…';
     const res=await rpc('dd_register',{p_name:name,p_phone:phone});
     btn.disabled=false; btn.innerHTML=old;
