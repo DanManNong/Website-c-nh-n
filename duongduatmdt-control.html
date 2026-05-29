@@ -127,8 +127,8 @@
       <button class="btn btn-new" id="btnAddOne" style="padding:12px 16px;font-size:.92rem">➕ Thêm 1</button>
     </div>
     <div class="setup" style="margin-top:10px">
-      <div class="f"><label>Số lượng test</label><input class="qty" id="addQty" type="number" min="1" max="500" value="50"></div>
-      <button class="btn btn-display" id="btnAddBulk" style="padding:12px 16px;font-size:.92rem">➕ Thêm N người test</button>
+      <div class="f"><label>Số lượng</label><input class="qty" id="addQty" type="number" min="1" max="1000" value="50"></div>
+      <button class="btn btn-display" id="btnAddBulk" style="padding:12px 16px;font-size:.92rem">🎲 Thêm người ngẫu nhiên</button>
     </div>
     <div class="hint">Chỉ thêm được khi phiên "Đang mở đăng ký". SĐT phải đủ 10 số.</div>
   </div>
@@ -226,22 +226,27 @@
     if(res&&res.ok){ toast('Đã thêm: '+name); $('addName').value=''; $('addPhone').value=''; poll(); }
     else toast((res&&res.error)||'Lỗi (phiên phải đang mở đăng ký)');
   });
+  const _HO=['Nguyễn','Trần','Lê','Phạm','Hoàng','Huỳnh','Phan','Vũ','Võ','Đặng','Bùi','Đỗ','Hồ','Ngô','Dương','Lý','Đinh','Trương','Lương','Mai'];
+  const _DEM=['Văn','Thị','Hữu','Đức','Minh','Thành','Ngọc','Gia','Khánh','Quốc','Thu','Hải','Anh','Tuấn','Kim','Hồng','Bảo','Nhật','Phương','Thanh'];
+  const _TEN=['An','Bình','Cường','Dũng','Dung','Phong','Giang','Hà','Hùng','Khoa','Lan','Mai','Nam','Oanh','Phúc','Quân','Sơn','Tâm','Uyên','Vy','Trang','Hương','Long','Linh','Ngân','Tú','Vinh','Yến','Đạt','Kiên'];
+  const _PFX=['03','05','07','08','09'];
+  function _r(n){ return Math.floor(Math.random()*n); }
+  function randName(){ return _HO[_r(_HO.length)]+' '+_DEM[_r(_DEM.length)]+' '+_TEN[_r(_TEN.length)]; }
+  function randPhone(){ return _PFX[_r(_PFX.length)]+String(_r(100000000)).padStart(8,'0'); }
   $('btnAddBulk').addEventListener('click', async function(){
-    const n=Math.min(500,Math.max(1,parseInt($('addQty').value,10)||1));
-    if(!confirm('Thêm '+n+' người TEST vào phiên đang chạy?')) return;
+    const n=Math.min(1000,Math.max(1,parseInt($('addQty').value,10)||50));
+    if(!confirm('Thêm '+n+' người ngẫu nhiên vào phiên đang chạy?')) return;
     const btn=$('btnAddBulk'); btn.disabled=true; const old=btn.textContent;
-    const base=Math.floor(Math.random()*8999+1000);  // tránh trùng phone giữa các lần
     let ok=0;
     for(let i=0;i<n;i+=15){
       const batch=[];
       for(let j=i;j<Math.min(n,i+15);j++){
-        const phone='09'+String(((base+j)*9301)%100000000).padStart(8,'0');  // 10 số
-        batch.push(rpc('dd_register',{p_name:'Test '+(j+1),p_phone:phone}).then(r=>{ if(r&&r.ok) ok++; }));
+        batch.push(rpc('dd_register',{p_name:randName(),p_phone:randPhone()}).then(r=>{ if(r&&r.ok) ok++; }));
       }
       btn.textContent='Đang thêm… '+Math.min(n,i+15)+'/'+n;
       await Promise.all(batch);
     }
-    btn.disabled=false; btn.textContent=old; toast('Đã thêm xong ('+ok+' lượt)'); poll();
+    btn.disabled=false; btn.textContent=old; toast('Đã thêm '+ok+' người ngẫu nhiên'); poll();
   });
 
   async function setStatus(s){ const res=await rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:s}); if(!(res&&res.ok)) toast((res&&res.error)||'Lỗi'); poll(); return res&&res.ok; }
