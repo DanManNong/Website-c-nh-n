@@ -192,7 +192,6 @@
   $('lnkLogout').addEventListener('click',function(e){ e.preventDefault(); sessionStorage.removeItem(TOKEN_KEY); token=null; location.reload(); });
   function openApp(){ $('gate').classList.add('hidden'); $('app').classList.remove('hidden'); renderPrizeEditor(); poll(); }
   function openDisplay(){ const url='/duongduatmdt-display'+(token?('#t='+encodeURIComponent(token)):''); window.open(url,'ddDisplay','noopener'); }
-  function openQuayso(){ const url='/quayso-display'+(token?('#t='+encodeURIComponent(token)):''); window.open(url,'ddQuayso','noopener'); }
 
   $('btnNewRound').addEventListener('click', async function(){
     const list=collectPrizes();
@@ -209,8 +208,7 @@
   function renderActions(){
     const a=$('actions'); const hint=$('actionHint'); const s=st.status;
     if(!st.roundId){ a.innerHTML='<div class="empty full" style="grid-column:1/-1">Chưa có phiên. Bấm "Tạo phiên mới" ở trên.</div>'; hint.textContent=''; return; }
-    let h=b('btnDisplay','btn-display full','📺 Hiển thị đường đua (mở màn hình)');
-    h+=b('btnQuayso','btn-quayso full','🎰 Quay số (game dự phòng)');
+    let h=b('btnDisplay','btn-display full','📺 Mở màn hình trò chơi (chọn Đua / Quay số)');
     if(s==='registration'){ h+=b('btnStop','btn-stop','🔒 Ngưng nhận'); h+=b('btnStart','btn-start','▶ Bắt đầu'); hint.textContent='Bấm "Hiển thị đường đua" mở màn chiếu. "Bắt đầu" → đếm ngược 15s rồi tự quay giải đầu tiên.'; }
     else if(s==='closed'){ h+=b('btnReopen','btn-reopen','🔓 Mở lại nhận'); h+=b('btnStart','btn-start','▶ Bắt đầu'); hint.textContent='Đã ngưng nhận. Bấm "Bắt đầu" để quay.'; }
     else if(s==='countdown'){ h+=b('btnFinish','btn-finish full','⏹ Kết thúc game'); hint.textContent='Màn hình đang đếm ngược & quay. Chờ kết quả.'; }
@@ -218,7 +216,6 @@
     else if(s==='finished'){ h+=b('btnNew2','btn-new full','🔄 Tạo phiên mới'); hint.textContent='Game đã kết thúc.'; }
     a.innerHTML=h;
     bind('btnDisplay',openDisplay);
-    bind('btnQuayso',openQuayso);
     bind('btnStop',()=>setStatus('closed'));
     bind('btnReopen',()=>setStatus('registration'));
     bind('btnStart',()=>setStatus('countdown'));
