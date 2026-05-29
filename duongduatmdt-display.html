@@ -167,7 +167,7 @@
   function setMode(m){
     if(mode===m && m!=='finished') return false;
     mode=m;
-    var tn=$('topName'); if(tn) tn.style.display=(m==='countdown'||m==='play')?'block':'none';
+    var tn=$('topName'); if(tn) tn.style.display=(m==='countdown'||m==='play'||m==='wheel')?'block':'none';
     if(m==='idle'){
       clearStage();
       root.innerHTML='<div class="center"><div class="flag">🏁</div><h1>Tăng trưởng thần tốc</h1><div class="subt">Đường Đua Thương Mại Điện Tử</div><p>Đang chờ ban tổ chức mở phiên…</p></div>';
@@ -188,8 +188,14 @@
       if(!$('cdOverlay')){ const o=document.createElement('div'); o.id='cdOverlay'; o.innerHTML='<div class="pz" id="cdPrize"></div><div class="lbl">Sắp bắt đầu</div><div class="num" id="cdNum">15</div>'; document.body.appendChild(o); }
     } else if(m==='play'){
       const cd=$('cdOverlay'); if(cd) cd.remove();
-      if(gameType==='race'){ ensureRace(); root.innerHTML=''; }
-      else { const rc=$('raceContainer'); if(rc) rc.remove(); root.innerHTML='<div class="wheelStage"><div class="pz" id="spinPz"></div><div class="wheelWrap"><div class="pointer"></div><svg id="wheelSvg" viewBox="0 0 640 640"></svg><div class="hub">🎯</div></div><div class="result" id="spinResult"></div><div class="hint" id="spinHint">Đang quay…</div></div>'; }
+      ensureRace(); root.innerHTML='';
+    } else if(m==='wheel'){
+      const cd=$('cdOverlay'); if(cd) cd.remove();
+      const rc=$('raceContainer'); if(rc) rc.remove();
+      if(!$('wheelStageEl')){
+        root.innerHTML='<div class="wheelStage" id="wheelStageEl"><div class="pz" id="spinPz"></div><div class="wheelWrap"><div class="pointer"></div><svg id="wheelSvg" viewBox="0 0 640 640"></svg><div class="hub">🎯</div></div><div class="result" id="spinResult"></div><div class="hint" id="spinHint">Chuẩn bị quay…</div></div>';
+      }
+      buildWheelStatic();
     } else if(m==='finished'){
       clearStage();
       root.innerHTML='<div class="fin"><div class="flag">🏆</div><h1>Người trúng giải</h1><div class="wlist" id="wlist"></div></div>';
@@ -233,22 +239,35 @@
 
   // ---------- WHEEL ----------
   function buildWheel(labels){
-    const N=labels.length, cx=320, cy=320, R=304, rLabel=198, seg=360/N;
-    const gold='#E8C274', dark='#241d12';
+    const N=labels.length, cx=320, cy=320, R=304;
+    if(N<=1){ return '<circle cx="320" cy="320" r="304" fill="#E8C274" stroke="#9C6B2E" stroke-width="6"/>'+(labels[0]?('<text x="320" y="332" fill="#1a1206" font-size="34" font-weight="900" text-anchor="middle">'+esc(shortName(labels[0]))+'</text>'):''); }
+    const seg=360/N, showText=(N<=40), rLabel=(N<=20?198:218), fs=(N<=20?20:13);
+    const cols=['#E8C274','#241d12','#C9A24E','#2c2519'];
     let s='';
     for(let i=0;i<N;i++){
       const a0=(i*seg-90)*Math.PI/180, a1=((i+1)*seg-90)*Math.PI/180;
       const x0=cx+R*Math.cos(a0), y0=cy+R*Math.sin(a0), x1=cx+R*Math.cos(a1), y1=cy+R*Math.sin(a1);
-      const fill=(i%2===0)?gold:dark;
-      s+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+R+' '+R+' 0 0 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+' Z" fill="'+fill+'" stroke="rgba(11,11,11,.65)" stroke-width="2"/>';
-      const am=((i+0.5)*seg-90)*Math.PI/180;
-      const lx=cx+rLabel*Math.cos(am), ly=cy+rLabel*Math.sin(am);
-      let rot=(i+0.5)*seg; if(rot>90 && rot<270) rot+=180;   // lật chữ nửa dưới cho dễ đọc
-      s+='<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" fill="'+((i%2===0)?'#1a1206':'#F5EFE2')+'" font-size="22" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(1)+' '+lx.toFixed(1)+' '+ly.toFixed(1)+')">'+esc(shortName(labels[i]))+'</text>';
+      s+='<path d="M'+cx+' '+cy+' L'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+R+' '+R+' 0 0 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+' Z" fill="'+cols[i%cols.length]+'" stroke="rgba(11,11,11,.5)" stroke-width="'+(N>60?0.5:1.5)+'"/>';
+      if(showText){
+        const am=((i+0.5)*seg-90)*Math.PI/180, lx=cx+rLabel*Math.cos(am), ly=cy+rLabel*Math.sin(am);
+        let rot=(i+0.5)*seg; if(rot>90 && rot<270) rot+=180;
+        s+='<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" fill="'+((i%2===0)?'#1a1206':'#F5EFE2')+'" font-size="'+fs+'" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate('+rot.toFixed(1)+' '+lx.toFixed(1)+' '+ly.toFixed(1)+')">'+esc(shortName(labels[i]))+'</text>';
+      }
     }
     s+='<circle cx="320" cy="320" r="304" fill="none" stroke="#E8C274" stroke-width="6"/>';
-    s+='<circle cx="320" cy="320" r="298" fill="none" stroke="rgba(11,11,11,.5)" stroke-width="2"/>';
     return s;
+  }
+  function buildWheelStatic(){
+    if(spinning) return;
+    const svg=$('wheelSvg'); if(!svg) return;
+    const elig=players.filter(p=>!wonSet.has(p.id));
+    const sig=elig.map(p=>p.id).join(',');
+    if(svg.dataset.sig===sig && svg.innerHTML) return;
+    svg.dataset.sig=sig;
+    svg.classList.remove('spin-anim'); wheelRot=0; svg.style.transform='rotate(0deg)';
+    svg.innerHTML=elig.length?buildWheel(elig):'';
+    const r2=$('spinResult'); if(r2) r2.textContent='';
+    const pz=$('spinPz'); if(pz){ const g=currentGroup(); pz.textContent=g?('🎁 '+g.name+(g.quantity>1?(' ('+g.slot+'/'+g.quantity+')'):'')):'🎁'; }
   }
   function startSpin(){
     if(spinning) return;
@@ -260,32 +279,31 @@
     const pz=$('spinPz'); if(pz) pz.textContent='🎁 '+g.name+(g.quantity>1?(' ('+g.slot+'/'+g.quantity+')'):'');
     const res=$('spinResult'); if(res) res.textContent='';
     if(hint) hint.textContent='Đang quay…';
-    const winner=elig[Math.floor(Math.random()*elig.length)];
-    const N=12, wIdx=Math.floor(Math.random()*N);
-    const others=players.filter(p=>p.id!==winner.id);
-    for(let i=others.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=others[i];others[i]=others[j];others[j]=t; }
-    const labels=[]; let oi=0;
-    for(let i=0;i<N;i++){ labels.push(i===wIdx ? winner.name : ((others[oi++]||winner).name)); }
+    const list=players.filter(p=>!wonSet.has(p.id));   // TẤT CẢ người còn lại = các ô trên vòng
+    const wIdx=Math.floor(Math.random()*list.length);
+    const winner=list[wIdx];
     const svg=$('wheelSvg'); if(!svg){ spinning=false; return; }
-    svg.innerHTML=buildWheel(labels);
+    svg.dataset.sig=list.map(p=>p.id).join(',');
+    svg.innerHTML=buildWheel(list);
     svg.classList.remove('spin-anim');
     wheelRot=((wheelRot%360)+360)%360; svg.style.transform='rotate('+wheelRot+'deg)';
     void svg.offsetWidth;
-    const seg=360/N, desired=360-((wIdx+0.5)*seg), delta=((desired-wheelRot)%360+360)%360, jitter=(Math.random()-0.5)*(seg*0.55);
+    const N=list.length, seg=360/N, desired=360-((wIdx+0.5)*seg), delta=((desired-wheelRot)%360+360)%360, jitter=(Math.random()-0.5)*Math.min(seg*0.5,6);
     const target=wheelRot+360*6+delta+jitter;
     try{ ac(); }catch(e){}
     svg.classList.add('spin-anim'); svg.style.transform='rotate('+target+'deg)'; wheelRot=target;
-    let tk=0; const tkInt=setInterval(function(){ tk++; if(tk>26||!spinning){clearInterval(tkInt);return;} tick(); },190);
+    let tk=0; const tkInt=setInterval(function(){ tk++; if(tk>28||!spinning){clearInterval(tkInt);return;} tick(); },190);
     let done=false;
     function finish(){ if(done) return; done=true; clearInterval(tkInt);
       if(!winHandled){ winHandled=true; recordWin(winner); }
       if(res) res.textContent='🏆 '+winner.name;
-      if(hint) hint.textContent='🎉 Chúc mừng!';
+      const remain=list.length-1;
+      if(hint) hint.textContent=remain>0?('✅ Đã ghi nhận · còn '+remain+' người · bấm "Quay tiếp"'):'✅ Đã ghi nhận (hết người)';
       confetti(); fanfare();
       spinning=false; lastCtrlKey=null; renderCtrl();
     }
     svg.addEventListener('transitionend', finish, {once:true});
-    setTimeout(finish, 5800);
+    setTimeout(finish, 6200);
   }
 
   function triggerDraw(){
@@ -339,15 +357,18 @@
 
   // ---------- countdown tick ----------
   setInterval(function(){
-    if(mode!=='countdown'||!st.countdownAt) return;
+    if(st.status!=='countdown'||!st.countdownAt) return;
     const nowS=Date.now()+st.skew;
     let remain=CD_TOTAL-(nowS-st.countdownAt)/1000; if(remain<0)remain=0;
-    const el=$('cdNum'); if(el) el.textContent=Math.ceil(remain);
-    const pz=$('cdPrize'); if(pz){ const g=currentGroup(); pz.textContent=g?('🎁 '+g.name+(g.quantity>1?(' ('+g.slot+'/'+g.quantity+')'):'')):'🎁 Giải thưởng'; }
-    if(remain<=0 && !drawStarted){
-      drawStarted=true;
-      if(token){ rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:'playing'}); }
-      setMode('play'); triggerDraw();
+    const g=currentGroup();
+    if(gameType==='wheel'){
+      const h=$('spinHint'); if(h && !spinning) h.textContent='⏳ Quay sau '+Math.ceil(remain)+' giây…';
+      const pz=$('spinPz'); if(pz) pz.textContent=g?('🎁 '+g.name+(g.quantity>1?(' ('+g.slot+'/'+g.quantity+')'):'')):'🎁 Giải thưởng';
+      if(remain<=0 && !drawStarted){ drawStarted=true; if(token){ rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:'playing'}); } startSpin(); }
+    } else {
+      const el=$('cdNum'); if(el) el.textContent=Math.ceil(remain);
+      const pz=$('cdPrize'); if(pz) pz.textContent=g?('🎁 '+g.name+(g.quantity>1?(' ('+g.slot+'/'+g.quantity+')'):'')):'🎁 Giải thưởng';
+      if(remain<=0 && !drawStarted){ drawStarted=true; if(token){ rpc('dd_admin_set_status',{p_token:token,p_round:st.roundId,p_status:'playing'}); } setMode('play'); triggerDraw(); }
     }
   },120);
 
@@ -374,13 +395,13 @@
       if(drawSignal!==r.countdown_at){ drawSignal=r.countdown_at; drawStarted=false; winHandled=false; }
       if(token) await refreshPlayersAdmin();
       await fetchWinCount();
-      setMode('countdown');
-      if(gameType==='race'){ ensureRace(); sendParticipants(); }
+      if(gameType==='race'){ setMode('countdown'); ensureRace(); sendParticipants(); }
+      else { setMode('wheel'); buildWheelStatic(); }
     } else if(r.status==='playing'){
       if(token) await refreshPlayersAdmin();
       await fetchWinCount();
-      if(mode!=='play') setMode('play');
-      if(gameType==='race' && iframeReady) sendParticipants();
+      if(gameType==='race'){ if(mode!=='play') setMode('play'); if(iframeReady) sendParticipants(); }
+      else { if(mode!=='wheel') setMode('wheel'); }
     } else if(r.status==='finished'){
       setMode('finished'); refreshWinners();
     }
