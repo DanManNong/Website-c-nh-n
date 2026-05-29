@@ -120,12 +120,12 @@
   async function rpc(fn,args){ if(!sb)return null; const{data,error}=await sb.rpc(fn,args||{}); if(error){console.warn(fn,error.message);return null;} return data; }
 
   let st={ roundId:null, status:null, prizes:[{name:'Giải thưởng',quantity:1}], countdownAt:null, skew:0, count:0, winCount:0 };
-  let players=[], codeMap={}, mode=null, iframeReady=false, drawSignal=null, drawStarted=false, recorded=new Set(), qrDone=false;
+  let players=[], codeMap={}, mode=null, iframeReady=false, drawSignal=null, drawStarted=false, wonSet=new Set(), winHandled=false, qrDone=false;
 
   const HERO='<div class="hero"><div class="flag">🏁</div><div class="slogan">Tăng trưởng thần tốc</div><div class="title">Đường Đua Thương Mại Điện Tử</div></div>';
 
   function totalSlots(){ return st.prizes.reduce((s,p)=>s+p.quantity,0); }
-  function effWin(){ return Math.max(st.winCount, recorded.size); }
+  function effWin(){ return Math.max(st.winCount, wonSet.size); }
   function currentGroup(){
     let acc=0; const w=effWin();
     for(let i=0;i<st.prizes.length;i++){ const p=st.prizes[i]; if(w<acc+p.quantity) return {name:p.name,quantity:p.quantity,slot:(w-acc)+1,groupIdx:i}; acc+=p.quantity; }
@@ -200,7 +200,8 @@
   function sendParticipants(){
     if(!iframeReady || !frameWin()) return;
     const g=currentGroup()||st.prizes[st.prizes.length-1]||{name:'Giải thưởng',quantity:1};
-    const list=players.map((p,i)=>({code:String(i+1).padStart(2,'0'),name:p.name,avatar:null}));
+    const elig=players.filter(p=>!wonSet.has(p.id));   // loại người đã trúng → iframe không bốc trùng (an toàn cả khi reload)
+    codeMap={}; const list=elig.map(function(p,i){ const code=String(i+1).padStart(2,'0'); codeMap[code]=p; return {code:code,name:p.name,avatar:null}; });
     frameWin().postMessage({type:'SET_PARTICIPANTS',participants:list,prize:g.name,prizeQty:g.quantity},'*');
   }
 
@@ -216,7 +217,12 @@
   async function refreshPlayersAdmin(){
     if(!st.roundId || !token) return;
     const rows=await rpc('dd_admin_players',{p_token:token,p_round:st.roundId});
-    if(Array.isArray(rows)){ players=rows.map(r=>({id:r.id,name:r.name,phone:r.phone})); codeMap={}; players.forEach((p,i)=>{ codeMap[String(i+1).padStart(2,'0')]=p; }); }
+    if(Array.isArray(rows)){ players=rows.map(r=>({id:r.id,name:r.name,phone:r.phone})); }
+  }
+  function rebuildWon(winners){
+    const ws=new Set();
+    (winners||[]).forEach(function(w){ const last3=String(w.phone_masked||'').slice(-3); const p=players.find(x=>x.name===w.name && String(x.phone).slice(-3)===last3 && !ws.has(x.id)); if(p) ws.add(p.id); });
+    if(ws.size>=wonSet.size) wonSet=ws;
   }
   async function refreshWinners(){
     if(!st.roundId) return;
@@ -226,17 +232,18 @@
     if(!rows||!rows.length){ box.innerHTML='<div class="pempty">Chưa có người trúng.</div>'; return; }
     box.innerHTML=rows.map(w=>'<div class="wcard"><div class="ic">🏆</div><div style="flex:1;min-width:0"><div class="pz">'+esc(w.prize)+'</div><div class="nm">'+esc(w.name)+' <span class="ph">'+esc(w.phone_masked)+'</span></div></div></div>').join('');
   }
-  async function fetchWinCount(){ if(!st.roundId) return; const rows=await rpc('dd_winners_list',{p_round:st.roundId}); if(Array.isArray(rows)) st.winCount=rows.length; }
+  async function fetchWinCount(){ if(!st.roundId) return; const rows=await rpc('dd_winners_list',{p_round:st.roundId}); if(Array.isArray(rows)){ st.winCount=rows.length; rebuildWon(rows); } }
 
   window.addEventListener('message', function(e){
     const d=e.data; if(!d||!d.type) return;
     if(d.type==='IFRAME_READY'){ iframeReady=true; sendParticipants(); return; }
     if(d.type==='RACE_WINNER'){
-      const code=d.code; if(recorded.has(code)) return; recorded.add(code);
-      const p=codeMap[code];
-      const g=currentGroup()||{name:(st.prizes[0]&&st.prizes[0].name)||'Giải thưởng'};
+      if(winHandled) return; winHandled=true;          // mỗi lượt chỉ ghi 1 người
+      const p=codeMap[d.code];
+      const g=currentGroup()||{name:(st.prizes[0]&&st.prizes[0].name)||'Giải thưởng'};  // tính giải TRƯỚC khi cộng
       const name=p?p.name:(d.name||'—'), phone=p?p.phone:'', prize=g.name;
-      if(token){ rpc('dd_admin_add_winner',{p_token:token,p_round:st.roundId,p_name:name,p_phone:phone,p_prize:prize,p_position:recorded.size}); }
+      if(p) wonSet.add(p.id);
+      if(token){ rpc('dd_admin_add_winner',{p_token:token,p_round:st.roundId,p_name:name,p_phone:phone,p_prize:prize,p_position:effWin()}); }
       return;
     }
   });
@@ -261,7 +268,7 @@
     if(!r){ st.roundId=null; st.status=null; setMode('idle'); renderCtrl(); return; }
     if(r.server_now) st.skew=new Date(r.server_now).getTime()-Date.now();
     const changedRound=st.roundId!==r.id;
-    if(changedRound){ recorded=new Set(); drawSignal=null; drawStarted=false; const rc=$('raceContainer'); if(rc) rc.remove(); iframeReady=false; st.winCount=0; }
+    if(changedRound){ wonSet=new Set(); winHandled=false; drawSignal=null; drawStarted=false; const rc=$('raceContainer'); if(rc) rc.remove(); iframeReady=false; st.winCount=0; }
     st.roundId=r.id; st.status=r.status; st.prizes=parsePrizes(r.prize);
     st.countdownAt=r.countdown_at?new Date(r.countdown_at).getTime():null;
     st.count=r.player_count||0;
@@ -275,13 +282,13 @@
       if(token) await refreshPlayersAdmin();
       sendParticipants();
     } else if(r.status==='countdown'){
-      if(drawSignal!==r.countdown_at){ drawSignal=r.countdown_at; drawStarted=false; }
-      await fetchWinCount();
+      if(drawSignal!==r.countdown_at){ drawSignal=r.countdown_at; drawStarted=false; winHandled=false; }
       if(token) await refreshPlayersAdmin();
+      await fetchWinCount();
       setMode('countdown'); sendParticipants();
     } else if(r.status==='playing'){
-      await fetchWinCount();
       if(token) await refreshPlayersAdmin();
+      await fetchWinCount();
       setMode('race'); sendParticipants();
     } else if(r.status==='finished'){
       setMode('finished'); refreshWinners();

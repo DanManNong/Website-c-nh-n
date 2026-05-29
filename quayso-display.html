@@ -293,8 +293,8 @@
     setTimeout(finish, 5400);
   }
   function recordWinner(p){
+    const g=currentGroup()||{name:(st.prizes[0]&&st.prizes[0].name)||'Giải thưởng'};  // tính giải TRƯỚC khi cộng
     wonSet.add(p.id);
-    const g=currentGroup()||{name:(st.prizes[0]&&st.prizes[0].name)||'Giải thưởng'};
     if(token) rpc('dd_admin_add_winner',{p_token:token,p_round:st.roundId,p_name:p.name,p_phone:p.phone,p_prize:g.name,p_position:wonSet.size});
   }
 
