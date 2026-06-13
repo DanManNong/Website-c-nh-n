@@ -3,6 +3,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/tracnghiem",
+      "destination": "https://www.moigioibatdongsan.edu.vn/luyen-thi",
+      "permanent": true
+    },
+    {
       "source": "/home",
       "destination": "/",
       "permanent": true
