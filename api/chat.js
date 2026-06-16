@@ -15,21 +15,23 @@ const SUPABASE_URL = process.env.SUPABASE_URL || "https://dcmtbgcltopnqsiedwlg.s
 const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq";
 const endpointFor = m => `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
 
-// Xoay vòng: mỗi lượt bắt đầu ở 1 model ngẫu nhiên để trải đều quota, rồi xếp các model còn lại làm dự phòng.
+// Xoay vòng cho tác vụ nhẹ (viết lại câu hỏi): bắt đầu ngẫu nhiên để trải đều quota.
 function rotatedModels() {
   const i = Math.floor(Math.random() * MODELS.length);
   return MODELS.map((_, k) => MODELS[(i + k) % MODELS.length]);
 }
+// Thứ tự cho CÂU TRẢ LỜI: ưu tiên model mạnh (flash) -> pro -> lite (lite chỉ là cứu cánh) để câu trả lời chất lượng hơn.
+const ANSWER_ORDER = ["gemini-2.5-flash", "gemini-2.5-pro", "gemini-2.5-flash-lite"];
 
-const ANSWER_SYSTEM = `Bạn là Trợ lý AI Pháp lý trên website của ông Nguyễn Tấn Phong — Phó Chủ tịch Hiệp hội Thương mại điện tử Việt Nam (VECOM), chuyên gia Kinh tế số & Pháp luật.
+const ANSWER_SYSTEM = `Bạn là Trợ lý AI Pháp lý trên website của ông Nguyễn Tấn Phong — Phó Chủ tịch Hiệp hội Thương mại điện tử Việt Nam (VECOM), chuyên gia Kinh tế số & Pháp luật. Trả lời câu hỏi pháp luật Việt Nam, ưu tiên DỰA TRÊN NGỮ CẢNH (các điều luật Pháp điển + án lệ) cung cấp bên dưới.
 
-Trả lời câu hỏi pháp luật Việt Nam DỰA TRÊN NGỮ CẢNH (điều luật Pháp điển + án lệ) cung cấp bên dưới.
-
-QUY TẮC:
-- CHỈ dùng NGỮ CẢNH để nêu nội dung pháp luật. Nếu ngữ cảnh không đủ/không liên quan, nói rõ "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu" và gợi ý liên hệ ông Phong qua form/Zalo trên trang.
-- TUYỆT ĐỐI KHÔNG bịa số điều, tên văn bản, nội dung. Luôn TRÍCH DẪN mã điều/số án lệ theo [n] và kèm link nếu có.
-- Trả lời bằng ĐÚNG ngôn ngữ người dùng. Ngắn gọn, có cấu trúc.
-- Kết thúc bằng 1 dòng nhắc: thông tin mang tính tham khảo, không thay thế tư vấn pháp lý chính thức; vụ việc cụ thể nên liên hệ ông Phong.
+CÁCH TRẢ LỜI:
+- Hãy trả lời HỮU ÍCH và trực tiếp: tóm tắt, giải thích, kết nối các điều luật liên quan trong NGỮ CẢNH để giải đáp câu hỏi — KỂ CẢ khi điều luật không khớp 100%, hãy nêu những gì gần nhất và hữu ích.
+- Khi dùng nội dung từ một mục, TRÍCH DẪN mã điều/số án lệ theo [n] (kèm link nếu có).
+- KHÔNG bịa số điều, tên văn bản hay nội dung không có trong ngữ cảnh. Có thể bổ sung kiến thức pháp lý phổ thông để làm rõ, nhưng phải nói rõ phần nào là dẫn chiếu điều luật, phần nào là giải thích chung.
+- CHỈ nói "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu" khi NGỮ CẢNH hoàn toàn không liên quan đến câu hỏi.
+- Trả lời bằng ĐÚNG ngôn ngữ người dùng. Trình bày rõ ràng, có cấu trúc (gạch đầu dòng khi phù hợp), không lan man.
+- Kết thúc bằng 1 dòng ngắn: thông tin mang tính tham khảo, không thay thế tư vấn pháp lý chính thức; vụ việc cụ thể nên liên hệ ông Phong.
 - Lịch sự từ chối nội dung ngoài phạm vi pháp luật.`;
 
 const REWRITE_SYSTEM = `Bạn tạo TRUY VẤN TÌM KIẾM cho cơ sở dữ liệu pháp luật Việt Nam (Pháp điển + Án lệ).
@@ -66,10 +68,10 @@ async function callModel(apiKey, model, system, messages, maxTokens) {
   return cand.content.parts.filter(p => p && p.text).map(p => p.text).join("").trim();
 }
 
-// Luân phiên + dự phòng: thử lần lượt theo thứ tự xoay vòng; nếu 429/5xx thì sang model kế tiếp.
-async function gemini(apiKey, system, messages, maxTokens) {
+// Luân phiên + dự phòng: thử lần lượt theo thứ tự `order`; nếu 429/5xx thì sang model kế tiếp.
+async function gemini(apiKey, system, messages, maxTokens, order) {
   let lastErr;
-  for (const model of rotatedModels()) {
+  for (const model of (order || rotatedModels())) {
     try { const text = await callModel(apiKey, model, system, messages, maxTokens); return { text, model }; }
     catch (e) {
       lastErr = e;
@@ -160,7 +162,7 @@ module.exports = async (req, res) => {
     // 3) Sinh câu trả lời
     const augmented = messages.slice();
     augmented[augmented.length - 1] = { role: "user", content: `NGỮ CẢNH PHÁP LUẬT (trích dẫn theo số [n]):\n\n${buildContext(top)}\n\n---\nCÂU HỎI: ${userQuery}` };
-    const { text: reply, model: usedModel } = await gemini(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS);
+    const { text: reply, model: usedModel } = await gemini(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS, ANSWER_ORDER);
     logAI(userQuery, body.lang, top.length, usedModel);
     return send(res, 200, { reply: reply || "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu. Vui lòng liên hệ trực tiếp để được tư vấn.", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })), model: usedModel });
   } catch (e) {
