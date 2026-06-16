@@ -126,8 +126,8 @@
   function renderAI(rows){
     var el=document.getElementById('aiBox');
     if(!rows.length){ el.innerHTML='<div class="empty">Chưa có câu hỏi AI nào.</div>'; return; }
-    var body=rows.map(function(r){ return '<tr><td class="q">'+esc(r.question)+'</td><td><span class="tag">'+esc(r.lang||'?')+'</span></td><td>'+(r.n_sources==null?'':r.n_sources)+'</td><td>'+fmt(r.created_at)+'</td></tr>'; }).join('');
-    el.innerHTML='<table><thead><tr><th>Câu hỏi</th><th>Ngôn ngữ</th><th>Nguồn</th><th>Thời gian</th></tr></thead><tbody>'+body+'</tbody></table>';
+    var body=rows.map(function(r){ return '<tr><td class="q">'+esc(r.question)+'</td><td><span class="tag">'+esc(r.lang||'?')+'</span></td><td>'+esc((r.model||'').replace('gemini-2.5-',''))+'</td><td>'+(r.n_sources==null?'':r.n_sources)+'</td><td>'+fmt(r.created_at)+'</td></tr>'; }).join('');
+    el.innerHTML='<table><thead><tr><th>Câu hỏi</th><th>Ngôn ngữ</th><th>Model</th><th>Nguồn</th><th>Thời gian</th></tr></thead><tbody>'+body+'</tbody></table>';
   }
 </script>
 </body>

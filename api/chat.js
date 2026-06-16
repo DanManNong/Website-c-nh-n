@@ -1,9 +1,11 @@
 // Vercel Serverless Function — Trợ lý AI Pháp lý (RAG) cho nguyentanphong.com
-// LLM: Google Gemini 2.5 Flash. Luồng: (1) viết lại câu hỏi -> cụm từ khoá;
-//      (2) tìm Pháp điển + Án lệ (Supabase PGroonga, phrase); (3) trả lời kèm trích dẫn.
+// LLM: Google Gemini 2.5 — LUÂN PHIÊN 3 model (flash / flash-lite / pro) + dự phòng khi 429.
+// Luồng: (1) viết lại câu hỏi -> cụm từ khoá; (2) tìm Pháp điển + Án lệ (Supabase PGroonga);
+//        (3) trả lời kèm trích dẫn.
 // ENV bắt buộc (đặt trên Vercel): GEMINI_API_KEY
 
-const MODEL = "gemini-2.5-flash";
+// Thứ tự xoay vòng — bỏ bớt model nào thì xoá khỏi mảng này.
+const MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"];
 const MAX_TOKENS = 1100;
 const MAX_MSG = 12;
 const MAX_CHARS = 2000;
@@ -11,7 +13,13 @@ const TARGET_ROWS = 7;
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://dcmtbgcltopnqsiedwlg.supabase.co";
 const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq";
-const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+const endpointFor = m => `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
+
+// Xoay vòng: mỗi lượt bắt đầu ở 1 model ngẫu nhiên để trải đều quota, rồi xếp các model còn lại làm dự phòng.
+function rotatedModels() {
+  const i = Math.floor(Math.random() * MODELS.length);
+  return MODELS.map((_, k) => MODELS[(i + k) % MODELS.length]);
+}
 
 const ANSWER_SYSTEM = `Bạn là Trợ lý AI Pháp lý trên website của ông Nguyễn Tấn Phong — Phó Chủ tịch Hiệp hội Thương mại điện tử Việt Nam (VECOM), chuyên gia Kinh tế số & Pháp luật.
 
@@ -40,17 +48,16 @@ function send(res, status, obj) {
   res.end(JSON.stringify(obj));
 }
 
-// Gọi Gemini. messages: [{role:'user'|'assistant', content}]. thinking tắt để rẻ/nhanh.
-async function gemini(apiKey, system, messages, maxTokens) {
+// Gọi 1 model cụ thể.
+async function callModel(apiKey, model, system, messages, maxTokens) {
   const contents = messages.map(m => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] }));
-  const r = await fetch(GEMINI_ENDPOINT, {
+  const gc = { maxOutputTokens: maxTokens, temperature: 0.3 };
+  // flash/flash-lite: tắt thinking cho rẻ/nhanh. pro KHÔNG cho tắt -> để mặc định.
+  if (!model.includes("pro")) gc.thinkingConfig = { thinkingBudget: 0 };
+  const r = await fetch(endpointFor(model), {
     method: "POST",
     headers: { "x-goog-api-key": apiKey, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      systemInstruction: { parts: [{ text: system }] },
-      contents,
-      generationConfig: { maxOutputTokens: maxTokens, temperature: 0.3, thinkingConfig: { thinkingBudget: 0 } },
-    }),
+    body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents, generationConfig: gc }),
   });
   if (!r.ok) { const t = await r.text().catch(() => ""); const e = new Error("gemini " + r.status + " " + t); e.status = r.status; throw e; }
   const data = await r.json();
@@ -59,21 +66,36 @@ async function gemini(apiKey, system, messages, maxTokens) {
   return cand.content.parts.filter(p => p && p.text).map(p => p.text).join("").trim();
 }
 
+// Luân phiên + dự phòng: thử lần lượt theo thứ tự xoay vòng; nếu 429/5xx thì sang model kế tiếp.
+async function gemini(apiKey, system, messages, maxTokens) {
+  let lastErr;
+  for (const model of rotatedModels()) {
+    try { const text = await callModel(apiKey, model, system, messages, maxTokens); return { text, model }; }
+    catch (e) {
+      lastErr = e;
+      const retryable = e.status === 429 || (e.status >= 500 && e.status < 600);
+      if (retryable) { console.warn("model busy, fallback:", model, e.status); continue; }
+      throw e;
+    }
+  }
+  throw lastErr;
+}
+
 async function rewriteQueries(apiKey, history) {
   try {
-    const txt = await gemini(apiKey, REWRITE_SYSTEM, history, 120);
+    const { text: txt } = await gemini(apiKey, REWRITE_SYSTEM, history, 120);
     const lines = txt.split("\n").map(s => s.replace(/^[-*\d.)\s"]+/, "").replace(/["]+$/, "").trim()).filter(s => s.length >= 2 && s.length <= 80);
     if (lines.length === 1 && lines[0].toUpperCase() === "NONE") return [];
     return lines.slice(0, 3);
   } catch (e) { console.error("rewrite err", e.message); return []; }
 }
 
-function logAI(question, lang, n) {
+function logAI(question, lang, n, model) {
   try {
     fetch(`${SUPABASE_URL}/rest/v1/ai_logs`, {
       method: "POST",
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ question: String(question || "").slice(0, 500), lang: String(lang || "").slice(0, 8), n_sources: n }),
+      body: JSON.stringify({ question: String(question || "").slice(0, 500), lang: String(lang || "").slice(0, 8), n_sources: n, model: String(model || "").slice(0, 40) }),
     }).catch(() => {});
   } catch (e) { /* fire-and-forget */ }
 }
@@ -138,9 +160,9 @@ module.exports = async (req, res) => {
     // 3) Sinh câu trả lời
     const augmented = messages.slice();
     augmented[augmented.length - 1] = { role: "user", content: `NGỮ CẢNH PHÁP LUẬT (trích dẫn theo số [n]):\n\n${buildContext(top)}\n\n---\nCÂU HỎI: ${userQuery}` };
-    const reply = await gemini(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS);
-    logAI(userQuery, body.lang, top.length);
-    return send(res, 200, { reply: reply || "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu. Vui lòng liên hệ trực tiếp để được tư vấn.", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })) });
+    const { text: reply, model: usedModel } = await gemini(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS);
+    logAI(userQuery, body.lang, top.length, usedModel);
+    return send(res, 200, { reply: reply || "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu. Vui lòng liên hệ trực tiếp để được tư vấn.", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })), model: usedModel });
   } catch (e) {
     console.error("chat handler error", e.message);
     const msg = e.status === 429 ? "Trợ lý đang quá tải, vui lòng thử lại sau ít phút." : "Có lỗi xảy ra. Vui lòng thử lại sau.";
