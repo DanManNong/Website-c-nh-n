@@ -124,8 +124,26 @@ function buildContext(rows) {
   }).join("\n\n");
 }
 
+// ====== CÔNG TẮC TẠM TẮT AI ======
+// Đặt true để tắt tạm (trả lời "đang phát triển"); đặt false để bật lại AI.
+const MAINTENANCE = true;
+const MAINTENANCE_MSG = {
+  vi: "Trợ lý AI đang trong quá trình phát triển. Vui lòng liên hệ 0915159499 để được hỗ trợ.",
+  en: "The AI assistant is under development. Please contact 0915159499 for support.",
+  ja: "AIアシスタントは現在開発中です。サポートは 0915159499 までご連絡ください。",
+  zh: "AI 助手正在开发中。如需帮助，请联系 0915159499。",
+};
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") return send(res, 405, { error: "method_not_allowed" });
+
+  // Tắt tạm: trả lời ngay, KHÔNG gọi Gemini (khỏi tốn quota)
+  if (MAINTENANCE) {
+    let lang = "vi";
+    try { const b = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {}); if (b && b.lang) lang = b.lang; } catch (e) {}
+    return send(res, 200, { reply: MAINTENANCE_MSG[lang] || MAINTENANCE_MSG.vi, sources: [], maintenance: true });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return send(res, 503, { error: "not_configured", reply: "Trợ lý AI đang được cấu hình. Vui lòng liên hệ trực tiếp qua Zalo/điện thoại trên trang." });
 
