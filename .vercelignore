@@ -40,8 +40,6 @@ thuong_hieu_so_phong.html
 # Tuyên ngôn offline — không deploy
 TUYEN-NGON.md
 
-# Admin panel — CHỈ mở LOCAL (mật khẩu hardcoded JS, không an toàn deploy public)
-admin.html
 
 # Doc 2 trang offline — không deploy
 DANH-THIEP.md
@@ -68,3 +66,7 @@ coming-soon.html
 
 # Internal tools — không deploy
 _tools/
+
+# Design system docs — chỉ làm reference local, không deploy
+_DESIGN-SYSTEM.md
+_DESIGN-SYSTEM.css

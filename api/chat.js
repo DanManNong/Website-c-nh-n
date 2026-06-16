@@ -68,6 +68,16 @@ async function rewriteQueries(apiKey, history) {
   } catch (e) { console.error("rewrite err", e.message); return []; }
 }
 
+function logAI(question, lang, n) {
+  try {
+    fetch(`${SUPABASE_URL}/rest/v1/ai_logs`, {
+      method: "POST",
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ question: String(question || "").slice(0, 500), lang: String(lang || "").slice(0, 8), n_sources: n }),
+    }).catch(() => {});
+  } catch (e) { /* fire-and-forget */ }
+}
+
 async function searchLaw(q, k) {
   try {
     const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/phaply_search`, {
@@ -129,6 +139,7 @@ module.exports = async (req, res) => {
     const augmented = messages.slice();
     augmented[augmented.length - 1] = { role: "user", content: `NGỮ CẢNH PHÁP LUẬT (trích dẫn theo số [n]):\n\n${buildContext(top)}\n\n---\nCÂU HỎI: ${userQuery}` };
     const reply = await gemini(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS);
+    logAI(userQuery, body.lang, top.length);
     return send(res, 200, { reply: reply || "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu. Vui lòng liên hệ trực tiếp để được tư vấn.", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })) });
   } catch (e) {
     console.error("chat handler error", e.message);
