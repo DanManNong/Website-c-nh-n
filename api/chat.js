@@ -1,16 +1,17 @@
 // Vercel Serverless Function — Trợ lý AI Pháp lý (RAG) cho nguyentanphong.com
-// Luồng: (1) Claude viết lại câu hỏi -> cụm từ khoá tra cứu; (2) tìm Pháp điển + Án lệ (PGroonga, phrase);
-//        (3) Claude trả lời dựa trên ngữ cảnh, kèm trích dẫn.
-// ENV bắt buộc (đặt trên Vercel): ANTHROPIC_API_KEY
+// LLM: Google Gemini 2.5 Flash. Luồng: (1) viết lại câu hỏi -> cụm từ khoá;
+//      (2) tìm Pháp điển + Án lệ (Supabase PGroonga, phrase); (3) trả lời kèm trích dẫn.
+// ENV bắt buộc (đặt trên Vercel): GEMINI_API_KEY
 
-const MODEL = "claude-haiku-4-5-20251001"; // đổi sang claude-sonnet-4-6 nếu cần chất lượng cao hơn
-const MAX_TOKENS = 1000;
+const MODEL = "gemini-2.5-flash";
+const MAX_TOKENS = 1100;
 const MAX_MSG = 12;
 const MAX_CHARS = 2000;
 const TARGET_ROWS = 7;
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://dcmtbgcltopnqsiedwlg.supabase.co";
 const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_goPNlFYvQUspbFSvDzkN3w_KMapxvUq";
+const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 const ANSWER_SYSTEM = `Bạn là Trợ lý AI Pháp lý trên website của ông Nguyễn Tấn Phong — Phó Chủ tịch Hiệp hội Thương mại điện tử Việt Nam (VECOM), chuyên gia Kinh tế số & Pháp luật.
 
@@ -23,6 +24,8 @@ QUY TẮC:
 - Kết thúc bằng 1 dòng nhắc: thông tin mang tính tham khảo, không thay thế tư vấn pháp lý chính thức; vụ việc cụ thể nên liên hệ ông Phong.
 - Lịch sự từ chối nội dung ngoài phạm vi pháp luật.`;
 
+const REWRITE_SYSTEM = `Bạn tạo TRUY VẤN TÌM KIẾM cho cơ sở dữ liệu pháp luật Việt Nam. Dựa vào hội thoại, đưa ra 2-3 cụm từ khoá pháp lý (cụm danh từ), xếp từ CỤ THỂ đến RỘNG, mỗi cụm trên 1 dòng. KHÔNG giải thích, KHÔNG đánh số, KHÔNG ngoặc kép, không stopword. Nếu câu hỏi không liên quan pháp luật, trả về đúng 1 dòng: NONE`;
+
 function send(res, status, obj) {
   res.statusCode = status;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
@@ -30,26 +33,28 @@ function send(res, status, obj) {
   res.end(JSON.stringify(obj));
 }
 
-async function claude(apiKey, system, messages, maxTokens) {
-  const r = await fetch("https://api.anthropic.com/v1/messages", {
+// Gọi Gemini. messages: [{role:'user'|'assistant', content}]. thinking tắt để rẻ/nhanh.
+async function gemini(apiKey, system, messages, maxTokens) {
+  const contents = messages.map(m => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] }));
+  const r = await fetch(GEMINI_ENDPOINT, {
     method: "POST",
-    headers: { "x-api-key": apiKey, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    headers: { "x-goog-api-key": apiKey, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: MODEL, max_tokens: maxTokens,
-      system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
-      messages,
+      systemInstruction: { parts: [{ text: system }] },
+      contents,
+      generationConfig: { maxOutputTokens: maxTokens, temperature: 0.3, thinkingConfig: { thinkingBudget: 0 } },
     }),
   });
-  if (!r.ok) { const t = await r.text().catch(() => ""); const e = new Error("anthropic " + r.status + " " + t); e.status = r.status; throw e; }
+  if (!r.ok) { const t = await r.text().catch(() => ""); const e = new Error("gemini " + r.status + " " + t); e.status = r.status; throw e; }
   const data = await r.json();
-  return Array.isArray(data.content) ? data.content.filter(b => b.type === "text").map(b => b.text).join("\n").trim() : "";
+  const cand = data && data.candidates && data.candidates[0];
+  if (!cand || !cand.content || !Array.isArray(cand.content.parts)) return "";
+  return cand.content.parts.filter(p => p && p.text).map(p => p.text).join("").trim();
 }
 
-// Bước 1: viết lại câu hỏi -> 2-3 cụm từ khoá pháp lý (cụ thể -> rộng)
 async function rewriteQueries(apiKey, history) {
-  const sys = `Bạn tạo TRUY VẤN TÌM KIẾM cho cơ sở dữ liệu pháp luật Việt Nam. Dựa vào hội thoại, hãy đưa ra 2-3 cụm từ khoá pháp lý (cụm danh từ), xếp từ CỤ THỂ đến RỘNG, mỗi cụm trên 1 dòng. KHÔNG giải thích, KHÔNG đánh số, KHÔNG dấu ngoặc, không stopword. Nếu câu hỏi không liên quan pháp luật, trả về 1 dòng: NONE`;
   try {
-    const txt = await claude(apiKey, sys, history, 80);
+    const txt = await gemini(apiKey, REWRITE_SYSTEM, history, 120);
     const lines = txt.split("\n").map(s => s.replace(/^[-*\d.)\s"]+/, "").replace(/["]+$/, "").trim()).filter(s => s.length >= 2 && s.length <= 80);
     if (lines.length === 1 && lines[0].toUpperCase() === "NONE") return [];
     return lines.slice(0, 3);
@@ -80,7 +85,7 @@ function buildContext(rows) {
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") return send(res, 405, { error: "method_not_allowed" });
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return send(res, 503, { error: "not_configured", reply: "Trợ lý AI đang được cấu hình. Vui lòng liên hệ trực tiếp qua Zalo/điện thoại trên trang." });
 
   let body = req.body;
@@ -103,11 +108,10 @@ module.exports = async (req, res) => {
     const seen = new Set(); const rows = [];
     for (const q of queries) {
       if (rows.length >= TARGET_ROWS) break;
-      const phrase = /\s/.test(q) ? `"${q}"` : q; // nhiều từ -> phrase
+      const phrase = /\s/.test(q) ? `"${q}"` : q;
       const r = await searchLaw(phrase, 5);
       for (const x of r) { const key = (x.kind || "") + "|" + (x.citation || "") + "|" + (x.title || ""); if (!seen.has(key)) { seen.add(key); rows.push(x); } }
     }
-    // fallback: chưa đủ -> tìm OR theo câu hỏi gốc
     if (rows.length < 3) {
       const r = await searchLaw(userQuery, 6);
       for (const x of r) { const key = (x.kind || "") + "|" + (x.citation || "") + "|" + (x.title || ""); if (!seen.has(key)) { seen.add(key); rows.push(x); } }
@@ -117,11 +121,11 @@ module.exports = async (req, res) => {
     // 3) Sinh câu trả lời
     const augmented = messages.slice();
     augmented[augmented.length - 1] = { role: "user", content: `NGỮ CẢNH PHÁP LUẬT (trích dẫn theo số [n]):\n\n${buildContext(top)}\n\n---\nCÂU HỎI: ${userQuery}` };
-    const reply = await claude(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS);
-    return send(res, 200, { reply: reply || "…", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })) });
+    const reply = await gemini(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS);
+    return send(res, 200, { reply: reply || "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu. Vui lòng liên hệ trực tiếp để được tư vấn.", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })) });
   } catch (e) {
     console.error("chat handler error", e.message);
-    const code = e.status === 429 ? "Trợ lý đang quá tải, vui lòng thử lại sau ít phút." : "Có lỗi xảy ra. Vui lòng thử lại sau.";
-    return send(res, 502, { error: "upstream", reply: code });
+    const msg = e.status === 429 ? "Trợ lý đang quá tải, vui lòng thử lại sau ít phút." : "Có lỗi xảy ra. Vui lòng thử lại sau.";
+    return send(res, 502, { error: "upstream", reply: msg });
   }
 };
