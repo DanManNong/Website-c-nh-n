@@ -61,6 +61,7 @@ async function rewriteQueries(apiKey, history) {
   } catch (e) { console.error("rewrite err", e.message); return []; }
 }
 
+const DBG = { steps: [] };
 async function searchLaw(q, k) {
   try {
     const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/phaply_search`, {
@@ -68,10 +69,11 @@ async function searchLaw(q, k) {
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({ q, k }),
     });
-    if (!r.ok) { console.error("search rpc", r.status, await r.text().catch(() => "")); return []; }
+    if (!r.ok) { const t = await r.text().catch(() => ""); DBG.steps.push(`search "${q}" -> HTTP ${r.status}: ${t.slice(0,120)}`); return []; }
     const data = await r.json();
+    DBG.steps.push(`search "${q}" -> ${Array.isArray(data) ? data.length : "?"} rows`);
     return Array.isArray(data) ? data : [];
-  } catch (e) { console.error("searchLaw err", e); return []; }
+  } catch (e) { DBG.steps.push(`search "${q}" -> ERR ${String(e).slice(0,120)}`); return []; }
 }
 
 function buildContext(rows) {
@@ -103,6 +105,7 @@ module.exports = async (req, res) => {
   try {
     // 1) Viết lại -> truy vấn
     const queries = await rewriteQueries(apiKey, messages.slice(-4));
+    DBG.steps.unshift("queries=" + JSON.stringify(queries));
 
     // 2) Tìm kiếm: phrase trước (cụ thể->rộng), gộp & loại trùng
     const seen = new Set(); const rows = [];
@@ -122,7 +125,7 @@ module.exports = async (req, res) => {
     const augmented = messages.slice();
     augmented[augmented.length - 1] = { role: "user", content: `NGỮ CẢNH PHÁP LUẬT (trích dẫn theo số [n]):\n\n${buildContext(top)}\n\n---\nCÂU HỎI: ${userQuery}` };
     const reply = await gemini(apiKey, ANSWER_SYSTEM, augmented, MAX_TOKENS);
-    return send(res, 200, { reply: reply || "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu. Vui lòng liên hệ trực tiếp để được tư vấn.", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })) });
+    return send(res, 200, { reply: reply || "Tôi chưa tìm thấy quy định cụ thể trong dữ liệu tra cứu. Vui lòng liên hệ trực tiếp để được tư vấn.", sources: top.map(x => ({ citation: x.citation, url: x.url, kind: x.kind })), _debug: DBG.steps });
   } catch (e) {
     console.error("chat handler error", e.message);
     const msg = e.status === 429 ? "Trợ lý đang quá tải, vui lòng thử lại sau ít phút." : "Có lỗi xảy ra. Vui lòng thử lại sau.";
