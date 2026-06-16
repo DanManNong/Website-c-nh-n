@@ -1036,6 +1036,7 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
   <a href="tel:+84915159499" class="v-sq blink blink-2" title="Gọi ngay">
     <i class="fas fa-phone-alt"></i>
   </a>
+  <button type="button" class="v-sq v-ai blink" title="Trợ lý AI" onclick="openAIChat()" aria-label="Trợ lý AI"><i class="fas fa-robot"></i></button>
   <button type="button" class="v-sq v-save" title="Lưu Danh Bạ" onclick="saveContactFull()">
     <i class="fas fa-address-book"></i>
   </button>
@@ -1403,7 +1404,8 @@ gtag('config', 'G-V45VVRDW8T', { 'anonymize_ip': true });
         tôi tập trung tư vấn chiến lược Thương mại điện tử và hệ thống Tự động hoá kinh doanh -
         giúp các đơn vị vận hành hiệu quả, an toàn pháp lý, và sẵn sàng mở rộng ra quốc tế.
       </p>
-    </div>
+    <div class="hero-2col-cta"><button type="button" class="btn-ai-hero" onclick="openAIChat()"><i class="fas fa-robot"></i> <span>Hỏi Trợ lý AI</span></button></div>
+      </div>
     <div class="hero-2col-img">
       <img src="avatar-nguyentanphong.jpg?v=2" alt="Nguyễn Tấn Phong" onerror="this.style.display='none';">
     </div>
@@ -2858,6 +2860,100 @@ window.onscroll = function() {
 })();
 
 </script>
+
+
+<!-- ============ Z16 · TRỢ LÝ AI PHÁP LÝ (RAG) ============ -->
+<style>
+  .btn-ai-hero{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding:13px 24px;border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-weight:700;font-size:14px;
+    border:0;cursor:pointer;box-shadow:0 8px 24px rgba(224,170,121,0.32);transition:transform .15s,box-shadow .15s;font-family:inherit;}
+  .btn-ai-hero:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(224,170,121,0.45);}
+  .btn-ai-hero i{font-size:15px;}
+  .v-sq.v-ai{background:linear-gradient(135deg,#6d4bd1,#9b6cff)!important;color:#fff!important;border-color:#9b6cff!important;}
+  .v-sq.v-ai:hover{transform:scale(1.1);box-shadow:-3px 3px 18px rgba(155,108,255,0.5)!important;}
+  #ai-chat{position:fixed;bottom:20px;right:20px;width:390px;max-width:calc(100vw - 32px);height:600px;max-height:80vh;
+    background:#15110d;border:1px solid var(--border);border-radius:18px;z-index:10000;display:none;flex-direction:column;
+    overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.6);}
+  #ai-chat.open{display:flex;}
+  .ai-head{display:flex;align-items:center;gap:12px;padding:16px 18px;background:linear-gradient(135deg,#1f1812,#15110d);border-bottom:1px solid var(--border);}
+  .ai-head-ic{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:18px;flex-shrink:0;}
+  .ai-head-tt{flex:1;min-width:0;}
+  .ai-head-tt b{display:block;color:#fff;font-size:15px;font-weight:700;}
+  .ai-head-tt span{display:block;color:var(--text-soft);font-size:10.5px;letter-spacing:.02em;margin-top:2px;}
+  .ai-close{background:none;border:0;color:var(--text-soft);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px;line-height:1;}
+  .ai-close:hover{color:var(--gold);background:rgba(224,170,121,0.1);}
+  .ai-msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;}
+  .ai-msg{max-width:85%;padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.6;word-wrap:break-word;white-space:pre-wrap;}
+  .ai-msg a{color:var(--gold-light);text-decoration:underline;}
+  .ai-msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);border-bottom-right-radius:4px;font-weight:500;}
+  .ai-msg.bot{align-self:flex-start;background:rgba(255,255,255,0.06);color:#e8e2da;border:1px solid var(--border);border-bottom-left-radius:4px;}
+  .ai-msg.typing{color:var(--text-soft);font-style:italic;}
+  .ai-foot{padding:12px 14px;border-top:1px solid var(--border);background:#15110d;}
+  .ai-input-row{display:flex;gap:8px;align-items:flex-end;}
+  .ai-input-row textarea{flex:1;resize:none;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;
+    color:#fff;padding:10px 12px;font-size:13.5px;font-family:inherit;max-height:96px;line-height:1.4;}
+  .ai-input-row textarea:focus{outline:none;border-color:var(--gold);}
+  .ai-send{flex-shrink:0;width:40px;height:40px;border-radius:10px;border:0;cursor:pointer;
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-size:15px;}
+  .ai-send:disabled{opacity:.5;cursor:not-allowed;}
+  .ai-disc{color:var(--text-soft);font-size:9.5px;line-height:1.4;margin-top:8px;text-align:center;opacity:.75;}
+  @media(max-width:480px){#ai-chat{right:0;left:0;bottom:0;width:100%;max-width:100%;height:88vh;border-radius:18px 18px 0 0;}}
+</style>
+<section id="ai-chat" data-zone="Z16 · Trợ lý AI" role="dialog" aria-label="Trợ lý AI Pháp lý" aria-modal="false">
+  <div class="ai-head">
+    <div class="ai-head-ic"><i class="fas fa-robot"></i></div>
+    <div class="ai-head-tt"><b>Trợ lý AI Pháp lý</b><span>Pháp điển · Án lệ · TMĐT · Kinh tế số</span></div>
+    <button type="button" class="ai-close" onclick="closeAIChat()" aria-label="Đóng">&times;</button>
+  </div>
+  <div class="ai-msgs" id="ai-msgs"></div>
+  <div class="ai-foot">
+    <div class="ai-input-row">
+      <textarea id="ai-input" rows="1" placeholder="Hỏi về luật, án lệ, TMĐT…" aria-label="Hỏi về luật, án lệ, TMĐT…"></textarea>
+      <button type="button" class="ai-send" id="ai-send" onclick="sendAIMsg()" aria-label="Gửi"><i class="fas fa-paper-plane"></i></button>
+    </div>
+    <div class="ai-disc">Thông tin mang tính tham khảo, không thay thế tư vấn pháp lý chính thức.</div>
+  </div>
+</section>
+<script>
+(function(){
+  var LANG="vi", GREET="Xin chào! Tôi là Trợ lý AI của ông Nguyễn Tấn Phong, có thể tra cứu Pháp điển và Án lệ Việt Nam. Bạn cần hỏi điều gì?", TYPING="Đang tra cứu…", ERR="Xin lỗi, có lỗi xảy ra. Vui lòng thử lại.";
+  var msgs=[], started=false, busy=false;
+  function el(id){return document.getElementById(id);}
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function linkify(s){return s.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');}
+  function render(){
+    var box=el("ai-msgs"); box.innerHTML="";
+    var g=document.createElement("div"); g.className="ai-msg bot"; g.innerHTML=linkify(esc(GREET)); box.appendChild(g);
+    msgs.forEach(function(m){
+      var d=document.createElement("div"); d.className="ai-msg "+(m.role==="user"?"user":"bot");
+      d.innerHTML=linkify(esc(m.content)); box.appendChild(d);
+    });
+    if(busy){var t=document.createElement("div"); t.className="ai-msg bot typing"; t.textContent=TYPING; box.appendChild(t);}
+    box.scrollTop=box.scrollHeight;
+  }
+  window.openAIChat=function(){el("ai-chat").classList.add("open"); if(!started){started=true; render();} setTimeout(function(){el("ai-input").focus();},100);};
+  window.closeAIChat=function(){el("ai-chat").classList.remove("open");};
+  window.sendAIMsg=async function(){
+    if(busy)return; var inp=el("ai-input"); var text=(inp.value||"").trim(); if(!text)return;
+    msgs.push({role:"user",content:text}); inp.value=""; inp.style.height="auto"; busy=true; el("ai-send").disabled=true; render();
+    try{
+      var r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({messages:msgs,lang:LANG})});
+      var data=await r.json().catch(function(){return {};});
+      var reply=(data&&data.reply)?data.reply:ERR;
+      msgs.push({role:"assistant",content:reply});
+    }catch(e){ msgs.push({role:"assistant",content:ERR}); }
+    busy=false; el("ai-send").disabled=false; render();
+  };
+  document.addEventListener("DOMContentLoaded",function(){
+    var inp=el("ai-input"); if(!inp)return;
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault(); sendAIMsg();} });
+    inp.addEventListener("input",function(){ this.style.height="auto"; this.style.height=Math.min(this.scrollHeight,96)+"px"; });
+  });
+})();
+</script>
+<!-- ============ /Z16 ============ -->
 
 </body>
 </html>

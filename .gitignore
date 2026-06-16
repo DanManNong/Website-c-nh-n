@@ -37,3 +37,11 @@ wireframe_nguyentanphong_v2.html
 
 # Archive backup từ folder NguyenTanPhong (giữ local, không push lên git)
 _archive_nguyentanphong/
+
+# Dữ liệu RAG nguồn (lớn, không push — chỉ nạp lên Supabase)
+*.parquet
+# Ảnh gốc Zalo dán vào (đã crop sang avatar)
+z[0-9]*.jpg
+# Connection string / secrets cục bộ
+db_url.txt
+*.secret
