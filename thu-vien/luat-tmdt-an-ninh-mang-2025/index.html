@@ -3,6 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  /* Giữ đường dẫn ảnh/video tương đối chạy đúng kể cả khi host bỏ dấu "/" cuối URL (vd Vercel) */
+  (function(){
+    var p = location.pathname;
+    if (location.protocol.indexOf('http') === 0 && p.charAt(p.length-1) !== '/' && !/\.[a-z0-9]+$/i.test(p)) {
+      var b = document.createElement('base'); b.href = p + '/'; document.head.appendChild(b);
+    }
+  })();
+</script>
 <title>Luật Thương mại điện tử &amp; Luật An ninh mạng 2025 — Cẩm nang Pháp lý cho Nhà sáng tạo nội dung</title>
 
 <style id="reveal-css">/*!
