@@ -25,3 +25,6 @@ Disallow: /parcel-scan
 Disallow: /KLIC
 
 Sitemap: https://www.nguyentanphong.com/sitemap.xml
+
+# AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot...)
+# are welcome under the rules above. Machine-readable profile: /llms.txt
